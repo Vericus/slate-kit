@@ -1,0 +1,42 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:flowtype/recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/flowtype",
+    "prettier/react",
+    "prettier/standard"
+  ],
+  "plugins": [
+    "import",
+    "flowtype",
+    "react",
+    "prettier",
+    "standard"
+  ],
+  "settings": {
+    "import/extensions": [".js"]
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "es6": true
+  },
+  "rules": {
+    "react/jsx-filename-extension": [1, {"extensions": [".js"]}],
+    "prettier/prettier": "error",
+    "standard/object-curly-even-spacing": [2, "either"],
+    "standard/array-bracket-even-spacing": [2, "either"],
+    "standard/computed-property-even-spacing": [2, "even"],
+    "standard/no-callback-literal": [2, ["cb", "callback"]],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": false, "peerDependencies": true}]
+  }
+}

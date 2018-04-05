@@ -1,0 +1,13 @@
+[ignore]
+.*/node_modules/immutable/.*
+.*/node_modules/config-chain/.*
+
+[include]
+
+[libs]
+./custom-flow-typed
+[lints]
+
+[options]
+
+[strict]

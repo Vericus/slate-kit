@@ -1,0 +1,13 @@
+**/dist/
+**/lib/
+**/node_modules/
+**/tests/
+**/custom-flow-typed/**/*.js
+stories/
+support/
+tmp/
+.stories/
+flow-typed/
+**/__tests__/**/*.js
+**/__benchmark__/**/*.js
+src/setupFiles
