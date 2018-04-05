@@ -1,6 +1,7 @@
 [ignore]
 .*/node_modules/immutable/.*
 .*/node_modules/config-chain/.*
+.*/tmp/.*.json
 
 [include]
 

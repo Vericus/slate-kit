@@ -90,7 +90,7 @@ function configure(pkg, location, env, target) {
         format: "umd",
         file: `${location}/${isProd ? pkg.umdMin : pkg.umd}`,
         exports: "named",
-        name: startCase(pkg.name).replace(/ /g, ""),
+        name: startCase(pkg.name).replace(/@vericus/g,"").replace(/ /g, ""),
         globals: pkg.umdGlobals
       },
       external: Object.keys(pkg.umdGlobals || {})

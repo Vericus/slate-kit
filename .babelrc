@@ -29,13 +29,20 @@
         [
           "env",
           {
-            "modules": false
+            "modules": "commonjs",
+            "useBuiltIns": "usage",
+            "debug": false
           }
         ],
+        "es2015",
+        "stage-0",
         "react",
-        "stage-0"
+        "jest"
       ],
-      "plugins": ["transform-runtime"]
+      "plugins": [
+        "transform-runtime",
+        "transform-es2015-modules-commonjs"
+      ]
     },
     "gh-pages": {
       "presets": [

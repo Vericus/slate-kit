@@ -14,8 +14,7 @@
     "lib/"
   ],
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules",
-    "flow:install": "flow-typed install --ignore-deps peer"
+    "clean": "rm -rf ./dist ./lib ./node_modules"
   },
   "umdGlobals": {
     "immutable": "Immutable",
