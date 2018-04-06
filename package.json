@@ -1,8 +1,8 @@
 {
-  "name": "slate-helpers",
+  "name": "slate-kit",
   "description": "A collection of slate's plugins and utils",
   "version": "0.0.1",
-  "repository": "git://github.com/Vericus/slate-helpers.git",
+  "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
   "license": "MIT",
   "private": true,
@@ -18,10 +18,11 @@
     "flow:install": "flow-mono install-types --ignore-deps=peer --overwrite",
     "gh-pages": "NODE_ENV=gh-pages babel-node support/gh-pages/deploy.js",
     "lint": "eslint packages",
+    "new-module": "support/script/new-module",
     "prettier": "prettier --write '**/*.{js,jsx,md,json,css}'",
     "storybook": "start-storybook -p 6006",
     "test": "jest --no-cache --passWithNoTests",
-    "updated": "lerna updated",
+    "updated": "lerna updated || exit 0",
     "watch": "npm-run-all --parallel --print-label watch:test watch:build storybook",
     "watch:test": "yarn run test --watch",
     "watch:build": "yarn run build --watch"
@@ -36,9 +37,9 @@
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.14",
     "@storybook/addon-events": "^3.3.14",
-    "@storybook/addon-info": "^3.3.14",
     "@storybook/addon-knobs": "^3.3.14",
     "@storybook/addon-links": "^3.3.14",
+    "@storybook/addon-options": "^3.4.0",
     "@storybook/addon-storysource": "^3.4.0-alpha.8",
     "@storybook/addons": "^3.3.14",
     "@storybook/react": "^3.3.14",
@@ -109,7 +110,8 @@
     "slate-simulator": "^0.4.27",
     "storybook-readme": "^3.2.1",
     "style-loader": "^0.20.3",
-    "webpack": "^4.4.1"
+    "webpack": "^4.4.1",
+    "yo": "^2.0.1"
   },
   "peerDependencies": {
     "react": ">=16.0.0",

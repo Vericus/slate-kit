@@ -1,7 +1,19 @@
 {
   "lerna": "2.9.0",
-  "packages": ["packages/**"],
+  "packages": ["packages/**", "tools/*"],
   "version": "independent",
   "npmClient": "yarn",
-  "useWorkspaces": false
+  "useWorkspaces": false,
+  "changelog": {
+    "repo": "Vericus/slate-kit",
+    "labels": {
+      "Tag: Breaking Change": ":boom: Breaking Change",
+      "Tag: Enhancement": ":rocket: Enhancement",
+      "Tag: Bug Fix": ":bug: Bug Fix",
+      "Tag: Polish": ":nail_care: Polish",
+      "Tag: Documentation": ":memo: Documentation",
+      "Tag: Internal": ":house: Internal"
+    },
+    "cacheDir": ".changelog"
+  }
 }

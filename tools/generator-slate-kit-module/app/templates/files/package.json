@@ -1,0 +1,32 @@
+{
+  "version": "0.0.1",
+  "name": "@vericus/<%= module %>",
+  "description": "<%= description %>",
+  "homepage": "https://github.com/Vericus/slate-kit/",
+  "repository": "git://github.com/Vericus/slate-kit.git",
+  "author": "Cadmus",
+  "files": [
+    "dist/",
+    "lib/"
+  ],
+  "license": "MIT",
+  "main": "lib/<%= module %>.js",
+  "module": "lib/<%= module %>.es.js",
+  "umd": "dist/<%= module %>.js",
+  "umdMin": "dist/<%= module %>.min.js",
+  "scripts": {
+    "clean": "rm -rf ./dist ./lib ./node_modules"
+  },
+  "umdGlobals": {
+    "immutable": "Immutable",
+    "slate": "Slate"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.69.0"
+  },
+  "keywords": [
+    "Vericus",
+    "slate",
+    "slate-kit"
+  ]
+}

@@ -1,9 +1,6 @@
-# @Vericus / slate-kit-utils-change-color
+# @Vericus / <%= title %>
 
-A [**Slate**](https://github.com/ianstormtaylor/slate) plugin to attach (a) hotkey(s) to slate change.
-
-```js
-```
+> <%= description %>
 
 ## Documentation
 

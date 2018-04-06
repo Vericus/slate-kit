@@ -1,14 +1,14 @@
 {
-  "name": "@vericus/slate-helpers-bind-hotkey",
+  "name": "@vericus/slate-kit-helpers-bind-hotkey",
   "version": "0.0.1",
   "description": "a slate helper plugin to associate hotkey(s) to slate change",
-  "repository": "git://github.com/Vericus/slate-helpers.git",
+  "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
   "license": "MIT",
-  "main": "lib/slate-helpers-bind-hotkey.js",
-  "module": "lib/slate-helpers-bind-hotkey.es.js",
-  "umd": "dist/slate-helpers-bind-hotkey.js",
-  "umdMin": "dist/slate-helpers-bind-hotkey.min.js",
+  "main": "lib/slate-kit-helpers-bind-hotkey.js",
+  "module": "lib/slate-kit-helpers-bind-hotkey.es.js",
+  "umd": "dist/slate-kit-helpers-bind-hotkey.js",
+  "umdMin": "dist/slate-kit-helpers-bind-hotkey.min.js",
   "files": [
     "dist/",
     "lib/"
@@ -20,7 +20,6 @@
     "immutable": "Immutable",
     "slate": "Slate"
   },
-  "keywords": ["slate"],
   "dependencies": {
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
@@ -29,5 +28,10 @@
   },
   "devDependencies": {
     "flow-bin": "^0.69.0"
-  }
+  },
+  "keywords": [
+    "Vericus",
+    "slate",
+    "slate-kit"
+  ]
 }

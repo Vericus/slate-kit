@@ -1,14 +1,14 @@
 {
-  "name": "@vericus/slate-utils-hyperscript",
+  "name": "@vericus/slate-kit-utils-hyperscript",
   "version": "0.0.1",
   "description": "hyperscript helpers for testing purposes",
-  "repository": "git://github.com/Vericus/slate-helpers.git",
+  "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
   "license": "MIT",
-  "main": "lib/slate-utils-hyperscript.js",
-  "module": "lib/slate-utils-hyperscript.es.js",
-  "umd": "dist/slate-utils-hyperscript.js",
-  "umdMin": "dist/slate-utils-hyperscript.min.js",
+  "main": "lib/slate-kit-utils-hyperscript.js",
+  "module": "lib/slate-kit-utils-hyperscript.es.js",
+  "umd": "dist/slate-kit-utils-hyperscript.js",
+  "umdMin": "dist/slate-kit-utils-hyperscript.min.js",
   "files": [
     "dist/",
     "lib/"
@@ -18,5 +18,10 @@
   },
   "dependencies": {
     "slate-hyperscript": "^0.5.10"
-  }
+  },
+  "keywords": [
+    "Vericus",
+    "slate",
+    "slate-kit"
+  ]
 }

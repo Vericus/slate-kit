@@ -2,14 +2,24 @@ const path = require("path");
 
 module.exports = (storybookBaseConfig, configType) => {
   storybookBaseConfig.module.rules.push({
-    test: /\.scss$/,
+    test: /\.s?css$/,
     loaders: ["style-loader", "css-loader", "sass-loader"],
-    include: path.resolve(__dirname, "../")
+    include: [
+      path.resolve(__dirname, "../assets/css")
+    ]
   });
 
   storybookBaseConfig.module.rules.push({
     test: /\.stories\.jsx?$/,
-    loaders: [require.resolve('@storybook/addon-storysource/loader')],
+    loaders: [{
+      loader: require.resolve('@storybook/addon-storysource/loader'),
+      options: {
+        prettierConfig: {
+          printWidth: 80,
+          tabWidth: 2
+        }
+      }
+    }],
     enforce: "pre"
   });
 

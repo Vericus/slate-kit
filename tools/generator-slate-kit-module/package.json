@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "name": "generator-slate-kit-module",
+  "description": "Use this to create a new slate-kit modules!",
+  "author": "Cadmus",
+  "license": "MIT",
+  "repository": "https://github.com/primer/primer/tree/master/modules/generator-primer-module",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "yeoman-generator": "^1.1.1"
+  },
+  "keywords": [
+    "yeoman-generator"
+  ]
+}
