@@ -28,3 +28,4 @@ src/styles/main.css
 /tmp
 **/flow-typed
 storybook-static
+packages/**/.flowconfig
