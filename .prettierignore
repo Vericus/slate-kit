@@ -3,5 +3,8 @@ node_modules/
 package.json
 packages/**/dist/
 packages/**/lib/
+custom-flow-typed/
 tmp/
 lerna.json
+storybook-static/
+
