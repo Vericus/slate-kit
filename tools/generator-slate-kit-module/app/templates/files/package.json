@@ -5,6 +5,9 @@
   "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
+  "slate-kit": {
+    "type": "module"
+  },
   "files": [
     "dist/",
     "lib/"
