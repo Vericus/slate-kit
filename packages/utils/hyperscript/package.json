@@ -13,6 +13,9 @@
     "dist/",
     "lib/"
   ],
+  "slate-kit": {
+    "type": "module"
+  },
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules"
   },
