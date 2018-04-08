@@ -9,7 +9,6 @@
     "react",
     "stage-0"
   ],
-  "plugins": ["external-helpers"],
   "env": {
     "webpack": {
       "presets": [

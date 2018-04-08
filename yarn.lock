@@ -4866,6 +4866,12 @@ get-document@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/get-document/-/get-document-1.0.0.tgz#4821bce66f1c24cb0331602be6cb6b12c4f01c4b"
 
+get-lerna-packages@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/get-lerna-packages/-/get-lerna-packages-0.1.0.tgz#f7cf4b358584d98f24cd931451e56ee9d37094e5"
+  dependencies:
+    glob "^7.1.2"
+
 get-own-enumerable-property-symbols@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-2.0.1.tgz#5c4ad87f2834c4b9b4e84549dc1e0650fb38c24b"
@@ -6963,6 +6969,12 @@ lcid@^1.0.0:
 left-pad@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/left-pad/-/left-pad-1.2.0.tgz#d30a73c6b8201d8f7d8e7956ba9616087a68e0ee"
+
+lerna-alias@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/lerna-alias/-/lerna-alias-3.0.2.tgz#61d7d79b182849e98ee4cdca0127f714f8712d4d"
+  dependencies:
+    get-lerna-packages "^0.1.0"
 
 lerna-get-packages@^1.0.0:
   version "1.0.0"

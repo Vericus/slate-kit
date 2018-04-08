@@ -1,4 +1,5 @@
 const path = require("path");
+const { webpack: lernaAliases } = require("lerna-alias");
 
 module.exports = (storybookBaseConfig, configType) => {
   storybookBaseConfig.module.rules.push({
@@ -23,5 +24,8 @@ module.exports = (storybookBaseConfig, configType) => {
     enforce: "pre"
   });
 
+  storybookBaseConfig.resolve.alias = lernaAliases({
+    directory: path.resolve(__dirname)
+  });
   return storybookBaseConfig;
 };

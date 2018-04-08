@@ -71,7 +71,8 @@ function configure(pkg, location, env, target) {
 
     // Use Babel to transpile the result, limiting it to the source code.
     babel({
-      include: [`${location}/src/**`]
+      include: [`${location}/src/**`],
+      plugins: ["external-helpers"]
     }),
 
     // Register Node.js globals for browserify compatibility.
