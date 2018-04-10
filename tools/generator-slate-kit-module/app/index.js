@@ -56,9 +56,7 @@ module.exports = class SlateKitModule extends Generator {
   }
 
   paths() {
-    this.basePath = this.destinationPath(
-      this.options.path.replace(/^packages\//, "")
-    );
+    this.basePath = this.destinationPath(this.options.path);
   }
 
   writing() {

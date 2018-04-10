@@ -10,6 +10,11 @@
 **/build
 **/lib
 **/dist
+**/module
+**/build/**/*
+**/lib/**/*
+**/dist/**/*
+**/module/**/*
 
 # misc
 .DS_Store

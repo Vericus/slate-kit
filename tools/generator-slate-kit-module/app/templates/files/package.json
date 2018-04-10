@@ -19,7 +19,7 @@
   "umd": "dist/<%= module %>.js",
   "umdMin": "dist/<%= module %>.min.js",
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules",
+    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "umdGlobals": {

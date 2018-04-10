@@ -18,7 +18,7 @@
     "type": "module"
   },
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules",
+    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "dependencies": {

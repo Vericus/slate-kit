@@ -1,36 +1,36 @@
 {
-  "name": "@vericus/slate-kit-bind-hotkey",
   "version": "0.0.1",
-  "description": "a slate helper plugin to associate hotkey(s) to slate change",
+  "name": "@vericus/slate-kit-utils-changes",
+  "description": "TODO: fill in this description later",
+  "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
-  "license": "MIT",
-  "main": "lib/slate-kit-bind-hotkey.js",
-  "module": "lib/slate-kit-bind-hotkey.es.js",
-  "umd": "dist/slate-kit-bind-hotkey.js",
-  "umdMin": "dist/slate-kit-bind-hotkey.min.js",
-  "files": [
-    "dist/",
-    "lib/",
-    "module/"
-  ],
   "slate-kit": {
     "type": "module"
   },
+  "files": [
+    "dist/",
+    "lib/",
+    "module"
+  ],
+  "license": "MIT",
+  "main": "lib/slate-kit-utils-changes.js",
+  "module": "lib/slate-kit-utils-changes.es.js",
+  "umd": "dist/slate-kit-utils-changes.js",
+  "umdMin": "dist/slate-kit-utils-changes.min.js",
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate",
-    "is-hotkey": "IsHotkey"
+    "slate": "Slate"
   },
   "dependencies": {
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
-    "is-hotkey": "^0.1.2",
-    "slate": ">0.32.4 <0.34.0"
+    "slate": ">0.32.4 <0.34.0",
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
     "flow-bin": "^0.69.0"
