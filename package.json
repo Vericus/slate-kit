@@ -6,11 +6,15 @@
   "author": "Cadmus",
   "license": "MIT",
   "private": true,
+  "workspaces": [
+    "packages/*",
+    "tools/*"
+  ],
   "scripts": {
     "bootstrap": "lerna bootstrap && yarn && yarn run flow:setup",
     "bootstrap:build": "yarn bootstrap && yarn build",
     "build-storybook": "build-storybook",
-    "build": "yarn run build:packages",
+    "build": "yarn run build:packages && lerna run build --parallel",
     "build:packages": "rollup --config ./support/rollup/config.js",
     "clean": "lerna clean --yes && lerna run clean --yes && rm -rf ./node_modules ./flow-typed",
     "flow:setup": "yarn run flow:symlink && yarn run flow:install",

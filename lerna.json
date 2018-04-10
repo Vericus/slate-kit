@@ -1,12 +1,12 @@
 {
   "lerna": "2.9.0",
   "packages": [
-    "packages/**",
+    "packages/*",
     "tools/*"
   ],
   "version": "independent",
   "npmClient": "yarn",
-  "useWorkspaces": false,
+  "useWorkspaces": true,
   "changelog": {
     "repo": "Vericus/slate-kit",
     "labels": {

@@ -11,13 +11,15 @@
   "umdMin": "dist/slate-kit-utils-change-color.min.js",
   "files": [
     "dist/",
-    "lib/"
+    "lib/",
+    "module/"
   ],
   "slate-kit": {
     "type": "module"
   },
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules"
+    "clean": "rm -rf ./dist ./lib ./node_modules",
+    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "umdGlobals": {
     "immutable": "Immutable",

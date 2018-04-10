@@ -136,8 +136,8 @@ function factory(pkg, location) {
   const isProd = process.env.NODE_ENV === "production";
   return [
     configure(pkg, location, "development", "module"),
-    isProd && configure(pkg, "development", "umd"),
-    isProd && configure(pkg, "production", "umd")
+    isProd && configure(pkg, location, "development", "umd"),
+    isProd && configure(pkg, location, "production", "umd")
   ].filter(Boolean);
 }
 
