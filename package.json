@@ -62,6 +62,7 @@
     "babel-runtime": "^6.26.0",
     "chalk": "^2.3.2",
     "child-process-promise": "^2.2.1",
+    "chokidar": "^2.0.3",
     "compare-versions": "^3.1.0",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
@@ -106,7 +107,7 @@
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "^3.0.0",
     "sass-loader": "^6.0.7",
-    "slate": "^0.33.4",
+    "slate": "0.32.0 - ^0.33.0",
     "slate-base64-serializer": "^0.2.29",
     "slate-dev-logger": "^0.1.39",
     "slate-html-serializer": "^0.6.1",
@@ -121,15 +122,11 @@
     "yo": "^2.0.1"
   },
   "peerDependencies": {
-    "react": ">=16.0.0",
-    "react-dom": ">=16.0.0",
-    "slate": ">=0.32.4",
-    "slate-base64-serializer": ">=0.2.26",
-    "slate-html-serializer": ">=0.6.0",
-    "slate-plain-serializer": ">=0.5.0",
-    "slate-prop-types": ">=0.4.24",
-    "slate-react": ">=0.11.0",
-    "slate-schema-violations": ">=0.1.6"
+    "@vericus/slate-kit-basic-text-formatting": "*",
+    "@vericus/slate-kit-bind-hotkey": "*",
+    "@vericus/slate-kit-highlight-text": "*",
+    "@vericus/slate-kit-plugins-wrapper": "*",
+    "@vericus/slate-kit-utils-changes": "*"
   },
   "dependencies": {
     "debug": "^3.1.0",

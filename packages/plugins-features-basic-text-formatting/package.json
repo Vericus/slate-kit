@@ -1,6 +1,6 @@
 {
   "version": "0.0.1",
-  "name": "@vericus/slate-kit-utils-changes",
+  "name": "@vericus/slate-kit-basic-text-formatting",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
@@ -14,23 +14,27 @@
     "module"
   ],
   "license": "MIT",
-  "main": "lib/slate-kit-utils-changes.js",
-  "module": "lib/slate-kit-utils-changes.es.js",
-  "umd": "dist/slate-kit-utils-changes.js",
-  "umdMin": "dist/slate-kit-utils-changes.min.js",
+  "main": "lib/slate-kit-basic-text-formatting.js",
+  "module": "lib/slate-kit-basic-text-formatting.es.js",
+  "umd": "dist/slate-kit-basic-text-formatting.js",
+  "umdMin": "dist/slate-kit-basic-text-formatting.min.js",
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate"
+    "slate": "Slate",
+    "is-hotkey": "IsHotkey"
   },
   "dependencies": {
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
-    "slate": "0.32.0 - 0.34.0",
-    "tinycolor2": "^1.4.1"
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "slate": "0.32.0 - ^0.33.0",
+    "slate-prop-types": "^0.4.27",
+    "@vericus/slate-kit-bind-hotkey": "0.0.1"
   },
   "devDependencies": {
     "flow-bin": "^0.69.0"

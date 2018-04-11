@@ -1,0 +1,48 @@
+{
+  "version": "0.0.1",
+  "name": "@vericus/slate-kit-highlight-text",
+  "description": "TODO: fill in this description later",
+  "homepage": "https://github.com/Vericus/slate-kit/",
+  "repository": "git://github.com/Vericus/slate-kit.git",
+  "author": "Cadmus",
+  "files": [
+    "dist/",
+    "lib/",
+    "module/"
+  ],
+  "slate-kit": {
+    "type": "module"
+  },
+  "license": "MIT",
+  "main": "lib/slate-kit-highlight-text.js",
+  "module": "lib/slate-kit-highlight-text.es.js",
+  "umd": "dist/slate-kit-highlight-text.js",
+  "umdMin": "dist/slate-kit-highlight-text.min.js",
+  "scripts": {
+    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
+    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+  },
+  "umdGlobals": {
+    "immutable": "Immutable",
+    "slate": "Slate"
+  },
+  "devDependencies": {
+    "@vericus/slate-kit-utils-hyperscript": "^0.0.1",
+    "flow-bin": "^0.69.0"
+  },
+  "keywords": [
+    "Vericus",
+    "slate",
+    "slate-kit"
+  ],
+  "dependencies": {
+    "@vericus/slate-kit-utils-changes": "^0.0.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "slate": "0.32.0 - ^0.33.0",
+    "slate-prop-types": "^0.4.27",
+    "slate-react": "^0.12.4",
+    "tinycolor2": "^1.4.1"
+  }
+}

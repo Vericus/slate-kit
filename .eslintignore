@@ -1,5 +1,6 @@
 **/dist/
 **/lib/
+**/module/
 **/node_modules/
 **/tests/
 **/custom-flow-typed/**/*.js

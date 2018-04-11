@@ -2408,7 +2408,7 @@ chokidar@^1.6.1:
   optionalDependencies:
     fsevents "^1.0.0"
 
-chokidar@^2.0.2:
+chokidar@^2.0.2, chokidar@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.0.3.tgz#dcbd4f6cbb2a55b4799ba8a840ac527e5f4b1176"
   dependencies:
@@ -11211,7 +11211,7 @@ slate-simulator@^0.4.27:
   version "0.4.27"
   resolved "https://registry.yarnpkg.com/slate-simulator/-/slate-simulator-0.4.27.tgz#8b86806bed877969f2da66bb2bcaf9a5d1c7cd37"
 
-"slate@>0.32.4 <0.34.0", slate@^0.33.4:
+"slate@0.32.0 - 0.34.0", "slate@0.32.0 - ^0.33.0":
   version "0.33.4"
   resolved "https://registry.yarnpkg.com/slate/-/slate-0.33.4.tgz#8f39000a7a0fb1ec04b211c3e264e45677dfd9d8"
   dependencies:

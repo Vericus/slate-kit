@@ -1,7 +1,7 @@
 // @flow
 
 import { Record } from "immutable";
-import { type Change } from "slate";
+import type { Change } from "slate";
 
 export type typeOptions = {
   hotkeys: string | Array<string>,

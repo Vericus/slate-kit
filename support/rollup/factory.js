@@ -22,6 +22,9 @@ function configure(pkg, location, env, target) {
   const isUmd = target === "umd";
   const isModule = target === "module";
   const input = `${location}/src/index.js`;
+  const watch = {
+    chokidar: true
+  };
   const deps = []
     .concat(pkg.dependencies ? Object.keys(pkg.dependencies) : [])
     .concat(pkg.peerDependencies ? Object.keys(pkg.peerDependencies) : []);
@@ -85,6 +88,7 @@ function configure(pkg, location, env, target) {
 
   if (isUmd) {
     return {
+      watch,
       plugins,
       input,
       output: {
@@ -102,6 +106,7 @@ function configure(pkg, location, env, target) {
 
   if (isModule) {
     return {
+      watch,
       plugins,
       input,
       output: [
@@ -119,7 +124,7 @@ function configure(pkg, location, env, target) {
       ],
       // We need to explicitly state which modules are external, meaning that
       // they are present at runtime. In the case of non-UMD configs, this means
-      // all non-Slate packages.
+      // all non-Slate-kit packages.
       external: id => !!deps.find(dep => dep === id || id.startsWith(`${dep}/`))
     };
   }

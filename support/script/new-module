@@ -20,5 +20,5 @@ else
   generate "$@"
 
   echo "✅  All set! Let me bootstrap that new module for ya..."
-  npm run bootstrap
+  yarn bootstrap
 fi

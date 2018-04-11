@@ -1,7 +1,7 @@
 // @flow
 
 import isHotkey from "is-hotkey";
-import { type Change } from "slate";
+import type { Change } from "slate";
 import type Options from "./options";
 
 function createOnKeyDown(opts: Options) {
