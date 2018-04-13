@@ -9,7 +9,8 @@ export type KeyBinding = {
 };
 
 export type typeOptions = {
-  renderMark?: () => void
+  renderMark?: () => void,
+  keyBindings?: Array<KeyBinding>
 };
 
 const defaultOption: typeOptions = {

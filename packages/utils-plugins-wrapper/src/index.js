@@ -54,9 +54,9 @@ export default class PluginsWrapper {
   };
 
   configurePlugin = (createPlugin, options = {}, label) => {
-    if (!label) return createPlugin(options);
+    if (!label) return createPlugin(options, this);
 
-    const plugin = createPlugin(options);
+    const plugin = createPlugin(options, this);
     let plugins;
     if (plugin.plugins) {
       // eslint-disable-next-line prefer-destructuring

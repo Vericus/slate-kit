@@ -5,10 +5,10 @@ import defaultRenderMarks from "./renderMarks";
 
 type Props = {
   mark: Mark,
-  children: React.Node | void,
-  style?: ?any
+  children: React.Element<*>,
+  attributes: ?any
 };
-type RenderMark = ?(props: Props) => React.Element<any> | React.Node | void;
+type RenderMark = ?(props: Props) => React.Element<*> | void;
 
 export default function createRenderer(
   renderMark: RenderMark = defaultRenderMarks

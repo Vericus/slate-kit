@@ -5,7 +5,7 @@ import { Value } from "slate";
 import Debug from "debug";
 import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
-import initialState from "../../states/richText.json";
+import initialState from "../states/richText.json";
 
 const debug = Debug("slate-kit:stories:RichText");
 

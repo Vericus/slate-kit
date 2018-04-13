@@ -24,7 +24,8 @@
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate"
+    "slate": "Slate",
+    "is-plain-object": "IsPlainObject"
   },
   "devDependencies": {
     "@vericus/slate-kit-utils-hyperscript": "^0.0.1",
@@ -36,13 +37,15 @@
     "slate-kit"
   ],
   "dependencies": {
-    "@vericus/slate-kit-utils-changes": "^0.0.1",
+    "immutable": "^3.8.2",
+    "is-plain-object": "^2.0.4",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "slate": "0.32.0 - ^0.33.0",
     "slate-prop-types": "^0.4.27",
     "slate-react": "^0.12.4",
+    "@vericus/slate-kit-plugins-utils": "^0.0.1",
     "tinycolor2": "^1.4.1"
   }
 }

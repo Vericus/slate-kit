@@ -1,11 +1,27 @@
 const path = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const { webpack: lernaAliases } = require("lerna-alias");
+
+const extractSass = new ExtractTextPlugin({
+  filename: "[name].[contenthash].css",
+  disable: process.env.NODE_ENV === "development"
+});
 
 module.exports = (storybookBaseConfig, configType) => {
   storybookBaseConfig.module.rules.push({
     test: /\.s?css$/,
-    loaders: ["style-loader", "css-loader", "sass-loader"],
-    include: [path.resolve(__dirname, "assets/css")]
+    use: extractSass.extract({
+      use: [
+        {
+          loader: "css-loader"
+        },
+        {
+          loader: "sass-loader"
+        }
+      ],
+      // use style-loader in development
+      fallback: "style-loader"
+    })
   });
 
   storybookBaseConfig.module.rules.push({
@@ -27,5 +43,7 @@ module.exports = (storybookBaseConfig, configType) => {
   storybookBaseConfig.resolve.alias = lernaAliases({
     directory: path.resolve(__dirname)
   });
+
+  storybookBaseConfig.plugins.push(extractSass);
   return storybookBaseConfig;
 };

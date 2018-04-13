@@ -1,33 +1,50 @@
 // @flow
-import * as React from "react";
+import React, { type Element } from "react";
 import Types from "slate-prop-types";
 import type { Mark } from "slate";
 
 type Props = {
   // eslint-disable-next-line react/no-unused-prop-types
   mark: Mark,
-  children: React.Node | void,
-  style: ?any
+  children: Element<*>,
+  attributes: ?any
 };
 
-function renderMark({ children, style }: Props) {
-  return <span style={style}>{children}</span>;
+const defaultStyle = {
+  textDecoration: "inherit",
+  textDecorationColor: "inherit"
+};
+
+function renderMark({ children, attributes }: Props) {
+  return <span {...attributes}>{children}</span>;
 }
 
 export function renderBold(props: Props) {
-  return renderMark({ ...props, style: { fontWeight: "bold" } });
+  return renderMark({
+    ...props,
+    attributes: { style: { ...defaultStyle, fontWeight: "bold" } }
+  });
 }
 
 export function renderItalic(props: Props) {
-  return renderMark({ ...props, style: { fontStyle: "italic" } });
+  return renderMark({
+    ...props,
+    attributes: { style: { ...defaultStyle, fontStyle: "italic" } }
+  });
 }
 
 export function renderUnderline(props: Props) {
-  return renderMark({ ...props, style: { textDecoration: "underline" } });
+  return renderMark({
+    ...props,
+    attributes: { style: { ...defaultStyle, textDecoration: "underline" } }
+  });
 }
 
 export function renderStrikethrough(props: Props) {
-  return renderMark({ ...props, style: { textDecoration: "line-through" } });
+  return renderMark({
+    ...props,
+    attributes: { style: { ...defaultStyle, textDecoration: "line-through" } }
+  });
 }
 
 export default function renderMarks(props: Props) {
