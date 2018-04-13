@@ -43,6 +43,18 @@
         "transform-es2015-modules-commonjs"
       ]
     },
+    "build": {
+      "presets": [
+        "flow",
+        "react",
+        "env"
+      ],
+      "plugins": [
+        "transform-runtime",
+        "transform-class-properties",
+        "transform-object-rest-spread"
+      ]
+    },
     "gh-pages": {
       "presets": [
          "env",

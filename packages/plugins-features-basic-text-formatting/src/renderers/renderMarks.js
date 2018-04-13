@@ -62,8 +62,8 @@ export default function renderMarks(props: Props) {
   return undefined;
 }
 
-renderBold.propTypes = Types.Mark;
-renderItalic.propTypes = Types.Mark;
-renderUnderline.propTypes = Types.Mark;
-renderStrikethrough.propTypes = Types.Mark;
-renderMark.propTypes = Types.Mark;
+renderBold.propTypes = Types.mark;
+renderItalic.propTypes = Types.mark;
+renderUnderline.propTypes = Types.mark;
+renderStrikethrough.propTypes = Types.mark;
+renderMark.propTypes = Types.mark;
