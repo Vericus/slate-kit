@@ -5,6 +5,9 @@
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/slate-kit-utils-hyperscript.js",
   "module": "lib/slate-kit-utils-hyperscript.es.js",
   "umd": "dist/slate-kit-utils-hyperscript.js",

@@ -5,6 +5,9 @@
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/slate-kit-bind-hotkey.js",
   "module": "lib/slate-kit-bind-hotkey.es.js",
   "umd": "dist/slate-kit-bind-hotkey.js",

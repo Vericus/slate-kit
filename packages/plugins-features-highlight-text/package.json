@@ -14,6 +14,9 @@
     "type": "module"
   },
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/slate-kit-highlight-text.js",
   "module": "lib/slate-kit-highlight-text.es.js",
   "umd": "dist/slate-kit-highlight-text.js",

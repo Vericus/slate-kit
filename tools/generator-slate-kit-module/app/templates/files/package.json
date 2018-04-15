@@ -14,6 +14,9 @@
     "module"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/<%= module %>.js",
   "module": "lib/<%= module %>.es.js",
   "umd": "dist/<%= module %>.js",

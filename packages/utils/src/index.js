@@ -4,9 +4,11 @@ import hasBlock from "./hasBlock";
 import hasMark from "./hasMark";
 import removeExpandedMark from "./removeExpandedMark";
 import removeCollapsedMark from "./removeCollapsedMark";
+import * as environments from "./environment";
 
 // eslint-disable-next-line import/prefer-default-export
 export {
+  environments,
   getHighestSelectedBlocks,
   hasMark,
   hasActiveMark,

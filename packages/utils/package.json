@@ -14,6 +14,9 @@
     "module"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/slate-kit-plugins-utils.js",
   "module": "lib/slate-kit-plugins-utils.es.js",
   "umd": "dist/slate-kit-plugins-utils.js",
@@ -24,11 +27,13 @@
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate"
+    "slate": "Slate",
+    "is-in-browser": "IsInBrowser"
   },
   "dependencies": {
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
+    "is-in-browser": "^1.1.3",
     "slate": "0.32.0 - 0.34.0"
   },
   "devDependencies": {

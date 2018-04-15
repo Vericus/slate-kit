@@ -7,6 +7,11 @@
   "version": "independent",
   "npmClient": "yarn",
   "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "allowBranch": "master"
+    }
+  },
   "changelog": {
     "repo": "Vericus/slate-kit",
     "labels": {

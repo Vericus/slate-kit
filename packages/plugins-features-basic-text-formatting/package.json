@@ -14,6 +14,9 @@
     "module"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/slate-kit-basic-text-formatting.js",
   "module": "lib/slate-kit-basic-text-formatting.es.js",
   "umd": "dist/slate-kit-basic-text-formatting.js",
