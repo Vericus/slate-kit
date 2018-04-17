@@ -6,7 +6,7 @@ import Types from "slate-prop-types";
 type Props = {
   attributes: any,
   children: Element<*>,
-  node?: Node
+  node: Node
 };
 
 export function HeadingOne(props: Props) {

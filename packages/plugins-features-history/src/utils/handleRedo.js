@@ -1,6 +1,12 @@
+// @flow
+import type { Value, Change } from "slate";
 import hasRedo from "./hasRedo";
 
-export default function handleRedo(value, editorChange, onRedo) {
+export default function handleRedo(
+  value: Value,
+  editorChange: ?Change,
+  onRedo: (change: Change) => void
+) {
   const change = editorChange || value.change();
   const newChange = change.value.change();
   if (!hasRedo(value)) return change;

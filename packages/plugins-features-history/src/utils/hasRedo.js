@@ -1,4 +1,7 @@
-export default function hasRedo(value) {
+// @flow
+import type { Value } from "slate";
+
+export default function hasRedo(value: Value) {
   return !(
     value.history.redos &&
     value.history.redos

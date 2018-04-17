@@ -27,6 +27,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+# .yarnrc
+**/npm-packages-offline-cache
 
 src/styles/main.css
 /.vscode

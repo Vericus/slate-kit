@@ -1,4 +1,7 @@
-export default function hasUndo(value) {
+// @flow
+import type { Value } from "slate";
+
+export default function hasUndo(value: Value) {
   return !(
     value.history.undos &&
     value.history.undos

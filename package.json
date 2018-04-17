@@ -11,7 +11,7 @@
     "tools/*"
   ],
   "scripts": {
-    "bootstrap": "lerna bootstrap && yarn && yarn run flow:setup",
+    "bootstrap": "yarn --offline && lerna bootstrap && yarn run flow:setup",
     "bootstrap:build": "yarn bootstrap && yarn build",
     "build-storybook": "build-storybook",
     "build": "yarn run build:packages && lerna run build --parallel",
@@ -97,6 +97,7 @@
     "npm-run-all": "^4.1.2",
     "prettier": "^1.11.1",
     "react": "^16.3.0",
+    "react-color": "^2.14.1",
     "react-dom": "^16.3.0",
     "rmfr": "^2.0.0",
     "rollup-plugin-babel": "^3.0.3",
@@ -108,7 +109,7 @@
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "^3.0.0",
     "sass-loader": "^6.0.7",
-    "slate": "0.32.0 - ^0.33.0",
+    "slate": "0.33.4",
     "slate-base64-serializer": "^0.2.29",
     "slate-dev-logger": "^0.1.39",
     "slate-html-serializer": "^0.6.1",

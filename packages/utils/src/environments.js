@@ -56,13 +56,13 @@ let OS;
 if (browser) {
   const { userAgent } = window.navigator;
 
-  BROWSER_RULES.entries().some(([name, regexp]) => {
+  BROWSER_RULES.some(([name, regexp]) => {
     const match = regexp.test(userAgent);
     if (match) BROWSER = name;
     return match;
   });
 
-  OS_RULES.entries().some(([name, regexp]) => {
+  OS_RULES.some(([name, regexp]) => {
     const match = regexp.test(userAgent);
     if (match) OS = name;
     return match;
@@ -71,7 +71,7 @@ if (browser) {
   const testEl = window.document.createElement("div");
   testEl.contentEditable = true;
 
-  EVENT_RULES.entries().forEach(([name, testFn]) => {
+  EVENT_RULES.forEach(([name, testFn]) => {
     EVENTS[name] = testFn(testEl);
   });
 }

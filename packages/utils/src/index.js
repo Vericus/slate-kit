@@ -4,7 +4,7 @@ import hasBlock from "./hasBlock";
 import hasMark from "./hasMark";
 import removeExpandedMark from "./removeExpandedMark";
 import removeCollapsedMark from "./removeCollapsedMark";
-import * as environments from "./environment";
+import * as environments from "./environments";
 
 // eslint-disable-next-line import/prefer-default-export
 export {

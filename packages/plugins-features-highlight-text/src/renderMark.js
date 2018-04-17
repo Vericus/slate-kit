@@ -20,7 +20,11 @@ export default function createRenderMark(opt: typeOptions) {
   const { type, data: dataField, styles: styleFields, alpha } = opt;
   return (props: Props) => {
     if (props.mark.type === type) {
-      const { children, attributes, mark: { data } } = props;
+      const {
+        children,
+        attributes,
+        mark: { data }
+      } = props;
       let { style } = attributes || {};
       const color = tinycolor(data.get(dataField));
       style = {
