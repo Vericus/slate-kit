@@ -6,6 +6,7 @@ import json from "rollup-plugin-json";
 import replace from "rollup-plugin-replace";
 import resolve from "rollup-plugin-node-resolve";
 import uglify from "rollup-plugin-uglify";
+import visualizer from "rollup-plugin-visualizer";
 import { startCase } from "lodash";
 
 /**
@@ -76,6 +77,12 @@ function configure(pkg, location, env, target) {
     babel({
       include: [`${location}/src/**`],
       plugins: ["external-helpers"]
+    }),
+
+    visualizer({
+      filename: `tmp/stats/${pkg.name}.html`,
+      title: `${pkg.name}`,
+      sourcemap: true
     }),
 
     // Register Node.js globals for browserify compatibility.
