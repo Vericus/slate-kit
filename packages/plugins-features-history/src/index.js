@@ -3,8 +3,7 @@ import isHotkey from "is-hotkey";
 import type { Change } from "slate";
 import { environments } from "@vericus/slate-kit-plugins-utils";
 import Options, { type typeOptions } from "./options";
-import handleUndo from "./utils/handleUndo";
-import handleRedo from "./utils/handleRedo";
+import utils, { handleUndo, handleRedo } from "./utils";
 
 export default function History(pluginOptions: typeOptions = {}) {
   const opts = new Options(pluginOptions);
@@ -25,6 +24,7 @@ export default function History(pluginOptions: typeOptions = {}) {
   }
 
   return {
-    onKeyDown
+    onKeyDown,
+    utils
   };
 }
