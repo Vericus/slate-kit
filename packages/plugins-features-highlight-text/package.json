@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@vericus/slate-kit-utils-hyperscript": "^0.0.1",
-    "flow-bin": "^0.69.0"
+    "flow-bin": "^0.70.0"
   },
   "keywords": [
     "Vericus",

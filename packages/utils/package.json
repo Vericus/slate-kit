@@ -37,7 +37,7 @@
     "slate": "0.32.0 - 0.34.0"
   },
   "devDependencies": {
-    "flow-bin": "^0.69.0"
+    "flow-bin": "^0.70.0"
   },
   "keywords": [
     "Vericus",

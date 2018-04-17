@@ -40,7 +40,7 @@
     "@vericus/slate-kit-bind-hotkey": "0.0.1"
   },
   "devDependencies": {
-    "flow-bin": "^0.69.0"
+    "flow-bin": "^0.70.0"
   },
   "keywords": [
     "Vericus",

@@ -24,8 +24,10 @@ function configure(pkg, location, env, target) {
   const isModule = target === "module";
   const input = `${location}/src/index.js`;
   const watch = {
-    chokidar: true
+    chokidar: true,
+    include: `${location}/src/**`
   };
+
   const deps = []
     .concat(pkg.dependencies ? Object.keys(pkg.dependencies) : [])
     .concat(pkg.peerDependencies ? Object.keys(pkg.peerDependencies) : []);

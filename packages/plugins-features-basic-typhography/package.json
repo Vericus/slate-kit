@@ -31,7 +31,7 @@
     "is-plain-object": "IsPlainObject"
   },
   "devDependencies": {
-    "flow-bin": "^0.69.0"
+    "flow-bin": "^0.70.0"
   },
   "dependencies": {
     "@vericus/slate-kit-plugins-utils": "0.0.1",
