@@ -43,6 +43,7 @@ export default class PluginsWrapper {
         this.styles[label] = value;
         break;
       case "utils":
+      case "helpers":
         this[UTILS][label] = value;
         break;
       case "changes":
