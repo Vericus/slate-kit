@@ -8,6 +8,7 @@ import BasicTypography from "@vericus/slate-kit-basic-typhography";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import initialState from "../states/typography.json";
+import Toolbar from "../support/components/toolbar";
 
 const debug = Debug("slate-kit:stories:RichText");
 
@@ -36,6 +37,7 @@ class TypographyStory extends Component {
     this.state = {
       value: Value.fromJSON(initialState)
     };
+    console.log(this.state.value);
   }
 
   onChange = ({ value }) => {
@@ -44,9 +46,18 @@ class TypographyStory extends Component {
     });
   };
 
+  renderToolbar = () => (
+    <Toolbar
+      pluginsWrapper={pluginsWrapper}
+      value={this.state.value}
+      onChange={this.onChange}
+    />
+  );
+
   render() {
     return (
       <div>
+        {this.renderToolbar()}
         <Editor
           placeholder={"Enter some text..."}
           plugins={plugins}

@@ -1,0 +1,142 @@
+{
+  "document": {
+    "nodes": [
+      {
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "text": "This is editable ",
+                "marks": [
+                  {
+                    "type": "textColor",
+                    "data": {
+                      "color": "#0066ff"
+                    }
+                  },
+                  {
+                    "type": "textBackground",
+                    "data": {
+                      "backgroundColor": "#ff00ff"
+                    }
+                  }
+                ]
+              },
+              {
+                "text": "rich",
+                "marks": [
+                  {
+                    "type": "textColor",
+                    "data": {
+                      "color": "#ffff00"
+                    }
+                  },
+                  {
+                    "type": "textBackground",
+                    "data": {
+                      "backgroundColor": "#ff0066"
+                    }
+                  },
+                  {
+                    "type": "underline"
+                  }
+                ]
+              },
+              {
+                "text": " text, "
+              },
+              {
+                "text": "much",
+                "marks": [
+                  {
+                    "type": "italic"
+                  }
+                ]
+              },
+              {
+                "text": " better than a ",
+                "marks": [
+                  {
+                    "type": "textColor",
+                    "data": {
+                      "color": "#b2e35a"
+                    }
+                  }
+                ]
+              },
+              {
+                "text": "<textarea>",
+                "marks": [
+                  {
+                    "type": "code"
+                  }
+                ]
+              },
+              {
+                "text": "!"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "heading-one",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "text":
+                  "Since it's rich text, you can do things like turn a selection of text "
+              },
+              {
+                "text": "bold",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ]
+              },
+              {
+                "text":
+                  ", or add a semantically rendered block quote in the middle of the page, like this:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "heading-three",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "text": "A wise quote."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "text": "Try it out for yourself!"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

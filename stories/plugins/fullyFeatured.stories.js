@@ -4,12 +4,14 @@ import { storiesOf } from "@storybook/react";
 import { Value } from "slate";
 import Debug from "debug";
 import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
+import BasicTypography from "@vericus/slate-kit-basic-typhography";
+import HighlightText from "@vericus/slate-kit-highlight-text";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
-import initialState from "../states/richText.json";
+import initialState from "../states/fullText.json";
 import Toolbar from "../support/components/toolbar";
 
-const debug = Debug("slate-kit:stories:RichText");
+const debug = Debug("slate-kit:stories:HighlightedText");
 
 const pluginsWrapper = new PluginsWrapper();
 
@@ -21,12 +23,37 @@ const pluginOpts = [
   {
     label: "basic-text-format",
     createPlugin: BasicTextFormat
+  },
+  {
+    label: "basic-typhography",
+    createPlugin: BasicTypography
+  },
+  {
+    label: "background-colored-text",
+    createPlugin: HighlightText,
+    options: {
+      type: "textBackground",
+      alpha: 0.4,
+      data: "backgroundColor",
+      defaultColor: "black",
+      styles: ["backgroundColor"]
+    }
+  },
+  {
+    label: "colored-text",
+    createPlugin: HighlightText,
+    options: {
+      type: "textColor",
+      data: "color",
+      defaultColor: "transparent",
+      styles: ["textDecorationColor", "color"]
+    }
   }
 ];
 
 const plugins = pluginsWrapper.makePlugins(pluginOpts);
 
-class RichTextStory extends Component {
+class EditorStory extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,6 +90,6 @@ class RichTextStory extends Component {
   }
 }
 
-storiesOf("plugins/features", module).add("Rich Text", () => {
-  return <RichTextStory />;
+storiesOf("editor", module).add("Full Featured", () => {
+  return <EditorStory />;
 });

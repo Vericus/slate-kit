@@ -1,0 +1,93 @@
+.ql-color-label {
+  stroke: red;
+}
+.ql-transparent {
+  opacity: 0.2;
+}
+.ql-thin {
+  stroke-width: 0.5;
+}
+
+:not(.colored-icon) {
+  .ql-stroke {
+    stroke: #000;
+    fill: transparent;
+  }
+  .ql-stroke-mitter {
+    stroke: #000;
+    fill: transparent;
+  }
+  .ql-fill {
+    fill: #000;
+  }
+  .ql-even {
+    stroke: #000;
+    fill: #fff;
+  }
+  .ql-thin {
+    stroke: #000;
+    fill: transparent;
+  }
+}
+
+.colored-icon {
+  .ql-stroke {
+    stroke: inherit;
+    fill: transparent;
+    stroke-width: 2;
+  }
+  .ql-stroke-mitter {
+    stroke: inherit;
+    fill: transparent;
+    stroke-width: 2;
+  }
+  .ql-fill {
+    fill: inherit;
+  }
+  .ql-even {
+    stroke: inherit;
+    fill: inherit;
+  }
+  .ql-thin {
+    stroke: inherit;
+    fill: inherit;
+    stroke-width: 1;
+  }
+}
+
+.btn-icon--disabled {
+  .ql-stroke {
+    stroke: rgba(0, 0, 0, 0.23);
+  }
+  .ql-stroke-mitter {
+    stroke: rgba(0, 0, 0, 0.23);
+  }
+  .ql-fill {
+    fill: rgba(0, 0, 0, 0.23);
+  }
+  .ql-even {
+    stroke: rgba(0, 0, 0, 0.23);
+    fill: #fff;
+  }
+  .ql-thin {
+    stroke: rgba(0, 0, 0, 0.23);
+  }
+}
+
+.btn-icon--active {
+  .ql-fill {
+    fill: blue;
+  }
+  .ql-stroke {
+    stroke: blue;
+    stroke-width: 2;
+  }
+  .ql-stroke-mitter {
+    stroke: blue;
+    stroke-width: 2;
+  }
+  .ql-thin {
+    stroke: blue;
+    stroke-width: 1;
+  }
+}

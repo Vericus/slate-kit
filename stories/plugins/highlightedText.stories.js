@@ -8,6 +8,7 @@ import HighlightText from "@vericus/slate-kit-highlight-text";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import initialState from "../states/highlightedText.json";
+import Toolbar from "../support/components/toolbar";
 
 const debug = Debug("slate-kit:stories:HighlightedText");
 
@@ -23,7 +24,7 @@ const pluginOpts = [
     createPlugin: BasicTextFormat
   },
   {
-    label: "colored-text",
+    label: "background-colored-text",
     createPlugin: HighlightText,
     options: {
       type: "textBackground",
@@ -34,7 +35,7 @@ const pluginOpts = [
     }
   },
   {
-    label: "background-colored-text",
+    label: "colored-text",
     createPlugin: HighlightText,
     options: {
       type: "textColor",
@@ -61,9 +62,18 @@ class ColoredTextStory extends Component {
     });
   };
 
+  renderToolbar = () => (
+    <Toolbar
+      pluginsWrapper={pluginsWrapper}
+      value={this.state.value}
+      onChange={this.onChange}
+    />
+  );
+
   render() {
     return (
       <div>
+        {this.renderToolbar()}
         <Editor
           placeholder={"Enter some text..."}
           plugins={plugins}
