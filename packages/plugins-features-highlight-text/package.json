@@ -30,15 +30,6 @@
     "slate": "Slate",
     "is-plain-object": "IsPlainObject"
   },
-  "devDependencies": {
-    "@vericus/slate-kit-utils-hyperscript": "0.0.0",
-    "flow-bin": "^0.70.0"
-  },
-  "keywords": [
-    "Vericus",
-    "slate",
-    "slate-kit"
-  ],
   "dependencies": {
     "immutable": "^3.8.2",
     "is-plain-object": "^2.0.4",
@@ -48,7 +39,15 @@
     "slate": "0.32.0 - ^0.33.0",
     "slate-prop-types": "^0.4.27",
     "slate-react": "^0.12.4",
-    "@vericus/slate-kit-plugins-utils": "0.0.0",
     "tinycolor2": "^1.4.1"
-  }
+  },
+  "devDependencies": {
+    "@vericus/slate-kit-utils-hyperscript": "0.0.0",
+    "flow-bin": "^0.70.0"
+  },
+  "keywords": [
+    "Vericus",
+    "slate",
+    "slate-kit"
+  ]
 }

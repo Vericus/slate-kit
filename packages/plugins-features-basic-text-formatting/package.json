@@ -31,14 +31,14 @@
     "is-hotkey": "IsHotkey"
   },
   "dependencies": {
+    "@vericus/slate-kit-bind-hotkey": "0.0.0",
+    "@vericus/slate-kit-plugins-utils": "0.0.0",
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "slate": "0.32.0 - ^0.33.0",
-    "slate-prop-types": "^0.4.27",
-    "@vericus/slate-kit-plugins-utils": "0.0.0",
-    "@vericus/slate-kit-bind-hotkey": "0.0.0"
+    "slate-prop-types": "^0.4.27"
   },
   "devDependencies": {
     "flow-bin": "^0.70.0"

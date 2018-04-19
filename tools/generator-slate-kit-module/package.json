@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.2",
   "name": "@vericus/generator-slate-kit-module",
   "description": "Use this to create a new slate-kit modules!",
   "author": "Cadmus",
@@ -12,7 +12,6 @@
     "app"
   ],
   "dependencies": {
-    "can-npm-publish": "^1.1.0",
     "chalk": "^2.1.0",
     "yeoman-generator": "^1.1.1"
   },
