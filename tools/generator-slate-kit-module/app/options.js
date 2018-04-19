@@ -1,7 +1,7 @@
 const chalk = require("chalk");
 
-const capitalize = require("./lib/capitalize");
-const stripPrefix = require("./lib/strip-prefix");
+const capitalize = require("./utils/capitalize");
+const stripPrefix = require("./utils/strip-prefix");
 
 module.exports = {
   module: {
