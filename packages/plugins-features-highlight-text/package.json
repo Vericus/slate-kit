@@ -1,5 +1,5 @@
 {
-  "version": "0.0.0",
+  "version": "0.0.1",
   "name": "@vericus/slate-kit-highlight-text",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -42,7 +42,7 @@
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
-    "@vericus/slate-kit-utils-hyperscript": "0.0.0",
+    "@vericus/slate-kit-utils-hyperscript": "0.0.1",
     "flow-bin": "^0.70.0"
   },
   "keywords": [
