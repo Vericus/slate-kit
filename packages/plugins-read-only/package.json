@@ -1,0 +1,46 @@
+{
+  "version": "0.0.1",
+  "name": "@vericus/slate-kit-read-only",
+  "description": "TODO: fill in this description later",
+  "homepage": "https://github.com/Vericus/slate-kit/",
+  "repository": "git://github.com/Vericus/slate-kit.git",
+  "author": "Cadmus",
+  "slate-kit": {
+    "type": "module"
+  },
+  "files": [
+    "dist/",
+    "lib/",
+    "module"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/slate-kit-read-only.js",
+  "module": "lib/slate-kit-read-only.es.js",
+  "umd": "dist/slate-kit-read-only.js",
+  "umdMin": "dist/slate-kit-read-only.min.js",
+  "scripts": {
+    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
+    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+  },
+  "umdGlobals": {
+    "is-hotkey": "IsHotkey"
+  },
+  "dependencies": {
+    "hoist-non-react-statics": "^2.5.0",
+    "is-hotkey": "^0.1.2",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.70.0"
+  },
+  "keywords": [
+    "Vericus",
+    "slate",
+    "slate-kit"
+  ]
+}

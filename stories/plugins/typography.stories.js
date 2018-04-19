@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { storiesOf } from "@storybook/react";
 import { Value } from "slate";
+import { withKnobs, boolean } from "@storybook/addon-knobs/react";
 import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
 import BasicTypography from "@vericus/slate-kit-basic-typhography";
 import HistoryPlugin from "@vericus/slate-kit-history";
@@ -23,6 +24,14 @@ const pluginOpts = [
   }
 ];
 
-storiesOf("plugins/features", module).add("Typography", () => {
-  return <Editor initialState={initialState} pluginOpts={pluginOpts} />;
-});
+storiesOf("plugins/features", module)
+  .addDecorator(withKnobs)
+  .add("Typography", () => {
+    return (
+      <Editor
+        initialState={initialState}
+        pluginOpts={pluginOpts}
+        isReadOnly={boolean("ReadOnly", false)}
+      />
+    );
+  });

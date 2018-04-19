@@ -106,7 +106,8 @@ class ColorPicker extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     return (
       this.state.color !== nextState.color ||
-      this.state.isOpen !== nextState.isOpen
+      this.state.isOpen !== nextState.isOpen ||
+      this.props.isReadOnly !== nextProps.isReadOnly
     );
   }
 
@@ -187,6 +188,7 @@ class ColorPicker extends Component {
               this.props.color === "transparent" ? "black" : this.props.color
           }}
           size="18"
+          disabled={this.props.isReadOnly}
         />
       </ContextPopover>
     );
@@ -302,7 +304,7 @@ export default class Toolbar extends Component {
         <IconButton
           icon={options.icon}
           onMouseDown={e => this.handleClickTypography(e, options.change, type)}
-          disabled={options.disabled}
+          disabled={options.disabled || this.props.isReadOnly}
           active={this.currentTypography(this.props.value) === type}
           size="18"
         />
@@ -315,7 +317,7 @@ export default class Toolbar extends Component {
         <IconButton
           icon={options.icon}
           onMouseDown={e => this.handleClickMark(e, options.change)}
-          disabled={options.disabled}
+          disabled={options.disabled || this.props.isReadOnly}
           active={options.isActive(this.props.value)}
           size="18"
         />
@@ -345,13 +347,13 @@ export default class Toolbar extends Component {
           <IconButton
             icon="Undo"
             onMouseDown={e => this.handleHistory(e, "undo")}
-            disabled={!this.hasHistory("undo")}
+            disabled={!this.hasHistory("undo") || this.props.isReadOnly}
             size="18"
           />,
           <IconButton
             icon="Redo"
             onMouseDown={e => this.handleHistory(e, "redo")}
-            disabled={!this.hasHistory("redo")}
+            disabled={!this.hasHistory("redo") || this.props.isReadOnly}
             size="18"
           />
         ]
@@ -378,6 +380,7 @@ export default class Toolbar extends Component {
         onChange={color =>
           this.handleColorChange(colorChanges.changeColor, color)
         }
+        isReadOnly={this.props.isReadOnly}
       />
     ) : null;
   };

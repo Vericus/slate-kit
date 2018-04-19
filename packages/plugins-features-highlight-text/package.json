@@ -31,6 +31,7 @@
     "is-plain-object": "IsPlainObject"
   },
   "dependencies": {
+    "@vericus/slate-kit-plugins-utils": "0.0.1",
     "immutable": "^3.8.2",
     "is-plain-object": "^2.0.4",
     "prop-types": "^15.6.1",

@@ -57,20 +57,23 @@
 
 .btn-icon--disabled {
   .ql-stroke {
-    stroke: rgba(0, 0, 0, 0.23);
+    stroke: rgba(0, 0, 0, 0.23)!important;
   }
   .ql-stroke-mitter {
-    stroke: rgba(0, 0, 0, 0.23);
+    stroke: rgba(0, 0, 0, 0.23)!important;
   }
   .ql-fill {
-    fill: rgba(0, 0, 0, 0.23);
+    fill: rgba(0, 0, 0, 0.23)!important;
   }
   .ql-even {
-    stroke: rgba(0, 0, 0, 0.23);
-    fill: #fff;
+    stroke: rgba(0, 0, 0, 0.23)!important;
+    fill: #fff!important;
   }
   .ql-thin {
-    stroke: rgba(0, 0, 0, 0.23);
+    stroke: rgba(0, 0, 0, 0.23)!important;
+  }
+  .ql-color-label {
+    stroke: rgba(0, 0, 0, 0.23)!important;
   }
 }
 
@@ -90,4 +93,10 @@
     stroke: blue;
     stroke-width: 1;
   }
+}
+
+.slate-read-only * {
+  caret-color: transparent;
+  color : transparent;
+  text-shadow : 0 0 0 #000;
 }
