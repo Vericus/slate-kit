@@ -1,6 +1,6 @@
 {
-  "version": "0.0.1",
-  "name": "generator-slate-kit",
+  "version": "0.0.6",
+  "name": "@vericus/generator-slate-kit-module",
   "description": "Use this to create a new slate-kit modules!",
   "author": "Cadmus",
   "license": "MIT",
