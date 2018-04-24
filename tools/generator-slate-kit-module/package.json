@@ -1,9 +1,10 @@
 {
-  "version": "0.0.6",
+  "version": "0.0.7",
   "name": "@vericus/generator-slate-kit-module",
   "description": "Use this to create a new slate-kit modules!",
   "author": "Cadmus",
   "license": "MIT",
+  "main": "app/index.js",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "slate-kit": {
     "type": "tool"
