@@ -1,7 +1,12 @@
 // @flow
 import * as React from "react";
 import type { Mark } from "slate";
-import defaultRenderMarks from "./renderMarks";
+import defaultRenderMarks, {
+  renderStrikethrough,
+  renderBold,
+  renderItalic,
+  renderUnderline
+} from "./renderMarks";
 
 type Props = {
   mark: Mark,
@@ -10,10 +15,16 @@ type Props = {
 };
 type RenderMark = ?(props: Props) => React.Element<*> | void;
 
-export default function createRenderer(
-  renderMark: RenderMark = defaultRenderMarks
-) {
+function createRenderer(renderMark: RenderMark = defaultRenderMarks) {
   return {
     renderMark
   };
 }
+
+export {
+  createRenderer as default,
+  renderStrikethrough,
+  renderBold,
+  renderItalic,
+  renderUnderline
+};

@@ -8,6 +8,6 @@ export default function createPlugin(pluginOptions: typeOptions) {
   const opt = new Options(pluginOptions);
   const utils = createUtils(opt);
   const changes = createChanges(opt, utils);
-  const renderers = createRenderers();
+  const renderers = createRenderers(opt);
   return { changes, utils, ...renderers };
 }

@@ -94,7 +94,6 @@ const highlightColors = [
 
 class ColorPicker extends Component {
   constructor(props) {
-    console.log("constructed");
     super(props);
 
     this.state = {

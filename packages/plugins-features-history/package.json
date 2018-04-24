@@ -36,10 +36,13 @@
     "immutable": "^3.8.2",
     "is-hotkey": "^0.1.2",
     "is-in-browser": "^1.1.3",
-    "slate": "0.32.0 - ^0.33.0"
+    "slate": "^0.33.0"
   },
   "devDependencies": {
     "flow-bin": "^0.70.0"
+  },
+  "peerDependencies": {
+    "slate": "^0.32.0 || ^0.33.0"
   },
   "keywords": [
     "Vericus",

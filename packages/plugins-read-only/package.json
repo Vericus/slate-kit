@@ -38,6 +38,10 @@
   "devDependencies": {
     "flow-bin": "^0.70.0"
   },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
   "keywords": [
     "Vericus",
     "slate",

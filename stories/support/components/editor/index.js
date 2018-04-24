@@ -3,6 +3,7 @@ import { Editor } from "slate-react";
 import { Value } from "slate";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import { WithReadOnly } from "@vericus/slate-kit-read-only";
+import HistoryPlugin from "@vericus/slate-kit-history";
 import Toolbar from "../toolbar";
 
 const pluginsWrapper = new PluginsWrapper();

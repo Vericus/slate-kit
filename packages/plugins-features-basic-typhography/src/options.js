@@ -10,17 +10,20 @@ const defaultOptions = {
     "heading-three",
     "heading-four"
   ],
-  defaultBlock: "paragraph"
+  defaultBlock: "paragraph",
+  externalRenderer: false
 };
 
 export type typeOptions = {
   blockTypes: Array<string>,
-  defaultBlock: string
+  defaultBlock: string,
+  externalRenderer: boolean
 };
 
 class Options extends Record(defaultOptions, "Typhography Options") {
   blockTypes: Array<string>;
   defaultBlock: string;
+  externalRenderer: boolean;
 
   static create(attrs: any = {}) {
     if (Options.isOptions(attrs)) return attrs;
