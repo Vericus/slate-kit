@@ -54,6 +54,7 @@ storiesOf("editor", module)
         initialState={initialState}
         pluginOpts={pluginOpts}
         isReadOnly={boolean("ReadOnly", false)}
+        spellCheck={boolean("SpellCheck", false)}
       />
     );
   });
