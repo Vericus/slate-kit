@@ -34,7 +34,7 @@ function withReadOnly(WrappedComponent) {
       return (
         <WrappedComponent
           {...this.props}
-          spellCheck={false}
+          spellCheck={this.props.spellCheck && !this.props.isReadOnly}
           plugins={this.plugins}
         />
       );
