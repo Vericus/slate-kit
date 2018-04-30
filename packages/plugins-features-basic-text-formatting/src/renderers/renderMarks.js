@@ -22,28 +22,40 @@ function renderMark({ children, attributes }: Props) {
 export function renderBold(props: Props) {
   return renderMark({
     ...props,
-    attributes: { style: { ...defaultStyle, fontWeight: "bold" } }
+    attributes: {
+      ...props.attributes,
+      style: { ...defaultStyle, fontWeight: "bold" }
+    }
   });
 }
 
 export function renderItalic(props: Props) {
   return renderMark({
     ...props,
-    attributes: { style: { ...defaultStyle, fontStyle: "italic" } }
+    attributes: {
+      ...props.attributes,
+      style: { ...defaultStyle, fontStyle: "italic" }
+    }
   });
 }
 
 export function renderUnderline(props: Props) {
   return renderMark({
     ...props,
-    attributes: { style: { ...defaultStyle, textDecoration: "underline" } }
+    attributes: {
+      ...props.attributes,
+      style: { ...defaultStyle, textDecoration: "underline" }
+    }
   });
 }
 
 export function renderStrikethrough(props: Props) {
   return renderMark({
     ...props,
-    attributes: { style: { ...defaultStyle, textDecoration: "line-through" } }
+    attributes: {
+      ...props.attributes,
+      style: { ...defaultStyle, textDecoration: "line-through" }
+    }
   });
 }
 
