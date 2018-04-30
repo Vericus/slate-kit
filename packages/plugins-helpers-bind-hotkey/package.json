@@ -1,6 +1,6 @@
 {
   "name": "@vericus/slate-kit-bind-hotkey",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "a slate helper plugin to associate hotkey(s) to slate change",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",

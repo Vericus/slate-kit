@@ -1,5 +1,5 @@
 {
-  "version": "0.0.3",
+  "version": "0.0.4",
   "name": "@vericus/slate-kit-highlight-text",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -31,7 +31,7 @@
     "is-plain-object": "IsPlainObject"
   },
   "dependencies": {
-    "@vericus/slate-kit-plugins-utils": "^0.0.2",
+    "@vericus/slate-kit-plugins-utils": "^0.0.3",
     "immutable": "^3.8.2",
     "is-plain-object": "^2.0.4",
     "prop-types": "^15.6.1",
