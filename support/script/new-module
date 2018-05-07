@@ -3,7 +3,7 @@ set -e
 
 function generate() {
   pushd packages > /dev/null
-  ../node_modules/.bin/yo ../tools/generator-slate-kit-module/app "$@"
+  ../node_modules/.bin/yo ../tools/generator-slate-kit-module/generators/app "$@"
   popd > /dev/null
 }
 
