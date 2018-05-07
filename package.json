@@ -11,7 +11,7 @@
     "tools/*"
   ],
   "scripts": {
-    "bootstrap": "yarn && lerna bootstrap --no-hoist && yarn run flow:setup",
+    "bootstrap": "yarn && lerna bootstrap && lerna exec yarn install && yarn run flow:setup",
     "bootstrap:build": "yarn bootstrap && yarn build",
     "build-storybook": "build-storybook",
     "build": "yarn run build:packages && lerna run build --parallel",
