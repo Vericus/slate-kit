@@ -1,0 +1,47 @@
+{
+  "version": "0.0.1",
+  "name": "@vericus/slate-kit-indent",
+  "description": "TODO: fill in this description later",
+  "homepage": "https://github.com/Vericus/slate-kit/",
+  "repository": "git://github.com/Vericus/slate-kit.git",
+  "author": "Cadmus",
+  "slate-kit": {
+    "type": "module"
+  },
+  "files": [
+    "dist/",
+    "lib/",
+    "module"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/slate-kit-indent.js",
+  "module": "lib/slate-kit-indent.es.js",
+  "umd": "dist/slate-kit-indent.js",
+  "umdMin": "dist/slate-kit-indent.min.js",
+  "scripts": {
+    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
+    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+  },
+  "umdGlobals": {
+    "immutable": "Immutable",
+    "slate": "Slate"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.70.0"
+  },
+  "keywords": [
+    "Vericus",
+    "slate",
+    "slate-kit"
+  ],
+  "dependencies": {
+    "@vericus/slate-kit-plugins-utils": "^0.0.4",
+    "immutable": "^3.8.2",
+    "is-hotkey": "^0.1.2",
+    "slate": "^0.33.5",
+    "slate-hotkeys": "^0.1.1"
+  }
+}
