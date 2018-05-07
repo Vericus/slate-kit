@@ -10,7 +10,7 @@
     "type": "tool"
   },
   "files": [
-    "app"
+    "generators"
   ],
   "publishConfig": {
     "access": "public"
