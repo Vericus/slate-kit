@@ -1,23 +1,44 @@
 // @flow
-import { isKeyHotkey } from "is-hotkey";
+import isHotkey from "is-hotkey";
+import hotkeys from "slate-hotkeys";
 import { type typeOptions } from "./options";
 
-export default function createOnKeyDown(opts: typeOptions, changes) {
+export default function createOnKeyDown(opts: typeOptions, changes, utils) {
   const { tabable } = opts;
   const { increaseIndent, decreaseIndent } = changes;
-  const TAB = isKeyHotkey("tab");
-  const SHIFT_TAB = isKeyHotkey("shift+tab");
-  return (e, change) => {
+  const { getIndentationLevel } = utils;
+  const {
+    isDeleteCharBackward,
+    isDeleteLineBackward,
+    isDeleteWordBackward
+  } = hotkeys;
+  const isDelete = e =>
+    isDeleteCharBackward(e) ||
+    isDeleteLineBackward(e) ||
+    isDeleteWordBackward(e);
+
+  return (event, change) => {
     const { value } = change;
     const { startBlock, endBlock, selection } = value;
-    if (!(TAB(e) || SHIFT_TAB(e))) return;
-    if (SHIFT_TAB(e)) {
-      e.preventDefault();
-      e.stopPropagation();
-      decreaseIndent(change);
-    } else if (TAB(e)) {
-      e.preventDefault();
-      e.stopPropagation();
+    const { isCollapsed, startOffset } = selection;
+    const isIndent = isHotkey("tab", event);
+    const isOutdent =
+      isHotkey("shift+tab", event) ||
+      (isDelete(event) &&
+        startBlock === endBlock &&
+        isCollapsed &&
+        startOffset === 0);
+    if (!(isIndent || isOutdent)) return;
+    if (isOutdent) {
+      if (getIndentationLevel(startBlock) !== 0) {
+        event.preventDefault();
+        event.stopPropagation();
+        decreaseIndent(change);
+        return true;
+      }
+    } else if (isIndent) {
+      event.preventDefault();
+      event.stopPropagation();
       if (
         startBlock === endBlock &&
         selection.isCollapsed &&

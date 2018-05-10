@@ -100,3 +100,68 @@
   color : transparent;
   text-shadow : 0 0 0 #000;
 }
+
+$indentation-level: 8;
+$indentation-padding: 99;
+$list-padding: 3em;
+$ul-types: disc, circle, square;
+$ol-types: decimal, lower-alpha, lower-roman;
+
+ul, ol {
+  padding-left: $list-padding;
+  li {
+    position: relative;
+  }
+  li::before {
+    user-select: all;
+    position: absolute;
+    text-align: right;
+    display: inline-block;
+    width: 3em;
+    left: -3em;
+  }
+}
+
+ol.list-reset:not(.indented) {
+  counter-reset: ol var(--start-at, 0);
+}
+
+ul {
+  list-style-type: none;
+  counter-increment: ul;
+  li::before {
+    content: counter(ul, nth($ul-types, 1)) "  ";
+  }
+}
+
+ol {
+  list-style-type: none;
+  counter-increment: ol;
+  li::before {
+    content: counter(ol, nth($ol-types, 1)) ". ";
+  }
+}
+
+@for $i from 1 through $indentation-level {
+  .indentation-#{$i}:not(ul):not(ol) {
+    padding-left: #{$i*$indentation-padding}px;
+  }
+  ul.indentation-#{$i}, ol.indentation-#{$i} {
+    padding-left: calc(#{$i*$indentation-padding}px + #{$list-padding});
+  }
+  ul.indentation-#{$i} {
+    counter-increment: ul-#{$i};
+    li::before {
+      content: counter(ul-#{$i}, nth($ul-types, ($i)%length($ul-types)+1)) "  ";
+    }
+  }
+  ol.indentation-#{$i} {
+    counter-increment: ol-#{$i};
+    li::before {
+      content: counter(ol-#{$i}, nth($ol-types, ($i)%length($ol-types)+1)) ". ";
+    }
+  }
+  ol.list-reset-#{$i} {
+    counter-reset: ol-#{$i} var(--start-at, 0);
+  }
+}

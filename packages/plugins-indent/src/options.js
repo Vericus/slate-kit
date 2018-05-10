@@ -21,8 +21,8 @@ const defaultOptions = {
     "heading-two",
     "heading-three",
     "heading-four",
-    "flat-ordered-list",
-    "flat-unordered-list"
+    "ol-list",
+    "ul-list"
   ],
   maxIndentation: 8
 };

@@ -11,7 +11,7 @@
     "tools/*"
   ],
   "scripts": {
-    "bootstrap": "yarn && lerna bootstrap && lerna exec yarn install && yarn run flow:setup",
+    "bootstrap": "yarn && lerna bootstrap && yarn run flow:setup",
     "bootstrap:build": "yarn bootstrap && yarn build",
     "build-storybook": "build-storybook",
     "build": "yarn run build:packages && lerna run build --parallel",
@@ -115,6 +115,7 @@
     "rollup-plugin-visualizer": "^0.6.0",
     "sass-loader": "^6.0.7",
     "slate": "*",
+    "slate-auto-replace": "^0.9.0",
     "slate-base64-serializer": "*",
     "slate-dev-environment": "*",
     "slate-dev-logger": "*",

@@ -2,45 +2,73 @@
 import React, { type Element } from "react";
 import { type Node } from "slate";
 import Types from "slate-prop-types";
-import type { typeOptions } from "../options";
 
 type Props = {
   attributes: any,
   children: Element<*>,
+  className: string,
   node: Node
 };
 
 export function HeadingOne(props: Props) {
-  return <h1 {...props.attributes}>{props.children}</h1>;
+  const { className, attributes, children } = props;
+  return (
+    <h1 className={className} {...attributes}>
+      {children}
+    </h1>
+  );
 }
 export function HeadingTwo(props: Props) {
-  return <h2 {...props.attributes}>{props.children}</h2>;
+  const { className, attributes, children } = props;
+  return (
+    <h2 className={className} {...attributes}>
+      {children}
+    </h2>
+  );
 }
 export function HeadingThree(props: Props) {
-  return <h3 {...props.attributes}>{props.children}</h3>;
+  const { className, attributes, children } = props;
+  return (
+    <h3 className={className} {...attributes}>
+      {children}
+    </h3>
+  );
 }
 export function HeadingFour(props: Props) {
-  return <h4 {...props.attributes}>{props.children}</h4>;
+  const { className, attributes, children } = props;
+  return (
+    <h4 className={className} {...attributes}>
+      {children}
+    </h4>
+  );
 }
 export function Paragraph(props: Props) {
-  return <p {...props.attributes}>{props.children}</p>;
+  const { className, attributes, children } = props;
+  return (
+    <p className={className} {...attributes}>
+      {children}
+    </p>
+  );
 }
 
-export default function renderNode(props: Props) {
-  switch (props.node.type) {
-    case "heading-one":
-      return <HeadingOne {...props} />;
-    case "heading-two":
-      return <HeadingTwo {...props} />;
-    case "heading-three":
-      return <HeadingThree {...props} />;
-    case "heading-four":
-      return <HeadingFour {...props} />;
-    case "paragraph":
-      return <Paragraph {...props} />;
-    // no default
-  }
-  return undefined;
+export default function createRenderNode(pluginsWrapper) {
+  return (props: Props) => {
+    const newProps = pluginsWrapper.getProps(props);
+    switch (newProps.node.type) {
+      case "heading-one":
+        return <HeadingOne {...newProps} />;
+      case "heading-two":
+        return <HeadingTwo {...newProps} />;
+      case "heading-three":
+        return <HeadingThree {...newProps} />;
+      case "heading-four":
+        return <HeadingFour {...newProps} />;
+      case "paragraph":
+        return <Paragraph {...newProps} />;
+      // no default
+    }
+    return undefined;
+  };
 }
 
 HeadingOne.propTypes = { ...Types };
@@ -48,4 +76,3 @@ HeadingTwo.propTypes = { ...Types };
 HeadingThree.propTypes = { ...Types };
 HeadingFour.propTypes = { ...Types };
 Paragraph.propTypes = { ...Types };
-renderNode.propTypes = { ...Types };

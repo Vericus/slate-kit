@@ -1,18 +1,13 @@
 // @flow
 import type { Value, Change, Block } from "slate";
 import { Data } from "slate";
-import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import { type typeOptions } from "./options";
 
-export default function createChanges(opts: typeOptions) {
+export default function createChanges(opts: typeOptions, utils) {
   const { indentable, maxIndentation } = opts;
-  const indentableBlocks = (value: Value) => {
-    return getHighestSelectedBlocks(value).filter(block =>
-      indentable.includes(block.type)
-    );
-  };
+  const { getIndentableBlocks, getIndentationLevel } = utils;
   const increaseBlockIndent = (change: Change, block: Block) => {
-    const indentLevel = block.data.get("indentation") || 0;
+    const indentLevel = getIndentationLevel(block);
     if (indentLevel + 1 > maxIndentation) return;
     change.setNodeByKey(block.key, {
       data: Data.fromJSON({
@@ -22,7 +17,7 @@ export default function createChanges(opts: typeOptions) {
     });
   };
   const decreaseBlockIndent = (change: Change, block: Block) => {
-    const indentLevel = block.data.get("indentation") || 0;
+    const indentLevel = getIndentationLevel(block);
     if (indentLevel === 0) return;
     const newData = {
       ...block.data.toJSON(),
@@ -36,15 +31,17 @@ export default function createChanges(opts: typeOptions) {
     });
   };
   return {
+    decreaseBlockIndent,
+    increaseBlockIndent,
     increaseIndent: (change: Change) => {
       const { value } = change;
-      indentableBlocks(value).forEach(block =>
+      getIndentableBlocks(value).forEach(block =>
         increaseBlockIndent(change, block)
       );
     },
     decreaseIndent: (change: Change) => {
       const { value } = change;
-      indentableBlocks(value).forEach(block =>
+      getIndentableBlocks(value).forEach(block =>
         decreaseBlockIndent(change, block)
       );
     }

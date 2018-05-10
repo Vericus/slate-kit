@@ -4,10 +4,13 @@ import createChanges from "./changes";
 import createUtils from "./utils";
 import createRenderers from "./renderers";
 
-export default function createPlugin(pluginOptions: typeOptions) {
+export default function createPlugin(
+  pluginOptions: typeOptions,
+  pluginsWrapper
+) {
   const opt = new Options(pluginOptions);
   const utils = createUtils(opt);
   const changes = createChanges(opt, utils);
-  const renderers = createRenderers(opt);
+  const renderers = createRenderers(opt, pluginsWrapper);
   return { changes, utils, ...renderers };
 }

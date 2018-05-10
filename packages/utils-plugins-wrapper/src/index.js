@@ -1,17 +1,20 @@
 import Symbol from "es6-symbol";
 
-const UTILS = Symbol("utils");
 const CHANGES = Symbol("changes");
-const PLUGINS = Symbol("plugins");
 const OPTIONS = Symbol("options");
+const PLUGINS = Symbol("plugins");
+const PROPS = Symbol("props");
+const STYLES = Symbol("styles");
+const UTILS = Symbol("utils");
 
 export default class PluginsWrapper {
   constructor() {
-    this.styles = {};
-    this[UTILS] = {};
     this[CHANGES] = {};
-    this[PLUGINS] = {};
     this[OPTIONS] = {};
+    this[PLUGINS] = {};
+    this[PROPS] = {};
+    this[STYLES] = {};
+    this[UTILS] = {};
   }
 
   getOptions = label => (label ? this[OPTIONS][label] : null);
@@ -32,7 +35,7 @@ export default class PluginsWrapper {
       : this.getFlattenPlugins(this[PLUGINS]);
 
   getSyles = block =>
-    this.styles.values().reduce((styles, style) => {
+    Object.values(this[STYLES]).reduce((styles, style) => {
       if (style && style.getStyle) {
         return {
           ...styles,
@@ -45,7 +48,7 @@ export default class PluginsWrapper {
     }, {});
 
   getData = el =>
-    this.styles.values().reduce((styles, style) => {
+    Object.values(this[STYLES]).reduce((styles, style) => {
       if (style && style.getData) {
         return {
           ...styles,
@@ -57,16 +60,34 @@ export default class PluginsWrapper {
       };
     }, {});
 
+  getProps = nodeProps =>
+    Object.values(this[PROPS]).reduce(
+      (props, prop) => {
+        if (prop && prop.getProps) {
+          return {
+            ...props,
+            ...prop.getProps(props)
+          };
+        }
+        return {
+          ...props
+        };
+      },
+      {
+        ...nodeProps
+      }
+    );
+
   configureHelper = (key, value, label) => {
     switch (key) {
       case "style":
-        if (this.style[label]) {
-          this.styles[label] = {
-            ...this.styles[label],
+        if (this[STYLES][label]) {
+          this[STYLES][label] = {
+            ...this[STYLES][label],
             ...value
           };
         } else {
-          this.styles[label] = value;
+          this[STYLES][label] = value;
         }
         break;
       case "utils":
@@ -88,6 +109,16 @@ export default class PluginsWrapper {
           };
         } else {
           this[CHANGES][label] = value;
+        }
+        break;
+      case "props":
+        if (this[PROPS][label]) {
+          this[PROPS][label] = {
+            ...this[PROPS][label],
+            ...value
+          };
+        } else {
+          this[PROPS][label] = value;
         }
         break;
       default:
