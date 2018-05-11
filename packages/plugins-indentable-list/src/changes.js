@@ -61,6 +61,7 @@ export default function createChanges(opts, utils, pluginsWrapper) {
         selectedBlocks.forEach(block => {
           c.setNodeByKey(block.key, type);
           resetBlockStartAt(c, block);
+          resetBlockChecked(c, block);
         });
       });
     }

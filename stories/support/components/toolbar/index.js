@@ -260,9 +260,9 @@ export default class Toolbar extends Component {
       },
       "check-list": {
         icon: "ListCheck",
-        change: change => change,
-        disabled: true,
-        isActive: () => false
+        change: this.listChanges ? this.listChanges.changeListType : () => {},
+        disabled: !this.listChanges,
+        isActive: this.listUtils ? this.listUtils.isCheckList : () => false
       }
     };
     this.marks = {
