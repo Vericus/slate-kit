@@ -14,7 +14,7 @@ export function createPlugin(pluginOptions: typeOptions, pluginsWrapper) {
   const utils = createUtils(opts);
   const changes = createChanges(opts, utils, pluginsWrapper);
   const { createListWithType } = changes;
-  const props = createProps(opts, pluginsWrapper);
+  const props = createProps(opts, changes);
   const onKeyDown = createOnKeyDown(opts, changes, utils);
   return {
     plugins: [

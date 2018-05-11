@@ -4,11 +4,23 @@ import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import { type typeOptions } from "./options";
 
 export default function createChanges(opts, utils, pluginsWrapper) {
-  const { ordered, unordered } = opts;
-  const { isOrderedList, isUnorderedList, selectedOrderedList } = utils;
+  const { ordered, unordered, checkList } = opts;
+  const {
+    isOrderedList,
+    isUnorderedList,
+    isCheckList,
+    selectedOrderedList
+  } = utils;
   const resetBlockStartAt = (change, block) => {
     const data = block.data.toJSON();
     if (data.startAt) delete data.startAt;
+    change.setNodeByKey(block.key, {
+      data: Data.fromJSON(data)
+    });
+  };
+  const resetBlockChecked = (change, block) => {
+    const data = block.data.toJSON();
+    if (data.checked) delete data.checked;
     change.setNodeByKey(block.key, {
       data: Data.fromJSON(data)
     });
@@ -22,10 +34,20 @@ export default function createChanges(opts, utils, pluginsWrapper) {
       });
     });
   };
+  const resetChecked = change => {
+    const { value } = change;
+    const selectedBlocks = selectedOrderedList(value);
+    change.withoutNormalization(c => {
+      selectedBlocks.forEach(block => {
+        resetCheckedStartAt(c, block);
+      });
+    });
+  };
   const changeListType = (change, type) => {
     const { value } = change;
     const selectedBlocks = getHighestSelectedBlocks(value);
     const shouldUnwrap =
+      (type === checkList && isCheckList(value)) ||
       (type === ordered && isOrderedList(value)) ||
       (type === unordered && isUnorderedList(value));
     if (shouldUnwrap) {
@@ -72,11 +94,21 @@ export default function createChanges(opts, utils, pluginsWrapper) {
       change.setNodeByKey(startBlock.key, "paragraph");
     }
   };
+  const toggleCheck = (change, node) => {
+    const data = node.data.toJSON();
+    data.checked = !data.checked;
+    return change.setNodeByKey(node.key, {
+      data: Data.fromJSON(data)
+    });
+  };
   return {
     createListWithType,
     changeListType,
     resetBlockStartAt,
+    resetBlockChecked,
+    resetChecked,
     resetStartAt,
+    toggleCheck,
     unwrapList
   };
 }

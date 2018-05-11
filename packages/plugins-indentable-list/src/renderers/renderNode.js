@@ -22,8 +22,17 @@ const UnOrderedList = ({ className, attributes, children }) => (
   </ul>
 );
 
+const CheckList = ({ className, attributes, children, onMouseDown }) => (
+  <div className={className} {...attributes}>
+    <p>
+      <span onMouseDown={onMouseDown} className="checkbox" />
+      {children}
+    </p>
+  </div>
+);
+
 export function createRenderNode(opts, pluginsWrapper) {
-  const { ordered, unordered } = opts;
+  const { ordered, unordered, checkList } = opts;
   return (props: Props) => {
     const newProps = pluginsWrapper.getProps(props);
     switch (newProps.node.type) {
@@ -31,6 +40,8 @@ export function createRenderNode(opts, pluginsWrapper) {
         return <OrderedList {...newProps} />;
       case unordered:
         return <UnOrderedList {...newProps} />;
+      case checkList:
+        return <CheckList {...newProps} />;
       // no default
     }
     return undefined;

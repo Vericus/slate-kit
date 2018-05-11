@@ -22,7 +22,8 @@ const defaultOptions = {
     "heading-three",
     "heading-four",
     "ol-list",
-    "ul-list"
+    "ul-list",
+    "check-list"
   ],
   maxIndentation: 8
 };

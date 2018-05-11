@@ -223,7 +223,7 @@
       },
       {
         "object": "block",
-        "type": "ol-list",
+        "type": "check-list",
         "nodes": [
           {
             "object": "text",
@@ -237,7 +237,7 @@
       },
       {
         "object": "block",
-        "type": "ol-list",
+        "type": "check-list",
         "nodes": [
           {
             "object": "text",

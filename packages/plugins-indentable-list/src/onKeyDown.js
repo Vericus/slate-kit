@@ -1,10 +1,11 @@
 // @flow
 import { isKeyHotkey } from "is-hotkey";
 import hotkeys from "slate-hotkeys";
+import { Block } from "slate";
 import { type typeOptions } from "./options";
 
 export default function createOnKeyDown(opts: typeOptions, changes, utils) {
-  const { resetStartAt, unwrapList, resetBlockStartAt } = changes;
+  const { resetStartAt, resetChecked, unwrapList, resetBlockStartAt } = changes;
   const { isListNode } = utils;
   const isTab = isKeyHotkey("tab");
   const isShiftTab = isKeyHotkey("shift+tab");
