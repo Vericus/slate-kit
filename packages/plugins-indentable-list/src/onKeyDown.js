@@ -1,7 +1,7 @@
 // @flow
 import { isKeyHotkey } from "is-hotkey";
 import hotkeys from "slate-hotkeys";
-import { Block } from "slate";
+import { Block, Data } from "slate";
 import { type typeOptions } from "./options";
 
 export default function createOnKeyDown(opts: typeOptions, changes, utils) {
@@ -49,7 +49,12 @@ export default function createOnKeyDown(opts: typeOptions, changes, utils) {
         unwrapList(change);
         return true;
       } else if (startBlock === endBlock) {
-        change.insertBlock(startBlock.type);
+        const data = startBlock.data.toJSON();
+        if (data.startAt) delete data.startAt;
+        change.insertBlock({
+          type: startBlock.type,
+          data: Data.fromJSON(data)
+        });
         return true;
       }
     } else {
