@@ -33,6 +33,8 @@ export default function createProps(opts, changes) {
       const onMouseDown =
         props.node.type === checkList
           ? e => {
+              const { x } = e.target.getBoundingClientRect();
+              if (e.clientX >= x) return;
               e.preventDefault();
               e.stopPropagation();
               const { editor, node } = props;

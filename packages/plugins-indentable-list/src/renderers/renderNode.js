@@ -23,12 +23,9 @@ const UnOrderedList = ({ className, attributes, children }) => (
 );
 
 const CheckList = ({ className, attributes, children, onMouseDown }) => (
-  <div className={className} {...attributes}>
-    <p>
-      <span onMouseDown={onMouseDown} className="checkbox" />
-      {children}
-    </p>
-  </div>
+  <ul onMouseDown={onMouseDown} className={className} {...attributes}>
+    <li>{children}</li>
+  </ul>
 );
 
 export function createRenderNode(opts, pluginsWrapper) {

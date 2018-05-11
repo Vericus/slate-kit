@@ -142,29 +142,27 @@ ol {
   }
 }
 
-.checkList {
+ul.checkList {
   padding-left: $list-padding;
-  .checkbox {
+  li::before {
     position: absolute;
     display: inline-block;
     width: 3em;
     height: 1em;
-    left: 0;
+    left: -3.3em;
     background-repeat: no-repeat;
-    content: ' ';
+    content: '';
     user-select: none;
     text-align: right;
     background-size: 1em 1em;
     background-position: right;
-  }
-  .checkbox {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAADpJREFUKFO1yqERwDAAxLDsv3QKLPplEfT5vHR/maINpmiDKdpgijaYog2maIMp2mCKNpiiDaYHzvkAci8q5Gg0BsgAAAAASUVORK5CYII=);
   }
 }
 
 .checkList.checked {
   text-decoration: line-through;
-  .checkbox {
+  li::before {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAEpJREFUKFO1ykEOwCAMxMD8/9Mtqq1ogXJkTsFL3fSc+aOZN87JZdYTh9hSdm6R2hJ5yvY5Fdn+/g1EZeJOdPWbbcE0cdk4X1D1AhcH8g67+AATAAAAAElFTkSuQmCC);
   }
 }
@@ -179,7 +177,7 @@ ol {
       padding-left: calc(#{$i*$indentation-padding}px);
     }
   }
-  ul.indentation-#{$i} {
+  ul.indentation-#{$i}:not(.checkList) {
     counter-increment: ul-#{$i};
     li::before {
       content: counter(ul-#{$i}, nth($ul-types, ($i)%length($ul-types)+1)) "  ";
