@@ -9,7 +9,7 @@ import createOnKeyDown from "./onKeyDown";
 
 export function createPlugin(pluginOptions: typeOptions, pluginsWrapper) {
   const opts = new Options(pluginOptions);
-  const { ordered, unordered } = opts;
+  const { ordered, unordered, checkList } = opts;
   const { renderNode } = createRenderer(opts, pluginsWrapper);
   const utils = createUtils(opts);
   const changes = createChanges(opts, utils, pluginsWrapper);
@@ -38,6 +38,14 @@ export function createPlugin(pluginOptions: typeOptions, pluginsWrapper) {
         before: /^(-)$/,
         transform: transform => {
           const type = unordered;
+          return transform.call(createListWithType, type);
+        }
+      }),
+      AutoReplace({
+        trigger: "space",
+        before: /^(\[\])$/,
+        transform: transform => {
+          const type = checkList;
           return transform.call(createListWithType, type);
         }
       })
