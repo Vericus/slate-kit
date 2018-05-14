@@ -9,9 +9,9 @@ import createProps from "./props";
 function createIndentPlugin(pluginOptions: typeOptions, pluginsWrapper) {
   const opts = new Options(pluginOptions);
   const utils = createUtils(opts);
-  const changes = createChanges(opts, utils);
-  const onKeyDown = createOnKeyDown(opts, changes, utils);
-  const props = createProps(opts, utils);
+  const changes = createChanges(opts);
+  const onKeyDown = createOnKeyDown(opts);
+  const props = createProps(opts);
   return {
     utils,
     props,
@@ -27,6 +27,7 @@ function createIndentPlugin(pluginOptions: typeOptions, pluginsWrapper) {
       ) {
         return true;
       }
+      return undefined;
     }
   };
 }

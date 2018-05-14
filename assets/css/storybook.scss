@@ -111,14 +111,14 @@ ul, ol {
   padding-left: $list-padding;
   li {
     position: relative;
+    text-indent: -3.5em;
   }
   li::before {
     user-select: all;
-    position: absolute;
     text-align: right;
     display: inline-block;
     width: 3em;
-    left: -3em;
+    margin-right: 0.5em;
   }
 }
 
@@ -145,11 +145,9 @@ ol {
 ul.checkList {
   padding-left: $list-padding;
   li::before {
-    position: absolute;
     display: inline-block;
     width: 3em;
     height: 1em;
-    left: -3.3em;
     background-repeat: no-repeat;
     content: '';
     user-select: none;

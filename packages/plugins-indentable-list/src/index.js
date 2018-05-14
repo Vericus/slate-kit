@@ -12,10 +12,10 @@ export function createPlugin(pluginOptions: typeOptions, pluginsWrapper) {
   const { ordered, unordered, checkList } = opts;
   const { renderNode } = createRenderer(opts, pluginsWrapper);
   const utils = createUtils(opts);
-  const changes = createChanges(opts, utils, pluginsWrapper);
+  const changes = createChanges(opts, pluginsWrapper);
   const { createListWithType } = changes;
-  const props = createProps(opts, changes);
-  const onKeyDown = createOnKeyDown(opts, changes, utils);
+  const props = createProps(opts);
+  const onKeyDown = createOnKeyDown(opts, pluginsWrapper);
   return {
     plugins: [
       {

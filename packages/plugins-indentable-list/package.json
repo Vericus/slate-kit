@@ -27,31 +27,38 @@
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate"
+    "slate": "Slate",
+    "is-hotkey": "IsHotkey"
   },
   "dependencies": {
     "@vericus/slate-kit-plugins-utils": "^0.0.4",
     "classnames": "^2.2.5",
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
-    "is-hotkey": "^0.1.2",
     "is-plain-object": "^2.0.4",
     "slate-auto-replace": "^0.9.0"
   },
   "devDependencies": {
     "flow-bin": "^0.70.0",
+    "is-hotkey": "^0.1.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "slate": "^0.33.0",
     "slate-dev-environment": "^0.1.1",
-    "slate-hotkeys": "^0.1.1",
     "slate-prop-types": "^0.4.27"
   },
   "peerDependencies": {
+    "is-hotkey": "^0.1.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "slate": "^0.32.0 || ^0.33.0",
+    "slate-dev-environment": "^0.1.1",
+    "slate-hotkeys": "^0.1.2",
     "slate-prop-types": "^0.4.0"
+  },
+  "resolutions": {
+    "slate-auto-replace/**/is-hotkey": "^0.1.2",
+    "is-hotkey": "^0.1.2"
   },
   "keywords": [
     "Vericus",

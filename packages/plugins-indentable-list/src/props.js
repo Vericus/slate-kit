@@ -1,9 +1,9 @@
 import classnames from "classnames";
+import { toggleCheck } from "./changes";
 
-export default function createProps(opts, changes) {
+export default function createProps(opts) {
   const { ordered, unordered, checkList } = opts;
   const listTypes = [ordered, unordered, checkList];
-  const { toggleCheck } = changes;
   return {
     getProps: props => {
       if (!props.node || !listTypes.includes(props.node.type)) return props;
@@ -37,12 +37,11 @@ export default function createProps(opts, changes) {
               if (e.clientX >= x) return;
               e.preventDefault();
               e.stopPropagation();
-              const { editor, node } = props;
               const {
                 state: { value },
                 props: { onChange }
-              } = editor;
-              onChange(toggleCheck(value.change(), node));
+              } = props.editor;
+              onChange(toggleCheck(opts, value.change(), node));
             }
           : () => {};
       const className = classnames({

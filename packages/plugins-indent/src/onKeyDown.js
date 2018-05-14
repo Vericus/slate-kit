@@ -2,11 +2,11 @@
 import isHotkey from "is-hotkey";
 import hotkeys from "slate-hotkeys";
 import { type typeOptions } from "./options";
+import { increaseIndent, decreaseIndent } from "./changes";
+import { getIndentationLevel } from "./utils";
 
-export default function createOnKeyDown(opts: typeOptions, changes, utils) {
+export default function createOnKeyDown(opts: typeOptions) {
   const { tabable } = opts;
-  const { increaseIndent, decreaseIndent } = changes;
-  const { getIndentationLevel } = utils;
   const {
     isDeleteCharBackward,
     isDeleteLineBackward,
@@ -28,12 +28,12 @@ export default function createOnKeyDown(opts: typeOptions, changes, utils) {
         startBlock === endBlock &&
         isCollapsed &&
         startOffset === 0);
-    if (!(isIndent || isOutdent)) return;
+    if (!(isIndent || isOutdent)) return undefined;
     if (isOutdent) {
-      if (getIndentationLevel(startBlock) !== 0) {
-        event.preventDefault();
-        event.stopPropagation();
-        decreaseIndent(change);
+      event.preventDefault();
+      event.stopPropagation();
+      if (getIndentationLevel(opts, startBlock) !== 0) {
+        decreaseIndent(opts, change);
         return true;
       }
     } else if (isIndent) {
@@ -45,9 +45,10 @@ export default function createOnKeyDown(opts: typeOptions, changes, utils) {
         tabable.includes(startBlock.type)
       ) {
         change.insertText("\t");
-      } else {
-        increaseIndent(change);
+        return undefined;
       }
+      increaseIndent(opts, change);
     }
+    return undefined;
   };
 }

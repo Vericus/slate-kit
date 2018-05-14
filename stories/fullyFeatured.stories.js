@@ -8,6 +8,7 @@ import HighlightText from "@vericus/slate-kit-highlight-text";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import IndentPlugin from "@vericus/slate-kit-indent";
 import ListPlugin from "@vericus/slate-kit-indentable-list";
+import AlignPlugin from "@vericus/slate-kit-align";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import initialState from "./states/fullText.json";
 import Editor from "./support/components/editor";
@@ -53,6 +54,10 @@ const pluginOpts = [
   {
     label: "indent",
     createPlugin: IndentPlugin
+  },
+  {
+    label: "align",
+    createPlugin: AlignPlugin
   }
 ];
 

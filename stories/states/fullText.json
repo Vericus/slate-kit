@@ -85,6 +85,10 @@
       {
         "object": "block",
         "type": "heading-one",
+        "data": {
+          "indentation": 2,
+          "textAlign": "justify"
+        },
         "nodes": [
           {
             "object": "text",
@@ -260,7 +264,8 @@
             "object": "text",
             "leaves": [
               {
-                "text": "Try it out for yourself!"
+                "text":
+                  "Lorem ipsum dolor sit amet consectetur adipiscing elit posuere, euismod viverra ultrices per facilisi accumsan gravida, velit cras sem cum molestie habitasse nunc. Facilisis curae per lacinia vulputate maecenas mi, suspendisse lobortis neque velit augue nunc, ante vitae morbi vehicula bibendum. Lacinia justo elit volutpat class amet ligula suspendisse, ultrices imperdiet est aliquet eu duis elementum, cubilia rutrum convallis primis aenean ad, nisl tempor conubia sociis sagittis donec."
               }
             ]
           }

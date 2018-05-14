@@ -204,6 +204,8 @@ export default class Toolbar extends Component {
     this.indentUtils = pluginsWrapper.getUtils("indent");
     this.listChanges = pluginsWrapper.getChanges("list");
     this.listUtils = pluginsWrapper.getUtils("list");
+    this.alignChanges = pluginsWrapper.getChanges("align");
+    this.alignUtils = pluginsWrapper.getUtils("align");
     this.historyUtils = pluginsWrapper.getUtils("history");
     this.currentTypography = hasTypography
       ? pluginsWrapper.getUtils("basic-typhography").currentTypography
@@ -310,23 +312,27 @@ export default class Toolbar extends Component {
     this.allignments = {
       left: {
         icon: "AlignLeft",
-        change: change => change,
-        disabled: true
+        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
+        disabled: !this.alignUtils,
+        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
       },
       center: {
         icon: "AlignCenter",
-        change: change => change,
-        disabled: true
+        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
+        disabled: !this.alignUtils,
+        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
       },
       right: {
         icon: "AlignRight",
-        change: change => change,
-        disabled: true
+        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
+        disabled: !this.alignUtils,
+        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
       },
       justify: {
         icon: "AlignJustify",
-        change: change => change,
-        disabled: true
+        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
+        disabled: !this.alignUtils,
+        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
       }
     };
   }
@@ -438,8 +444,12 @@ export default class Toolbar extends Component {
         <IconButton
           icon={options.icon}
           onMouseDown={e => this.handleClickAlignment(e, options.change, type)}
-          disabled={options.disabled || this.props.isReadOnly}
-          active
+          disabled={
+            options.disabled ||
+            this.props.isReadOnly ||
+            !this.alignUtils.isAlignable(this.props.value)
+          }
+          active={options.isActive(this.props.value, type)}
           size="18"
         />
       );
