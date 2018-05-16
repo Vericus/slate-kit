@@ -1,9 +1,9 @@
 // @flow
 import isHotkey from "is-hotkey";
 import hotkeys from "slate-hotkeys";
-import { type typeOptions } from "./options";
-import { increaseIndent, decreaseIndent } from "./changes";
-import { getIndentationLevel } from "./utils";
+import { type typeOptions } from "../options";
+import { increaseIndent, decreaseIndent } from "../changes";
+import { getIndentationLevel } from "../utils";
 
 export default function createOnKeyDown(opts: typeOptions) {
   const { tabable } = opts;

@@ -1,23 +1,25 @@
 // @flow
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import type { Change, Block, Node } from "slate";
-import { type typeOptions } from "./options";
+import { type typeOptions } from "../options";
 import {
   isOrderedList,
   isUnorderedList,
   isCheckList,
   selectedOrderedList
-} from "./utils";
+} from "../utils";
 
 function resetBlockStartAt(opts: typeOptions, change: Change, block: Block) {
+  const { startAtField } = opts;
   change.setNodeByKey(block.key, {
-    data: block.data.delete("startAt")
+    data: block.data.delete(startAtField)
   });
 }
 
 function resetBlockChecked(opts: typeOptions, change: Change, block: Block) {
+  const { checkField } = opts;
   change.setNodeByKey(block.key, {
-    data: block.data.delete("checked")
+    data: block.data.delete(checkField)
   });
 }
 
@@ -73,13 +75,14 @@ function createListWithType(
   type: string,
   startAt?: number
 ) {
+  const { startAtField } = opts;
   const { value } = change;
   const { startBlock } = value;
   change.withoutNormalization(c => {
     if (startAt) {
       c.setNodeByKey(startBlock.key, {
         type,
-        data: startBlock.data.set("startAt", startAt)
+        data: startBlock.data.set(startAtField, startAt)
       });
     } else {
       c.setNodeByKey(startBlock.key, type);
@@ -106,8 +109,9 @@ function unwrapList(
 }
 
 function toggleCheck(opts: typeOptions, change: Change, node: Node) {
+  const { checkField } = opts;
   return change.setNodeByKey(node.key, {
-    data: node.data.set("checked", !node.data.get("checked"))
+    data: node.data.set(checkField, !node.data.get(checkField))
   });
 }
 

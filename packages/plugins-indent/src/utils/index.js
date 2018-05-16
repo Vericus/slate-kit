@@ -1,7 +1,7 @@
 // @flow
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import type { Value, Block } from "slate";
-import { type typeOptions } from "./options";
+import { type typeOptions } from "../options";
 
 function isIndentable(opts: typeOptions, block: Block) {
   const { indentable } = opts;
@@ -15,11 +15,11 @@ function getIndentableBlocks(opts: typeOptions, value: Value) {
 }
 
 function getIndentationLevel(opts: typeOptions, block: Block) {
-  return block.data.get("indentation") || 0;
+  const { dataField } = opts;
+  return block.data.get(dataField) || 0;
 }
 
 function canBeOutdented(opts: typeOptions, value: Value) {
-  const { maxIndentation } = opts;
   const indentableBlocks = getIndentableBlocks(opts, value);
   if (indentableBlocks.length === 0) return false;
   return indentableBlocks.some(block => {

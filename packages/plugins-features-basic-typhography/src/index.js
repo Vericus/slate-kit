@@ -3,6 +3,7 @@ import Options, { type typeOptions } from "./options";
 import createChanges from "./changes";
 import createUtils from "./utils";
 import createRenderers from "./renderers";
+import createSchema from "./schemas";
 
 export default function createPlugin(
   pluginOptions: typeOptions,
@@ -12,5 +13,6 @@ export default function createPlugin(
   const utils = createUtils(opt);
   const changes = createChanges(opt, utils);
   const renderers = createRenderers(opt, pluginsWrapper);
-  return { changes, utils, ...renderers };
+  const schemas = createSchema(opt);
+  return { changes, utils, ...renderers, ...schemas };
 }

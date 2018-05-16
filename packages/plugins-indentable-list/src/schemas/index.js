@@ -1,0 +1,71 @@
+// @flow
+import { type typeOptions } from "../options";
+
+export default function createSchema(opts: typeOptions) {
+  const { ordered, unordered, checkList, startAtField, checkField } = opts;
+  const listBlocks = [ordered, unordered, checkList];
+  const schemas = {};
+  const schema = {};
+  schemas.validateNode = block => {
+    if (block.object !== "block") return undefined;
+    if (!listBlocks.includes(block.type)) return undefined;
+    if (block.type === ordered) {
+      if (
+        block.data.get(startAtField) &&
+        typeof block.data.get(startAtField) !== "number"
+      ) {
+        return change =>
+          change.setNodeByKey(
+            block.key,
+            { data: block.data.delete(checkField).delete(startAtField) },
+            { normalize: false }
+          );
+      } else if (block.data.get(checkField)) {
+        return change =>
+          change.setNodeByKey(
+            block.key,
+            { data: block.data.delete(checkField) },
+            { normalize: false }
+          );
+      }
+      return undefined;
+    }
+    if (
+      block.type === unordered &&
+      (block.data.get(checkField) || block.data.get(startAtField))
+    ) {
+      return change =>
+        change.setNodeByKey(
+          block.key,
+          { data: block.data.delete(checkField).delete(startAtField) },
+          { normalize: false }
+        );
+    }
+    if (block.type === checkList) {
+      if (
+        block.data.get(checkField) &&
+        typeof block.data.get(checkField) !== "boolean"
+      ) {
+        return change =>
+          change.setNodeByKey(
+            block.key,
+            { data: block.data.delete(checkField).delete(startAtField) },
+            { normalize: false }
+          );
+      } else if (block.data.get(startAtField)) {
+        return change =>
+          change.setNodeByKey(
+            block.key,
+            { data: block.data.delete(startAtField) },
+            { normalize: false }
+          );
+      }
+    }
+    return undefined;
+  };
+  schema.document = {
+    nodes: [{ types: listBlocks }]
+  };
+  schemas.getSchema = () => schema;
+  return schemas;
+}

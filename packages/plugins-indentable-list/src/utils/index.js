@@ -1,7 +1,7 @@
 // @flow
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import type { Value, Node } from "slate";
-import type { typeOptions } from "./options";
+import type { typeOptions } from "../options";
 
 function selectedOrderedList(opts: typeOptions, value: Value) {
   const { ordered } = opts;

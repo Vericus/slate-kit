@@ -2,9 +2,10 @@
 import { Record } from "immutable";
 
 export type typeOptions = {
-  tabable: Array<string>,
-  indentable: Array<string>,
-  maxIndentation: number
+  tabable?: Array<string>,
+  indentable?: Array<string>,
+  maxIndentation?: number,
+  dataField?: string
 };
 
 const defaultOptions = {
@@ -25,13 +26,15 @@ const defaultOptions = {
     "ul-list",
     "check-list"
   ],
-  maxIndentation: 8
+  maxIndentation: 8,
+  dataField: "indentation"
 };
 
 class Options extends Record(defaultOptions) {
   tabable: Array<string>;
   indentabe: Array<string>;
   maxIndentation: number;
+  dataField: string;
 }
 
 export default Options;

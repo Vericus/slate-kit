@@ -1,11 +1,12 @@
 // @flow
 import { isKeyHotkey } from "is-hotkey";
 import hotkeys from "slate-hotkeys";
-import { type typeOptions } from "./options";
-import { resetStartAt, unwrapList } from "./changes";
-import { isListNode } from "./utils";
+import { type typeOptions } from "../options";
+import { resetStartAt, unwrapList } from "../changes";
+import { isListNode } from "../utils";
 
 export default function createOnKeyDown(opts: typeOptions, pluginsWrapper) {
+  const { startAtField } = opts;
   const isTab = isKeyHotkey("tab");
   const isShiftTab = isKeyHotkey("shift+tab");
   const isEnter = isKeyHotkey("enter");
@@ -49,7 +50,7 @@ export default function createOnKeyDown(opts: typeOptions, pluginsWrapper) {
       } else if (startBlock === endBlock) {
         change.insertBlock({
           type: startBlock.type,
-          data: startBlock.data.delete("startAt")
+          data: startBlock.data.delete(startAtField)
         });
         return true;
       }

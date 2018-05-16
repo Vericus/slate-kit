@@ -3,7 +3,8 @@ import type { Block } from "slate";
 import { type typeOptions } from "../options";
 
 function getAlignment(opts: typeOptions, block: Block) {
-  return (block && block.data.get("textAlign")) || "left";
+  const { dataField } = opts;
+  return (block && block.data.get(dataField)) || "left";
 }
 
 export default getAlignment;

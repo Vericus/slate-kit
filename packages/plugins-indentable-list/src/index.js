@@ -6,6 +6,7 @@ import createProps from "./props";
 import createUtils from "./utils";
 import createChanges from "./changes";
 import createOnKeyDown from "./onKeyDown";
+import createSchema from "./schemas";
 
 export function createPlugin(pluginOptions: typeOptions, pluginsWrapper) {
   const opts = new Options(pluginOptions);
@@ -14,7 +15,8 @@ export function createPlugin(pluginOptions: typeOptions, pluginsWrapper) {
   const utils = createUtils(opts);
   const changes = createChanges(opts, pluginsWrapper);
   const { createListWithType } = changes;
-  const props = createProps(opts);
+  const props = createProps(opts, pluginsWrapper);
+  const schemas = createSchema(opts);
   const onKeyDown = createOnKeyDown(opts, pluginsWrapper);
   return {
     plugins: [
@@ -23,7 +25,8 @@ export function createPlugin(pluginOptions: typeOptions, pluginsWrapper) {
         renderNode,
         utils,
         changes,
-        onKeyDown
+        onKeyDown,
+        ...schemas
       },
       AutoReplace({
         trigger: "space",

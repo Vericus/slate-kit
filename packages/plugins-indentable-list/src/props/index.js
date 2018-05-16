@@ -1,11 +1,12 @@
 import classnames from "classnames";
-import { toggleCheck } from "./changes";
+import { toggleCheck } from "../changes";
 
-export default function createProps(opts) {
-  const { ordered, unordered, checkList } = opts;
+export default function createProps(opts, pluginsWrapper) {
+  const { ordered, unordered, checkList, startAtField, checkField } = opts;
   const listTypes = [ordered, unordered, checkList];
   return {
     getProps: props => {
+      const { getIndentationLevel } = pluginsWrapper.getUtils("indent");
       if (!props.node || !listTypes.includes(props.node.type)) return props;
       const { editor, key, node } = props;
       const {
@@ -15,10 +16,10 @@ export default function createProps(opts) {
       } = editor;
       const previousBlock = document.getPreviousBlock(key);
       const prevIndentation =
-        (previousBlock && previousBlock.data.get("indentation")) || 0;
-      const indentation = props.node.data.get("indentation") || 0;
-      const startAt = props.node.data.get("startAt");
-      const checked = props.node.data.get("checked");
+        previousBlock && getIndentationLevel(previousBlock);
+      const indentation = getIndentationLevel(props.node);
+      const startAt = props.node.data.get(startAtField);
+      const checked = props.node.data.get(checkField);
       const style =
         props.attributes && props.attributes.style
           ? props.attributes.style
@@ -37,6 +38,7 @@ export default function createProps(opts) {
               if (e.clientX >= x) return;
               e.preventDefault();
               e.stopPropagation();
+              if (props.editor.props.isReadOnly) return;
               const {
                 state: { value },
                 props: { onChange }
@@ -49,7 +51,8 @@ export default function createProps(opts) {
         "list-reset": shouldReset,
         [`list-reset-${indentation}`]: indentation && shouldReset,
         checked: !!checked,
-        checkList: props.node.type === checkList
+        checkList: props.node.type === checkList,
+        readOnly: props.node.type === checkList && props.editor.props.isReadOnly
       });
       return {
         ...props,

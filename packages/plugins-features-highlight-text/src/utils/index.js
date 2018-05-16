@@ -1,6 +1,6 @@
 // @flow
 import type { Value } from "slate";
-import type { typeOptions } from "./options";
+import type { typeOptions } from "../options";
 
 export default function createUtils(opts: typeOptions) {
   const { defaultColor, data, type } = opts;

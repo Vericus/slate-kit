@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import { getIndentationLevel } from "./utils";
+import { getIndentationLevel } from "../utils";
 
 export default function createProps(opts) {
   const { indentable } = opts;

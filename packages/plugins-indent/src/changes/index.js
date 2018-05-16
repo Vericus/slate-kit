@@ -1,25 +1,27 @@
 // @flow
-import type { Value, Change, Block } from "slate";
-import { type typeOptions } from "./options";
-import { getIndentableBlocks, getIndentationLevel } from "./utils";
+import type { Change, Block } from "slate";
+import { type typeOptions } from "../options";
+import { getIndentableBlocks, getIndentationLevel } from "../utils";
 
 function increaseBlockIndent(opts: typeOptions, change: Change, block: Block) {
+  const { dataField } = opts;
   const { maxIndentation } = opts;
   const indentLevel = getIndentationLevel(opts, block);
   if (indentLevel + 1 > maxIndentation) return;
   change.setNodeByKey(block.key, {
-    data: block.data.set("indentation", indentLevel + 1)
+    data: block.data.set(dataField, indentLevel + 1)
   });
 }
 
 function decreaseBlockIndent(opts: typeOptions, change: Change, block: Block) {
+  const { dataField } = opts;
   const indentLevel = getIndentationLevel(opts, block);
   if (indentLevel === 0) return;
   let newData;
   if (indentLevel === 1) {
-    newData = block.data.delete("indentation");
+    newData = block.data.delete(dataField);
   } else {
-    newData = block.data.set("indentation", indentLevel - 1);
+    newData = block.data.set(dataField, indentLevel - 1);
   }
   change.setNodeByKey(block.key, {
     data: newData

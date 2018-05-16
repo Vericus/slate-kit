@@ -86,7 +86,7 @@
         "object": "block",
         "type": "heading-one",
         "data": {
-          "indentation": 2,
+          "indentation": 9,
           "textAlign": "justify"
         },
         "nodes": [
@@ -116,6 +116,9 @@
       {
         "object": "block",
         "type": "heading-three",
+        "data": {
+          "textAlign": "middle"
+        },
         "nodes": [
           {
             "object": "text",

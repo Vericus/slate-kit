@@ -5,6 +5,7 @@ import createChanges from "./changes";
 import createUtils from "./utils";
 import createOnKeyDown from "./onKeyDown";
 import createProps from "./props";
+import createSchema from "./schemas";
 
 function createIndentPlugin(pluginOptions: typeOptions, pluginsWrapper) {
   const opts = new Options(pluginOptions);
@@ -12,11 +13,13 @@ function createIndentPlugin(pluginOptions: typeOptions, pluginsWrapper) {
   const changes = createChanges(opts);
   const onKeyDown = createOnKeyDown(opts);
   const props = createProps(opts);
+  const schemas = createSchema(opts);
   return {
     utils,
     props,
     onKeyDown,
     changes,
+    ...schemas,
     shouldNodeComponentUpdate: (currProps, nextProps) => {
       if (currProps.node.data !== nextProps.node.data) {
         return true;
