@@ -102,9 +102,15 @@ class ColorPicker extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      color: nextProps.color
+    });
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return (
-      this.props.color !== nextProps.color ||
+      this.state.color !== nextState.color ||
       this.state.isOpen !== nextState.isOpen ||
       this.props.isReadOnly !== nextProps.isReadOnly
     );
