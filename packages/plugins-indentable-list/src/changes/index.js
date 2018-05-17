@@ -95,7 +95,7 @@ function unwrapList(
   opts: typeOptions,
   change: Change,
   isDelete: boolean,
-  pluginsWrapper
+  pluginsWrapper: any
 ) {
   const { canBeOutdented } = pluginsWrapper.getUtils("indent");
   const { decreaseIndent } = pluginsWrapper.getChanges("indent");
@@ -115,19 +115,21 @@ function toggleCheck(opts: typeOptions, change: Change, node: Node) {
   });
 }
 
-function createChanges(opts: typeOptions, pluginsWrapper) {
+function createChanges(opts: typeOptions, pluginsWrapper: any) {
   return {
-    createListWithType: (change, type, startAt) =>
+    createListWithType: (change: Change, type: string, startAt: number) =>
       createListWithType(opts, change, type, startAt),
-    changeListType: (change, type) => changeListType(opts, change, type),
-    resetBlockStartAt: (change, block) =>
+    changeListType: (change: Change, type: string) =>
+      changeListType(opts, change, type),
+    resetBlockStartAt: (change: Change, block: Block) =>
       resetBlockStartAt(opts, change, block),
-    resetBlockChecked: (change, block) =>
+    resetBlockChecked: (change: Change, block: Block) =>
       resetBlockChecked(opts, change, block),
-    resetChecked: change => resetChecked(opts, change),
-    resetStartAt: change => resetStartAt(opts, change),
-    toggleCheck: (change, node) => toggleCheck(opts, change, node),
-    unwrapList: (change, isDelete) =>
+    resetChecked: (change: Change) => resetChecked(opts, change),
+    resetStartAt: (change: Change) => resetStartAt(opts, change),
+    toggleCheck: (change: Change, node: Node) =>
+      toggleCheck(opts, change, node),
+    unwrapList: (change: Change, isDelete: boolean) =>
       unwrapList(opts, change, isDelete, pluginsWrapper)
   };
 }

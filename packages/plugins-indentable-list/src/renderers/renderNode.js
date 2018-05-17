@@ -1,34 +1,36 @@
 // @flow
 import React, { type Element } from "react";
 import { type Node } from "slate";
-import Types from "slate-prop-types";
 import type { typeOptions } from "../options";
 
 type Props = {
   attributes: any,
   children: Element<*>,
+  className: string,
+  onMouseDown: () => {},
   node: Node
 };
 
-const OrderedList = ({ className, attributes, children }) => (
+const OrderedList = ({ className, attributes, children }: Props) => (
   <ol className={className} {...attributes}>
     <li>{children}</li>
   </ol>
 );
 
-const UnOrderedList = ({ className, attributes, children }) => (
+const UnOrderedList = ({ className, attributes, children }: Props) => (
   <ul className={className} {...attributes}>
     <li>{children}</li>
   </ul>
 );
 
-const CheckList = ({ className, attributes, children, onMouseDown }) => (
+const CheckList = ({ className, attributes, children, onMouseDown }: Props) => (
+  // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
   <ul onMouseDown={onMouseDown} className={className} {...attributes}>
     <li>{children}</li>
   </ul>
 );
 
-export function createRenderNode(opts, pluginsWrapper) {
+export function createRenderNode(opts: typeOptions, pluginsWrapper: any) {
   const { ordered, unordered, checkList } = opts;
   return (props: Props) => {
     const newProps = pluginsWrapper.getProps(props);

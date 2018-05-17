@@ -7,11 +7,13 @@ function withReadOnly(WrappedComponent) {
   class WithReadOnly extends Component {
     static propTypes = {
       plugins: PropTypes.arrayOf(PropTypes.object).isRequired,
-      isReadOnly: PropTypes.bool
+      isReadOnly: PropTypes.bool,
+      spellCheck: PropTypes.bool
     };
 
     static defaultProps = {
-      isReadOnly: true
+      isReadOnly: true,
+      spellCheck: false
     };
 
     constructor(props) {

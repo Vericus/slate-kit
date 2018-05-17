@@ -1,8 +1,6 @@
-// @flow
-import { type typeOptions } from "../options";
 import getAlignment from "../utils/getAlignment";
 
-export default function createProps(opts: typeOptions) {
+export default function createProps(opts) {
   const { floatBlocks, textBlocks } = opts;
   return {
     getProps: props => {

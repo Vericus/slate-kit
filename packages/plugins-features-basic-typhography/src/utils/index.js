@@ -26,7 +26,7 @@ function currentTypography(opts: typeOptions, value: Value) {
 
 function createUtils(opts: typeOptions) {
   return {
-    isTypography: node => isTypography(opts, node),
+    isTypography: (node: Node) => isTypography(opts, node),
     currentTypography: (value: Value) => currentTypography(opts, value)
   };
 }

@@ -47,14 +47,14 @@ function isCheckList(opts: typeOptions, value: Value) {
 
 function createUtils(opts: typeOptions) {
   return {
-    isListNode: node => isListNode(opts, node),
-    isOrderedNode: node => isOrderedNode(opts, node),
-    isUnorderedNode: node => isUnorderedNode(opts, node),
-    isCheckNode: node => isCheckNode(opts, node),
-    isOrderedList: value => isOrderedList(opts, value),
-    isUnorderedList: value => isUnorderedList(opts, value),
-    isCheckList: value => isCheckList(opts, value),
-    selectedOrderedList: value => selectedOrderedList(opts, value)
+    isListNode: (node: Node) => isListNode(opts, node),
+    isOrderedNode: (node: Node) => isOrderedNode(opts, node),
+    isUnorderedNode: (node: Node) => isUnorderedNode(opts, node),
+    isCheckNode: (node: Node) => isCheckNode(opts, node),
+    isOrderedList: (value: Value) => isOrderedList(opts, value),
+    isUnorderedList: (value: Value) => isUnorderedList(opts, value),
+    isCheckList: (value: Value) => isCheckList(opts, value),
+    selectedOrderedList: (value: Value) => selectedOrderedList(opts, value)
   };
 }
 

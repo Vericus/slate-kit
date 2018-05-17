@@ -51,7 +51,7 @@ export function Paragraph(props: Props) {
   );
 }
 
-export default function createRenderNode(pluginsWrapper) {
+export default function createRenderNode(pluginsWrapper: any) {
   return (props: Props) => {
     const newProps = pluginsWrapper.getProps(props);
     switch (newProps.node.type) {

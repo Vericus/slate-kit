@@ -2,10 +2,10 @@
 import { Record } from "immutable";
 
 export type typeOptions = {
-  floatBlocks?: Array<string>,
-  textBlocks?: Array<string>,
-  alignments?: Array<string>,
-  dataField?: string
+  floatBlocks: Array<string>,
+  textBlocks: Array<string>,
+  alignments: Array<string>,
+  dataField: string
 };
 
 const defaultOption: typeOptions = {

@@ -1,4 +1,5 @@
 // @flow
+import type { Change } from "slate";
 import type { typeOptions } from "../options";
 import getAlignBlocks from "../utils/getAlignBlocks";
 

@@ -5,7 +5,7 @@ import createDefaultRenderNode, {
   UnOrderedList
 } from "./renderNode";
 
-function createRenderer(opts: typeOptions, pluginsWrapper) {
+function createRenderer(opts: typeOptions, pluginsWrapper: any) {
   const { externalRenderer } = opts;
   return {
     renderNode: externalRenderer

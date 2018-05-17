@@ -7,7 +7,7 @@ import createOnKeyDown from "./onKeyDown";
 import createProps from "./props";
 import createSchema from "./schemas";
 
-function createIndentPlugin(pluginOptions: typeOptions, pluginsWrapper) {
+function createIndentPlugin(pluginOptions: typeOptions, pluginsWrapper: any) {
   const opts = new Options(pluginOptions);
   const utils = createUtils(opts);
   const changes = createChanges(opts);

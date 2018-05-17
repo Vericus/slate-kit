@@ -9,9 +9,9 @@ export type KeyBinding = {
 };
 
 export type typeOptions = {
-  renderMark?: ?() => void,
-  keyBindings?: Array<KeyBinding>,
-  marks?: Array<string>
+  renderMark: ?() => void,
+  keyBindings: Array<KeyBinding>,
+  marks: Array<string>
 };
 
 const defaultOption: typeOptions = {

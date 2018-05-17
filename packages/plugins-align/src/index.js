@@ -1,11 +1,11 @@
 // @flow
-import Options, { type typeOptions } from "./options";
+import Options from "./options";
 import CreateUtils from "./utils";
 import CreateChanges from "./changes";
 import CreateProps from "./props";
 import CreateSchema from "./schemas";
 
-function createAlignPlugin(pluginOptions: typeOptions = {}) {
+function createAlignPlugin(pluginOptions: any = {}) {
   const opts = new Options(pluginOptions);
   const utils = CreateUtils(opts);
   const changes = CreateChanges(opts);

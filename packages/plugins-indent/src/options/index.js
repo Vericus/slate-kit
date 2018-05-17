@@ -2,10 +2,10 @@
 import { Record } from "immutable";
 
 export type typeOptions = {
-  tabable?: Array<string>,
-  indentable?: Array<string>,
-  maxIndentation?: number,
-  dataField?: string
+  tabable: Array<string>,
+  indentable: Array<string>,
+  maxIndentation: number,
+  dataField: string
 };
 
 const defaultOptions = {

@@ -40,11 +40,11 @@ function canBeIndented(opts: typeOptions, value: Value) {
 
 function createUtils(opts: typeOptions) {
   return {
-    getIndentationLevel: block => getIndentationLevel(opts, block),
-    isIndentable: block => isIndentable(opts, block),
-    getIndentableBlocks: value => getIndentableBlocks(opts, value),
-    canBeIndented: value => canBeIndented(opts, value),
-    canBeOutdented: value => canBeOutdented(opts, value)
+    getIndentationLevel: (block: Block) => getIndentationLevel(opts, block),
+    isIndentable: (block: Block) => isIndentable(opts, block),
+    getIndentableBlocks: (value: Value) => getIndentableBlocks(opts, value),
+    canBeIndented: (value: Value) => canBeIndented(opts, value),
+    canBeOutdented: (value: Value) => canBeOutdented(opts, value)
   };
 }
 

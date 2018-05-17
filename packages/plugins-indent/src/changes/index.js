@@ -28,14 +28,14 @@ function decreaseBlockIndent(opts: typeOptions, change: Change, block: Block) {
   });
 }
 
-function increaseIndent(opts, change) {
+function increaseIndent(opts: typeOptions, change: Change) {
   const { value } = change;
   getIndentableBlocks(opts, value).forEach(block =>
     increaseBlockIndent(opts, change, block)
   );
 }
 
-function decreaseIndent(opts, change) {
+function decreaseIndent(opts: typeOptions, change: Change) {
   const { value } = change;
   getIndentableBlocks(opts, value).forEach(block =>
     decreaseBlockIndent(opts, change, block)
@@ -44,12 +44,12 @@ function decreaseIndent(opts, change) {
 
 function createChanges(opts: typeOptions) {
   return {
-    decreaseBlockIndent: (change, block) =>
+    decreaseBlockIndent: (change: Change, block: Block) =>
       decreaseBlockIndent(opts, change, block),
-    increaseBlockIndent: (change, block) =>
+    increaseBlockIndent: (change: Change, block: Block) =>
       increaseBlockIndent(opts, change, block),
-    increaseIndent: change => increaseIndent(opts, change),
-    decreaseIndent: change => decreaseIndent(opts, change)
+    increaseIndent: (change: Change) => increaseIndent(opts, change),
+    decreaseIndent: (change: Change) => decreaseIndent(opts, change)
   };
 }
 

@@ -8,7 +8,7 @@ import createChanges from "./changes";
 import createOnKeyDown from "./onKeyDown";
 import createSchema from "./schemas";
 
-export function createPlugin(pluginOptions: typeOptions, pluginsWrapper) {
+export function createPlugin(pluginOptions: typeOptions, pluginsWrapper: any) {
   const opts = new Options(pluginOptions);
   const { ordered, unordered, checkList } = opts;
   const { renderNode } = createRenderer(opts, pluginsWrapper);

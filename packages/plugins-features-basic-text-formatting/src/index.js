@@ -1,14 +1,12 @@
 // @flow
-import Options, { type typeOptions } from "./options";
+import Options from "./options";
 import createChanges from "./changes";
 import createUtils from "./utils";
 import createRenderers from "./renderers";
 import createKeyBindings from "./keyBindings";
 import createSchema from "./schemas";
 
-export default function createBasicTextFormatPlugin(
-  pluginOptions: typeOptions = {}
-) {
+export default function createBasicTextFormatPlugin(pluginOptions: any = {}) {
   const opt = new Options(pluginOptions);
   const changes = createChanges();
   const utils = createUtils();

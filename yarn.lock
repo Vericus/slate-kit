@@ -6263,7 +6263,7 @@ is-glob@^4.0.0:
   dependencies:
     is-extglob "^2.1.1"
 
-is-hotkey@^0.0.3, is-hotkey@^0.1.1, is-hotkey@^0.1.2:
+is-hotkey@*, is-hotkey@^0.0.3, is-hotkey@^0.1.1, is-hotkey@^0.1.2:
   version "0.1.2"
   resolved "http://localhost:4873/is-hotkey/-/is-hotkey-0.1.2.tgz#aeda5e4f542284700ae18b46980fb0637c021198"
 

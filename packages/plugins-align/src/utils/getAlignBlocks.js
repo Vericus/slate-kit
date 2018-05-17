@@ -3,7 +3,7 @@ import type { Value, Node } from "slate";
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import type { typeOptions } from "../options";
 
-function getAlignBlocksInBlock(opts, node) {
+function getAlignBlocksInBlock(opts: typeOptions, node: Node) {
   if (node.object !== "block") return [];
   const { textBlocks, floatBlocks } = opts;
   if (node.isLeafBlock()) {
@@ -12,9 +12,13 @@ function getAlignBlocksInBlock(opts, node) {
     }
     return [];
   }
-  return node.nodes.reduce((alignBlocks, block) => {
-    return [...alignBlocks, ...getAlignBlocksInBlock(opts, block)];
-  }, []);
+  return node.nodes.reduce(
+    (alignBlocks, block) => [
+      ...alignBlocks,
+      ...getAlignBlocksInBlock(opts, block)
+    ],
+    []
+  );
 }
 
 function getAlignBlocks(opts: typeOptions, value: Value) {

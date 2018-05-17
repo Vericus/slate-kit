@@ -1,4 +1,5 @@
 // @flow
+import type { Change } from "slate";
 import isHotkey from "is-hotkey";
 import hotkeys from "slate-hotkeys";
 import { type typeOptions } from "../options";
@@ -17,7 +18,7 @@ export default function createOnKeyDown(opts: typeOptions) {
     isDeleteLineBackward(e) ||
     isDeleteWordBackward(e);
 
-  return (event, change) => {
+  return (event: SyntheticKeyboardEvent<*>, change: Change) => {
     const { value } = change;
     const { startBlock, endBlock, selection } = value;
     const { isCollapsed, startOffset } = selection;

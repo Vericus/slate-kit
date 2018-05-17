@@ -1,4 +1,5 @@
 // @flow
+import type { Change, Block } from "slate";
 import { type typeOptions } from "../options";
 
 export default function createSchema(opts: typeOptions) {
@@ -6,7 +7,7 @@ export default function createSchema(opts: typeOptions) {
   const listBlocks = [ordered, unordered, checkList];
   const schemas = {};
   const schema = {};
-  schemas.validateNode = block => {
+  schemas.validateNode = (block: Block) => {
     if (block.object !== "block") return undefined;
     if (!listBlocks.includes(block.type)) return undefined;
     if (block.type === ordered) {
@@ -14,14 +15,14 @@ export default function createSchema(opts: typeOptions) {
         block.data.get(startAtField) &&
         typeof block.data.get(startAtField) !== "number"
       ) {
-        return change =>
+        return (change: Change) =>
           change.setNodeByKey(
             block.key,
             { data: block.data.delete(checkField).delete(startAtField) },
             { normalize: false }
           );
       } else if (block.data.get(checkField)) {
-        return change =>
+        return (change: Change) =>
           change.setNodeByKey(
             block.key,
             { data: block.data.delete(checkField) },
@@ -34,7 +35,7 @@ export default function createSchema(opts: typeOptions) {
       block.type === unordered &&
       (block.data.get(checkField) || block.data.get(startAtField))
     ) {
-      return change =>
+      return (change: Change) =>
         change.setNodeByKey(
           block.key,
           { data: block.data.delete(checkField).delete(startAtField) },
@@ -46,14 +47,14 @@ export default function createSchema(opts: typeOptions) {
         block.data.get(checkField) &&
         typeof block.data.get(checkField) !== "boolean"
       ) {
-        return change =>
+        return (change: Change) =>
           change.setNodeByKey(
             block.key,
             { data: block.data.delete(checkField).delete(startAtField) },
             { normalize: false }
           );
       } else if (block.data.get(startAtField)) {
-        return change =>
+        return (change: Change) =>
           change.setNodeByKey(
             block.key,
             { data: block.data.delete(startAtField) },

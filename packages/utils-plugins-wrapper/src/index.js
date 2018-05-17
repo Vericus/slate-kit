@@ -81,7 +81,7 @@ function defaultSchemaCustomizer(schema, schemas) {
     const d = resolveDocumentRule(document);
     const bs = {};
     const is = {};
-
+    /* eslint-disable guard-for-in, no-restricted-syntax */
     for (const key in blocks) {
       bs[key] = resolveNodeRule("block", key, blocks[key]);
     }
@@ -89,6 +89,7 @@ function defaultSchemaCustomizer(schema, schemas) {
     for (const key in inlines) {
       is[key] = resolveNodeRule("inline", key, inlines[key]);
     }
+    /* eslint-enable guard-for-in, no-restricted-syntax */
     mergeWith(customizedSchema.document, d, documentCustomizer);
     mergeWith(customizedSchema.blocks, bs, customizer);
     mergeWith(customizedSchema.inlines, is, customizer);

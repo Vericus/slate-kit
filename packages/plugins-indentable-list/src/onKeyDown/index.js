@@ -1,11 +1,15 @@
 // @flow
+import type { Change } from "slate";
 import { isKeyHotkey } from "is-hotkey";
 import hotkeys from "slate-hotkeys";
 import { type typeOptions } from "../options";
 import { resetStartAt, unwrapList } from "../changes";
 import { isListNode } from "../utils";
 
-export default function createOnKeyDown(opts: typeOptions, pluginsWrapper) {
+export default function createOnKeyDown(
+  opts: typeOptions,
+  pluginsWrapper: any
+) {
   const { startAtField } = opts;
   const isTab = isKeyHotkey("tab");
   const isShiftTab = isKeyHotkey("shift+tab");
@@ -21,7 +25,7 @@ export default function createOnKeyDown(opts: typeOptions, pluginsWrapper) {
     isDeleteLineBackward(e) ||
     isDeleteWordBackward(e);
 
-  return (e, change) => {
+  return (e: SyntheticKeyboardEvent<*>, change: Change) => {
     const { value } = change;
     const { startBlock, endBlock, selection } = value;
     const { isCollapsed, startOffset } = selection;

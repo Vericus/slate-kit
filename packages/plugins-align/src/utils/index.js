@@ -1,5 +1,5 @@
 // @flow
-import type { Node, Block } from "slate";
+import type { Node, Block, Value } from "slate";
 import getAlignBlocks, { getAlignBlocksInBlock } from "./getAlignBlocks";
 import getAlignment from "./getAlignment";
 import isAligned from "./isAligned";
@@ -13,8 +13,9 @@ function createUtils(opts: typeOptions) {
     getAlignBlocksInBlock: (node: Array<Node>): Array<Node> =>
       getAlignBlocksInBlock(opts, node),
     getAlignment: (block: Block) => getAlignment(opts, block),
-    isAligned: (value, alignment) => isAligned(opts, value, alignment),
-    isAlignable: value => isAlignable(opts, value)
+    isAligned: (value: Value, alignment: string) =>
+      isAligned(opts, value, alignment),
+    isAlignable: (value: Value) => isAlignable(opts, value)
   };
 }
 export default createUtils;

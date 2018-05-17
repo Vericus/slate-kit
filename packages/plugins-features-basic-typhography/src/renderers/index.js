@@ -8,7 +8,7 @@ import createDefaultRenderNode, {
   Paragraph
 } from "./renderNode";
 
-export function createRenderer(opts: typeOptions, pluginsWrapper) {
+export function createRenderer(opts: typeOptions, pluginsWrapper: any) {
   const { externalRenderer } = opts;
   return {
     renderNode: externalRenderer

@@ -7,11 +7,11 @@ import createSchema from "./schemas";
 
 export default function createPlugin(
   pluginOptions: typeOptions,
-  pluginsWrapper
+  pluginsWrapper: any
 ) {
   const opt = new Options(pluginOptions);
   const utils = createUtils(opt);
-  const changes = createChanges(opt, utils);
+  const changes = createChanges(opt);
   const renderers = createRenderers(opt, pluginsWrapper);
   const schemas = createSchema(opt);
   return { changes, utils, ...renderers, ...schemas };
