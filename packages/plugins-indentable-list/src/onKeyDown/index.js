@@ -49,7 +49,7 @@ export default function createOnKeyDown(
       if (startBlock === endBlock && isCollapsed && startBlock.text === "") {
         e.preventDefault();
         e.stopPropagation();
-        unwrapList(opts, change, isDeleting, pluginsWrapper);
+        unwrapList(opts, change, true, pluginsWrapper);
         return true;
       } else if (startBlock === endBlock) {
         change.insertBlock({

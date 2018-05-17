@@ -13,7 +13,7 @@ export default function createSchema(opts: typeOptions) {
     if (block.type === ordered) {
       if (
         block.data.get(startAtField) &&
-        typeof block.data.get(startAtField) !== "number"
+        typeof parseInt(block.data.get(startAtField), 10) !== "number"
       ) {
         return (change: Change) =>
           change.setNodeByKey(
