@@ -1,6 +1,6 @@
 // @flow
 import type { typeOptions } from "../options";
-import defaultRenderNode, {
+import createDefaultRenderNode, {
   HeadingOne,
   HeadingTwo,
   HeadingThree,
@@ -8,10 +8,12 @@ import defaultRenderNode, {
   Paragraph
 } from "./renderNode";
 
-export function createRenderer(opts: typeOptions) {
+export function createRenderer(opts: typeOptions, pluginsWrapper) {
   const { externalRenderer } = opts;
   return {
-    renderNode: externalRenderer ? undefined : defaultRenderNode
+    renderNode: externalRenderer
+      ? undefined
+      : createDefaultRenderNode(pluginsWrapper)
   };
 }
 

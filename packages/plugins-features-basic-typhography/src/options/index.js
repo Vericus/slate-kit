@@ -34,18 +34,18 @@ class Options extends Record(defaultOptions, "Typhography Options") {
 
   static fromJSON(object: any) {
     if (Options.isOptions(object)) return object;
-
-    const { blockTypes, defaultBlock } = object;
+    const options = {
+      ...defaultOptions,
+      ...object
+    };
+    const { blockTypes, defaultBlock } = options;
     if (!blockTypes || !defaultBlock || !Array.isArray(blockTypes)) {
       throw new Error(
         "Typhography requires blockTypes and defaultBlock option"
       );
     }
 
-    return new Options({
-      blockTypes,
-      defaultBlock
-    });
+    return new Options(options);
   }
 
   static isOptions(any: any) {

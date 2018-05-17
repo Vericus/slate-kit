@@ -102,6 +102,12 @@ class ColorPicker extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      color: nextProps.color
+    });
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return (
       this.state.color !== nextState.color ||
@@ -200,6 +206,12 @@ export default class Toolbar extends Component {
     const { pluginsWrapper } = props;
     const hasTypography = pluginsWrapper.getChanges("basic-typhography");
     const hasMarks = pluginsWrapper.getChanges("basic-text-format");
+    this.indentChanges = pluginsWrapper.getChanges("indent");
+    this.indentUtils = pluginsWrapper.getUtils("indent");
+    this.listChanges = pluginsWrapper.getChanges("list");
+    this.listUtils = pluginsWrapper.getUtils("list");
+    this.alignChanges = pluginsWrapper.getChanges("align");
+    this.alignUtils = pluginsWrapper.getUtils("align");
     this.historyUtils = pluginsWrapper.getUtils("history");
     this.currentTypography = hasTypography
       ? pluginsWrapper.getUtils("basic-typhography").currentTypography
@@ -239,6 +251,26 @@ export default class Toolbar extends Component {
           ? pluginsWrapper.getChanges("basic-typhography").toggleTypography
           : () => {},
         disabled: !hasTypography
+      }
+    };
+    this.lists = {
+      "ol-list": {
+        icon: "ListOrdered",
+        change: this.listChanges ? this.listChanges.changeListType : () => {},
+        disabled: !this.listChanges,
+        isActive: this.listUtils ? this.listUtils.isOrderedList : () => false
+      },
+      "ul-list": {
+        icon: "ListBullet",
+        change: this.listChanges ? this.listChanges.changeListType : () => {},
+        disabled: !this.listChanges,
+        isActive: this.listUtils ? this.listUtils.isUnorderedList : () => false
+      },
+      "check-list": {
+        icon: "ListCheck",
+        change: this.listChanges ? this.listChanges.changeListType : () => {},
+        disabled: !this.listChanges,
+        isActive: this.listUtils ? this.listUtils.isCheckList : () => false
       }
     };
     this.marks = {
@@ -283,6 +315,32 @@ export default class Toolbar extends Component {
           : () => false
       }
     };
+    this.allignments = {
+      left: {
+        icon: "AlignLeft",
+        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
+        disabled: !this.alignUtils,
+        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
+      },
+      center: {
+        icon: "AlignCenter",
+        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
+        disabled: !this.alignUtils,
+        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
+      },
+      right: {
+        icon: "AlignRight",
+        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
+        disabled: !this.alignUtils,
+        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
+      },
+      justify: {
+        icon: "AlignJustify",
+        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
+        disabled: !this.alignUtils,
+        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
+      }
+    };
   }
 
   handleClickMark = (event, change) => {
@@ -310,6 +368,100 @@ export default class Toolbar extends Component {
       );
     });
   };
+
+  handleClickList = (event, change, type) => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.props.onChange(change(this.props.value.change(), type));
+  };
+
+  renderList = () => {
+    return Object.entries(this.lists).map(([type, options]) => {
+      return (
+        <IconButton
+          icon={options.icon}
+          onMouseDown={e => this.handleClickList(e, options.change, type)}
+          disabled={options.disabled || this.props.isReadOnly}
+          active={options.isActive(this.props.value)}
+          size="18"
+        />
+      );
+    });
+  };
+
+  handleClickIndent = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    const change = this.props.value.change();
+    const { value } = change;
+    change.withoutNormalization(c => {
+      this.indentChanges.increaseIndent(c);
+    });
+    this.props.onChange(change);
+  };
+
+  handleClickOutdent = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    const change = this.props.value.change();
+    const { value } = change;
+    change.withoutNormalization(c => {
+      this.indentChanges.decreaseIndent(c);
+    });
+    this.props.onChange(change);
+  };
+
+  canBeIndented = () => {
+    if (!this.indentUtils) return false;
+    return this.indentUtils.canBeIndented(this.props.value);
+  };
+
+  canBeOutdented = () => {
+    if (!this.indentUtils) return false;
+    return this.indentUtils.canBeOutdented(this.props.value);
+  };
+
+  renderIndent = () => {
+    return [
+      <IconButton
+        icon="Indent"
+        onMouseDown={e => this.handleClickIndent(e)}
+        disabled={this.props.isReadOnly || !this.indentUtils}
+        size="18"
+      />,
+      <IconButton
+        icon="Outdent"
+        onMouseDown={e => this.handleClickOutdent(e)}
+        disabled={this.props.isReadOnly || !this.indentUtils}
+        size="18"
+      />
+    ];
+  };
+
+  handleClickAlignment = (event, change, type) => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.props.onChange(change(this.props.value.change(), type));
+  };
+
+  renderAllignment = () => {
+    return Object.entries(this.allignments).map(([type, options]) => {
+      return (
+        <IconButton
+          icon={options.icon}
+          onMouseDown={e => this.handleClickAlignment(e, options.change, type)}
+          disabled={
+            options.disabled ||
+            this.props.isReadOnly ||
+            !this.alignUtils.isAlignable(this.props.value)
+          }
+          active={options.isActive(this.props.value, type)}
+          size="18"
+        />
+      );
+    });
+  };
+
   renderMarks = () => {
     return Object.entries(this.marks).map(([type, options]) => {
       return (
@@ -400,6 +552,9 @@ export default class Toolbar extends Component {
     return (
       <div style={{ paddingBottom: "150px" }}>
         {this.renderTyphography()}
+        {this.renderIndent()}
+        {this.renderAllignment()}
+        {this.renderList()}
         {this.renderMarks()}
         {this.renderTextColor()}
         {this.renderBackgroundColor()}

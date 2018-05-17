@@ -6,7 +6,7 @@ import {
   removeExpandedMark
 } from "@vericus/slate-kit-plugins-utils";
 import tinycolor from "tinycolor2";
-import type { typeOptions } from "./options";
+import type { typeOptions } from "../options";
 
 export default function createChanges(opt: typeOptions) {
   const { defaultColor, data, type } = opt;

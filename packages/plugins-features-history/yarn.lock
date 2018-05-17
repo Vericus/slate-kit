@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@vericus/slate-kit-plugins-utils@^0.0.3":
-  version "0.0.3"
-  resolved "@vericus-slate-kit-plugins-utils-0.0.3.tgz#7ae9f8a72b30e31b648950b77beb51f52e5c142b"
+"@vericus/slate-kit-plugins-utils@^0.0.4":
+  version "0.0.4"
+  resolved "@vericus-slate-kit-plugins-utils-0.0.4.tgz#98262f65cfc23fc0bb93a8e96cc7cc9a229a2f62"
   dependencies:
     debug "^3.1.0"
     immutable "^3.8.2"

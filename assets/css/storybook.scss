@@ -100,3 +100,94 @@
   color : transparent;
   text-shadow : 0 0 0 #000;
 }
+
+$indentation-level: 8;
+$indentation-padding: 99;
+$list-padding: 3em;
+$ul-types: disc, circle, square;
+$ol-types: decimal, lower-alpha, lower-roman;
+
+ul, ol {
+  padding-left: $list-padding;
+  li {
+    position: relative;
+    text-indent: -3.5em;
+  }
+  li::before {
+    user-select: all;
+    text-align: right;
+    display: inline-block;
+    width: 3em;
+    margin-right: 0.5em;
+  }
+}
+
+ol.list-reset:not(.indented) {
+  counter-reset: ol var(--start-at, 0);
+}
+
+ul {
+  list-style-type: none;
+  counter-increment: ul;
+  li::before {
+    content: counter(ul, nth($ul-types, 1)) "  ";
+  }
+}
+
+ol {
+  list-style-type: none;
+  counter-increment: ol;
+  li::before {
+    content: counter(ol, nth($ol-types, 1)) ". ";
+  }
+}
+
+ul.checkList {
+  padding-left: $list-padding;
+  li::before {
+    display: inline-block;
+    width: 3em;
+    height: 1em;
+    background-repeat: no-repeat;
+    content: '';
+    user-select: none;
+    text-align: right;
+    background-size: 1em 1em;
+    background-position: right;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAADpJREFUKFO1yqERwDAAxLDsv3QKLPplEfT5vHR/maINpmiDKdpgijaYog2maIMp2mCKNpiiDaYHzvkAci8q5Gg0BsgAAAAASUVORK5CYII=);
+  }
+}
+
+.checkList.checked {
+  text-decoration: line-through;
+  li::before {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAEpJREFUKFO1ykEOwCAMxMD8/9Mtqq1ogXJkTsFL3fSc+aOZN87JZdYTh9hSdm6R2hJ5yvY5Fdn+/g1EZeJOdPWbbcE0cdk4X1D1AhcH8g67+AATAAAAAElFTkSuQmCC);
+  }
+}
+
+@for $i from 1 through $indentation-level {
+  .indentation-#{$i}:not(ul):not(ol) {
+    padding-left: #{$i*$indentation-padding}px;
+  }
+  ul.indentation-#{$i}, ol.indentation-#{$i}, .checkList.indentation-#{$i} {
+    padding-left: calc(#{$i*$indentation-padding}px + #{$list-padding});
+    .checkbox {
+      padding-left: calc(#{$i*$indentation-padding}px);
+    }
+  }
+  ul.indentation-#{$i}:not(.checkList) {
+    counter-increment: ul-#{$i};
+    li::before {
+      content: counter(ul-#{$i}, nth($ul-types, ($i)%length($ul-types)+1)) "  ";
+    }
+  }
+  ol.indentation-#{$i} {
+    counter-increment: ol-#{$i};
+    li::before {
+      content: counter(ol-#{$i}, nth($ol-types, ($i)%length($ol-types)+1)) ". ";
+    }
+  }
+  ol.list-reset-#{$i} {
+    counter-reset: ol-#{$i} var(--start-at, 0);
+  }
+}

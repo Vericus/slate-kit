@@ -10,7 +10,8 @@ export type KeyBinding = {
 
 export type typeOptions = {
   renderMark?: ?() => void,
-  keyBindings?: Array<KeyBinding>
+  keyBindings?: Array<KeyBinding>,
+  marks?: Array<string>
 };
 
 const defaultOption: typeOptions = {
@@ -19,12 +20,14 @@ const defaultOption: typeOptions = {
     { hotkeys: "mod+i", changeName: "toggleItalic" },
     { hotkeys: "mod+u", changeName: "toggleUnderline" }
   ],
+  marks: ["bold", "italic", "underline", "strikethrough"],
   renderMark: undefined
 };
 
 class Options extends Record(defaultOption) {
   renderMark: () => void;
   keyBindings: Array<KeyBinding>;
+  marks: Array<string>;
 }
 
 export default Options;

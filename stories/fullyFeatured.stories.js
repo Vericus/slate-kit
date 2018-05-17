@@ -6,9 +6,12 @@ import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
 import BasicTypography from "@vericus/slate-kit-basic-typhography";
 import HighlightText from "@vericus/slate-kit-highlight-text";
 import HistoryPlugin from "@vericus/slate-kit-history";
+import IndentPlugin from "@vericus/slate-kit-indent";
+import ListPlugin from "@vericus/slate-kit-indentable-list";
+import AlignPlugin from "@vericus/slate-kit-align";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
-import initialState from "../states/fullText.json";
-import Editor from "../support/components/editor";
+import initialState from "./states/fullText.json";
+import Editor from "./support/components/editor";
 
 const pluginOpts = [
   {
@@ -43,6 +46,18 @@ const pluginOpts = [
       defaultColor: "transparent",
       styles: ["textDecorationColor", "color"]
     }
+  },
+  {
+    label: "list",
+    createPlugin: ListPlugin
+  },
+  {
+    label: "indent",
+    createPlugin: IndentPlugin
+  },
+  {
+    label: "align",
+    createPlugin: AlignPlugin
   }
 ];
 
