@@ -1,5 +1,5 @@
 {
-  "version": "0.0.4",
+  "version": "0.0.5",
   "name": "@vericus/slate-kit-plugins-wrapper",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -40,8 +40,8 @@
     "slate": "^0.33.0"
   },
   "peerDependencies": {
-    "slate": "^0.32.0 || ^0.33.0",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "slate": "^0.32.0 || ^0.33.0"
   },
   "keywords": [
     "Vericus",
