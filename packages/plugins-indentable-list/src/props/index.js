@@ -25,7 +25,7 @@ export default function createProps(opts, pluginsWrapper) {
           ? props.attributes.style
           : {};
       if (startAt) {
-        style["--start-at"] = startAt - 1;
+        style["--start-at"] = startAt;
       }
       const shouldReset =
         !previousBlock ||
