@@ -46,7 +46,7 @@ function resetChecked(opts: typeOptions, change: Change) {
 function changeListType(opts: typeOptions, change: Change, type: string) {
   const { ordered, unordered, checkList } = opts;
   const { value } = change;
-  const selectedBlocks = getHighestSelectedBlocks(opts, value);
+  const selectedBlocks = getHighestSelectedBlocks(value);
   const shouldUnwrap =
     (type === checkList && isCheckList(opts, value)) ||
     (type === ordered && isOrderedList(opts, value)) ||
