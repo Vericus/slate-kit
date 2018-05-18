@@ -28,6 +28,7 @@ export default function createProps(opts, pluginsWrapper) {
         style["--start-at"] = startAt - 1;
       }
       const shouldReset =
+        !previousBlock ||
         (previousBlock && previousBlock.type !== node.type) ||
         prevIndentation < indentation ||
         startAt;
