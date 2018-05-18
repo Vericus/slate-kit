@@ -6,12 +6,12 @@ import CreateProps from "./props";
 import CreateSchema from "./schemas";
 
 function createAlignPlugin(pluginOptions: any = {}) {
-  const opts = new Options(pluginOptions);
-  const utils = CreateUtils(opts);
-  const changes = CreateChanges(opts);
-  const props = CreateProps(opts);
-  const schemas = CreateSchema(opts);
-  return { utils, changes, props, ...schemas };
+  const options = new Options(pluginOptions);
+  const utils = CreateUtils(options);
+  const changes = CreateChanges(options);
+  const props = CreateProps(options);
+  const schemas = CreateSchema(options);
+  return { options, utils, changes, props, ...schemas };
 }
 
 export default createAlignPlugin;

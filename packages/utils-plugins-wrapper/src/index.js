@@ -242,6 +242,9 @@ export default class PluginsWrapper {
           this[SCHEMAS][label] = value();
         }
         break;
+      case "options":
+        this[OPTIONS][label] = value;
+        break;
       default:
         break;
     }
@@ -266,7 +269,6 @@ export default class PluginsWrapper {
       )
     );
     this[PLUGINS][label] = plugins;
-    this[OPTIONS][label] = options;
     return plugins;
   };
 

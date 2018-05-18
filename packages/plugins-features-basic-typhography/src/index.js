@@ -9,10 +9,10 @@ export default function createPlugin(
   pluginOptions: typeOptions,
   pluginsWrapper: any
 ) {
-  const opt = new Options(pluginOptions);
-  const utils = createUtils(opt);
-  const changes = createChanges(opt);
-  const renderers = createRenderers(opt, pluginsWrapper);
-  const schemas = createSchema(opt);
-  return { changes, utils, ...renderers, ...schemas };
+  const options = new Options(pluginOptions);
+  const utils = createUtils(options);
+  const changes = createChanges(options);
+  const renderers = createRenderers(options, pluginsWrapper);
+  const schemas = createSchema(options);
+  return { options, changes, utils, ...renderers, ...schemas };
 }

@@ -7,15 +7,15 @@ import createKeyBindings from "./keyBindings";
 import createSchema from "./schemas";
 
 export default function createBasicTextFormatPlugin(pluginOptions: any = {}) {
-  const opt = new Options(pluginOptions);
+  const options = new Options(pluginOptions);
   const changes = createChanges();
   const utils = createUtils();
-  const schemas = createSchema(opt);
-  const { renderMark } = createRenderers(opt.renderMark);
+  const schemas = createSchema(options);
+  const { renderMark } = createRenderers(options.renderMark);
   return {
     plugins: [
-      { changes, utils, renderMark, ...schemas },
-      ...createKeyBindings(opt, changes)
+      { options, changes, utils, renderMark, ...schemas },
+      ...createKeyBindings(options, changes)
     ]
   };
 }

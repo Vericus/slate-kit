@@ -9,15 +9,15 @@ import createOnKeyDown from "./onKeyDown";
 import createSchema from "./schemas";
 
 export function createPlugin(pluginOptions: typeOptions, pluginsWrapper: any) {
-  const opts = new Options(pluginOptions);
-  const { ordered, unordered, checkList } = opts;
-  const { renderNode } = createRenderer(opts, pluginsWrapper);
-  const utils = createUtils(opts);
-  const changes = createChanges(opts, pluginsWrapper);
+  const options = new Options(pluginOptions);
+  const { ordered, unordered, checkList } = options;
+  const { renderNode } = createRenderer(options, pluginsWrapper);
+  const utils = createUtils(options);
+  const changes = createChanges(options, pluginsWrapper);
   const { createListWithType } = changes;
-  const props = createProps(opts, pluginsWrapper);
-  const schemas = createSchema(opts);
-  const onKeyDown = createOnKeyDown(opts, pluginsWrapper);
+  const props = createProps(options, pluginsWrapper);
+  const schemas = createSchema(options);
+  const onKeyDown = createOnKeyDown(options, pluginsWrapper);
   return {
     plugins: [
       {
@@ -26,6 +26,7 @@ export function createPlugin(pluginOptions: typeOptions, pluginsWrapper: any) {
         utils,
         changes,
         onKeyDown,
+        options,
         ...schemas
       },
       AutoReplace({

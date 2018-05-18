@@ -8,17 +8,18 @@ import createProps from "./props";
 import createSchema from "./schemas";
 
 function createIndentPlugin(pluginOptions: typeOptions, pluginsWrapper: any) {
-  const opts = new Options(pluginOptions);
-  const utils = createUtils(opts);
-  const changes = createChanges(opts);
-  const onKeyDown = createOnKeyDown(opts);
-  const props = createProps(opts);
-  const schemas = createSchema(opts);
+  const options = new Options(pluginOptions);
+  const utils = createUtils(options);
+  const changes = createChanges(options);
+  const onKeyDown = createOnKeyDown(options);
+  const props = createProps(options);
+  const schemas = createSchema(options);
   return {
     utils,
     props,
     onKeyDown,
     changes,
+    options,
     ...schemas,
     shouldNodeComponentUpdate: (currProps, nextProps) => {
       if (currProps.node.data !== nextProps.node.data) {

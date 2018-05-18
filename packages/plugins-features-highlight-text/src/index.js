@@ -6,10 +6,10 @@ import createUtils from "./utils";
 import createSchema from "./schemas";
 
 export default function createPlugin(pluginOptions: typeOptions) {
-  const opt = Options.create(pluginOptions);
-  const changes = createChanges(opt);
-  const renderMark = createRenderMark(opt);
-  const schemas = createSchema(opt);
-  const utils = createUtils(opt);
-  return { changes, utils, renderMark, ...schemas };
+  const options = Options.create(pluginOptions);
+  const changes = createChanges(options);
+  const renderMark = createRenderMark(options);
+  const schemas = createSchema(options);
+  const utils = createUtils(options);
+  return { options, changes, utils, renderMark, ...schemas };
 }

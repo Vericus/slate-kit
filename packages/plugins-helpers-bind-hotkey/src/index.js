@@ -4,10 +4,11 @@ import Options, { type typeOptions } from "./options";
 import createOnKeyDown from "./onKeyDown";
 
 function createHotKeyPlugin(pluginOptions: typeOptions) {
-  const opts = new Options(pluginOptions);
-  const onKeyDown = createOnKeyDown(opts);
+  const options = new Options(pluginOptions);
+  const onKeyDown = createOnKeyDown(options);
   return {
-    onKeyDown
+    onKeyDown,
+    options
   };
 }
 
