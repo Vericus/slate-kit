@@ -33,5 +33,5 @@ export default function getHighestSelectedBlocks(value: Value) {
 
     return ancestor.nodes.slice(startPath[0], endPath[0] + 1);
   }
-  return undefined;
+  return List([]);
 }

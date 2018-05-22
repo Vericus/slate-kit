@@ -21,7 +21,7 @@ function getIndentationLevel(opts: typeOptions, block: Block) {
 
 function canBeOutdented(opts: typeOptions, value: Value) {
   const indentableBlocks = getIndentableBlocks(opts, value);
-  if (indentableBlocks.length === 0) return false;
+  if (indentableBlocks.size === 0) return false;
   return indentableBlocks.some(block => {
     const indentation = getIndentationLevel(opts, block);
     return indentation > 0;
@@ -31,7 +31,7 @@ function canBeOutdented(opts: typeOptions, value: Value) {
 function canBeIndented(opts: typeOptions, value: Value) {
   const { maxIndentation } = opts;
   const indentableBlocks = getIndentableBlocks(opts, value);
-  if (indentableBlocks.length === 0) return false;
+  if (indentableBlocks.size === 0) return false;
   return indentableBlocks.some(block => {
     const indentation = getIndentationLevel(block);
     return indentation < maxIndentation;
