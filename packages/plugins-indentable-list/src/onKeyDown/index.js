@@ -10,7 +10,7 @@ export default function createOnKeyDown(
   opts: typeOptions,
   pluginsWrapper: any
 ) {
-  const { startAtField } = opts;
+  const { startAtField, checkField } = opts;
   const isTab = isKeyHotkey("tab");
   const isShiftTab = isKeyHotkey("shift+tab");
   const isEnter = isKeyHotkey("enter");
@@ -54,7 +54,7 @@ export default function createOnKeyDown(
       } else if (startBlock === endBlock) {
         change.insertBlock({
           type: startBlock.type,
-          data: startBlock.data.delete(startAtField)
+          data: startBlock.data.delete(startAtField).delete(checkField)
         });
         return true;
       }

@@ -9,7 +9,9 @@ export default function isAligned(
   value: Value,
   alignment: string
 ) {
-  return getAlignBlocks(opts, value).every(
-    block => block && getAlignment(opts, block) === alignment
+  const alignBlocks = getAlignBlocks(opts, value);
+  return (
+    alignBlocks.length !== 0 &&
+    alignBlocks.every(block => block && getAlignment(opts, block) === alignment)
   );
 }
