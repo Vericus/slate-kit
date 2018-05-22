@@ -1,5 +1,5 @@
 {
-  "version": "0.0.10",
+  "version": "0.0.11",
   "name": "@vericus/slate-kit-basic-text-formatting",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@vericus/slate-kit-bind-hotkey": "0.0.5",
-    "@vericus/slate-kit-plugins-utils": "0.0.6",
+    "@vericus/slate-kit-plugins-utils": "0.0.7",
     "debug": "^3.1.0",
     "immutable": "^3.8.2"
   },
