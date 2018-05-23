@@ -11259,7 +11259,7 @@ slate-simulator@*:
   version "0.4.29"
   resolved "https://registry.yarnpkg.com/slate-simulator/-/slate-simulator-0.4.29.tgz#d6cb090e0908965219a8b98a0fe365a3f0aac759"
 
-slate@*, slate@^0.33.0, slate@^0.33.5:
+slate@*, slate@^0.33.0, slate@^0.33.6:
   version "0.33.6"
   resolved "https://registry.yarnpkg.com/slate/-/slate-0.33.6.tgz#0c7cb193cc5adeecec5c81e2ec0c86ab23dd6755"
   dependencies:
