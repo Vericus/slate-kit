@@ -1,9 +1,17 @@
 import React, { Component } from "react";
-import { Editor } from "slate-react";
+import {
+  getEventRange,
+  getEventTransfer,
+  setEventTransfer,
+  findNode,
+  findDOMNode,
+  Editor
+} from "slate-react";
 import { Value } from "slate";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import { WithReadOnly } from "@vericus/slate-kit-read-only";
 import HistoryPlugin from "@vericus/slate-kit-history";
+import pasteCleaner from "@vericus/slate-kit-paste-helpers";
 import Toolbar from "../toolbar";
 
 const pluginsWrapper = new PluginsWrapper();
@@ -25,6 +33,19 @@ export default class SlateKitEditor extends Component {
     });
   };
 
+  onPaste = (event, change) => {
+    const data = getEventTransfer(event);
+    if (data.html) {
+      console.log(data.text);
+      const { origin, cleanedHTML } = pasteCleaner(data.html);
+      const parser = pluginsWrapper.getSerializer();
+      console.log(cleanedHTML);
+      const { document } = parser.deserialize(cleanedHTML);
+      change.insertFragment(document);
+      return true;
+    }
+  };
+
   renderToolbar = () => (
     <Toolbar
       pluginsWrapper={pluginsWrapper}
@@ -38,13 +59,16 @@ export default class SlateKitEditor extends Component {
     return (
       <div>
         {this.renderToolbar()}
-        <EditorWithReadOnly
-          placeholder={"Enter some text..."}
-          plugins={this.plugins}
-          value={this.state.value}
-          onChange={this.onChange}
-          {...this.props}
-        />
+        <div className="editorContainer">
+          <EditorWithReadOnly
+            placeholder={"Enter some text..."}
+            plugins={this.plugins}
+            value={this.state.value}
+            onChange={this.onChange}
+            onPaste={this.onPaste}
+            {...this.props}
+          />
+        </div>
       </div>
     );
   }
