@@ -1,5 +1,5 @@
 {
-  "version": "0.0.8",
+  "version": "0.0.9",
   "name": "@vericus/slate-kit-indent",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -11,7 +11,7 @@
   "files": [
     "dist/",
     "lib/",
-    "module"
+    "module/"
   ],
   "license": "MIT",
   "publishConfig": {
