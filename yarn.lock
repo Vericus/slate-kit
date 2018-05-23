@@ -92,6 +92,143 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@ephox/agar@latest":
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/@ephox/agar/-/agar-3.0.10.tgz#be1f094fbf94fc7302d3ba1b088ada44ae41f768"
+  dependencies:
+    "@ephox/jax" latest
+    "@ephox/sand" latest
+    "@ephox/sugar" latest
+    "@ephox/wrap-jsverify" latest
+    "@ephox/wrap-sizzle" latest
+
+"@ephox/alloy@latest":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@ephox/alloy/-/alloy-2.0.5.tgz#873adbd84c5aa0e93152edb57e6f7ea893246ba1"
+  dependencies:
+    "@ephox/boulder" latest
+    "@ephox/katamari" latest
+    "@ephox/sand" latest
+    "@ephox/sugar" latest
+
+"@ephox/boss@latest":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@ephox/boss/-/boss-3.0.5.tgz#fd76de9cacfb1780e8a9a69eac258fc1a0cd2292"
+  dependencies:
+    "@ephox/katamari" latest
+    "@ephox/sugar" latest
+
+"@ephox/boulder@latest":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@ephox/boulder/-/boulder-3.0.5.tgz#43335c433020caff9374ca848899834cc876dcbb"
+  dependencies:
+    "@ephox/katamari" latest
+    "@ephox/sand" latest
+
+"@ephox/darwin@latest":
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/@ephox/darwin/-/darwin-3.0.6.tgz#887883886d0c215f4e24051cc0766785e1141872"
+  dependencies:
+    "@ephox/katamari" latest
+    "@ephox/phoenix" latest
+    "@ephox/robin" latest
+    "@ephox/sand" latest
+    "@ephox/snooker" latest
+    "@ephox/sugar" latest
+
+"@ephox/dragster@latest":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@ephox/dragster/-/dragster-4.0.4.tgz#9d5322b5257bc62438f23ffa70d0586e94ca0ccf"
+  dependencies:
+    "@ephox/katamari" latest
+    "@ephox/porkbun" latest
+    "@ephox/sugar" latest
+
+"@ephox/echo@latest":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@ephox/echo/-/echo-3.0.4.tgz#0fa0ec572c4dc2c8814d7f811dae6b3596c7e4fb"
+  dependencies:
+    "@ephox/katamari" latest
+    "@ephox/sand" latest
+    "@ephox/sugar" latest
+
+"@ephox/imagetools@latest":
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/@ephox/imagetools/-/imagetools-3.0.10.tgz#533c64d1039d344aa386afb52621d7220cf43ee7"
+
+"@ephox/jax@latest":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@ephox/jax/-/jax-3.0.5.tgz#49fa1970b283cc3f0520a672f731c6cd40adfba9"
+  dependencies:
+    "@ephox/katamari" latest
+    "@ephox/sand" latest
+
+"@ephox/katamari@latest":
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/@ephox/katamari/-/katamari-2.1.10.tgz#d887e0f5f6e4bd9a4b11080e0524d9d05a6f0ca2"
+
+"@ephox/phoenix@latest":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@ephox/phoenix/-/phoenix-5.0.8.tgz#1271b2c9493fbf9c6323da6b36108eed61adc611"
+  dependencies:
+    "@ephox/boss" latest
+    "@ephox/katamari" latest
+    "@ephox/polaris" latest
+
+"@ephox/polaris@latest":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@ephox/polaris/-/polaris-3.0.5.tgz#4e155fb78ec7fb8a94860027de2f34be37035f31"
+  dependencies:
+    "@ephox/katamari" latest
+
+"@ephox/porkbun@latest":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@ephox/porkbun/-/porkbun-4.0.3.tgz#9e1290639806050191e26a1229a5f02728a5831c"
+  dependencies:
+    "@ephox/katamari" latest
+
+"@ephox/robin@latest":
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/@ephox/robin/-/robin-7.0.4.tgz#46031423a2d485066afe2b53142336723104dfd7"
+  dependencies:
+    "@ephox/boss" latest
+    "@ephox/katamari" latest
+    "@ephox/phoenix" latest
+    "@ephox/polaris" latest
+
+"@ephox/sand@latest":
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/@ephox/sand/-/sand-2.0.8.tgz#56ac8e1921f697d6c7f888103c08d4a07b93eb4e"
+  dependencies:
+    "@ephox/katamari" latest
+
+"@ephox/snooker@latest":
+  version "4.0.9"
+  resolved "https://registry.yarnpkg.com/@ephox/snooker/-/snooker-4.0.9.tgz#dd43873d2eac6627a471f08c5cbc8efdd5da6f6a"
+  dependencies:
+    "@ephox/agar" latest
+    "@ephox/dragster" latest
+    "@ephox/echo" latest
+    "@ephox/katamari" latest
+    "@ephox/porkbun" latest
+    "@ephox/robin" latest
+    "@ephox/sugar" latest
+
+"@ephox/sugar@latest":
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/@ephox/sugar/-/sugar-4.0.10.tgz#522b491279469a7ca5ac0b035a71913b895768ea"
+  dependencies:
+    "@ephox/katamari" latest
+    "@ephox/sand" latest
+
+"@ephox/wrap-jsverify@latest":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@ephox/wrap-jsverify/-/wrap-jsverify-2.0.0.tgz#358044d3c6e3bb85862db0e4c922a5ddc979b2a1"
+
+"@ephox/wrap-sizzle@latest":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@ephox/wrap-sizzle/-/wrap-sizzle-4.0.0.tgz#d0334ebc45caccae2d4f0534103f20448b096bc5"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -11204,7 +11341,7 @@ slate-hotkeys@*, slate-hotkeys@^0.1.1, slate-hotkeys@^0.1.2:
     is-hotkey "^0.1.1"
     slate-dev-environment "^0.1.2"
 
-slate-html-serializer@*:
+slate-html-serializer@*, slate-html-serializer@^0.6.3:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/slate-html-serializer/-/slate-html-serializer-0.6.3.tgz#dba47103937199180c6d89585d20b7d83037b838"
   dependencies:
@@ -12010,6 +12147,19 @@ tiny-relative-date@^1.3.0:
 tinycolor2@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
+
+tinymce-word-paste-filter@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/tinymce-word-paste-filter/-/tinymce-word-paste-filter-0.6.1.tgz#d00a9ceace168c8d508147b1399598a0401d21d3"
+  dependencies:
+    "@ephox/alloy" latest
+    "@ephox/boulder" latest
+    "@ephox/darwin" latest
+    "@ephox/imagetools" latest
+    "@ephox/katamari" latest
+    "@ephox/sand" latest
+    "@ephox/snooker" latest
+    "@ephox/sugar" latest
 
 titleize@^1.0.0:
   version "1.0.1"

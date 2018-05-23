@@ -11,7 +11,7 @@
     "tools/*"
   ],
   "scripts": {
-    "bootstrap": "yarn && lerna bootstrap && yarn run flow:setup",
+    "bootstrap": "yarn && lerna bootstrap --nohoist && yarn run flow:setup",
     "bootstrap:build": "yarn bootstrap && yarn build",
     "build-storybook": "build-storybook",
     "build": "yarn run build:packages && lerna run build --parallel",
@@ -130,6 +130,7 @@
     "slate-simulator": "*",
     "storybook-readme": "^3.2.1",
     "style-loader": "^0.20.3",
+    "tinymce-word-paste-filter": "^0.6.1",
     "yo": "^2.0.1"
   },
   "dependencies": {
