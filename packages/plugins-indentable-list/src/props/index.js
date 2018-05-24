@@ -18,6 +18,7 @@ export default function createProps(opts, pluginsWrapper) {
       const prevIndentation =
         previousBlock && getIndentationLevel(previousBlock);
       const indentation = getIndentationLevel(props.node);
+      console.log(props.node.data);
       const startAt = props.node.data.get(startAtField);
       const checked = props.node.data.get(checkField);
       const style =

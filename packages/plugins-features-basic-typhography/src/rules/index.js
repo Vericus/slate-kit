@@ -9,7 +9,7 @@ const blocks = {
   h6: "heading-four"
 };
 
-export default function createRule(getData) {
+export default function createRule(options, getData) {
   return [
     {
       deserialize(el, next) {

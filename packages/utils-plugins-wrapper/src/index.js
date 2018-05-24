@@ -255,8 +255,11 @@ export default class PluginsWrapper {
   getSerializer = () => this.serializer;
 
   updateSerializer = () => {
-    const rulesGenerators = Object.values(this[RULES]).reduce(
-      (acc, rulesGenerator) => [...acc, rulesGenerator],
+    const rulesGenerators = Object.entries(this[RULES]).reduce(
+      (acc, [label, rulesGenerator]) => [
+        ...acc,
+        (...args) => rulesGenerator(this[OPTIONS][label], ...args)
+      ],
       []
     );
     this.serializer = HTMLSerializer({

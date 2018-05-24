@@ -45,18 +45,21 @@ function getFontWeightMark(fontWeight) {
 export default function getData(el: Element) {
   let marks = new Set([]);
   const { style } = el;
-  const { fontStyle, textDecoration, fontWeight } = style;
-  if (fontStyle) {
-    const fontMark = getFontStyleMark(fontStyle);
-    if (fontMark) marks = marks.add(fontMark);
+  if (style) {
+    const { fontStyle, textDecoration, fontWeight } = style;
+    if (fontStyle) {
+      const fontMark = getFontStyleMark(fontStyle);
+      if (fontMark) marks = marks.add(fontMark);
+    }
+    if (textDecoration) {
+      const decorationMark = getTextDecorationMark(textDecoration);
+      if (decorationMark) marks = marks.add(decorationMark);
+    }
+    if (fontWeight) {
+      const weightMark = getFontWeightMark(fontWeight);
+      if (weightMark) marks = marks.add(weightMark);
+    }
+    return { marks: marks.toList() };
   }
-  if (textDecoration) {
-    const decorationMark = getTextDecorationMark(textDecoration);
-    if (decorationMark) marks = marks.add(decorationMark);
-  }
-  if (fontWeight) {
-    const weightMark = getFontWeightMark(fontWeight);
-    if (weightMark) marks = marks.add(weightMark);
-  }
-  return { marks: marks.toList() };
+  return {};
 }
