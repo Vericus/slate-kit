@@ -224,6 +224,10 @@
       li::before {
         content: counter(ol-#{$i}, nth($ol-types, ($i)%length($ol-types)+1)) ". ";
       }
+      li::after {
+        content: " ";
+        counter-increment: ol-#{$i};
+      }
     }
     ol.list-reset-#{$i} {
       counter-reset: ol-#{$i} var(--start-at, 1);
