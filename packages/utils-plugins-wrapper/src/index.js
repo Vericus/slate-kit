@@ -1,5 +1,6 @@
 import Symbol from "es6-symbol";
 import mergeWith from "lodash/mergeWith";
+import HTMLSerializer from "@vericus/slate-kit-html-serializer";
 
 const CHANGES = Symbol("changes");
 const OPTIONS = Symbol("options");
@@ -8,6 +9,7 @@ const PROPS = Symbol("props");
 const STYLES = Symbol("styles");
 const UTILS = Symbol("utils");
 const SCHEMAS = Symbol("schema");
+const RULES = Symbol("rules");
 
 /**
  * Resolve a document rule `obj`.
@@ -108,6 +110,8 @@ export default class PluginsWrapper {
     this[STYLES] = {};
     this[UTILS] = {};
     this[SCHEMAS] = {};
+    this[RULES] = {};
+    this.serializers = null;
     this.schema = {
       blocks: {},
       inlines: {},
@@ -148,25 +152,20 @@ export default class PluginsWrapper {
       ? this.getFlattenPlugins(this[PLUGINS], label)
       : this.getFlattenPlugins(this[PLUGINS]);
 
-  getSyles = block =>
-    Object.values(this[STYLES]).reduce((styles, style) => {
-      if (style && style.getStyle) {
-        return {
-          ...styles,
-          ...style.getStyle(block)
-        };
-      }
-      return {
-        ...styles
-      };
-    }, {});
-
   getData = el =>
     Object.values(this[STYLES]).reduce((styles, style) => {
       if (style && style.getData) {
+        const passData = style.getData(el);
+        const marks = styles.marks || [];
+        if (passData.mark) {
+          return {
+            ...styles,
+            marks: [...marks, passData.mark]
+          };
+        }
         return {
           ...styles,
-          ...style.getData(el)
+          ...passData
         };
       }
       return {
@@ -245,9 +244,30 @@ export default class PluginsWrapper {
       case "options":
         this[OPTIONS][label] = value;
         break;
+      case "rules":
+        this[RULES][label] = value;
+        break;
       default:
         break;
     }
+  };
+
+  getSerializer = () => this.serializer;
+
+  updateSerializer = () => {
+    const rulesGenerators = Object.entries(this[RULES]).reduce(
+      (acc, [label, rulesGenerator]) => [
+        ...acc,
+        (...args) => rulesGenerator(this[OPTIONS][label], ...args)
+      ],
+      []
+    );
+    this.serializer = HTMLSerializer({
+      rulesGenerators,
+      getData: this.getData,
+      getProps: this.getProps
+    });
+    return this.serializer;
   };
 
   configurePlugin = (createPlugin, options = {}, label) => {
@@ -274,6 +294,7 @@ export default class PluginsWrapper {
 
   addPlugin = (createPlugin, options = {}, label) => {
     this.configurePlugin(createPlugin, options, label);
+    this.serializer = this.updateSerializer();
     return this.getPlugins();
   };
 
@@ -282,14 +303,18 @@ export default class PluginsWrapper {
     return this.getPlugins();
   };
 
-  makePlugins = (pluginDict = []) => [
-    ...pluginDict.reduce(
-      (plugins, { label, createPlugin, options }) => [
-        ...plugins,
-        ...this.configurePlugin(createPlugin, options, label)
-      ],
-      []
-    ),
-    { schema: this.getSchema() }
-  ];
+  makePlugins = (pluginDict = []) => {
+    const plugins = [
+      ...pluginDict.reduce(
+        (acc, { label, createPlugin, options }) => [
+          ...acc,
+          ...this.configurePlugin(createPlugin, options, label)
+        ],
+        []
+      ),
+      { schema: this.getSchema() }
+    ];
+    this.serializer = this.updateSerializer();
+    return plugins;
+  };
 }

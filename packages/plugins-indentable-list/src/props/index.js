@@ -18,6 +18,7 @@ export default function createProps(opts, pluginsWrapper) {
       const prevIndentation =
         previousBlock && getIndentationLevel(previousBlock);
       const indentation = getIndentationLevel(props.node);
+      console.log(props.node.data);
       const startAt = props.node.data.get(startAtField);
       const checked = props.node.data.get(checkField);
       const style =
@@ -36,7 +37,19 @@ export default function createProps(opts, pluginsWrapper) {
         props.node.type === checkList
           ? e => {
               const { x } = e.target.getBoundingClientRect();
-              if (e.clientX >= x) return;
+              const targetStyle = getComputedStyle(e.target);
+              const fontSize = parseInt(targetStyle.fontSize, 10);
+              const paddingLeft = parseInt(targetStyle.paddingLeft, 10);
+              const min = x + paddingLeft - fontSize * 1.5;
+              const max = x + paddingLeft - fontSize * 0.5;
+              if (
+                !(
+                  min <= e.clientX &&
+                  e.clientX <= max &&
+                  e.target.nodeName.toLowerCase() === "li"
+                )
+              )
+                return;
               e.preventDefault();
               e.stopPropagation();
               if (props.editor.props.isReadOnly) return;

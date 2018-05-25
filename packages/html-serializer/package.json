@@ -1,6 +1,6 @@
 {
-  "version": "0.0.6",
-  "name": "@vericus/slate-kit-plugins-wrapper",
+  "version": "0.0.1",
+  "name": "@vericus/slate-kit-html-serializer",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
@@ -17,32 +17,23 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-plugins-wrapper.js",
-  "module": "lib/slate-kit-plugins-wrapper.es.js",
-  "umd": "dist/slate-kit-plugins-wrapper.js",
-  "umdMin": "dist/slate-kit-plugins-wrapper.min.js",
+  "main": "lib/slate-kit-html-serializer.js",
+  "module": "lib/slate-kit-html-serializer.es.js",
+  "umd": "dist/slate-kit-html-serializer.js",
+  "umdMin": "dist/slate-kit-html-serializer.min.js",
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "umdGlobals": {
-    "immutable": "Immutable",
-    "slate": "Slate"
-  },
-  "dependencies": {
-    "@vericus/slate-kit-html-serializer": "^0.0.1",
-    "debug": "^3.1.0",
-    "es6-symbol": "^3.1.1",
-    "immutable": "^3.8.2"
+    "immutable": "Immutable"
   },
   "devDependencies": {
     "flow-bin": "^0.70.0",
-    "lodash": "^4.17.10",
-    "slate": "^0.33.0"
+    "slate-html-serializer": "^0.6.3"
   },
-  "peerDependencies": {
-    "lodash": "^4.17.10",
-    "slate": "^0.32.0 || ^0.33.0"
+  "dependencies": {
+    "slate-html-serializer": "^0.6.3"
   },
   "keywords": [
     "Vericus",

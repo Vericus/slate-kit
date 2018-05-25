@@ -6,7 +6,7 @@ export default function createUtils(opts: typeOptions) {
   const { defaultColor, data, type } = opts;
   return {
     currentColor: (value: Value) => {
-      if (value.activeMarks) {
+      if (value.selection && value.selection.isFocused && value.activeMarks) {
         const activeColorMarks = value.activeMarks
           .filter(mark => mark.type === type)
           .map(mark => mark.data.get(data));

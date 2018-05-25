@@ -7,6 +7,7 @@ import createUtils from "./utils";
 import createChanges from "./changes";
 import createOnKeyDown from "./onKeyDown";
 import createSchema from "./schemas";
+import createRule from "./rules";
 
 export function createPlugin(pluginOptions: typeOptions, pluginsWrapper: any) {
   const options = new Options(pluginOptions);
@@ -17,11 +18,13 @@ export function createPlugin(pluginOptions: typeOptions, pluginsWrapper: any) {
   const { createListWithType } = changes;
   const props = createProps(options, pluginsWrapper);
   const schemas = createSchema(options);
+  const rules = createRule;
   const onKeyDown = createOnKeyDown(options, pluginsWrapper);
   return {
     plugins: [
       {
         props,
+        rules,
         renderNode,
         utils,
         changes,

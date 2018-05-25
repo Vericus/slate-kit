@@ -51,7 +51,10 @@ export default function createOnKeyDown(
         e.stopPropagation();
         unwrapList(opts, change, true, pluginsWrapper);
         return true;
-      } else if (startBlock === endBlock) {
+      } else if (
+        startBlock === endBlock &&
+        (selection.isAtStartOf(startBlock) || selection.isAtEndOf(startBlock))
+      ) {
         change.insertBlock({
           type: startBlock.type,
           data: startBlock.data.delete(startAtField).delete(checkField)

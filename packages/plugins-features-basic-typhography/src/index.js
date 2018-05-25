@@ -4,6 +4,7 @@ import createChanges from "./changes";
 import createUtils from "./utils";
 import createRenderers from "./renderers";
 import createSchema from "./schemas";
+import createRule from "./rules";
 
 export default function createPlugin(
   pluginOptions: typeOptions,
@@ -14,5 +15,6 @@ export default function createPlugin(
   const changes = createChanges(options);
   const renderers = createRenderers(options, pluginsWrapper);
   const schemas = createSchema(options);
-  return { options, changes, utils, ...renderers, ...schemas };
+  const rules = createRule;
+  return { options, rules, changes, utils, ...renderers, ...schemas };
 }
