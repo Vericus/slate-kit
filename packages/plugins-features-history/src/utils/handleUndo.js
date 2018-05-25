@@ -11,13 +11,13 @@ export default function handleUndo(
   const newChange = change.value.change();
   if (!hasUndo(value)) return change;
   value.history.undos.some(undo => {
+    if (undo.size === 1 && undo.get(0).type === "set_selection") {
+      return false;
+    }
     if (onUndo && typeof onUndo === "function") {
       newChange.undo();
     } else {
       change.undo();
-    }
-    if (undo.size === 1 && undo.get(0).type === "set_selection") {
-      return false;
     }
     return true;
   });
