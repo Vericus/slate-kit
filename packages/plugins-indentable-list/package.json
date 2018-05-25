@@ -1,5 +1,5 @@
 {
-  "version": "0.0.13",
+  "version": "0.0.14",
   "name": "@vericus/slate-kit-indentable-list",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -45,8 +45,7 @@
     "slate": "^0.33.6",
     "slate-auto-replace": "^0.9.0",
     "slate-dev-environment": "^0.1.1",
-    "slate-prop-types": "^0.4.27",
-    "slate-auto-replace": "^0.9.0"
+    "slate-prop-types": "^0.4.27"
   },
   "peerDependencies": {
     "is-hotkey": "^0.1.2",
@@ -56,8 +55,7 @@
     "slate-auto-replace": "^0.9.0",
     "slate-dev-environment": "^0.1.1",
     "slate-hotkeys": "^0.1.2",
-    "slate-prop-types": "^0.4.0",
-    "slate-auto-replace": "^0.9.0"
+    "slate-prop-types": "^0.4.0"
   },
   "resolutions": {
     "slate-auto-replace/**/is-hotkey": "^0.1.2",
