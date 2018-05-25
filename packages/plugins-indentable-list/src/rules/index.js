@@ -90,7 +90,6 @@ function deserializeFlat(getData, el, block, childNodes, next) {
 }
 
 export default function createRule(options, getData) {
-  console.log(options, getData);
   return [
     {
       deserialize(el, next) {
