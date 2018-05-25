@@ -64,9 +64,6 @@ export default function createSchema(opts: typeOptions) {
     }
     return undefined;
   };
-  schema.document = {
-    nodes: [{ types: listBlocks }]
-  };
   schemas.getSchema = () => schema;
   return schemas;
 }

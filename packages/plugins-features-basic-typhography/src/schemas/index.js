@@ -11,9 +11,6 @@ export default function createSchema(opts: typeOptions) {
       isVoid: false
     };
   });
-  schema.document = {
-    nodes: [{ types: blockTypes }]
-  };
   schemas.getSchema = () => schema;
   return schemas;
 }
