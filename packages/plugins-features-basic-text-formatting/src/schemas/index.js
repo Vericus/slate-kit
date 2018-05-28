@@ -1,14 +1,8 @@
 // @flow
-import { type typeOptions } from "../options";
 
-export default function createSchema(opts: typeOptions) {
-  const { marks } = opts;
+export default function createSchema() {
   const schemas = {};
-  const schema = {
-    document: {
-      marks: marks.map(mark => ({ type: mark }))
-    }
-  };
+  const schema = {};
   schemas.getSchema = () => schema;
   return schemas;
 }
