@@ -58,19 +58,8 @@ function resolveNodeRule(object, type, obj) {
  */
 
 function customizer(target, source, key) {
-  if (key === "objects" || key === "types") {
-    return target == null ? source : target.concat(source);
-  }
-  return source == null ? target : source;
-}
-
-function documentCustomizer(target, source, key) {
   if (key === "objects" || key === "types" || key === "marks") {
     return target == null ? source : target.concat(source);
-  } else if (key === "nodes") {
-    if (source == null) return target;
-    if (target == null) return source;
-    return [{ types: source[0].types.concat(target[0].types) }];
   }
   return source == null ? target : source;
 }
@@ -92,7 +81,7 @@ function defaultSchemaCustomizer(schema, schemas) {
       is[key] = resolveNodeRule("inline", key, inlines[key]);
     }
     /* eslint-enable guard-for-in, no-restricted-syntax */
-    mergeWith(customizedSchema.document, d, documentCustomizer);
+    mergeWith(customizedSchema.document, d, customizer);
     mergeWith(customizedSchema.blocks, bs, customizer);
     mergeWith(customizedSchema.inlines, is, customizer);
   });
