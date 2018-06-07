@@ -252,7 +252,55 @@ export default class PluginsWrapper {
       []
     );
     this.serializer = HTMLSerializer({
-      rulesGenerators,
+      rulesGenerators: [
+        ...rulesGenerators,
+        () => {
+          const { getData } = this;
+          return [
+            {
+              deserialize(el, next) {
+                if (el.tagName.toLowerCase() !== "div") return undefined;
+                const { data, marks } = getData(el);
+                return {
+                  object: "block",
+                  data,
+                  marks,
+                  type: "paragraph",
+                  nodes: next(el.childNodes)
+                };
+              }
+            },
+            {
+              deserialize(el, next) {
+                if (
+                  el.parentNode &&
+                  el.parentNode.parentNode &&
+                  el.parentNode.parentNode.tagName.toLowerCase() === "div"
+                )
+                  return undefined;
+                if (el.nodeName === "#text") return undefined;
+                if (
+                  el.firstChild &&
+                  el.firstChild.nodeName !== "#text" &&
+                  el.firstChild.firstChild &&
+                  el.firstChild.firstChild.nodeName !== "#text"
+                )
+                  return undefined;
+                if (el.firstChild && el.firstChild.nodeName === "#text")
+                  return undefined;
+                const { data, marks } = getData(el);
+                return {
+                  object: "block",
+                  data,
+                  marks,
+                  type: "paragraph",
+                  nodes: next(el.childNodes)
+                };
+              }
+            }
+          ];
+        }
+      ],
       getData: this.getData,
       getProps: this.getProps
     });
