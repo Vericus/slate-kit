@@ -278,6 +278,11 @@ export default class PluginsWrapper {
                   el.parentNode.parentNode.tagName.toLowerCase() === "div"
                 )
                   return undefined;
+                if (
+                  el.parentNode &&
+                  el.parentNode.tagName.toLowerCase() === "li"
+                )
+                  return undefined;
                 if (el.nodeName === "#text") return undefined;
                 if (
                   el.firstChild &&
