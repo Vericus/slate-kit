@@ -1,5 +1,5 @@
 {
-  "version": "0.0.2",
+  "version": "0.0.3",
   "name": "@vericus/slate-kit-html-serializer",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -30,10 +30,10 @@
   },
   "devDependencies": {
     "flow-bin": "^0.70.0",
-    "slate-html-serializer": "^0.6.3"
+    "slate-html-serializer": "^0.6.4"
   },
-  "dependencies": {
-    "slate-html-serializer": "^0.6.3"
+  "peerDependencies": {
+    "slate-html-serializer": "^0.6.4"
   },
   "keywords": [
     "Vericus",
