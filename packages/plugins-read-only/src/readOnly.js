@@ -2,8 +2,7 @@ import React from "react";
 import isHotKey from "is-hotkey";
 import PropTypes from "prop-types";
 
-export default function ReadOnly(opts = { readOnlyClass: "slate-read-only" }) {
-  const { readOnlyClass } = opts;
+export default function ReadOnly() {
   const COPY = isHotKey("mod+c");
 
   function onKeyDown(e) {
@@ -21,7 +20,7 @@ export default function ReadOnly(opts = { readOnlyClass: "slate-read-only" }) {
   }
 
   function renderEditor(props) {
-    return <div className={readOnlyClass}>{props.children}</div>;
+    return props.children;
   }
 
   renderEditor.propTypes = {
