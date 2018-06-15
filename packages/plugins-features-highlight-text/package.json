@@ -1,5 +1,5 @@
 {
-  "version": "0.0.12",
+  "version": "0.0.13",
   "name": "@vericus/slate-kit-highlight-text",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -31,14 +31,14 @@
     "is-plain-object": "IsPlainObject"
   },
   "dependencies": {
-    "@vericus/slate-kit-plugins-utils": "0.0.7",
+    "@vericus/slate-kit-plugins-utils": "0.0.8",
     "immutable": "^3.8.2",
     "is-plain-object": "^2.0.4",
     "prop-types": "^15.6.1",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
-    "@vericus/slate-kit-utils-hyperscript": ">=0.0.1",
+    "@vericus/slate-kit-utils-hyperscript": "0.0.2",
     "flow-bin": "0.74.0",
     "react": ">=16.3.2",
     "react-dom": ">=16.3.2",

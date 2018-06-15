@@ -1,5 +1,5 @@
 {
-  "version": "0.0.10",
+  "version": "0.0.11",
   "name": "@vericus/slate-kit-indent",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -31,7 +31,7 @@
     "is-hotkey": "IsHotkey"
   },
   "dependencies": {
-    "@vericus/slate-kit-plugins-utils": ">=0.0.7",
+    "@vericus/slate-kit-plugins-utils": "0.0.8",
     "classnames": "^2.2.5",
     "immutable": "^3.8.2"
   },
