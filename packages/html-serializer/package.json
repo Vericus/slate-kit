@@ -29,11 +29,11 @@
     "immutable": "Immutable"
   },
   "devDependencies": {
-    "flow-bin": "^0.70.0",
-    "slate-html-serializer": "^0.6.4"
+    "flow-bin": "0.74.0",
+    "slate-html-serializer": ">=0.6.0"
   },
   "peerDependencies": {
-    "slate-html-serializer": "^0.6.4"
+    "slate-html-serializer": ">=0.6.0"
   },
   "keywords": [
     "Vericus",

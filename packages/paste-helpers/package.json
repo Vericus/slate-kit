@@ -30,7 +30,7 @@
     "slate": "Slate"
   },
   "devDependencies": {
-    "flow-bin": "^0.70.0"
+    "flow-bin": "0.74.0"
   },
   "dependencies": {
     "tinymce-word-paste-filter": "^0.6.1"

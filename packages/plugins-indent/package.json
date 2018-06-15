@@ -31,23 +31,23 @@
     "is-hotkey": "IsHotkey"
   },
   "dependencies": {
-    "@vericus/slate-kit-plugins-utils": "0.0.7",
+    "@vericus/slate-kit-plugins-utils": ">=0.0.7",
     "classnames": "^2.2.5",
     "immutable": "^3.8.2"
   },
   "devDependencies": {
-    "flow-bin": "^0.70.0",
-    "is-hotkey": "^0.1.2",
-    "slate": "^0.33.6",
-    "slate-dev-environment": "^0.1.1",
-    "slate-hotkeys": "^0.1.1"
+    "flow-bin": "0.74.0",
+    "is-hotkey": ">=0.1.2",
+    "slate": ">=0.33.6",
+    "slate-dev-environment": ">=0.1.1",
+    "slate-hotkeys": ">=0.1.1"
   },
   "peerDependencies": {
-    "is-hotkey": "^0.1.2",
-    "slate": "^0.32.0 || ^0.33.0",
-    "slate-dev-environment": "^0.1.1",
-    "slate-hotkeys": "^0.1.1",
-    "slate-prop-types": "^0.4.0"
+    "is-hotkey": ">=0.1.2",
+    "slate": ">=0.32.0",
+    "slate-dev-environment": ">=0.1.1",
+    "slate-hotkeys": ">=0.1.1",
+    "slate-prop-types": ">=0.4.0"
   },
   "keywords": [
     "Vericus",
