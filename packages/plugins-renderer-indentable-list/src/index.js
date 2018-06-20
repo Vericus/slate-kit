@@ -1,16 +1,14 @@
 // @flow
-import type { typeOptions } from "../options";
+import Options, { type typeOptions } from "./options";
 import createDefaultRenderNode, {
   OrderedList,
   UnOrderedList
 } from "./renderNode";
 
 function createRenderer(opts: typeOptions, pluginsWrapper: any) {
-  const { externalRenderer } = opts;
+  const options = new Options(opts);
   return {
-    renderNode: externalRenderer
-      ? undefined
-      : createDefaultRenderNode(opts, pluginsWrapper)
+    renderNode: createDefaultRenderNode(options, pluginsWrapper)
   };
 }
 

@@ -1,5 +1,4 @@
 // @flow
-import type { typeOptions } from "../options";
 import createDefaultRenderNode, {
   HeadingOne,
   HeadingTwo,
@@ -9,11 +8,8 @@ import createDefaultRenderNode, {
 } from "./renderNode";
 
 export function createRenderer(opts: typeOptions, pluginsWrapper: any) {
-  const { externalRenderer } = opts;
   return {
-    renderNode: externalRenderer
-      ? undefined
-      : createDefaultRenderNode(pluginsWrapper)
+    renderNode: createDefaultRenderNode(pluginsWrapper)
   };
 }
 

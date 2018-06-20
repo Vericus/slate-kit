@@ -1,7 +1,7 @@
 // @flow
 import React, { type Element } from "react";
 import { type Node } from "slate";
-import type { typeOptions } from "../options";
+import type { typeOptions } from "./options";
 
 type Props = {
   attributes: any,

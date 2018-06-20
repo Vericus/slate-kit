@@ -9,7 +9,7 @@ export type KeyBinding = {
 };
 
 export type typeOptions = {
-  renderMark: ?() => void,
+  externalRenderer: boolean,
   keyBindings: Array<KeyBinding>,
   marks: Array<string>
 };
@@ -21,11 +21,11 @@ const defaultOption: typeOptions = {
     { hotkeys: "mod+u", changeName: "toggleUnderline" }
   ],
   marks: ["bold", "italic", "underline", "strikethrough"],
-  renderMark: undefined
+  externalRenderer: false
 };
 
 class Options extends Record(defaultOption) {
-  renderMark: () => void;
+  externalRenderer: boolean;
   keyBindings: Array<KeyBinding>;
   marks: Array<string>;
 }

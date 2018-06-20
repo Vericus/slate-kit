@@ -59,23 +59,27 @@ export function renderStrikethrough(props: Props) {
   });
 }
 
-export default function renderMarks(props: Props) {
-  switch (props.mark.type) {
-    case "bold":
-      return renderBold(props);
-    case "italic":
-      return renderItalic(props);
-    case "underline":
-      return renderUnderline(props);
-    case "strikethrough":
-      return renderStrikethrough(props);
-    // no default
-  }
-  return undefined;
-}
-
 renderBold.propTypes = Types.mark;
 renderItalic.propTypes = Types.mark;
 renderUnderline.propTypes = Types.mark;
 renderStrikethrough.propTypes = Types.mark;
 renderMark.propTypes = Types.mark;
+
+export default function createPlugin() {
+  return {
+    renderMark: (props: Props) => {
+      switch (props.mark.type) {
+        case "bold":
+          return renderBold(props);
+        case "italic":
+          return renderItalic(props);
+        case "underline":
+          return renderUnderline(props);
+        case "strikethrough":
+          return renderStrikethrough(props);
+        // no default
+      }
+      return undefined;
+    }
+  };
+}

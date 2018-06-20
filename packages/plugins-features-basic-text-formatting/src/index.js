@@ -1,8 +1,8 @@
 // @flow
+import Renderer from "@vericus/slate-kit-basic-text-formatting-renderer";
 import Options from "./options";
 import createChanges from "./changes";
 import createUtils from "./utils";
-import createRenderers from "./renderers";
 import createKeyBindings from "./keyBindings";
 import createSchema from "./schemas";
 import createStyle from "./style";
@@ -15,11 +15,14 @@ export default function createBasicTextFormatPlugin(pluginOptions: any = {}) {
   const schemas = createSchema(options);
   const style = createStyle();
   const rules = createRule;
-  const { renderMark } = createRenderers(options.renderMark);
+  let plugins = [
+    { options, rules, changes, style, utils, ...schemas },
+    ...createKeyBindings(options, changes)
+  ];
+  if (!options.externalRenderer) {
+    plugins = [...plugins, Renderer()];
+  }
   return {
-    plugins: [
-      { options, rules, changes, style, utils, renderMark, ...schemas },
-      ...createKeyBindings(options, changes)
-    ]
+    plugins
   };
 }

@@ -1,6 +1,6 @@
 {
-  "version": "0.0.9",
-  "name": "@vericus/slate-kit-read-only",
+  "version": "0.0.1",
+  "name": "@vericus/slate-kit-basic-text-formatting-renderer",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
@@ -17,36 +17,41 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-read-only.js",
-  "module": "lib/slate-kit-read-only.es.js",
-  "umd": "dist/slate-kit-read-only.js",
-  "umdMin": "dist/slate-kit-read-only.min.js",
+  "main": "lib/slate-kit-basic-text-formatting-renderer.js",
+  "module": "lib/slate-kit-basic-text-formatting-renderer.es.js",
+  "umd": "dist/slate-kit-basic-text-formatting-renderer.js",
+  "umdMin": "dist/slate-kit-basic-text-formatting-renderer.min.js",
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "umdGlobals": {
-    "is-hotkey": "IsHotkey"
+    "immutable": "Immutable",
+    "slate": "Slate"
   },
   "dependencies": {
-    "hoist-non-react-statics": ">=2.5.0",
-    "is-hotkey": ">=0.1.2",
-    "prop-types": ">=15.6.1",
     "react": ">=16.0.0",
-    "react-dom": ">=16.0.0"
+    "react-dom": ">=16.0.0",
+    "debug": "^3.1.0",
+    "immutable": "^3.8.2"
   },
   "devDependencies": {
     "flow-bin": "0.74.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react": ">=16.3.2",
+    "react-dom": ">=16.3.2",
+    "slate": ">=0.32.0",
+    "slate-prop-types": ">=0.4.0"
   },
   "peerDependencies": {
     "react": ">=16.0.0",
-    "react-dom": ">=16.0.0"
+    "react-dom": ">=16.0.0",
+    "slate": ">=0.32.0",
+    "slate-prop-types": ">=0.4.0"
   },
   "keywords": [
     "Vericus",
     "slate",
-    "slate-kit"
+    "slate-kit",
+    "slate-kit-renderer"
   ]
 }
