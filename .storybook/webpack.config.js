@@ -32,7 +32,8 @@ module.exports = (storybookBaseConfig, configType) => {
         options: {
           prettierConfig: {
             printWidth: 80,
-            tabWidth: 2
+            tabWidth: 2,
+            parser: "babylon"
           }
         }
       }
