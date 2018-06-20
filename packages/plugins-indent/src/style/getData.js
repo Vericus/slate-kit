@@ -9,7 +9,11 @@ const tagNames = [...tagTextIndented, ...tagTextFurtherIndented];
 export default function getData(el: Element, opts) {
   const { maxIndentation, dataField } = opts;
   const tagName = el.tagName && el.tagName.toLowerCase();
-  const classNames = el.className && el.className.split(" ");
+  const classNames =
+    (el.className &&
+      typeof el.className === "string" &&
+      el.className.split(" ")) ||
+    "";
   let marginLeft;
   if (!tagName || !tagNames.includes(tagName)) return {};
   if (tagTextFurtherIndented.includes(tagName)) {
