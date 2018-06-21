@@ -38,11 +38,14 @@
     "immutable": "^3.8.2"
   },
   "devDependencies": {
+    "expect": "^23.1.0",
     "flow-bin": "0.74.0",
     "react": ">=16.3.2",
     "react-dom": ">=16.3.2",
     "slate": ">=0.32.0",
-    "slate-prop-types": ">=0.4.0"
+    "slate-prop-types": ">=0.4.0",
+    "slate-simulator": "^0.4.33",
+    "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
     "react": ">=16.0.0",

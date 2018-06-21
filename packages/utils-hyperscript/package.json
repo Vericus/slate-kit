@@ -32,5 +32,8 @@
     "slate",
     "slate-kit",
     "test"
-  ]
+  ],
+  "devDependencies": {
+    "to-camel-case": "^1.0.0"
+  }
 }

@@ -20,9 +20,9 @@ const h = createHyperscript({
       type: "image",
       isVoid: true
     },
-    ol: "numbered-list",
-    ul: "bulleted-list",
-    li: "list-item"
+    ol: "ol-list",
+    ul: "ul-list",
+    check: "check-list"
   },
   inlines: {
     link: "link",

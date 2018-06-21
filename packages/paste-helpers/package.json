@@ -30,7 +30,10 @@
     "slate": "Slate"
   },
   "devDependencies": {
-    "flow-bin": "0.74.0"
+    "expect": "^23.1.0",
+    "flow-bin": "0.74.0",
+    "slate-simulator": "^0.4.33",
+    "to-camel-case": "^1.0.0"
   },
   "dependencies": {
     "tinymce-word-paste-filter": "^0.6.1"

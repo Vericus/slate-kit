@@ -41,6 +41,7 @@
     "react-dom": ">=16.0.0"
   },
   "devDependencies": {
+    "expect": "^23.1.0",
     "flow-bin": "0.74.0",
     "is-hotkey": ">=0.1.2",
     "react": "^16.3.2",
@@ -48,7 +49,9 @@
     "slate": ">=0.33.0",
     "slate-auto-replace": ">=0.9.0",
     "slate-dev-environment": ">=0.1.1",
-    "slate-prop-types": ">=0.4.27"
+    "slate-prop-types": ">=0.4.27",
+    "slate-simulator": "^0.4.33",
+    "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
     "is-hotkey": ">=0.1.2",
