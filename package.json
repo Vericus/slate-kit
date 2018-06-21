@@ -96,7 +96,6 @@
     "lerna-get-packages": "^1.0.0",
     "lint-staged": "^7.0.4",
     "lodash": "^4.17.10",
-    "node-sass": "^4.8.3",
     "npm-run-all": "^4.1.2",
     "prettier": "^1.13.5",
     "prop-types": "^15.6.1",
@@ -132,6 +131,7 @@
     "slate-simulator": "*",
     "storybook-readme": "^3.2.1",
     "style-loader": "^0.20.3",
+    "styled-components": "^3.3.2",
     "tinymce-word-paste-filter": "^0.6.1",
     "yo": "^2.0.1"
   },

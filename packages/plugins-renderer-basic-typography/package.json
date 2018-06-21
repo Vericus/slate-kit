@@ -30,10 +30,10 @@
     "slate": "Slate"
   },
   "dependencies": {
-    "react": ">=16.0.0",
-    "react-dom": ">=16.0.0",
     "debug": "^3.1.0",
-    "immutable": "^3.8.2"
+    "immutable": "^3.8.2",
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
   },
   "devDependencies": {
     "flow-bin": "0.74.0",

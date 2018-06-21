@@ -550,7 +550,16 @@ export default class Toolbar extends Component {
 
   render() {
     return (
-      <div style={{ paddingBottom: "50px" }}>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          background: "white"
+        }}
+      >
         {this.renderTyphography()}
         {this.renderIndent()}
         {this.renderAllignment()}
