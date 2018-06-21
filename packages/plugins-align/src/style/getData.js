@@ -6,7 +6,7 @@ const tagNames = [...tagTextAlign, ...tagFloat];
 const alignments = ["left", "center", "right", "justify"];
 
 export default function getData(
-  el: Element,
+  el: HTMLElement,
   dataField: string
 ): { textAlign?: string } {
   if (!el.tagName || !tagNames.includes(el.tagName.toLowerCase())) return {};

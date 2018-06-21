@@ -1,5 +1,3 @@
-// @flow
-
 const markTags = {
   strong: "bold",
   b: "bold",

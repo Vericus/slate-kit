@@ -1,12 +1,10 @@
-// @flow
-
 const tagTextIndented = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
 const tagTextFurtherIndented = ["ul", "ol"];
 const basicIndentation = 27;
 const extraIndentation = 36;
 const tagNames = [...tagTextIndented, ...tagTextFurtherIndented];
 
-export default function getData(el: Element, opts) {
+export default function getData(el, opts) {
   const { maxIndentation, dataField } = opts;
   const tagName = el.tagName && el.tagName.toLowerCase();
   const classNames =

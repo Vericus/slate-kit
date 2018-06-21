@@ -1,4 +1,3 @@
-// @flow
 const blocks = {
   p: "paragraph",
   h1: "heading-one",

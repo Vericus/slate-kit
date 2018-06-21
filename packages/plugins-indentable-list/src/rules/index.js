@@ -1,4 +1,3 @@
-// @flow
 import { Data } from "slate";
 
 const blocks = {
@@ -36,28 +35,30 @@ function deserializeNested(getData, el, block, childNodes, next) {
   const nodes = Array.from(childNodes);
   return nodes
     .map(node => {
-      if (node.tagName && node.tagName.toLowerCase() === "li") {
-        return deserializeFlatList(data, marks, block, [node], next);
+      const updatedNode = node;
+      if (updatedNode.tagName && updatedNode.tagName.toLowerCase() === "li") {
+        return deserializeFlatList(data, marks, block, [updatedNode], next);
       }
-      const { data: nodeData = {}, marks: nodeMarks } = getData(node);
+      const { data: nodeData = {}, marks: nodeMarks } = getData(updatedNode);
       const indentation =
         nodeData && nodeData.indentation
           ? nodeData.indentation
           : initialIndentation + 1;
       nodeData.indentation = indentation;
-      const classNames = node.className && node.className.split(" ");
+      const classNames =
+        updatedNode.className && updatedNode.className.split(" ");
       const containsIndentation =
         classNames &&
         classNames.some(className =>
           /(.*)(indent|level)(.*)(\d+)/.test(className)
         );
       if (!containsIndentation && classNames) {
-        node.classList.add(`indent-${indentation + 1}`);
+        updatedNode.classList.add(`indent-${indentation + 1}`);
       } else if (!classNames) {
-        node.className = `indent-${indentation + 1}`;
+        updatedNode.className = `indent-${indentation + 1}`;
       }
-      const nodeBlock = blocks[node.tagName.toLowerCase()];
-      const nodeChildNodes = [...node.childNodes].filter(
+      const nodeBlock = blocks[updatedNode.tagName.toLowerCase()];
+      const nodeChildNodes = [...updatedNode.childNodes].filter(
         childNode =>
           childNode.nodeName !== "#text" ||
           (childNode.nodeName === "#text" &&
@@ -76,7 +77,13 @@ function deserializeNested(getData, el, block, childNodes, next) {
           next
         );
       }
-      return deserializeNested(getData, node, nodeBlock, nodeChildNodes, next);
+      return deserializeNested(
+        getData,
+        updatedNode,
+        nodeBlock,
+        nodeChildNodes,
+        next
+      );
     })
     .reduce(
       (acc, val) => (Array.isArray(val) ? [...acc, ...val] : [...acc, val]),

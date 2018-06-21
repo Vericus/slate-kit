@@ -2,7 +2,6 @@
 import React, { type Element } from "react";
 import { type Mark } from "slate";
 import tinycolor from "tinycolor2";
-import type { typeOptions } from "./options";
 
 const defaultStyle = {
   textDecoration: "inherit",
@@ -16,7 +15,7 @@ type Props = {
   attributes: ?any
 };
 
-export default function createRenderMark(opt: typeOptions) {
+export default function createRenderMark(opt: any) {
   const { type, data: dataField, styles: styleFields, alpha } = opt;
   return (props: Props) => {
     if (props.mark.type === type) {

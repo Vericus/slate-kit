@@ -1,50 +1,54 @@
 {
-  "version": "0.0.13",
-  "name": "@vericus/slate-kit-highlight-text",
+  "version": "0.0.1",
+  "name": "@vericus/slate-kit-highlight-text-renderer",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
+  "slate-kit": {
+    "type": "module"
+  },
   "files": [
     "dist/",
     "lib/",
     "module/"
   ],
-  "slate-kit": {
-    "type": "module"
-  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-highlight-text.js",
-  "module": "lib/slate-kit-highlight-text.es.js",
-  "umd": "dist/slate-kit-highlight-text.js",
-  "umdMin": "dist/slate-kit-highlight-text.min.js",
+  "main": "lib/slate-kit-highlight-text-renderer.js",
+  "module": "lib/slate-kit-highlight-text-renderer.es.js",
+  "umd": "dist/slate-kit-highlight-text-renderer.js",
+  "umdMin": "dist/slate-kit-highlight-text-renderer.min.js",
   "scripts": {
     "clean": "rm -rf ./dist ./lib ./node_modules ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "umdGlobals": {
-    "immutable": "Immutable",
     "slate": "Slate",
     "is-plain-object": "IsPlainObject"
   },
   "dependencies": {
     "@vericus/slate-kit-plugins-utils": "0.0.8",
-    "@vericus/slate-kit-highlight-text-renderer": "0.0.1",
-    "immutable": "^3.8.2",
     "is-plain-object": "^2.0.4",
+    "prop-types": "^15.6.1",
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
     "@vericus/slate-kit-utils-hyperscript": "0.0.2",
     "expect": "^23.1.0",
     "flow-bin": "0.74.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "slate": ">=0.33.0",
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0",
     "slate": ">=0.32.0"
   },
   "keywords": [

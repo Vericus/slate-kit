@@ -2,17 +2,6 @@
 import { Set } from "immutable";
 import { Mark } from "slate";
 
-const MarksTags = {
-  strong: "bold",
-  b: "bold",
-  em: "italic",
-  i: "italic",
-  u: "underline",
-  s: "strikethrough",
-  strike: "strikethrough",
-  del: "strikethrough"
-};
-
 function getFontStyleMark(fontStyle) {
   switch (fontStyle) {
     case "italic":
@@ -36,14 +25,14 @@ function getTextDecorationMark(textDecoration) {
 function getFontWeightMark(fontWeight) {
   if (fontWeight === "bold") {
     return new Mark({ type: "bold" });
-  } else if (fontWeight > 400) {
+  } else if (parseInt(fontWeight, 10) > 400) {
     return new Mark({ type: "bold" });
   }
   return undefined;
 }
 
-export default function getData(el: Element) {
-  let marks = new Set([]);
+export default function getData(el: HTMLElement) {
+  let marks = new Set();
   const { style } = el;
   if (style) {
     const { fontStyle, textDecoration, fontWeight } = style;

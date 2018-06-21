@@ -7,7 +7,7 @@ import createDefaultRenderNode, {
   Paragraph
 } from "./renderNode";
 
-export function createRenderer(opts: typeOptions, pluginsWrapper: any) {
+export function createRenderer(opts: any, pluginsWrapper: any) {
   return {
     renderNode: createDefaultRenderNode(pluginsWrapper)
   };
