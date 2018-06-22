@@ -8,8 +8,17 @@ import createSchema from "./schemas";
 export default function createPlugin(pluginOptions: typeOptions) {
   const options = Options.create(pluginOptions);
   const changes = createChanges(options);
-  const { renderMark } = Renderer(options);
   const schemas = createSchema();
   const utils = createUtils(options);
-  return { options, changes, utils, renderMark, ...schemas };
+  const plugin = {
+    options,
+    changes,
+    utils,
+    ...schemas
+  };
+  if (!options.externalRenderer) {
+    const { renderMark } = Renderer(options);
+    plugin.renderMark = renderMark;
+  }
+  return plugin;
 }

@@ -7,7 +7,8 @@ const defaultOptions = {
   styles: undefined,
   data: undefined,
   defaultColor: undefined,
-  alpha: 1
+  alpha: 1,
+  externalRenderer: false
 };
 
 export type typeOptions = {
@@ -15,7 +16,8 @@ export type typeOptions = {
   alpha?: number,
   data: string,
   styles: Array<string>,
-  defaultColor: string
+  defaultColor: string,
+  externalRenderer: boolean
 };
 
 class Options extends Record(defaultOptions, "highlight text option") {
@@ -24,6 +26,7 @@ class Options extends Record(defaultOptions, "highlight text option") {
   data: string;
   alpha: number;
   defaultColor: string;
+  externalRenderer: boolean;
 
   static create(attrs: any = {}) {
     if (Options.isOptions(attrs)) return attrs;
