@@ -1,7 +1,7 @@
 {
   "version": "0.0.14",
   "name": "@vericus/slate-kit-basic-typhography",
-  "description": "TODO: fill in this description later",
+  "description": "plugin that provides basic typography functionality to slate",
   "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
@@ -58,6 +58,9 @@
   "keywords": [
     "Vericus",
     "slate",
-    "slate-kit"
+    "slate-kit",
+    "slate-plugin",
+    "editor",
+    "typography"
   ]
 }
