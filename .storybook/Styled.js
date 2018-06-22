@@ -170,8 +170,8 @@ const Styled = styled.div`
     p {
       font-size: ${p => p.theme.typography.paragraph.fontSize};
       font-weight: ${p => p.theme.typography.paragraph.fontWeight};
-      margin-top: ${p => `${p.paragraphSpacing}em`};
-      margin-bottom: ${p => `${p.paragraphSpacing}em`};
+      margin-top: 1em;
+      margin-bottom: 1em;
     }
 
     strong {
