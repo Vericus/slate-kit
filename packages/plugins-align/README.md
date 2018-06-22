@@ -1,6 +1,6 @@
-# @Vericus / Slate Kit Align
+# [@Vericus / Slate Kit Align](https://github.com/Vericus/slate-kit/tree/master/packages/plugins-align)
 
-> TODO: fill in this description later
+> Plugins to provide a way to align blocks on slate
 
 ## Documentation
 
@@ -8,10 +8,27 @@
 title: Slate Kit Align
 -->
 
-"TODO: Write some documentation here."
+[Slate](https://github.com/ianstormtaylor/slate) plugin that provides a way to align blocks for [`slate-kit`](https://github.com/Vericus/slate-kit).
+It accepts a few configurable `options` for what kind of blocks(floating/text) can be aligned and the `dataField` that it use to store the alignment position.
+
+sample options:
+
+```js
+{
+  floatBlocks: [],
+  textBlocks: [
+    "paragraph",
+    "heading-one",
+    "heading-two",
+    "heading-three",
+    "heading-four"
+  ],
+  dataField: "textAlign"
+}
+```
 
 <!-- %enddocs -->
 
 ## License
 
-[MIT](./LICENSE.txt) &copy; [GitHub](https://github.com/)
+[MIT](./LICENSE.txt) &copy; [`slate-kit`](https://github.com/Vericus/slate-kit)

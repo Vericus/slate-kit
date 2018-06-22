@@ -1,7 +1,7 @@
 {
   "version": "0.0.9",
   "name": "@vericus/slate-kit-align",
-  "description": "TODO: fill in this description later",
+  "description": "Plugins to provide a way to align blocks on slate",
   "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
@@ -47,6 +47,9 @@
   "keywords": [
     "Vericus",
     "slate",
-    "slate-kit"
+    "slate-kit",
+    "slate-plugin",
+    "editor",
+    "alignment"
   ]
 }
