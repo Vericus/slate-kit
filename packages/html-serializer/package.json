@@ -1,7 +1,7 @@
 {
   "version": "0.0.4",
   "name": "@vericus/slate-kit-html-serializer",
-  "description": "TODO: fill in this description later",
+  "description": "slate-html-serializer's rules builder for slate-kit style plugins",
   "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
@@ -29,18 +29,20 @@
     "immutable": "Immutable"
   },
   "devDependencies": {
-    "expect": "^23.1.0",
     "flow-bin": "0.74.0",
-    "slate-html-serializer": ">=0.6.0",
-    "slate-simulator": "^0.4.33",
-    "to-camel-case": "^1.0.0"
+    "slate-html-serializer": ">=0.6.0"
   },
   "peerDependencies": {
     "slate-html-serializer": ">=0.6.0"
   },
   "keywords": [
-    "Vericus",
+    "deserialize",
+    "html",
     "slate",
-    "slate-kit"
+    "slate-kit",
+    "serialize",
+    "serializer",
+    "Vericus",
+    "xml"
   ]
 }
