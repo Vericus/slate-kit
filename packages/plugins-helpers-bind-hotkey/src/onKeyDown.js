@@ -14,7 +14,8 @@ function createOnKeyDown(opts: Options) {
   }
   return (event: SyntheticKeyboardEvent<*>, change: Change): void | Change => {
     if (checkHotKey(event)) {
-      return change.call(changeFn);
+      change.call(changeFn);
+      return true;
     }
     return undefined;
   };
