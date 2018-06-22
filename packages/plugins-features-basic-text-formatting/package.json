@@ -1,7 +1,7 @@
 {
   "version": "0.0.15",
   "name": "@vericus/slate-kit-basic-text-formatting",
-  "description": "TODO: fill in this description later",
+  "description": "Plugin that provides `expected` functionality on `strike-through, underlined, bold, italicised` text on slate",
   "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
