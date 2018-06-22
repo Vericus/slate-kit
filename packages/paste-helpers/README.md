@@ -1,6 +1,6 @@
-# @Vericus / Slate Kit Paste Helpers
+# [@Vericus / Slate Kit Paste Helpers](https://github.com/Vericus/slate-kit/tree/master/packages/paste-helpers)
 
-> TODO: fill in this description later
+> Clean pasted HTML from unnecessary tags and styling
 
 ## Documentation
 
@@ -8,10 +8,10 @@
 title: Slate Kit Paste Helpers
 -->
 
-"TODO: Write some documentation here."
+Clean pasted HTML from unnecessary tags and styling
 
 <!-- %enddocs -->
 
 ## License
 
-[MIT](./LICENSE.txt) &copy; [GitHub](https://github.com/)
+[MIT](./LICENSE.txt) &copy; [`slate-kit`](https://github.com/Vericus/slate-kit)
