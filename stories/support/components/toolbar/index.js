@@ -547,6 +547,13 @@ export default class Toolbar extends Component {
       "Background"
     );
   };
+  renderStateLogger = () => {
+    return (
+      <button onMouseDown={e => console.log(this.props.value)}>
+        Log State
+      </button>
+    );
+  };
 
   render() {
     return (
@@ -557,6 +564,7 @@ export default class Toolbar extends Component {
           width: "100%",
           display: "flex",
           justifyContent: "center",
+          zIndex: "99999",
           background: "white"
         }}
       >
@@ -568,6 +576,7 @@ export default class Toolbar extends Component {
         {this.renderTextColor()}
         {this.renderBackgroundColor()}
         {this.renderHistories()}
+        {this.renderStateLogger()}
       </div>
     );
   }
