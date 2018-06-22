@@ -48,6 +48,8 @@
   "keywords": [
     "Vericus",
     "slate",
-    "slate-kit"
+    "slate-kit",
+    "slate-plugin",
+    "hotkeys"
   ]
 }

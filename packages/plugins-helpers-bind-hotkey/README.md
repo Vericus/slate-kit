@@ -1,9 +1,6 @@
 # @Vericus / slate-kit-plugins-hotkey
 
-A [**Slate**](https://github.com/ianstormtaylor/slate) plugin to attach (a) hotkey(s) to slate change.
-
-```js
-```
+a slate helper plugin to associate hotkey(s) to slate change
 
 ## Documentation
 
@@ -11,10 +8,19 @@ A [**Slate**](https://github.com/ianstormtaylor/slate) plugin to attach (a) hotk
 title: <%= title %>
 -->
 
-"TODO: Write some documentation here."
+A [Slate](https://github.com/ianstormtaylor/slate) plugin to attach (a) hotkey(s) to slate change.
+
+sample options:
+
+```js
+{
+  hotkeys: ['ctrl+right', 'ctrl+e'],
+  change: (change) => change.collapseToEnd()
+}
+```
 
 <!-- %enddocs -->
 
 ## License
 
-[MIT](./LICENSE.txt) &copy; [GitHub](https://github.com/)
+[MIT](./LICENSE.txt) &copy; [`slate-kit`](https://github.com/Vericus/slate-kit)
