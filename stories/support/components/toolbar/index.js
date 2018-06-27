@@ -555,17 +555,16 @@ export default class Toolbar extends Component {
     );
   };
 
-  handleInsertImage = (event, input) => {
+  handleClickAddImage = input => {
     event.preventDefault();
     event.stopPropagation();
 
-    var getImagePath = URL.createObjectURL(event.target.files[0]);
-
     const change = this.props.value.change();
-    change.insertText(getImagePath);
+    change.insertBlock({
+      type: "image",
+      isVoid: true
+    });
     this.props.onChange(change);
-
-    input.value = "";
   };
 
   renderInsertImage = () => {
@@ -574,19 +573,9 @@ export default class Toolbar extends Component {
         <IconButton
           icon="Image"
           onMouseDown={() => {
-            this._input.click();
+            this.handleClickAddImage();
           }}
           size="18"
-        />
-        <input
-          type="file"
-          ref={ref => {
-            this._input = ref;
-          }}
-          onChange={e => {
-            this.handleInsertImage(e, this._input);
-          }}
-          hidden
         />
       </div>
     );
