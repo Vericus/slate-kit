@@ -1,0 +1,46 @@
+{
+  "version": "0.0.1",
+  "name": "@vericus/slate-kit-image",
+  "description": "TODO: fill in this description later",
+  "homepage": "https://github.com/Vericus/slate-kit/",
+  "repository": "git://github.com/Vericus/slate-kit.git",
+  "author": "Cadmus",
+  "slate-kit": {
+    "type": "module"
+  },
+  "files": [
+    "dist/",
+    "lib/",
+    "module/"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/slate-kit-image.js",
+  "module": "lib/slate-kit-image.es.js",
+  "umd": "dist/slate-kit-image.js",
+  "umdMin": "dist/slate-kit-image.min.js",
+  "scripts": {
+    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
+    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+  },
+  "umdGlobals": {
+    "immutable": "Immutable",
+    "slate": "Slate"
+  },
+  "devDependencies": {
+    "flow-bin": "0.74.0"
+  },
+  "keywords": [
+    "Vericus",
+    "slate",
+    "slate-kit"
+  ],
+  "dependencies": {
+    "slate-drop-or-paste-images": "^0.8.2"
+  },
+  "peerDependencies": {
+    "react": "^16.4.1"
+  }
+}
