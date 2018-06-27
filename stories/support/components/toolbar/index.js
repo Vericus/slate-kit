@@ -555,6 +555,43 @@ export default class Toolbar extends Component {
     );
   };
 
+  handleInsertImage = (event, input) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    var getImagePath = URL.createObjectURL(event.target.files[0]);
+
+    const change = this.props.value.change();
+    change.insertText(getImagePath);
+    this.props.onChange(change);
+
+    input.value = "";
+  };
+
+  renderInsertImage = () => {
+    return (
+      <div>
+        <IconButton
+          icon="Image"
+          onMouseDown={() => {
+            this._input.click();
+          }}
+          size="18"
+        />
+        <input
+          type="file"
+          ref={ref => {
+            this._input = ref;
+          }}
+          onChange={e => {
+            this.handleInsertImage(e, this._input);
+          }}
+          hidden
+        />
+      </div>
+    );
+  };
+
   render() {
     return (
       <div
@@ -575,6 +612,7 @@ export default class Toolbar extends Component {
         {this.renderMarks()}
         {this.renderTextColor()}
         {this.renderBackgroundColor()}
+        {this.renderInsertImage()}
         {this.renderHistories()}
         {this.renderStateLogger()}
       </div>
