@@ -1,100 +1,147 @@
 import React from "react";
 
-class Image extends React.Component {
-  state = {};
+const buttonStyle = {
+  color: "blue",
+  cursor: "pointer",
+  margin: "2rem"
+};
 
+class Image extends React.Component {
+  state = {
+    errors: ""
+  };
+
+  ///////////////////////// For drag and drop plugin ////////////////////////////
   componentDidMount() {
     const { node } = this.props;
     const { data } = node;
     const file = data.get("file");
-    // console.log(file);
     if (file) this.load(file);
-  }
-
-  componentWillUnmount() {
-    console.log("unmounting...");
   }
 
   load(file) {
     const reader = new FileReader();
-    reader.addEventListener("load", () =>
-      this.setState({ src: reader.result })
-    );
+    reader.addEventListener("load", () => {
+      const url = reader.result;
+      fetch(url)
+        .then(res => res.blob())
+        .then(blob => {
+          const src = URL.createObjectURL(blob);
+          this.setState({ src });
+        });
+    });
     if (file) {
+      // console.log(file);
       reader.readAsDataURL(file);
     }
   }
+  ////////////////////////////////////////////////////////////////////////
 
-  renderPlaceholder = () => {
-    const customStyles = {
-      background: "red"
-      // height: "25rem"
-    };
+  isImageFile = type => {
+    const validImageFormats = ["image/gif", "image/jpeg", "image/png"];
+    return validImageFormats.includes(type);
+  };
+
+  handleInsertImage = (event, input) => {
+    const file = event.target.files[0];
+    if (this.isImageFile(file.type)) {
+      const src = URL.createObjectURL(file);
+      this.setState({ src });
+
+      this.props.editor.change(change => {
+        change.setNodeByKey(this.props.node.key, { data: { src } });
+      });
+    } else {
+      this.setState({ errors: "Uploaded file is not an image" });
+    }
+
+    if (input) {
+      input.value = "";
+    }
+  };
+
+  componentDidUpdate() {
+    console.log(this.props.node);
+  }
+
+  deleteImage = e => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const { node, readOnly, editor } = this.props;
+    const { data } = node;
+    if (!readOnly) {
+      editor.change(change => {
+        change.removeNodeByKey(node.key);
+      });
+    }
+  };
+
+  renderUploadPrompt = () => {
     return (
-      <div style={customStyles}>
-        <img />
-        <button
+      <div>
+        <a
+          style={buttonStyle}
           onClick={() => {
             this._input.click();
           }}
         >
           Upload
-        </button>
-        <button
-          onMouseDown={e => {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const { node, readOnly, editor } = this.props;
-            const { data } = node;
-            if (!readOnly) {
-              editor.change(change => {
-                change.removeNodeByKey(node.key);
-              });
-            }
-          }}
-        >
+        </a>
+        <a style={buttonStyle} onMouseDown={this.deleteImage}>
           Cancel
-        </button>
+        </a>
+        {this.state.errors && this.renderErrors(this.state.errors)}
       </div>
     );
   };
 
-  handleInsertImage = (event, input) => {
-    var src = URL.createObjectURL(event.target.files[0]);
-    this.setState({ src });
-    input.value = "";
+  renderImageTools = () => {
+    return (
+      <div>
+        <a onMouseDown={this.deleteImage} style={buttonStyle}>
+          Delete
+        </a>
+      </div>
+    );
+  };
+
+  renderErrors = (error = "There was an error") => {
+    return (
+      <div>
+        <p>{error}. Please try again</p>
+      </div>
+    );
+  };
+
+  createInput = () => {
+    return (
+      <input
+        type="file"
+        ref={ref => (this._input = ref)}
+        onChange={e => this.handleInsertImage(e)}
+        hidden
+      />
+    );
   };
 
   render() {
     const { attributes } = this.props;
     const { src } = this.state;
     return (
-      <div {...attributes}>
-        {
-          // Hidden input component for uploading documents
-          <input
-            type="file"
-            ref={ref => {
-              this._input = ref;
-            }}
-            onChange={e => {
-              this.handleInsertImage(e);
-            }}
-            hidden
-          />
-        }
-        {// Render component, three states, Placeholder, Loading, Image
-        src ? (
-          <img
-            src={src}
-            onDrag={() => {
-              console.log("dragg");
-            }}
-          />
-        ) : (
-          this.renderPlaceholder()
-        )}
+      <div
+        {...attributes}
+        style={{
+          backgroundColor: !this.state.src && "#f8f8f8",
+          backgroundImage: this.state.src && `url(${this.state.src})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          height: "25rem"
+        }}
+      >
+        {this.createInput()}
+        {!src && this.renderUploadPrompt()}
+        {src && this.renderImageTools()}
       </div>
     );
   }

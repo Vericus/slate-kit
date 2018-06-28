@@ -7,7 +7,6 @@ import schema from "./schemas";
 const dragDropPlugin = InsertImages({
   extensions: ["png"],
   insertImage: (transform, file) => {
-    // console.log(transform, file);
     return transform.insertBlock({
       type: "image",
       isVoid: true,
@@ -18,8 +17,10 @@ const dragDropPlugin = InsertImages({
 
 export default function ImagePlugin(pluginOptions: any, pluginsWrapper: any) {
   return {
-    ...dragDropPlugin,
+    // ...dragDropPlugin,
     schema,
     renderNode
+    // onDrop,
+    // onPaste
   };
 }
