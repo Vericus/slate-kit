@@ -8,7 +8,11 @@ class Image extends React.Component {
     const { data } = node;
     const file = data.get("file");
     // console.log(file);
-    this.load(file);
+    if (file) this.load(file);
+  }
+
+  componentWillUnmount() {
+    console.log("unmounting...");
   }
 
   load(file) {
@@ -24,15 +28,34 @@ class Image extends React.Component {
   renderPlaceholder = () => {
     const customStyles = {
       background: "red"
+      // height: "25rem"
     };
     return (
-      <div
-        style={customStyles}
-        onClick={() => {
-          this._input.click();
-        }}
-      >
-        {this.state.src ? this.state.src : "This is a placeholder"}
+      <div style={customStyles}>
+        <img />
+        <button
+          onClick={() => {
+            this._input.click();
+          }}
+        >
+          Upload
+        </button>
+        <button
+          onMouseDown={e => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const { node, readOnly, editor } = this.props;
+            const { data } = node;
+            if (!readOnly) {
+              editor.change(change => {
+                change.removeNodeByKey(node.key);
+              });
+            }
+          }}
+        >
+          Cancel
+        </button>
       </div>
     );
   };
@@ -47,7 +70,7 @@ class Image extends React.Component {
     const { attributes } = this.props;
     const { src } = this.state;
     return (
-      <div>
+      <div {...attributes}>
         {
           // Hidden input component for uploading documents
           <input
@@ -61,14 +84,12 @@ class Image extends React.Component {
             hidden
           />
         }
-        {// Render component
+        {// Render component, three states, Placeholder, Loading, Image
         src ? (
           <img
-            {...attributes}
             src={src}
-            onDrop={e => {
-              console.log("Drop");
-              e.preventDefault();
+            onDrag={() => {
+              console.log("dragg");
             }}
           />
         ) : (

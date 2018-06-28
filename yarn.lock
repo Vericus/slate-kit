@@ -10313,7 +10313,7 @@ react-treebeard@^2.1.0:
     shallowequal "^0.2.2"
     velocity-react "^1.3.1"
 
-react@>=16.0.0, react@>=16.3.2, react@^16.3.2, react@^16.4.1:
+react@>=16.0.0, react@>=16.3.2, react@^16.3.2:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
   dependencies:
@@ -11367,6 +11367,10 @@ slate-react@*:
 slate-schema-violations@*, slate-schema-violations@^0.1.14:
   version "0.1.14"
   resolved "https://registry.yarnpkg.com/slate-schema-violations/-/slate-schema-violations-0.1.14.tgz#b5e9015cc54922185098b7329b84eca92aefd982"
+
+slate-schema-violations@^0.1.15:
+  version "0.1.15"
+  resolved "https://registry.yarnpkg.com/slate-schema-violations/-/slate-schema-violations-0.1.15.tgz#668c30b556397efe72ff1c82b22a2673814fd61e"
 
 slate-simulator@*, slate-simulator@^0.4.33:
   version "0.4.33"

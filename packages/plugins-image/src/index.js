@@ -1,25 +1,25 @@
 // @flow
 import InsertImages from "slate-drop-or-paste-images";
 import renderNode from "./renderer";
+import createChanges from "./changes";
+import schema from "./schemas";
 
-export default function createPlugin(pluginOptions: any = {}) {
-  let plugins = [
-    InsertImages({
-      extensions: ["png"],
-      insertImage: (transform, file) => {
-        console.log(transform, file);
-        return transform.insertBlock({
-          type: "image",
-          isVoid: true,
-          data: { file }
-        });
-      }
-    }),
-    {
-      renderNode
-    }
-  ];
+const dragDropPlugin = InsertImages({
+  extensions: ["png"],
+  insertImage: (transform, file) => {
+    // console.log(transform, file);
+    return transform.insertBlock({
+      type: "image",
+      isVoid: true,
+      data: { file }
+    });
+  }
+});
+
+export default function ImagePlugin(pluginOptions: any, pluginsWrapper: any) {
   return {
-    plugins
+    ...dragDropPlugin,
+    schema,
+    renderNode
   };
 }

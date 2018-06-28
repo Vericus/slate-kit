@@ -41,6 +41,8 @@
     "slate-drop-or-paste-images": "^0.8.2"
   },
   "peerDependencies": {
-    "react": "^16.4.1"
+    "react": "^16.4.1",
+    "slate": ">=0.32.0",
+    "slate-schema-violations": "^0.1.15"
   }
 }
