@@ -1,41 +1,52 @@
 import React from "react";
 
 const buttonStyle = {
-  color: "blue",
-  cursor: "pointer",
-  margin: "2rem"
+  color: "#767676",
+  paddingTop: "10rem",
+  textAlign: "center",
+  textDecoration: "underline"
+};
+
+const Icon = props => {
+  const size = "2rem";
+  return (
+    <div
+      onMouseDown={props.action}
+      style={{
+        display: "inline-block",
+        height: size,
+        width: size,
+        background: "white",
+        border: "1px solid #767676",
+        borderRadius: size,
+        margin: "0.5rem",
+        cursor: "pointer"
+      }}
+    >
+      <div
+        style={{
+          textAlign: "center",
+          lineHeight: size
+        }}
+      >
+        {props.icon}
+      </div>
+    </div>
+  );
 };
 
 class Image extends React.Component {
-  state = {
-    errors: ""
-  };
+  state = {};
 
-  ///////////////////////// For drag and drop plugin ////////////////////////////
   componentDidMount() {
-    const { node } = this.props;
-    const { data } = node;
-    const file = data.get("file");
-    if (file) this.load(file);
+    const { src } = this.props.node.data;
+    this.setState({ src });
   }
 
-  load(file) {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-      const url = reader.result;
-      fetch(url)
-        .then(res => res.blob())
-        .then(blob => {
-          const src = URL.createObjectURL(blob);
-          this.setState({ src });
-        });
-    });
-    if (file) {
-      // console.log(file);
-      reader.readAsDataURL(file);
-    }
+  componentWillUnmount() {
+    URL.revokeObjectURL(this.state.src);
+    console.log("Revoking blob");
   }
-  ////////////////////////////////////////////////////////////////////////
 
   isImageFile = type => {
     const validImageFormats = ["image/gif", "image/jpeg", "image/png"];
@@ -44,6 +55,7 @@ class Image extends React.Component {
 
   handleInsertImage = (event, input) => {
     const file = event.target.files[0];
+
     if (this.isImageFile(file.type)) {
       const src = URL.createObjectURL(file);
       this.setState({ src });
@@ -60,10 +72,6 @@ class Image extends React.Component {
     }
   };
 
-  componentDidUpdate() {
-    console.log(this.props.node);
-  }
-
   deleteImage = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -79,29 +87,57 @@ class Image extends React.Component {
 
   renderUploadPrompt = () => {
     return (
-      <div>
-        <a
-          style={buttonStyle}
-          onClick={() => {
-            this._input.click();
-          }}
-        >
-          Upload
-        </a>
-        <a style={buttonStyle} onMouseDown={this.deleteImage}>
-          Cancel
-        </a>
+      <div style={buttonStyle}>
+        <div>
+          <a
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              this._input.click();
+            }}
+          >
+            attach an image from your computer
+          </a>
+        </div>
+        <div>
+          <a onMouseDown={this.deleteImage} style={{ cursor: "pointer" }}>
+            cancel
+          </a>
+        </div>
         {this.state.errors && this.renderErrors(this.state.errors)}
       </div>
     );
   };
 
   renderImageTools = () => {
+    const tools = [
+      {
+        name: "delete",
+        action: this.deleteImage,
+        icon: "𝗫"
+      },
+      {
+        name: "else",
+        action: () => {
+          URL.revokeObjectURL(this.state.src);
+          this._input.click();
+        },
+        icon: "⬆"
+      }
+    ];
+
     return (
-      <div>
-        <a onMouseDown={this.deleteImage} style={buttonStyle}>
-          Delete
-        </a>
+      <div
+        style={{
+          background: "rgba(0,0,0,0.75)",
+          display: this.state.hovering ? "flex" : "none",
+          justifyContent: "center",
+          position: "absolute",
+          width: "100%"
+        }}
+      >
+        {tools.map(tool => (
+          <Icon name={tool.name} action={tool.action} icon={tool.icon} />
+        ))}
       </div>
     );
   };
@@ -111,6 +147,20 @@ class Image extends React.Component {
       <div>
         <p>{error}. Please try again</p>
       </div>
+    );
+  };
+
+  renderImage = () => {
+    return (
+      <img
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover"
+        }}
+        onLoad={() => console.log("Image has loaded")}
+        src={this.state.src}
+      />
     );
   };
 
@@ -132,16 +182,16 @@ class Image extends React.Component {
       <div
         {...attributes}
         style={{
-          backgroundColor: !this.state.src && "#f8f8f8",
-          backgroundImage: this.state.src && `url(${this.state.src})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
+          backgroundColor: "#f8f8f8",
           height: "25rem"
         }}
+        onMouseOver={() => this.setState({ hovering: true })}
+        onMouseOut={() => this.setState({ hovering: false })}
       >
         {this.createInput()}
         {!src && this.renderUploadPrompt()}
         {src && this.renderImageTools()}
+        {src && this.renderImage()}
       </div>
     );
   }

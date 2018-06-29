@@ -1,0 +1,25 @@
+  ///////////////////////// For drag and drop plugin ////////////////////////////
+  // componentDidMount() {
+  //   const { node } = this.props;
+  //   const { data } = node;
+  //   const file = data.get("file");
+  //   if (file) this.load(file);
+  // }
+
+  // load(file) {
+  //   const reader = new FileReader();
+  //   reader.addEventListener("load", () => {
+  //     const url = reader.result;
+  //     fetch(url)
+  //       .then(res => res.blob())
+  //       .then(blob => {
+  //         const src = URL.createObjectURL(blob);
+  //         this.setState({ src });
+  //       });
+  //   });
+  //   if (file) {
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
+  ////////////////////////////////////////////////////////////////////////
+  
