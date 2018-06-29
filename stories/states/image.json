@@ -1,0 +1,51 @@
+{
+  "object": "value",
+  "document": {
+    "object": "document",
+    "data": {},
+    "nodes": [
+      {
+        "object": "block",
+        "type": "image",
+        "isVoid": true,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [{ "object": "leaf", "text": "", "marks": [] }]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "object": "leaf",
+                "text":
+                  "Upload an image or press the button to insert a new block.",
+                "marks": [
+                  {
+                    "object": "mark",
+                    "type": "textColor",
+                    "data": { "color": "#0066ff" }
+                  },
+                  {
+                    "object": "mark",
+                    "type": "textBackground",
+                    "data": { "backgroundColor": "#ff00ff" }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

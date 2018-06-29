@@ -5,7 +5,7 @@ import { withKnobs, boolean } from "@storybook/addon-knobs/react";
 import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import Image from "@vericus/slate-kit-image";
-import initialState from "../states/fullText.json";
+import initialState from "../states/image.json";
 import Editor from "../support/components/editor";
 
 const pluginOpts = [
