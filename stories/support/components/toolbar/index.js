@@ -555,7 +555,7 @@ export default class Toolbar extends Component {
     );
   };
 
-  handleClickAddImage = input => {
+  handleClickAddImage = event => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -572,9 +572,7 @@ export default class Toolbar extends Component {
       <div>
         <IconButton
           icon="Image"
-          onMouseDown={() => {
-            this.handleClickAddImage();
-          }}
+          onMouseDown={this.handleClickAddImage}
           size="18"
         />
       </div>
