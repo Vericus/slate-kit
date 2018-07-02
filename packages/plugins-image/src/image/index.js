@@ -3,8 +3,12 @@ import React from "react";
 const buttonStyle = {
   color: "#767676",
   paddingTop: "10rem",
-  textAlign: "center",
-  textDecoration: "underline"
+  textAlign: "center"
+};
+
+const aStyle = {
+  textDecoration: "underline",
+  cursor: "pointer"
 };
 
 const Icon = props => {
@@ -45,18 +49,23 @@ class Image extends React.Component {
 
   componentWillUnmount() {
     URL.revokeObjectURL(this.state.src);
-    console.log("Revoking blob");
   }
 
   isImageFile = type => {
-    const validImageFormats = ["image/gif", "image/jpeg", "image/png"];
+    const validImageFormats = [
+      "image/gif",
+      "image/jpeg",
+      "image/jpg",
+      "image/png"
+    ];
     return validImageFormats.includes(type);
   };
 
   handleInsertImage = (event, input) => {
     const file = event.target.files[0];
+    console.log(file.type);
 
-    if (this.isImageFile(file.type)) {
+    if (file && this.isImageFile(file.type)) {
       const src = URL.createObjectURL(file);
       this.setState({ src });
 
@@ -77,7 +86,6 @@ class Image extends React.Component {
     e.stopPropagation();
 
     const { node, readOnly, editor } = this.props;
-    const { data } = node;
     if (!readOnly) {
       editor.change(change => {
         change.removeNodeByKey(node.key);
@@ -90,7 +98,7 @@ class Image extends React.Component {
       <div style={buttonStyle}>
         <div>
           <a
-            style={{ cursor: "pointer" }}
+            style={aStyle}
             onClick={() => {
               this._input.click();
             }}
@@ -99,7 +107,7 @@ class Image extends React.Component {
           </a>
         </div>
         <div>
-          <a onMouseDown={this.deleteImage} style={{ cursor: "pointer" }}>
+          <a onMouseDown={this.deleteImage} style={aStyle}>
             cancel
           </a>
         </div>
@@ -127,25 +135,34 @@ class Image extends React.Component {
 
     return (
       <div
+        onMouseEnter={() => this.setState({ hovering: true })}
+        onMouseLeave={() => this.setState({ hovering: false })}
         style={{
-          background: "rgba(0,0,0,0.75)",
-          display: this.state.hovering ? "flex" : "none",
+          background: this.state.hovering ? "rgba(0,0,0,0.75)" : "transparent",
+          display: "flex",
           justifyContent: "center",
           position: "absolute",
-          width: "100%"
+          width: "100%",
+          height: "3rem"
         }}
       >
-        {tools.map(tool => (
-          <Icon name={tool.name} action={tool.action} icon={tool.icon} />
-        ))}
+        {this.state.hovering &&
+          tools.map(tool => (
+            <Icon
+              name={tool.name}
+              action={tool.action}
+              icon={tool.icon}
+              key={tool.name}
+            />
+          ))}
       </div>
     );
   };
 
   renderErrors = (error = "There was an error") => {
     return (
-      <div>
-        <p>{error}. Please try again</p>
+      <div style={{ color: "red" }}>
+        <p style={{ textDecoration: "none" }}>{error}. Please try again</p>
       </div>
     );
   };
@@ -160,6 +177,7 @@ class Image extends React.Component {
         }}
         onLoad={() => console.log("Image has loaded")}
         src={this.state.src}
+        draggable="false"
       />
     );
   };
@@ -168,6 +186,7 @@ class Image extends React.Component {
     return (
       <input
         type="file"
+        accept=".gif, .jpeg, .jpg, .png, image/gif, image/jpeg, image/jpg, image/png"
         ref={ref => (this._input = ref)}
         onChange={e => this.handleInsertImage(e)}
         hidden
@@ -185,8 +204,6 @@ class Image extends React.Component {
           backgroundColor: "#f8f8f8",
           height: "25rem"
         }}
-        onMouseOver={() => this.setState({ hovering: true })}
-        onMouseOut={() => this.setState({ hovering: false })}
       >
         {this.createInput()}
         {!src && this.renderUploadPrompt()}

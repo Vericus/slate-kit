@@ -22,5 +22,6 @@ export default function ImagePlugin(pluginOptions: any, pluginsWrapper: any) {
     renderNode
     // onDrop,
     // onPaste
+    // onKeyDown // insert new paragraph with word and select.
   };
 }
