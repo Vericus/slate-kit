@@ -40,7 +40,7 @@ const Icon = props => {
 };
 
 class Image extends React.Component {
-  state = {};
+  state = { loading: true };
 
   componentDidMount() {
     const { src } = this.props.node.data;
@@ -63,15 +63,28 @@ class Image extends React.Component {
 
   handleInsertImage = (event, input) => {
     const file = event.target.files[0];
-    console.log(file.type);
 
     if (file && this.isImageFile(file.type)) {
-      const src = URL.createObjectURL(file);
-      this.setState({ src });
+      const tempSrc = URL.createObjectURL(file);
+      this.setState({ src: tempSrc, loading: true });
 
-      this.props.editor.change(change => {
-        change.setNodeByKey(this.props.node.key, { data: { src } });
-      });
+      let data = new FormData();
+      data.append("file", file);
+
+      fetch("http://localhost:4000/api/upload", {
+        method: "POST",
+        body: data,
+        "Content-Type": file.type
+      })
+        .then(resp => {
+          return resp.text();
+        })
+        .then(persistUrl => {
+          this.setState({ src: persistUrl, loading: false });
+          this.props.editor.change(change => {
+            change.setNodeByKey(this.props.node.key, { data: { persistUrl } });
+          });
+        });
     } else {
       this.setState({ errors: "Uploaded file is not an image" });
     }
@@ -124,7 +137,7 @@ class Image extends React.Component {
         icon: "𝗫"
       },
       {
-        name: "else",
+        name: "upload",
         action: () => {
           URL.revokeObjectURL(this.state.src);
           this._input.click();
@@ -173,9 +186,10 @@ class Image extends React.Component {
         style={{
           width: "100%",
           height: "100%",
-          objectFit: "cover"
+          objectFit: "cover",
+          opacity: this.state.loading && 0.5
         }}
-        onLoad={() => console.log("Image has loaded")}
+        onLoad={() => this.setState({ loading: false })}
         src={this.state.src}
         draggable="false"
       />
