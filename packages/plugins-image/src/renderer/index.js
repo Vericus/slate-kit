@@ -1,10 +1,14 @@
 import React from "react";
 import Image from "../image";
 
-const renderNode = (props: Props) => {
-  switch (props.node.type) {
-    case "image":
-      return <Image {...props} />;
-  }
+const createRenderNode = (pluginOptions, pluginsWrapper) => {
+  return props => {
+    const newProps = pluginsWrapper.getProps(props);
+    switch (newProps.node.type) {
+      case "image":
+        return <Image {...newProps} options={pluginOptions} />;
+    }
+  };
 };
-export default renderNode;
+
+export default createRenderNode;

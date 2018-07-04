@@ -11,22 +11,50 @@ const aStyle = {
   cursor: "pointer"
 };
 
-const Icon = props => {
+const toolBarStyles = hovering => {
+  return {
+    background: "rgba(0,0,0,0.75)",
+    display: "flex",
+    justifyContent: "center",
+    opacity: hovering ? 1 : 0,
+    transition: "opacity 0.3s"
+  };
+};
+
+const imgStyles = ({ loading }) => {
+  return {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    opacity: loading && 0.5
+  };
+};
+
+const defaultComponentStyle = {
+  backgroundColor: "#f8f8f8",
+  height: "25rem"
+};
+
+const iconStyles = ({ size }) => {
+  return {
+    display: "inline-block",
+    height: size,
+    width: size,
+    background: "white",
+    border: "1px solid #767676",
+    borderRadius: size,
+    margin: "0.5rem",
+    cursor: "pointer",
+    background: "black",
+    boxShadow: "0px 0px 5px 0px white",
+    color: "white"
+  };
+};
+
+const DefaultToolbarIcon = props => {
   const size = "2rem";
   return (
-    <div
-      onMouseDown={props.action}
-      style={{
-        display: "inline-block",
-        height: size,
-        width: size,
-        background: "white",
-        border: "1px solid #767676",
-        borderRadius: size,
-        margin: "0.5rem",
-        cursor: "pointer"
-      }}
-    >
+    <div onMouseDown={props.action} style={iconStyles({ size })}>
       <div
         style={{
           textAlign: "center",
@@ -34,6 +62,42 @@ const Icon = props => {
         }}
       >
         {props.icon}
+      </div>
+    </div>
+  );
+};
+
+const defaultToolbar = ({ hovering, loading }, tools) => {
+  return (
+    <div style={toolBarStyles(hovering)}>
+      {hovering &&
+        tools.map(
+          tool =>
+            (tool.always || !loading) && (
+              <DefaultToolbarIcon
+                name={tool.name}
+                action={tool.action}
+                icon={tool.icon}
+                key={tool.name}
+              />
+            )
+        )}
+    </div>
+  );
+};
+
+const defaultRenderSelect = (chooseFile, handleDeleteImage) => {
+  return (
+    <div style={buttonStyle}>
+      <div>
+        <a style={aStyle} onClick={chooseFile}>
+          attach an image from your computer
+        </a>
+      </div>
+      <div>
+        <a onMouseDown={handleDeleteImage} style={aStyle}>
+          cancel
+        </a>
       </div>
     </div>
   );
@@ -51,47 +115,62 @@ class Image extends React.Component {
     URL.revokeObjectURL(this.state.src);
   }
 
-  isImageFile = type => {
+  invalidImageFile = file => {
     const validImageFormats = [
       "image/gif",
       "image/jpeg",
       "image/jpg",
       "image/png"
     ];
-    return validImageFormats.includes(type);
+    this.setState({ errors: "Uploaded file is not an image" });
+    return !validImageFormats.includes(file.type);
+  };
+
+  exceedsMaxFileSize = file => {
+    const defaultMaxFileSize = 10485760;
+    let maxFileSize = this.props.options.maxFileSize || defaultMaxFileSize;
+    if (file.size > maxFileSize) {
+      this.setState({
+        errors: `The file exceeded the maximum size of ${(
+          maxFileSize / 1048576
+        ).toFixed(1)} MB`
+      });
+      return true;
+    }
+    return false;
+  };
+
+  resetForm = input => {
+    if (input) {
+      input.value = "";
+    }
+  };
+
+  updateSrc = newUrl => {
+    this.setState({ src: newUrl, loading: false });
+    this.props.editor.change(change => {
+      change.setNodeByKey(this.props.node.key, { data: { newUrl } });
+    });
   };
 
   handleInsertImage = (event, input) => {
     const file = event.target.files[0];
 
-    if (file && this.isImageFile(file.type)) {
-      const tempSrc = URL.createObjectURL(file);
-      this.setState({ src: tempSrc, loading: true });
+    if (!file) return;
+    if (this.exceedsMaxFileSize(file)) return;
+    if (this.invalidImageFile(file)) return;
 
-      let data = new FormData();
-      data.append("file", file);
+    const tempSrc = URL.createObjectURL(file);
+    this.setState({ src: tempSrc, loading: true });
 
-      fetch("http://localhost:4000/api/upload", {
-        method: "POST",
-        body: data,
-        "Content-Type": file.type
-      })
-        .then(resp => {
-          return resp.text();
-        })
-        .then(persistUrl => {
-          this.setState({ src: persistUrl, loading: false });
-          this.props.editor.change(change => {
-            change.setNodeByKey(this.props.node.key, { data: { persistUrl } });
-          });
-        });
+    const { uploadImage } = this.props.options;
+    if (uploadImage) {
+      uploadImage(file, this.updateSrc);
     } else {
-      this.setState({ errors: "Uploaded file is not an image" });
+      this.setState({ loading: false });
     }
 
-    if (input) {
-      input.value = "";
-    }
+    this.resetForm(input);
   };
 
   deleteImage = e => {
@@ -106,38 +185,32 @@ class Image extends React.Component {
     }
   };
 
-  renderUploadPrompt = () => {
+  renderSelect = () => {
+    const { renderSelect, renderErrors } = this.props.options;
+    const selectFile = () => {
+      this._input.click();
+    };
     return (
-      <div style={buttonStyle}>
-        <div>
-          <a
-            style={aStyle}
-            onClick={() => {
-              this._input.click();
-            }}
-          >
-            attach an image from your computer
-          </a>
-        </div>
-        <div>
-          <a onMouseDown={this.deleteImage} style={aStyle}>
-            cancel
-          </a>
-        </div>
-        {this.state.errors && this.renderErrors(this.state.errors)}
+      <div>
+        {(renderSelect && renderSelect(selectFile, this.deleteImage)) ||
+          defaultRenderSelect(selectFile, this.deleteImage)}
+        {this.state.errors &&
+          ((renderErrors && renderErrors(this.state.errors)) ||
+            this.renderErrors(this.state.errors))}
       </div>
     );
   };
 
-  renderImageTools = () => {
+  renderToolbar = () => {
     const tools = [
       {
         name: "delete",
         action: this.deleteImage,
-        icon: "𝗫"
+        icon: "𝗫",
+        always: true
       },
       {
-        name: "upload",
+        name: "re-upload",
         action: () => {
           URL.revokeObjectURL(this.state.src);
           this._input.click();
@@ -145,29 +218,11 @@ class Image extends React.Component {
         icon: "⬆"
       }
     ];
-
+    const { renderToolbar } = this.props.options;
     return (
-      <div
-        onMouseEnter={() => this.setState({ hovering: true })}
-        onMouseLeave={() => this.setState({ hovering: false })}
-        style={{
-          background: this.state.hovering ? "rgba(0,0,0,0.75)" : "transparent",
-          display: "flex",
-          justifyContent: "center",
-          position: "absolute",
-          width: "100%",
-          height: "3rem"
-        }}
-      >
-        {this.state.hovering &&
-          tools.map(tool => (
-            <Icon
-              name={tool.name}
-              action={tool.action}
-              icon={tool.icon}
-              key={tool.name}
-            />
-          ))}
+      <div style={{ position: "absolute", width: "100%", zIndex: 1 }}>
+        {(renderToolbar && renderToolbar(this.state, tools)) ||
+          defaultToolbar(this.state, tools)}
       </div>
     );
   };
@@ -175,7 +230,7 @@ class Image extends React.Component {
   renderErrors = (error = "There was an error") => {
     return (
       <div style={{ color: "red" }}>
-        <p style={{ textDecoration: "none" }}>{error}. Please try again</p>
+        <p style={{ textDecoration: "none" }}>{error}. Please try again.</p>
       </div>
     );
   };
@@ -183,13 +238,12 @@ class Image extends React.Component {
   renderImage = () => {
     return (
       <img
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          opacity: this.state.loading && 0.5
+        style={imgStyles(this.state)}
+        onLoad={() => {
+          if (!this.state.src.includes("blob")) {
+            this.setState({ loading: false });
+          }
         }}
-        onLoad={() => this.setState({ loading: false })}
         src={this.state.src}
         draggable="false"
       />
@@ -214,14 +268,13 @@ class Image extends React.Component {
     return (
       <div
         {...attributes}
-        style={{
-          backgroundColor: "#f8f8f8",
-          height: "25rem"
-        }}
+        style={this.props.options.style || defaultComponentStyle}
+        onMouseEnter={() => this.setState({ hovering: true })}
+        onMouseLeave={() => this.setState({ hovering: false })}
       >
         {this.createInput()}
-        {!src && this.renderUploadPrompt()}
-        {src && this.renderImageTools()}
+        {!src && this.renderSelect()}
+        {src && this.renderToolbar()}
         {src && this.renderImage()}
       </div>
     );
