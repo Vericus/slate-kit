@@ -573,6 +573,7 @@ export default class Toolbar extends Component {
         <IconButton
           icon="Image"
           onMouseDown={this.handleClickAddImage}
+          disabled={this.props.isReadOnly}
           size="18"
         />
       </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "../image";
+import Image from "../components/Image";
 
 const createRenderNode = (pluginOptions, pluginsWrapper) => {
   return props => {
