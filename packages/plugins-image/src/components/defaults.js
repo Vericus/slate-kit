@@ -1,10 +1,5 @@
 import React from "react";
 
-export const defaultComponentStyle = {
-  backgroundColor: "#f8f8f8",
-  height: "25rem"
-};
-
 const buttonStyle = {
   color: "#767676",
   paddingTop: "10rem",
@@ -16,12 +11,12 @@ const aStyle = {
   cursor: "pointer"
 };
 
-const toolBarStyles = hovering => {
+const toolBarStyles = selected => {
   return {
-    background: "rgba(0,0,0,0.75)",
+    background: "rgba(0,0,0,0.5)", // todo: "linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0));",
     display: "flex",
     justifyContent: "center",
-    opacity: hovering ? 1 : 0,
+    opacity: selected ? 1 : 0,
     transition: "opacity 0.3s"
   };
 };
@@ -44,6 +39,10 @@ const iconStyles = ({ size }) => {
 
 const DefaultToolbarIcon = props => {
   const size = "2rem";
+  const iconMap = {
+    delete: "␡",
+    "re-upload": "⬆"
+  };
   return (
     <div onMouseDown={props.action} style={iconStyles({ size })}>
       <div
@@ -52,23 +51,22 @@ const DefaultToolbarIcon = props => {
           lineHeight: size
         }}
       >
-        {props.icon}
+        {iconMap[props.name]}
       </div>
     </div>
   );
 };
 
-export const DefaultRenderToolbar = ({ hovering, loading }, tools) => {
+export const DefaultRenderToolbar = ({ selected, loading }, tools) => {
   return (
-    <div style={toolBarStyles(hovering)}>
-      {hovering &&
+    <div style={toolBarStyles(selected)}>
+      {selected &&
         tools.map(
           tool =>
             (tool.always || !loading) && (
               <DefaultToolbarIcon
                 name={tool.name}
                 action={tool.action}
-                icon={tool.icon}
                 key={tool.name}
               />
             )

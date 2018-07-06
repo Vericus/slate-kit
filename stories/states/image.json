@@ -6,9 +6,41 @@
     "nodes": [
       {
         "object": "block",
+        "type": "paragraph",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "object": "leaf",
+                "text": "Image loaded from data:",
+                "marks": [
+                  {
+                    "object": "mark",
+                    "type": "textColor",
+                    "data": { "color": "#0066ff" }
+                  },
+                  {
+                    "object": "mark",
+                    "type": "textBackground",
+                    "data": { "backgroundColor": "#ff00ff" }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
         "type": "image",
         "isVoid": true,
-        "data": {},
+        "data": {
+          "src":
+            "https://images.unsplash.com/photo-1530726856676-e6c684e01ad3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=68b2cdb44adb94d729145483805d692a&auto=format&fit=crop&w=2378&q=80"
+        },
         "nodes": [
           {
             "object": "text",
@@ -43,6 +75,18 @@
                 ]
               }
             ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "image",
+        "isVoid": true,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [{ "object": "leaf", "text": "", "marks": [] }]
           }
         ]
       }
