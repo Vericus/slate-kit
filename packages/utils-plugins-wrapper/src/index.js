@@ -260,6 +260,11 @@ export default class PluginsWrapper {
             {
               deserialize(el, next) {
                 if (el.tagName.toLowerCase() !== "div") return undefined;
+                if (
+                  !el.textContent ||
+                  (el.textContent && el.textContent !== "")
+                )
+                  return undefined;
                 const { data, marks } = getData(el);
                 return {
                   object: "block",
