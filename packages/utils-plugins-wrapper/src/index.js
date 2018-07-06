@@ -298,6 +298,11 @@ export default class PluginsWrapper {
                   return undefined;
                 if (el.firstChild && el.firstChild.nodeName === "#text")
                   return undefined;
+                if (
+                  !el.textContent ||
+                  (el.textContent && el.textContent !== "")
+                )
+                  return undefined;
                 const { data, marks } = getData(el);
                 return {
                   object: "block",
