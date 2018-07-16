@@ -1,32 +1,26 @@
 // @flow
-import InsertImages from "slate-drop-or-paste-images";
 import createRenderNode from "./renderer";
 import schema from "./schemas";
-
-/**
-  Integration with Drap and drop images
-
-const dragDropPlugin = InsertImages({
-  extensions: ["png"],
-  insertImage: (transform, file) => {
-    return transform.insertBlock({
-      type: "image",
-      isVoid: true,
-      data: { file }
-    });
-  }
-});
-*/
 
 export default function ImagePlugin(pluginOptions, pluginsWrapper) {
   const renderNode = createRenderNode(pluginOptions, pluginsWrapper);
 
   return {
-    // ...dragDropPlugin,
     schema,
-    renderNode
-    // onDrop,
-    // onPaste
+    renderNode,
+    onPaste: (event, change) => {
+      // TODO: verify clipboard type == image, allow file paste
+      const { items } = event.clipboardData;
+      for (let i = 0; i < items.length; i += 1) {
+        const item = items[i];
+        const blobUrl = URL.createObjectURL(item.getAsFile());
+        change.insertBlock({
+          type: "image",
+          isVoid: true,
+          data: { src: blobUrl }
+        });
+      }
+    }
     // onKeyDown // TODO: insert new paragraph when enter.
   };
 }

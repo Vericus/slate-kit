@@ -6,7 +6,7 @@ import {
   DefaultRenderError
 } from "./imageRendererHelper.js";
 
-class CadmusImageRenderer extends React.Component {
+class CustomImageRenderer extends React.Component {
   renderSelect = () => {
     const { actions } = this.props;
     const { selectFile, deleteImage } = actions;
@@ -67,7 +67,6 @@ class CadmusImageRenderer extends React.Component {
             }
           }}
           src={src}
-          draggable="false"
         />
       )
     );
@@ -89,4 +88,4 @@ class CadmusImageRenderer extends React.Component {
   }
 }
 
-export default CadmusImageRenderer;
+export default CustomImageRenderer;

@@ -8,13 +8,13 @@ import Image from "@vericus/slate-kit-image";
 import initialState from "../states/image.json";
 import Editor from "../support/components/editor";
 
-import NewImageRenderer from "../../packages/plugins-image/src/cadmus-components/CadmusImageRenderer";
-import imageUpload from "../../packages/plugins-image/src/cadmus-components/imageUpload";
+import CustomImageRenderer from "../support/components/image/CustomImageRenderer";
+import imageUpload from "../support/components/image/imageUpload";
 
 const customOptions = {
-  // renderer: NewImageRenderer,
-  // maxFileSize: 1000000,
-  // uploadImage: imageUpload
+  renderer: CustomImageRenderer,
+  maxFileSize: 5000000,
+  uploadImage: imageUpload
 };
 
 const pluginOpts = [

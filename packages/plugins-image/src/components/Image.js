@@ -1,10 +1,10 @@
 import React from "react";
+import propTypes from "prop-types";
 import DefaultImageRenderer from "./DefaultImageRenderer";
 
-const bytesToMb = bytes => {
-  return (bytes / 1048576).toFixed(1);
-};
+const bytesToMb = bytes => (bytes / 1048576).toFixed(1);
 
+/* eslint no-param-reassign: ["error", { "props": false }] */
 const resetForm = input => {
   if (input) {
     input.value = "";
@@ -16,10 +16,37 @@ class Image extends React.Component {
     super(props);
     const src = props.node.data.get("src");
     this.state = { src, loading: false, error: undefined };
+    this.attemptBlobUpload();
   }
 
   componentWillUnmount() {
-    URL.revokeObjectURL(this.state.src);
+    // Do not revoke blob on dismount in case of drag and drop
+    // URL.revokeObjectURL(this.state.src);
+  }
+
+  attemptBlobUpload() {
+    const { src } = this.state;
+    if (src && src.includes("blob")) {
+      fetch(src)
+        .then(resp => resp.blob())
+        .then(blob => {
+          const file = new File([blob], `clipboard.png`);
+          this.attemptUpload(file);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+  }
+
+  attemptUpload(file) {
+    this.setState({ loading: true });
+    const { uploadImage } = this.props.options;
+    if (uploadImage) {
+      uploadImage(file, this.updateSrc, this.updateError);
+    } else {
+      this.setState({ loading: false });
+    }
   }
 
   updateError = error => {
@@ -27,7 +54,7 @@ class Image extends React.Component {
   };
 
   updateSrc = (src = "") => {
-    this.setState({ src, loading: false });
+    this.setState({ src, loading: false, error: undefined });
     this.props.editor.change(change => {
       change.setNodeByKey(this.props.node.key, { data: { src } });
     });
@@ -53,7 +80,7 @@ class Image extends React.Component {
 
   exceedsMaxFileSize = file => {
     const defaultMaxFileSize = 10485760;
-    let maxFileSize = this.props.options.maxFileSize || defaultMaxFileSize;
+    const maxFileSize = this.props.options.maxFileSize || defaultMaxFileSize;
     if (file.size > maxFileSize) {
       this.updateError(
         `The file exceeded the maximum size of ${bytesToMb(maxFileSize)} MB`
@@ -69,14 +96,9 @@ class Image extends React.Component {
       return;
 
     const src = URL.createObjectURL(file);
-    this.setState({ src, loading: true, error: undefined });
+    this.updateSrc(src);
 
-    const { uploadImage } = this.props.options;
-    if (uploadImage) {
-      uploadImage(file, this.updateSrc, this.updateError);
-    } else {
-      this.setState({ loading: false });
-    }
+    this.attemptUpload(file);
 
     resetForm(input);
   };
@@ -96,25 +118,25 @@ class Image extends React.Component {
   selectFile = () => {
     const { src } = this.state;
     if (src) URL.revokeObjectURL(src);
-    this._input.click();
+    this.input.click();
   };
 
-  createInput = () => {
-    return (
-      <input
-        type="file"
-        accept=".gif, .jpeg, .jpg, .png, image/gif, image/jpeg, image/jpg, image/png"
-        ref={ref => (this._input = ref)}
-        onChange={e => this.handleInsertImage(e)}
-        hidden
-      />
-    );
-  };
+  createInput = () => (
+    <input
+      type="file"
+      accept=".gif, .jpeg, .jpg, .png, image/gif, image/jpeg, image/jpg, image/png"
+      ref={ref => {
+        this.input = ref;
+      }}
+      onChange={e => this.handleInsertImage(e)}
+      hidden
+    />
+  );
 
   render() {
-    const { selectFile, deleteImage } = this;
+    const { selectFile, deleteImage, updateLoading, updateError } = this;
     const { attributes, readOnly, editor, isSelected, options } = this.props;
-    const { src } = this.state;
+    const { src, loading, error } = this.state;
     const isReadOnly = readOnly || editor.props.isReadOnly;
     const ImageRenderer = options.renderer || DefaultImageRenderer;
     return (
@@ -124,15 +146,32 @@ class Image extends React.Component {
           actions={{ selectFile, deleteImage }}
           isReadOnly={isReadOnly}
           isSelected={isSelected}
-          src={this.state.src}
-          loading={this.state.loading}
-          error={this.state.error}
-          updateLoading={this.updateLoading}
-          updateError={this.updateError}
+          src={src}
+          loading={loading}
+          error={error}
+          updateLoading={updateLoading}
+          updateError={updateError}
         />
       </div>
     );
   }
 }
+
+Image.propTypes = {
+  node: propTypes.shape({
+    data: propTypes.isRequired,
+    key: propTypes.string.isRequired
+  }).isRequired,
+  options: propTypes.shape({
+    uploadImage: propTypes.func.isRequired,
+    maxFileSize: propTypes.number.isRequired
+  }).isRequired,
+  editor: propTypes.shape({
+    change: propTypes.func.isRequired
+  }).isRequired,
+  attributes: propTypes.shape({}).isRequired,
+  readOnly: propTypes.bool.isRequired,
+  isSelected: propTypes.bool.isRequired
+};
 
 export default Image;

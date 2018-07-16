@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 class DefaultImageRenderer extends React.Component {
   renderToolbar = () => {
@@ -44,16 +44,14 @@ class DefaultImageRenderer extends React.Component {
     );
   };
 
-  renderImage = () => {
-    return (
-      this.props.src && (
-        <img
-          src={this.props.src}
-          style={{ objectFit: "cover", height: "25rem", width: "100%" }}
-        />
-      )
+  renderImage = () =>
+    this.props.src && (
+      <img
+        src={this.props.src}
+        style={{ objectFit: "cover", height: "25rem", width: "100%" }}
+        alt="main"
+      />
     );
-  };
 
   render() {
     return (
@@ -73,18 +71,16 @@ class DefaultImageRenderer extends React.Component {
   }
 }
 
-DefaultImageRenderer.PropTypes = {
-  actions: PropTypes.shape({
-    selectFile: PropTypes.object,
-    deleteImage: PropTypes.object
-  }),
-  isReadOnly: PropTypes.boolean,
-  isSelected: PropTypes.boolean,
-  src: PropTypes.string,
-  loading: PropTypes.boolean,
-  error: PropTypes.boolean,
-  updateLoading: PropTypes.object,
-  updateError: PropTypes.object
+DefaultImageRenderer.propTypes = {
+  actions: propTypes.shape({
+    selectFile: propTypes.func.isRequired,
+    deleteImage: propTypes.func.isRequired
+  }).isRequired,
+  isReadOnly: propTypes.bool.isRequired,
+  isSelected: propTypes.bool.isRequired,
+  src: propTypes.string.isRequired,
+  loading: propTypes.bool.isRequired,
+  error: propTypes.bool.isRequired
 };
 
 export default DefaultImageRenderer;
