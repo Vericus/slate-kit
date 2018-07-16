@@ -15,7 +15,8 @@
             "leaves": [
               {
                 "object": "leaf",
-                "text": "Image loaded from data:",
+                "text":
+                  "Example of persistent image loaded from a static URL, stored in the data property of the node:",
                 "marks": [
                   {
                     "object": "mark",

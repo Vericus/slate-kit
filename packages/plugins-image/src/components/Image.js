@@ -1,6 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 import DefaultImageRenderer from "./DefaultImageRenderer";
+import validImageFormats from "../static/validImageFormats";
 
 const bytesToMb = bytes => (bytes / 1048576).toFixed(1);
 
@@ -32,9 +33,6 @@ class Image extends React.Component {
         .then(blob => {
           const file = new File([blob], `clipboard.png`);
           this.attemptUpload(file);
-        })
-        .catch(e => {
-          console.log(e);
         });
     }
   }
@@ -65,12 +63,6 @@ class Image extends React.Component {
   };
 
   invalidImageFile = file => {
-    const validImageFormats = [
-      "image/gif",
-      "image/jpeg",
-      "image/jpg",
-      "image/png"
-    ];
     if (!validImageFormats.includes(file.type)) {
       this.updateError("Uploaded file is not an image");
       return true;
@@ -128,7 +120,7 @@ class Image extends React.Component {
       ref={ref => {
         this.input = ref;
       }}
-      onChange={e => this.handleInsertImage(e)}
+      onChange={e => this.handleInsertImage(e, this.input)}
       hidden
     />
   );
@@ -169,7 +161,7 @@ Image.propTypes = {
   editor: propTypes.shape({
     change: propTypes.func.isRequired
   }).isRequired,
-  attributes: propTypes.shape({}).isRequired,
+  attributes: propTypes.isRequired,
   readOnly: propTypes.bool.isRequired,
   isSelected: propTypes.bool.isRequired
 };

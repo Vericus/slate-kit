@@ -12,9 +12,9 @@ import CustomImageRenderer from "../support/components/image/CustomImageRenderer
 import imageUpload from "../support/components/image/imageUpload";
 
 const customOptions = {
-  renderer: CustomImageRenderer,
-  maxFileSize: 5000000,
-  uploadImage: imageUpload
+  renderer: CustomImageRenderer
+  // maxFileSize: 5000000,
+  // uploadImage: imageUpload
 };
 
 const pluginOpts = [

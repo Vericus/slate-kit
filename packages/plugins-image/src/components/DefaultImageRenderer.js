@@ -53,6 +53,20 @@ class DefaultImageRenderer extends React.Component {
       />
     );
 
+  renderLoading = () =>
+    this.props.loading && (
+      <div
+        style={{
+          position: "absolute",
+          bottom: "50%",
+          left: "50%",
+          background: "white"
+        }}
+      >
+        Loading
+      </div>
+    );
+
   render() {
     return (
       <div
@@ -65,6 +79,7 @@ class DefaultImageRenderer extends React.Component {
             {this.renderError()}
           </div>
         )}
+        {this.renderLoading()}
         {this.renderImage()}
       </div>
     );
