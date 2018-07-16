@@ -1,58 +1,65 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-import {
-  DefaultRenderSelect,
-  DefaultRenderToolbar,
-  DefaultRenderError
-} from "./defaults";
-
-// default
 class DefaultImageRenderer extends React.Component {
+  renderToolbar = () => {
+    const { isSelected, src, loading, actions } = this.props;
+    const { deleteImage, selectFile } = actions;
+    return (
+      isSelected &&
+      src && (
+        <div style={{ position: "absolute" }}>
+          {!loading && <button onMouseDown={selectFile}>Re-Upload</button>}
+          <button onMouseDown={deleteImage}>Delete</button>
+        </div>
+      )
+    );
+  };
+
   renderSelect = () => {
-    const { actions } = this.props;
-    const { selectFile, deleteImage } = actions;
+    const { selectFile, deleteImage } = this.props.actions;
     return (
       !this.props.src && (
-        <div>{DefaultRenderSelect(selectFile, deleteImage)}</div>
+        <div>
+          <button onMouseDown={selectFile}>Select File</button>
+          <button onMouseDown={deleteImage}>Delete</button>
+        </div>
       )
     );
   };
 
   renderError = () => {
+    const { error } = this.props;
     return (
-      <div style={{ position: "absolute", width: "100%" }}>
-        {this.props.error && DefaultRenderError(this.props.error)}
+      <div
+        style={{
+          backgroundColor: "red",
+          color: "white",
+          position: "absolute",
+          bottom: "0"
+        }}
+      >
+        {error}
       </div>
     );
   };
 
-  renderToolbar = () => {
-    const { src, loading, actions } = this.props;
-    const { selectFile, deleteImage } = actions;
-    const selected = this.props.isSelected;
-    const tools = [
-      {
-        name: "delete",
-        action: deleteImage,
-        always: true
-      },
-      {
-        name: "re-upload",
-        action: selectFile
-      }
-    ];
+  renderImage = () => {
     return (
-      src && (
-        <div style={{ position: "absolute", width: "100%", zIndex: 1 }}>
-          {DefaultRenderToolbar({ selected, loading }, tools)}
-        </div>
+      this.props.src && (
+        <img
+          src={this.props.src}
+          style={{ objectFit: "cover", height: "25rem", width: "100%" }}
+        />
       )
     );
   };
 
   render() {
     return (
-      <div>
+      <div
+        style={{ height: "25rem", background: "#f7f7f7", position: "relative" }}
+      >
         {!this.props.isReadOnly && (
           <div>
             {this.renderToolbar()}
@@ -60,9 +67,24 @@ class DefaultImageRenderer extends React.Component {
             {this.renderError()}
           </div>
         )}
+        {this.renderImage()}
       </div>
     );
   }
 }
+
+DefaultImageRenderer.PropTypes = {
+  actions: PropTypes.shape({
+    selectFile: PropTypes.object,
+    deleteImage: PropTypes.object
+  }),
+  isReadOnly: PropTypes.boolean,
+  isSelected: PropTypes.boolean,
+  src: PropTypes.string,
+  loading: PropTypes.boolean,
+  error: PropTypes.boolean,
+  updateLoading: PropTypes.object,
+  updateError: PropTypes.object
+};
 
 export default DefaultImageRenderer;

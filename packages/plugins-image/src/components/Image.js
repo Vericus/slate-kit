@@ -11,28 +11,18 @@ const resetForm = input => {
   }
 };
 
-const imageModeStyles = {
-  fit: {},
-  cover: {
-    backgroundColor: "#f8f8f8",
-    height: "25rem"
-  },
-  original: {}
-};
-
 class Image extends React.Component {
-  state = { loading: true, src: undefined, error: undefined, mode: "cover" };
-
-  componentDidMount() {
-    const src = this.props.node.data.get("src");
-    this.setState({ src });
+  constructor(props) {
+    super(props);
+    const src = props.node.data.get("src");
+    this.state = { src, loading: false, error: undefined };
   }
 
   componentWillUnmount() {
     URL.revokeObjectURL(this.state.src);
   }
 
-  setError = error => {
+  updateError = error => {
     this.setState({ error });
   };
 
@@ -43,6 +33,10 @@ class Image extends React.Component {
     });
   };
 
+  updateLoading = state => {
+    this.setState({ loading: state });
+  };
+
   invalidImageFile = file => {
     const validImageFormats = [
       "image/gif",
@@ -51,7 +45,7 @@ class Image extends React.Component {
       "image/png"
     ];
     if (!validImageFormats.includes(file.type)) {
-      this.setError("Uploaded file is not an image");
+      this.updateError("Uploaded file is not an image");
       return true;
     }
     return false;
@@ -61,7 +55,7 @@ class Image extends React.Component {
     const defaultMaxFileSize = 10485760;
     let maxFileSize = this.props.options.maxFileSize || defaultMaxFileSize;
     if (file.size > maxFileSize) {
-      this.setError(
+      this.updateError(
         `The file exceeded the maximum size of ${bytesToMb(maxFileSize)} MB`
       );
       return true;
@@ -79,7 +73,7 @@ class Image extends React.Component {
 
     const { uploadImage } = this.props.options;
     if (uploadImage) {
-      uploadImage(file, this.updateSrc, this.setError);
+      uploadImage(file, this.updateSrc, this.updateError);
     } else {
       this.setState({ loading: false });
     }
@@ -117,50 +111,25 @@ class Image extends React.Component {
     );
   };
 
-  renderImage = () => {
-    const { src } = this.state;
-    return (
-      src && (
-        <img
-          style={{
-            cursor: "pointer",
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: this.state.loading && 0.5
-          }}
-          onLoad={() => {
-            if (!src.includes("blob")) {
-              this.setState({ loading: false });
-            }
-          }}
-          src={src}
-          draggable="false"
-        />
-      )
-    );
-  };
-
   render() {
+    const { selectFile, deleteImage } = this;
     const { attributes, readOnly, editor, isSelected, options } = this.props;
     const { src } = this.state;
     const isReadOnly = readOnly || editor.props.isReadOnly;
-    const { selectFile, deleteImage } = this;
-    let ImageRenderer = options.renderer || DefaultImageRenderer; // TODO: add prop types
+    const ImageRenderer = options.renderer || DefaultImageRenderer;
     return (
-      <div {...attributes} style={imageModeStyles[this.state.mode]}>
+      <div {...attributes}>
         {!isReadOnly && this.createInput()}
-        {!isReadOnly && (
-          <ImageRenderer
-            actions={{ selectFile, deleteImage }}
-            isReadOnly={isReadOnly}
-            isSelected={isSelected}
-            src={this.state.src}
-            error={this.state.error}
-            loading={this.state.loading}
-          />
-        )}
-        {this.renderImage()}
+        <ImageRenderer
+          actions={{ selectFile, deleteImage }}
+          isReadOnly={isReadOnly}
+          isSelected={isSelected}
+          src={this.state.src}
+          loading={this.state.loading}
+          error={this.state.error}
+          updateLoading={this.updateLoading}
+          updateError={this.updateError}
+        />
       </div>
     );
   }
