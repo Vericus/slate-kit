@@ -15,8 +15,8 @@ const resetForm = input => {
 class Image extends React.Component {
   constructor(props) {
     super(props);
-    const src = props.node.data.get("src");
-    this.state = { src, loading: false, error: undefined };
+    const src = props.node.data.get("src") || "";
+    this.state = { src, loading: true, error: "" };
     this.attemptBlobUpload();
   }
 
@@ -24,6 +24,13 @@ class Image extends React.Component {
     // Do not revoke blob on dismount in case of drag and drop
     // URL.revokeObjectURL(this.state.src);
   }
+
+  onImgLoad = () => {
+    // There should ne no blobs to load
+    if (!this.state.src.includes("blob")) {
+      this.setState({ loading: false });
+    }
+  };
 
   attemptBlobUpload() {
     const { src } = this.state;
@@ -58,10 +65,6 @@ class Image extends React.Component {
     });
   };
 
-  updateLoading = state => {
-    this.setState({ loading: state });
-  };
-
   invalidImageFile = file => {
     if (!validImageFormats.includes(file.type)) {
       this.updateError("Uploaded file is not an image");
@@ -87,8 +90,10 @@ class Image extends React.Component {
     if (!file || this.exceedsMaxFileSize(file) || this.invalidImageFile(file))
       return;
 
-    const src = URL.createObjectURL(file);
-    this.updateSrc(src);
+    const { src } = this.state;
+    if (src) URL.revokeObjectURL(src);
+    const newSrc = URL.createObjectURL(file);
+    this.updateSrc(newSrc);
 
     this.attemptUpload(file);
 
@@ -108,8 +113,6 @@ class Image extends React.Component {
   };
 
   selectFile = () => {
-    const { src } = this.state;
-    if (src) URL.revokeObjectURL(src);
     this.input.click();
   };
 
@@ -126,7 +129,7 @@ class Image extends React.Component {
   );
 
   render() {
-    const { selectFile, deleteImage, updateLoading, updateError } = this;
+    const { selectFile, deleteImage, onImgLoad, updateError } = this;
     const { attributes, readOnly, editor, isSelected, options } = this.props;
     const { src, loading, error } = this.state;
     const isReadOnly = readOnly || editor.props.isReadOnly;
@@ -141,7 +144,7 @@ class Image extends React.Component {
           src={src}
           loading={loading}
           error={error}
-          updateLoading={updateLoading}
+          onImgLoad={onImgLoad}
           updateError={updateError}
         />
       </div>
@@ -155,13 +158,15 @@ Image.propTypes = {
     key: propTypes.string.isRequired
   }).isRequired,
   options: propTypes.shape({
-    uploadImage: propTypes.func.isRequired,
-    maxFileSize: propTypes.number.isRequired
+    uploadImage: propTypes.func,
+    maxFileSize: propTypes.number
   }).isRequired,
   editor: propTypes.shape({
     change: propTypes.func.isRequired
   }).isRequired,
-  attributes: propTypes.isRequired,
+  attributes: propTypes.shape({
+    "data-key": propTypes.string.isRequired
+  }).isRequired,
   readOnly: propTypes.bool.isRequired,
   isSelected: propTypes.bool.isRequired
 };

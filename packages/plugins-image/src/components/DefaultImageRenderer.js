@@ -49,12 +49,14 @@ class DefaultImageRenderer extends React.Component {
       <img
         src={this.props.src}
         style={{ objectFit: "cover", height: "25rem", width: "100%" }}
+        onLoad={this.props.onImgLoad}
         alt="main"
       />
     );
 
   renderLoading = () =>
-    this.props.loading && (
+    this.props.loading &&
+    this.props.src && (
       <div
         style={{
           position: "absolute",
@@ -94,8 +96,9 @@ DefaultImageRenderer.propTypes = {
   isReadOnly: propTypes.bool.isRequired,
   isSelected: propTypes.bool.isRequired,
   src: propTypes.string.isRequired,
+  error: propTypes.string.isRequired,
   loading: propTypes.bool.isRequired,
-  error: propTypes.bool.isRequired
+  onImgLoad: propTypes.func.isRequired
 };
 
 export default DefaultImageRenderer;

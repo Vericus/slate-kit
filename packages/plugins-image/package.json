@@ -30,7 +30,8 @@
     "slate": "Slate"
   },
   "devDependencies": {
-    "flow-bin": "0.74.0"
+    "flow-bin": "0.74.0",
+    "jest": "^23.4.1"
   },
   "keywords": [
     "Vericus",
@@ -42,7 +43,6 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "slate": ">=0.32.0",
-    "slate-react": "^0.13.2",
     "slate-schema-violations": "^0.1.15"
   }
 }

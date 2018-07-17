@@ -50,7 +50,7 @@ class CustomImageRenderer extends React.Component {
   };
 
   renderImage = () => {
-    const { src, updateLoading } = this.props;
+    const { src, loading, onImgLoad } = this.props;
     return (
       src && (
         <img
@@ -59,13 +59,9 @@ class CustomImageRenderer extends React.Component {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            opacity: this.props.loading && 0.5
+            opacity: loading && 0.5
           }}
-          onLoad={() => {
-            if (!src.includes("blob")) {
-              updateLoading(false);
-            }
-          }}
+          onLoad={onImgLoad}
           src={src}
         />
       )
