@@ -31,8 +31,6 @@
     "is-plain-object": "IsPlainObject"
   },
   "dependencies": {
-    "@vericus/slate-kit-highlight-text-renderer": "^0.0.2",
-    "@vericus/slate-kit-plugins-utils": "^0.0.9",
     "immutable": "^3.8.2",
     "is-plain-object": "^2.0.4",
     "tinycolor2": "^1.4.1"
@@ -45,6 +43,8 @@
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
+    "@vericus/slate-kit-highlight-text-renderer": "^0.0.2",
+    "@vericus/slate-kit-plugins-utils": "^0.0.9",
     "slate": ">=0.32.0"
   },
   "keywords": [

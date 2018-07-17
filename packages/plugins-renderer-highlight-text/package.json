@@ -30,7 +30,6 @@
     "is-plain-object": "IsPlainObject"
   },
   "dependencies": {
-    "@vericus/slate-kit-plugins-utils": "^0.0.9",
     "is-plain-object": "^2.0.4",
     "prop-types": "^15.6.1",
     "react": ">=16.0.0",
@@ -47,6 +46,7 @@
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
+    "@vericus/slate-kit-plugins-utils": "^0.0.9",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
     "slate": ">=0.32.0"

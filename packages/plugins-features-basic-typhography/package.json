@@ -31,8 +31,6 @@
     "is-plain-object": "IsPlainObject"
   },
   "dependencies": {
-    "@vericus/slate-kit-basic-typography-renderer": "^0.0.2",
-    "@vericus/slate-kit-plugins-utils": "^0.0.9",
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
     "is-plain-object": "^2.0.4",
@@ -50,6 +48,8 @@
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
+    "@vericus/slate-kit-basic-typography-renderer": "^0.0.2",
+    "@vericus/slate-kit-plugins-utils": "^0.0.9",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
     "slate": ">=0.32.0",
