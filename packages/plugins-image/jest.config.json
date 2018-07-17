@@ -1,0 +1,5 @@
+{
+  "setupFiles": ["raf/polyfill", "<rootDir>/test/setupTests.js"],
+  "snapshotSerializers": ["enzyme-to-json/serializer"],
+  "automock": false
+}

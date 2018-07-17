@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Image /> component Provides functionality for the img artifact 1`] = `
+<div
+  data-key="1"
+>
+  <input
+    accept=".gif, .jpeg, .jpg, .png, image/gif, image/jpeg, image/jpg, image/png"
+    hidden={true}
+    onChange={[Function]}
+    type="file"
+  />
+  <DefaultImageRenderer
+    actions={
+      Object {
+        "deleteImage": [Function],
+        "selectFile": [Function],
+      }
+    }
+    error=""
+    isReadOnly={false}
+    isSelected={false}
+    loading={true}
+    onImgLoad={[Function]}
+    src=""
+    updateError={[Function]}
+  />
+</div>
+`;
+
+exports[`<Image /> component should render <Image /> component correctly 1`] = `
+<div
+  data-key="1"
+>
+  <input
+    accept=".gif, .jpeg, .jpg, .png, image/gif, image/jpeg, image/jpg, image/png"
+    hidden={true}
+    onChange={[Function]}
+    type="file"
+  />
+  <DefaultImageRenderer
+    actions={
+      Object {
+        "deleteImage": [Function],
+        "selectFile": [Function],
+      }
+    }
+    error=""
+    isReadOnly={false}
+    isSelected={false}
+    loading={true}
+    onImgLoad={[Function]}
+    src=""
+    updateError={[Function]}
+  />
+</div>
+`;

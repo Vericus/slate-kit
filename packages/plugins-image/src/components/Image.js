@@ -3,10 +3,10 @@ import propTypes from "prop-types";
 import DefaultImageRenderer from "./DefaultImageRenderer";
 import validImageFormats from "../static/validImageFormats";
 
-const bytesToMb = bytes => (bytes / 1048576).toFixed(1);
+export const bytesToMb = bytes => `${(bytes / 1048576).toFixed(1)} MB`;
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
-const resetForm = input => {
+export const resetForm = input => {
   if (input) {
     input.value = "";
   }
@@ -78,7 +78,7 @@ class Image extends React.Component {
     const maxFileSize = this.props.options.maxFileSize || defaultMaxFileSize;
     if (file.size > maxFileSize) {
       this.updateError(
-        `The file exceeded the maximum size of ${bytesToMb(maxFileSize)} MB`
+        `The file exceeded the maximum size of ${bytesToMb(maxFileSize)}`
       );
       return true;
     }
@@ -162,7 +162,10 @@ Image.propTypes = {
     maxFileSize: propTypes.number
   }).isRequired,
   editor: propTypes.shape({
-    change: propTypes.func.isRequired
+    change: propTypes.func.isRequired,
+    props: propTypes.shape({
+      isReadOnly: propTypes.bool.isRequired
+    }).isRequired
   }).isRequired,
   attributes: propTypes.shape({
     "data-key": propTypes.string.isRequired
