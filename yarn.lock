@@ -502,6 +502,10 @@
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
 
+"@types/jest@^23.0.0":
+  version "23.3.0"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.0.tgz#5dd70033b616a6228042244ebd992f6426808810"
+
 "@types/node@*":
   version "10.3.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.3.tgz#8798d9e39af2fa604f715ee6a6b19796528e46c3"
@@ -6776,7 +6780,7 @@ isomorphic-base64@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/isomorphic-base64/-/isomorphic-base64-1.0.2.tgz#f426aae82569ba8a4ec5ca73ad21a44ab1ee7803"
 
-isomorphic-fetch@^2.1.1:
+isomorphic-fetch@^2.1.1, isomorphic-fetch@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz#611ae1acf14f5e81f729507472819fe9733558a9"
   dependencies:
@@ -7081,6 +7085,14 @@ jest-environment-node@^23.4.0:
   dependencies:
     jest-mock "^23.2.0"
     jest-util "^23.4.0"
+
+jest-fetch-mock@^1.6.5:
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/jest-fetch-mock/-/jest-fetch-mock-1.6.5.tgz#178fa1a937ef6f61fb8e8483b6d4602b17e0d96d"
+  dependencies:
+    "@types/jest" "^23.0.0"
+    isomorphic-fetch "^2.2.1"
+    promise-polyfill "^7.1.1"
 
 jest-get-type@^22.1.0, jest-get-type@^22.4.3:
   version "22.4.3"
@@ -10311,6 +10323,10 @@ promise-inflight@^1.0.1, promise-inflight@~1.0.1:
 promise-polyfill@^6.0.1:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-6.1.0.tgz#dfa96943ea9c121fca4de9b5868cb39d3472e057"
+
+promise-polyfill@^7.1.1:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-7.1.2.tgz#ab05301d8c28536301622d69227632269a70ca3b"
 
 promise-retry@^1.1.1:
   version "1.1.1"

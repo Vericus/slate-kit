@@ -3,6 +3,11 @@ import { shallow } from "enzyme";
 
 import Image, { resetForm, bytesToMb } from "../src/components/Image";
 
+const BLOB_URL =
+  "blob:http://localhost:6006/07b3b520-7aab-4ff8-9a84-b090f3cc4351";
+const STANDARD_URL =
+  "http://localhost:6006/07b3b520-7aab-4ff8-9a84-b090f3cc4351";
+
 describe("translates bytes to megabytes", () => {
   it("translates 0 to string MB", () => {
     const zero = 0;
@@ -73,7 +78,7 @@ describe("<Image /> component's onImgLoad method", () => {
     const initialLoadingState = true;
     wrapper.setState({
       loading: initialLoadingState,
-      src: "blob:http://localhost:6006/07b3b520-7aab-4ff8-9a84-b090f3cc4351"
+      src: BLOB_URL
     });
     wrapper.instance().onImgLoad();
     expect(wrapper.state("loading")).toEqual(initialLoadingState);
@@ -81,7 +86,7 @@ describe("<Image /> component's onImgLoad method", () => {
   it("should set loading to false when src is NOT a blob", () => {
     wrapper.setState({
       loading: true,
-      src: "http://localhost:6006/07b3b520-7aab-4ff8-9a84-b090f3cc4351"
+      src: STANDARD_URL
     });
     wrapper.instance().onImgLoad();
     expect(wrapper.state("loading")).toEqual(false);
@@ -168,9 +173,88 @@ describe("<Image /> component", () => {
 
 // Expected behaviours
 describe("Loading behaviour", () => {
-  it("is freshly mounted blob, upload enabled. Should immediately be loading", () => {});
-  it("is freshly mounted blob, upload disabled. Should immediately be not loading (loaded)", () => {});
-  it("is freshly mounted static url. Should immediately be loading", () => {});
-  it("is existing mount, added blob, upload enabled. Should immediately be loading", () => {});
-  it("is existing mount, added blob, upload disabled. Should immediately be not loading (loaded)", () => {});
+  const nodeWithBlobSrc = {
+    data: new Map([["src", BLOB_URL]]),
+    key: "1"
+  };
+  const nodeWithStaticSrc = {
+    data: new Map([["src", STANDARD_URL]]),
+    key: "1"
+  };
+  const optionsWithUpload = {
+    uploadImage: () => {}
+  };
+  const optionsWithoutUpload = {};
+  const LOADING = true;
+  const LOADED = false;
+  const file = new File([""], "temp-file");
+  it("is freshly mounted blob, upload enabled. Should immediately be loading", () => {
+    const wrapper = shallow(
+      <Image
+        attributes={attributes}
+        readOnly={false}
+        isSelected={false}
+        editor={editor}
+        options={optionsWithUpload}
+        node={nodeWithBlobSrc}
+      />
+    );
+    expect(wrapper.state("loading")).toEqual(LOADING);
+  });
+  it("is freshly mounted blob, upload disabled. Should immediately be not loading (loaded)", () => {
+    const wrapper = shallow(
+      <Image
+        attributes={attributes}
+        readOnly={false}
+        isSelected={false}
+        editor={editor}
+        options={optionsWithoutUpload}
+        node={nodeWithBlobSrc}
+      />
+    );
+    // Does not go through fetch, force attempt upload as it would normally.
+    wrapper.instance().attemptUpload(file);
+    expect(wrapper.state("loading")).toEqual(LOADED);
+  });
+  it("is freshly mounted static url. Should immediately be loading", () => {
+    const wrapper = shallow(
+      <Image
+        attributes={attributes}
+        readOnly={false}
+        isSelected={false}
+        editor={editor}
+        options={options}
+        node={nodeWithStaticSrc}
+      />
+    );
+    expect(wrapper.state("loading")).toEqual(LOADING);
+  });
+  it("is existing mount, added blob, upload enabled. Should immediately be loading", () => {
+    const wrapper = shallow(
+      <Image
+        attributes={attributes}
+        readOnly={false}
+        isSelected={false}
+        editor={editor}
+        options={optionsWithUpload}
+        node={node}
+      />
+    );
+    wrapper.instance().attemptUpload(file);
+    expect(wrapper.state("loading")).toEqual(LOADING);
+  });
+  it("is existing mount, added blob, upload disabled. Should immediately be not loading (loaded)", () => {
+    const wrapper = shallow(
+      <Image
+        attributes={attributes}
+        readOnly={false}
+        isSelected={false}
+        editor={editor}
+        options={optionsWithoutUpload}
+        node={node}
+      />
+    );
+    wrapper.instance().attemptUpload(file);
+    expect(wrapper.state("loading")).toEqual(LOADED);
+  });
 });
