@@ -1,5 +1,5 @@
 {
-  "version": "0.0.10",
+  "version": "0.0.11",
   "name": "@vericus/slate-kit-align",
   "description": "Plugins to provide a way to align blocks on slate",
   "homepage": "https://github.com/Vericus/slate-kit/",

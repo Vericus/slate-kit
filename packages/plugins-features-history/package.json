@@ -1,5 +1,5 @@
 {
-  "version": "0.0.13",
+  "version": "0.0.14",
   "name": "@vericus/slate-kit-history",
   "description": "plugin that group together history of selections to the next editing event on slate for undo/redo",
   "homepage": "https://github.com/Vericus/slate-kit/",
