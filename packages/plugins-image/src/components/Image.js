@@ -59,7 +59,7 @@ class Image extends React.Component {
   };
 
   updateSrc = (src = "") => {
-    this.setState({ src, loading: false, error: undefined });
+    this.setState({ src, loading: false, error: "" });
     this.props.editor.change(change => {
       change.setNodeByKey(this.props.node.key, { data: { src } });
     });

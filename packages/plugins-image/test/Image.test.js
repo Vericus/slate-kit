@@ -90,14 +90,65 @@ describe("<Image /> component's onImgLoad method", () => {
 
 describe("attemptBlobUpload", () => {});
 describe("attemptUpload", () => {});
-describe("updateError", () => {});
-describe("updateSrc", () => {});
-describe("invalidImageFile", () => {});
-describe("exceedsMaxFileSize", () => {});
-describe("handleInsertImage", () => {});
-describe("deleteImage", () => {});
-describe("selectFile", () => {});
-describe("createInput", () => {});
+describe("updateError", () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(
+      <Image
+        attributes={attributes}
+        readOnly={false}
+        isSelected={false}
+        editor={editor}
+        options={options}
+        node={node}
+      />
+    );
+  });
+  it("updates error with text", () => {
+    const errorMessage = "There was an error";
+    wrapper.instance().updateError(errorMessage);
+    expect(wrapper.state("error")).toEqual(errorMessage);
+  });
+  it("updates error with no text", () => {
+    const errorMessage = "";
+    wrapper.instance().updateError(errorMessage);
+    expect(wrapper.state("error")).toEqual(errorMessage);
+  });
+});
+describe("updateSrc", () => {
+  it("updates src state", () => {});
+  it("sets loading state to false", () => {});
+  it("sets error state to empty string", () => {});
+  it("updates node data to src", () => {});
+});
+describe("invalidImageFile", () => {
+  it("accepts png", () => {});
+  it("accepts jpeg", () => {});
+  it("accepts jpg", () => {});
+  it("accepts gif", () => {});
+  it("rejects txt", () => {});
+  it("accepts docx", () => {});
+});
+describe("exceedsMaxFileSize", () => {
+  it("rejects over default", () => {});
+  it("accepts default", () => {});
+  it("accepts under default", () => {});
+  it("rejects over custom size", () => {});
+  it("accepts custom size", () => {});
+  it("accepts under custom size", () => {});
+});
+describe("handleInsertImage", () => {
+  it("updates src if valid file selected", () => {});
+});
+describe("deleteImage", () => {
+  it("removes the component", () => {});
+});
+describe("selectFile", () => {
+  it("clicks the correct input", () => {});
+});
+describe("createInput", () => {
+  it("returns an input", () => {});
+});
 
 describe("<Image /> component", () => {
   it("should render <Image /> component correctly", () => {
@@ -113,4 +164,13 @@ describe("<Image /> component", () => {
     );
     expect(wrapper).toMatchSnapshot();
   });
+});
+
+// Expected behaviours
+describe("Loading behaviour", () => {
+  it("is freshly mounted blob, upload enabled. Should immediately be loading", () => {});
+  it("is freshly mounted blob, upload disabled. Should immediately be not loading (loaded)", () => {});
+  it("is freshly mounted static url. Should immediately be loading", () => {});
+  it("is existing mount, added blob, upload enabled. Should immediately be loading", () => {});
+  it("is existing mount, added blob, upload disabled. Should immediately be not loading (loaded)", () => {});
 });
