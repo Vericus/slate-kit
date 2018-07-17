@@ -65,30 +65,35 @@ class Image extends React.Component {
     });
   };
 
-  invalidImageFile = file => {
-    if (!validImageFormats.includes(file.type)) {
-      this.updateError("Uploaded file is not an image");
+  validFileType = type => {
+    if (validImageFormats.includes(type)) {
       return true;
     }
+    this.updateError("Uploaded file is not an image");
     return false;
   };
 
-  exceedsMaxFileSize = file => {
+  validFileSize = size => {
     const defaultMaxFileSize = 10485760;
     const maxFileSize = this.props.options.maxFileSize || defaultMaxFileSize;
-    if (file.size > maxFileSize) {
-      this.updateError(
-        `The file exceeded the maximum size of ${bytesToMb(maxFileSize)}`
-      );
+    if (size <= maxFileSize) {
       return true;
     }
+    this.updateError(
+      `The file exceeded the maximum size of ${bytesToMb(maxFileSize)}`
+    );
     return false;
   };
 
   handleInsertImage = (event, input) => {
     const file = event.target.files[0];
-    if (!file || this.exceedsMaxFileSize(file) || this.invalidImageFile(file))
+    if (
+      !file ||
+      !this.validFileSize(file.size) ||
+      !this.validFileType(file.type)
+    ) {
       return;
+    }
 
     const { src } = this.state;
     if (src) URL.revokeObjectURL(src);

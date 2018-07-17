@@ -8,6 +8,7 @@ const BLOB_URL =
 const STANDARD_URL =
   "http://localhost:6006/07b3b520-7aab-4ff8-9a84-b090f3cc4351";
 
+// Tests for exported functions
 describe("translates bytes to megabytes", () => {
   it("translates 0 to string MB", () => {
     const zero = 0;
@@ -26,7 +27,6 @@ describe("translates bytes to megabytes", () => {
     expect(bytesToMb(twoDigit)).toEqual("10.0 MB");
   });
 });
-
 describe("reset input form value", () => {
   let input;
   beforeEach(() => {
@@ -60,6 +60,7 @@ const node = {
 };
 const options = {};
 
+// Tests for component methods
 describe("<Image /> component's onImgLoad method", () => {
   let wrapper;
   beforeEach(() => {
@@ -81,7 +82,7 @@ describe("<Image /> component's onImgLoad method", () => {
       src: BLOB_URL
     });
     wrapper.instance().onImgLoad();
-    expect(wrapper.state("loading")).toEqual(initialLoadingState);
+    expect(wrapper.state().loading).toEqual(initialLoadingState);
   });
   it("should set loading to false when src is NOT a blob", () => {
     wrapper.setState({
@@ -89,12 +90,9 @@ describe("<Image /> component's onImgLoad method", () => {
       src: STANDARD_URL
     });
     wrapper.instance().onImgLoad();
-    expect(wrapper.state("loading")).toEqual(false);
+    expect(wrapper.state().loading).toEqual(false);
   });
 });
-
-describe("attemptBlobUpload", () => {});
-describe("attemptUpload", () => {});
 describe("updateError", () => {
   let wrapper;
   beforeEach(() => {
@@ -112,49 +110,128 @@ describe("updateError", () => {
   it("updates error with text", () => {
     const errorMessage = "There was an error";
     wrapper.instance().updateError(errorMessage);
-    expect(wrapper.state("error")).toEqual(errorMessage);
+    expect(wrapper.state().error).toEqual(errorMessage);
   });
   it("updates error with no text", () => {
     const errorMessage = "";
     wrapper.instance().updateError(errorMessage);
-    expect(wrapper.state("error")).toEqual(errorMessage);
+    expect(wrapper.state().error).toEqual(errorMessage);
   });
 });
 describe("updateSrc", () => {
-  it("updates src state", () => {});
-  it("sets loading state to false", () => {});
-  it("sets error state to empty string", () => {});
-  it("updates node data to src", () => {});
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(
+      <Image
+        attributes={attributes}
+        readOnly={false}
+        isSelected={false}
+        editor={editor}
+        options={options}
+        node={node}
+      />
+    );
+  });
+  it("updates src state", () => {
+    wrapper.instance().updateSrc(BLOB_URL);
+    expect(wrapper.state().src).toEqual(BLOB_URL);
+  });
+  it("sets loading state to false", () => {
+    wrapper.instance().updateSrc(BLOB_URL);
+    expect(wrapper.state().loading).toEqual(false);
+  });
+  it("sets error state to empty string", () => {
+    wrapper.instance().updateSrc(BLOB_URL);
+    expect(wrapper.state().error).toEqual("");
+  });
+  it("updates node data to src", () => {
+    // Needs to define change.setNodeByKey from slate
+  });
 });
-describe("invalidImageFile", () => {
-  it("accepts png", () => {});
-  it("accepts jpeg", () => {});
-  it("accepts jpg", () => {});
-  it("accepts gif", () => {});
-  it("rejects txt", () => {});
-  it("accepts docx", () => {});
+describe("validFileType", () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(
+      <Image
+        attributes={attributes}
+        readOnly={false}
+        isSelected={false}
+        editor={editor}
+        options={options}
+        node={node}
+      />
+    );
+  });
+  it("accepts png", () => {
+    const file = new File([""], "file.png", { type: "image/png" });
+    expect(wrapper.instance().validFileType(file.type)).toEqual(true);
+  });
+  it("accepts jpeg", () => {
+    const file = new File([""], "file.jpeg", { type: "image/jpeg" });
+    expect(wrapper.instance().validFileType(file.type)).toEqual(true);
+  });
+  it("accepts jpg", () => {
+    const file = new File([""], "file.jpg", { type: "image/jpg" });
+    expect(wrapper.instance().validFileType(file.type)).toEqual(true);
+  });
+  it("accepts gif", () => {
+    const file = new File([""], "file.gif", { type: "image/gif" });
+    expect(wrapper.instance().validFileType(file.type)).toEqual(true);
+  });
+  it("rejects txt", () => {
+    const file = new File([""], "file.txt", { type: "text/plain" });
+    expect(wrapper.instance().validFileType(file.type)).toEqual(false);
+  });
+  it("rejects word document", () => {
+    const file = new File([""], "file.docx", {
+      type:
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    });
+    expect(wrapper.instance().validFileType(file.type)).toEqual(false);
+  });
 });
-describe("exceedsMaxFileSize", () => {
-  it("rejects over default", () => {});
-  it("accepts default", () => {});
-  it("accepts under default", () => {});
-  it("rejects over custom size", () => {});
-  it("accepts custom size", () => {});
-  it("accepts under custom size", () => {});
-});
-describe("handleInsertImage", () => {
-  it("updates src if valid file selected", () => {});
-});
-describe("deleteImage", () => {
-  it("removes the component", () => {});
-});
-describe("selectFile", () => {
-  it("clicks the correct input", () => {});
-});
-describe("createInput", () => {
-  it("returns an input", () => {});
+describe("validFileSize", () => {
+  const wrapperDefaultMFS = shallow(
+    <Image
+      attributes={attributes}
+      readOnly={false}
+      isSelected={false}
+      editor={editor}
+      options={{}}
+      node={node}
+    />
+  );
+  const wrapperCustomMFS = shallow(
+    <Image
+      attributes={attributes}
+      readOnly={false}
+      isSelected={false}
+      editor={editor}
+      options={{ maxFileSize: 5000000 }}
+      node={node}
+    />
+  );
+  it("rejects over default", () => {
+    expect(wrapperDefaultMFS.instance().validFileSize(20000000)).toEqual(false);
+  });
+  it("accepts default", () => {
+    expect(wrapperDefaultMFS.instance().validFileSize(10485760)).toEqual(true);
+  });
+  it("accepts under default", () => {
+    expect(wrapperDefaultMFS.instance().validFileSize(10000000)).toEqual(true);
+  });
+  it("rejects over custom size", () => {
+    expect(wrapperCustomMFS.instance().validFileSize(5000001)).toEqual(false);
+  });
+  it("accepts custom size", () => {
+    expect(wrapperCustomMFS.instance().validFileSize(5000000)).toEqual(true);
+  });
+  it("accepts under custom size", () => {
+    expect(wrapperCustomMFS.instance().validFileSize(4999999)).toEqual(true);
+  });
 });
 
+// Snapshot tests
 describe("<Image /> component", () => {
   it("should render <Image /> component correctly", () => {
     const wrapper = shallow(
@@ -187,7 +264,8 @@ describe("Loading behaviour", () => {
   const optionsWithoutUpload = {};
   const LOADING = true;
   const LOADED = false;
-  const file = new File([""], "temp-file");
+  const STUB_FILE = new File([""], "temp-file");
+
   it("is freshly mounted blob, upload enabled. Should immediately be loading", () => {
     const wrapper = shallow(
       <Image
@@ -199,7 +277,7 @@ describe("Loading behaviour", () => {
         node={nodeWithBlobSrc}
       />
     );
-    expect(wrapper.state("loading")).toEqual(LOADING);
+    expect(wrapper.state().loading).toEqual(LOADING);
   });
   it("is freshly mounted blob, upload disabled. Should immediately be not loading (loaded)", () => {
     const wrapper = shallow(
@@ -213,8 +291,8 @@ describe("Loading behaviour", () => {
       />
     );
     // Does not go through fetch, force attempt upload as it would normally.
-    wrapper.instance().attemptUpload(file);
-    expect(wrapper.state("loading")).toEqual(LOADED);
+    wrapper.instance().attemptUpload(STUB_FILE);
+    expect(wrapper.state().loading).toEqual(LOADED);
   });
   it("is freshly mounted static url. Should immediately be loading", () => {
     const wrapper = shallow(
@@ -227,7 +305,7 @@ describe("Loading behaviour", () => {
         node={nodeWithStaticSrc}
       />
     );
-    expect(wrapper.state("loading")).toEqual(LOADING);
+    expect(wrapper.state().loading).toEqual(LOADING);
   });
   it("is existing mount, added blob, upload enabled. Should immediately be loading", () => {
     const wrapper = shallow(
@@ -240,8 +318,8 @@ describe("Loading behaviour", () => {
         node={node}
       />
     );
-    wrapper.instance().attemptUpload(file);
-    expect(wrapper.state("loading")).toEqual(LOADING);
+    wrapper.instance().attemptUpload(STUB_FILE);
+    expect(wrapper.state().loading).toEqual(LOADING);
   });
   it("is existing mount, added blob, upload disabled. Should immediately be not loading (loaded)", () => {
     const wrapper = shallow(
@@ -254,7 +332,23 @@ describe("Loading behaviour", () => {
         node={node}
       />
     );
-    wrapper.instance().attemptUpload(file);
-    expect(wrapper.state("loading")).toEqual(LOADED);
+    wrapper.instance().attemptUpload(STUB_FILE);
+    expect(wrapper.state().loading).toEqual(LOADED);
   });
+});
+
+// Later tests - low priority
+describe("attemptBlobUpload", () => {});
+describe("attemptUpload", () => {});
+describe("handleInsertImage", () => {
+  it("updates src if valid file selected", () => {});
+});
+describe("deleteImage", () => {
+  it("removes the component", () => {});
+});
+describe("selectFile", () => {
+  it("clicks the correct input", () => {});
+});
+describe("createInput", () => {
+  it("returns an input", () => {});
 });
