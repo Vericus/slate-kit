@@ -548,11 +548,22 @@ export default class Toolbar extends Component {
     );
   };
   renderStateLogger = () => {
-    return (
-      <button onMouseDown={e => console.log(this.props.value)}>
+    return [
+      <button
+        onMouseDown={e => console.log(this.props.value)}
+        key="state-logger"
+      >
         Log State
+      </button>,
+      <button
+        onMouseDown={e =>
+          console.log(JSON.stringify(this.props.value.toJSON()))
+        }
+        key="json-state-logger"
+      >
+        Log JSON State
       </button>
-    );
+    ];
   };
 
   render() {

@@ -1,5 +1,6 @@
 // @flow
 import Options, { type typeOptions } from "./options";
+import createProps from "./props";
 import createDefaultRenderNode, {
   OrderedList,
   UnOrderedList
@@ -7,8 +8,10 @@ import createDefaultRenderNode, {
 
 function createRenderer(opts: typeOptions, pluginsWrapper: any) {
   const options = new Options(opts);
+  const props = createProps(options, pluginsWrapper);
   return {
-    renderNode: createDefaultRenderNode(options, pluginsWrapper)
+    renderNode: createDefaultRenderNode(options, pluginsWrapper),
+    props
   };
 }
 

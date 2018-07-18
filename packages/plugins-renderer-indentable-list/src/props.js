@@ -1,12 +1,19 @@
 import classnames from "classnames";
-import { toggleCheck } from "../changes";
 
 export default function createProps(opts, pluginsWrapper) {
-  const { ordered, unordered, checkList, startAtField, checkField } = opts;
+  const {
+    ordered,
+    unordered,
+    checkList,
+    startAtField,
+    checkField,
+    changes
+  } = opts;
   const listTypes = [ordered, unordered, checkList];
   return {
     getProps: props => {
       const { getIndentationLevel } = pluginsWrapper.getUtils("indent");
+      const { toggleCheck } = changes;
       if (!props.node || !listTypes.includes(props.node.type)) return props;
       const { editor, key, node } = props;
       const {
@@ -51,12 +58,17 @@ export default function createProps(opts, pluginsWrapper) {
                 return;
               e.preventDefault();
               e.stopPropagation();
-              if (props.editor.props.isReadOnly) return;
+              if (
+                props.editor.props.isReadOnly ||
+                !toggleCheck ||
+                props.editor.props.readOnly
+              )
+                return;
               const {
                 state: { value },
                 props: { onChange }
               } = props.editor;
-              onChange(toggleCheck(opts, value.change(), node));
+              onChange(toggleCheck(value.change(), node));
             }
           : () => {};
       const className = classnames({

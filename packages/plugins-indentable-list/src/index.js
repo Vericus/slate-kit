@@ -2,7 +2,6 @@
 import Renderer from "@vericus/slate-kit-indentable-list-renderer";
 import AutoReplace from "slate-auto-replace";
 import Options, { type typeOptions } from "./options";
-import createProps from "./props";
 import createUtils from "./utils";
 import createChanges from "./changes";
 import createOnKeyDown from "./onKeyDown";
@@ -15,18 +14,23 @@ export function createPlugin(pluginOptions: typeOptions, pluginsWrapper: any) {
   const utils = createUtils(options);
   const changes = createChanges(options, pluginsWrapper);
   const { createListWithType } = changes;
-  const props = createProps(options, pluginsWrapper);
   const schemas = createSchema(options);
   const rules = createRule;
   const onKeyDown = createOnKeyDown(options, pluginsWrapper);
+  const rendererOptions = { ...options.toJSON() };
+  delete rendererOptions.externalRenderer;
+  const { renderNode, props } = Renderer(
+    { ...rendererOptions, changes },
+    pluginsWrapper
+  );
   let plugins = [
     {
-      props,
       rules,
       utils,
       changes,
       onKeyDown,
       options,
+      props,
       ...schemas
     },
     AutoReplace({
@@ -55,7 +59,7 @@ export function createPlugin(pluginOptions: typeOptions, pluginsWrapper: any) {
     })
   ];
   if (!options.externalRenderer) {
-    plugins = [...plugins, { ...Renderer(pluginOptions, pluginsWrapper) }];
+    plugins = [...plugins, { renderNode }];
   }
   return {
     plugins

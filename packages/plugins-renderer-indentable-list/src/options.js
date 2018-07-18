@@ -6,7 +6,8 @@ export type typeOptions = {
   unordered?: string,
   checkList?: string,
   startAtField?: string,
-  checkField?: string
+  checkField?: string,
+  changes?: Object
 };
 
 const defaultOptions = {
@@ -14,7 +15,8 @@ const defaultOptions = {
   unordered: "ul-list",
   checkList: "check-list",
   startAtField: "startAt",
-  checkField: "checked"
+  checkField: "checked",
+  changes: {}
 };
 
 class Options extends Record(defaultOptions) {
@@ -23,6 +25,7 @@ class Options extends Record(defaultOptions) {
   checkList: string;
   startAtField: string;
   checkField: string;
+  changes: ?Object;
 }
 
 export default Options;
