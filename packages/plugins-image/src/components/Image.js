@@ -20,14 +20,9 @@ class Image extends React.Component {
     this.attemptBlobUpload();
   }
 
-  componentWillUnmount() {
-    // Do not revoke blob on dismount in case of drag and drop
-    // URL.revokeObjectURL(this.state.src);
-  }
-
   onImgLoad = () => {
-    // There should ne no blobs to load
-    if (!this.state.src.includes("blob")) {
+    // Non-blobs onLoad should finish loading
+    if (!this.state.src.startsWith("blob:")) {
       this.setState({ loading: false });
     }
   };
@@ -48,7 +43,15 @@ class Image extends React.Component {
     this.setState({ loading: true });
     const { uploadImage } = this.props.options;
     if (uploadImage) {
-      uploadImage(file, this.updateSrc, this.updateError);
+      uploadImage(file)
+        .then(newUrl => {
+          URL.revokeObjectURL(this.state.src);
+          this.updateSrc(newUrl);
+        })
+        .catch(e => {
+          this.updateSrc("");
+          this.updateError(`${e}. Failed to upload file to server`);
+        });
     } else {
       this.setState({ loading: false });
     }
