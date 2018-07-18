@@ -27,24 +27,24 @@ const pluginOpts = [
     createPlugin: BasicTypography
   },
   {
-    label: "background-colored-text",
-    createPlugin: HighlightText,
-    options: {
-      type: "textBackground",
-      alpha: 0.4,
-      data: "backgroundColor",
-      defaultColor: "black",
-      styles: ["backgroundColor"]
-    }
-  },
-  {
     label: "colored-text",
     createPlugin: HighlightText,
     options: {
       type: "textColor",
       data: "color",
-      defaultColor: "transparent",
+      defaultColor: "black",
       styles: ["textDecorationColor", "color"]
+    }
+  },
+  {
+    label: "background-colored-text",
+    createPlugin: HighlightText,
+    options: {
+      type: "textBackground",
+      alpha: 0.54,
+      data: "backgroundColor",
+      defaultColor: "transparent",
+      styles: ["backgroundColor"]
     }
   },
   {
