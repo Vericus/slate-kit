@@ -20,6 +20,14 @@ class Image extends React.Component {
     this.attemptBlobUpload();
   }
 
+  componentDidMount() {
+    this.mounted = true;
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
   onImgLoad = () => {
     // Non-blobs onLoad should finish loading
     if (!this.state.src.startsWith("blob:")) {
@@ -45,10 +53,11 @@ class Image extends React.Component {
     if (uploadImage) {
       uploadImage(file)
         .then(newUrl => {
-          URL.revokeObjectURL(this.state.src);
+          if (!this.mounted) return;
           this.updateSrc(newUrl);
         })
         .catch(e => {
+          if (!this.mounted) return;
           this.updateSrc("");
           this.updateError(`${e}. Failed to upload file to server`);
         });
@@ -61,10 +70,12 @@ class Image extends React.Component {
     this.setState({ error });
   };
 
-  updateSrc = (src = "") => {
+  updateSrc = (src = "", record = false) => {
     this.setState({ src, loading: false, error: "" });
     this.props.editor.change(change => {
+      if (!record) change.setOperationFlag("save", false);
       change.setNodeByKey(this.props.node.key, { data: { src } });
+      if (!record) change.setOperationFlag("save", true);
     });
   };
 
@@ -98,8 +109,6 @@ class Image extends React.Component {
       return;
     }
 
-    const { src } = this.state;
-    if (src) URL.revokeObjectURL(src);
     const newSrc = URL.createObjectURL(file);
     this.updateSrc(newSrc);
 
