@@ -1,21 +1,13 @@
-const imageUpload = (file, updateSrc, updateErrors) => {
+const imageUpload = file => {
   let data = new FormData();
   data.append("file", file);
-  fetch("http://localhost:4000/api/upload", {
+  return fetch("http://localhost:4000/api/upload", {
     method: "POST",
     body: data,
     "Content-Type": file.type
-  })
-    .then(resp => {
-      return resp.text();
-    })
-    .then(newUrl => {
-      updateSrc(newUrl);
-    })
-    .catch(e => {
-      updateSrc();
-      updateErrors("Failed to upload file to server");
-    });
+  }).then(resp => {
+    return resp.text();
+  });
 };
 
 export default imageUpload;

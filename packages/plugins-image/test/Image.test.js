@@ -318,7 +318,14 @@ describe("Loading behaviour", () => {
         node={node}
       />
     );
-    wrapper.instance().attemptUpload(STUB_FILE);
+    try {
+      wrapper.instance().attemptUpload(STUB_FILE);
+    } catch (e) {
+      /**
+        catch failing .then statement
+        - simulates waiting for upload
+       */
+    }
     expect(wrapper.state().loading).toEqual(LOADING);
   });
   it("is existing mount, added blob, upload disabled. Should immediately be not loading (loaded)", () => {
