@@ -5,13 +5,6 @@ import validImageFormats from "../static/validImageFormats";
 
 export const bytesToMb = bytes => `${(bytes / 1048576).toFixed(1)} MB`;
 
-/* eslint no-param-reassign: ["error", { "props": false }] */
-export const resetForm = input => {
-  if (input) {
-    input.value = "";
-  }
-};
-
 const makeCancelable = promise => {
   let hasCanceled = false;
 
@@ -40,7 +33,6 @@ class Image extends React.Component {
   componentWillUnmount() {
     if (this.uploader) this.uploader.cancel();
   }
-
   onImgLoad = () => {
     // Non-blobs onLoad should finish loading
     if (!this.state.src.startsWith("blob:")) {
@@ -70,8 +62,7 @@ class Image extends React.Component {
           this.updateSrc(newUrl);
         })
         .catch(() => {
-          this.updateSrc("");
-          this.updateError(`Failed to upload file to server`);
+          this.updateSrc("", false, "Failed to upload file to server");
         });
     } else {
       this.setState({ loading: false });
@@ -82,8 +73,9 @@ class Image extends React.Component {
     this.setState({ error });
   };
 
-  updateSrc = (src = "", record = false) => {
-    this.setState({ src, loading: false, error: "" });
+  // Update Src should delete this block and insert a new one
+  updateSrc = (src = "", record = false, error = "") => {
+    this.setState({ src, loading: false, error });
     this.props.editor.change(change => {
       if (!record) change.setOperationFlag("save", false);
       change.setNodeByKey(this.props.node.key, { data: { src } });
@@ -111,7 +103,7 @@ class Image extends React.Component {
     return false;
   };
 
-  handleInsertImage = (event, input) => {
+  handleInsertImage = event => {
     const file = event.target.files[0];
     if (
       !file ||
@@ -126,7 +118,7 @@ class Image extends React.Component {
 
     this.attemptUpload(file);
 
-    resetForm(input);
+    if (this.input) this.input.value = "";
   };
 
   deleteImage = e => {
@@ -152,7 +144,7 @@ class Image extends React.Component {
       ref={ref => {
         this.input = ref;
       }}
-      onChange={e => this.handleInsertImage(e, this.input)}
+      onChange={e => this.handleInsertImage(e)}
       hidden
     />
   );

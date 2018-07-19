@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import Image, { resetForm, bytesToMb } from "../src/components/Image";
+import Image, { bytesToMb } from "../src/components/Image";
 
 const BLOB_URL =
   "blob:http://localhost:6006/07b3b520-7aab-4ff8-9a84-b090f3cc4351";
@@ -25,24 +25,6 @@ describe("translates bytes to megabytes", () => {
   it("translates to 6+ digit number to string MB", () => {
     const twoDigit = 10485760;
     expect(bytesToMb(twoDigit)).toEqual("10.0 MB");
-  });
-});
-describe("reset input form value", () => {
-  let input;
-  beforeEach(() => {
-    input = document.createElement("input");
-  });
-  it("resets string", () => {
-    input.value = "first";
-    expect(input.value).toEqual("first");
-    resetForm(input);
-    expect(input.value).toEqual("");
-  });
-  it("resets file", () => {
-    input.value = new File([""], "new-file");
-    expect(input.value).toEqual("[object File]");
-    resetForm(input);
-    expect(input.value).toEqual("");
   });
 });
 
@@ -349,6 +331,7 @@ describe("attemptBlobUpload", () => {});
 describe("attemptUpload", () => {});
 describe("handleInsertImage", () => {
   it("updates src if valid file selected", () => {});
+  it("clears input", () => {});
 });
 describe("deleteImage", () => {
   it("removes the component", () => {});
