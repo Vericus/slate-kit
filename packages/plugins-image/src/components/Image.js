@@ -10,8 +10,8 @@ const makeCancelable = promise => {
 
   const wrappedPromise = new Promise((resolve, reject) => {
     promise.then(
-      val => (hasCanceled ? reject(new Error("Cancelled")) : resolve(val)),
-      error => (hasCanceled ? reject(new Error("Cancelled")) : reject(error))
+      val => (hasCanceled ? reject(new Error("canceled")) : resolve(val)),
+      error => (hasCanceled ? reject(new Error("canceled")) : reject(error))
     );
   });
 
@@ -61,7 +61,8 @@ class Image extends React.Component {
         .then(newUrl => {
           this.updateSrc(newUrl);
         })
-        .catch(() => {
+        .catch(e => {
+          if (e.message === "canceled") return;
           this.updateSrc("", false, "Failed to upload file to server");
         });
     } else {
@@ -73,7 +74,6 @@ class Image extends React.Component {
     this.setState({ error });
   };
 
-  // Update Src should delete this block and insert a new one
   updateSrc = (src = "", record = false, error = "") => {
     this.setState({ src, loading: false, error });
     this.props.editor.change(change => {
