@@ -12,6 +12,24 @@ export const resetForm = input => {
   }
 };
 
+const makeCancelable = promise => {
+  let hasCanceled = false;
+
+  const wrappedPromise = new Promise((resolve, reject) => {
+    promise.then(
+      val => (hasCanceled ? reject(new Error("Cancelled")) : resolve(val)),
+      error => (hasCanceled ? reject(new Error("Cancelled")) : reject(error))
+    );
+  });
+
+  return {
+    promise: wrappedPromise,
+    cancel() {
+      hasCanceled = true;
+    }
+  };
+};
+
 class Image extends React.Component {
   constructor(props) {
     super(props);
@@ -19,13 +37,8 @@ class Image extends React.Component {
     this.state = { src, loading: true, error: "" };
     this.attemptBlobUpload();
   }
-
-  componentDidMount() {
-    this.mounted = true;
-  }
-
   componentWillUnmount() {
-    this.mounted = false;
+    if (this.uploader) this.uploader.cancel();
   }
 
   onImgLoad = () => {
@@ -51,15 +64,14 @@ class Image extends React.Component {
     this.setState({ loading: true });
     const { uploadImage } = this.props.options;
     if (uploadImage) {
-      uploadImage(file)
+      this.uploader = makeCancelable(uploadImage(file));
+      this.uploader.promise
         .then(newUrl => {
-          if (!this.mounted) return;
           this.updateSrc(newUrl);
         })
-        .catch(e => {
-          if (!this.mounted) return;
+        .catch(() => {
           this.updateSrc("");
-          this.updateError(`${e}. Failed to upload file to server`);
+          this.updateError(`Failed to upload file to server`);
         });
     } else {
       this.setState({ loading: false });
