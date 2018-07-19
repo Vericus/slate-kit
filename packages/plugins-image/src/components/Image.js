@@ -50,7 +50,7 @@ class Image extends React.Component {
 
   attemptBlobUpload() {
     const { src } = this.state;
-    if (src && src.includes("blob")) {
+    if (src && src.startsWith("blob:")) {
       fetch(src)
         .then(resp => resp.blob())
         .then(blob => {
