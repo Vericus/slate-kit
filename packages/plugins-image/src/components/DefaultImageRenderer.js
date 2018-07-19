@@ -1,16 +1,53 @@
 import React from "react";
 import propTypes from "prop-types";
 
+const buttonStyle = {
+  background: "transparent",
+  border: "0",
+  color: "#767676",
+  cursor: "pointer",
+  textDecoration: "underline"
+};
+
 class DefaultImageRenderer extends React.Component {
   renderToolbar = () => {
     const { isSelected, src, loading, actions } = this.props;
     const { deleteImage, selectFile } = actions;
+    const style = {
+      position: "absolute",
+      zIndex: 1,
+      background: "linear-gradient(rgba(0, 0, 0, 0.66), transparent)",
+      width: "100%",
+      height: "4rem",
+      opacity: isSelected ? 1 : 0,
+      transition: "opacity 0.3s",
+      textAlign: "center"
+    };
+    const toolStyle = {
+      color: "white",
+      margin: "1rem"
+    };
     return (
-      isSelected &&
       src && (
-        <div style={{ position: "absolute" }}>
-          {!loading && <button onMouseDown={selectFile}>Re-Upload</button>}
-          <button onMouseDown={deleteImage}>Delete</button>
+        <div style={style}>
+          {isSelected && (
+            <div>
+              {!loading && (
+                <button
+                  style={{ ...buttonStyle, ...toolStyle }}
+                  onMouseDown={selectFile}
+                >
+                  Re-Upload
+                </button>
+              )}
+              <button
+                style={{ ...buttonStyle, ...toolStyle }}
+                onMouseDown={deleteImage}
+              >
+                Delete
+              </button>
+            </div>
+          )}
         </div>
       )
     );
@@ -18,11 +55,20 @@ class DefaultImageRenderer extends React.Component {
 
   renderSelect = () => {
     const { selectFile, deleteImage } = this.props.actions;
+    const style = { paddingTop: "10rem", textAlign: "center" };
     return (
       !this.props.src && (
-        <div>
-          <button onMouseDown={selectFile}>Select File</button>
-          <button onMouseDown={deleteImage}>Delete</button>
+        <div style={style}>
+          <div>
+            <button style={buttonStyle} onClick={selectFile}>
+              attach an image from your computer
+            </button>
+          </div>
+          <div>
+            <button style={buttonStyle} onClick={deleteImage}>
+              cancel
+            </button>
+          </div>
         </div>
       )
     );
@@ -30,17 +76,20 @@ class DefaultImageRenderer extends React.Component {
 
   renderError = () => {
     const { error } = this.props;
+    const style = {
+      background: "rgba(0, 0, 0, 0.66)",
+      color: "white",
+      position: "absolute",
+      bottom: "0",
+      width: "100%",
+      textAlign: "center"
+    };
     return (
-      <div
-        style={{
-          backgroundColor: "red",
-          color: "white",
-          position: "absolute",
-          bottom: "0"
-        }}
-      >
-        {error}
-      </div>
+      error && (
+        <div style={style}>
+          <p>Error: {error}</p>
+        </div>
+      )
     );
   };
 
@@ -48,7 +97,13 @@ class DefaultImageRenderer extends React.Component {
     this.props.src && (
       <img
         src={this.props.src}
-        style={{ objectFit: "cover", height: "25rem", width: "100%" }}
+        style={{
+          objectFit: "cover",
+          height: "25rem",
+          width: "100%",
+          opacity: this.props.loading ? 0.25 : 1,
+          cursor: "pointer"
+        }}
         onLoad={this.props.onImgLoad}
         alt="main"
       />
@@ -61,11 +116,11 @@ class DefaultImageRenderer extends React.Component {
         style={{
           position: "absolute",
           bottom: "50%",
-          left: "50%",
-          background: "white"
+          width: "100%",
+          textAlign: "center"
         }}
       >
-        Loading
+        <p>Loading</p>
       </div>
     );
 
@@ -81,8 +136,8 @@ class DefaultImageRenderer extends React.Component {
             {this.renderError()}
           </div>
         )}
-        {this.renderLoading()}
         {this.renderImage()}
+        {this.renderLoading()}
       </div>
     );
   }
