@@ -1,6 +1,6 @@
 # @Vericus / Slate Kit Image
 
-> TODO: fill in this description later
+Replaces the slatekit image with an feature-extendable image block.
 
 ## Documentation
 
@@ -8,7 +8,38 @@
 title: Slate Kit Image
 -->
 
-"TODO: Write some documentation here."
+### Options:
+
+```js
+customOptions = {
+  renderer: CustomImageRenderer,
+  maxFileSize: 5000000,
+  uploadImage: imageUpload
+};
+```
+
+#### Custom Image Renderer
+
+Example: See `DefaultImageRenderer.js` in how to construct your own custom image renderer.
+
+#### Upload Image Function
+
+Provide a promise that returns a url, given a file.
+Example:
+
+```js
+const imageUpload = file => {
+  const data = new FormData();
+  data.append("file", file);
+  return fetch("http://localhost:4000/api/upload", {
+    method: "POST",
+    body: data,
+    "Content-Type": file.type
+  }).then(resp => {
+    return resp.text();
+  });
+};
+```
 
 <!-- %enddocs -->
 
