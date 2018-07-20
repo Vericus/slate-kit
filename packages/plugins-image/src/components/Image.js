@@ -156,7 +156,7 @@ class Image extends React.Component {
     const isReadOnly = readOnly || editor.props.isReadOnly;
     const ImageRenderer = options.renderer || DefaultImageRenderer;
     return (
-      <div {...attributes} style={{ cursor: "pointer" }} draggable="true">
+      <div {...attributes}>
         {!isReadOnly && this.createInput()}
         <ImageRenderer
           actions={{ selectFile, deleteImage }}

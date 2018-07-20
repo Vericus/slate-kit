@@ -101,11 +101,11 @@ class DefaultImageRenderer extends React.Component {
           objectFit: "cover",
           height: "25rem",
           width: "100%",
-          opacity: this.props.loading ? 0.25 : 1
+          opacity: this.props.loading ? 0.25 : 1,
+          cursor: "pointer"
         }}
         onLoad={this.props.onImgLoad}
         alt="main"
-        draggable="false"
       />
     );
 
