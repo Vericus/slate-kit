@@ -1,5 +1,5 @@
 import createRenderNode from "./renderer";
-import onPaste from "./onPaste";
+import onDropPaste from "./onDropPaste";
 import schema from "./schemas";
 
 export default function ImagePlugin(pluginOptions, pluginsWrapper) {
@@ -7,7 +7,8 @@ export default function ImagePlugin(pluginOptions, pluginsWrapper) {
   return {
     schema,
     renderNode,
-    onPaste
+    onPaste: onDropPaste,
+    onDrop: onDropPaste
     // onKeyDown // TODO: insert new paragraph when enter.
   };
 }

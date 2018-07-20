@@ -101,11 +101,11 @@ class DefaultImageRenderer extends React.Component {
           objectFit: "cover",
           height: "25rem",
           width: "100%",
-          opacity: this.props.loading ? 0.25 : 1,
-          cursor: "pointer"
+          opacity: this.props.loading ? 0.25 : 1
         }}
         onLoad={this.props.onImgLoad}
         alt="main"
+        draggable="false"
       />
     );
 
@@ -129,13 +129,11 @@ class DefaultImageRenderer extends React.Component {
       <div
         style={{ height: "25rem", background: "#f7f7f7", position: "relative" }}
       >
-        {!this.props.isReadOnly && (
-          <div>
-            {this.renderToolbar()}
-            {this.renderSelect()}
-            {this.renderError()}
-          </div>
-        )}
+        {!this.props.isReadOnly && [
+          this.renderToolbar(),
+          this.renderSelect(),
+          this.renderError()
+        ]}
         {this.renderImage()}
         {this.renderLoading()}
       </div>
