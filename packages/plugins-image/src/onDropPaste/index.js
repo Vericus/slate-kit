@@ -16,45 +16,14 @@ const fileToUrl = file => {
   return blobUrl;
 };
 
-const findImgTag = str => {
-  const imgIndex = str.indexOf("<img");
-  let pointer = imgIndex + 1;
-  while (pointer < str.length && str[pointer] !== ">") {
-    pointer += 1;
-  }
-  return str.substring(imgIndex, pointer);
-};
-
-const findSrc = str => {
-  const imgIndex = str.indexOf('src="');
-  const start = imgIndex + 'src="'.length;
-  let pointer = start;
-
-  while (pointer < str.length && str[pointer] !== '"') {
-    pointer += 1;
-  }
-  return str.substring(start, pointer);
-};
-
-const htmlToUrl = html => {
-  const imgIndex = html.indexOf("<img");
-  if (imgIndex < 0) return "";
-  const imgTag = findImgTag(html);
-  const src = findSrc(imgTag);
-  return src;
-};
-
 const onDropPaste = (event, change) => {
   const transfer = getEventTransfer(event);
-  const { type, files, html } = transfer;
+  const { type, files } = transfer;
   switch (type) {
     case "files":
       files.forEach(file => {
         insertNode(change, fileToUrl(file));
       });
-      break;
-    case "html":
-      insertNode(change, htmlToUrl(html));
       break;
     default:
       break;
