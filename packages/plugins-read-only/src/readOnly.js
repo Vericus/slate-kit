@@ -29,10 +29,17 @@ export default function ReadOnly() {
     return true;
   }
 
+  function onCut(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return true;
+  }
+
   return {
     onInput,
     onDrop,
     onKeyDown,
-    onBeforeInput
+    onBeforeInput,
+    onCut
   };
 }
