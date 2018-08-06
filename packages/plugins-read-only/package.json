@@ -31,9 +31,7 @@
   "dependencies": {
     "hoist-non-react-statics": ">=2.5.0",
     "is-hotkey": ">=0.1.2",
-    "prop-types": ">=15.6.1",
-    "react": ">=16.0.0",
-    "react-dom": ">=16.0.0"
+    "prop-types": ">=15.6.1"
   },
   "devDependencies": {
     "expect": "^23.1.0",
