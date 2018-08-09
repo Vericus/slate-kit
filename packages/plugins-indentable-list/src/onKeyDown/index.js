@@ -46,12 +46,13 @@ export default function createOnKeyDown(
       resetStartAt(opts, change);
       return undefined;
     } else if (isSplitBlock) {
-      if (startBlock === endBlock && isCollapsed && startBlock.text === "") {
+      const { text } = startBlock;
+      if (startBlock === endBlock && isCollapsed && text === "") {
         e.preventDefault();
         e.stopPropagation();
         unwrapList(opts, change, true, pluginsWrapper);
         return true;
-      } else if (startBlock === endBlock) {
+      } else if (startBlock === endBlock && startOffset === text.length) {
         change.insertBlock({
           type: startBlock.type,
           data: startBlock.data.delete(startAtField).delete(checkField)
