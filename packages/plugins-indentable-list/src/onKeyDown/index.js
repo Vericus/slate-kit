@@ -60,14 +60,20 @@ export default function createOnKeyDown(
         });
         return true;
       } else if (startBlock === endBlock) {
-        change
-          .setNodeByKey(key, {
+        change.setNodeByKey(key, {
+          data: data.delete(startAtField).delete(checkField)
+        });
+        if (startOffset === 0) {
+          change.splitBlock(1);
+        } else {
+          change.insertBlock({
+            type: startBlock.type,
             data: data.delete(startAtField).delete(checkField)
-          })
-          .splitBlock(1)
-          .setNodeByKey(key, {
-            data
           });
+        }
+        change.setNodeByKey(key, {
+          data
+        });
         return true;
       }
       return undefined;
