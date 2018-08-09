@@ -59,19 +59,14 @@ export default function createOnKeyDown(
           data: data.delete(startAtField).delete(checkField)
         });
         return true;
-      } else if (startBlock === endBlock && startOffset === 0) {
-        const startAt = data.get(startAtField);
-        const checked = data.get(checkField);
+      } else if (startBlock === endBlock) {
         change
           .setNodeByKey(key, {
             data: data.delete(startAtField).delete(checkField)
           })
           .splitBlock(1)
           .setNodeByKey(key, {
-            data: Data.create({
-              [startAtField]: startAt,
-              [checkField]: checked
-            })
+            data
           });
         return true;
       }
