@@ -1,0 +1,15 @@
+{
+  "exclude": ["**/*.spec.ts"],
+  "types": ["react", "jest"],
+  "compilerOptions": {
+    "noEmitOnError": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es5",
+    "lib": ["es2018", "dom"],
+    "sourceMap": true,
+    "pretty": true,
+    "jsx": "react",
+    "strictNullChecks": true
+  }
+}

@@ -5,9 +5,11 @@ import globals from "rollup-plugin-node-globals";
 import json from "rollup-plugin-json";
 import replace from "rollup-plugin-replace";
 import resolve from "rollup-plugin-node-resolve";
-import uglify from "rollup-plugin-uglify";
+import { uglify } from "rollup-plugin-uglify";
 import visualizer from "rollup-plugin-visualizer";
+import typescript from "@wessberg/rollup-plugin-ts";
 import { startCase } from "lodash";
+import fs from "fs";
 
 /**
  * Return a Rollup configuration for a `pkg` with `env` and `target`.
@@ -22,11 +24,15 @@ function configure(pkg, location, env, target) {
   const isProd = env === "production";
   const isUmd = target === "umd";
   const isModule = target === "module";
-  const input = `${location}/src/index.js`;
+  const input = fs.existsSync(`${location}/src/index.js`)
+    ? `${location}/src/index.js`
+    : `${location}/src/index.ts`;
   const watch = {
     chokidar: true,
     include: `${location}/src/**`
   };
+
+  const isTypescript = /\.(ts|tsx)$/i.test(input);
 
   const deps = []
     .concat(pkg.dependencies ? Object.keys(pkg.dependencies) : [])
@@ -75,11 +81,19 @@ function configure(pkg, location, env, target) {
     // Register Node.js builtins for browserify compatibility.
     builtins(),
 
+    isTypescript &&
+      typescript({
+        tsconfig: `${location}/tsconfig.json`,
+        typescript: require("typescript"),
+        root: location
+      }),
+
     // Use Babel to transpile the result, limiting it to the source code.
-    babel({
-      include: [`${location}/src/**`],
-      plugins: ["external-helpers"]
-    }),
+    !isTypescript &&
+      babel({
+        include: [`${location}/src/**`],
+        plugins: ["external-helpers"]
+      }),
 
     visualizer({
       filename: `tmp/stats/${pkg.name}.html`,

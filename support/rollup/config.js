@@ -1,7 +1,8 @@
-import getPackages from "lerna-get-packages";
+import path from "path";
+import getPackages from "get-monorepo-packages";
 import factory from "./factory";
 
-const configurations = getPackages(__dirname)
+const configurations = getPackages(path.resolve("."))
   .filter(
     pkg =>
       pkg.package["slate-kit"] && pkg.package["slate-kit"].type === "module"
