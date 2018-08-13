@@ -21,8 +21,13 @@
   "module": "lib/slate-kit-paste-helpers.es.js",
   "umd": "dist/slate-kit-paste-helpers.js",
   "umdMin": "dist/slate-kit-paste-helpers.min.js",
+  "umdGlobals": {
+    "tinymce-word-paste-filter": "WordPasteFilter"
+  },
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
+    "clean": "yarn run clean:module && yan run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "devDependencies": {

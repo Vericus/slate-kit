@@ -21,7 +21,9 @@
     "type": "module"
   },
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
+    "clean": "yarn run clean:module && yan run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "dependencies": {

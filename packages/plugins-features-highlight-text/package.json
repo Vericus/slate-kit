@@ -22,13 +22,17 @@
   "umd": "dist/slate-kit-highlight-text.js",
   "umdMin": "dist/slate-kit-highlight-text.min.js",
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
+    "clean": "yarn run clean:module && yan run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "umdGlobals": {
     "immutable": "Immutable",
     "slate": "Slate",
-    "is-plain-object": "IsPlainObject"
+    "is-plain-object": "IsPlainObject",
+    "@vericus/slate-kit-highlight-text-renderer": "HighlightTextRenderer",
+    "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils"
   },
   "dependencies": {
     "immutable": "^3.8.2",

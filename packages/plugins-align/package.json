@@ -22,12 +22,15 @@
   "umd": "dist/slate-kit-align.js",
   "umdMin": "dist/slate-kit-align.min.js",
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
+    "clean": "yarn run clean:module && yan run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate"
+    "slate": "Slate",
+    "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils"
   },
   "dependencies": {
     "debug": "^3.1.0",

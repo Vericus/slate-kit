@@ -1,5 +1,6 @@
 // @flow
-import { Mark, Data, Change } from "slate";
+import { Mark, Data } from "slate";
+import type { Change } from "slate";
 import {
   hasMark,
   removeCollapsedMark,

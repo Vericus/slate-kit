@@ -1,6 +1,6 @@
 {
-  "exclude": ["**/*.spec.ts"],
-  "types": ["react", "jest"],
+  "exclude": ["**/*.spec.ts", "node_modules"],
+  "typeRoots": ["packages/typescript-typings/types", "node_modules/@types"],
   "compilerOptions": {
     "noEmitOnError": true,
     "module": "commonjs",
