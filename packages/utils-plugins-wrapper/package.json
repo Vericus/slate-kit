@@ -22,10 +22,10 @@
   "umd": "dist/slate-kit-plugins-wrapper.js",
   "umdMin": "dist/slate-kit-plugins-wrapper.min.js",
   "scripts": {
-    "clean": "yarn run clean:module && yan run clean:build",
+    "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "build": "tsc"
   },
   "umdGlobals": {
     "immutable": "Immutable",
@@ -38,7 +38,6 @@
     "immutable": "^3.8.2"
   },
   "devDependencies": {
-    "flow-bin": "0.74.0",
     "lodash": ">=4.17.10",
     "slate": ">=0.33.0",
     "slate-simulator": "^0.4.33",

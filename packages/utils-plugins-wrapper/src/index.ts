@@ -72,15 +72,14 @@ function defaultSchemaCustomizer(schema, schemas) {
     const d = resolveDocumentRule(document);
     const bs = {};
     const is = {};
-    /* eslint-disable guard-for-in, no-restricted-syntax */
-    for (const key in blocks) {
-      bs[key] = resolveNodeRule("block", key, blocks[key]);
+
+    for (const [key, value] of Object.entries(blocks)) {
+      bs[key] = resolveNodeRule("block", key, value);
     }
 
-    for (const key in inlines) {
-      is[key] = resolveNodeRule("inline", key, inlines[key]);
+    for (const [key, value] of Object.entries(inlines)) {
+      is[key] = resolveNodeRule("inline", key, value);
     }
-    /* eslint-enable guard-for-in, no-restricted-syntax */
     mergeWith(customizedSchema.document, d, customizer);
     mergeWith(customizedSchema.blocks, bs, customizer);
     mergeWith(customizedSchema.inlines, is, customizer);
@@ -88,7 +87,52 @@ function defaultSchemaCustomizer(schema, schemas) {
   return customizedSchema;
 }
 
+export interface ObjectMap {
+  [label: string]: object;
+}
+
+export interface SlateKitData {
+  mark?: object;
+}
+
+export interface SlateKitDatum {
+  marks?: object[];
+  data?: object;
+}
+
+export interface SlateKitStyle {
+  getData?: (el: HTMLElement) => SlateKitData;
+}
+
+export interface SlateKitStyles {
+  marks?: object[];
+}
+
+export interface StylesMap {
+  [label: string]: SlateKitStyle;
+}
+
+export interface RulesMap {
+  [label: string]: () => void;
+}
+
+export interface SlateKitProps {
+  getProps?: (nodeProps: object) => object;
+}
+
+export interface PropsMap {
+  [label: string]: SlateKitProps;
+}
+
 export default class PluginsWrapper {
+  serializer: null | object;
+  schema: object;
+  schemaCustomizer: (schema: object, schemas: object[]) => object;
+  CHANGES: ObjectMap;
+  OPTIONS: ObjectMap;
+  UTILS: ObjectMap;
+  STYLES: StylesMap;
+  RULES: RulesMap;
   constructor(
     { schemaCustomizer } = { schemaCustomizer: defaultSchemaCustomizer }
   ) {
@@ -100,7 +144,7 @@ export default class PluginsWrapper {
     this[UTILS] = {};
     this[SCHEMAS] = {};
     this[RULES] = {};
-    this.serializers = null;
+    this.serializer = null;
     this.schema = {
       blocks: {},
       inlines: {},
@@ -109,9 +153,13 @@ export default class PluginsWrapper {
     this.schemaCustomizer = schemaCustomizer;
   }
 
-  getOptions = label => (label ? this[OPTIONS][label] : null);
+  getOptions = (label?: string): null | object =>
+    label ? this[OPTIONS][label] : null;
 
-  getFlattenPlugins = (pluginCollection, pluginLabel) => [
+  getFlattenPlugins = (
+    pluginCollection: object,
+    pluginLabel?: string
+  ): object[] => [
     ...Object.entries(pluginCollection).reduce(
       (plugins, [label, pluginList]) => {
         if (pluginLabel && label !== pluginLabel) return plugins;
@@ -122,49 +170,53 @@ export default class PluginsWrapper {
     { schema: this.getSchema() }
   ];
 
-  getSchemas = label => {
+  getSchemas = (label?: string): object[] => {
     if (label) return this[SCHEMAS][label];
     return Object.entries(this[SCHEMAS]).reduce(
-      (schemas, entry) => schemas.concat(entry[1]),
+      (schemas: any[], [key, value]) => schemas.concat(value),
       []
     );
   };
 
   getSchema = () => this.schemaCustomizer(this.schema, this.getSchemas());
 
-  getUtils = label => (label ? this[UTILS][label] : this[UTILS]);
+  getUtils = (label?: string) => (label ? this[UTILS][label] : this[UTILS]);
 
-  getChanges = label => (label ? this[CHANGES][label] : this[CHANGES]);
+  getChanges = (label?: string) =>
+    label ? this[CHANGES][label] : this[CHANGES];
 
-  getPlugins = label =>
+  getPlugins = (label?: string) =>
     label
       ? this.getFlattenPlugins(this[PLUGINS], label)
       : this.getFlattenPlugins(this[PLUGINS]);
 
-  getData = el =>
-    Object.values(this[STYLES]).reduce((styles, style) => {
-      if (style && style.getData) {
-        const passData = style.getData(el);
-        const marks = styles.marks || [];
-        if (passData.mark) {
+  getData = (el: HTMLElement): SlateKitDatum =>
+    Object.values(this[STYLES]).reduce(
+      (styles: SlateKitStyles, style: SlateKitStyle) => {
+        if (style && style.getData) {
+          const passData = style.getData(el);
+          const marks = styles.marks || [];
+          if (passData.mark) {
+            return {
+              ...styles,
+              marks: [...marks, passData.mark]
+            };
+          }
           return {
             ...styles,
-            marks: [...marks, passData.mark]
+            ...passData
           };
         }
         return {
-          ...styles,
-          ...passData
+          ...styles
         };
-      }
-      return {
-        ...styles
-      };
-    }, {});
+      },
+      {}
+    );
 
-  getProps = nodeProps =>
+  getProps = (nodeProps: object): object =>
     Object.values(this[PROPS]).reduce(
-      (props, prop) => {
+      (props: object, prop: SlateKitProps) => {
         if (prop && prop.getProps) {
           return {
             ...props,
@@ -180,7 +232,11 @@ export default class PluginsWrapper {
       }
     );
 
-  configureHelper = (key, value, label) => {
+  configureHelper = (
+    key: string,
+    value: object | (() => any),
+    label: string
+  ): void => {
     switch (key) {
       case "style":
         if (this[STYLES][label]) {
@@ -224,10 +280,12 @@ export default class PluginsWrapper {
         }
         break;
       case "getSchema":
-        if (this[SCHEMAS][label]) {
-          this[SCHEMAS][label] = value();
-        } else {
-          this[SCHEMAS][label] = value();
+        if (typeof value !== "object") {
+          if (this[SCHEMAS][label]) {
+            this[SCHEMAS][label] = value();
+          } else {
+            this[SCHEMAS][label] = value();
+          }
         }
         break;
       case "options":
@@ -245,7 +303,7 @@ export default class PluginsWrapper {
 
   updateSerializer = () => {
     const rulesGenerators = Object.entries(this[RULES]).reduce(
-      (acc, [label, rulesGenerator]) => [
+      (acc, [label, rulesGenerator]: [string, (...args: any[]) => void]) => [
         ...acc,
         (...args) => rulesGenerator(this[OPTIONS][label], ...args)
       ],
@@ -263,8 +321,9 @@ export default class PluginsWrapper {
                 if (
                   !el.textContent ||
                   (el.textContent && el.textContent !== "")
-                )
+                ) {
                   return undefined;
+                }
                 const { data, marks } = getData(el);
                 return {
                   object: "block",
@@ -281,28 +340,33 @@ export default class PluginsWrapper {
                   el.parentNode &&
                   el.parentNode.parentNode &&
                   el.parentNode.parentNode.tagName.toLowerCase() === "div"
-                )
+                ) {
                   return undefined;
+                }
                 if (
                   el.parentNode &&
                   el.parentNode.tagName.toLowerCase() === "li"
-                )
+                ) {
                   return undefined;
+                }
                 if (el.nodeName === "#text") return undefined;
                 if (
                   el.firstChild &&
                   el.firstChild.nodeName !== "#text" &&
                   el.firstChild.firstChild &&
                   el.firstChild.firstChild.nodeName !== "#text"
-                )
+                ) {
                   return undefined;
-                if (el.firstChild && el.firstChild.nodeName === "#text")
+                }
+                if (el.firstChild && el.firstChild.nodeName === "#text") {
                   return undefined;
+                }
                 if (
                   !el.textContent ||
                   (el.textContent && el.textContent !== "")
-                )
+                ) {
                   return undefined;
+                }
                 const { data, marks } = getData(el);
                 return {
                   object: "block",
@@ -328,7 +392,6 @@ export default class PluginsWrapper {
     const plugin = createPlugin(options, this);
     let plugins;
     if (plugin.plugins) {
-      // eslint-disable-next-line prefer-destructuring
       plugins = plugin.plugins;
     } else if (plugin.plugin) {
       plugins = [plugin.plugin];
@@ -358,10 +421,18 @@ export default class PluginsWrapper {
   makePlugins = (pluginDict = []) => {
     const plugins = [
       ...pluginDict.reduce(
-        (acc, { label, createPlugin, options }) => [
-          ...acc,
-          ...this.configurePlugin(createPlugin, options, label)
-        ],
+        (
+          acc,
+          {
+            label,
+            createPlugin,
+            options
+          }: {
+            label?: string;
+            createPlugin: (...args: any[]) => any;
+            options?: object;
+          }
+        ) => [...acc, ...this.configurePlugin(createPlugin, options, label)],
         []
       ),
       { schema: this.getSchema() }

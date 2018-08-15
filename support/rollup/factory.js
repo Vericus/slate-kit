@@ -7,7 +7,7 @@ import replace from "rollup-plugin-replace";
 import resolve from "rollup-plugin-node-resolve";
 import { uglify } from "rollup-plugin-uglify";
 import visualizer from "rollup-plugin-visualizer";
-import typescript from "@wessberg/rollup-plugin-ts";
+import typescript from "rollup-plugin-typescript2";
 import { startCase } from "lodash";
 import fs from "fs";
 
@@ -84,8 +84,7 @@ function configure(pkg, location, env, target) {
     isTypescript &&
       typescript({
         tsconfig: `${location}/tsconfig.json`,
-        typescript: require("typescript"),
-        root: location
+        typescript: require("typescript")
       }),
 
     // Use Babel to transpile the result, limiting it to the source code.

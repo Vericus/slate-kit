@@ -22,7 +22,7 @@
   "umd": "dist/slate-kit-align.js",
   "umdMin": "dist/slate-kit-align.min.js",
   "scripts": {
-    "clean": "yarn run clean:module && yan run clean:build",
+    "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"

@@ -2,7 +2,6 @@
   "exclude": ["**/*.spec.ts", "node_modules"],
   "typeRoots": ["packages/typescript-typings/types", "node_modules/@types"],
   "compilerOptions": {
-    "noEmitOnError": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
