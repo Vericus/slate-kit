@@ -1,6 +1,5 @@
 // @flow
 import type { Change } from "slate";
-import { Data } from "slate";
 import { isKeyHotkey } from "is-hotkey";
 import hotkeys from "slate-hotkeys";
 import { type typeOptions } from "../options";
