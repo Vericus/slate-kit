@@ -18,6 +18,7 @@
     "access": "public"
   },
   "main": "lib/slate-kit-plugins-wrapper.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-plugins-wrapper.es.js",
   "umd": "dist/slate-kit-plugins-wrapper.js",
   "umdMin": "dist/slate-kit-plugins-wrapper.min.js",
@@ -25,7 +26,7 @@
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "tsc"
+    "build": "tsc -b ."
   },
   "umdGlobals": {
     "immutable": "Immutable",

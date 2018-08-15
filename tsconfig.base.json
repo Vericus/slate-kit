@@ -1,7 +1,8 @@
 {
-  "exclude": ["**/*.spec.ts", "node_modules"],
+  "exclude": ["**/*.spec.ts", "node_modules", "*.d.ts", "**/*.d.ts"],
   "typeRoots": ["packages/typescript-typings/types", "node_modules/@types"],
   "compilerOptions": {
+    "composite": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
@@ -9,6 +10,9 @@
     "sourceMap": true,
     "pretty": true,
     "jsx": "react",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true
   }
 }

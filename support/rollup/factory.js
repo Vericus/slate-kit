@@ -83,8 +83,9 @@ function configure(pkg, location, env, target) {
 
     isTypescript &&
       typescript({
-        tsconfig: `${location}/tsconfig.json`,
-        typescript: require("typescript")
+        tsconfig: `${location}/tsconfig.rollup.json`,
+        typescript: require("typescript"),
+        useTsconfigDeclarationDir: true
       }),
 
     // Use Babel to transpile the result, limiting it to the source code.
