@@ -9,7 +9,8 @@
     "ordered-imports": false,
     "member-ordering": false,
     "member-access": false,
-    "curly": [true, "ignore-same-line"]
+    "curly": [true, "ignore-same-line"],
+    "no-empty": [true, "allow-empty-functions"]
   },
   "rulesDirectory": []
 }
