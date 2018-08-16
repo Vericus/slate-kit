@@ -18,6 +18,7 @@
     "access": "public"
   },
   "main": "lib/slate-kit-highlight-text-renderer.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-highlight-text-renderer.es.js",
   "umd": "dist/slate-kit-highlight-text-renderer.js",
   "umdMin": "dist/slate-kit-highlight-text-renderer.min.js",
@@ -25,23 +26,26 @@
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "build": "tsc -b ."
   },
   "umdGlobals": {
     "slate": "Slate",
-    "is-plain-object": "IsPlainObject"
+    "is-plain-object": "IsPlainObject",
+    "react": "React",
+    "tslib": "TSLib",
+    "tinycolor2": "TinyColor"
   },
   "dependencies": {
     "is-plain-object": "^2.0.4",
     "prop-types": "^15.6.1",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.4.1",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@vericus/slate-kit-utils-hyperscript": "^0.0.3",
     "expect": "^23.1.0",
-    "flow-bin": "0.74.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "slate": ">=0.33.0",
