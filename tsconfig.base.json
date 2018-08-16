@@ -13,6 +13,7 @@
     "strictNullChecks": true,
     "declaration": true,
     "declarationMap": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "importHelpers": true
   }
 }

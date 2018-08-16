@@ -33,12 +33,14 @@
     "slate": "Slate",
     "react-dom/server": "ReactDomServer",
     "lodash/mergeWith": "LodashMergeWith",
-    "@vericus/slate-kit-html-serializer": "HTMLSerializer"
+    "@vericus/slate-kit-html-serializer": "HTMLSerializer",
+    "tslib": "TSLib"
   },
   "dependencies": {
     "debug": ">=3.1.0",
     "es6-symbol": ">=3.1.1",
-    "immutable": "^3.8.2"
+    "immutable": "^3.8.2",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "lodash": ">=4.17.10",
