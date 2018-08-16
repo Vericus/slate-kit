@@ -1,10 +1,17 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import { Component } from "react";
+import * as PropTypes from "prop-types";
 import hoistNonReactStatics from "hoist-non-react-statics";
 import ReadOnly from "./readOnly";
 
+interface Props {
+  plugins: object[];
+  isReadOnly: boolean;
+  spellCheck: boolean;
+}
+
 function withReadOnly(WrappedComponent) {
-  class WithReadOnly extends Component {
+  class WithReadOnly extends Component<Props> {
     static propTypes = {
       plugins: PropTypes.arrayOf(PropTypes.object).isRequired,
       isReadOnly: PropTypes.bool,
@@ -16,15 +23,18 @@ function withReadOnly(WrappedComponent) {
       spellCheck: false
     };
 
-    constructor(props) {
+    readOnly: object;
+    plugins: object[];
+
+    constructor(props: Props) {
       super(props);
       this.readOnly = ReadOnly();
-      this.plugins = props.isReadOnly
+      this.plugins = this.props.isReadOnly
         ? [this.readOnly, ...this.props.plugins]
         : this.props.plugins;
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: Props) {
       if (this.props.isReadOnly !== nextProps.isReadOnly) {
         this.plugins = nextProps.isReadOnly
           ? [this.readOnly, ...nextProps.plugins]
