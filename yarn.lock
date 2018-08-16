@@ -5624,12 +5624,6 @@ get-document@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/get-document/-/get-document-1.0.0.tgz#4821bce66f1c24cb0331602be6cb6b12c4f01c4b"
 
-get-lerna-packages@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/get-lerna-packages/-/get-lerna-packages-0.1.0.tgz#f7cf4b358584d98f24cd931451e56ee9d37094e5"
-  dependencies:
-    glob "^7.1.2"
-
 get-monorepo-packages@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/get-monorepo-packages/-/get-monorepo-packages-1.0.1.tgz#05b707d2fd12f91e20cbaff7bfde3bc7e8e35d54"
@@ -7716,12 +7710,6 @@ lcid@^1.0.0:
 left-pad@^1.2.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/left-pad/-/left-pad-1.3.0.tgz#5b8a3a7765dfe001261dde915589e782f8c94d1e"
-
-lerna-alias@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lerna-alias/-/lerna-alias-3.0.2.tgz#61d7d79b182849e98ee4cdca0127f714f8712d4d"
-  dependencies:
-    get-lerna-packages "^0.1.0"
 
 lerna@^3.0.1:
   version "3.0.3"
