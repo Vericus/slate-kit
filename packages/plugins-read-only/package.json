@@ -31,12 +31,15 @@
   "umdGlobals": {
     "is-hotkey": "IsHotkey",
     "react": "react",
-    "prop-types": "PropTypes"
+    "prop-types": "PropTypes",
+    "tslib": "TSLib",
+    "hoist-non-react-statics": "HoistNonReactStatics"
   },
   "dependencies": {
     "hoist-non-react-statics": ">=2.5.0",
     "is-hotkey": ">=0.1.2",
-    "prop-types": ">=15.6.1"
+    "prop-types": ">=15.6.1",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "expect": "^23.1.0",

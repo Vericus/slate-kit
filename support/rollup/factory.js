@@ -97,7 +97,7 @@ function configure(pkg, location, env, target) {
       }),
 
     visualizer({
-      filename: `tmp/stats/${pkg.name}.html`,
+      filename: `tmp/stats/${pkg.name}-${target}-${env}.html`,
       title: `${pkg.name}`,
       sourcemap: true
     }),
