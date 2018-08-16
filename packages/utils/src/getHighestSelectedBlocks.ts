@@ -1,5 +1,4 @@
-// @flow
-import { type Value } from "slate";
+import { Value } from "slate";
 import { List } from "immutable";
 
 export default function getHighestSelectedBlocks(value: Value) {

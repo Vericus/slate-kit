@@ -1,5 +1,4 @@
-// @flow
-import type { Value } from "slate";
+import { Value } from "slate";
 
 // check if currentSelection has block of type
 export default function hasBlock(value: Value, type: string) {

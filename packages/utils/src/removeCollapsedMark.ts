@@ -1,5 +1,4 @@
-// @flow
-import type { Change, Value } from "slate";
+import { Change, Value } from "slate";
 
 export default function removeCollapsedMark(
   value: Value,

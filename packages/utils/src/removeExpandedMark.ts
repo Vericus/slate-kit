@@ -1,5 +1,4 @@
-// @flow
-import type { Document, Selection, Change } from "slate";
+import { Document, Selection, Change } from "slate";
 
 export default function removeExpandedMark(
   document: Document,

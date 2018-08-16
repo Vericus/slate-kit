@@ -1,5 +1,4 @@
-// @flow
-import type { Value } from "slate";
+import { Value } from "slate";
 
 export default function hasActiveMark(value: Value, type: string): boolean {
   return (
