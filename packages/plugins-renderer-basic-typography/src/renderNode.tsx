@@ -1,55 +1,54 @@
-// @flow
-import React, { type Element } from "react";
-import { type Node } from "slate";
-import Types from "slate-prop-types";
+import * as React from "react";
+import { Node } from "slate";
+import SlateTypes from "slate-prop-types";
 
-type Props = {
-  attributes: any,
-  children: Element<*>,
-  className: string,
-  node: Node
-};
+export interface Props {
+  attributes: any;
+  children: JSX.Element;
+  className: string;
+  node: Node;
+}
 
-export function HeadingOne(props: Props) {
+export const HeadingOne: React.SFC<Props> = props => {
   const { className, attributes, children } = props;
   return (
     <h1 className={className} {...attributes}>
       {children}
     </h1>
   );
-}
-export function HeadingTwo(props: Props) {
+};
+export const HeadingTwo: React.SFC<Props> = props => {
   const { className, attributes, children } = props;
   return (
     <h2 className={className} {...attributes}>
       {children}
     </h2>
   );
-}
-export function HeadingThree(props: Props) {
+};
+export const HeadingThree: React.SFC<Props> = props => {
   const { className, attributes, children } = props;
   return (
     <h3 className={className} {...attributes}>
       {children}
     </h3>
   );
-}
-export function HeadingFour(props: Props) {
+};
+export const HeadingFour: React.SFC<Props> = props => {
   const { className, attributes, children } = props;
   return (
     <h4 className={className} {...attributes}>
       {children}
     </h4>
   );
-}
-export function Paragraph(props: Props) {
+};
+export const Paragraph: React.SFC<Props> = props => {
   const { className, attributes, children } = props;
   return (
     <p className={className} {...attributes}>
       {children}
     </p>
   );
-}
+};
 
 export default function createRenderNode(pluginsWrapper: any) {
   return (props: Props) => {
@@ -71,8 +70,8 @@ export default function createRenderNode(pluginsWrapper: any) {
   };
 }
 
-HeadingOne.propTypes = { ...Types };
-HeadingTwo.propTypes = { ...Types };
-HeadingThree.propTypes = { ...Types };
-HeadingFour.propTypes = { ...Types };
-Paragraph.propTypes = { ...Types };
+HeadingOne.propTypes = SlateTypes.Block;
+HeadingTwo.propTypes = SlateTypes.Block;
+HeadingThree.propTypes = SlateTypes.Block;
+HeadingFour.propTypes = SlateTypes.Block;
+Paragraph.propTypes = SlateTypes.Block;

@@ -1,5 +1,4 @@
-// @flow
-import createDefaultRenderNode, {
+import createRenderNode, {
   HeadingOne,
   HeadingTwo,
   HeadingThree,
@@ -9,7 +8,7 @@ import createDefaultRenderNode, {
 
 export function createRenderer(opts: any, pluginsWrapper: any) {
   return {
-    renderNode: createDefaultRenderNode(pluginsWrapper)
+    renderNode: createRenderNode(pluginsWrapper)
   };
 }
 
