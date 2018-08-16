@@ -1,14 +1,13 @@
-// @flow
 import { Record } from "immutable";
 
-export type typeOptions = {
-  ordered?: string,
-  unordered?: string,
-  checkList?: string,
-  startAtField?: string,
-  checkField?: string,
-  changes?: Object
-};
+export interface TypeOptions {
+  ordered?: string;
+  unordered?: string;
+  checkList?: string;
+  startAtField?: string;
+  checkField?: string;
+  changes?: object;
+}
 
 const defaultOptions = {
   ordered: "ol-list",
@@ -25,7 +24,7 @@ class Options extends Record(defaultOptions) {
   checkList: string;
   startAtField: string;
   checkField: string;
-  changes: ?Object;
+  changes: object;
 }
 
 export default Options;

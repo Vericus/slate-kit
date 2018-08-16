@@ -11,11 +11,13 @@ export default function createProps(opts, pluginsWrapper) {
   } = opts;
   const listTypes = [ordered, unordered, checkList];
   return {
-    getProps: props => {
+    getProps: nodeProps => {
       const { getIndentationLevel } = pluginsWrapper.getUtils("indent");
       const { toggleCheck } = changes;
-      if (!props.node || !listTypes.includes(props.node.type)) return props;
-      const { editor, key, node } = props;
+      if (!nodeProps.node || !listTypes.includes(nodeProps.node.type)) {
+        return nodeProps;
+      }
+      const { editor, key, node } = nodeProps;
       const {
         state: {
           value: { document }
@@ -24,12 +26,12 @@ export default function createProps(opts, pluginsWrapper) {
       const previousBlock = document.getPreviousBlock(key);
       const prevIndentation =
         previousBlock && getIndentationLevel(previousBlock);
-      const indentation = getIndentationLevel(props.node);
-      const startAt = props.node.data.get(startAtField);
-      const checked = props.node.data.get(checkField);
+      const indentation = getIndentationLevel(nodeProps.node);
+      const startAt = nodeProps.node.data.get(startAtField);
+      const checked = nodeProps.node.data.get(checkField);
       const style =
-        props.attributes && props.attributes.style
-          ? props.attributes.style
+        nodeProps.attributes && nodeProps.attributes.style
+          ? nodeProps.attributes.style
           : {};
       if (startAt) {
         style["--start-at"] = startAt;
@@ -40,12 +42,15 @@ export default function createProps(opts, pluginsWrapper) {
         prevIndentation < indentation ||
         startAt;
       const onMouseDown =
-        props.node.type === checkList
+        nodeProps.node.type === checkList
           ? e => {
               const { x } = e.target.getBoundingClientRect();
               const targetStyle = getComputedStyle(e.target);
-              const fontSize = parseInt(targetStyle.fontSize, 10);
-              const paddingLeft = parseInt(targetStyle.paddingLeft, 10);
+              const fontSize = parseInt(targetStyle.fontSize || "16px", 10);
+              const paddingLeft = parseInt(
+                targetStyle.paddingLeft || "0px",
+                10
+              );
               const min = x + paddingLeft - fontSize * 1.5;
               const max = x + paddingLeft - fontSize * 0.5;
               if (
@@ -54,37 +59,40 @@ export default function createProps(opts, pluginsWrapper) {
                   e.clientX <= max &&
                   e.target.nodeName.toLowerCase() === "li"
                 )
-              )
+              ) {
                 return;
+              }
               e.preventDefault();
               e.stopPropagation();
               if (
-                props.editor.props.isReadOnly ||
+                nodeProps.editor.props.isReadOnly ||
                 !toggleCheck ||
-                props.editor.props.readOnly
-              )
+                nodeProps.editor.props.readOnly
+              ) {
                 return;
+              }
               const {
                 state: { value },
                 props: { onChange }
-              } = props.editor;
+              } = nodeProps.editor;
               onChange(toggleCheck(value.change(), node));
             }
           : () => {};
       const className = classnames({
-        [props.className]: props.className,
+        [nodeProps.className]: nodeProps.className,
         "list-reset": shouldReset,
         [`list-reset-${indentation}`]: indentation && shouldReset,
         checked: !!checked,
-        checkList: props.node.type === checkList,
-        readOnly: props.node.type === checkList && props.editor.props.isReadOnly
+        checkList: nodeProps.node.type === checkList,
+        readOnly:
+          nodeProps.node.type === checkList && nodeProps.editor.props.isReadOnly
       });
       return {
-        ...props,
+        ...nodeProps,
         className,
         onMouseDown,
         attributes: {
-          ...props.attributes,
+          ...nodeProps.attributes,
           style
         }
       };

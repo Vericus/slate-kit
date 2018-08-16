@@ -1,15 +1,14 @@
-// @flow
-import React, { type Element } from "react";
-import { type Node } from "slate";
-import type { typeOptions } from "./options";
+import * as React from "react";
+import { Node } from "slate";
+import { TypeOptions } from "./options";
 
-type Props = {
-  attributes: any,
-  children: Element<*>,
-  className: string,
-  onMouseDown: () => {},
-  node: Node
-};
+export interface Props {
+  attributes: any;
+  children: JSX.Element;
+  className: string;
+  onMouseDown: () => {};
+  node: Node;
+}
 
 const OrderedList = ({ className, attributes, children }: Props) => (
   <ol className={className} {...attributes}>
@@ -32,7 +31,7 @@ const CheckList = ({ className, attributes, children, onMouseDown }: Props) => (
   </ul>
 );
 
-export function createRenderNode(opts: typeOptions, pluginsWrapper: any) {
+export function createRenderNode(opts: TypeOptions, pluginsWrapper: any) {
   const { ordered, unordered, checkList } = opts;
   return (props: Props) => {
     const newProps = pluginsWrapper.getProps(props);
