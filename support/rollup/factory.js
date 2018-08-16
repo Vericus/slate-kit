@@ -123,7 +123,8 @@ function configure(pkg, location, env, target) {
         name: startCase(pkg.name)
           .replace(/@vericus/g, "")
           .replace(/ /g, ""),
-        globals: pkg.umdGlobals
+        globals: pkg.umdGlobals,
+        sourcemap: true
       },
       external: Object.keys(pkg.umdGlobals || {})
     };
