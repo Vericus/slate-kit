@@ -12,6 +12,9 @@
   "module": "lib/slate-kit-utils-hyperscript.es.js",
   "umd": "dist/slate-kit-utils-hyperscript.js",
   "umdMin": "dist/slate-kit-utils-hyperscript.min.js",
+  "umdGlobals": {
+    "slate-hyperscript": "SlateHyperScript"
+  },
   "files": [
     "dist/",
     "lib/",
