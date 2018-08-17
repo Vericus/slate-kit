@@ -18,6 +18,7 @@
     "access": "public"
   },
   "main": "lib/slate-kit-html-serializer.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-html-serializer.es.js",
   "umd": "dist/slate-kit-html-serializer.js",
   "umdMin": "dist/slate-kit-html-serializer.min.js",
@@ -25,14 +26,14 @@
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "build": "tsc -b ."
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "react-dom/server": "ReactDomServer"
+    "react-dom/server": "ReactDomServer",
+    "slate-html-serializer": "SlateHTMLSerializer"
   },
   "devDependencies": {
-    "flow-bin": "0.74.0",
     "slate-html-serializer": ">=0.6.0"
   },
   "peerDependencies": {

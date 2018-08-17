@@ -3,7 +3,6 @@ import { Mark } from "slate";
 import SlateTypes from "slate-prop-types";
 
 export interface Props {
-  // eslint-disable-next-line react/no-unused-prop-types
   mark: Mark;
   children: JSX.Element;
   attributes: any;
