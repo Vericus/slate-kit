@@ -18,6 +18,7 @@
     "access": "public"
   },
   "main": "lib/slate-kit-basic-text-formatting-renderer.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-basic-text-formatting-renderer.es.js",
   "umd": "dist/slate-kit-basic-text-formatting-renderer.js",
   "umdMin": "dist/slate-kit-basic-text-formatting-renderer.min.js",
@@ -25,21 +26,25 @@
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "build": "tsc -b ."
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate"
+    "slate": "Slate",
+    "react": "React",
+    "tslib": "TSLib",
+    "slate-prop-types": "SlatePropTypes"
   },
   "dependencies": {
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
     "react": ">=16.0.0",
-    "react-dom": ">=16.0.0"
+    "react-dom": ">=16.0.0",
+    "slate-prop-types": ">=0.4.0",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "expect": "^23.1.0",
-    "flow-bin": "0.74.0",
     "react": ">=16.3.2",
     "react-dom": ">=16.3.2",
     "slate": ">=0.32.0",

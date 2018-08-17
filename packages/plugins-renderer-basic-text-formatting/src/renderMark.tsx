@@ -1,23 +1,24 @@
-// @flow
-import React, { type Element } from "react";
-import Types from "slate-prop-types";
-import type { Mark } from "slate";
+import * as React from "react";
+import { Mark } from "slate";
+import SlateTypes from "slate-prop-types";
 
-type Props = {
+export interface Props {
   // eslint-disable-next-line react/no-unused-prop-types
-  mark: Mark,
-  children: Element<*>,
-  attributes: ?any
-};
+  mark: Mark;
+  children: JSX.Element;
+  attributes: any;
+}
 
 const defaultStyle = {
   textDecoration: "inherit",
   textDecorationColor: "inherit"
 };
 
-function renderMark({ children, attributes }: Props) {
+const renderMark: React.SFC<Props> = ({ children, attributes }) => {
   return <span {...attributes}>{children}</span>;
-}
+};
+
+renderMark.propTypes = SlateTypes.Mark;
 
 export function renderBold(props: Props) {
   return renderMark({
@@ -59,27 +60,19 @@ export function renderStrikethrough(props: Props) {
   });
 }
 
-renderBold.propTypes = Types.mark;
-renderItalic.propTypes = Types.mark;
-renderUnderline.propTypes = Types.mark;
-renderStrikethrough.propTypes = Types.mark;
-renderMark.propTypes = Types.mark;
-
-export default function createPlugin() {
-  return {
-    renderMark: (props: Props) => {
-      switch (props.mark.type) {
-        case "bold":
-          return renderBold(props);
-        case "italic":
-          return renderItalic(props);
-        case "underline":
-          return renderUnderline(props);
-        case "strikethrough":
-          return renderStrikethrough(props);
-        // no default
-      }
-      return undefined;
+export default function createRenderMark() {
+  return (props: Props) => {
+    switch (props.mark.type) {
+      case "bold":
+        return renderBold(props);
+      case "italic":
+        return renderItalic(props);
+      case "underline":
+        return renderUnderline(props);
+      case "strikethrough":
+        return renderStrikethrough(props);
+      // no default
     }
+    return undefined;
   };
 }
