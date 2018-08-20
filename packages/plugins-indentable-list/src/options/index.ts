@@ -1,14 +1,13 @@
-// @flow
 import { Record } from "immutable";
 
-export type typeOptions = {
-  ordered?: string,
-  unordered?: string,
-  checkList?: string,
-  externalRenderer?: boolean,
-  startAtField?: string,
-  checkField?: string
-};
+export interface TypeOptions {
+  ordered?: string;
+  unordered?: string;
+  checkList?: string;
+  externalRenderer?: boolean;
+  startAtField?: string;
+  checkField?: string;
+}
 
 const defaultOptions = {
   ordered: "ol-list",

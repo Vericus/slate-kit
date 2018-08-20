@@ -1,13 +1,12 @@
-// @flow
-import type { Change } from "slate";
+import { Change } from "slate";
 import { isKeyHotkey } from "is-hotkey";
 import hotkeys from "slate-hotkeys";
-import { type typeOptions } from "../options";
+import { TypeOptions } from "../options";
 import { resetStartAt, unwrapList } from "../changes";
 import { isListNode } from "../utils";
 
 export default function createOnKeyDown(
-  opts: typeOptions,
+  opts: TypeOptions,
   pluginsWrapper: any
 ) {
   const { startAtField, checkField } = opts;
@@ -25,7 +24,7 @@ export default function createOnKeyDown(
     isDeleteLineBackward(e) ||
     isDeleteWordBackward(e);
 
-  return (e: SyntheticKeyboardEvent<*>, change: Change) => {
+  return (e, change: Change) => {
     const { value } = change;
     const { startBlock, endBlock, selection } = value;
     const { isCollapsed, startOffset } = selection;

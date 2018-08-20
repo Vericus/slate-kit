@@ -1,51 +1,50 @@
-// @flow
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
-import type { Value, Node } from "slate";
-import type { typeOptions } from "../options";
+import { Value, Node } from "slate";
+import { TypeOptions } from "../options";
 
-function selectedOrderedList(opts: typeOptions, value: Value) {
+function selectedOrderedList(opts: TypeOptions, value: Value) {
   const { ordered } = opts;
   return getHighestSelectedBlocks(value).filter(node => node.type === ordered);
 }
 
-function isOrderedNode(opts: typeOptions, node: Node) {
+function isOrderedNode(opts: TypeOptions, node: Node) {
   const { ordered } = opts;
   return node.type === ordered;
 }
 
-function isUnorderedNode(opts: typeOptions, node: Node) {
+function isUnorderedNode(opts: TypeOptions, node: Node) {
   const { unordered } = opts;
   return node.type === unordered;
 }
 
-function isCheckNode(opts: typeOptions, node: Node) {
+function isCheckNode(opts: TypeOptions, node: Node) {
   const { checkList } = opts;
   return node.type === checkList;
 }
 
-function isListNode(opts: typeOptions, node: Node) {
+function isListNode(opts: TypeOptions, node: Node) {
   const { ordered, unordered, checkList } = opts;
   const listTypes = [ordered, unordered, checkList];
   return listTypes.includes(node.type);
 }
 
-function isOrderedList(opts: typeOptions, value: Value) {
+function isOrderedList(opts: TypeOptions, value: Value) {
   return getHighestSelectedBlocks(value).every(node =>
     isOrderedNode(opts, node)
   );
 }
 
-function isUnorderedList(opts: typeOptions, value: Value) {
+function isUnorderedList(opts: TypeOptions, value: Value) {
   return getHighestSelectedBlocks(value).every(node =>
     isUnorderedNode(opts, node)
   );
 }
 
-function isCheckList(opts: typeOptions, value: Value) {
+function isCheckList(opts: TypeOptions, value: Value) {
   return getHighestSelectedBlocks(value).every(node => isCheckNode(opts, node));
 }
 
-function createUtils(opts: typeOptions) {
+function createUtils(opts: TypeOptions) {
   return {
     isListNode: (node: Node) => isListNode(opts, node),
     isOrderedNode: (node: Node) => isOrderedNode(opts, node),

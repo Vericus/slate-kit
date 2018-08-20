@@ -1,7 +1,6 @@
-// @flow
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
-import type { Change, Block, Node } from "slate";
-import { type typeOptions } from "../options";
+import { Change, Block, Node } from "slate";
+import { TypeOptions } from "../options";
 import {
   isOrderedList,
   isUnorderedList,
@@ -9,21 +8,21 @@ import {
   selectedOrderedList
 } from "../utils";
 
-function resetBlockStartAt(opts: typeOptions, change: Change, block: Block) {
+function resetBlockStartAt(opts: TypeOptions, change: Change, block: Block) {
   const { startAtField } = opts;
   change.setNodeByKey(block.key, {
     data: block.data.delete(startAtField)
   });
 }
 
-function resetBlockChecked(opts: typeOptions, change: Change, block: Block) {
+function resetBlockChecked(opts: TypeOptions, change: Change, block: Block) {
   const { checkField } = opts;
   change.setNodeByKey(block.key, {
     data: block.data.delete(checkField)
   });
 }
 
-function resetStartAt(opts: typeOptions, change: Change) {
+function resetStartAt(opts: TypeOptions, change: Change) {
   const { value } = change;
   const selectedBlocks = selectedOrderedList(opts, value);
   change.withoutNormalization(c => {
@@ -33,7 +32,7 @@ function resetStartAt(opts: typeOptions, change: Change) {
   });
 }
 
-function resetChecked(opts: typeOptions, change: Change) {
+function resetChecked(opts: TypeOptions, change: Change) {
   const { value } = change;
   const selectedBlocks = selectedOrderedList(opts, value);
   change.withoutNormalization(c => {
@@ -43,7 +42,7 @@ function resetChecked(opts: typeOptions, change: Change) {
   });
 }
 
-function changeListType(opts: typeOptions, change: Change, type: string) {
+function changeListType(opts: TypeOptions, change: Change, type: string) {
   const { ordered, unordered, checkList } = opts;
   const { value } = change;
   const selectedBlocks = getHighestSelectedBlocks(value);
@@ -70,7 +69,7 @@ function changeListType(opts: typeOptions, change: Change, type: string) {
 }
 
 function createListWithType(
-  opts: typeOptions,
+  opts: TypeOptions,
   change: Change,
   type: string,
   startAt?: number
@@ -92,7 +91,7 @@ function createListWithType(
 }
 
 function unwrapList(
-  opts: typeOptions,
+  opts: TypeOptions,
   change: Change,
   isDelete: boolean,
   pluginsWrapper: any
@@ -108,14 +107,14 @@ function unwrapList(
   }
 }
 
-function toggleCheck(opts: typeOptions, change: Change, node: Node) {
+function toggleCheck(opts: TypeOptions, change: Change, node: Node) {
   const { checkField } = opts;
   return change.setNodeByKey(node.key, {
     data: node.data.set(checkField, !node.data.get(checkField))
   });
 }
 
-function createChanges(opts: typeOptions, pluginsWrapper: any) {
+function createChanges(opts: TypeOptions, pluginsWrapper: any) {
   return {
     createListWithType: (change: Change, type: string, startAt: number) =>
       createListWithType(opts, change, type, startAt),
