@@ -1,12 +1,11 @@
-// @flow
 import { Record } from "immutable";
 
-export type typeOptions = {
-  tabable: Array<string>,
-  indentable: Array<string>,
-  maxIndentation: number,
-  dataField: string
-};
+export interface TypeOptions {
+  tabable: string[];
+  indentable: string[];
+  maxIndentation: number;
+  dataField: string;
+}
 
 const defaultOptions = {
   tabable: [
@@ -31,8 +30,8 @@ const defaultOptions = {
 };
 
 class Options extends Record(defaultOptions) {
-  tabable: Array<string>;
-  indentabe: Array<string>;
+  tabable: string[];
+  indentable: string[];
   maxIndentation: number;
   dataField: string;
 }

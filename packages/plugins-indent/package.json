@@ -18,6 +18,7 @@
     "access": "public"
   },
   "main": "lib/slate-kit-indent.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-indent.es.js",
   "umd": "dist/slate-kit-indent.js",
   "umdMin": "dist/slate-kit-indent.min.js",
@@ -25,13 +26,17 @@
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "build": "BABEL_ENV=build babel ./src --out-dir ./module",
+    "dev": "tsc -w ."
   },
   "umdGlobals": {
     "immutable": "Immutable",
     "slate": "Slate",
     "is-hotkey": "IsHotkey",
-    "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils"
+    "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
+    "tslib": "TSLib",
+    "slate-hotkeys": "SlateHotKeys",
+    "slate-dev-environment": "SlateDevEnvironment"
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -39,7 +44,6 @@
   },
   "devDependencies": {
     "expect": "^23.1.0",
-    "flow-bin": "0.74.0",
     "is-hotkey": ">=0.1.2",
     "slate": ">=0.33.6",
     "slate-dev-environment": ">=0.1.1",

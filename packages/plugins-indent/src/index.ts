@@ -1,6 +1,4 @@
-// @flow
-
-import Options, { type typeOptions } from "./options";
+import Options, { TypeOptions } from "./options";
 import createChanges from "./changes";
 import createUtils from "./utils";
 import createOnKeyDown from "./onKeyDown";
@@ -8,7 +6,7 @@ import createProps from "./props";
 import createSchema from "./schemas";
 import createStyle from "./style";
 
-function createIndentPlugin(pluginOptions: typeOptions) {
+function createIndentPlugin(pluginOptions: TypeOptions) {
   const options = new Options(pluginOptions);
   const utils = createUtils(options);
   const changes = createChanges(options);

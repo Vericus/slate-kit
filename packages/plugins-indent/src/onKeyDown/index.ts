@@ -1,12 +1,11 @@
-// @flow
-import type { Change } from "slate";
+import { Change } from "slate";
 import isHotkey from "is-hotkey";
 import hotkeys from "slate-hotkeys";
-import { type typeOptions } from "../options";
+import { TypeOptions } from "../options";
 import { increaseIndent, decreaseIndent } from "../changes";
 import { getIndentationLevel } from "../utils";
 
-export default function createOnKeyDown(opts: typeOptions) {
+export default function createOnKeyDown(opts: TypeOptions) {
   const { tabable } = opts;
   const {
     isDeleteCharBackward,
@@ -18,7 +17,7 @@ export default function createOnKeyDown(opts: typeOptions) {
     isDeleteLineBackward(e) ||
     isDeleteWordBackward(e);
 
-  return (event: SyntheticKeyboardEvent<*>, change: Change) => {
+  return (event, change: Change) => {
     const { value } = change;
     const { startBlock, endBlock, selection } = value;
     const { isCollapsed, startOffset } = selection;
