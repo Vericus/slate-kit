@@ -1,8 +1,7 @@
-// @flow
-import type { Value } from "slate";
-import type { typeOptions } from "../options";
+import { Value } from "slate";
+import { TypeOptions } from "../options";
 
-export default function createUtils(opts: typeOptions) {
+export default function createUtils(opts: TypeOptions) {
   const { defaultColor, data, type } = opts;
   return {
     currentColor: (value: Value) => {
@@ -10,7 +9,7 @@ export default function createUtils(opts: typeOptions) {
         const activeColorMarks = value.activeMarks
           .filter(mark => mark.type === type)
           .map(mark => mark.data.get(data));
-        const uniqueColorMarks = [...new Set(activeColorMarks)];
+        const uniqueColorMarks = [...Array.from(new Set(activeColorMarks))];
         if (uniqueColorMarks.length !== 0) {
           return uniqueColorMarks[0];
         }

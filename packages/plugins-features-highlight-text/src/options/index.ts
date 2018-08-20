@@ -1,6 +1,15 @@
-// @flow
 import { Record } from "immutable";
-import isPlainObject from "is-plain-object";
+
+const isPlainObject = require("is-plain-object");
+
+export interface TypeOptions {
+  type: string;
+  alpha?: number;
+  data: string;
+  styles: string[];
+  defaultColor: string;
+  externalRenderer: boolean;
+}
 
 const defaultOptions = {
   type: undefined,
@@ -11,18 +20,9 @@ const defaultOptions = {
   externalRenderer: false
 };
 
-export type typeOptions = {
-  type: string,
-  alpha?: number,
-  data: string,
-  styles: Array<string>,
-  defaultColor: string,
-  externalRenderer: boolean
-};
-
 class Options extends Record(defaultOptions, "highlight text option") {
   type: string;
-  styles: Array<string>;
+  styles: string[];
   data: string;
   alpha: number;
   defaultColor: string;
@@ -58,19 +58,11 @@ class Options extends Record(defaultOptions, "highlight text option") {
     });
   }
 
-  static isOptions(any: any) {
+  static isOptions(args: any) {
     return !!(
-      any instanceof Record &&
-      ["type", "data", "styles", "defaultColor"].every(key => any.has(key))
+      args instanceof Record &&
+      ["type", "data", "styles", "defaultColor"].every(key => args.has(key))
     );
-  }
-
-  /**
-   * Alias `toJS`.
-   */
-
-  toJS(options: any) {
-    return this.toJSON(options);
   }
 }
 

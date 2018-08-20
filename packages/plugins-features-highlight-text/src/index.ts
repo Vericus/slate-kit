@@ -1,16 +1,15 @@
-// @flow
 import Renderer from "@vericus/slate-kit-highlight-text-renderer";
-import Options, { type typeOptions } from "./options";
+import Options, { TypeOptions } from "./options";
 import createChanges from "./changes";
 import createUtils from "./utils";
 import createSchema from "./schemas";
 
-export default function createPlugin(pluginOptions: typeOptions) {
+export default function createPlugin(pluginOptions: TypeOptions) {
   const options = Options.create(pluginOptions);
   const changes = createChanges(options);
   const schemas = createSchema();
   const utils = createUtils(options);
-  const plugin = {
+  const plugin: any = {
     options,
     changes,
     utils,

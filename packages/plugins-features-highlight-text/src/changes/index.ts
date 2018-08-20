@@ -1,15 +1,14 @@
-// @flow
 import { Mark, Data } from "slate";
-import type { Change } from "slate";
+import { Change } from "slate";
 import {
   hasMark,
   removeCollapsedMark,
   removeExpandedMark
 } from "@vericus/slate-kit-plugins-utils";
 import tinycolor from "tinycolor2";
-import type { typeOptions } from "../options";
+import { TypeOptions } from "../options";
 
-export default function createChanges(opt: typeOptions) {
+export default function createChanges(opt: TypeOptions) {
   const { defaultColor, data, type } = opt;
   return {
     changeColor: (change: Change, color: string) => {
