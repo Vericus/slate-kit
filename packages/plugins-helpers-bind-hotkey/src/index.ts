@@ -1,9 +1,7 @@
-// @flow
-
-import Options, { type typeOptions } from "./options";
+import Options, { TypeOptions } from "./options";
 import createOnKeyDown from "./onKeyDown";
 
-function createHotKeyPlugin(pluginOptions: typeOptions) {
+function createHotKeyPlugin(pluginOptions: TypeOptions) {
   const options = new Options(pluginOptions);
   const onKeyDown = createOnKeyDown(options);
   return {
