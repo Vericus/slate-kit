@@ -31,7 +31,8 @@
   "umdGlobals": {
     "immutable": "Immutable",
     "react-dom/server": "ReactDomServer",
-    "slate-html-serializer": "SlateHTMLSerializer"
+    "slate-html-serializer": "SlateHTMLSerializer",
+    "tslib": "TSLib"
   },
   "devDependencies": {
     "slate-html-serializer": ">=0.6.0"

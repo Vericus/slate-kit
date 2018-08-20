@@ -34,7 +34,7 @@
     "slate": "Slate",
     "react-dom/server": "ReactDomServer",
     "lodash/mergeWith": "LodashMergeWith",
-    "@vericus/slate-kit-html-serializer": "HTMLSerializer",
+    "@vericus/slate-kit-html-serializer": "SlateKitHTMLSerializer",
     "tslib": "TSLib"
   },
   "dependencies": {
