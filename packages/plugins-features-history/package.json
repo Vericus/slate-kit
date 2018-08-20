@@ -40,7 +40,6 @@
   },
   "devDependencies": {
     "expect": "^23.1.0",
-    "flow-bin": "0.74.0",
     "slate": ">=0.33.0",
     "slate-hotkeys": ">=0.1.1",
     "slate-simulator": "^0.4.33",
