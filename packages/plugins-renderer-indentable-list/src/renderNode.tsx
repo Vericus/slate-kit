@@ -24,10 +24,7 @@ const UnOrderedList = ({ className, attributes, children }: Props) => (
 
 const CheckList = ({ className, attributes, children, onMouseDown }: Props) => (
   <ul className={className} {...attributes}>
-    {
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-      <li onMouseDown={onMouseDown}>{children}</li>
-    }
+    <li onMouseDown={onMouseDown}>{children}</li>
   </ul>
 );
 
