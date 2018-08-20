@@ -1,5 +1,4 @@
-// @flow
-import type { Value } from "slate";
+import { Value } from "slate";
 
 export default function hasRedo(value: Value) {
   return !(

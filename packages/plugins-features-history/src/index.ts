@@ -1,10 +1,9 @@
-// @flow
-import type { Change } from "slate";
+import { Change } from "slate";
 import hotkeys from "slate-hotkeys";
-import Options, { type typeOptions } from "./options";
+import Options, { TypeOptions } from "./options";
 import utils, { handleUndo, handleRedo } from "./utils";
 
-export default function History(pluginOptions: typeOptions = {}) {
+export default function History(pluginOptions: TypeOptions = {}) {
   const opts = new Options(pluginOptions);
   const { onUndo, onRedo } = opts;
 

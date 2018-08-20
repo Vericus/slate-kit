@@ -1,10 +1,9 @@
-// @flow
-import type { Value, Change } from "slate";
+import { Value, Change } from "slate";
 import hasUndo from "./hasUndo";
 
 export default function handleUndo(
   value: Value,
-  editorChange: ?Change,
+  editorChange: Change | undefined,
   onUndo: (change: Change) => void
 ) {
   const change = editorChange || value.change();
