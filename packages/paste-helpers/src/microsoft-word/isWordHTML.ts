@@ -1,4 +1,3 @@
-// @flow
 export default function isWordHTML(html: string) {
   return html
     .toString()

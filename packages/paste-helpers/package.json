@@ -18,21 +18,20 @@
     "access": "public"
   },
   "main": "lib/slate-kit-paste-helpers.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-paste-helpers.es.js",
   "umd": "dist/slate-kit-paste-helpers.js",
   "umdMin": "dist/slate-kit-paste-helpers.min.js",
   "umdGlobals": {
-    "tinymce-word-paste-filter": "WordPasteFilter"
+    "tinymce-word-paste-filter": "WordPasteFilter",
+    "tslib": "TSLib"
   },
   "scripts": {
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module",
-    "dev": "yarn run build --watch"
-  },
-  "devDependencies": {
-    "flow-bin": "0.74.0"
+    "dev": "tsc -w ."
   },
   "dependencies": {
     "tinymce-word-paste-filter": "^0.6.1"

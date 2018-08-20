@@ -1,4 +1,3 @@
-// @flow
 import wordFilter from "tinymce-word-paste-filter";
 
 // filter pasted HTML using wordFilter from tinymce to get rid of
