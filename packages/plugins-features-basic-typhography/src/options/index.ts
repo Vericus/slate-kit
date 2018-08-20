@@ -1,6 +1,12 @@
-// @flow
 import { Record } from "immutable";
-import isPlainObject from "is-plain-object";
+
+const isPlainObject = require("is-plain-object");
+
+export interface TypeOptions {
+  blockTypes: string[];
+  defaultBlock: string;
+  externalRenderer: boolean;
+}
 
 const defaultOptions = {
   blockTypes: [
@@ -14,14 +20,8 @@ const defaultOptions = {
   externalRenderer: false
 };
 
-export type typeOptions = {
-  blockTypes: Array<string>,
-  defaultBlock: string,
-  externalRenderer: boolean
-};
-
 class Options extends Record(defaultOptions, "Typhography Options") {
-  blockTypes: Array<string>;
+  blockTypes: string[];
   defaultBlock: string;
   externalRenderer: boolean;
 
@@ -48,19 +48,11 @@ class Options extends Record(defaultOptions, "Typhography Options") {
     return new Options(options);
   }
 
-  static isOptions(any: any) {
+  static isOptions(args: any) {
     return !!(
-      any instanceof Record &&
-      ["blockTypes", "defaultBlock"].every(key => any.has(key))
+      args instanceof Record &&
+      ["blockTypes", "defaultBlock"].every(key => args.has(key))
     );
-  }
-
-  /**
-   * Alias `toJS`.
-   */
-
-  toJS(options: any) {
-    return this.toJSON(options);
   }
 }
 

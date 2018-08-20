@@ -1,14 +1,13 @@
-// @flow
-import type { Node, Value } from "slate";
+import { Node, Value } from "slate";
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
-import { type typeOptions } from "../options";
+import { TypeOptions } from "../options";
 
-function isTypography(opts: typeOptions, node: Node) {
+function isTypography(opts: TypeOptions, node: Node) {
   const { blockTypes } = opts;
   return blockTypes.includes(node.type);
 }
 
-function currentTypography(opts: typeOptions, value: Value) {
+function currentTypography(opts: TypeOptions, value: Value) {
   const { blockTypes } = opts;
   return (
     blockTypes.find(t => {
@@ -24,7 +23,7 @@ function currentTypography(opts: typeOptions, value: Value) {
   );
 }
 
-function createUtils(opts: typeOptions) {
+function createUtils(opts: TypeOptions) {
   return {
     isTypography: (node: Node) => isTypography(opts, node),
     currentTypography: (value: Value) => currentTypography(opts, value)

@@ -1,16 +1,26 @@
-// @flow
-import type { Block, Change } from "slate";
-import { type typeOptions } from "../options";
+import { Block, Change } from "slate";
+import { TypeOptions } from "../options";
 
-export default function createSchema(opts: typeOptions) {
+export interface SlateSchemas {
+  validateNode?: (block: Block) => any;
+  getSchema?: () => object;
+}
+
+export interface SlateSchema {
+  blocks?: object;
+}
+
+export default function createSchema(opts: TypeOptions) {
   const { blockTypes } = opts;
-  const schemas = {};
-  const schema = {};
+  const schemas: SlateSchemas = {};
+  const schema: SlateSchema = {};
   schema.blocks = {};
   blockTypes.forEach(block => {
-    schema.blocks[block] = {
-      isVoid: false
-    };
+    if (schema.blocks) {
+      schema.blocks[block] = {
+        isVoid: false
+      };
+    }
   });
   schemas.validateNode = (block: Block) => {
     if (block.object !== "block") return undefined;
