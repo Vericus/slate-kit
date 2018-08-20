@@ -36,3 +36,4 @@ src/styles/main.css
 **/flow-typed
 storybook-static
 packages/**/.flowconfig
+**/.rpt2_cache/**
