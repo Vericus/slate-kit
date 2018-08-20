@@ -18,6 +18,7 @@
     "access": "public"
   },
   "main": "lib/slate-kit-indentable-list.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-indentable-list.es.js",
   "umd": "dist/slate-kit-indentable-list.js",
   "umdMin": "dist/slate-kit-indentable-list.min.js",
@@ -25,7 +26,8 @@
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "build": "BABEL_ENV=build babel ./src --out-dir ./module",
+    "dev": "tsc -w ."
   },
   "umdGlobals": {
     "immutable": "Immutable",

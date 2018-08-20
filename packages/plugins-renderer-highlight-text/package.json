@@ -26,7 +26,8 @@
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "tsc -b ."
+    "build": "tsc -b .",
+    "dev": "tsc -w ."
   },
   "umdGlobals": {
     "slate": "Slate",

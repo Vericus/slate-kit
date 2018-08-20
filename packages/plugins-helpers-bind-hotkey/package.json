@@ -24,7 +24,8 @@
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "build": "BABEL_ENV=build babel ./src --out-dir ./module",
+    "dev": "yarn run build --watch"
   },
   "umdGlobals": {
     "immutable": "Immutable",
