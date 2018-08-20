@@ -8,7 +8,7 @@ import resolve from "rollup-plugin-node-resolve";
 import { uglify } from "rollup-plugin-uglify";
 import visualizer from "rollup-plugin-visualizer";
 import typescript from "rollup-plugin-typescript2";
-import progress from "rollup-plugin-progress";
+// import progress from "rollup-plugin-progress";
 import { startCase } from "lodash";
 import fs from "fs";
 
@@ -108,8 +108,8 @@ function configure(pkg, location, env, target) {
 
     // Only minify the output in production, since it is very slow. And only
     // for UMD builds, since modules will be bundled by the consumer.
-    isUmd && isProd && uglify(),
-    progress()
+    isUmd && isProd && uglify()
+    // progress()
   ].filter(Boolean);
 
   if (isUmd) {
