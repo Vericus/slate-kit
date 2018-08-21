@@ -38,4 +38,4 @@ storybook-static
 packages/**/.flowconfig
 
 # rollup-typescript-cache
-.rpt2_cache
+**/.rpt2_cache/**
