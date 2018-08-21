@@ -1,4 +1,3 @@
-// @flow
 import { Set } from "immutable";
 import { Mark } from "slate";
 
@@ -32,7 +31,7 @@ function getFontWeightMark(fontWeight) {
 }
 
 export default function getData(el: HTMLElement) {
-  let marks = new Set();
+  let marks = Set();
   const { style } = el;
   if (style) {
     const { fontStyle, textDecoration, fontWeight } = style;

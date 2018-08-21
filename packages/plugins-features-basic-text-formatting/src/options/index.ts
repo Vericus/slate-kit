@@ -1,20 +1,19 @@
-// @flow
 import { Record } from "immutable";
-import { type Change } from "slate";
+import { Change } from "slate";
 
-export type KeyBinding = {
-  hotkeys: string,
-  changeName?: string,
-  change?: (change: Change) => void
-};
+export interface KeyBinding {
+  hotkeys: string;
+  changeName?: string;
+  change?: (change: Change) => void;
+}
 
-export type typeOptions = {
-  externalRenderer: boolean,
-  keyBindings: Array<KeyBinding>,
-  marks: Array<string>
-};
+export interface TypeOptions {
+  externalRenderer: boolean;
+  keyBindings: KeyBinding[];
+  marks: string[];
+}
 
-const defaultOption: typeOptions = {
+const defaultOption: TypeOptions = {
   keyBindings: [
     { hotkeys: "mod+b", changeName: "toggleBold" },
     { hotkeys: "mod+i", changeName: "toggleItalic" },
@@ -26,8 +25,8 @@ const defaultOption: typeOptions = {
 
 class Options extends Record(defaultOption) {
   externalRenderer: boolean;
-  keyBindings: Array<KeyBinding>;
-  marks: Array<string>;
+  keyBindings: KeyBinding[];
+  marks: string[];
 }
 
 export default Options;

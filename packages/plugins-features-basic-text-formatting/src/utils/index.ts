@@ -1,5 +1,4 @@
-// @flow
-import { type Value } from "slate";
+import { Value } from "slate";
 import { hasActiveMark } from "@vericus/slate-kit-plugins-utils";
 
 export default function createUtils() {

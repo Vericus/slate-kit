@@ -18,6 +18,7 @@
     "access": "public"
   },
   "main": "lib/slate-kit-basic-text-formatting.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-basic-text-formatting.es.js",
   "umd": "dist/slate-kit-basic-text-formatting.js",
   "umdMin": "dist/slate-kit-basic-text-formatting.min.js",
@@ -25,13 +26,16 @@
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module",
-    "dev": "yarn run build --watch"
+    "build": "tsc -b .",
+    "dev": "tsc -w ."
   },
   "umdGlobals": {
     "immutable": "Immutable",
+    "tslib": "TSLib",
     "slate": "Slate",
-    "is-hotkey": "IsHotkey"
+    "@vericus/slate-kit-basic-text-formatting-renderer": "TextFormatRenderer",
+    "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
+    "@vericus/slate-kit-bind-hotkey": "SlateKitBindHotKey"
   },
   "dependencies": {
     "debug": "^3.1.0",

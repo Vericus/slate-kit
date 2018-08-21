@@ -1,5 +1,4 @@
-// @flow
-import { type Change } from "slate";
+import { Change } from "slate";
 
 export default function createChanges() {
   return {

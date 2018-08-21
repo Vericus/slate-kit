@@ -1,4 +1,3 @@
-// @flow
 import getData from "./getData";
 
 export default function createStyle() {

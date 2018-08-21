@@ -1,4 +1,3 @@
-// @flow
 import Renderer from "@vericus/slate-kit-basic-text-formatting-renderer";
 import Options from "./options";
 import createChanges from "./changes";
