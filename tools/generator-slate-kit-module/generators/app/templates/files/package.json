@@ -18,6 +18,7 @@
     "access": "public"
   },
   "main": "lib/<%= module %>.js",
+  "types": "lib/index.d.ts",
   "module": "lib/<%= module %>.es.js",
   "umd": "dist/<%= module %>.js",
   "umdMin": "dist/<%= module %>.min.js",
@@ -25,12 +26,19 @@
     "clean": "rm -rf ./dist ./lib ./node_modules ./module",
     "build": "BABEL_ENV=build babel ./src --out-dir ./module"
   },
+  "scripts": {
+    "clean": "yarn run clean:module && yarn run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
+    "build": "tsc -b .",
+    "dev": "tsc -w ."
+  },
   "umdGlobals": {
     "immutable": "Immutable",
     "slate": "Slate"
   },
-  "devDependencies": {
-    "flow-bin": "0.74.0"
+  "dependencies": {
+    "tslib": "^1.9.3"
   },
   "keywords": [
     "Vericus",
