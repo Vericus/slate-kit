@@ -18,18 +18,24 @@
     "access": "public"
   },
   "main": "lib/slate-kit-html-serializer.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-html-serializer.es.js",
   "umd": "dist/slate-kit-html-serializer.js",
   "umdMin": "dist/slate-kit-html-serializer.min.js",
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "clean": "yarn run clean:module && yarn run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
+    "build": "tsc -b .",
+    "dev": "tsc -w ."
   },
   "umdGlobals": {
-    "immutable": "Immutable"
+    "immutable": "Immutable",
+    "react-dom/server": "ReactDomServer",
+    "slate-html-serializer": "SlateHTMLSerializer",
+    "tslib": "TSLib"
   },
   "devDependencies": {
-    "flow-bin": "0.74.0",
     "slate-html-serializer": ">=0.6.0"
   },
   "peerDependencies": {
@@ -44,5 +50,8 @@
     "serializer",
     "Vericus",
     "xml"
-  ]
+  ],
+  "dependencies": {
+    "tslib": "^1.9.3"
+  }
 }

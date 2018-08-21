@@ -3,6 +3,7 @@
 **/module/
 **/node_modules/
 **/tests/
+**/test/
 **/custom-flow-typed/**/*.js
 stories/
 support/

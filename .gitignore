@@ -36,4 +36,6 @@ src/styles/main.css
 **/flow-typed
 storybook-static
 packages/**/.flowconfig
+
+# rollup-typescript-cache
 **/.rpt2_cache/**

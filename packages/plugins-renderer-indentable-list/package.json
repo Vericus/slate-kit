@@ -18,27 +18,34 @@
     "access": "public"
   },
   "main": "lib/slate-kit-indentable-list-renderer.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-indentable-list-renderer.es.js",
   "umd": "dist/slate-kit-indentable-list-renderer.js",
   "umdMin": "dist/slate-kit-indentable-list-renderer.min.js",
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "clean": "yarn run clean:module && yarn run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
+    "build": "tsc -b .",
+    "dev": "tsc -w ."
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate"
+    "slate": "Slate",
+    "classnames": "ClassNames",
+    "react": "React",
+    "tslib": "TSLib"
   },
   "dependencies": {
     "classnames": ">=2.2.5",
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
     "react": ">=16.0.0",
-    "react-dom": ">=16.0.0"
+    "react-dom": ">=16.0.0",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "expect": "^23.1.0",
-    "flow-bin": "0.74.0",
     "react": ">=16.3.2",
     "react-dom": ">=16.3.2",
     "slate": ">=0.32.0",

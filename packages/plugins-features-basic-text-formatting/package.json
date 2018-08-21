@@ -18,25 +18,32 @@
     "access": "public"
   },
   "main": "lib/slate-kit-basic-text-formatting.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-basic-text-formatting.es.js",
   "umd": "dist/slate-kit-basic-text-formatting.js",
   "umdMin": "dist/slate-kit-basic-text-formatting.min.js",
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "clean": "yarn run clean:module && yarn run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
+    "build": "tsc -b .",
+    "dev": "tsc -w ."
   },
   "umdGlobals": {
     "immutable": "Immutable",
+    "tslib": "TSLib",
     "slate": "Slate",
-    "is-hotkey": "IsHotkey"
+    "@vericus/slate-kit-basic-text-formatting-renderer": "TextFormatRenderer",
+    "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
+    "@vericus/slate-kit-bind-hotkey": "SlateKitBindHotKey"
   },
   "dependencies": {
     "debug": "^3.1.0",
-    "immutable": "^3.8.2"
+    "immutable": "^3.8.2",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "expect": "^23.1.0",
-    "flow-bin": "0.74.0",
     "react": ">=16.3.2",
     "react-dom": ">=16.3.2",
     "slate": ">=0.32.0",

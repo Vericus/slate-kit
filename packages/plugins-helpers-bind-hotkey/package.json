@@ -9,6 +9,7 @@
     "access": "public"
   },
   "main": "lib/slate-kit-bind-hotkey.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-bind-hotkey.es.js",
   "umd": "dist/slate-kit-bind-hotkey.js",
   "umdMin": "dist/slate-kit-bind-hotkey.min.js",
@@ -21,21 +22,25 @@
     "type": "module"
   },
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "clean": "yarn run clean:module && yarn run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
+    "build": "tsc -b .",
+    "dev": "tsc -w ."
   },
   "umdGlobals": {
     "immutable": "Immutable",
+    "tslib": "TSLib",
     "slate": "Slate",
     "is-hotkey": "IsHotkey"
   },
   "dependencies": {
     "debug": ">=3.1.0",
-    "immutable": "^3.8.2"
+    "immutable": "^3.8.2",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "expect": "^23.1.0",
-    "flow-bin": "0.74.0",
     "is-hotkey": ">=0.1.2",
     "slate": ">=0.33.0",
     "slate-simulator": "^0.4.33",

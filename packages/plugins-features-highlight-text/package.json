@@ -18,27 +18,35 @@
     "access": "public"
   },
   "main": "lib/slate-kit-highlight-text.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-highlight-text.es.js",
   "umd": "dist/slate-kit-highlight-text.js",
   "umdMin": "dist/slate-kit-highlight-text.min.js",
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "clean": "yarn run clean:module && yarn run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
+    "build": "tsc -b .",
+    "dev": "tsc -w ."
   },
   "umdGlobals": {
     "immutable": "Immutable",
     "slate": "Slate",
-    "is-plain-object": "IsPlainObject"
+    "is-plain-object": "IsPlainObject",
+    "@vericus/slate-kit-highlight-text-renderer": "HighlightTextRenderer",
+    "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
+    "tslib": "TSLib",
+    "tinycolor2": "TinyColor"
   },
   "dependencies": {
     "immutable": "^3.8.2",
     "is-plain-object": "^2.0.4",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.4.1",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@vericus/slate-kit-utils-hyperscript": "^0.0.3",
     "expect": "^23.1.0",
-    "flow-bin": "0.74.0",
     "slate": ">=0.33.0",
     "to-camel-case": "^1.0.0"
   },

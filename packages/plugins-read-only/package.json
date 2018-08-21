@@ -18,24 +18,32 @@
     "access": "public"
   },
   "main": "lib/slate-kit-read-only.js",
+  "types": "lib/index.d.ts",
   "module": "lib/slate-kit-read-only.es.js",
   "umd": "dist/slate-kit-read-only.js",
   "umdMin": "dist/slate-kit-read-only.min.js",
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "clean": "yarn run clean:module && yarn run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
+    "build": "tsc -b .",
+    "dev": "tsc -w ."
   },
   "umdGlobals": {
-    "is-hotkey": "IsHotkey"
+    "is-hotkey": "IsHotkey",
+    "react": "react",
+    "prop-types": "PropTypes",
+    "tslib": "TSLib",
+    "hoist-non-react-statics": "HoistNonReactStatics"
   },
   "dependencies": {
     "hoist-non-react-statics": ">=2.5.0",
     "is-hotkey": ">=0.1.2",
-    "prop-types": ">=15.6.1"
+    "prop-types": ">=15.6.1",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "expect": "^23.1.0",
-    "flow-bin": "0.74.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "slate-simulator": "^0.4.33",

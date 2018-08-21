@@ -12,6 +12,10 @@
   "module": "lib/slate-kit-utils-hyperscript.es.js",
   "umd": "dist/slate-kit-utils-hyperscript.js",
   "umdMin": "dist/slate-kit-utils-hyperscript.min.js",
+  "umdGlobals": {
+    "slate-hyperscript": "SlateHyperScript",
+    "tslib": "TSLib"
+  },
   "files": [
     "dist/",
     "lib/",
@@ -21,11 +25,15 @@
     "type": "module"
   },
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
+    "clean": "yarn run clean:module && yarn run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
+    "build": "BABEL_ENV=build babel ./src --out-dir ./module",
+    "dev": "yarn run build --watch"
   },
   "dependencies": {
-    "slate-hyperscript": ">=0.5.10"
+    "slate-hyperscript": ">=0.5.10",
+    "tslib": "^1.9.3"
   },
   "keywords": [
     "Vericus",

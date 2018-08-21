@@ -1,6 +1,5 @@
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const { webpack: lernaAliases } = require("lerna-alias");
 
 const extractCss = new ExtractTextPlugin({
   filename: "[name].[contenthash].css",
@@ -36,10 +35,6 @@ module.exports = (storybookBaseConfig, configType) => {
       }
     ],
     enforce: "pre"
-  });
-
-  storybookBaseConfig.resolve.alias = lernaAliases({
-    directory: path.resolve(__dirname)
   });
 
   storybookBaseConfig.plugins.push(extractCss);
