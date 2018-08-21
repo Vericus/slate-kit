@@ -17,6 +17,7 @@
     "build": "yarn run build:packages && lerna run build --parallel",
     "build:packages": "rollup --config ./support/rollup/config.js",
     "clean": "lerna clean --yes && lerna run clean --yes && rm -rf ./node_modules ./flow-typed",
+    "dev": "lerna run --parallel build -- --watch",
     "flow:setup": "yarn run flow:symlink && yarn run flow:install",
     "flow:symlink": "flow-mono create-symlinks .flowconfig",
     "flow:install": "flow-mono install-types --ignore-deps=peer --overwrite",

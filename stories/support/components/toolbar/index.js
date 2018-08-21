@@ -566,6 +566,31 @@ export default class Toolbar extends Component {
     ];
   };
 
+  handleClickAddImage = event => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const change = this.props.value.change();
+    change.insertBlock({
+      type: "image",
+      isVoid: true
+    });
+    this.props.onChange(change);
+  };
+
+  renderInsertImage = () => {
+    return (
+      <div>
+        <IconButton
+          icon="Image"
+          onMouseDown={this.handleClickAddImage}
+          disabled={this.props.isReadOnly}
+          size="18"
+        />
+      </div>
+    );
+  };
+
   render() {
     return (
       <div
@@ -586,6 +611,7 @@ export default class Toolbar extends Component {
         {this.renderMarks()}
         {this.renderTextColor()}
         {this.renderBackgroundColor()}
+        {this.renderInsertImage()}
         {this.renderHistories()}
         {this.renderStateLogger()}
       </div>

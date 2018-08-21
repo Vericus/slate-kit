@@ -1,0 +1,54 @@
+{
+  "version": "0.0.1",
+  "name": "@vericus/slate-kit-image",
+  "description": "TODO: fill in this description later",
+  "homepage": "https://github.com/Vericus/slate-kit/",
+  "repository": "git://github.com/Vericus/slate-kit.git",
+  "author": "Cadmus",
+  "slate-kit": {
+    "type": "module"
+  },
+  "files": [
+    "dist/",
+    "lib/",
+    "module/"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/slate-kit-image.js",
+  "module": "lib/slate-kit-image.es.js",
+  "umd": "dist/slate-kit-image.js",
+  "umdMin": "dist/slate-kit-image.min.js",
+  "scripts": {
+    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
+    "build": "BABEL_ENV=build babel ./src --out-dir ./module",
+    "test": "jest --config=jest.config.json"
+  },
+  "umdGlobals": {
+    "immutable": "Immutable",
+    "slate": "Slate"
+  },
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
+    "flow-bin": "0.74.0",
+    "jest": "^23.4.1",
+    "jest-fetch-mock": "^1.6.5"
+  },
+  "keywords": [
+    "Vericus",
+    "slate",
+    "slate-kit"
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "slate": ">=0.32.0",
+    "slate-react": "^0.13.3",
+    "slate-schema-violations": "^0.1.14"
+  }
+}

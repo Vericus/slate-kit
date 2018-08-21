@@ -1,0 +1,96 @@
+{
+  "object": "value",
+  "document": {
+    "object": "document",
+    "data": {},
+    "nodes": [
+      {
+        "object": "block",
+        "type": "paragraph",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "object": "leaf",
+                "text":
+                  "Example of persistent image loaded from a static URL, stored in the data property of the node:",
+                "marks": [
+                  {
+                    "object": "mark",
+                    "type": "textColor",
+                    "data": { "color": "#0066ff" }
+                  },
+                  {
+                    "object": "mark",
+                    "type": "textBackground",
+                    "data": { "backgroundColor": "#ff00ff" }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "image",
+        "isVoid": true,
+        "data": {
+          "src":
+            "https://images.unsplash.com/photo-1515350681417-300dee45d0e9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=98c819de4353dc09864e8b4e89fa5a13&auto=format&fit=crop&w=1950&q=80"
+        },
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [{ "object": "leaf", "text": "", "marks": [] }]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "isVoid": false,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "object": "leaf",
+                "text":
+                  "Upload an image or press the button to insert a new block.",
+                "marks": [
+                  {
+                    "object": "mark",
+                    "type": "textColor",
+                    "data": { "color": "#0066ff" }
+                  },
+                  {
+                    "object": "mark",
+                    "type": "textBackground",
+                    "data": { "backgroundColor": "#ff00ff" }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "image",
+        "isVoid": true,
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [{ "object": "leaf", "text": "", "marks": [] }]
+          }
+        ]
+      }
+    ]
+  }
+}

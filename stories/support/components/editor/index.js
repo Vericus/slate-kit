@@ -35,8 +35,12 @@ export default class SlateKitEditor extends Component {
 
   onPaste = (event, change) => {
     const data = getEventTransfer(event);
+    if (data.fragment) {
+      return undefined;
+    }
     if (data.html) {
       const { origin, cleanedHTML } = pasteCleaner(data.html);
+      if (origin === "html-image") return undefined;
       const parser = pluginsWrapper.getSerializer();
       const { document } = parser.deserialize(cleanedHTML);
       change.insertFragment(document);
