@@ -41,7 +41,8 @@
   "dependencies": {
     "immutable": "^3.8.2",
     "is-plain-object": "^2.0.4",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.4.1",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@vericus/slate-kit-utils-hyperscript": "^0.0.3",

@@ -50,5 +50,8 @@
     "serializer",
     "Vericus",
     "xml"
-  ]
+  ],
+  "dependencies": {
+    "tslib": "^1.9.3"
+  }
 }

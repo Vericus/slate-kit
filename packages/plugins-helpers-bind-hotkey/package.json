@@ -30,12 +30,14 @@
   },
   "umdGlobals": {
     "immutable": "Immutable",
+    "tslib": "TSLib",
     "slate": "Slate",
     "is-hotkey": "IsHotkey"
   },
   "dependencies": {
     "debug": ">=3.1.0",
-    "immutable": "^3.8.2"
+    "immutable": "^3.8.2",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "expect": "^23.1.0",

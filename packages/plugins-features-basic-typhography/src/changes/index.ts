@@ -14,8 +14,9 @@ export default function createChanges(pluginOptions: TypeOptions) {
             change.setNodeByKey(block.key, type);
           } else {
             block.getBlocks().forEach(nodeBlock => {
-              if (isTypography(pluginOptions, nodeBlock))
+              if (isTypography(pluginOptions, nodeBlock)) {
                 change.setNodeByKey(nodeBlock.key, type);
+              }
             });
           }
         });

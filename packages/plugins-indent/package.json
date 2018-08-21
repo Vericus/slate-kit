@@ -36,11 +36,13 @@
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
     "tslib": "TSLib",
     "slate-hotkeys": "SlateHotKeys",
-    "slate-dev-environment": "SlateDevEnvironment"
+    "slate-dev-environment": "SlateDevEnvironment",
+    "classnames": "ClassNames"
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "immutable": "^3.8.2"
+    "immutable": "^3.8.2",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "expect": "^23.1.0",
