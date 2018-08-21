@@ -19,7 +19,7 @@ export default function createProps(opts, pluginsWrapper) {
       }
       const { editor, key, node } = nodeProps;
       const {
-        state: {
+        props: {
           value: { document }
         }
       } = editor;

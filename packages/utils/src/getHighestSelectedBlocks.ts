@@ -8,14 +8,14 @@ export default function getHighestSelectedBlocks(value: Value) {
   }
   const { document } = value;
   try {
-    if (range.startKey && range.endKey) {
-      let startBlock = document.getClosestBlock(range.startKey);
-      let endBlock = document.getClosestBlock(range.endKey);
+    if (range.start.key && range.end.key) {
+      let startBlock = document.getClosestBlock(range.start.key);
+      let endBlock = document.getClosestBlock(range.end.key);
       if (startBlock && endBlock && startBlock !== endBlock) {
-        if (range.hasAnchorAtEndOf(startBlock)) {
+        if (range.anchor.isAtEndOfNode(startBlock)) {
           startBlock = document.getNextBlock(startBlock.key);
         }
-        if (range.hasFocusAtStartOf(endBlock)) {
+        if (range.focus.isAtStartOfNode(endBlock)) {
           endBlock = document.getPreviousBlock(endBlock.key);
         }
       }

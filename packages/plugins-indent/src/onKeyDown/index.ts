@@ -8,19 +8,20 @@ import { getIndentationLevel } from "../utils";
 export default function createOnKeyDown(opts: TypeOptions) {
   const { tabable } = opts;
   const {
-    isDeleteCharBackward,
+    isDeleteBackward,
     isDeleteLineBackward,
     isDeleteWordBackward
   } = hotkeys;
   const isDelete = e =>
-    isDeleteCharBackward(e) ||
-    isDeleteLineBackward(e) ||
-    isDeleteWordBackward(e);
+    isDeleteBackward(e) || isDeleteLineBackward(e) || isDeleteWordBackward(e);
 
   return (event, change: Change) => {
     const { value } = change;
     const { startBlock, endBlock, selection } = value;
-    const { isCollapsed, startOffset } = selection;
+    const {
+      isCollapsed,
+      start: { offset: startOffset }
+    } = selection;
     const isIndent = isHotkey("tab", event);
     const isOutdent =
       isHotkey("shift+tab", event) ||

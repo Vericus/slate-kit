@@ -15,19 +15,20 @@ export default function createOnKeyDown(
   const isEnter = isKeyHotkey("enter");
   const isShiftEnter = isKeyHotkey("shift+enter");
   const {
-    isDeleteCharBackward,
+    isDeleteBackward,
     isDeleteLineBackward,
     isDeleteWordBackward
   } = hotkeys;
   const isDelete = e =>
-    isDeleteCharBackward(e) ||
-    isDeleteLineBackward(e) ||
-    isDeleteWordBackward(e);
+    isDeleteBackward(e) || isDeleteLineBackward(e) || isDeleteWordBackward(e);
 
   return (e, change: Change) => {
     const { value } = change;
     const { startBlock, endBlock, selection } = value;
-    const { isCollapsed, startOffset } = selection;
+    const {
+      isCollapsed,
+      start: { offset: startOffset }
+    } = selection;
     const isIndent = isTab(e) && !isShiftTab(e);
     const isSplitBlock =
       isEnter(e) && !isShiftEnter(e) && isListNode(opts, startBlock);
