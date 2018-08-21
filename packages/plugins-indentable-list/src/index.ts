@@ -35,25 +35,25 @@ export function createPlugin(pluginOptions: TypeOptions, pluginsWrapper: any) {
     AutoReplace({
       trigger: "space",
       before: /^(\d+)(\.)$/,
-      transform: (transform, e, matches) => {
+      change: (change, e, matches) => {
         const type = ordered;
-        return transform.call(createListWithType, type, matches.before[1]);
+        return change.call(createListWithType, type, matches.before[1]);
       }
     }),
     AutoReplace({
       trigger: "space",
       before: /^(-)$/,
-      transform: transform => {
+      change: change => {
         const type = unordered;
-        return transform.call(createListWithType, type);
+        return change.call(createListWithType, type);
       }
     }),
     AutoReplace({
       trigger: "space",
       before: /^(\[\])$/,
-      transform: transform => {
+      change: change => {
         const type = checkList;
-        return transform.call(createListWithType, type);
+        return change.call(createListWithType, type);
       }
     })
   ];
