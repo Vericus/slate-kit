@@ -30,8 +30,7 @@ export default function getHighestSelectedBlocks(value: Value) {
       const ancestor = document.getCommonAncestor(startBlock.key, endBlock.key);
       const startPath = ancestor.getPath(startBlock.key);
       const endPath = ancestor.getPath(endBlock.key);
-
-      return ancestor.nodes.slice(startPath[0], endPath[0] + 1);
+      return ancestor.nodes.slice(startPath[0], endPath[0]);
     }
   } catch (e) {
     return List([]);
