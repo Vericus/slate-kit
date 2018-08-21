@@ -1,6 +1,6 @@
 {
   "name": "@vericus/slate-kit-utils-hyperscript",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "hyperscript helpers for testing purposes",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
@@ -28,8 +28,8 @@
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module",
-    "dev": "yarn run build --watch"
+    "build": "tsc -b .",
+    "dev": "tsc -w ."
   },
   "dependencies": {
     "slate-hyperscript": ">=0.5.10",
