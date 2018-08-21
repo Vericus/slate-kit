@@ -3,7 +3,7 @@ import fs from "fs";
 import toCamel from "to-camel-case";
 import { basename, extname, resolve } from "path";
 
-import HighlightText from "../../src";
+import HighlightText from "../../src/index.ts";
 
 const plugin = HighlightText({
   type: "textColor",

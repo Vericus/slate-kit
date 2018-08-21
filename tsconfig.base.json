@@ -2,7 +2,6 @@
   "exclude": ["**/*.spec.ts", "node_modules", "*.d.ts", "**/*.d.ts"],
   "typeRoots": ["packages/typescript-typings/types", "node_modules/@types"],
   "compilerOptions": {
-    "composite": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
