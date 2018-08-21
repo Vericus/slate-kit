@@ -1,9 +1,8 @@
-// @flow
-import type { Change } from "slate";
-import type { typeOptions } from "../options";
+import { Change } from "slate";
+import { TypeOptions } from "../options";
 import getAlignBlocks from "../utils/getAlignBlocks";
 
-function removeAlign(opts: typeOptions) {
+function removeAlign(opts: TypeOptions) {
   const { dataField } = opts;
   return (change: Change, align: string) => {
     const { value } = change;
@@ -18,12 +17,12 @@ function removeAlign(opts: typeOptions) {
   };
 }
 
-function setAlign(opts: typeOptions) {
+function setAlign(opts: TypeOptions) {
   const { dataField } = opts;
   return (change: Change, align: string) => {
     const { value } = change;
     const { alignments } = opts;
-    if (!alignments.includes(align)) return change;
+    if (!alignments || !alignments.includes(align)) return change;
     change.withoutNormalization(c => {
       getAlignBlocks(opts, value).forEach(n => {
         c.setNodeByKey(n.key, { data: n.data.set(dataField, align) });
@@ -33,7 +32,7 @@ function setAlign(opts: typeOptions) {
   };
 }
 
-function createChanges(opts: typeOptions) {
+function createChanges(opts: TypeOptions) {
   return {
     removeAlign: removeAlign(opts),
     setAlign: setAlign(opts)

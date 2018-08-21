@@ -1,4 +1,3 @@
-// @flow
 import Options from "./options";
 import CreateUtils from "./utils";
 import CreateChanges from "./changes";

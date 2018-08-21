@@ -1,11 +1,10 @@
-// @flow
-import type { Value } from "slate";
-import { type typeOptions } from "../options";
+import { Value } from "slate";
+import { TypeOptions } from "../options";
 import getAlignBlocks from "./getAlignBlocks";
 import getAlignment from "./getAlignment";
 
 export default function isAligned(
-  opts: typeOptions,
+  opts: TypeOptions,
   value: Value,
   alignment: string
 ) {

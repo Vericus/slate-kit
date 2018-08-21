@@ -1,14 +1,13 @@
-// @flow
 import { Record } from "immutable";
 
-export type typeOptions = {
-  floatBlocks: Array<string>,
-  textBlocks: Array<string>,
-  alignments: Array<string>,
-  dataField: string
-};
+export interface TypeOptions {
+  floatBlocks: string[];
+  textBlocks: string[];
+  alignments: string[];
+  dataField: string;
+}
 
-const defaultOption: typeOptions = {
+const defaultOption: TypeOptions = {
   floatBlocks: [],
   textBlocks: [
     "paragraph",
@@ -22,9 +21,9 @@ const defaultOption: typeOptions = {
 };
 
 class Options extends Record(defaultOption) {
-  floatBlocks: Array<string>;
-  textBlocks: Array<string>;
-  allignments: Array<string>;
+  floatBlocks: string[];
+  textBlocks: string[];
+  alignments: string[];
   dataField: string;
 }
 
