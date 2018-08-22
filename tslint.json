@@ -12,5 +12,8 @@
     "curly": [true, "ignore-same-line"],
     "no-empty": [true, "allow-empty-functions"]
   },
-  "rulesDirectory": []
+  "rulesDirectory": [],
+  "linterOptions": {
+    "exclude": ["**/*.d.ts"]
+  }
 }
