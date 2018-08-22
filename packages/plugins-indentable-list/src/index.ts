@@ -13,7 +13,7 @@ export function createPlugin(pluginOptions: TypeOptions, pluginsWrapper: any) {
   const utils = createUtils(options);
   const changes = createChanges(options, pluginsWrapper);
   const { createListWithType } = changes;
-  const schemas = createSchema(options);
+  const schema = createSchema(options);
   const rules = createRule;
   const onKeyDown = createOnKeyDown(options, pluginsWrapper);
   const rendererOptions = { ...options.toJS() };
@@ -30,7 +30,7 @@ export function createPlugin(pluginOptions: TypeOptions, pluginsWrapper: any) {
       onKeyDown,
       options,
       props,
-      ...schemas
+      schema
     },
     AutoReplace({
       trigger: "space",

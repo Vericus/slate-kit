@@ -8,84 +8,7 @@ const PLUGINS = Symbol("plugins");
 const PROPS = Symbol("props");
 const STYLES = Symbol("styles");
 const UTILS = Symbol("utils");
-const SCHEMAS = Symbol("schema");
 const RULES = Symbol("rules");
-
-/**
- * Resolve a document rule `obj`.
- *
- * @param {Object} obj
- * @return {Object}
- */
-
-function resolveDocumentRule(obj) {
-  return {
-    data: {},
-    nodes: null,
-    ...obj
-  };
-}
-
-/**
- * Resolve a node rule with `type` from `obj`.
- *
- * @param {String} object
- * @param {String} type
- * @param {Object} obj
- * @return {Object}
- */
-
-function resolveNodeRule(object, type, obj) {
-  return {
-    data: {},
-    isVoid: null,
-    nodes: null,
-    first: null,
-    last: null,
-    parent: null,
-    text: null,
-    ...obj
-  };
-}
-
-/**
- * A Lodash customizer for merging schema definitions. Special cases `objects`,
- * `marks` and `types` arrays to be unioned, and ignores new `null` values.
- *
- * @param {Mixed} target
- * @param {Mixed} source
- * @return {Array|Void}
- */
-
-function customizer(target, source, key) {
-  if (key === "objects" || key === "types" || key === "marks") {
-    return target == null ? source : target.concat(source);
-  }
-  return source == null ? target : source;
-}
-
-function defaultSchemaCustomizer(schema, schemas) {
-  const customizedSchema = schema;
-  schemas.forEach(s => {
-    if (!s) return;
-    const { document = {}, blocks = {}, inlines = {} } = s;
-    const d = resolveDocumentRule(document);
-    const bs = {};
-    const is = {};
-
-    for (const [key, value] of Object.entries(blocks)) {
-      bs[key] = resolveNodeRule("block", key, value);
-    }
-
-    for (const [key, value] of Object.entries(inlines)) {
-      is[key] = resolveNodeRule("inline", key, value);
-    }
-    mergeWith(customizedSchema.document, d, customizer);
-    mergeWith(customizedSchema.blocks, bs, customizer);
-    mergeWith(customizedSchema.inlines, is, customizer);
-  });
-  return customizedSchema;
-}
 
 export interface ObjectMap {
   [label: string]: object;
@@ -126,31 +49,20 @@ export interface PropsMap {
 
 export default class PluginsWrapper {
   serializer: null | object;
-  schema: object;
-  schemaCustomizer: (schema: object, schemas: object[]) => object;
   CHANGES: ObjectMap;
   OPTIONS: ObjectMap;
   UTILS: ObjectMap;
   STYLES: StylesMap;
   RULES: RulesMap;
-  constructor(
-    { schemaCustomizer } = { schemaCustomizer: defaultSchemaCustomizer }
-  ) {
+  constructor() {
     this[CHANGES] = {};
     this[OPTIONS] = {};
     this[PLUGINS] = {};
     this[PROPS] = {};
     this[STYLES] = {};
     this[UTILS] = {};
-    this[SCHEMAS] = {};
     this[RULES] = {};
     this.serializer = null;
-    this.schema = {
-      blocks: {},
-      inlines: {},
-      document: {}
-    };
-    this.schemaCustomizer = schemaCustomizer;
   }
 
   getOptions = (label?: string): null | object =>
@@ -166,19 +78,8 @@ export default class PluginsWrapper {
         return [...plugins, ...pluginList];
       },
       []
-    ),
-    { schema: this.getSchema() }
+    )
   ];
-
-  getSchemas = (label?: string): object[] => {
-    if (label) return this[SCHEMAS][label];
-    return Object.entries(this[SCHEMAS]).reduce(
-      (schemas: any[], [key, value]) => schemas.concat(value),
-      []
-    );
-  };
-
-  getSchema = () => this.schemaCustomizer(this.schema, this.getSchemas());
 
   getUtils = (label?: string) => (label ? this[UTILS][label] : this[UTILS]);
 
@@ -277,15 +178,6 @@ export default class PluginsWrapper {
           };
         } else {
           this[PROPS][label] = value;
-        }
-        break;
-      case "getSchema":
-        if (typeof value !== "object") {
-          if (this[SCHEMAS][label]) {
-            this[SCHEMAS][label] = value();
-          } else {
-            this[SCHEMAS][label] = value();
-          }
         }
         break;
       case "options":
@@ -434,8 +326,7 @@ export default class PluginsWrapper {
           }
         ) => [...acc, ...this.configurePlugin(createPlugin, options, label)],
         []
-      ),
-      { schema: this.getSchema() }
+      )
     ];
     this.serializer = this.updateSerializer();
     return plugins;

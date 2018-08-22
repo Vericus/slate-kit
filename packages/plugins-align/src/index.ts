@@ -10,9 +10,9 @@ function createAlignPlugin(pluginOptions: any = {}) {
   const utils = CreateUtils(options);
   const changes = CreateChanges(options);
   const props = CreateProps(options);
-  const schemas = CreateSchema(options);
+  const schema = CreateSchema(options);
   const style = createStyle(options);
-  return { options, style, utils, changes, props, ...schemas };
+  return { options, style, utils, changes, props, schema };
 }
 
 export default createAlignPlugin;
