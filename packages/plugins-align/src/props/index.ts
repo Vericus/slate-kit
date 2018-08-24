@@ -11,8 +11,9 @@ export default function createProps(opts) {
           textBlocks.includes(props.node.type) ||
           floatBlocks.includes(props.node.type)
         )
-      )
+      ) {
         return props;
+      }
       const alignment = getAlignment(opts, props.node);
       let style = (props.attributes && props.attributes.style) || {};
       if (textBlocks.includes(props.node.type)) {
