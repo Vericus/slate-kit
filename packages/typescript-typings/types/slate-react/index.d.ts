@@ -1,7 +1,16 @@
 // ported from https://github.com/DefinitelyTyped/DefinitelyTyped
-// definitions for slate-react 0.12
+// definitions for slate-react 0.18
 // TypeScript Version: 2.8
-import { Mark, Node, Block, Change, Schema, Value, Stack } from "slate";
+import {
+  Mark,
+  Node,
+  Block,
+  Change,
+  Schema,
+  Value,
+  Stack,
+  Document
+} from "slate";
 import * as Immutable from "immutable";
 import * as React from "react";
 
@@ -37,18 +46,37 @@ export interface Plugin {
     change: Change,
     editor: Editor
   ) => Change | void;
-  onBlur?: (event: Event, change: Change, editor: Editor) => Change | void;
-  onFocus?: (event: Event, change: Change, editor: Editor) => Change | void;
-  onClick?: (event: Event, change: Change, editor: Editor) => Change | void;
-  onCopy?: (event: Event, change: Change, editor: Editor) => Change | void;
-  onCut?: (event: Event, change: Change, editor: Editor) => Change | void;
-  onDrop?: (event: Event, change: Change, editor: Editor) => Change | void;
-  onKeyDown?: (event: Event, change: Change, editor: Editor) => Change | void;
-  onKeyUp?: (event: Event, change: Change, editor: Editor) => Change | void;
-  onPaste?: (event: Event, change: Change, editor: Editor) => Change | void;
-  onSelect?: (event: Event, change: Change, editor: Editor) => Change | void;
-  onChange?: (change: Change) => any;
-  renderEditor?: (props: RenderAttributes, editor: Editor) => object | void;
+  onBlur?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onFocus?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onClick?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onCopy?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onCut?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onDragEnd?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onDragEnter?: (
+    event: Event,
+    change: Change,
+    editor?: Editor
+  ) => Change | void;
+  onDragExit?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onDragLeave?: (
+    event: Event,
+    change: Change,
+    editor?: Editor
+  ) => Change | void;
+  onDragOver?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onDragStart?: (
+    event: Event,
+    change: Change,
+    editor?: Editor
+  ) => Change | void;
+  onDrop?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onInput?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onKeyDown?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onKeyUp?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onPaste?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onSelect?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onChange?: (change: Change, editor?: Editor) => any;
+  renderEditor?: (props: RenderAttributes, editor?: Editor) => object | void;
   schema?: Schema;
   decorateNode?: (node: Node) => Range[] | void;
   renderMark?: (props: RenderMarkProps) => any;
@@ -70,7 +98,7 @@ export interface BasicEditorProps {
   role?: string;
   schema?: Schema;
   spellCheck?: boolean;
-  style?: { [key: string]: string };
+  style?: React.CSSProperties;
   tabIndex?: number;
 }
 
@@ -88,6 +116,8 @@ export class Editor extends React.Component<EditorProps, EditorState> {
   value: Value;
   stack: Stack;
 
+  readonly plugins: Plugin[];
+
   // Instance Methods
   blur(): void;
   change(fn: (change: Change) => any): void;
@@ -103,8 +133,14 @@ export type SlateType =
   | "text"
   | "files";
 
-export function findDOMNode(node: Node): Element;
-export function findDOMRange(range: Range): Range;
+export function cloneFragment(
+  event: Event,
+  value: Value,
+  fragment?: Document,
+  callback?: () => void
+): void;
+export function findDOMNode(node: Node, win?: Window): Element;
+export function findDOMRange(range: Range, win?: Window): Range;
 export function findNode(element: Element, value: Value): Node;
 export function findRange(selection: Selection, value: Value): Range;
 export function getEventRange(event: Event, value: Value): Range;
