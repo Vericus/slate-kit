@@ -1,16 +1,7 @@
 // ported from https://github.com/DefinitelyTyped/DefinitelyTyped
 // definitions for slate-react 0.18
 // TypeScript Version: 2.8
-import {
-  Mark,
-  Node,
-  Block,
-  Change,
-  Schema,
-  Value,
-  Stack,
-  Document
-} from "slate";
+import { Mark, Node, Change, Schema, Value, Stack, Document } from "slate";
 import * as Immutable from "immutable";
 import * as React from "react";
 
@@ -36,7 +27,7 @@ export interface RenderNodeProps {
   editor: Editor;
   isSelected: boolean;
   key: string;
-  node: Block;
+  node: Node;
   parent: Node;
 }
 
