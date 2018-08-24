@@ -12,5 +12,5 @@
     "noEmit": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": ["index.d.ts"]
+  "files": ["index.d.ts", "slate-base64-serializer-tests.ts"]
 }
