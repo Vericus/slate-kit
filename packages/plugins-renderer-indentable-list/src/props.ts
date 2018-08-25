@@ -68,10 +68,15 @@ export default function createProps(opts, pluginsWrapper) {
                 return;
               }
               const {
-                state: { value },
-                props: { onChange }
+                state: { value: stateValue },
+                props: { onChange, value }
               } = nodeProps.editor;
-              onChange(toggleCheck(value.change(), node));
+              onChange(
+                toggleCheck(
+                  stateValue ? stateValue.change() : value.change(),
+                  node
+                )
+              );
             }
           : () => {};
       const className = classnames({

@@ -1,6 +1,5 @@
 import { Record } from "immutable";
-
-const isPlainObject = require("is-plain-object");
+import isPlainObject from "is-plain-obj";
 
 export interface TypeOptions {
   type: string;

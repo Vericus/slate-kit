@@ -7,9 +7,15 @@ export default function handleUndo(
   onUndo: (change: Change) => void
 ) {
   const change = editorChange || value.change();
-  const newChange = change.value.change();
+  const newChange = editorChange || change.value.change();
   if (!hasUndo(value)) return change;
-  value.history.undos.some(undo => {
+  let newValue;
+  if (onUndo && typeof onUndo === "function") {
+    newValue = newChange.value;
+  } else {
+    newValue = change.value;
+  }
+  newValue.history.undos.some(undo => {
     if (undo.size === 1 && undo.get(0).type === "set_selection") {
       return false;
     }
