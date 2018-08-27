@@ -23,10 +23,6 @@
   "umd": "dist/<%= module %>.js",
   "umdMin": "dist/<%= module %>.min.js",
   "scripts": {
-    "clean": "rm -rf ./dist ./lib ./node_modules ./module",
-    "build": "BABEL_ENV=build babel ./src --out-dir ./module"
-  },
-  "scripts": {
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
