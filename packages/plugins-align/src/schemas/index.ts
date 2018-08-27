@@ -1,6 +1,5 @@
 import { Change, Node } from "slate";
 import { TypeOptions } from "../options";
-import { NODE_DATA_INVALID } from "slate-schema-violations";
 
 export default function createSchema(opts: TypeOptions) {
   const { floatBlocks, textBlocks, dataField, alignments } = opts;
@@ -15,7 +14,7 @@ export default function createSchema(opts: TypeOptions) {
               !align || (align && alignments.includes(align))
           },
           normalize: (change: Change, error) => {
-            if (error.code === NODE_DATA_INVALID) {
+            if (error.code === "node_data_invalid") {
               change.withoutNormalization(c =>
                 c.setNodeByKey(error.node.key, {
                   data: error.node.data.delete(dataField)

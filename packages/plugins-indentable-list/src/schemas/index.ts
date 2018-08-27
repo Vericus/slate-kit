@@ -1,5 +1,4 @@
 import { Change, Block } from "slate";
-import { NODE_DATA_INVALID } from "slate-schema-violations";
 import { TypeOptions } from "../options";
 
 export interface SlateSchemas {
@@ -19,7 +18,7 @@ export default function createSchema(opts: TypeOptions) {
             [checkField]: checked => checked === undefined
           },
           normalize: (change: Change, error) => {
-            if (error.code === NODE_DATA_INVALID) {
+            if (error.code === "node_data_invalid") {
               let blockData = error.node.data;
               if (blockData.get(checkField) !== undefined) {
                 blockData = blockData.delete(checkField);
@@ -41,7 +40,7 @@ export default function createSchema(opts: TypeOptions) {
             [checkField]: checked => checked === undefined
           },
           normalize: (change: Change, error) => {
-            if (error.code === NODE_DATA_INVALID) {
+            if (error.code === "node_data_invalid") {
               change.withoutNormalization(c =>
                 c.setNodeByKey(error.node.key, {
                   data: error.node.data.delete(checkField).delete(startAtField)
@@ -56,7 +55,7 @@ export default function createSchema(opts: TypeOptions) {
             [checkField]: checked => typeof checked === "boolean"
           },
           normalize: (change: Change, error) => {
-            if (error.code === NODE_DATA_INVALID) {
+            if (error.code === "node_data_invalid") {
               let blockData = error.node.data;
               if (blockData.get(startAtField) !== undefined) {
                 blockData = blockData.delete(startAtField);
