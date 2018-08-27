@@ -12,7 +12,7 @@ function createIndentPlugin(pluginOptions: TypeOptions) {
   const changes = createChanges(options);
   const onKeyDown = createOnKeyDown(options);
   const props = createProps(options);
-  const schemas = createSchema(options);
+  const schema = createSchema(options);
   const style = createStyle(options);
   return {
     utils,
@@ -21,7 +21,7 @@ function createIndentPlugin(pluginOptions: TypeOptions) {
     changes,
     options,
     style,
-    ...schemas,
+    schema,
     shouldNodeComponentUpdate: (currProps, nextProps) => {
       if (currProps.node.data !== nextProps.node.data) {
         return true;

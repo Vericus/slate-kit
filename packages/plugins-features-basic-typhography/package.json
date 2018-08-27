@@ -33,7 +33,7 @@
     "immutable": "Immutable",
     "tslib": "TSLib",
     "slate": "Slate",
-    "is-plain-object": "IsPlainObject",
+    "is-plain-obj": "IsPlainObj",
     "@vericus/slate-kit-basic-typography-renderer": "TypographyRenderer",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils"
   },
@@ -41,7 +41,7 @@
     "@vericus/slate-kit-basic-typography-renderer": "^0.1.0",
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
-    "is-plain-object": "^2.0.4",
+    "is-plain-obj": "^1.1.0",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
     "tslib": "^1.9.3"
@@ -50,16 +50,16 @@
     "expect": "^23.1.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "slate": ">=0.32.0",
-    "slate-simulator": "^0.4.33",
+    "slate": ">=0.40.0 <0.41.0",
+    "slate-simulator": ">=0.4.59",
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
-    "@vericus/slate-kit-basic-typography-renderer": "^0.0.2",
-    "@vericus/slate-kit-plugins-utils": "^0.0.9",
+    "@vericus/slate-kit-basic-typography-renderer": "^0.1.0",
+    "@vericus/slate-kit-plugins-utils": "^0.1.0",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "slate": ">=0.32.0"
+    "slate": ">=0.40.0 <0.41.0"
   },
   "keywords": [
     "Vericus",

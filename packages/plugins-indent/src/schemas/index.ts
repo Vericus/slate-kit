@@ -1,25 +1,39 @@
 import { Change, Block } from "slate";
 import { TypeOptions } from "../options";
 
-export interface SlateSchemas {
-  validateNode?: (block: Block) => any;
-  getSchema?: () => object;
-}
-
 export default function createSchema(opts: TypeOptions) {
   const { indentable, dataField, maxIndentation } = opts;
-  const schemas: SlateSchemas = {};
-  schemas.validateNode = (block: Block) => {
-    if (block.object !== "block") return undefined;
-    if (!indentable.includes(block.type)) return undefined;
-    if (!block.data || !block.data.get(dataField)) return undefined;
-    if (block.data.get(dataField) <= maxIndentation) return undefined;
-    return (change: Change) =>
-      change.setNodeByKey(
-        block.key,
-        { data: block.data.set(dataField, maxIndentation) },
-        { normalize: false }
-      );
+  return {
+    blocks: indentable.reduce(
+      (acc, block) => ({
+        ...acc,
+        [block]: {
+          data: {
+            [dataField]: indentation =>
+              !indentation ||
+              (indentation && indentation <= maxIndentation && indentation >= 0)
+          },
+          normalize: (change: Change, error) => {
+            if (error.code === "node_data_invalid") {
+              const data = error.node.data.get(dataField);
+              if (typeof data !== "number" || data < 0) {
+                change.withoutNormalization(c =>
+                  c.setNodeByKey(error.node.key, {
+                    data: error.node.data.delete(dataField)
+                  })
+                );
+              } else {
+                change.withoutNormalization(c =>
+                  c.setNodeByKey(error.node.key, {
+                    data: error.node.data.set(dataField, maxIndentation)
+                  })
+                );
+              }
+            }
+          }
+        }
+      }),
+      {}
+    )
   };
-  return schemas;
 }

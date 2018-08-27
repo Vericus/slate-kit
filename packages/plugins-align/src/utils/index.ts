@@ -7,9 +7,8 @@ import { TypeOptions } from "../options";
 
 function createUtils(opts: TypeOptions) {
   return {
-    getAlignBlocks: (value: Array<Node>): Array<Node> =>
-      getAlignBlocks(opts, value),
-    getAlignBlocksInBlock: (node: Array<Node>): Array<Node> =>
+    getAlignBlocks: (value: Node[]): Node[] => getAlignBlocks(opts, value),
+    getAlignBlocksInBlock: (node: Node[]): Node[] =>
       getAlignBlocksInBlock(opts, node),
     getAlignment: (block: Block) => getAlignment(opts, block),
     isAligned: (value: Value, alignment: string) =>

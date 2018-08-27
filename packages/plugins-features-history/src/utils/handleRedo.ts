@@ -7,9 +7,15 @@ export default function handleRedo(
   onRedo: (change: Change) => void
 ) {
   const change = editorChange || value.change();
-  const newChange = change.value.change();
+  const newChange = editorChange || change.value.change();
+  let newValue;
   if (!hasRedo(value)) return change;
-  value.history.redos.some(redo => {
+  if (onRedo && typeof onRedo === "function") {
+    newValue = newChange.value;
+  } else {
+    newValue = change.value;
+  }
+  newValue.history.redos.some(redo => {
     if (onRedo && typeof onRedo === "function") {
       newChange.redo();
     } else {

@@ -13,7 +13,7 @@ export function createPlugin(pluginOptions: TypeOptions, pluginsWrapper: any) {
   const utils = createUtils(options);
   const changes = createChanges(options, pluginsWrapper);
   const { createListWithType } = changes;
-  const schemas = createSchema(options);
+  const schema = createSchema(options);
   const rules = createRule;
   const onKeyDown = createOnKeyDown(options, pluginsWrapper);
   const rendererOptions = { ...options.toJS() };
@@ -30,30 +30,30 @@ export function createPlugin(pluginOptions: TypeOptions, pluginsWrapper: any) {
       onKeyDown,
       options,
       props,
-      ...schemas
+      schema
     },
     AutoReplace({
       trigger: "space",
       before: /^(\d+)(\.)$/,
-      transform: (transform, e, matches) => {
+      change: (change, e, matches) => {
         const type = ordered;
-        return transform.call(createListWithType, type, matches.before[1]);
+        return change.call(createListWithType, type, matches.before[1]);
       }
     }),
     AutoReplace({
       trigger: "space",
       before: /^(-)$/,
-      transform: transform => {
+      change: change => {
         const type = unordered;
-        return transform.call(createListWithType, type);
+        return change.call(createListWithType, type);
       }
     }),
     AutoReplace({
       trigger: "space",
       before: /^(\[\])$/,
-      transform: transform => {
+      change: change => {
         const type = checkList;
-        return transform.call(createListWithType, type);
+        return change.call(createListWithType, type);
       }
     })
   ];

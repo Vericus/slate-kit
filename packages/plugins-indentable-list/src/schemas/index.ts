@@ -8,66 +8,69 @@ export interface SlateSchemas {
 
 export default function createSchema(opts: TypeOptions) {
   const { ordered, unordered, checkList, startAtField, checkField } = opts;
-  const listBlocks = [ordered, unordered, checkList];
-  const schemas: SlateSchemas = {};
-  const schema = {};
-  schemas.validateNode = (block: Block) => {
-    if (block.object !== "block") return undefined;
-    if (!listBlocks.includes(block.type)) return undefined;
-    if (block.type === ordered) {
-      if (
-        block.data.get(startAtField) &&
-        typeof parseInt(block.data.get(startAtField), 10) !== "number"
-      ) {
-        return (change: Change) =>
-          change.setNodeByKey(
-            block.key,
-            { data: block.data.delete(checkField).delete(startAtField) },
-            { normalize: false }
-          );
-      } else if (block.data.get(checkField)) {
-        return (change: Change) =>
-          change.setNodeByKey(
-            block.key,
-            { data: block.data.delete(checkField) },
-            { normalize: false }
-          );
+  if (startAtField && checkField && ordered && unordered && checkList) {
+    return {
+      blocks: {
+        [ordered]: {
+          data: {
+            [startAtField]: startAt =>
+              !startAt || typeof parseInt(startAt, 10) === "number",
+            [checkField]: checked => checked === undefined
+          },
+          normalize: (change: Change, error) => {
+            if (error.code === "node_data_invalid") {
+              let blockData = error.node.data;
+              if (blockData.get(checkField) !== undefined) {
+                blockData = blockData.delete(checkField);
+              }
+              if (
+                typeof parseInt(blockData.get(startAtField), 10) !== "number"
+              ) {
+                blockData = blockData.delete(startAtField);
+              }
+              change.withoutNormalization(c =>
+                c.setNodeByKey(error.node.key, { data: blockData })
+              );
+            }
+          }
+        },
+        [unordered]: {
+          data: {
+            [startAtField]: startAt => startAt === undefined,
+            [checkField]: checked => checked === undefined
+          },
+          normalize: (change: Change, error) => {
+            if (error.code === "node_data_invalid") {
+              change.withoutNormalization(c =>
+                c.setNodeByKey(error.node.key, {
+                  data: error.node.data.delete(checkField).delete(startAtField)
+                })
+              );
+            }
+          }
+        },
+        [checkList]: {
+          data: {
+            [startAtField]: startAt => startAt === undefined,
+            [checkField]: checked => typeof checked === "boolean"
+          },
+          normalize: (change: Change, error) => {
+            if (error.code === "node_data_invalid") {
+              let blockData = error.node.data;
+              if (blockData.get(startAtField) !== undefined) {
+                blockData = blockData.delete(startAtField);
+              }
+              if (typeof blockData.get(checkField) !== "boolean") {
+                blockData = blockData.set(checkField, false);
+              }
+              change.withoutNormalization(c =>
+                c.setNodeByKey(error.node.key, { data: blockData })
+              );
+            }
+          }
+        }
       }
-      return undefined;
-    }
-    if (
-      block.type === unordered &&
-      (block.data.get(checkField) || block.data.get(startAtField))
-    ) {
-      return (change: Change) =>
-        change.setNodeByKey(
-          block.key,
-          { data: block.data.delete(checkField).delete(startAtField) },
-          { normalize: false }
-        );
-    }
-    if (block.type === checkList) {
-      if (
-        block.data.get(checkField) &&
-        typeof block.data.get(checkField) !== "boolean"
-      ) {
-        return (change: Change) =>
-          change.setNodeByKey(
-            block.key,
-            { data: block.data.delete(checkField).delete(startAtField) },
-            { normalize: false }
-          );
-      } else if (block.data.get(startAtField)) {
-        return (change: Change) =>
-          change.setNodeByKey(
-            block.key,
-            { data: block.data.delete(startAtField) },
-            { normalize: false }
-          );
-      }
-    }
-    return undefined;
-  };
-  schemas.getSchema = () => schema;
-  return schemas;
+    };
+  }
+  return {};
 }

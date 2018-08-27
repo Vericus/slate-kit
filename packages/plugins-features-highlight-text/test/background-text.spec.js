@@ -8,7 +8,7 @@ import "babel-polyfill"; // eslint-disable-line import/no-extraneous-dependencie
  * Dependencies.
  */
 
-import { resetKeyGenerator } from "slate";
+import { KeyUtils } from "slate";
 
 /**
  * Tests.
@@ -27,5 +27,5 @@ describe("colored-text", () => {
  */
 
 beforeEach(() => {
-  resetKeyGenerator();
+  KeyUtils.resetGenerator();
 });

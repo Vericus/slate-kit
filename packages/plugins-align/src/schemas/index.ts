@@ -1,28 +1,30 @@
-import { Block, Change } from "slate";
+import { Change, Node } from "slate";
 import { TypeOptions } from "../options";
-
-export interface SlateSchemas {
-  validateNode?: (block: Block) => any;
-  getSchema?: () => object;
-}
 
 export default function createSchema(opts: TypeOptions) {
   const { floatBlocks, textBlocks, dataField, alignments } = opts;
   const alignBlocks = [...floatBlocks, ...textBlocks];
-  const schemas: SlateSchemas = {};
-  schemas.validateNode = (block: Block) => {
-    if (block.object !== "block") return undefined;
-    if (!alignBlocks.includes(block.type)) return undefined;
-    if (!block.data || !block.data.get(dataField)) return undefined;
-    if (!alignments || alignments.includes(block.data.get(dataField))) {
-      return undefined;
-    }
-    return (change: Change) =>
-      change.setNodeByKey(
-        block.key,
-        { data: block.data.delete(dataField) },
-        { normalize: false }
-      );
+  return {
+    blocks: alignBlocks.reduce(
+      (acc, block) => ({
+        ...acc,
+        [block]: {
+          data: {
+            [dataField]: align =>
+              !align || (align && alignments.includes(align))
+          },
+          normalize: (change: Change, error) => {
+            if (error.code === "node_data_invalid") {
+              change.withoutNormalization(c =>
+                c.setNodeByKey(error.node.key, {
+                  data: error.node.data.delete(dataField)
+                })
+              );
+            }
+          }
+        }
+      }),
+      {}
+    )
   };
-  return schemas;
 }

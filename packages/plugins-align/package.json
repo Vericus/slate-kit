@@ -42,13 +42,13 @@
   },
   "devDependencies": {
     "expect": "^23.1.0",
-    "slate": ">=0.32.0",
-    "slate-simulator": "^0.4.33",
+    "slate": ">=0.40.0 <0.41.0",
+    "slate-simulator": ">=0.4.59",
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
-    "@vericus/slate-kit-plugins-utils": "^0.0.9",
-    "slate": ">=0.32.0"
+    "@vericus/slate-kit-plugins-utils": "^0.1.0",
+    "slate": ">=0.40.0 <0.41.0"
   },
   "keywords": [
     "Vericus",

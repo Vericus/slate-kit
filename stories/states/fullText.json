@@ -94,8 +94,7 @@
             "object": "text",
             "leaves": [
               {
-                "text":
-                  "Since it's rich text, you can do things like turn a selection of text "
+                "text": "Since it's rich text, you can do things like turn a selection of text "
               },
               {
                 "text": "bold",
@@ -106,8 +105,7 @@
                 ]
               },
               {
-                "text":
-                  ", or add a semantically rendered block quote in the middle of the page, like this:"
+                "text": ", or add a semantically rendered block quote in the middle of the page, like this:"
               }
             ]
           }
@@ -231,6 +229,10 @@
       {
         "object": "block",
         "type": "check-list",
+        "data": {
+          "startAt": 1000,
+          "checked": true
+        },
         "nodes": [
           {
             "object": "text",
@@ -245,6 +247,10 @@
       {
         "object": "block",
         "type": "check-list",
+        "data": {
+          "startAt": 1000,
+          "checked": "blah"
+        },
         "nodes": [
           {
             "object": "text",
@@ -260,15 +266,15 @@
         "object": "block",
         "type": "ol-list",
         "data": {
-          "startAt": 1000
+          "startAt": 1000,
+          "checked": "blah"
         },
         "nodes": [
           {
             "object": "text",
             "leaves": [
               {
-                "text":
-                  "Lorem ipsum dolor sit amet consectetur adipiscing elit posuere, euismod viverra ultrices per facilisi accumsan gravida, velit cras sem cum molestie habitasse nunc. Facilisis curae per lacinia vulputate maecenas mi, suspendisse lobortis neque velit augue nunc, ante vitae morbi vehicula bibendum. Lacinia justo elit volutpat class amet ligula suspendisse, ultrices imperdiet est aliquet eu duis elementum, cubilia rutrum convallis primis aenean ad, nisl tempor conubia sociis sagittis donec."
+                "text": "Lorem ipsum dolor sit amet consectetur adipiscing elit posuere, euismod viverra ultrices per facilisi accumsan gravida, velit cras sem cum molestie habitasse nunc. Facilisis curae per lacinia vulputate maecenas mi, suspendisse lobortis neque velit augue nunc, ante vitae morbi vehicula bibendum. Lacinia justo elit volutpat class amet ligula suspendisse, ultrices imperdiet est aliquet eu duis elementum, cubilia rutrum convallis primis aenean ad, nisl tempor conubia sociis sagittis donec."
               }
             ]
           }
