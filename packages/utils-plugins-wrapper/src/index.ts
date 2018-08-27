@@ -1,5 +1,4 @@
 import Symbol from "es6-symbol";
-import mergeWith from "lodash/mergeWith";
 import HTMLSerializer from "@vericus/slate-kit-html-serializer";
 
 const CHANGES = Symbol("changes");
