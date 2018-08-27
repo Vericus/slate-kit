@@ -62,7 +62,7 @@ export default function createOnKeyDown(
         change.setNodeByKey(key, {
           data: data.delete(startAtField).delete(checkField)
         });
-        if (startOffset === 0) {
+        if (startOffset !== 0) {
           change.splitBlock(1);
         } else {
           change.insertBlock({
