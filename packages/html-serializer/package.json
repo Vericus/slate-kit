@@ -36,10 +36,10 @@
     "tslib": "TSLib"
   },
   "devDependencies": {
-    "slate-html-serializer": ">=0.6.0"
+    "slate-html-serializer": ">=0.7.0 < 0.8.0"
   },
   "peerDependencies": {
-    "slate-html-serializer": ">=0.6.0"
+    "slate-html-serializer": ">=0.7.0 <0.8.0"
   },
   "keywords": [
     "deserialize",
