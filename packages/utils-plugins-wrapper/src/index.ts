@@ -46,6 +46,12 @@ export interface PropsMap {
   [label: string]: SlateKitProps;
 }
 
+export interface Plugin {
+  plugins?: object[];
+  plugin?: object;
+  [label: string]: any;
+}
+
 export default class PluginsWrapper {
   serializer: null | object;
   CHANGES: ObjectMap;
@@ -277,7 +283,11 @@ export default class PluginsWrapper {
     return this.serializer;
   };
 
-  configurePlugin = (createPlugin, options = {}, label) => {
+  configurePlugin: (
+    createPlugin: (options?: object, pluginsWrapper?: any) => Plugin,
+    options?: object,
+    label?: string
+  ) => object[] = (createPlugin, options = {}, label) => {
     if (!label) return createPlugin(options, this);
 
     const plugin = createPlugin(options, this);
