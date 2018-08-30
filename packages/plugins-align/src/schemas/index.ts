@@ -6,7 +6,7 @@ export default function createSchema(opts: TypeOptions) {
   const alignBlocks = [...floatBlocks, ...textBlocks];
   return {
     blocks: alignBlocks.reduce(
-      (acc, block) => ({
+      (acc: object, block) => ({
         ...acc,
         [block]: {
           data: {
