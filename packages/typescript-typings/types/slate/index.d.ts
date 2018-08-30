@@ -73,7 +73,7 @@ export class Schema extends Immutable.Record({}) {
 
 export interface ValueProperties {
   document?: Document;
-  selection?: Range;
+  selection?: Selection;
   history?: History;
   schema?: Schema;
   data?: Data;
@@ -897,6 +897,7 @@ export class Change extends Immutable.Record({}) {
   unwrapNodeByKey(key: string): Change;
   wrapInlineByKey(key: string, properties: InlineProperties | string): Change;
   wrapBlockByKey(key: string, properties: BlockProperties | string): Change;
+  wrapNodeByKey(key: string): Change;
 
   // by path
   addMarkByPath(
@@ -926,6 +927,7 @@ export class Change extends Immutable.Record({}) {
     options: ChangeOption
   ): Change;
   mergeNodeByPath(path: Path, options: ChangeOption): Change;
+  mergeNodeByKey(key: string, options: ChangeOption): Change;
   moveNodeByPath(
     path: Path,
     newPath: Path,
@@ -940,6 +942,7 @@ export class Change extends Immutable.Record({}) {
     options: ChangeOption
   ): Change;
   removeAllMarksByPath(path: Path, options: ChangeOption): Change;
+  removeAllMarksByKey(key: string, options: ChangeOption): Change;
   removeNodeByPath(path: Path, options: ChangeOption): Change;
   removeTextByPath(
     path: Path,
@@ -950,6 +953,14 @@ export class Change extends Immutable.Record({}) {
   replaceNodeByPath(path: Path, newNode: Node, options: ChangeOption): Change;
   replaceTextByPath(
     path: Path,
+    offset: number,
+    length: number,
+    text: string,
+    marks: Immutable.Set<Mark> | null | undefined,
+    options: ChangeOption
+  ): Change;
+  replaceTextByKey(
+    key: string,
     offset: number,
     length: number,
     text: string,
@@ -971,6 +982,12 @@ export class Change extends Immutable.Record({}) {
   ): Change;
   setTextByPath(
     path: Path,
+    text: string,
+    marks: Immutable.Set<Mark> | null | undefined,
+    options: ChangeOption
+  ): Change;
+  setTextByKey(
+    key: string,
     text: string,
     marks: Immutable.Set<Mark> | null | undefined,
     options: ChangeOption
