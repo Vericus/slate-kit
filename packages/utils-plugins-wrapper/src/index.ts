@@ -52,6 +52,12 @@ export interface Plugin {
   [label: string]: any;
 }
 
+export interface PluginOption {
+  label?: string;
+  createPlugin: (...args: any[]) => any;
+  options?: object;
+}
+
 export default class PluginsWrapper {
   serializer: null | object;
   CHANGES: ObjectMap;
@@ -319,21 +325,13 @@ export default class PluginsWrapper {
     return this.getPlugins();
   };
 
-  makePlugins = (pluginDict = []) => {
+  makePlugins = (pluginDict: PluginOption[] = []) => {
     const plugins = [
       ...pluginDict.reduce(
-        (
-          acc,
-          {
-            label,
-            createPlugin,
-            options
-          }: {
-            label?: string;
-            createPlugin: (...args: any[]) => any;
-            options?: object;
-          }
-        ) => [...acc, ...this.configurePlugin(createPlugin, options, label)],
+        (acc, { label, createPlugin, options }) => [
+          ...acc,
+          ...this.configurePlugin(createPlugin, options, label)
+        ],
         []
       )
     ];
