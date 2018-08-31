@@ -5,7 +5,7 @@ export default function createSchema(opts: TypeOptions) {
   const { indentable, dataField, maxIndentation } = opts;
   return {
     blocks: indentable.reduce(
-      (acc, block) => ({
+      (acc: any[], block) => ({
         ...acc,
         [block]: {
           data: {

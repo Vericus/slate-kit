@@ -588,10 +588,10 @@ export class Change extends Immutable.Record({}) {
   delete(): Change;
   insertBlock(block: Block | BlockProperties | string): Change;
   insertFragment(fragment: Document): Change;
-  insertInline(inline: Inline | InlineProperties): Change;
+  insertInline(inline: Inline | Partial<InlineProperties>): Change;
   insertText(text: string): Change;
-  addMark(mark: Mark | MarkProperties | string): Change;
-  setBlocks(properties: BlockProperties | string): Change;
+  addMark(mark: Mark | Partial<MarkProperties> | string): Change;
+  setBlocks(properties: Partial<BlockProperties> | string): Change;
   setInlines(properties: InlineProperties | string): Change;
   splitBlock(depth: number): Change;
   splitInline(depth: number): Change;
@@ -889,11 +889,14 @@ export class Change extends Immutable.Record({}) {
   ): Change;
   setNodeByKey(
     key: string,
-    properties: BlockProperties | InlineProperties | string
+    properties: Partial<BlockProperties> | Partial<InlineProperties> | string
   ): Change;
   splitNodeByKey(key: string, offset: number): Change;
   unwrapInlineByKey(key: string, properties: InlineProperties | string): Change;
-  unwrapBlockByKey(key: string, properties: BlockProperties | string): Change;
+  unwrapBlockByKey(
+    key: string,
+    properties?: Partial<BlockProperties> | string
+  ): Change;
   unwrapNodeByKey(key: string): Change;
   wrapInlineByKey(key: string, properties: InlineProperties | string): Change;
   wrapBlockByKey(key: string, properties: BlockProperties | string): Change;
@@ -1443,6 +1446,8 @@ export type ErrorCode =
 
 export class SlateError extends Error {
   code: ErrorCode;
+  node: Node;
+  child: Node;
   [key: string]: any;
 }
 

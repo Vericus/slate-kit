@@ -1,5 +1,6 @@
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import { Change, Block, Node } from "slate";
+import { List } from "immutable";
 import { TypeOptions } from "../options";
 import {
   isOrderedList,
@@ -27,7 +28,7 @@ function resetStartAt(opts: TypeOptions, change: Change) {
   const selectedBlocks = selectedOrderedList(opts, value);
   change.withoutNormalization(c => {
     selectedBlocks.forEach(block => {
-      resetBlockStartAt(opts, c, block);
+      Block.isBlock(block) && resetBlockStartAt(opts, c, block);
     });
   });
 }
@@ -37,7 +38,7 @@ function resetChecked(opts: TypeOptions, change: Change) {
   const selectedBlocks = selectedOrderedList(opts, value);
   change.withoutNormalization(c => {
     selectedBlocks.forEach(block => {
-      resetBlockChecked(opts, c, block);
+      Block.isBlock(block) && resetBlockChecked(opts, c, block);
     });
   });
 }
@@ -45,7 +46,7 @@ function resetChecked(opts: TypeOptions, change: Change) {
 function changeListType(opts: TypeOptions, change: Change, type: string) {
   const { ordered, unordered, checkList } = opts;
   const { value } = change;
-  const selectedBlocks = getHighestSelectedBlocks(value);
+  const selectedBlocks = List(getHighestSelectedBlocks(value));
   const shouldUnwrap =
     (type === checkList && isCheckList(opts, value)) ||
     (type === ordered && isOrderedList(opts, value)) ||
@@ -53,15 +54,19 @@ function changeListType(opts: TypeOptions, change: Change, type: string) {
   if (shouldUnwrap) {
     change.withoutNormalization(c =>
       selectedBlocks.forEach(block => {
-        c.setNodeByKey(block.key, "paragraph");
+        if (Block.isBlock(block)) {
+          c.setNodeByKey(block.key, "paragraph");
+        }
       })
     );
   } else {
     change.withoutNormalization(c => {
       selectedBlocks.forEach(block => {
-        c.setNodeByKey(block.key, type);
-        resetBlockStartAt(opts, c, block);
-        resetBlockChecked(opts, c, block);
+        if (Block.isBlock(block)) {
+          c.setNodeByKey(block.key, type);
+          resetBlockStartAt(opts, c, block);
+          resetBlockChecked(opts, c, block);
+        }
       });
     });
   }
@@ -107,10 +112,10 @@ function unwrapList(
   }
 }
 
-function toggleCheck(opts: TypeOptions, change: Change, node: Node) {
+function toggleCheck(opts: TypeOptions, change: Change, block: Block) {
   const { checkField } = opts;
-  return change.setNodeByKey(node.key, {
-    data: node.data.set(checkField, !node.data.get(checkField))
+  return change.setNodeByKey(block.key, {
+    data: block.data.set(checkField, !block.data.get(checkField))
   });
 }
 
@@ -126,8 +131,8 @@ function createChanges(opts: TypeOptions, pluginsWrapper: any) {
       resetBlockChecked(opts, change, block),
     resetChecked: (change: Change) => resetChecked(opts, change),
     resetStartAt: (change: Change) => resetStartAt(opts, change),
-    toggleCheck: (change: Change, node: Node) =>
-      toggleCheck(opts, change, node),
+    toggleCheck: (change: Change, block: Block) =>
+      toggleCheck(opts, change, block),
     unwrapList: (change: Change, isDelete: boolean) =>
       unwrapList(opts, change, isDelete, pluginsWrapper)
   };

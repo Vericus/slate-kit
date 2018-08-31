@@ -1,13 +1,13 @@
-import { Document, Selection, Change } from "slate";
+import { Document, Range, Change } from "slate";
 
 export default function removeExpandedMark(
   document: Document,
-  selection: Selection,
+  selection: Range,
   change: Change,
   type: string
-): void {
+): any {
   return document
     .getMarksAtRange(selection)
-    .filter(mark => mark.type === type)
-    .forEach(mark => change.removeMarkAtRange(selection, mark));
+    .filter(mark => !!(mark && mark.type === type))
+    .forEach(mark => mark && change.removeMarkAtRange(selection, mark));
 }

@@ -1,21 +1,22 @@
-import { Node, Value } from "slate";
+import { Node, Value, Block } from "slate";
+import { List } from "immutable";
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import { TypeOptions } from "../options";
 
 function isTypography(opts: TypeOptions, node: Node) {
   const { blockTypes } = opts;
-  return blockTypes.includes(node.type);
+  return Block.isBlock(node) && blockTypes.includes(node.type);
 }
 
 function currentTypography(opts: TypeOptions, value: Value) {
   const { blockTypes } = opts;
   return (
     blockTypes.find(t => {
-      const selectedBlocks = getHighestSelectedBlocks(value);
+      const selectedBlocks = List(getHighestSelectedBlocks(value));
       if (selectedBlocks) {
         const headBlock = selectedBlocks.get(0);
         if (headBlock) {
-          return t === headBlock.type;
+          return Block.isBlock(headBlock) && t === headBlock.type;
         }
       }
       return false;

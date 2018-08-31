@@ -27,14 +27,14 @@ export default function createSchema(opts: TypeOptions) {
     if (!blockTypes.includes(block.type)) return undefined;
     if (
       blockTypes.includes(block.type) &&
-      !block.nodes.some(node => node && node.object === "block")
+      !block.nodes.some(node => !!(node && node.object === "block"))
     ) {
       return undefined;
     }
     return (change: Change) => {
       change.withoutNormalization(c => {
         block.nodes.forEach(b => {
-          if (blockTypes.includes(b.type)) {
+          if (Block.isBlock(b) && blockTypes.includes(b.type)) {
             c.unwrapBlockByKey(b.key);
           }
         });

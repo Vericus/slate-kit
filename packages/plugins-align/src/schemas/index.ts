@@ -1,4 +1,4 @@
-import { Change, Node } from "slate";
+import { Change, Node, SlateError, Text } from "slate";
 import { TypeOptions } from "../options";
 
 export default function createSchema(opts: TypeOptions) {
@@ -13,13 +13,15 @@ export default function createSchema(opts: TypeOptions) {
             [dataField]: align =>
               !align || (align && alignments.includes(align))
           },
-          normalize: (change: Change, error) => {
+          normalize: (change: Change, error: SlateError) => {
             if (error.code === "node_data_invalid") {
-              change.withoutNormalization(c =>
-                c.setNodeByKey(error.node.key, {
-                  data: error.node.data.delete(dataField)
-                })
-              );
+              change.withoutNormalization(c => {
+                if (!Text.isText(error.node)) {
+                  c.setNodeByKey(error.node.key, {
+                    data: error.node.data.delete(dataField)
+                  });
+                }
+              });
             }
           }
         }

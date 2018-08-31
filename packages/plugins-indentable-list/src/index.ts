@@ -7,7 +7,10 @@ import createOnKeyDown from "./onKeyDown";
 import createSchema from "./schemas";
 import createRule from "./rules";
 
-export function createPlugin(pluginOptions: TypeOptions, pluginsWrapper: any) {
+export function createPlugin(
+  pluginOptions: Partial<TypeOptions> = {},
+  pluginsWrapper: any
+) {
   const options = new Options(pluginOptions);
   const { ordered, unordered, checkList } = options;
   const utils = createUtils(options);

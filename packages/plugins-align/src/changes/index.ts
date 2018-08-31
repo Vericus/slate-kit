@@ -4,14 +4,14 @@ import getAlignBlocks from "../utils/getAlignBlocks";
 
 function removeAlign(opts: TypeOptions) {
   const { dataField } = opts;
-  return (change: Change, align: string) => {
+  return (change: Change, align: string): Change => {
     const { value } = change;
     change.withoutNormalization(c => {
       getAlignBlocks(opts, value)
         .filter(n => align && n.data && n.data.get(dataField) === align)
-        .forEach(n => {
-          c.setNodeByKey(n.key, { data: n.data.delete(dataField) });
-        });
+        .forEach(n =>
+          c.setNodeByKey(n.key, { data: n.data.delete(dataField) })
+        );
     });
     return change;
   };
@@ -19,7 +19,7 @@ function removeAlign(opts: TypeOptions) {
 
 function setAlign(opts: TypeOptions) {
   const { dataField } = opts;
-  return (change: Change, align: string) => {
+  return (change: Change, align: string): Change => {
     const { value } = change;
     const { alignments } = opts;
     if (!alignments || !alignments.includes(align)) return change;

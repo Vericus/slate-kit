@@ -29,15 +29,15 @@ function decreaseBlockIndent(opts: TypeOptions, change: Change, block: Block) {
 
 function increaseIndent(opts: TypeOptions, change: Change) {
   const { value } = change;
-  getIndentableBlocks(opts, value).forEach(block =>
-    increaseBlockIndent(opts, change, block)
+  getIndentableBlocks(opts, value).forEach(
+    block => Block.isBlock(block) && increaseBlockIndent(opts, change, block)
   );
 }
 
 function decreaseIndent(opts: TypeOptions, change: Change) {
   const { value } = change;
-  getIndentableBlocks(opts, value).forEach(block =>
-    decreaseBlockIndent(opts, change, block)
+  getIndentableBlocks(opts, value).forEach(
+    block => Block.isBlock(block) && decreaseBlockIndent(opts, change, block)
   );
 }
 

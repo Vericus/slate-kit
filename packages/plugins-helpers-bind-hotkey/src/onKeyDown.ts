@@ -10,7 +10,7 @@ function createOnKeyDown(opts: Options) {
   function checkHotKey(event): boolean {
     return hotkeyArrays.some(hotkey => isHotkey(hotkey, event));
   }
-  return (event, change: Change): void | Change => {
+  return (event, change: Change): void | Change | boolean => {
     if (checkHotKey(event)) {
       change.call(changeFn);
       return true;

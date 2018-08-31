@@ -4,11 +4,11 @@ export default function removeCollapsedMark(
   value: Value,
   change: Change,
   type: string
-): void {
+): any {
   return (
     value.marks &&
     value.marks
-      .filter(mark => mark.type === type)
-      .forEach(mark => change.removeMark(mark))
+      .filter(mark => !(mark && mark.type === type))
+      .forEach(mark => mark && change.removeMark(mark))
   );
 }

@@ -1,47 +1,52 @@
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
-import { Value, Node } from "slate";
+import { Value, Node, Block } from "slate";
+import { List } from "immutable";
 import { TypeOptions } from "../options";
 
 function selectedOrderedList(opts: TypeOptions, value: Value) {
   const { ordered } = opts;
-  return getHighestSelectedBlocks(value).filter(node => node.type === ordered);
+  return List(getHighestSelectedBlocks(value)).filter(
+    (node: Node) => !!(Block.isBlock(node) && node && node.type === ordered)
+  );
 }
 
 function isOrderedNode(opts: TypeOptions, node: Node) {
   const { ordered } = opts;
-  return node.type === ordered;
+  return Block.isBlock(node) && node.type === ordered;
 }
 
 function isUnorderedNode(opts: TypeOptions, node: Node) {
   const { unordered } = opts;
-  return node.type === unordered;
+  return Block.isBlock(node) && node.type === unordered;
 }
 
 function isCheckNode(opts: TypeOptions, node: Node) {
   const { checkList } = opts;
-  return node.type === checkList;
+  return Block.isBlock(node) && node.type === checkList;
 }
 
 function isListNode(opts: TypeOptions, node: Node) {
   const { ordered, unordered, checkList } = opts;
   const listTypes = [ordered, unordered, checkList];
-  return listTypes.includes(node.type);
+  return Block.isBlock(node) && listTypes.includes(node.type);
 }
 
 function isOrderedList(opts: TypeOptions, value: Value) {
-  return getHighestSelectedBlocks(value).every(node =>
-    isOrderedNode(opts, node)
+  return List(getHighestSelectedBlocks(value)).every(
+    node => Block.isBlock(node) && isOrderedNode(opts, node)
   );
 }
 
 function isUnorderedList(opts: TypeOptions, value: Value) {
-  return getHighestSelectedBlocks(value).every(node =>
-    isUnorderedNode(opts, node)
+  return List(getHighestSelectedBlocks(value)).every(
+    node => Block.isBlock(node) && isUnorderedNode(opts, node)
   );
 }
 
 function isCheckList(opts: TypeOptions, value: Value) {
-  return getHighestSelectedBlocks(value).every(node => isCheckNode(opts, node));
+  return List(getHighestSelectedBlocks(value)).every(
+    node => Block.isBlock(node) && isCheckNode(opts, node)
+  );
 }
 
 function createUtils(opts: TypeOptions) {

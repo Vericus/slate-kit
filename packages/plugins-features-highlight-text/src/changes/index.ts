@@ -1,4 +1,4 @@
-import { Mark, Data } from "slate";
+import { Mark, Data, Range } from "slate";
 import { Change } from "slate";
 import {
   hasMark,
@@ -14,12 +14,13 @@ export default function createChanges(opt: TypeOptions) {
     changeColor: (change: Change, color: string) => {
       const { value } = change;
       const { selection, document } = value;
+      const range = Range.create(selection);
       if (hasMark(value, type)) {
         if (tinycolor(color).toName() === defaultColor) {
           if (selection.isCollapsed) {
             removeCollapsedMark(value, change, type);
           } else {
-            removeExpandedMark(document, selection, change, type);
+            removeExpandedMark(document, range, change, type);
           }
         } else {
           const newMark = new Mark({
@@ -28,13 +29,13 @@ export default function createChanges(opt: TypeOptions) {
               [data]: color
             })
           });
-          if (selection.isCollapsed) {
+          if (range.isCollapsed) {
             removeCollapsedMark(value, change, type);
             change.focus();
             change.addMark(newMark);
           } else {
-            removeExpandedMark(document, selection, change, type);
-            change.addMarkAtRange(selection, newMark);
+            removeExpandedMark(document, range, change, type);
+            change.addMarkAtRange(range, newMark);
           }
         }
       } else if (tinycolor(color).toName() !== defaultColor) {
@@ -44,11 +45,11 @@ export default function createChanges(opt: TypeOptions) {
             [data]: color
           })
         });
-        if (selection.isCollapsed) {
+        if (range.isCollapsed) {
           change.addMark(mark);
         } else {
-          removeExpandedMark(document, selection, change, type);
-          change.addMarkAtRange(selection, mark);
+          removeExpandedMark(document, range, change, type);
+          change.addMarkAtRange(range, mark);
         }
       }
       change.focus();

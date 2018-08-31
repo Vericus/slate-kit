@@ -1,3 +1,47 @@
 {
-  "extends": "./tsconfig.base.json"
+  "extends": "./tsconfig.base.json",
+  "files": [],
+  "references": [
+    { "path": "packages/html-serializer", "prepend": true },
+    { "path": "packages/paste-helpers", "prepend": true },
+    { "path": "packages/plugins-align", "prepend": true },
+    {
+      "path": "packages/plugins-features-basic-text-formatting",
+      "prepend": true
+    },
+    { "path": "packages/plugins-features-basic-typhography", "prepend": true },
+    { "path": "packages/plugins-features-highlight-text", "prepend": true },
+    { "path": "packages/plugins-features-history", "prepend": true },
+    { "path": "packages/plugins-helpers-bind-hotkey", "prepend": true },
+    { "path": "packages/plugins-indent", "prepend": true },
+    { "path": "packages/plugins-indentable-list", "prepend": true },
+    { "path": "packages/plugins-read-only", "prepend": true },
+    {
+      "path": "packages/plugins-renderer-basic-text-formatting",
+      "prepend": true
+    },
+    { "path": "packages/plugins-renderer-basic-typography", "prepend": true },
+    { "path": "packages/plugins-renderer-highlight-text", "prepend": true },
+    { "path": "packages/plugins-renderer-indentable-list", "prepend": true },
+    { "path": "packages/typescript-typings/types/slate", "prepend": true },
+    {
+      "path": "packages/typescript-typings/types/slate-base64-serializer",
+      "prepend": true
+    },
+    {
+      "path": "packages/typescript-typings/types/slate-html-serializer",
+      "prepend": true
+    },
+    {
+      "path": "packages/typescript-typings/types/slate-plain-serializer",
+      "prepend": true
+    },
+    {
+      "path": "packages/typescript-typings/types/slate-react",
+      "prepend": true
+    },
+    { "path": "packages/utils", "prepend": true },
+    { "path": "packages/utils-hyperscript", "prepend": true },
+    { "path": "packages/utils-plugins-wrapper", "prepend": true }
+  ]
 }
