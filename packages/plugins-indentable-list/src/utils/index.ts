@@ -6,7 +6,8 @@ import { TypeOptions } from "../options";
 function selectedOrderedList(opts: TypeOptions, value: Value) {
   const { ordered } = opts;
   return List(getHighestSelectedBlocks(value)).filter(
-    (node: Node) => !!(Block.isBlock(node) && node && node.type === ordered)
+    (node: any) =>
+      !!(node && Block.isBlock(node) && node && node.type === ordered)
   );
 }
 

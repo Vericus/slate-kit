@@ -146,6 +146,7 @@ class ColorPicker extends Component {
         background: "white",
         padding: "0",
         margin: "0",
+        marginTop: "50px",
         display: "flex",
         flexDirection: "column",
         borderRadius: "3px",

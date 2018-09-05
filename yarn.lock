@@ -4808,10 +4808,6 @@ estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
 
-estree-walker@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-0.2.1.tgz#bdafe8095383d8414d5dc2ecf4c9173b6db9412e"
-
 estree-walker@^0.5.1, estree-walker@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-0.5.2.tgz#d3850be7529c9580d815600b53126515e146dd39"
@@ -6890,7 +6886,7 @@ is-hexadecimal@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-hexadecimal/-/is-hexadecimal-1.0.2.tgz#b6e710d7d07bb66b98cb8cece5c9b4921deeb835"
 
-is-hotkey@*, is-hotkey@>=0.1.2, is-hotkey@^0.0.3, is-hotkey@^0.1.3:
+is-hotkey@*, is-hotkey@>=0.1.2, is-hotkey@^0.0.3, is-hotkey@^0.1.2, is-hotkey@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/is-hotkey/-/is-hotkey-0.1.3.tgz#8a129eec16f3941bd4f37191e02b9c3e91950549"
 
@@ -11484,19 +11480,12 @@ rollup-plugin-visualizer@^0.8.1:
     mkdirp "^0.5.1"
     source-map "^0.7.3"
 
-rollup-pluginutils@2.3.0, rollup-pluginutils@^2.0.1, rollup-pluginutils@^2.2.0:
+rollup-pluginutils@2.3.0, rollup-pluginutils@^1.5.0, rollup-pluginutils@^2.0.1, rollup-pluginutils@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.3.0.tgz#478ace04bd7f6da2e724356ca798214884738fc4"
   dependencies:
     estree-walker "^0.5.2"
     micromatch "^2.3.11"
-
-rollup-pluginutils@^1.5.0:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-1.5.2.tgz#1e156e778f94b7255bfa1b3d0178be8f5c552408"
-  dependencies:
-    estree-walker "^0.2.1"
-    minimatch "^3.0.2"
 
 rollup@^0.64.1:
   version "0.64.1"
@@ -11867,11 +11856,30 @@ slate-react@*:
     slate-plain-serializer "^0.6.2"
     slate-prop-types "^0.4.61"
 
+slate-react@^0.18.5:
+  version "0.18.5"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.18.5.tgz#089ae30cd19b7600a9b528b5ab0525038b500142"
+  dependencies:
+    debug "^3.1.0"
+    get-window "^1.1.1"
+    is-window "^1.0.2"
+    lodash "^4.1.1"
+    memoize-one "^4.0.0"
+    prop-types "^15.5.8"
+    react-immutable-proptypes "^2.1.0"
+    selection-is-backward "^1.0.0"
+    slate-base64-serializer "^0.2.63"
+    slate-dev-environment "^0.2.0"
+    slate-dev-warning "^0.0.1"
+    slate-hotkeys "^0.2.3"
+    slate-plain-serializer "^0.6.2"
+    slate-prop-types "^0.4.61"
+
 slate-simulator@*, slate-simulator@>=0.4.59, slate-simulator@^0.4.33:
   version "0.4.61"
   resolved "https://registry.yarnpkg.com/slate-simulator/-/slate-simulator-0.4.61.tgz#dc9a998d22c06d1229ce0855fae6bcfb884b6d23"
 
-slate@*, "slate@>=0.40.0 <0.41.0":
+slate@*, "slate@>=0.40.0 <0.41.0", slate@^0.40.2:
   version "0.40.2"
   resolved "https://registry.yarnpkg.com/slate/-/slate-0.40.2.tgz#3adbd4bb66c16208b2dc3f0900b1857ea7912cb0"
   dependencies:

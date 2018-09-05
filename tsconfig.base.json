@@ -2,7 +2,6 @@
   "exclude": ["**/*.spec.ts", "node_modules", "*.d.ts", "**/*.d.ts"],
   "compilerOptions": {
     "baseUrl": ".",
-    "rootDir": ".",
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",

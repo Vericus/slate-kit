@@ -3,8 +3,8 @@ import { List } from "immutable";
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import { TypeOptions } from "../options";
 
-function getAlignBlocksInBlock(opts: TypeOptions, node: Node): Block[] {
-  if (node.object !== "block") return [];
+function getAlignBlocksInBlock(opts: TypeOptions, node: any): Block[] {
+  if (!node || !Block.isBlock(node)) return [];
   const { textBlocks, floatBlocks } = opts;
   if (node.isLeafBlock()) {
     if (textBlocks.includes(node.type) || floatBlocks.includes(node.type)) {
@@ -25,7 +25,7 @@ function getAlignBlocks(opts: TypeOptions, value: Value) {
   const maybeAlignBlocks = getHighestSelectedBlocks(value);
   if (maybeAlignBlocks.size === 0) return [];
   return List(maybeAlignBlocks).reduce(
-    (alignBlocks: Block[], block: Node) => [
+    (alignBlocks: Block[], block: any) => [
       ...alignBlocks,
       ...getAlignBlocksInBlock(opts, block)
     ],
