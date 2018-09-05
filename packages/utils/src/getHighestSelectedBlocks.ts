@@ -21,7 +21,6 @@ export default function getHighestSelectedBlocks(
           endBlock = document.getPreviousBlock(endBlock.key);
         }
       }
-
       if (startBlock && !endBlock) {
         return List([startBlock]);
       } else if (endBlock && !startBlock) {
@@ -37,7 +36,20 @@ export default function getHighestSelectedBlocks(
         if (ancestor instanceof Block || ancestor instanceof Document) {
           const startPath = ancestor.getPath(startBlock.key);
           const endPath = ancestor.getPath(endBlock.key);
-          return List(ancestor.nodes.slice(startPath[0], endPath[0]));
+          const blockStartPath = startPath
+            ? List(startPath).first()
+            : undefined;
+          const blockEndPath = endPath ? List(endPath).first() : undefined;
+          if (
+            blockStartPath !== undefined &&
+            blockEndPath !== undefined &&
+            typeof blockStartPath === "number" &&
+            typeof blockEndPath === "number"
+          ) {
+            return ancestor.nodes
+              .slice(blockStartPath, blockEndPath)
+              .filter(node => Block.isBlock(node)) as List<Block>;
+          }
         }
       }
       return List([]);
