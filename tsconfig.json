@@ -1,6 +1,5 @@
 {
   "extends": "./tsconfig.base.json",
-  "files": [],
   "references": [
     { "path": "packages/html-serializer", "prepend": true },
     { "path": "packages/paste-helpers", "prepend": true },
