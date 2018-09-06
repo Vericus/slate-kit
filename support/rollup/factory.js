@@ -93,7 +93,10 @@ function configure(pkg, location, env, target) {
           compilerOptions: {
             rootDir: path.resolve(location, "src"),
             paths: {
-              "@vericus/slate-kit*": [`${path.resolve(location, "..")}/*/src`],
+              "@vericus/slate-kit*": [
+                `${path.resolve(location, "..")}/*/src`,
+                `${path.resolve(location, "..")}/*/lib`
+              ],
               "slate*": [
                 `${path.resolve(location, "../../node_modules")}/*`,
                 `${path.resolve(location, "..")}/typescript-typings/types/*`

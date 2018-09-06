@@ -1,4 +1,4 @@
-import renderMark from "./renderMark";
+import renderMark, { Props } from "./renderMark";
 
 export function createRenderer(opts: any) {
   return {

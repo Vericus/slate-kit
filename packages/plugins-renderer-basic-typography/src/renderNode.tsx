@@ -50,6 +50,12 @@ export const Paragraph: React.SFC<Props> = props => {
   );
 };
 
+HeadingOne.propTypes = SlateTypes.Block;
+HeadingTwo.propTypes = SlateTypes.Block;
+HeadingThree.propTypes = SlateTypes.Block;
+HeadingFour.propTypes = SlateTypes.Block;
+Paragraph.propTypes = SlateTypes.Block;
+
 export default function createRenderNode(pluginsWrapper: any) {
   return (props: Props) => {
     const newProps = pluginsWrapper.getProps(props);
@@ -69,9 +75,3 @@ export default function createRenderNode(pluginsWrapper: any) {
     return undefined;
   };
 }
-
-HeadingOne.propTypes = SlateTypes.Block;
-HeadingTwo.propTypes = SlateTypes.Block;
-HeadingThree.propTypes = SlateTypes.Block;
-HeadingFour.propTypes = SlateTypes.Block;
-Paragraph.propTypes = SlateTypes.Block;

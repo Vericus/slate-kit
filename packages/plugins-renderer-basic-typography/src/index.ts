@@ -3,7 +3,8 @@ import createRenderNode, {
   HeadingTwo,
   HeadingThree,
   HeadingFour,
-  Paragraph
+  Paragraph,
+  Props
 } from "./renderNode";
 
 export function createRenderer(opts: any, pluginsWrapper: any) {
