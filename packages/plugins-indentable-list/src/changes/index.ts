@@ -27,9 +27,9 @@ function resetStartAt(opts: TypeOptions, change: Change) {
   const { value } = change;
   const selectedBlocks = selectedOrderedList(opts, value);
   change.withoutNormalization(c => {
-    selectedBlocks.forEach(block => {
-      Block.isBlock(block) && resetBlockStartAt(opts, c, block);
-    });
+    selectedBlocks.forEach(block =>
+      Block.isBlock(block) && resetBlockStartAt(opts, c, block)
+    );
   });
 }
 
@@ -37,9 +37,9 @@ function resetChecked(opts: TypeOptions, change: Change) {
   const { value } = change;
   const selectedBlocks = selectedOrderedList(opts, value);
   change.withoutNormalization(c => {
-    selectedBlocks.forEach(block => {
-      Block.isBlock(block) && resetBlockChecked(opts, c, block);
-    });
+    selectedBlocks.forEach(block =>
+      Block.isBlock(block) && resetBlockChecked(opts, c, block)
+    );
   });
 }
 
