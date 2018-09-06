@@ -252,6 +252,13 @@ export default class Toolbar extends Component {
           ? pluginsWrapper.getChanges("basic-typhography").toggleTypography
           : () => {},
         disabled: !hasTypography
+      },
+      blockquote: {
+        icon: "Blockquote",
+        change: hasTypography
+          ? pluginsWrapper.getChanges("basic-typhography").toggleTypography
+          : () => {},
+        disabled: !hasTypography
       }
     };
     this.lists = {
