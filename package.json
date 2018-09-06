@@ -31,7 +31,7 @@
     "watch": "npm-run-all --parallel --print-label watch:test watch:build watch:build-packages storybook",
     "watch:test": "yarn run test --watch",
     "watch:build-packages": "yarn run build:packages --watch",
-    "watch:build": "lerna run dev --parallel"
+    "watch:build": "lerna run --parallel dev"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.0",

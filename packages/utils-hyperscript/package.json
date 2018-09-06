@@ -29,7 +29,7 @@
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
     "build": "tsc -b .",
-    "dev": "tsc -w ."
+    "dev": "tsc -w"
   },
   "dependencies": {
     "slate-hyperscript": ">=0.5.10",

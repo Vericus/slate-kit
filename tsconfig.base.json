@@ -1,5 +1,13 @@
 {
-  "exclude": ["**/*.spec.ts", "node_modules", "*.d.ts", "**/*.d.ts"],
+  "exclude": [
+    "**/*.spec.ts",
+    "node_modules",
+    "*.d.ts",
+    "**/*.d.ts",
+    "**/lib/**/*.ts",
+    "**/dist/**/*.ts",
+    "**/module/**/*.ts"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "module": "commonjs",
