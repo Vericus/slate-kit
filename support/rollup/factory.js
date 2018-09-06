@@ -11,6 +11,7 @@ import typescript from "rollup-plugin-typescript2";
 // import progress from "rollup-plugin-progress";
 import { startCase } from "lodash";
 import fs from "fs";
+import path from "path";
 
 /**
  * Return a Rollup configuration for a `pkg` with `env` and `target`.
@@ -87,7 +88,20 @@ function configure(pkg, location, env, target) {
       typescript({
         tsconfig: `${location}/tsconfig.rollup.json`,
         typescript: require("typescript"),
-        useTsconfigDeclarationDir: true
+        useTsconfigDeclarationDir: true,
+        tsconfigOverride: {
+          compilerOptions: {
+            rootDir: path.resolve(location, "src"),
+            paths: {
+              "@vericus/slate-kit*": [`${path.resolve(location, "..")}/*/src`],
+              "slate*": [
+                `${path.resolve(location, "../../node_modules")}/*`,
+                `${path.resolve(location, "..")}/typescript-typings/types/*`
+              ]
+            }
+          },
+          include: [path.resolve(location, "src")]
+        }
       }),
 
     // Use Babel to transpile the result, limiting it to the source code.
