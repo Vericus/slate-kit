@@ -1,33 +1,48 @@
 import { Node, Value, Block } from "slate";
 import { List } from "immutable";
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
-import { TypeOptions } from "../options";
+import { TypeOptions, BlockTypes } from "../options";
 
-function isTypography(opts: TypeOptions, node: Node) {
-  const { blockTypes } = opts;
-  return Block.isBlock(node) && blockTypes.includes(node.type);
+function isTypography(types: string[], node: Node) {
+  return Block.isBlock(node) && types.includes(node.type);
 }
 
-function currentTypography(opts: TypeOptions, value: Value) {
-  const { blockTypes } = opts;
-  return (
-    blockTypes.find(t => {
-      const selectedBlocks = List(getHighestSelectedBlocks(value));
-      if (selectedBlocks) {
-        const headBlock = selectedBlocks.get(0);
-        if (headBlock) {
-          return Block.isBlock(headBlock) && t === headBlock.type;
-        }
+function currentTypography(types: Partial<BlockTypes>, value: Value) {
+  const blockType = Object.entries(types).find(([type, typeName]) => {
+    const selectedBlocks = List(getHighestSelectedBlocks(value));
+    if (selectedBlocks) {
+      const headBlock = selectedBlocks.get(0);
+      if (headBlock) {
+        return !!(
+          Block.isBlock(headBlock) &&
+          typeName === headBlock.type &&
+          type
+        );
       }
-      return false;
-    }) || "paragraph"
-  );
+    }
+    return false;
+  });
+  return blockType ? blockType[1] : "paragraph";
 }
 
 function createUtils(opts: TypeOptions) {
+  const { blockTypes } = opts;
+  const validBlockTypes: { [key: string]: string } = Object.entries(
+    blockTypes
+  ).reduce((types, [type, typeName]) => {
+    if (typeof typeName === "string") {
+      return {
+        ...types,
+        [type]: typeName
+      };
+    }
+    return types;
+  }, {});
+  const slateBlockTypes = Object.values(validBlockTypes);
   return {
-    isTypography: (node: Node) => isTypography(opts, node),
-    currentTypography: (value: Value) => currentTypography(opts, value)
+    isTypography: (node: Node) => isTypography(slateBlockTypes, node),
+    currentTypography: (value: Value) =>
+      currentTypography(validBlockTypes, value)
   };
 }
 

@@ -1,46 +1,35 @@
-import { Block, Change } from "slate";
+import { Block, Change, SlateError } from "slate";
 import { TypeOptions } from "../options";
-
-export interface SlateSchemas {
-  validateNode?: (block: Block) => any;
-  getSchema?: () => object;
-}
-
-export interface SlateSchema {
-  blocks?: object;
-}
 
 export default function createSchema(opts: TypeOptions) {
   const { blockTypes } = opts;
-  const schemas: SlateSchemas = {};
-  const schema: SlateSchema = {};
-  schema.blocks = {};
-  blockTypes.forEach(block => {
-    if (schema.blocks) {
-      schema.blocks[block] = {
-        isVoid: false
-      };
+  return {
+    blocks: {
+      ...Object.values(blockTypes).reduce((acc, type) => {
+        if (typeof type === "string") {
+          return {
+            ...acc,
+            [type]: {
+              isVoid: false,
+              parent: { object: "document" },
+              nodes: [{ match: [{ object: "text" }, { object: "inline" }] }],
+              normalize: (change: Change, error: SlateError) => {
+                switch (error.code) {
+                  case "child_object_invalid":
+                    change.removeNodeByKey(error.child.key);
+                    return;
+                  case "parent_object_invalid":
+                    change.unwrapBlockByKey(error.node.key);
+                    return;
+                  default:
+                    return;
+                }
+              }
+            }
+          };
+        }
+        return acc;
+      }, {})
     }
-  });
-  schemas.validateNode = (block: Block) => {
-    if (block.object !== "block") return undefined;
-    if (!blockTypes.includes(block.type)) return undefined;
-    if (
-      blockTypes.includes(block.type) &&
-      !block.nodes.some(node => !!(node && node.object === "block"))
-    ) {
-      return undefined;
-    }
-    return (change: Change) => {
-      change.withoutNormalization(c => {
-        block.nodes.forEach(b => {
-          if (Block.isBlock(b) && blockTypes.includes(b.type)) {
-            c.unwrapBlockByKey(b.key);
-          }
-        });
-      });
-    };
   };
-  schemas.getSchema = () => schema;
-  return schemas;
 }
