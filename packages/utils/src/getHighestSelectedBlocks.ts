@@ -3,7 +3,7 @@ import { List } from "immutable";
 
 export default function getHighestSelectedBlocks(
   value: Value
-): List<Block | null> {
+): List<Block> {
   let { selection } = value;
   if (selection.isBackward) {
     selection = selection.flip() as Selection;
@@ -25,7 +25,7 @@ export default function getHighestSelectedBlocks(
         return List([startBlock]);
       } else if (endBlock && !startBlock) {
         return List([endBlock]);
-      } else if (startBlock === endBlock) {
+      } else if (startBlock === endBlock && startBlock) {
         return List([startBlock]);
       }
       if (startBlock && endBlock) {
