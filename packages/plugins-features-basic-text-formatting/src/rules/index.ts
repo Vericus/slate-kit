@@ -10,6 +10,7 @@ const markTags = {
 };
 
 export default function createRule(options, getData) {
+  const { marks: markTypes } = options;
   return [
     {
       deserialize(el, next) {
@@ -18,7 +19,7 @@ export default function createRule(options, getData) {
         if (![...el.childNodes].every(node => node.nodeName === "#text")) {
           return {
             object: "mark",
-            type: mark,
+            type: markTypes[mark],
             nodes: next(el.childNodes)
           };
         }
@@ -30,7 +31,7 @@ export default function createRule(options, getData) {
             marks: [
               {
                 object: "mark",
-                type: mark
+                type: markTypes[mark]
               }
             ]
           }))
