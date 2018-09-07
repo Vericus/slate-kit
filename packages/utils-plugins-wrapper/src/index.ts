@@ -114,21 +114,24 @@ export default class PluginsWrapper {
           return {
             ...renderers,
             marks: {
-              ...(renderers.marks ? renderer.marks : {})
+              ...(renderers.marks ? renderers.marks : {}),
+              ...renderer.marks
             }
           };
         } else if (renderer.nodes) {
           return {
             ...renderers,
             nodes: {
-              ...(renderers.nodes ? renderer.nodes : {})
+              ...(renderers.nodes ? renderers.nodes : {}),
+              ...renderer.nodes
             }
           };
         } else if (renderer.placeholders) {
           return {
             ...renderers,
             placeholders: [
-              ...(renderers.placeholders ? renderer.placeholders : [])
+              ...(renderers.placeholders ? renderers.placeholders : []),
+              ...renderer.placeholders
             ]
           };
         }
@@ -152,14 +155,16 @@ export default class PluginsWrapper {
           return {
             ...mappings,
             marks: {
-              ...(mappings.marks ? mapping.marks : {})
+              ...(mapping.marks ? mapping.marks : {}),
+              ...mappings.marks
             }
           };
         } else if (mapping.blockTypes) {
           return {
             ...mappings,
             nodes: {
-              ...(mappings.nodes ? mapping.blockTypes : {})
+              ...(mapping.blockTypes ? mapping.blockTypes : {}),
+              ...mappings.nodes
             }
           };
         }

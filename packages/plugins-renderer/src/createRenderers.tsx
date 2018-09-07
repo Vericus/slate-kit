@@ -7,15 +7,21 @@ export interface Props {
 }
 
 const SlateKitNode: React.SFC<Props> = props => props.children(props);
-const createRenderMarks = marksOptions => props => (
-  <SlateKitNode>
-    {() =>
-      marksOptions[props.mark.type]
-        ? marksOptions[props.mark.type](props)
-        : null
-    }
-  </SlateKitNode>
-);
+const createRenderMarks = (
+  marksOptions,
+  pluginsWrapper: PluginsWrapper
+) => props => {
+  const newProps = pluginsWrapper.getProps(props);
+  return (
+    <SlateKitNode>
+      {() =>
+        marksOptions[props.mark.type]
+          ? marksOptions[props.mark.type](newProps)
+          : null
+      }
+    </SlateKitNode>
+  );
+};
 const createRenderNodes = (
   nodesOptions,
   pluginsWrapper: PluginsWrapper
@@ -37,7 +43,7 @@ const createRenderPlaceholders = placeholdersOptions => {
 
 const renderers = (opts: TypeOptions, pluginsWrapper: PluginsWrapper) => {
   const { marks, nodes, placeholders } = opts;
-  const renderMark = createRenderMarks(marks);
+  const renderMark = createRenderMarks(marks, pluginsWrapper);
   const renderNode = createRenderNodes(nodes, pluginsWrapper);
   const renderPlaceholders = createRenderPlaceholders(placeholders);
   return [...renderPlaceholders, { renderMark, renderNode }];
@@ -59,12 +65,10 @@ export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
               : {
                   ...mapRenderers[key],
                   ...Object.entries(value).reduce(
-                    (acc, [mapKey, mapRenderer]) => {
-                      return {
-                        ...acc,
-                        [mapping[key][mapKey]]: mapRenderer
-                      };
-                    },
+                    (acc, [mapKey, mapRenderer]) => ({
+                      ...acc,
+                      [mapping[key][mapKey]]: mapRenderer
+                    }),
                     {}
                   )
                 }
