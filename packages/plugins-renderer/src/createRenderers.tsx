@@ -7,6 +7,11 @@ export interface Props {
 }
 
 const SlateKitNode: React.SFC<Props> = props => props.children(props);
+
+const defaultMark = props => (
+  <span {...props.attributes}>{props.children}</span>
+);
+
 const createRenderMarks = (
   marksOptions,
   pluginsWrapper: PluginsWrapper
@@ -17,7 +22,7 @@ const createRenderMarks = (
       {() =>
         marksOptions[props.mark.type]
           ? marksOptions[props.mark.type](newProps)
-          : null
+          : defaultMark(newProps)
       }
     </SlateKitNode>
   );
