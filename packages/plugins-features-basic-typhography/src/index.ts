@@ -16,7 +16,7 @@ export default function createPlugin(
   const rules = createRule;
   let plugins: any = [{ options, rules, changes, utils, schema }];
   if (!options.externalRenderer) {
-    plugins = [...plugins, { ...Renderer(pluginOptions, pluginsWrapper) }];
+    plugins = [...plugins, { ...Renderer() }];
   }
   return {
     plugins

@@ -66,6 +66,7 @@ function configure(pkg, location, env, target) {
             "Stack",
             "is"
           ],
+          "fbjs/lib/shallowEqual": ["shallowEqual"],
           react: ["createElement"],
           "react-dom": ["findDOMNode"],
           "react-dom/server": ["renderToStaticMarkup"]

@@ -1,0 +1,85 @@
+import * as React from "react";
+import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
+import Options, { TypeOptions } from "./options";
+
+export interface Props {
+  children: (...args: any[]) => JSX.Element;
+}
+
+const SlateKitNode: React.SFC<Props> = props => props.children(props);
+const createRenderMarks = marksOptions => props => (
+  <SlateKitNode>
+    {() =>
+      marksOptions[props.mark.type]
+        ? marksOptions[props.mark.type](props)
+        : null
+    }
+  </SlateKitNode>
+);
+const createRenderNodes = (
+  nodesOptions,
+  pluginsWrapper: PluginsWrapper
+) => props => {
+  const newProps = pluginsWrapper.getProps(props);
+  return (
+    <SlateKitNode>
+      {() =>
+        nodesOptions[props.node.type]
+          ? nodesOptions[props.node.type](newProps)
+          : null
+      }
+    </SlateKitNode>
+  );
+};
+const createRenderPlaceholders = placeholdersOptions => {
+  return [];
+};
+
+const renderers = (opts: TypeOptions, pluginsWrapper: PluginsWrapper) => {
+  const { marks, nodes, placeholders } = opts;
+  const renderMark = createRenderMarks(marks);
+  const renderNode = createRenderNodes(nodes, pluginsWrapper);
+  const renderPlaceholders = createRenderPlaceholders(placeholders);
+  return [...renderPlaceholders, { renderMark, renderNode }];
+};
+
+export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
+  let options = opts;
+  if (pluginsWrapper) {
+    const renderers = pluginsWrapper.getRenderers();
+    const mapping = pluginsWrapper.getNodeMappings();
+    options = {
+      ...options,
+      ...Object.entries(renderers).reduce(
+        (mapRenderers, [key, value]) => {
+          return {
+            ...mapRenderers,
+            [key]: Array.isArray(value)
+              ? [...mapRenderers[key], ...value]
+              : {
+                  ...mapRenderers[key],
+                  ...Object.entries(value).reduce(
+                    (acc, [mapKey, mapRenderer]) => {
+                      return {
+                        ...acc,
+                        [mapping[key][mapKey]]: mapRenderer
+                      };
+                    },
+                    {}
+                  )
+                }
+          };
+        },
+        {
+          marks: {},
+          nodes: {},
+          placeholders: []
+        }
+      )
+    };
+  }
+  const pluginOptions = new Options(options);
+  return {
+    plugins: [...renderers(pluginOptions, pluginsWrapper)]
+  };
+}

@@ -8,6 +8,7 @@ const PROPS = Symbol("props");
 const STYLES = Symbol("styles");
 const UTILS = Symbol("utils");
 const RULES = Symbol("rules");
+const RENDERERS = Symbol("renderers");
 
 export interface ObjectMap {
   [label: string]: object;
@@ -38,6 +39,18 @@ export interface RulesMap {
   [label: string]: () => void;
 }
 
+export interface SlateRenderers {
+  [key: string]: (...args: any[]) => JSX.Element;
+}
+
+export type RenderersType =
+  | "renderMarks"
+  | "renderNodes"
+  | "renderEditor"
+  | "renderPlaceholder";
+
+export type RenderersMap = { [label in RenderersType]: SlateRenderers };
+
 export interface SlateKitProps {
   getProps?: (nodeProps: object) => object;
 }
@@ -65,6 +78,7 @@ export default class PluginsWrapper {
   UTILS: ObjectMap;
   STYLES: StylesMap;
   RULES: RulesMap;
+  RENDERERS: RenderersMap;
   constructor() {
     this[CHANGES] = {};
     this[OPTIONS] = {};
@@ -73,6 +87,7 @@ export default class PluginsWrapper {
     this[STYLES] = {};
     this[UTILS] = {};
     this[RULES] = {};
+    this[RENDERERS] = {};
     this.serializer = null;
   }
 
@@ -91,6 +106,70 @@ export default class PluginsWrapper {
       []
     )
   ];
+
+  getRenderers = () =>
+    Object.values(this[RENDERERS]).reduce(
+      (renderers: any, renderer: any) => {
+        if (renderer.marks) {
+          return {
+            ...renderers,
+            marks: {
+              ...(renderers.marks ? renderer.marks : {})
+            }
+          };
+        } else if (renderer.nodes) {
+          return {
+            ...renderers,
+            nodes: {
+              ...(renderers.nodes ? renderer.nodes : {})
+            }
+          };
+        } else if (renderer.placeholders) {
+          return {
+            ...renderers,
+            placeholders: [
+              ...(renderers.placeholders ? renderer.placeholders : [])
+            ]
+          };
+        }
+        return renderers;
+      },
+      { marks: {}, nodes: {}, placeholders: [] }
+    );
+
+  getFlattenOptions = () =>
+    Object.values(this[OPTIONS]).reduce((acc: any[], value) => {
+      if (Array.isArray(value)) {
+        return [...acc, ...value];
+      }
+      return [...acc, value];
+    }, []) as any[];
+
+  getNodeMappings = () =>
+    this.getFlattenOptions().reduce(
+      (mappings: any, mapping: any) => {
+        if (mapping.marks) {
+          return {
+            ...mappings,
+            marks: {
+              ...(mappings.marks ? mapping.marks : {})
+            }
+          };
+        } else if (mapping.blockTypes) {
+          return {
+            ...mappings,
+            nodes: {
+              ...(mappings.nodes ? mapping.blockTypes : {})
+            }
+          };
+        }
+        return mappings;
+      },
+      {
+        marks: {},
+        nodes: {}
+      }
+    );
 
   getUtils = (label?: string) => (label ? this[UTILS][label] : this[UTILS]);
 
@@ -192,10 +271,17 @@ export default class PluginsWrapper {
         }
         break;
       case "options":
-        this[OPTIONS][label] = value;
+        if (this[OPTIONS][label]) {
+          this[OPTIONS][label] = [...this[OPTIONS][label], value];
+        } else {
+          this[OPTIONS][label] = value;
+        }
         break;
       case "rules":
         this[RULES][label] = value;
+        break;
+      case "renderers":
+        this[RENDERERS][label] = value;
         break;
       default:
         break;

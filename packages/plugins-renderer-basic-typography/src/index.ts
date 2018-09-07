@@ -4,12 +4,13 @@ import createRenderNode, {
   HeadingThree,
   HeadingFour,
   Paragraph,
+  Blockquote,
   Props
 } from "./renderNode";
 
-export function createRenderer(opts: any, pluginsWrapper: any) {
+export function createRenderer() {
   return {
-    renderNode: createRenderNode(pluginsWrapper)
+    renderers: createRenderNode()
   };
 }
 
@@ -19,5 +20,6 @@ export {
   HeadingTwo,
   HeadingThree,
   HeadingFour,
-  Paragraph
+  Paragraph,
+  Blockquote
 };

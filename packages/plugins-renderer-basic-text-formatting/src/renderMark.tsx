@@ -19,7 +19,7 @@ const renderMark: React.SFC<Props> = ({ children, attributes }) => {
 
 renderMark.propTypes = SlateTypes.Mark;
 
-export function renderBold(props: Props) {
+export function bold(props: Props) {
   return renderMark({
     ...props,
     attributes: {
@@ -29,7 +29,7 @@ export function renderBold(props: Props) {
   });
 }
 
-export function renderItalic(props: Props) {
+export function italic(props: Props) {
   return renderMark({
     ...props,
     attributes: {
@@ -39,7 +39,7 @@ export function renderItalic(props: Props) {
   });
 }
 
-export function renderUnderline(props: Props) {
+export function underline(props: Props) {
   return renderMark({
     ...props,
     attributes: {
@@ -49,7 +49,7 @@ export function renderUnderline(props: Props) {
   });
 }
 
-export function renderStrikethrough(props: Props) {
+export function strikethrough(props: Props) {
   return renderMark({
     ...props,
     attributes: {
@@ -60,18 +60,12 @@ export function renderStrikethrough(props: Props) {
 }
 
 export default function createRenderMark() {
-  return (props: Props) => {
-    switch (props.mark.type) {
-      case "bold":
-        return renderBold(props);
-      case "italic":
-        return renderItalic(props);
-      case "underline":
-        return renderUnderline(props);
-      case "strikethrough":
-        return renderStrikethrough(props);
-      // no default
+  return {
+    marks: {
+      bold,
+      italic,
+      underline,
+      strikethrough
     }
-    return undefined;
   };
 }

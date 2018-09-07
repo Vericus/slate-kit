@@ -31,7 +31,8 @@
     "watch": "npm-run-all --parallel --print-label watch:test watch:build watch:build-packages storybook",
     "watch:test": "yarn run test --watch",
     "watch:build-packages": "yarn run build:packages --watch",
-    "watch:build": "lerna run --parallel dev"
+    "watch:build": "lerna run --parallel dev",
+    "watch:dev": "npm-run-all --parallel --print-label watch:build watch:build-packages"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.0",
@@ -98,6 +99,7 @@
     "react-color": "^2.14.1",
     "react-dom": "^16.3.2",
     "react-popover": ">=0.5.4",
+    "recompose": "^0.30.0",
     "rmfr": "^2.0.0",
     "rollup": "^0.64.1",
     "rollup-plugin-babel": "^3.0.3",

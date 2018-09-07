@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { compose } from "recompose";
 import {
   getEventRange,
   getEventTransfer,
@@ -10,13 +11,17 @@ import {
 import { Value } from "slate";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import { WithReadOnly } from "@vericus/slate-kit-read-only";
+import { WithRenderers } from "@vericus/slate-kit-renderer";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import pasteCleaner from "@vericus/slate-kit-paste-helpers";
 import Toolbar from "../toolbar";
 
 const pluginsWrapper = new PluginsWrapper();
 
-const EditorWithReadOnly = WithReadOnly(Editor);
+const EnchancedEditor = compose(
+  WithReadOnly,
+  WithRenderers
+)(Editor);
 
 export default class SlateKitEditor extends Component {
   constructor(props) {
@@ -58,12 +63,13 @@ export default class SlateKitEditor extends Component {
       <div>
         {this.renderToolbar()}
         <div className="editorContainer">
-          <EditorWithReadOnly
+          <EnchancedEditor
             placeholder={"Enter some text..."}
             plugins={this.plugins}
             value={this.state.value}
             onChange={this.onChange}
             onPaste={this.onPaste}
+            pluginsWrapper={pluginsWrapper}
             {...this.props}
           />
         </div>
