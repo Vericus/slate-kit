@@ -144,22 +144,13 @@ const Styled = styled.div`
     }
 
     blockquote {
+      position: relative;
       font-weight: 500;
       color: gray;
       display: block;
       margin-top: 1em;
       margin-bottom: 1em;
-      padding-left: ${p => `${p.theme.spacing.gutter + 40}px`};
-      padding-right: ${p => `${p.theme.spacing.gutter + 40}px`};
-      &:before {
-        content: "";
-        position: relative;
-        top: 0px;
-        right: -30px;
-        bottom: -30px;
-        left: -10px;
-        border-left: solid 3px gray;
-      }
+      border-left: solid 3px gray;
     }
 
     h1 {
