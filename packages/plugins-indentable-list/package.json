@@ -30,6 +30,7 @@
     "dev": "tsc -w"
   },
   "umdGlobals": {
+    "classnames": "ClassNames",
     "immutable": "Immutable",
     "slate": "Slate",
     "is-hotkey": "IsHotkey",
@@ -40,6 +41,7 @@
     "slate-dev-environment": "SlateDevEnvironment"
   },
   "dependencies": {
+    "classnames": ">=2.2.5",
     "debug": ">=3.1.0",
     "immutable": "^3.8.2",
     "is-plain-object": ">=2.0.4",

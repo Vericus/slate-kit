@@ -15,9 +15,7 @@ function withRenderers(WrappedComponent) {
       super(props);
       const { pluginsWrapper } = this.props;
       const { plugins: rendererPlugins } = CreateRenderers({}, pluginsWrapper);
-      console.log(rendererPlugins);
       this.plugins = [...this.props.plugins, ...rendererPlugins];
-      console.log(this.plugins);
     }
 
     render() {

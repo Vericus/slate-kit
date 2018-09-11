@@ -1,5 +1,6 @@
 import Renderer from "@vericus/slate-kit-indentable-list-renderer";
 import AutoReplace from "slate-auto-replace";
+import createProps from "./props";
 import Options, { TypeOptions } from "./options";
 import createUtils from "./utils";
 import createChanges from "./changes";
@@ -12,19 +13,15 @@ export function createPlugin(
   pluginsWrapper: any
 ) {
   const options = new Options(pluginOptions);
-  const { ordered, unordered, checkList } = options;
+  const { blockTypes } = options;
+  const { orderedlist, unorderedlist, checklist } = blockTypes;
   const utils = createUtils(options);
   const changes = createChanges(options, pluginsWrapper);
   const { createListWithType } = changes;
   const schema = createSchema(options);
-  const rules = createRule;
+  const props = createProps(options, pluginsWrapper);
+  const rules = createRule(options);
   const onKeyDown = createOnKeyDown(options, pluginsWrapper);
-  const rendererOptions = { ...options.toJS() };
-  delete rendererOptions.externalRenderer;
-  const { renderNode, props } = Renderer(
-    { ...rendererOptions, changes },
-    pluginsWrapper
-  );
   let plugins = [
     {
       rules,
@@ -39,7 +36,7 @@ export function createPlugin(
       trigger: "space",
       before: /^(\d+)(\.)$/,
       change: (change, e, matches) => {
-        const type = ordered;
+        const type = orderedlist;
         return change.call(createListWithType, type, matches.before[1]);
       }
     }),
@@ -47,7 +44,7 @@ export function createPlugin(
       trigger: "space",
       before: /^(-)$/,
       change: change => {
-        const type = unordered;
+        const type = unorderedlist;
         return change.call(createListWithType, type);
       }
     }),
@@ -55,13 +52,13 @@ export function createPlugin(
       trigger: "space",
       before: /^(\[\])$/,
       change: change => {
-        const type = checkList;
+        const type = checklist;
         return change.call(createListWithType, type);
       }
     })
   ];
   if (!options.externalRenderer) {
-    plugins = [...plugins, { renderNode }];
+    plugins = [...plugins, { ...Renderer() }];
   }
   return {
     plugins

@@ -7,11 +7,12 @@ export interface SlateSchemas {
 }
 
 export default function createSchema(opts: TypeOptions) {
-  const { ordered, unordered, checkList, startAtField, checkField } = opts;
-  if (startAtField && checkField && ordered && unordered && checkList) {
+  const { blockTypes, startAtField, checkField } = opts;
+  const { orderedlist, unorderedlist, checklist } = blockTypes;
+  if (startAtField && checkField && orderedlist && unorderedlist && checklist) {
     return {
       blocks: {
-        [ordered]: {
+        [orderedlist]: {
           data: {
             [startAtField]: startAt =>
               !startAt || typeof parseInt(startAt, 10) === "number",
@@ -34,7 +35,7 @@ export default function createSchema(opts: TypeOptions) {
             }
           }
         },
-        [unordered]: {
+        [unorderedlist]: {
           data: {
             [startAtField]: startAt => startAt === undefined,
             [checkField]: checked => checked === undefined
@@ -49,7 +50,7 @@ export default function createSchema(opts: TypeOptions) {
             }
           }
         },
-        [checkList]: {
+        [checklist]: {
           data: {
             [startAtField]: startAt => startAt === undefined,
             [checkField]: checked => typeof checked === "boolean"

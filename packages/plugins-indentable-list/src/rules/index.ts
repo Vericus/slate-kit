@@ -1,13 +1,9 @@
+import { TypeOptions, BlockTypes } from "../options";
 import { Data } from "slate";
-
-const blocks = {
-  ul: "ul-list",
-  ol: "ol-list"
-};
 
 const rejectedBlocks = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
 
-function deserializeFlatList(data, marks, block, childNodes, next) {
+function deserializeFlatList(blocks, data, marks, block, childNodes, next) {
   const nodes = Array.from(childNodes);
   return nodes.map(node => {
     const nodeElement = node as HTMLElement;
@@ -34,7 +30,7 @@ function deserializeFlatList(data, marks, block, childNodes, next) {
   });
 }
 
-function deserializeNested(getData, el, block, childNodes, next) {
+function deserializeNested(blocks, getData, el, block, childNodes, next) {
   const { data, marks } = getData(el);
   const initialIndentation = data && data.indentation ? data.indentation : 0;
   const nodes: Node[] = Array.from(childNodes);
@@ -47,6 +43,7 @@ function deserializeNested(getData, el, block, childNodes, next) {
         updatedNodeElement.tagName.toLowerCase() === "li"
       ) {
         return deserializeFlatList(
+          blocks,
           data,
           marks,
           block,
@@ -89,6 +86,7 @@ function deserializeNested(getData, el, block, childNodes, next) {
       });
       if (isFlat) {
         return deserializeFlatList(
+          blocks,
           nodeData,
           nodeMarks,
           nodeBlock,
@@ -97,6 +95,7 @@ function deserializeNested(getData, el, block, childNodes, next) {
         );
       }
       return deserializeNested(
+        blocks,
         getData,
         updatedNode,
         nodeBlock,
@@ -110,13 +109,18 @@ function deserializeNested(getData, el, block, childNodes, next) {
     );
 }
 
-function deserializeFlat(getData, el, block, childNodes, next) {
+function deserializeFlat(blocks, getData, el, block, childNodes, next) {
   const { data, marks } = getData(el);
-  return deserializeFlatList(data, marks, block, childNodes, next);
+  return deserializeFlatList(blocks, data, marks, block, childNodes, next);
 }
 
-export default function createRule(options, getData) {
-  return [
+export default function createRule(options) {
+  const { blockTypes } = options;
+  const blocks = {
+    ul: blockTypes.unorderedlist,
+    ol: blockTypes.orderedlist
+  };
+  return getData => [
     {
       deserialize(el: HTMLElement, next) {
         const block = blocks[el.tagName.toLowerCase()];
@@ -138,8 +142,8 @@ export default function createRule(options, getData) {
           );
         });
         return isFlat
-          ? deserializeFlat(getData, el, block, childNodes, next)
-          : deserializeNested(getData, el, block, childNodes, next);
+          ? deserializeFlat(blocks, getData, el, block, childNodes, next)
+          : deserializeNested(blocks, getData, el, block, childNodes, next);
       }
     }
   ];

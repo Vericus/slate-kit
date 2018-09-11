@@ -9,7 +9,7 @@ export default function createOnKeyDown(
   opts: TypeOptions,
   pluginsWrapper: any
 ) {
-  const { startAtField, checkField } = opts;
+  const { startAtField, checkField, blockTypes } = opts;
   const isTab = isKeyHotkey("tab");
   const isShiftTab = isKeyHotkey("shift+tab");
   const isEnter = isKeyHotkey("enter");
@@ -31,7 +31,7 @@ export default function createOnKeyDown(
     } = selection;
     const isIndent = isTab(e) && !isShiftTab(e);
     const isSplitBlock =
-      isEnter(e) && !isShiftEnter(e) && isListNode(opts, startBlock);
+      isEnter(e) && !isShiftEnter(e) && isListNode(blockTypes, startBlock);
     const isDeleting = isDelete(e);
     const isOutdent =
       isShiftTab(e) ||
@@ -77,7 +77,7 @@ export default function createOnKeyDown(
       }
       return undefined;
     }
-    if (isListNode(opts, startBlock)) {
+    if (isListNode(blockTypes, startBlock)) {
       e.preventDefault();
       e.stopPropagation();
       unwrapList(opts, change, isDeleting, pluginsWrapper);

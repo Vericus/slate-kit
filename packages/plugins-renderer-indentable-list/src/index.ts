@@ -1,16 +1,12 @@
-import Options, { TypeOptions } from "./options";
-import createProps from "./props";
 import createRenderNode, {
   OrderedList,
   UnOrderedList,
   Props
 } from "./renderNode";
 
-function createRenderer(opts: TypeOptions, pluginsWrapper: any) {
-  const options = new Options(opts);
+function createRenderer() {
   return {
-    renderNode: createRenderNode(options, pluginsWrapper),
-    props: createProps(options, pluginsWrapper)
+    renderers: createRenderNode()
   };
 }
 
