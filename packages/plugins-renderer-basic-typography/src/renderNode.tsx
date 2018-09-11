@@ -50,12 +50,8 @@ export const Paragraph: React.SFC<Props> = props => {
   );
 };
 export const Blockquote: React.SFC<Props> = props => {
-  const { className, attributes, children } = props;
-  return (
-    <p className={className} {...attributes}>
-      {children}
-    </p>
-  );
+  const { attributes, children } = props;
+  return <blockquote {...attributes}>{children}</blockquote>;
 };
 
 HeadingOne.propTypes = SlateTypes.Block;

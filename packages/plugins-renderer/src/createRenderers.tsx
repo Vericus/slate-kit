@@ -37,7 +37,9 @@ const createRenderNodes = (
       {() =>
         nodesOptions[props.node.type]
           ? nodesOptions[props.node.type](newProps)
-          : null
+          : nodesOptions.default
+            ? nodesOptions.default(newProps)
+            : undefined
       }
     </SlateKitNode>
   );
@@ -56,9 +58,11 @@ const renderers = (opts: TypeOptions, pluginsWrapper: PluginsWrapper) => {
 
 export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
   let options = opts;
+  let defaultNodeRenderer;
   if (pluginsWrapper) {
     const renderers = pluginsWrapper.getRenderers();
     const mapping = pluginsWrapper.getNodeMappings();
+    defaultNodeRenderer = mapping.nodes.default;
     options = {
       ...options,
       ...Object.entries(renderers).reduce(
@@ -70,10 +74,12 @@ export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
               : {
                   ...mapRenderers[key],
                   ...Object.entries(value).reduce(
-                    (acc, [mapKey, mapRenderer]) => ({
-                      ...acc,
-                      [mapping[key][mapKey]]: mapRenderer
-                    }),
+                    (acc, [mapKey, mapRenderer]) => {
+                      return {
+                        ...acc,
+                        [mapping[key][mapKey]]: mapRenderer
+                      };
+                    },
                     {}
                   )
                 }
@@ -85,6 +91,15 @@ export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
           placeholders: []
         }
       )
+    };
+  }
+  if (defaultNodeRenderer) {
+    options = {
+      ...options,
+      nodes: {
+        ...options.nodes,
+        default: options.nodes[defaultNodeRenderer]
+      }
     };
   }
   const pluginOptions = new Options(options);

@@ -151,24 +151,35 @@ export default class PluginsWrapper {
   getNodeMappings = () =>
     this.getFlattenOptions().reduce(
       (mappings: any, mapping: any) => {
+        let newMappings = mappings;
         if (mapping.marks) {
-          return {
-            ...mappings,
+          newMappings = {
+            ...newMappings,
             marks: {
               ...(mapping.marks ? mapping.marks : {}),
-              ...mappings.marks
-            }
-          };
-        } else if (mapping.blockTypes) {
-          return {
-            ...mappings,
-            nodes: {
-              ...(mapping.blockTypes ? mapping.blockTypes : {}),
-              ...mappings.nodes
+              ...newMappings.marks
             }
           };
         }
-        return mappings;
+        if (mapping.blockTypes) {
+          newMappings = {
+            ...newMappings,
+            nodes: {
+              ...(mapping.blockTypes ? mapping.blockTypes : {}),
+              ...newMappings.nodes
+            }
+          };
+        }
+        if (mapping.defaultBlock) {
+          newMappings = {
+            ...newMappings,
+            nodes: {
+              ...newMappings.nodes,
+              default: newMappings.nodes[mapping.defaultBlock]
+            }
+          };
+        }
+        return newMappings;
       },
       {
         marks: {},
