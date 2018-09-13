@@ -641,8 +641,8 @@ export class Change extends Immutable.Record({}) {
   moveAnchorToStartOfText(): Change;
 
   moveBackward(point: Point, n?: number): Change;
-  moveEndBackward(point: Point, n?: number): Change;
-  moveEndForward(point: Point, n?: number): Change;
+  moveEndBackward(n?: number): Change;
+  moveEndForward(n?: number): Change;
 
   moveEndTo(path: Path, offset: number): Change;
   moveEndToEndOfBlock(): Change;
@@ -670,7 +670,7 @@ export class Change extends Immutable.Record({}) {
 
   moveFocusBackward(n?: number): Change;
   moveFocusForward(n?: number): Change;
-  moveFocusTo(point: Point, n?: number): Change;
+  moveFocusTo(n?: number): Change;
   moveFocusToEndOfBlock(): Change;
   moveFocusToEndOfDocument(): Change;
   moveFocusToEndOfInline(): Change;
@@ -696,9 +696,9 @@ export class Change extends Immutable.Record({}) {
 
   moveForward(point: Point, n?: number): Change;
 
-  moveStartForward(point: Point, n?: number): Change;
-  moveStartBackward(point: Point, n?: number): Change;
-  moveStartTo(point: Point, n?: number): Change;
+  moveStartForward(n?: number): Change;
+  moveStartBackward(n?: number): Change;
+  moveStartTo(n?: number): Change;
   moveStartToEndOfBlock(): Change;
   moveStartToEndOfDocument(): Change;
   moveStartToEndOfInline(): Change;
