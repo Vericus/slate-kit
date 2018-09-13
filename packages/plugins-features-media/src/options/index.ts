@@ -1,14 +1,17 @@
 import { Record } from "immutable";
 
+export type MediaTypes = "media" | "image" | "mediacaption";
+
+export type BlockTypes = { [key in MediaTypes]?: string | null };
+
 export interface CommonOption {
   onInsert: (...args: any[]) => any;
   onRemove: (...args: any[]) => any;
-  renderer: (props: any) => any;
   type: string;
   externalRenderer: boolean;
 }
 
-export interface ImageOption extends CommonOption{
+export interface ImageOption extends CommonOption {
   widthOptions: string[];
   defaultWidth: string;
   srcField: string;
@@ -17,17 +20,16 @@ export interface ImageOption extends CommonOption{
   allowedExtensions: string[];
 }
 
-export interface MediaTypes {
+export interface MediaOption {
   image?: ImageOption;
 }
 
 export interface TypeOption {
+  blockTypes: BlockTypes;
   type: string;
   captionType: string;
-  renderer: (props: any) => any | void;
-  captionRenderer: (props: any) => any | void;
   externalRenderer: boolean;
-  mediaTypes: MediaTypes;
+  mediaTypes: MediaOption;
 }
 
 export const defaultImageOptions: ImageOption = {
@@ -40,28 +42,60 @@ export const defaultImageOptions: ImageOption = {
   type: "image",
   onInsert: () => {},
   onRemove: () => {},
-  renderer: () => {},
   externalRenderer: false
 };
 
-export const defaultMediaTypesOption: MediaTypes = {
+export const defaultMediaTypesOption: MediaOption = {
   image: defaultImageOptions
 };
 
 export const defaultOptions: TypeOption = {
   type: "media",
   captionType: "mediaCaption",
-  renderer: () => {},
-  captionRenderer: () => {},
   externalRenderer: false,
-  mediaTypes: defaultMediaTypesOption
+  mediaTypes: defaultMediaTypesOption,
+  blockTypes: {}
 };
 
-export default class Options extends Record(defaultOptions, "media option") {
+export default class Options extends Record(defaultOptions) {
   type: string;
   captionType: string;
-  renderer: (...args: any[]) => any;
-  captionRenderer: (...args: any[]) => any;
   externalRenderer: boolean;
-  mediaTypes: MediaTypes;
+  mediaTypes: MediaOption;
+  blockTypes: BlockTypes;
+  static create(option: Partial<TypeOption>): TypeOption {
+    let options = defaultOptions;
+    let mediaTypesOption = defaultOptions.mediaTypes;
+    options = {
+      ...options,
+      blockTypes: {
+        ...(option.blockTypes ? option.blockTypes : {}),
+        media: option.type ? option.type : defaultOptions.type,
+        mediacaption: option.captionType
+          ? option.captionType
+          : defaultOptions.captionType
+      }
+    };
+    if (option.mediaTypes) {
+      mediaTypesOption = {
+        ...mediaTypesOption,
+        ...option.mediaTypes
+      };
+    }
+
+    options = {
+      ...options,
+      blockTypes: {
+        ...options.blockTypes,
+        ...Object.entries(mediaTypesOption).reduce(
+          (mediaTypes, [mediaType, mediaOption]: [string, CommonOption]) => ({
+            ...mediaTypes,
+            [mediaType]: mediaOption.type
+          }),
+          {}
+        )
+      }
+    };
+    return new Options(options);
+  }
 }

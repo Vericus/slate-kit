@@ -107,8 +107,8 @@
             "object": "block",
             "type": "image",
             "data": {
-              "src": "https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half/public/field_blog_entry_images/2018-02/vicious_dog_0.png?itok=nsghKOHs",
-              "width": "original"
+              "src": "https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half/public/field_blog_entry_images/2018-02/cloned_dogs_mdorottya_123rf.png?itok=yiaSkqQA",
+              "width": "fitToScreen"
             }
           },
           {
@@ -119,7 +119,7 @@
                 "object": "text",
                 "leaves": [
                   {
-                    "text": "dog 1"
+                    "text": "dog 2"
                   }
                 ]
               }
@@ -135,8 +135,8 @@
             "object": "block",
             "type": "image",
             "data": {
-              "src": "https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half/public/field_blog_entry_images/2018-02/cloned_dogs_mdorottya_123rf.png?itok=yiaSkqQA",
-              "width": "fitToScreen"
+              "src": "https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half/public/field_blog_entry_images/2018-02/vicious_dog_0.png?itok=nsghKOHs",
+              "width": "original"
             }
           },
           {
@@ -147,7 +147,7 @@
                 "object": "text",
                 "leaves": [
                   {
-                    "text": "dog 2"
+                    "text": "dog 1"
                   }
                 ]
               }
@@ -178,20 +178,6 @@
                     "text": "dog 3"
                   }
                 ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "object": "block",
-        "type": "heading-two",
-        "nodes": [
-          {
-            "object": "text",
-            "leaves": [
-              {
-                "text": "Try it out for yourself!"
               }
             ]
           }

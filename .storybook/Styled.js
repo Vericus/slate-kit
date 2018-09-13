@@ -131,6 +131,7 @@ const Styled = styled.div`
     ol,
     blockquote,
     dl,
+    figcaption,
     .cui-table {
       max-width: 800px;
       min-width: 360px;
@@ -151,6 +152,10 @@ const Styled = styled.div`
       margin-top: 1em;
       margin-bottom: 1em;
       border-left: solid 3px gray;
+    }
+
+    figure {
+      margin: 0;
     }
 
     h1 {
