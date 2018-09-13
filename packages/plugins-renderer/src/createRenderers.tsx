@@ -44,8 +44,35 @@ const createRenderNodes = (
     </SlateKitNode>
   );
 };
+
+const placeholderStyle: React.CSSProperties = {
+  pointerEvents: "none",
+  display: "inline-block",
+  whiteSpace: "nowrap",
+  opacity: 0.333,
+  float: "left",
+  position: "relative",
+  width: "100%"
+};
+
 const createRenderPlaceholders = placeholdersOptions => {
-  return [];
+  return {
+    renderPlaceholder: props => {
+      const placeholder = placeholdersOptions.find(option => {
+        return option.condition(props);
+      });
+      if (!placeholder) return;
+      return (
+        <span
+          contentEditable={false}
+          style={placeholderStyle}
+          className="placeholder"
+        >
+          {placeholder.render(props)}
+        </span>
+      );
+    }
+  };
 };
 
 const renderers = (opts: TypeOptions, pluginsWrapper: PluginsWrapper) => {
@@ -53,7 +80,7 @@ const renderers = (opts: TypeOptions, pluginsWrapper: PluginsWrapper) => {
   const renderMark = createRenderMarks(marks, pluginsWrapper);
   const renderNode = createRenderNodes(nodes, pluginsWrapper);
   const renderPlaceholders = createRenderPlaceholders(placeholders);
-  return [...renderPlaceholders, { renderMark, renderNode }];
+  return [renderPlaceholders, { renderMark, renderNode }];
 };
 
 export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {

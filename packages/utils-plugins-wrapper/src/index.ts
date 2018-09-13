@@ -110,32 +110,35 @@ export default class PluginsWrapper {
   getRenderers = () =>
     Object.values(this[RENDERERS]).reduce(
       (renderers: any, renderer: any) => {
+        let newRenderers = renderers;
         if (renderer.marks) {
-          return {
-            ...renderers,
+          newRenderers = {
+            ...newRenderers,
             marks: {
-              ...(renderers.marks ? renderers.marks : {}),
+              ...(newRenderers.marks ? newRenderers.marks : {}),
               ...renderer.marks
             }
           };
-        } else if (renderer.nodes) {
-          return {
-            ...renderers,
+        }
+        if (renderer.nodes) {
+          newRenderers = {
+            ...newRenderers,
             nodes: {
-              ...(renderers.nodes ? renderers.nodes : {}),
+              ...(newRenderers.nodes ? newRenderers.nodes : {}),
               ...renderer.nodes
             }
           };
-        } else if (renderer.placeholders) {
-          return {
-            ...renderers,
+        }
+        if (renderer.placeholders) {
+          newRenderers = {
+            ...newRenderers,
             placeholders: [
-              ...(renderers.placeholders ? renderers.placeholders : []),
+              ...(newRenderers.placeholders ? newRenderers.placeholders : []),
               ...renderer.placeholders
             ]
           };
         }
-        return renderers;
+        return newRenderers;
       },
       { marks: {}, nodes: {}, placeholders: [] }
     );
