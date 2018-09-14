@@ -8,7 +8,6 @@ export interface CommonOption {
   onInsert: (...args: any[]) => any;
   onRemove: (...args: any[]) => any;
   type: string;
-  externalRenderer: boolean;
 }
 
 export interface ImageOption extends CommonOption {
@@ -41,8 +40,7 @@ export const defaultImageOptions: ImageOption = {
   allowedExtensions: ["png", "tif", "gif", "bmp", "jpg"],
   type: "image",
   onInsert: () => {},
-  onRemove: () => {},
-  externalRenderer: false
+  onRemove: () => {}
 };
 
 export const defaultMediaTypesOption: MediaOption = {
@@ -74,7 +72,11 @@ export default class Options extends Record(defaultOptions) {
         mediacaption: option.captionType
           ? option.captionType
           : defaultOptions.captionType
-      }
+      },
+      externalRenderer:
+        option.externalRenderer !== undefined
+          ? option.externalRenderer
+          : defaultOptions.externalRenderer
     };
     if (option.mediaTypes) {
       mediaTypesOption = {

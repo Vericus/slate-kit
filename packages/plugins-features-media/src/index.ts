@@ -8,8 +8,8 @@ import createOnKeyDown from "./keyDown";
 
 export default function createPlugin(pluginOptions: Partial<TypeOption>) {
   const options = Options.create(pluginOptions);
-  const changes = createChanges(options);
   const utils = createUtils(options);
+  const changes = createChanges(options, utils);
   const schema = createSchema(options);
   const props = createProps(options);
   const onKeyDown = createOnKeyDown(options);
@@ -20,6 +20,6 @@ export default function createPlugin(pluginOptions: Partial<TypeOption>) {
     options,
     props,
     onKeyDown,
-    ...Renderer(options)
+    ...(options.externalRenderer ? {} : Renderer(options))
   };
 }
