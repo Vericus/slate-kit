@@ -42,7 +42,6 @@ const getImageProps = (props, imageOption: ImageOption) => {
       outline: "1px solid blue"
     };
   }
-  console.log(imageStyle);
   if (width === "full") {
     imageStyle = {
       ...imageStyle,
@@ -80,7 +79,6 @@ const getImageProps = (props, imageOption: ImageOption) => {
           : imageStyle
     }
   };
-  console.log(newProps, width);
   return newProps;
 };
 

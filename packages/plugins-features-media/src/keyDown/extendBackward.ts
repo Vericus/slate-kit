@@ -29,5 +29,4 @@ export default function extendBackward(
     }
     return true;
   }
-  return change;
 }

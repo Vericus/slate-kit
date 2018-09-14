@@ -26,5 +26,4 @@ export default function extendForward(
     }
     return true;
   }
-  return change;
 }

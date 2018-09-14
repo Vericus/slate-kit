@@ -5,8 +5,8 @@ import isHotkey from "is-hotkey";
 import { TypeOption } from "../options";
 import extendForward from "./extendForward";
 import extendBackward from "./extendBackward";
-import moveForward from "./moveForward";
-import moveBackward from "./moveBackward";
+import deleteBackward from "./deleteBackward";
+import deleteForward from "./deleteForward";
 
 export default function createOnKeyDown(opts: TypeOption) {
   const { captionType, type, mediaTypes } = opts;
@@ -37,10 +37,10 @@ export default function createOnKeyDown(opts: TypeOption) {
       return extendForward(types, captionType, event, change, editor);
     } else if (Hotkeys.isExtendBackward(event)) {
       return extendBackward(types, captionType, event, change, editor);
-    } else if (Hotkeys.isMoveForward(event)) {
-      return moveForward(types, captionType, event, change, editor);
-    } else if (Hotkeys.isMoveBackward(event)) {
-      return moveBackward(types, captionType, event, change, editor);
+    } else if (Hotkeys.isDeleteBackward(event)) {
+      return deleteBackward(types, captionType, event, change, editor);
+    } else if (Hotkeys.isDeleteForward(event)) {
+      return deleteForward(types, captionType, event, change, editor);
     }
   };
 }
