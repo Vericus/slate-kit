@@ -417,7 +417,7 @@ declare class BaseNode<
   createRange(properties: RangeProperties | Range): Range;
   createSelection(properties: SelectionProperties | Selection): Selection;
   filterDescendants(iterator: (node: Node) => boolean): Immutable.List<Node>;
-  findDescendants(iterator: (node: Node) => boolean): Node | null;
+  findDescendant(iterator: (node: Node) => boolean): Node | null;
   getActiveMarksAtRange(range: Range): Immutable.Set<Mark>;
   getAncestors(path: Path): Immutable.List<Node> | null;
   getBlocksAtRange(range: Range): Immutable.List<Block>;
