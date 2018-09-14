@@ -1,9 +1,7 @@
 import { Value, Selection, Block, Document } from "slate";
 import { List } from "immutable";
 
-export default function getHighestSelectedBlocks(
-  value: Value
-): List<Block> {
+export default function getHighestSelectedBlocks(value: Value): List<Block> {
   let { selection } = value;
   if (selection.isBackward) {
     selection = selection.flip() as Selection;
@@ -47,7 +45,7 @@ export default function getHighestSelectedBlocks(
             typeof blockEndPath === "number"
           ) {
             return ancestor.nodes
-              .slice(blockStartPath, blockEndPath)
+              .slice(blockStartPath, blockEndPath + 1)
               .filter(node => Block.isBlock(node)) as List<Block>;
           }
         }
