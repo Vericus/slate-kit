@@ -761,15 +761,15 @@ export class Change extends Immutable.Record({}) {
   deselect(): Change;
 
   // Document Changes
-  deleteCharBackwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteLineBackwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteWordBackwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteBackwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteCharForwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteLineForwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteWordForwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteForwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteAtRange(range: Range, options?: ChangeOption): Change;
+  deleteCharBackwardAtRange(range: Selection, options?: ChangeOption): Change;
+  deleteLineBackwardAtRange(range: Selection, options?: ChangeOption): Change;
+  deleteWordBackwardAtRange(range: Selection, options?: ChangeOption): Change;
+  deleteBackwardAtRange(range: Selection, options?: ChangeOption): Change;
+  deleteCharForwardAtRange(range: Selection, options?: ChangeOption): Change;
+  deleteLineForwardAtRange(range: Selection, options?: ChangeOption): Change;
+  deleteWordForwardAtRange(range: Selection, options?: ChangeOption): Change;
+  deleteForwardAtRange(range: Selection, options?: ChangeOption): Change;
+  deleteAtRange(range: Selection, options?: ChangeOption): Change;
   insertBlockAtRange(
     range: Range,
     block: Block | BlockProperties | string,
