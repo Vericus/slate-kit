@@ -464,9 +464,9 @@ declare class BaseNode<
   getNextText(path: Path): Text | null;
   getNode(path: Path): Node | null;
   getOffset(key: string): number;
-  getOffsetAtRange(range: Range): number;
+  getOffsetAtRange(range: Selection): number;
   getOrderedMarks(): Immutable.OrderedSet<Mark>;
-  getOrderedMarksAtRange(range: Range): Immutable.OrderedSet<Mark>;
+  getOrderedMarksAtRange(range: Selection): Immutable.OrderedSet<Mark>;
   getOrderedMarksBetweenPositions(
     startKey: string,
     startOffset: number,
@@ -481,7 +481,7 @@ declare class BaseNode<
   getPreviousSibling(path: Path): Node | null;
   getPreviousText(path: Path): Text | null;
   getSelectionIndexes(
-    range: Range,
+    range: Selection,
     isSelected?: boolean
   ): { start: number; end: number } | null;
   getText(): string;
@@ -489,8 +489,8 @@ declare class BaseNode<
   getTextDirection(): string | null;
   getTexts(): Immutable.List<Text>;
   getTextsAsArray(): Text[];
-  getTextsAtRange(range: Range): Immutable.List<Text>;
-  getTextsAtRangeAsArray(range: Range): Text[];
+  getTextsAtRange(range: Selection): Immutable.List<Text>;
+  getTextsAtRangeAsArray(range: Selection): Text[];
   getTextsBetweenPositionsAsArray(startKey: string, endKey: string): Text[];
   hasBlockChildren(): boolean;
   hasChild(path: Path): boolean;
