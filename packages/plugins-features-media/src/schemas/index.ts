@@ -8,23 +8,32 @@ export default function createSchema(opts: TypeOption) {
       [type]: {
         nodes: [
           {
-            match: Object.values(mediaTypes).map((mediaType: CommonOption) => ({
-              type: mediaType.type
-            })),
+            match: Object.values(mediaTypes).reduce(
+              (allowedTypes, mediaType: CommonOption) => [
+                ...allowedTypes,
+                {
+                  type: mediaType.type
+                }
+              ],
+              []
+            ),
             min: 1
           },
           {
             match: { type: captionType },
-            min: 0
+            min: 0,
+            max: 1
           }
         ],
-        first: Object.values(mediaTypes).map((mediaType: CommonOption) => ({
-          type: mediaType.type
-        })),
         normalize: (change: Change, error: SlateError) => {
           switch (error.code) {
-            case "first_child_type_invalid":
-              change.removeNodeByKey(error.node.key);
+            case "child_type_invalid":
+              change.withoutNormalization(c =>
+                c
+                  .removeNodeByKey(error.child.key)
+                  .removeNodeByKey(error.node.key)
+              );
+
               return;
             case "child_required":
               change.removeNodeByKey(error.node.key);
