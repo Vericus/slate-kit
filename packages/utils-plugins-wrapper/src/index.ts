@@ -138,9 +138,18 @@ export default class PluginsWrapper {
             ]
           };
         }
+        if (renderer.toolbars) {
+          newRenderers = {
+            ...newRenderers,
+            toolbars: [
+              ...(newRenderers.toolbars ? newRenderers.toolbars : []),
+              ...renderer.toolbars
+            ]
+          };
+        }
         return newRenderers;
       },
-      { marks: {}, nodes: {}, placeholders: [] }
+      { marks: {}, nodes: {}, placeholders: [], toolbars: [] }
     );
 
   getFlattenOptions = () =>

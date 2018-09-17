@@ -5,7 +5,7 @@ import Popover from "react-popover";
 import classnames from "classnames";
 import QuillIcons from "quill-icons";
 
-class IconButton extends Component {
+export class IconButton extends Component {
   shouldComponentUpdate(nextProps) {
     return (
       this.props.active !== nextProps.active ||
@@ -523,6 +523,12 @@ export default class Toolbar extends Component {
     this.props.onChange(this.props.value.change().call(change, ...options));
   };
 
+  renderMedia = () => {
+    return (
+      <IconButton icon="Image" disabled={this.props.isReadOnly} size="18" />
+    );
+  };
+
   handleColorChange = (change, color) => {
     this.call(change, [color.hex]);
   };
@@ -592,6 +598,7 @@ export default class Toolbar extends Component {
         {this.renderAllignment()}
         {this.renderList()}
         {this.renderMarks()}
+        {this.renderMedia()}
         {this.renderTextColor()}
         {this.renderBackgroundColor()}
         {this.renderHistories()}

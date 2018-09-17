@@ -17,8 +17,13 @@ export default function deleteBackward(
     previousBlock,
     nextBlock
   } = value;
-  const { start, end } = selection;
+  const { start, end, isExpanded } = selection;
   console.log("delete backward");
-  change.deleteBackwardAtRange(selection, {}).normalize({ normalize: true });
+  if (isExpanded) {
+    change.deleteBackwardAtRange(selection, {});
+  } else {
+    change.deleteBackward(1);
+  }
+  change.normalize({ normalize: true });
   return false;
 }

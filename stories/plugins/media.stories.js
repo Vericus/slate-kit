@@ -7,6 +7,7 @@ import BasicTypography from "@vericus/slate-kit-basic-typhography";
 import HighlightText from "@vericus/slate-kit-highlight-text";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import MediaPlugin from "@vericus/slate-kit-media";
+import MediaToolbar from "../support/plugins/mediaToolbar";
 import initialState from "../states/media.json";
 import Editor from "../support/components/editor";
 
@@ -47,6 +48,13 @@ const pluginOpts = [
   {
     label: "basic-typhography",
     createPlugin: BasicTypography
+  },
+  {
+    label: "mediaToolbar",
+    createPlugin: MediaToolbar,
+    options: {
+      mediaLabel: "media"
+    }
   }
 ];
 

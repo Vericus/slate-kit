@@ -19,16 +19,19 @@ export interface TypeOptions {
   marks: MarksRenderer;
   nodes: NodesRenderer;
   placeholders: PlaceholderRenderer[];
+  toolbars: any[];
 }
 
 const defaultOptions = {
   marks: {},
   nodes: {},
-  placeholders: []
+  placeholders: [],
+  toolbars: []
 };
 
 export default class Options extends Record(defaultOptions) {
   marks: MarksRenderer;
   nodes: NodesRenderer;
   placeholders: PlaceholderRenderer[];
+  toolbars: any[];
 }
