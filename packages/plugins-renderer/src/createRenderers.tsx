@@ -8,6 +8,17 @@ export interface Props {
 
 const SlateKitNode: React.SFC<Props> = props => props.children(props);
 
+const createRenderToolbar = (
+  toolbarOptions,
+  pluginsWrapper: PluginsWrapper
+) => props => {
+  let result = null;
+  toolbarOptions.some(renderer => {
+    return renderer(props) ? ((result = renderer(props)), true) : false;
+  });
+  return result;
+};
+
 const defaultMark = props => (
   <span {...props.attributes}>{props.children}</span>
 );
@@ -29,10 +40,12 @@ const createRenderMarks = (
 };
 const createRenderNodes = (
   nodesOptions,
+  renderToolbar,
   pluginsWrapper: PluginsWrapper
 ) => props => {
   const newProps = pluginsWrapper.getProps(props);
-  return (
+  return [
+    renderToolbar(props),
     <SlateKitNode>
       {() =>
         nodesOptions[props.node.type]
@@ -42,7 +55,7 @@ const createRenderNodes = (
             : undefined
       }
     </SlateKitNode>
-  );
+  ];
 };
 
 const placeholderStyle: React.CSSProperties = {
@@ -76,9 +89,10 @@ const createRenderPlaceholders = placeholdersOptions => {
 };
 
 const renderers = (opts: TypeOptions, pluginsWrapper: PluginsWrapper) => {
-  const { marks, nodes, placeholders } = opts;
+  const { marks, nodes, placeholders, toolbars } = opts;
+  const renderToolbar = createRenderToolbar(toolbars, pluginsWrapper);
   const renderMark = createRenderMarks(marks, pluginsWrapper);
-  const renderNode = createRenderNodes(nodes, pluginsWrapper);
+  const renderNode = createRenderNodes(nodes, renderToolbar, pluginsWrapper);
   const renderPlaceholders = createRenderPlaceholders(placeholders);
   return [renderPlaceholders, { renderMark, renderNode }];
 };
@@ -115,7 +129,8 @@ export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
         {
           marks: {},
           nodes: {},
-          placeholders: []
+          placeholders: [],
+          toolbars: []
         }
       )
     };

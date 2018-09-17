@@ -17,8 +17,13 @@ export default function deleteForward(
     previousBlock,
     nextBlock
   } = value;
-  const { start, end } = selection;
+  const { start, end, isExpanded } = selection;
   console.log("delete forward");
-  change.deleteForwardAtRange(selection, {}).normalize({ normalize: true });
+  if (isExpanded) {
+    change.deleteForwardAtRange(selection, {});
+  } else {
+    change.deleteForward(1);
+  }
+  change.normalize({ normalize: true });
   return false;
 }

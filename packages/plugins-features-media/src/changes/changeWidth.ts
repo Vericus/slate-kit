@@ -4,7 +4,7 @@ import { TypeOption } from "../options";
 export default function changeWidth(opts: TypeOption, utils) {
   const { mediaTypes } = opts;
   return (change: Change, width: string) => {
-    const media = utils.getSelectedMedia(change.value);
+    const media = utils.getSelectedMediaBlock(change.value);
     if (media && mediaTypes && Block.isBlock(media)) {
       return change.withoutNormalization(c => {
         media.nodes.map(node => {
