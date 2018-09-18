@@ -4,79 +4,19 @@ import getImageWidth from "../utils/getImageWidth";
 
 const getMediaProps = props => props;
 
-const getCaptionProps = props => {
-  let newProps = props;
-  newProps = {
-    ...newProps,
-    attributes: {
-      ...newProps.attributes,
-      style:
-        newProps.attributes && newProps.attributes.style
-          ? {
-              ...newProps.attributes.style,
-              "text-align": "center"
-            }
-          : {
-              "text-align": "center"
-            }
-    }
-  };
-  return newProps;
-};
+const getCaptionProps = props => props;
 
 const getImageProps = (props, imageOption: ImageOption) => {
   let newProps = props;
   const width = getImageWidth(props.node, imageOption);
   const src = getImageSource(props.node, imageOption);
-  let imageStyle: any = {
-    display: "block",
-    verticalAlign: "middle",
-    boxSizing: "border-box",
-    minWidth: "360px",
-    marginLeft: "auto",
-    marginRight: "auto"
-  };
-  if (props.isSelected) {
-    imageStyle = {
-      ...imageStyle,
-      outline: "1px solid blue"
-    };
-  }
-  if (width === "full") {
-    imageStyle = {
-      ...imageStyle,
-      width: "100%",
-      maxWidth: "100%",
-      objectFit: "cover",
-      maxHeight: "80vh"
-    };
-  } else if (width === "original") {
-    imageStyle = {
-      ...imageStyle,
-      width: "auto",
-      maxWidth: "100%",
-      objectFit: "contain"
-    };
-  } else {
-    imageStyle = {
-      ...imageStyle,
-      width: "100%",
-      maxWidth: "800px",
-      objectFit: "contain"
-    };
-  }
   newProps = {
     ...newProps,
     attributes: {
       ...newProps.attributes,
-      src,
-      style:
-        newProps.attributes && newProps.attributes.style
-          ? {
-              ...newProps.attributes.style,
-              ...imageStyle
-            }
-          : imageStyle
+      ["data-image-is-selected"]: props.isSelected,
+      ["data-image-width"]: width,
+      src
     }
   };
   return newProps;

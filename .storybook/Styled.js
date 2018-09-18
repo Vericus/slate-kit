@@ -144,6 +144,36 @@ const Styled = styled.div`
       display: block;
     }
 
+    figcaption {
+      text-align: center;
+    }
+
+    img {
+      display: block;
+      vertical-align: middle;
+      box-sizing: border-box;
+      min-width: 360px;
+      width: 100%;
+      max-width: 800px;
+      object-fit: contain;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    img[data-image-is-selected="true"] {
+      outline: 1px solid blue;
+    }
+    img[data-image-width="full"] {
+      width: 100%;
+      max-width: 100%;
+      object-fit: cover;
+      max-height: 80vh;
+    }
+    img[data-image-width="original"] {
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
     blockquote {
       position: relative;
       font-weight: 500;
