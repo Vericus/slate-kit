@@ -8,7 +8,7 @@ import extendBackward from "./extendBackward";
 import deleteBackward from "./deleteBackward";
 import deleteForward from "./deleteForward";
 
-export default function createOnKeyDown(opts: TypeOption) {
+export default function createOnKeyDown(opts: TypeOption, utils) {
   const { captionType, type, mediaTypes } = opts;
   const imageType = mediaTypes.image;
   const types = [captionType, type, ...[imageType ? imageType.type : []]];
@@ -30,9 +30,9 @@ export default function createOnKeyDown(opts: TypeOption) {
     } else if (Hotkeys.isExtendBackward(event)) {
       return extendBackward(types, captionType, event, change, editor);
     } else if (Hotkeys.isDeleteBackward(event)) {
-      return deleteBackward(type, types, captionType, event, change, editor);
+      return deleteBackward(utils, types, captionType, event, change, editor);
     } else if (Hotkeys.isDeleteForward(event)) {
-      return deleteForward(type, types, captionType, event, change, editor);
+      return deleteForward(utils, types, captionType, event, change, editor);
     }
   };
 }

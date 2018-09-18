@@ -12,7 +12,7 @@ export default function createPlugin(pluginOptions: Partial<TypeOption>) {
   const changes = createChanges(options, utils);
   const schema = createSchema(options);
   const props = createProps(options);
-  const onKeyDown = createOnKeyDown(options);
+  const onKeyDown = createOnKeyDown(options, utils);
   return {
     utils,
     changes,

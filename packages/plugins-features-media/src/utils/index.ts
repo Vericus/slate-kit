@@ -2,6 +2,8 @@ import { Block } from "slate";
 import { TypeOption } from "../options";
 import getSource from "./getSource";
 import getSelectedMediaBlock from "./getSelectedMediaBlock";
+import getImageWidth from "./getImageWidth";
+import getClosestMedia from "./getClosestMedia";
 
 export default function createUtils(opts: TypeOption) {
   const { mediaTypes } = opts;
@@ -13,8 +15,13 @@ export default function createUtils(opts: TypeOption) {
     {}
   );
   return {
-    getSelectedMediaBlock: getSelectedMediaBlock(opts)
+    getSelectedMediaBlock: getSelectedMediaBlock(opts),
+    getSource: (block: Block) =>
+      mediaTypes && mediaTypes.image && getSource(block, mediaTypes.image),
+    getImageWidth: (block: Block) =>
+      mediaTypes && mediaTypes.image && getImageWidth(block, mediaTypes.image),
+    getClosestMedia: getClosestMedia(opts)
   };
 }
 
-export { getSource, getSelectedMediaBlock };
+export { getSource, getSelectedMediaBlock, getImageWidth, getClosestMedia };

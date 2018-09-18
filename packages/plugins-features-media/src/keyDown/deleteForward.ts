@@ -2,7 +2,7 @@ import { Change, Node, Block } from "slate";
 import { Editor } from "slate-react";
 
 export default function deleteForward(
-  type,
+  utils,
   types,
   captionType,
   event,
@@ -18,14 +18,7 @@ export default function deleteForward(
     nextBlock.type !== captionType &&
     !isExpanded
   ) {
-    let mediaBlock: Node | null = nextBlock;
-    while (
-      mediaBlock &&
-      Block.isBlock(mediaBlock) &&
-      mediaBlock.type !== type
-    ) {
-      mediaBlock = document.getParent(mediaBlock.key);
-    }
+    const mediaBlock = utils.getClosestMedia(document, nextBlock);
     if (mediaBlock && Block.isBlock(mediaBlock)) {
       event.preventDefault();
       change.moveToRangeOfNode(mediaBlock);
