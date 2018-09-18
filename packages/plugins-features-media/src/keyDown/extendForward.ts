@@ -18,7 +18,6 @@ export default function extendForward(
     nextBlock
   } = value;
   const { anchor, focus, isForward } = selection;
-  console.log("extend forward");
   if (startBlock === endBlock && startBlock.type === captionType) {
     event.preventDefault();
     if ((isForward && focus.offset !== startBlock.text.length) || !isForward) {

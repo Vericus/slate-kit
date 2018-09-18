@@ -18,7 +18,6 @@ export default function extendBackward(
     nextBlock
   } = value;
   const { anchor, focus, isBackward, isCollapsed } = selection;
-  console.log("extend backward");
   if (startBlock === endBlock && startBlock.type === captionType) {
     event.preventDefault();
     if (
