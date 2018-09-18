@@ -16,8 +16,6 @@ import HistoryPlugin from "@vericus/slate-kit-history";
 import pasteCleaner from "@vericus/slate-kit-paste-helpers";
 import Toolbar from "../toolbar";
 
-const pluginsWrapper = new PluginsWrapper();
-
 const EnchancedEditor = compose(
   WithReadOnly,
   WithRenderers
@@ -29,7 +27,8 @@ export default class SlateKitEditor extends Component {
     this.state = {
       value: Value.fromJSON(props.initialState)
     };
-    this.plugins = pluginsWrapper.makePlugins(this.props.pluginOpts);
+    this.pluginsWrapper = new PluginsWrapper();
+    this.plugins = this.pluginsWrapper.makePlugins(this.props.pluginOpts);
   }
 
   onChange = ({ value }) => {
@@ -51,7 +50,7 @@ export default class SlateKitEditor extends Component {
 
   renderToolbar = () => (
     <Toolbar
-      pluginsWrapper={pluginsWrapper}
+      pluginsWrapper={this.pluginsWrapper}
       value={this.state.value}
       onChange={this.onChange}
       isReadOnly={this.props.isReadOnly}
@@ -69,7 +68,7 @@ export default class SlateKitEditor extends Component {
             value={this.state.value}
             onChange={this.onChange}
             onPaste={this.onPaste}
-            pluginsWrapper={pluginsWrapper}
+            pluginsWrapper={this.pluginsWrapper}
             {...this.props}
           />
         </div>
