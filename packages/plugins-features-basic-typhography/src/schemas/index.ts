@@ -2,14 +2,14 @@ import { Block, Change, SlateError, Document } from "slate";
 import { TypeOptions } from "../options";
 
 export default function createSchema(opts: TypeOptions) {
-  const { blockTypes } = opts;
+  const { blockTypes, defaultBlock } = opts;
   return {
     document: {
       last: Object.values(blockTypes).map(type => ({ type })),
       normalize: (change: Change, error: SlateError) => {
         switch (error.code) {
           case "last_child_type_invalid":
-            const paragraph = Block.create("paragraph");
+            const paragraph = Block.create(defaultBlock);
             if (Document.isDocument(error.node)) {
               change.insertNodeByKey(
                 error.node.key,

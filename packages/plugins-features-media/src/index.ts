@@ -6,13 +6,16 @@ import createSchema from "./schemas";
 import createProps from "./props";
 import createOnKeyDown from "./keyDown";
 
-export default function createPlugin(pluginOptions: Partial<TypeOption>) {
+export default function createPlugin(
+  pluginOptions: Partial<TypeOption>,
+  pluginsWrapper
+) {
   const options = Options.create(pluginOptions);
   const utils = createUtils(options);
   const changes = createChanges(options, utils);
   const schema = createSchema(options);
   const props = createProps(options);
-  const onKeyDown = createOnKeyDown(options, utils);
+  const onKeyDown = createOnKeyDown(options, utils, pluginsWrapper);
   return {
     utils,
     changes,

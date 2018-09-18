@@ -3,10 +3,10 @@ import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import { TypeOption } from "../options";
 
 export default function getSelectedMediaBlock(opts: TypeOption) {
-  const { mediaTypes, type } = opts;
+  const { mediaTypes, type, captionType } = opts;
   const mediaTypesOpts = Object.values(mediaTypes).reduce(
     (types, mediaOption) => [...types, mediaOption.type],
-    []
+    [captionType]
   );
   return (value: Value) => {
     const { document, selection } = value;
