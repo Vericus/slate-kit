@@ -3,7 +3,6 @@ import Options, { TypeOption } from "./options";
 import createUtils from "./utils";
 import createChanges from "./changes";
 import createSchema from "./schemas";
-import createProps from "./props";
 import createOnKeyDown from "./keyDown";
 
 export default function createPlugin(
@@ -12,17 +11,15 @@ export default function createPlugin(
 ) {
   const options = Options.create(pluginOptions);
   const utils = createUtils(options);
-  const changes = createChanges(options, utils);
+  const changes = createChanges(options, utils, pluginsWrapper);
   const schema = createSchema(options);
-  const props = createProps(options);
   const onKeyDown = createOnKeyDown(options, utils, pluginsWrapper);
   return {
     utils,
     changes,
     schema,
     options,
-    props,
     onKeyDown,
-    ...(options.externalRenderer ? {} : Renderer(options))
+    ...(options.externalRenderer ? {} : Renderer(options, changes, utils))
   };
 }
