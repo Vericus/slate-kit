@@ -214,6 +214,8 @@ export default class Toolbar extends Component {
     this.alignChanges = pluginsWrapper.getChanges("align");
     this.alignUtils = pluginsWrapper.getUtils("align");
     this.historyUtils = pluginsWrapper.getUtils("history");
+    this.mediaChanges = pluginsWrapper.getChanges("media");
+    this.mediaUtils = pluginsWrapper.getUtils("media");
     this.currentTypography = hasTypography
       ? pluginsWrapper.getUtils("basic-typhography").currentTypography
       : () => true;
@@ -523,9 +525,23 @@ export default class Toolbar extends Component {
     this.props.onChange(this.props.value.change().call(change, ...options));
   };
 
+  onImageInsert = e => {
+    this.props.onChange(
+      this.mediaChanges.insertImage(this.props.value.change())
+    );
+  };
+
   renderMedia = () => {
     return (
-      <IconButton icon="Image" disabled={this.props.isReadOnly} size="18" />
+      <IconButton
+        icon="Image"
+        onMouseDown={e => {
+          e.preventDefault();
+          this.onImageInsert();
+        }}
+        disabled={this.mediaUtils === undefined || this.props.isReadOnly}
+        size="18"
+      />
     );
   };
 
