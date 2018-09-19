@@ -160,6 +160,22 @@ export default class PluginsWrapper {
       return [...acc, value];
     }, []) as any[];
 
+  getDefaultBlock = () => {
+    let defaultBlock = "";
+    Object.values(this[OPTIONS]).some((option: any) => {
+      if (Array.isArray(option)) {
+        return option.some(
+          o =>
+            o.defaultBlock ? ((defaultBlock = o.defaultBlock), true) : false
+        );
+      }
+      return option.defaultBlock
+        ? ((defaultBlock = option.defaultBlock), true)
+        : false;
+    });
+    return defaultBlock;
+  };
+
   getNodeMappings = () =>
     this.getFlattenOptions().reduce(
       (mappings: any, mapping: any) => {
