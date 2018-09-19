@@ -198,7 +198,7 @@ export class Document<DataMap = { [key: string]: any }> extends BaseNode<
 export interface BlockProperties {
   type: string;
   key?: string;
-  nodes?: Immutable.List<Node>;
+  nodes?: Immutable.List<Node> | Node[] | object[];
   data?: Immutable.Map<string, any> | { [key: string]: any };
 }
 
@@ -812,7 +812,7 @@ export class Change extends Immutable.Record({}) {
     options?: ChangeOption
   ): Change;
   splitBlockAtRange(
-    range: Range,
+    range: Selection,
     depth: number,
     height?: number,
     options?: ChangeOption
