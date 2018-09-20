@@ -31,7 +31,8 @@ function configure(pkg, location, env, target) {
     : `${location}/src/index.ts`;
   const watch = {
     chokidar: true,
-    include: `${location}/src/**`
+    include: `${location}/src/**`,
+    exclude: `${location}/node_modules/**`
   };
 
   const isTypescript = /\.(ts|tsx)$/i.test(input);
@@ -44,7 +45,8 @@ function configure(pkg, location, env, target) {
     // Allow Rollup to resolve modules from `node_modules`, since it only
     // resolves local modules by default.
     resolve({
-      browser: true
+      browser: true,
+      only: [/^@vericus\/slate-kit.*$/]
     }),
 
     // Allow Rollup to resolve CommonJS modules, since it only resolves ES2015
