@@ -1,5 +1,8 @@
 // tsconfig.jest.json
 {
   "extends": "./tsconfig.json",
-  "includes": "packages/*/src"
+  "includes": "packages/*/src",
+  "compilerOptions": {
+    "composite": true
+  }
 }
