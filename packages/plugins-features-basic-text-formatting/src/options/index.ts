@@ -15,6 +15,7 @@ export interface TypeOptions {
   externalRenderer: boolean;
   keyBindings: KeyBinding[];
   marks: TextMark;
+  withHandlers: boolean;
 }
 
 const defaultOption: TypeOptions = {
@@ -29,13 +30,15 @@ const defaultOption: TypeOptions = {
     underline: "underline",
     strikethrough: "strikethrough"
   },
-  externalRenderer: false
+  externalRenderer: false,
+  withHandlers: true
 };
 
 class Options extends Record(defaultOption) {
   externalRenderer: boolean;
   keyBindings: KeyBinding[];
   marks: TextMark;
+  withHandlers: boolean;
 }
 
 export default Options;

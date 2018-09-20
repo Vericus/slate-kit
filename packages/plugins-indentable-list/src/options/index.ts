@@ -9,6 +9,7 @@ export interface TypeOptions {
   externalRenderer: boolean;
   startAtField: string;
   checkField: string;
+  withHandlers: boolean;
 }
 
 const defaultOptions = {
@@ -19,7 +20,8 @@ const defaultOptions = {
   },
   externalRenderer: false,
   startAtField: "startAt",
-  checkField: "checked"
+  checkField: "checked",
+  withHandlers: true
 };
 
 class Options extends Record(defaultOptions) {
@@ -27,6 +29,7 @@ class Options extends Record(defaultOptions) {
   externalRenderer: boolean;
   startAtField: string;
   checkField: string;
+  withHandlers: boolean;
 }
 
 export default Options;

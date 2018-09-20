@@ -19,7 +19,7 @@ export default function createPlugin(
     changes,
     schema,
     options,
-    onKeyDown,
+    onKeyDown: options.withHandlers ? onKeyDown : undefined,
     ...(options.externalRenderer ? {} : Renderer(options, changes, utils))
   };
 }

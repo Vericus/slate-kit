@@ -27,35 +27,39 @@ export function createPlugin(
       rules,
       utils,
       changes,
-      onKeyDown,
+      onKeyDown: options.withHandlers ? onKeyDown : undefined,
       options,
       props,
       schema
     },
-    AutoReplace({
-      trigger: "space",
-      before: /^(\d+)(\.)$/,
-      change: (change, e, matches) => {
-        const type = orderedlist;
-        return change.call(createListWithType, type, matches.before[1]);
-      }
-    }),
-    AutoReplace({
-      trigger: "space",
-      before: /^(-)$/,
-      change: change => {
-        const type = unorderedlist;
-        return change.call(createListWithType, type);
-      }
-    }),
-    AutoReplace({
-      trigger: "space",
-      before: /^(\[\])$/,
-      change: change => {
-        const type = checklist;
-        return change.call(createListWithType, type);
-      }
-    })
+    ...(options.withHandlers
+      ? [
+          AutoReplace({
+            trigger: "space",
+            before: /^(\d+)(\.)$/,
+            change: (change, e, matches) => {
+              const type = orderedlist;
+              return change.call(createListWithType, type, matches.before[1]);
+            }
+          }),
+          AutoReplace({
+            trigger: "space",
+            before: /^(-)$/,
+            change: change => {
+              const type = unorderedlist;
+              return change.call(createListWithType, type);
+            }
+          }),
+          AutoReplace({
+            trigger: "space",
+            before: /^(\[\])$/,
+            change: change => {
+              const type = checklist;
+              return change.call(createListWithType, type);
+            }
+          })
+        ]
+      : [])
   ];
   if (!options.externalRenderer) {
     plugins = [...plugins, { ...Renderer() }];

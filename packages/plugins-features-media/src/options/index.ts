@@ -29,6 +29,7 @@ export interface TypeOption {
   captionType: string;
   externalRenderer: boolean;
   mediaTypes: MediaOption;
+  withHandlers: boolean;
 }
 
 export const defaultImageOptions: ImageOption = {
@@ -52,7 +53,8 @@ export const defaultOptions: TypeOption = {
   captionType: "mediaCaption",
   externalRenderer: false,
   mediaTypes: defaultMediaTypesOption,
-  blockTypes: {}
+  blockTypes: {},
+  withHandlers: true
 };
 
 export default class Options extends Record(defaultOptions) {
@@ -61,6 +63,7 @@ export default class Options extends Record(defaultOptions) {
   externalRenderer: boolean;
   mediaTypes: MediaOption;
   blockTypes: BlockTypes;
+  withHandlers: boolean;
   static create(option: Partial<TypeOption>): TypeOption {
     let options = defaultOptions;
     let mediaTypesOption = defaultOptions.mediaTypes;

@@ -16,11 +16,12 @@ export default function createBasicTextFormatPlugin(
   const utils = createUtils(options);
   const style = createStyle(options);
   const rules = createRule;
+  const { externalRenderer, withHandlers } = options;
   let plugins = [
-    { options, rules, changes, style, utils },
-    ...createKeyBindings(options, changes)
+    { options, changes, style, utils, rules: withHandlers ? rules : undefined },
+    ...(withHandlers ? createKeyBindings(options, changes) : [])
   ];
-  if (!options.externalRenderer || pluginsWrapper) {
+  if (!externalRenderer || pluginsWrapper) {
     plugins = [...plugins, Renderer()];
   }
   return {
