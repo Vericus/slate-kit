@@ -30,8 +30,13 @@
     "dev": "tsc -w"
   },
   "umdGlobals": {
+    "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
+    "@vericus/slate-kit-media-renderer": "SlateKitMediaRenderer",
+    "is-hotkey": "IsHotkey",
     "immutable": "Immutable",
-    "slate": "Slate"
+    "slate": "Slate",
+    "slate-hotkeys": "SlateHotkeys",
+    "tslib": "TSLib"
   },
   "dependencies": {
     "@vericus/slate-kit-media-renderer": "^0.0.1",
@@ -40,6 +45,12 @@
     "slate": "^0.40.2",
     "slate-hotkeys": "^0.2.3",
     "tslib": "^1.9.3"
+  },
+  "peerDependencies": {
+    "@vericus/slate-kit-plugins-utils": "^0.1.0",
+    "debug": ">=3.1.0",
+    "slate": ">=0.40.0 <0.41.0",
+    "slate-hotkeys": ">=0.2.3"
   },
   "keywords": [
     "Vericus",

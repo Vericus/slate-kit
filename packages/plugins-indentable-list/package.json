@@ -33,6 +33,7 @@
     "classnames": "ClassNames",
     "immutable": "Immutable",
     "slate": "Slate",
+    "slate-auto-replace": "SlateAutoReplace",
     "is-hotkey": "IsHotkey",
     "@vericus/slate-kit-indentable-list-renderer": "IndentableListRenderer",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",

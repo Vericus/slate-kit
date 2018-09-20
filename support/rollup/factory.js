@@ -8,7 +8,6 @@ import resolve from "rollup-plugin-node-resolve";
 import { uglify } from "rollup-plugin-uglify";
 import visualizer from "rollup-plugin-visualizer";
 import typescript from "rollup-plugin-typescript2";
-// import progress from "rollup-plugin-progress";
 import { startCase } from "lodash";
 import fs from "fs";
 import path from "path";
@@ -45,8 +44,7 @@ function configure(pkg, location, env, target) {
     // Allow Rollup to resolve modules from `node_modules`, since it only
     // resolves local modules by default.
     resolve({
-      browser: true,
-      only: [/^@vericus\/slate-kit.*$/]
+      browser: true
     }),
 
     // Allow Rollup to resolve CommonJS modules, since it only resolves ES2015
@@ -69,7 +67,7 @@ function configure(pkg, location, env, target) {
             "is"
           ],
           "fbjs/lib/shallowEqual": ["shallowEqual"],
-          react: ["createElement"],
+          react: ["createElement", "Component"],
           "react-dom": ["findDOMNode"],
           "react-dom/server": ["renderToStaticMarkup"]
         }

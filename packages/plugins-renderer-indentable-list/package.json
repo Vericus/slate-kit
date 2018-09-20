@@ -32,6 +32,7 @@
   "umdGlobals": {
     "immutable": "Immutable",
     "slate": "Slate",
+    "slate-prop-types": "SlatePropTypes",
     "react": "React",
     "tslib": "TSLib"
   },

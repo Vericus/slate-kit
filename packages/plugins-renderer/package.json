@@ -30,8 +30,12 @@
     "dev": "tsc -w"
   },
   "umdGlobals": {
+    "react": "react",
     "immutable": "Immutable",
-    "slate": "Slate"
+    "slate": "Slate",
+    "tslib": "TSLib",
+    "hoist-non-react-statics": "HoistNonReactStatics",
+    "recompose": "Recompose"
   },
   "dependencies": {
     "hoist-non-react-statics": "^3.0.1",
