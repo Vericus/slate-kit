@@ -1,16 +1,20 @@
 import * as React from "react";
-import { Block } from "slate";
+import { Block, Change } from "slate";
 import { Props as GenericProps } from "../types";
+import ImageUploader from "./ImageUploader";
 
 interface States {
   src: string;
-  uploading: boolean;
   width: string;
+  error?: Error;
 }
 
 interface Props extends GenericProps {
   getSource: (block: Block) => string;
   getImageWidth: (block: Block) => string;
+  updateImageSource: (change: Change, block: Block, src: string) => any;
+  extensions: string;
+  onInsert: (...args: any[]) => any;
 }
 
 export default class Image extends React.Component<Props, States> {
@@ -22,8 +26,7 @@ export default class Image extends React.Component<Props, States> {
         : "",
       width: Block.isBlock(this.props.node)
         ? this.props.getImageWidth(this.props.node)
-        : "",
-      uploading: false
+        : ""
     };
   }
 
@@ -40,13 +43,42 @@ export default class Image extends React.Component<Props, States> {
     return null;
   }
 
+  onImageSelected = src => {
+    const { node, updateImageSource, editor } = this.props;
+    if (Block.isBlock(node)) {
+      editor.change(c => {
+        updateImageSource(c, node, src);
+      });
+    }
+  };
+
   render() {
-    const { className, attributes, isSelected } = this.props;
+    const {
+      className,
+      attributes,
+      isSelected,
+      extensions,
+      onInsert
+    } = this.props;
+    const { src, width } = this.state;
+    if (!src || src === "") {
+      return (
+        <ImageUploader
+          className={className}
+          onChange={this.onImageSelected}
+          extensions={extensions}
+          onInsert={onInsert}
+          width={width}
+          isSelected={isSelected}
+          src={src}
+        />
+      );
+    }
     return (
       <img
         className={className}
-        src={this.state.src}
-        data-image-width={this.state.width}
+        src={src}
+        data-image-width={width}
         data-image-is-selected={isSelected}
         {...attributes}
       />

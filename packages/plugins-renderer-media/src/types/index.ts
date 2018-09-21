@@ -1,4 +1,5 @@
 import { Node } from "slate";
+import { Editor } from "slate-react";
 export interface Props {
   attributes: any;
   children: JSX.Element;
@@ -7,4 +8,5 @@ export interface Props {
   parent?: Node;
   isSelected?: boolean;
   imageType?: string;
+  editor: Editor;
 }

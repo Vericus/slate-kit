@@ -1,21 +1,36 @@
 import * as React from "react";
 import { Block } from "slate";
-import { Props } from "../types";
+import { Props as GenericProps } from "../types";
+
+interface Props extends GenericProps {
+  getSource: (...args: any[]) => any;
+}
 
 const ImageCaption: React.SFC<Props> = props => {
-  const { className, attributes, children, imageType, node, parent } = props;
+  const {
+    className,
+    attributes,
+    children,
+    imageType,
+    node,
+    parent,
+    getSource
+  } = props;
   if (node && Block.isBlock(node) && node.nodes && Block.isBlock(parent)) {
-    const containImage =
+    const imageBlock =
       imageType &&
       parent.nodes
         .toArray()
         .find(n => Block.isBlock(n) && n.type === imageType);
-    if (containImage) {
-      return (
-        <figcaption className={className} {...attributes}>
-          {children}
-        </figcaption>
-      );
+    if (imageBlock) {
+      const src = getSource(imageBlock);
+      if (src) {
+        return (
+          <figcaption className={className} {...attributes}>
+            {children}
+          </figcaption>
+        );
+      }
     }
   }
   return (

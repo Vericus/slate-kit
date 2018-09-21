@@ -43,7 +43,21 @@ const pluginOpts = [
   },
   {
     label: "media",
-    createPlugin: MediaPlugin
+    createPlugin: MediaPlugin,
+    options: {
+      mediaTypes: {
+        image: {
+          onInsert: src => {
+            console.log(src);
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve(src);
+              }, 5000);
+            });
+          }
+        }
+      }
+    }
   },
   {
     label: "basic-typhography",

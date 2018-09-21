@@ -14,12 +14,15 @@ const createToolbar = (mediaLabel, pluginsWrapper) => {
   );
   return props => {
     const { node, editor } = props;
+    if (editor.props.isReadOnly) return;
     if (!mediaTypesOptions.includes(node.type)) return;
     const { value } = editor.props;
     const { selection } = value;
     const { start, end } = selection;
     const selectedMedia = utils.getSelectedMediaBlock(value);
     if (!selectedMedia) return;
+    const src = utils.getSource(node);
+    if (!src || src === "") return;
     if (!(start.isInNode(node) || end.isInNode(node))) return;
     return <Toolbar {...props} changes={changes} />;
   };

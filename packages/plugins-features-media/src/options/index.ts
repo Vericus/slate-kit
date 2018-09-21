@@ -6,7 +6,6 @@ export type BlockTypes = { [key in MediaTypes]?: string | null };
 
 export interface CommonOption {
   onInsert: (...args: any[]) => any;
-  onRemove: (...args: any[]) => any;
   type: string;
 }
 
@@ -40,8 +39,7 @@ export const defaultImageOptions: ImageOption = {
   maxSize: 1024000,
   allowedExtensions: ["png", "tif", "gif", "bmp", "jpg"],
   type: "image",
-  onInsert: () => {},
-  onRemove: () => {}
+  onInsert: () => {}
 };
 
 export const defaultMediaTypesOption: MediaOption = {
@@ -67,10 +65,37 @@ export default class Options extends Record(defaultOptions) {
   static create(option: Partial<TypeOption>): TypeOption {
     let options = defaultOptions;
     let mediaTypesOption = defaultOptions.mediaTypes;
+    if (option.mediaTypes) {
+      mediaTypesOption = {
+        ...mediaTypesOption,
+        ...Object.entries(option.mediaTypes).reduce(
+          (acc, [mediaType, mediaTypeOption]) => {
+            return {
+              ...acc,
+              [mediaType]: {
+                ...(mediaTypesOption[mediaType]
+                  ? mediaTypesOption[mediaType]
+                  : {}),
+                ...mediaTypeOption
+              }
+            };
+          },
+          {}
+        )
+      };
+    }
     options = {
       ...options,
+      mediaTypes: mediaTypesOption,
       blockTypes: {
-        ...(option.blockTypes ? option.blockTypes : {}),
+        ...options.blockTypes,
+        ...Object.entries(mediaTypesOption).reduce(
+          (mediaTypes, [mediaType, mediaOption]: [string, CommonOption]) => ({
+            ...mediaTypes,
+            [mediaType]: mediaOption.type
+          }),
+          {}
+        ),
         media: option.type ? option.type : defaultOptions.type,
         mediacaption: option.captionType
           ? option.captionType
@@ -80,26 +105,6 @@ export default class Options extends Record(defaultOptions) {
         option.externalRenderer !== undefined
           ? option.externalRenderer
           : defaultOptions.externalRenderer
-    };
-    if (option.mediaTypes) {
-      mediaTypesOption = {
-        ...mediaTypesOption,
-        ...option.mediaTypes
-      };
-    }
-
-    options = {
-      ...options,
-      blockTypes: {
-        ...options.blockTypes,
-        ...Object.entries(mediaTypesOption).reduce(
-          (mediaTypes, [mediaType, mediaOption]: [string, CommonOption]) => ({
-            ...mediaTypes,
-            [mediaType]: mediaOption.type
-          }),
-          {}
-        )
-      }
     };
     return new Options(options);
   }

@@ -17,8 +17,8 @@ import pasteCleaner from "@vericus/slate-kit-paste-helpers";
 import Toolbar from "../toolbar";
 
 const EnchancedEditor = compose(
-  WithReadOnly,
-  WithRenderers
+  WithRenderers,
+  WithReadOnly
 )(Editor);
 
 export default class SlateKitEditor extends Component {
@@ -41,7 +41,7 @@ export default class SlateKitEditor extends Component {
     const data = getEventTransfer(event);
     if (data.html) {
       const { origin, cleanedHTML } = pasteCleaner(data.html);
-      const parser = pluginsWrapper.getSerializer();
+      const parser = this.pluginsWrapper.getSerializer();
       const { document } = parser.deserialize(cleanedHTML);
       change.insertFragment(document);
       return true;

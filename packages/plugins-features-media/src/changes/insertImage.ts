@@ -20,8 +20,7 @@ export default function insertImage(opts: TypeOption, utils, pluginsWrapper) {
             type: imageType,
             object: "block",
             data: src ? Data.create({ [srcField]: src }) : undefined
-          }),
-          Block.create({ type: captionType, object: "block" })
+          })
         ])
       });
       change.insertBlock(media);
