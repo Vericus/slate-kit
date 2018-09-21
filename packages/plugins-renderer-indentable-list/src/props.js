@@ -42,13 +42,21 @@ export default function createProps(opts, pluginsWrapper) {
       const onMouseDown =
         props.node.type === checkList
           ? e => {
-              const { top, left } = e.target.getBoundingClientRect();
+              const { top } = e.target.getBoundingClientRect();
+              let left;
+              if (e.target.children && e.target.children[0]) {
+                const {
+                  left: leftBound
+                } = e.target.children[0].getBoundingClientRect();
+                left = leftBound;
+              }
               const targetStyle = getComputedStyle(e.target);
               const fontSize = parseInt(targetStyle.fontSize, 10);
               if (
                 !(
-                  e.clientX >= left &&
-                  e.clientX <= left + fontSize &&
+                  left &&
+                  e.clientX >= left - 2 * fontSize &&
+                  e.clientX <= left &&
                   e.clientY >= top + fontSize * 0.3 &&
                   e.clientY <= top + fontSize * 1.3 &&
                   e.target.nodeName.toLowerCase() === "li"
