@@ -1,5 +1,5 @@
 // ported from https://github.com/DefinitelyTyped/DefinitelyTyped
-// definitions for slate 0.40
+// definitions for slate 0.41
 // TypeScript Version: 2.3
 import * as Immutable from "immutable";
 
@@ -46,13 +46,14 @@ export interface SchemaProperties {
 export class Schema extends Immutable.Record({}) {
   stack: Stack;
   rules: Rules[];
+  object: "schema";
 
   static create(properties: SchemaProperties | Schema): Schema;
   static fromJSON(object: SchemaProperties): Schema;
   static fromJS(object: SchemaProperties): Schema;
   static isSchema(maybeSchema: any): maybeSchema is Schema;
 
-  validateNode(node: Node): Error | void;
+  validateNode(node: Node): SlateError | void;
   testNode(node: Node): boolean;
   assertNode(node: Node): boolean;
   getNodeRules(node: Node): any[];
@@ -135,7 +136,7 @@ export class Value extends Immutable.Record({}) {
   static fromJS(properties: ValueJSON): Value;
   static isValue(maybeValue: any): maybeValue is Value;
 
-  change(): Change;
+  change(args?: { [key: string]: any }): Change;
   toJSON(): ValueJSON;
   addMark(path: Path, offset: number, length: number, mark: Mark): Value;
   insertNode(path: Path, node: Node): Value;
@@ -160,7 +161,7 @@ export class Value extends Immutable.Record({}) {
     properties: MarkProperties
   ): Value;
   setProperties(properties: ValueProperties): Value;
-  setSelection(properties: RangeProperties): Value;
+  setSelection(properties: SelectionProperties): Value;
   splitNode(path: Path, position: number, properties: any): Value;
   mapRanges(iterator: () => void): Value;
   clearAtomicRanges(key: string, from: number, to?: number): Value;
@@ -284,8 +285,6 @@ export class Text extends Immutable.Record({}) {
   object: "text";
   key: string;
 
-  readonly text: string;
-
   static create(properties: TextProperties | Text | string): Text;
   static createList(
     elements?:
@@ -300,7 +299,6 @@ export class Text extends Immutable.Record({}) {
 
   toJSON(): TextJSON;
 
-  getKeysToPathsTable(): object;
   getString(): string;
   searchLeafAtOffset(offset: number): LeafAndOffset;
   addMark(index: number, length: number, mark: Mark): Text;
@@ -420,8 +418,8 @@ declare class BaseNode<
   findDescendant(iterator: (node: Node) => boolean): Node | null;
   getActiveMarksAtRange(range: Range): Immutable.Set<Mark>;
   getAncestors(path: Path): Immutable.List<Node> | null;
-  getBlocksAtRange(range: Range): Immutable.List<Block>;
-  getBlocksAtRangeAsArray(range: Range): Block[];
+  getBlocksAtRange(range: Range | Selection): Immutable.List<Block>;
+  getBlocksAtRangeAsArray(range: Range | Selection): Block[];
   getBlocks(): Immutable.List<Block>;
   getBlocksAsArray(): Block[];
   getBlocksByType(type: string): Immutable.List<Block>;
@@ -771,43 +769,43 @@ export class Change extends Immutable.Record({}) {
   deleteForwardAtRange(range: Selection, options?: ChangeOption): Change;
   deleteAtRange(range: Selection, options?: ChangeOption): Change;
   insertBlockAtRange(
-    range: Range,
+    range: Selection,
     block: Block | BlockProperties | string,
     options?: ChangeOption
   ): Change;
   insertFragmentAtRange(
-    range: Range,
+    range: Selection,
     fragment: Document,
     options?: ChangeOption
   ): Change;
   insertInlineAtRange(
-    range: Range,
+    range: Selection,
     inline: Inline | InlineProperties,
     options?: ChangeOption
   ): Change;
   insertTextAtRange(
-    range: Range,
+    range: Selection,
     text: string,
     marks?: Immutable.Set<Mark>,
     options?: ChangeOption
   ): Change;
   addMarkAtRange(
-    range: Range,
+    range: Selection,
     mark: Mark | MarkProperties | string,
     options?: ChangeOption
   ): Change;
   addMarksAtRange(
-    range: Range,
+    range: Selection,
     marks: Mark[] | MarkProperties[] | string[],
     options?: ChangeOption
   ): Change;
   setBlocksAtRange(
-    range: Range,
+    range: Selection,
     properties: BlockProperties | string,
     options?: ChangeOption
   ): Change;
   setInlinesAtRange(
-    range: Range,
+    range: Selection,
     properties: InlineProperties | string,
     options?: ChangeOption
   ): Change;
@@ -818,23 +816,23 @@ export class Change extends Immutable.Record({}) {
     options?: ChangeOption
   ): Change;
   splitInlineAtRange(
-    range: Range,
+    range: Selection,
     depth: number,
     height?: number,
     options?: ChangeOption
   ): Change;
   removeMarkAtRange(
-    range: Range,
+    range: Selection,
     mark: Mark | MarkProperties | string,
     options?: ChangeOption
   ): Change;
   toggleMarkAtRange(
-    range: Range,
+    range: Selection,
     mark: Mark | MarkProperties | string,
     options?: ChangeOption
   ): Change;
   unwrapBlockAtRange(
-    range: Range,
+    range: Selection,
     properties: BlockProperties | string,
     options?: ChangeOption
   ): Change;
@@ -844,17 +842,17 @@ export class Change extends Immutable.Record({}) {
     options?: ChangeOption
   ): Change;
   wrapBlockAtRange(
-    range: Range,
+    range: Selection,
     properties: BlockProperties | string,
     options?: ChangeOption
   ): Change;
   wrapInlineAtRange(
-    range: Range,
+    range: Selection,
     properties: InlineProperties | string,
     options?: ChangeOption
   ): Change;
   wrapTextAtRange(
-    range: Range,
+    range: Selection,
     prefix: string,
     suffix?: string,
     options?: ChangeOption
@@ -1451,52 +1449,54 @@ export class SlateError extends Error {
   [key: string]: any;
 }
 
-export interface KeyUtils {
-  create(key: string): string;
-  setGenerator(func: () => any): void;
-  resetGenerator(): void;
+export namespace KeyUtils {
+  function create(key: string): string;
+  function setGenerator(func: () => any): void;
+  function resetGenerator(): void;
 }
 
 export type useMemoization = () => void;
 export type resetMemoization = () => void;
 
-export interface PathUtils {
-  compare(
+export namespace PathUtils {
+  function compare(
     path: Immutable.List<number>,
     target: Immutable.List<number>
   ): number | null;
-  create(attrs: Immutable.List<number> | string): Immutable.List<number>;
-  crop(
+  function create(
+    attrs: Immutable.List<number> | string
+  ): Immutable.List<number>;
+  function crop(
     a: Immutable.List<number>,
     b: Immutable.List<number>,
     size?: number
   ): Array<Immutable.List<number>>;
-  decrement(
+  function decrement(
     path: Immutable.List<number>,
     n?: number,
     index?: number
   ): Immutable.List<number>;
-  increment(
+  function increment(
     path: Immutable.List<number>,
     n?: number,
     index?: number
   ): Immutable.List<number>;
-  isAbove(
+  function isAbove(
     path: Immutable.List<number>,
     target: Immutable.List<number>
   ): boolean;
-  isAfter(
+  function isAfter(
     path: Immutable.List<number>,
     target: Immutable.List<number>
   ): boolean;
-  isBefore(
+  function isBefore(
     path: Immutable.List<number>,
     target: Immutable.List<number>
   ): boolean;
-  lift(path: Immutable.List<number>): Immutable.List<number>;
-  max(a: Immutable.List<number>, b: Immutable.List<number>): number;
-  min(a: Immutable.List<number>, b: Immutable.List<number>): number;
-  relate(
+  function lift(path: Immutable.List<number>): Immutable.List<number>;
+  function max(a: Immutable.List<number>, b: Immutable.List<number>): number;
+  function min(a: Immutable.List<number>, b: Immutable.List<number>): number;
+  function relate(
     a: Immutable.List<number>,
     b: Immutable.List<number>
   ): Immutable.List<number>;
