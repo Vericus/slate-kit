@@ -51,4 +51,4 @@ export function createRenderNode() {
   };
 }
 
-export { createRenderNode as default, OrderedList, UnOrderedList };
+export { createRenderNode as default, OrderedList, UnOrderedList, CheckList };

@@ -1,7 +1,7 @@
 import { Change } from "slate";
 import hotkeys from "slate-hotkeys";
 import Options, { TypeOptions } from "./options";
-import utils, { handleUndo, handleRedo } from "./utils";
+import * as utils from "./utils";
 
 export default function History(pluginOptions: TypeOptions = {}) {
   const opts = new Options(pluginOptions);
@@ -10,9 +10,9 @@ export default function History(pluginOptions: TypeOptions = {}) {
   function onKeyDown(e: KeyboardEvent, change: Change) {
     const { value } = change;
     if (hotkeys.isUndo(e)) {
-      return handleUndo(value, change, onUndo);
+      return utils.handleUndo(value, change, onUndo);
     } else if (hotkeys.isRedo(e)) {
-      return handleRedo(value, change, onRedo);
+      return utils.handleRedo(value, change, onRedo);
     }
     return undefined;
   }

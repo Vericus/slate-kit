@@ -30,6 +30,7 @@
     "dev": "tsc -w"
   },
   "umdGlobals": {
+    "@vericus/slate-kit-plugins-wrapper": "SlateKitPluginsWrapper",
     "react": "react",
     "immutable": "Immutable",
     "slate": "Slate",
@@ -38,6 +39,7 @@
     "recompose": "Recompose"
   },
   "dependencies": {
+    "@vericus/slate-kit-plugins-wrapper": "^0.1.4",
     "hoist-non-react-statics": "^3.0.1",
     "immutable": "^3.8.2",
     "react": "^16.4.2",
@@ -45,13 +47,12 @@
     "recompose": "^0.30.0",
     "tslib": "^1.9.3"
   },
+  "peerDepencies": {
+    "@vericus/slate-kit-plugins-wrapper": "^0.1.4"
+  },
   "keywords": [
     "Vericus",
     "slate",
     "slate-kit"
-  ],
-  "devDependencies": {
-    "@vericus/slate-kit-plugins-wrapper": "^0.1.4",
-    "slate-react": ">=0.18.5 <=0.18.7"
-  }
+  ]
 }

@@ -1,6 +1,7 @@
 import createRenderNode, {
   OrderedList,
   UnOrderedList,
+  CheckList,
   Props
 } from "./renderNode";
 
@@ -10,4 +11,4 @@ function createRenderer() {
   };
 }
 
-export { createRenderer as default, OrderedList, UnOrderedList };
+export { createRenderer as default, OrderedList, UnOrderedList, CheckList };
