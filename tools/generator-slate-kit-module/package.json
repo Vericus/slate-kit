@@ -1,5 +1,5 @@
 {
-  "version": "0.1.2",
+  "version": "0.1.3",
   "name": "@vericus/generator-slate-kit-module",
   "description": "Use this to create a new slate-kit modules!",
   "author": "Cadmus",
