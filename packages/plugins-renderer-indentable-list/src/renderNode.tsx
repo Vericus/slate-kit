@@ -11,27 +11,27 @@ export interface Props {
 }
 
 const OrderedList: React.SFC<Props> = props => {
-  const { className, attributes, children } = props;
+  const { attributes, children, ...rest } = props;
   return (
-    <ol className={className} {...attributes}>
+    <ol {...attributes} {...rest}>
       <li>{children}</li>
     </ol>
   );
 };
 
 const UnOrderedList: React.SFC<Props> = props => {
-  const { className, attributes, children } = props;
+  const { attributes, children, ...rest } = props;
   return (
-    <ul className={className} {...attributes}>
+    <ul {...attributes} {...rest}>
       <li>{children}</li>
     </ul>
   );
 };
 
 const CheckList: React.SFC<Props> = props => {
-  const { className, attributes, children, onMouseDown } = props;
+  const { attributes, children, onMouseDown, ...rest } = props;
   return (
-    <ul className={className} {...attributes}>
+    <ul {...attributes} {...rest}>
       <li onMouseDown={onMouseDown}>{children}</li>
     </ul>
   );

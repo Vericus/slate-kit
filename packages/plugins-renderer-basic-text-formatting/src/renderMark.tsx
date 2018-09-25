@@ -13,8 +13,12 @@ const defaultStyle = {
   textDecorationColor: "inherit"
 };
 
-const renderMark: React.SFC<Props> = ({ children, attributes }) => {
-  return <span {...attributes}>{children}</span>;
+const renderMark: React.SFC<Props> = ({ children, attributes, ...rest }) => {
+  return (
+    <span {...attributes} {...rest}>
+      {children}
+    </span>
+  );
 };
 
 renderMark.propTypes = SlateTypes.Mark;

@@ -11,8 +11,12 @@ export default function createRenderMark(type) {
   return {
     marks: {
       [type]: (props: Props) => {
-        const { attributes, children } = props;
-        return <span {...attributes}>{children}</span>;
+        const { attributes, children, ...rest } = props;
+        return (
+          <span {...attributes} {...rest}>
+            {children}
+          </span>
+        );
       }
     }
   };
