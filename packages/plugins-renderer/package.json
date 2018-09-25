@@ -52,6 +52,6 @@
   ],
   "devDependencies": {
     "@vericus/slate-kit-plugins-wrapper": "^0.1.3",
-    "slate-react": "^0.18.5"
+    "slate-react": ">=0.18.5 <=0.18.7"
   }
 }

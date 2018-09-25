@@ -1,8 +1,8 @@
-import { Document, Range, Change } from "slate";
+import { Document, Selection, Change } from "slate";
 
 export default function removeExpandedMark(
   document: Document,
-  selection: Range,
+  selection: Selection,
   change: Change,
   type: string
 ): any {

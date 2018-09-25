@@ -40,7 +40,7 @@ export default function createProps(opts, pluginsWrapper) {
           ? e => {
               const { top } = e.target.getBoundingClientRect();
               let left;
-              if (e.target.children) {
+              if (e.target.children && e.target.children[0]) {
                 const {
                   left: leftBound
                 } = e.target.children[0].getBoundingClientRect();
