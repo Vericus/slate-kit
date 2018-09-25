@@ -1,11 +1,22 @@
 import { Value } from "slate";
 import { hasActiveMark } from "@vericus/slate-kit-plugins-utils";
+import { TypeOptions } from "../options";
 
-export default function createUtils() {
+const returnFalse = (value: Value) => false;
+
+export default function createUtils(options: TypeOptions) {
+  const { marks } = options;
+  const { bold, italic, underline, strikethrough } = marks;
   return {
-    isBold: (value: Value) => hasActiveMark(value, "bold"),
-    isItalic: (value: Value) => hasActiveMark(value, "italic"),
-    isUnderline: (value: Value) => hasActiveMark(value, "underline"),
-    isStrikethrough: (value: Value) => hasActiveMark(value, "strikethrough")
+    isBold: bold ? (value: Value) => hasActiveMark(value, bold) : returnFalse,
+    isItalic: italic
+      ? (value: Value) => hasActiveMark(value, italic)
+      : returnFalse,
+    isUnderline: underline
+      ? (value: Value) => hasActiveMark(value, underline)
+      : returnFalse,
+    isStrikethrough: strikethrough
+      ? (value: Value) => hasActiveMark(value, strikethrough)
+      : returnFalse
   };
 }

@@ -1,7 +1,15 @@
 {
-  "exclude": ["**/*.spec.ts", "node_modules", "*.d.ts", "**/*.d.ts"],
-  "typeRoots": ["packages/typescript-typings/types", "node_modules/@types"],
+  "exclude": [
+    "**/*.spec.ts",
+    "node_modules",
+    "*.d.ts",
+    "**/*.d.ts",
+    "**/lib/**/*.ts",
+    "**/dist/**/*.ts",
+    "**/module/**/*.ts"
+  ],
   "compilerOptions": {
+    "baseUrl": ".",
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
@@ -13,6 +21,16 @@
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
-    "importHelpers": true
-  }
+    "importHelpers": true,
+    "paths": {
+      "@vericus/slate-kit*": ["packages/*/src", "packages/*/lib"],
+      "*": [
+        "node_modules/*",
+        "node_modules/@types/*",
+        "packages/typescript-typings/types/*",
+        "*"
+      ]
+    }
+  },
+  "types": ["react", "jest"]
 }

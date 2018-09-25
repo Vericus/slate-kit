@@ -46,13 +46,14 @@ export interface SchemaProperties {
 export class Schema extends Immutable.Record({}) {
   stack: Stack;
   rules: Rules[];
+  object: "schema";
 
   static create(properties: SchemaProperties | Schema): Schema;
   static fromJSON(object: SchemaProperties): Schema;
   static fromJS(object: SchemaProperties): Schema;
   static isSchema(maybeSchema: any): maybeSchema is Schema;
 
-  validateNode(node: Node): Error | void;
+  validateNode(node: Node): SlateError | void;
   testNode(node: Node): boolean;
   assertNode(node: Node): boolean;
   getNodeRules(node: Node): any[];
@@ -135,7 +136,7 @@ export class Value extends Immutable.Record({}) {
   static fromJS(properties: ValueJSON): Value;
   static isValue(maybeValue: any): maybeValue is Value;
 
-  change(): Change;
+  change(args?: { [key: string]: any }): Change;
   toJSON(): ValueJSON;
   addMark(path: Path, offset: number, length: number, mark: Mark): Value;
   insertNode(path: Path, node: Node): Value;
@@ -160,7 +161,7 @@ export class Value extends Immutable.Record({}) {
     properties: MarkProperties
   ): Value;
   setProperties(properties: ValueProperties): Value;
-  setSelection(properties: RangeProperties): Value;
+  setSelection(properties: SelectionProperties): Value;
   splitNode(path: Path, position: number, properties: any): Value;
   mapRanges(iterator: () => void): Value;
   clearAtomicRanges(key: string, from: number, to?: number): Value;
@@ -198,7 +199,7 @@ export class Document<DataMap = { [key: string]: any }> extends BaseNode<
 export interface BlockProperties {
   type: string;
   key?: string;
-  nodes?: Immutable.List<Node>;
+  nodes?: Immutable.List<Node> | Node[] | object[];
   data?: Immutable.Map<string, any> | { [key: string]: any };
 }
 
@@ -284,8 +285,6 @@ export class Text extends Immutable.Record({}) {
   object: "text";
   key: string;
 
-  readonly text: string;
-
   static create(properties: TextProperties | Text | string): Text;
   static createList(
     elements?:
@@ -300,7 +299,6 @@ export class Text extends Immutable.Record({}) {
 
   toJSON(): TextJSON;
 
-  getKeysToPathsTable(): object;
   getString(): string;
   searchLeafAtOffset(offset: number): LeafAndOffset;
   addMark(index: number, length: number, mark: Mark): Text;
@@ -417,11 +415,11 @@ declare class BaseNode<
   createRange(properties: RangeProperties | Range): Range;
   createSelection(properties: SelectionProperties | Selection): Selection;
   filterDescendants(iterator: (node: Node) => boolean): Immutable.List<Node>;
-  findDescendants(iterator: (node: Node) => boolean): Node | null;
-  getActiveMarksAtRange(range: Range): Immutable.Set<Mark>;
+  findDescendant(iterator: (node: Node) => boolean): Node | null;
+  getActiveMarksAtRange(range: Range | Selection): Immutable.Set<Mark>;
   getAncestors(path: Path): Immutable.List<Node> | null;
-  getBlocksAtRange(range: Range): Immutable.List<Block>;
-  getBlocksAtRangeAsArray(range: Range): Block[];
+  getBlocksAtRange(range: Range | Selection): Immutable.List<Block>;
+  getBlocksAtRangeAsArray(range: Range | Selection): Block[];
   getBlocks(): Immutable.List<Block>;
   getBlocksAsArray(): Block[];
   getBlocksByType(type: string): Immutable.List<Block>;
@@ -437,7 +435,7 @@ declare class BaseNode<
   getDescendant(path: Path): Node | null;
   getFirstInvalidNode(schema: Schema): Node | null;
   getFirstText(): Text | null;
-  getFragmentAtRange(range: Range): Document;
+  getFragmentAtRange(range: Range | Selection): Document;
   getFurthest(path: Path, iterator: (node: Node) => boolean): Node | null;
   getFurthestAncestor(path: Path): Node | null;
   getFurthestBlock(path: Path): Block | null;
@@ -445,17 +443,17 @@ declare class BaseNode<
   getFurthestOnlyChildAncestor(path: Path): Node | null;
   getInlines(): Immutable.List<Inline>;
   getInlinesAsArray(): Inline[];
-  getInlinesAtRange(range: Range): Immutable.List<Inline>;
-  getInlinesAtRangeAsArray(range: Range): Inline[];
+  getInlinesAtRange(range: Range | Selection): Immutable.List<Inline>;
+  getInlinesAtRangeAsArray(range: Range | Selection): Inline[];
   getInlinesByType(type: string): Immutable.List<Inline>;
   getInlinesByTypeAsArray(type: string): Inline[];
-  getInsertMarksAtRange(range: Range): Immutable.Set<Mark>;
+  getInsertMarksAtRange(range: Range | Selection): Immutable.Set<Mark>;
   getKeysToPathsTable(): object;
   getLastText(): Text | null;
   getMarks(): Immutable.Set<Mark>;
   getMarksAsArray(): Mark[];
   getMarksAtPosition(key: string, offset: number): Immutable.Set<Mark>;
-  getMarksAtRange(range: Range): Immutable.Set<Mark>;
+  getMarksAtRange(range: Range | Selection): Immutable.Set<Mark>;
   getMarksByType(type: string): Immutable.Set<Mark>;
   getMarksByTypeAsArray(type: string): Mark[];
   getNextBlock(key: string | Node): Block | null;
@@ -464,9 +462,9 @@ declare class BaseNode<
   getNextText(path: Path): Text | null;
   getNode(path: Path): Node | null;
   getOffset(key: string): number;
-  getOffsetAtRange(range: Range): number;
+  getOffsetAtRange(range: Range | Selection): number;
   getOrderedMarks(): Immutable.OrderedSet<Mark>;
-  getOrderedMarksAtRange(range: Range): Immutable.OrderedSet<Mark>;
+  getOrderedMarksAtRange(range: Range | Selection): Immutable.OrderedSet<Mark>;
   getOrderedMarksBetweenPositions(
     startKey: string,
     startOffset: number,
@@ -481,7 +479,7 @@ declare class BaseNode<
   getPreviousSibling(path: Path): Node | null;
   getPreviousText(path: Path): Text | null;
   getSelectionIndexes(
-    range: Range,
+    range: Range | Selection,
     isSelected?: boolean
   ): { start: number; end: number } | null;
   getText(): string;
@@ -489,8 +487,8 @@ declare class BaseNode<
   getTextDirection(): string | null;
   getTexts(): Immutable.List<Text>;
   getTextsAsArray(): Text[];
-  getTextsAtRange(range: Range): Immutable.List<Text>;
-  getTextsAtRangeAsArray(range: Range): Text[];
+  getTextsAtRange(range: Range | Selection): Immutable.List<Text>;
+  getTextsAtRangeAsArray(range: Range | Selection): Text[];
   getTextsBetweenPositionsAsArray(startKey: string, endKey: string): Text[];
   hasBlockChildren(): boolean;
   hasChild(path: Path): boolean;
@@ -588,10 +586,10 @@ export class Change extends Immutable.Record({}) {
   delete(): Change;
   insertBlock(block: Block | BlockProperties | string): Change;
   insertFragment(fragment: Document): Change;
-  insertInline(inline: Inline | InlineProperties): Change;
+  insertInline(inline: Inline | Partial<InlineProperties>): Change;
   insertText(text: string): Change;
-  addMark(mark: Mark | MarkProperties | string): Change;
-  setBlocks(properties: BlockProperties | string): Change;
+  addMark(mark: Mark | Partial<MarkProperties> | string): Change;
+  setBlocks(properties: Partial<BlockProperties> | string): Change;
   setInlines(properties: InlineProperties | string): Change;
   splitBlock(depth: number): Change;
   splitInline(depth: number): Change;
@@ -641,8 +639,8 @@ export class Change extends Immutable.Record({}) {
   moveAnchorToStartOfText(): Change;
 
   moveBackward(point: Point, n?: number): Change;
-  moveEndBackward(point: Point, n?: number): Change;
-  moveEndForward(point: Point, n?: number): Change;
+  moveEndBackward(n?: number): Change;
+  moveEndForward(n?: number): Change;
 
   moveEndTo(path: Path, offset: number): Change;
   moveEndToEndOfBlock(): Change;
@@ -670,7 +668,7 @@ export class Change extends Immutable.Record({}) {
 
   moveFocusBackward(n?: number): Change;
   moveFocusForward(n?: number): Change;
-  moveFocusTo(point: Point, n?: number): Change;
+  moveFocusTo(n?: number): Change;
   moveFocusToEndOfBlock(): Change;
   moveFocusToEndOfDocument(): Change;
   moveFocusToEndOfInline(): Change;
@@ -696,9 +694,9 @@ export class Change extends Immutable.Record({}) {
 
   moveForward(point: Point, n?: number): Change;
 
-  moveStartForward(point: Point, n?: number): Change;
-  moveStartBackward(point: Point, n?: number): Change;
-  moveStartTo(point: Point, n?: number): Change;
+  moveStartForward(n?: number): Change;
+  moveStartBackward(n?: number): Change;
+  moveStartTo(n?: number): Change;
   moveStartToEndOfBlock(): Change;
   moveStartToEndOfDocument(): Change;
   moveStartToEndOfInline(): Change;
@@ -752,7 +750,7 @@ export class Change extends Immutable.Record({}) {
 
   moveToRangeOfDocument(): Change;
   moveToRangeOfNode(node: Node): Change;
-  select(properties: Range | RangeProperties, options: ChangeOption): Change;
+  select(properties: Range | RangeProperties, options?: ChangeOption): Change;
   setAnchor(point: Point): Change;
   setEnd(point: Point): Change;
   setFocus(point: Point): Change;
@@ -761,80 +759,98 @@ export class Change extends Immutable.Record({}) {
   deselect(): Change;
 
   // Document Changes
-  deleteCharBackwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteLineBackwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteWordBackwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteBackwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteCharForwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteLineForwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteWordForwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteForwardAtRange(range: Range, options?: ChangeOption): Change;
-  deleteAtRange(range: Range, options?: ChangeOption): Change;
+  deleteCharBackwardAtRange(
+    range: Range | Selection,
+    options?: ChangeOption
+  ): Change;
+  deleteLineBackwardAtRange(
+    range: Range | Selection,
+    options?: ChangeOption
+  ): Change;
+  deleteWordBackwardAtRange(
+    range: Range | Selection,
+    options?: ChangeOption
+  ): Change;
+  deleteBackwardAtRange(
+    range: Range | Selection,
+    options?: ChangeOption
+  ): Change;
+  deleteCharForwardAtRange(
+    range: Range | Selection,
+    options?: ChangeOption
+  ): Change;
+  deleteLineForwardAtRange(
+    range: Range | Selection,
+    options?: ChangeOption
+  ): Change;
+  deleteWordForwardAtRange(
+    range: Range | Selection,
+    options?: ChangeOption
+  ): Change;
+  deleteForwardAtRange(
+    range: Range | Selection,
+    options?: ChangeOption
+  ): Change;
+  deleteAtRange(range: Range | Selection, options?: ChangeOption): Change;
   insertBlockAtRange(
-    range: Range,
-    block: Block | BlockProperties | string,
-    options?: ChangeOption
+    range: Range | Selection,
+    block: Block | BlockProperties | string
   ): Change;
-  insertFragmentAtRange(
-    range: Range,
-    fragment: Document,
-    options?: ChangeOption
-  ): Change;
+  insertFragmentAtRange(range: Range | Selection, fragment: Document): Change;
   insertInlineAtRange(
-    range: Range,
-    inline: Inline | InlineProperties,
-    options?: ChangeOption
+    range: Range | Selection,
+    inline: Inline | InlineProperties
   ): Change;
   insertTextAtRange(
-    range: Range,
+    range: Range | Selection,
     text: string,
     marks?: Immutable.Set<Mark>,
     options?: ChangeOption
   ): Change;
   addMarkAtRange(
-    range: Range,
+    range: Range | Selection,
     mark: Mark | MarkProperties | string,
     options?: ChangeOption
   ): Change;
   addMarksAtRange(
-    range: Range,
+    range: Range | Selection,
     marks: Mark[] | MarkProperties[] | string[],
     options?: ChangeOption
   ): Change;
   setBlocksAtRange(
-    range: Range,
+    range: Range | Selection,
     properties: BlockProperties | string,
     options?: ChangeOption
   ): Change;
   setInlinesAtRange(
-    range: Range,
+    range: Range | Selection,
     properties: InlineProperties | string,
     options?: ChangeOption
   ): Change;
   splitBlockAtRange(
-    range: Range,
+    range: Range | Selection,
     depth: number,
     height?: number,
     options?: ChangeOption
   ): Change;
   splitInlineAtRange(
-    range: Range,
+    range: Range | Selection,
     depth: number,
     height?: number,
     options?: ChangeOption
   ): Change;
   removeMarkAtRange(
-    range: Range,
+    range: Range | Selection,
     mark: Mark | MarkProperties | string,
     options?: ChangeOption
   ): Change;
   toggleMarkAtRange(
-    range: Range,
+    range: Range | Selection,
     mark: Mark | MarkProperties | string,
     options?: ChangeOption
   ): Change;
   unwrapBlockAtRange(
-    range: Range,
+    range: Range | Selection,
     properties: BlockProperties | string,
     options?: ChangeOption
   ): Change;
@@ -844,18 +860,18 @@ export class Change extends Immutable.Record({}) {
     options?: ChangeOption
   ): Change;
   wrapBlockAtRange(
-    range: Range,
+    range: Range | Selection,
     properties: BlockProperties | string,
     options?: ChangeOption
   ): Change;
   wrapInlineAtRange(
-    range: Range,
+    range: Range | Selection,
     properties: InlineProperties | string,
     options?: ChangeOption
   ): Change;
   wrapTextAtRange(
-    range: Range,
-    prefix: string,
+    range: Range | Selection,
+    prefix?: string,
     suffix?: string,
     options?: ChangeOption
   ): Change;
@@ -889,11 +905,14 @@ export class Change extends Immutable.Record({}) {
   ): Change;
   setNodeByKey(
     key: string,
-    properties: BlockProperties | InlineProperties | string
+    properties: Partial<BlockProperties> | Partial<InlineProperties> | string
   ): Change;
   splitNodeByKey(key: string, offset: number): Change;
   unwrapInlineByKey(key: string, properties: InlineProperties | string): Change;
-  unwrapBlockByKey(key: string, properties: BlockProperties | string): Change;
+  unwrapBlockByKey(
+    key: string,
+    properties?: Partial<BlockProperties> | string
+  ): Change;
   unwrapNodeByKey(key: string): Change;
   wrapInlineByKey(key: string, properties: InlineProperties | string): Change;
   wrapBlockByKey(key: string, properties: BlockProperties | string): Change;
@@ -905,59 +924,59 @@ export class Change extends Immutable.Record({}) {
     offset: number,
     length: number,
     mark: MarkProperties | Mark | string,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   insertFragmentByPath(
     path: Path,
     index: number,
     fragment: Document,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   insertNodeByPath(
     path: Path,
     index: number,
     node: Node,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   insertTextByPath(
     path: Path,
     offset: number,
     text: string,
     marks: Immutable.Set<Mark> | null | undefined,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
-  mergeNodeByPath(path: Path, options: ChangeOption): Change;
-  mergeNodeByKey(key: string, options: ChangeOption): Change;
+  mergeNodeByPath(path: Path, options?: ChangeOption): Change;
+  mergeNodeByKey(key: string, options?: ChangeOption): Change;
   moveNodeByPath(
     path: Path,
     newPath: Path,
     newIndex: number,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   removeMarkByPath(
     path: Path,
     offset: number,
     length: number,
     mark: MarkProperties | Mark | string,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
-  removeAllMarksByPath(path: Path, options: ChangeOption): Change;
-  removeAllMarksByKey(key: string, options: ChangeOption): Change;
-  removeNodeByPath(path: Path, options: ChangeOption): Change;
+  removeAllMarksByPath(path: Path, options?: ChangeOption): Change;
+  removeAllMarksByKey(key: string, options?: ChangeOption): Change;
+  removeNodeByPath(path: Path, options?: ChangeOption): Change;
   removeTextByPath(
     path: Path,
     offset: number,
     length: number,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
-  replaceNodeByPath(path: Path, newNode: Node, options: ChangeOption): Change;
+  replaceNodeByPath(path: Path, newNode: Node, options?: ChangeOption): Change;
   replaceTextByPath(
     path: Path,
     offset: number,
     length: number,
     text: string,
     marks: Immutable.Set<Mark> | null | undefined,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   replaceTextByKey(
     key: string,
@@ -965,7 +984,7 @@ export class Change extends Immutable.Record({}) {
     length: number,
     text: string,
     marks: Immutable.Set<Mark> | null | undefined,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   setMarksByPath(
     path: Path,
@@ -973,54 +992,54 @@ export class Change extends Immutable.Record({}) {
     length: number,
     mark: Mark,
     properties: MarkProperties,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   setNodeByPath(
     path: Path,
     properties: NodeProperties,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   setTextByPath(
     path: Path,
     text: string,
     marks: Immutable.Set<Mark> | null | undefined,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   setTextByKey(
     key: string,
     text: string,
     marks: Immutable.Set<Mark> | null | undefined,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   splitNodeByPath(path: Path, position: number, options?: ChangeOption): Change;
   splitDescendantByPath(
     path: Path,
     textPath: Path,
     textOffset: number,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   unwrapInlineByPath(
     path: Path,
     properties: InlineProperties,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
   unwrapBlockByPath(
     path: Path,
     properties: BlockProperties,
-    options: ChangeOption
+    options?: ChangeOption
   ): Change;
-  unwrapNodeByPath(path: Path, options: ChangeOption): Change;
-  wrapBlockByPath(path: Path, block: Block, options: ChangeOption): Change;
-  wrapInlineByPath(path: Path, inline: Inline, options: ChangeOption): Change;
-  wrapNodeByPath(path: Path, node: Node): Change;
+  unwrapNodeByPath(path: Path, options?: ChangeOption): Change;
+  wrapBlockByPath(path: Path, block: Block, options?: ChangeOption): Change;
+  wrapInlineByPath(path: Path, inline: Inline, options?: ChangeOption): Change;
+  wrapNodeByPath(path: Path, node: Node, options?: ChangeOption): Change;
 
-  normalize(options: ChangeOption): Change;
-  normalizeDocument(options: ChangeOption): Change;
-  normalizeNodeByKey(key: string, options: ChangeOption): Change;
+  normalize(options?: ChangeOption): Change;
+  normalizeDocument(options?: ChangeOption): Change;
+  normalizeNodeByKey(key: string, options?: ChangeOption): Change;
   normalizeAncestorsByKey(key: string): Change;
-  normalizeParentByKey(key: string, options: ChangeOption): Change;
-  normalizeNodeByPath(path: Path, options: ChangeOption): Change;
-  normalizeParentByPath(path: Path, options: ChangeOption): Change;
+  normalizeParentByKey(key: string, options?: ChangeOption): Change;
+  normalizeNodeByPath(path: Path, options?: ChangeOption): Change;
+  normalizeParentByPath(path: Path, options?: ChangeOption): Change;
   normalizeNodeAndChildren(node: Node, schema: Schema): Change;
   normalizeNode(node: Node, schema: Schema): Change;
 
@@ -1443,55 +1462,59 @@ export type ErrorCode =
 
 export class SlateError extends Error {
   code: ErrorCode;
+  node: Node;
+  child: Node;
   [key: string]: any;
 }
 
-export interface KeyUtils {
-  create(key: string): string;
-  setGenerator(func: () => any): void;
-  resetGenerator(): void;
+export namespace KeyUtils {
+  function create(key: string): string;
+  function setGenerator(func: () => any): void;
+  function resetGenerator(): void;
 }
 
 export type useMemoization = () => void;
 export type resetMemoization = () => void;
 
-export interface PathUtils {
-  compare(
+export namespace PathUtils {
+  function compare(
     path: Immutable.List<number>,
     target: Immutable.List<number>
   ): number | null;
-  create(attrs: Immutable.List<number> | string): Immutable.List<number>;
-  crop(
+  function create(
+    attrs: Immutable.List<number> | string
+  ): Immutable.List<number>;
+  function crop(
     a: Immutable.List<number>,
     b: Immutable.List<number>,
     size?: number
   ): Array<Immutable.List<number>>;
-  decrement(
+  function decrement(
     path: Immutable.List<number>,
     n?: number,
     index?: number
   ): Immutable.List<number>;
-  increment(
+  function increment(
     path: Immutable.List<number>,
     n?: number,
     index?: number
   ): Immutable.List<number>;
-  isAbove(
+  function isAbove(
     path: Immutable.List<number>,
     target: Immutable.List<number>
   ): boolean;
-  isAfter(
+  function isAfter(
     path: Immutable.List<number>,
     target: Immutable.List<number>
   ): boolean;
-  isBefore(
+  function isBefore(
     path: Immutable.List<number>,
     target: Immutable.List<number>
   ): boolean;
-  lift(path: Immutable.List<number>): Immutable.List<number>;
-  max(a: Immutable.List<number>, b: Immutable.List<number>): number;
-  min(a: Immutable.List<number>, b: Immutable.List<number>): number;
-  relate(
+  function lift(path: Immutable.List<number>): Immutable.List<number>;
+  function max(a: Immutable.List<number>, b: Immutable.List<number>): number;
+  function min(a: Immutable.List<number>, b: Immutable.List<number>): number;
+  function relate(
     a: Immutable.List<number>,
     b: Immutable.List<number>
   ): Immutable.List<number>;

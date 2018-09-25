@@ -49,29 +49,27 @@ export const Paragraph: React.SFC<Props> = props => {
     </p>
   );
 };
-
-export default function createRenderNode(pluginsWrapper: any) {
-  return (props: Props) => {
-    const newProps = pluginsWrapper.getProps(props);
-    switch (newProps.node.type) {
-      case "heading-one":
-        return <HeadingOne {...newProps} />;
-      case "heading-two":
-        return <HeadingTwo {...newProps} />;
-      case "heading-three":
-        return <HeadingThree {...newProps} />;
-      case "heading-four":
-        return <HeadingFour {...newProps} />;
-      case "paragraph":
-        return <Paragraph {...newProps} />;
-      // no default
-    }
-    return undefined;
-  };
-}
+export const Blockquote: React.SFC<Props> = props => {
+  const { attributes, children } = props;
+  return <blockquote {...attributes}>{children}</blockquote>;
+};
 
 HeadingOne.propTypes = SlateTypes.Block;
 HeadingTwo.propTypes = SlateTypes.Block;
 HeadingThree.propTypes = SlateTypes.Block;
 HeadingFour.propTypes = SlateTypes.Block;
 Paragraph.propTypes = SlateTypes.Block;
+Blockquote.propTypes = SlateTypes.Block;
+
+export default function createRenderNode() {
+  return {
+    nodes: {
+      paragraph: Paragraph,
+      "heading-one": HeadingOne,
+      "heading-two": HeadingTwo,
+      "heading-three": HeadingThree,
+      "heading-four": HeadingFour,
+      blockquote: Blockquote
+    }
+  };
+}

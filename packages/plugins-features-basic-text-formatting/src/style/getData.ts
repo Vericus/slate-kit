@@ -1,50 +1,66 @@
-import { Set } from "immutable";
+import { Set, List } from "immutable";
 import { Mark } from "slate";
+import { TextMark, MarkTypes } from "../options";
 
-function getFontStyleMark(fontStyle) {
+function getFontStyleMark(marksOption: TextMark, fontStyle): Mark | undefined {
   switch (fontStyle) {
     case "italic":
-      return new Mark({ type: fontStyle });
+      return marksOption.italic
+        ? new Mark({ type: marksOption.italic })
+        : undefined;
     default:
       return undefined;
   }
 }
 
-function getTextDecorationMark(textDecoration) {
+function getTextDecorationMark(
+  marksOption: TextMark,
+  textDecoration
+): Mark | undefined {
   switch (textDecoration) {
     case "underline":
-      return new Mark({ type: "underline" });
+      return marksOption.underline
+        ? new Mark({ type: marksOption.underline })
+        : undefined;
     case "line-through":
-      return new Mark({ type: "strikethrough" });
+      return marksOption.strikethrough
+        ? new Mark({ type: marksOption.strikethrough })
+        : undefined;
     default:
       return undefined;
   }
 }
 
-function getFontWeightMark(fontWeight) {
+function getFontWeightMark(
+  marksOption: TextMark,
+  fontWeight
+): Mark | undefined {
   if (fontWeight === "bold") {
-    return new Mark({ type: "bold" });
+    return marksOption.bold ? new Mark({ type: "bold" }) : undefined;
   } else if (parseInt(fontWeight, 10) > 400) {
-    return new Mark({ type: "bold" });
+    return marksOption.bold ? new Mark({ type: "bold" }) : undefined;
   }
   return undefined;
 }
 
-export default function getData(el: HTMLElement) {
-  let marks = Set();
+export default function getData(
+  marksOption: TextMark,
+  el: HTMLElement
+): { marks?: List<Mark> } {
+  let marks = Set<Mark>();
   const { style } = el;
   if (style) {
     const { fontStyle, textDecoration, fontWeight } = style;
     if (fontStyle) {
-      const fontMark = getFontStyleMark(fontStyle);
+      const fontMark = getFontStyleMark(marksOption, fontStyle);
       if (fontMark) marks = marks.add(fontMark);
     }
     if (textDecoration) {
-      const decorationMark = getTextDecorationMark(textDecoration);
+      const decorationMark = getTextDecorationMark(marksOption, textDecoration);
       if (decorationMark) marks = marks.add(decorationMark);
     }
     if (fontWeight) {
-      const weightMark = getFontWeightMark(fontWeight);
+      const weightMark = getFontWeightMark(marksOption, fontWeight);
       if (weightMark) marks = marks.add(weightMark);
     }
     return { marks: marks.toList() };

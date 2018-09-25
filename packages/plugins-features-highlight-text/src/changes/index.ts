@@ -1,4 +1,4 @@
-import { Mark, Data } from "slate";
+import { Mark, Data, Selection } from "slate";
 import { Change } from "slate";
 import {
   hasMark,

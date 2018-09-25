@@ -3,6 +3,9 @@ import isPlainObject from "is-plain-obj";
 
 export interface TypeOptions {
   type: string;
+  marks: {
+    [type: string]: string;
+  };
   alpha?: number;
   data: string;
   styles: string[];
@@ -11,6 +14,7 @@ export interface TypeOptions {
 }
 
 const defaultOptions = {
+  marks: undefined,
   type: undefined,
   styles: undefined,
   data: undefined,
@@ -20,6 +24,9 @@ const defaultOptions = {
 };
 
 class Options extends Record(defaultOptions, "highlight text option") {
+  marks: {
+    [type: string]: string;
+  };
   type: string;
   styles: string[];
   data: string;
@@ -49,6 +56,9 @@ class Options extends Record(defaultOptions, "highlight text option") {
     }
 
     return new Options({
+      marks: {
+        [type]: type
+      },
       type,
       data,
       styles,
@@ -60,7 +70,9 @@ class Options extends Record(defaultOptions, "highlight text option") {
   static isOptions(args: any) {
     return !!(
       args instanceof Record &&
-      ["type", "data", "styles", "defaultColor"].every(key => args.has(key))
+      ["marks", "type", "data", "styles", "defaultColor"].every(key =>
+        args.has(key)
+      )
     );
   }
 }

@@ -3,6 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { Value } from "slate";
 import { withKnobs, boolean } from "@storybook/addon-knobs/react";
 import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
+import BasicTypography from "@vericus/slate-kit-basic-typhography";
 import HighlightText from "@vericus/slate-kit-highlight-text";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import initialState from "../states/highlightedText.json";
@@ -37,6 +38,10 @@ const pluginOpts = [
       defaultColor: "transparent",
       styles: ["textDecorationColor", "color"]
     }
+  },
+  {
+    label: "basic-typhography",
+    createPlugin: BasicTypography
   }
 ];
 

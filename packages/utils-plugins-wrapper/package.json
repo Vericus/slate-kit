@@ -27,7 +27,7 @@
     "clean:module": "rm -rf ./node_modules",
     "clean:build": "rm -rf ./dist ./lib ./module",
     "build": "tsc -b .",
-    "dev": "tsc -w ."
+    "dev": "tsc -w"
   },
   "umdGlobals": {
     "es6-symbol": "ES6Symbol",
@@ -38,6 +38,7 @@
     "tslib": "TSLib"
   },
   "dependencies": {
+    "@vericus/slate-kit-html-serializer": "^0.1.0",
     "debug": ">=3.1.0",
     "es6-symbol": ">=3.1.1",
     "immutable": "^3.8.2",

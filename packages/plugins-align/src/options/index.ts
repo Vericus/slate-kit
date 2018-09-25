@@ -14,7 +14,8 @@ const defaultOption: TypeOptions = {
     "heading-one",
     "heading-two",
     "heading-three",
-    "heading-four"
+    "heading-four",
+    "blockquote"
   ],
   alignments: ["left", "right", "center", "justify"],
   dataField: "textAlign"

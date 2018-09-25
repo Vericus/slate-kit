@@ -1,47 +1,53 @@
 import * as React from "react";
+import SlateTypes from "slate-prop-types";
 import { Node } from "slate";
-import { TypeOptions } from "./options";
 
 export interface Props {
   attributes: any;
   children: JSX.Element;
   className: string;
-  onMouseDown: () => {};
+  onMouseDown?: () => {};
   node: Node;
 }
 
-const OrderedList = ({ className, attributes, children }: Props) => (
-  <ol className={className} {...attributes}>
-    <li>{children}</li>
-  </ol>
-);
+const OrderedList: React.SFC<Props> = props => {
+  const { className, attributes, children } = props;
+  return (
+    <ol className={className} {...attributes}>
+      <li>{children}</li>
+    </ol>
+  );
+};
 
-const UnOrderedList = ({ className, attributes, children }: Props) => (
-  <ul className={className} {...attributes}>
-    <li>{children}</li>
-  </ul>
-);
+const UnOrderedList: React.SFC<Props> = props => {
+  const { className, attributes, children } = props;
+  return (
+    <ul className={className} {...attributes}>
+      <li>{children}</li>
+    </ul>
+  );
+};
 
-const CheckList = ({ className, attributes, children, onMouseDown }: Props) => (
-  <ul className={className} {...attributes}>
-    <li onMouseDown={onMouseDown}>{children}</li>
-  </ul>
-);
+const CheckList: React.SFC<Props> = props => {
+  const { className, attributes, children, onMouseDown } = props;
+  return (
+    <ul className={className} {...attributes}>
+      <li onMouseDown={onMouseDown}>{children}</li>
+    </ul>
+  );
+};
 
-export function createRenderNode(opts: TypeOptions, pluginsWrapper: any) {
-  const { ordered, unordered, checkList } = opts;
-  return (props: Props) => {
-    const newProps = pluginsWrapper.getProps(props);
-    switch (newProps.node.type) {
-      case ordered:
-        return <OrderedList {...newProps} />;
-      case unordered:
-        return <UnOrderedList {...newProps} />;
-      case checkList:
-        return <CheckList {...newProps} />;
-      // no default
+OrderedList.propTypes = SlateTypes.Block;
+UnOrderedList.propTypes = SlateTypes.Block;
+CheckList.propTypes = SlateTypes.Block;
+
+export function createRenderNode() {
+  return {
+    nodes: {
+      orderedlist: OrderedList,
+      unorderedlist: UnOrderedList,
+      checklist: CheckList
     }
-    return undefined;
   };
 }
 

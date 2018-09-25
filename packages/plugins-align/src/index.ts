@@ -1,11 +1,11 @@
-import Options from "./options";
-import CreateUtils from "./utils";
+import Options, { TypeOptions } from "./options";
+import CreateUtils, { AlignUtils } from "./utils";
 import CreateChanges from "./changes";
 import CreateProps from "./props";
 import CreateSchema from "./schemas";
 import createStyle from "./style";
 
-function createAlignPlugin(pluginOptions: any = {}) {
+function createAlignPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const options = new Options(pluginOptions);
   const utils = CreateUtils(options);
   const changes = CreateChanges(options);
@@ -16,3 +16,4 @@ function createAlignPlugin(pluginOptions: any = {}) {
 }
 
 export default createAlignPlugin;
+export { TypeOptions, AlignUtils };

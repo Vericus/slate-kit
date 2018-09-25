@@ -1,30 +1,35 @@
 import { Record } from "immutable";
 
+export type ListTypes = "orderedlist" | "unorderedlist" | "checklist";
+
+export type BlockTypes = { [key in ListTypes]?: string | null };
+
 export interface TypeOptions {
-  ordered?: string;
-  unordered?: string;
-  checkList?: string;
-  externalRenderer?: boolean;
-  startAtField?: string;
-  checkField?: string;
-}
-
-const defaultOptions = {
-  ordered: "ol-list",
-  unordered: "ul-list",
-  checkList: "check-list",
-  externalRenderer: false,
-  startAtField: "startAt",
-  checkField: "checked"
-};
-
-class Options extends Record(defaultOptions) {
-  ordered: string;
-  unordered: string;
-  checkList: string;
+  blockTypes: BlockTypes;
   externalRenderer: boolean;
   startAtField: string;
   checkField: string;
+  withHandlers: boolean;
+}
+
+const defaultOptions = {
+  blockTypes: {
+    orderedlist: "ol-list",
+    unorderedlist: "ul-list",
+    checklist: "check-list"
+  },
+  externalRenderer: false,
+  startAtField: "startAt",
+  checkField: "checked",
+  withHandlers: true
+};
+
+class Options extends Record(defaultOptions) {
+  blockTypes: BlockTypes;
+  externalRenderer: boolean;
+  startAtField: string;
+  checkField: string;
+  withHandlers: boolean;
 }
 
 export default Options;

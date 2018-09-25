@@ -1,7 +1,7 @@
-import createRenderMark from "./renderMark";
+import createRenderMark, { Props } from "./renderMark";
 
 export default function createRenderer() {
   return {
-    renderMark: createRenderMark()
+    renderers: createRenderMark()
   };
 }

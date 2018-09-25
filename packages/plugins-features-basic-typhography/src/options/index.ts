@@ -1,58 +1,38 @@
 import { Record } from "immutable";
-import isPlainObject from "is-plain-obj";
+
+export type TypographyTypes =
+  | "paragraph"
+  | "heading-one"
+  | "heading-two"
+  | "heading-three"
+  | "heading-four"
+  | "blockquote";
+
+export type BlockTypes = { [key in TypographyTypes]?: string | null };
 
 export interface TypeOptions {
-  blockTypes: string[];
+  blockTypes: BlockTypes;
   defaultBlock: string;
   externalRenderer: boolean;
 }
 
-const defaultOptions = {
-  blockTypes: [
-    "paragraph",
-    "heading-one",
-    "heading-two",
-    "heading-three",
-    "heading-four"
-  ],
+const defaultOptions: Partial<TypeOptions> = {
+  blockTypes: {
+    paragraph: "paragraph",
+    "heading-one": "heading-one",
+    "heading-two": "heading-two",
+    "heading-three": "heading-three",
+    "heading-four": "heading-four",
+    blockquote: "blockquote"
+  },
   defaultBlock: "paragraph",
   externalRenderer: false
 };
 
 class Options extends Record(defaultOptions, "Typhography Options") {
-  blockTypes: string[];
+  blockTypes: BlockTypes;
   defaultBlock: string;
   externalRenderer: boolean;
-
-  static create(attrs: any = {}) {
-    if (Options.isOptions(attrs)) return attrs;
-    if (isPlainObject(attrs)) return Options.fromJSON(attrs);
-
-    throw new Error("`Options.create` only accepts objects or options");
-  }
-
-  static fromJSON(object: any) {
-    if (Options.isOptions(object)) return object;
-    const options = {
-      ...defaultOptions,
-      ...object
-    };
-    const { blockTypes, defaultBlock } = options;
-    if (!blockTypes || !defaultBlock || !Array.isArray(blockTypes)) {
-      throw new Error(
-        "Typhography requires blockTypes and defaultBlock option"
-      );
-    }
-
-    return new Options(options);
-  }
-
-  static isOptions(args: any) {
-    return !!(
-      args instanceof Record &&
-      ["blockTypes", "defaultBlock"].every(key => args.has(key))
-    );
-  }
 }
 
 export default Options;

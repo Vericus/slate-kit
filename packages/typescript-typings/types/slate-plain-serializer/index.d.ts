@@ -9,8 +9,9 @@ export interface DeserializeOptions {
   defaultMarks?: MarkProperties[] | Set<MarkProperties>;
 }
 
-export function deserialize(
-  string: string,
-  options?: DeserializeOptions
-): Value;
-export function serialize(value: Value): string;
+declare namespace Plain {
+  function deserialize(string: string, options?: DeserializeOptions): Value;
+  function serialize(value: Value): string;
+}
+
+export default Plain;

@@ -12,11 +12,11 @@ export default function createPlugin(
   const options = new Options(pluginOptions);
   const utils = createUtils(options);
   const changes = createChanges(options);
-  const schemas = createSchema(options);
+  const schema = createSchema(options);
   const rules = createRule;
-  let plugins: any = [{ options, rules, changes, utils, ...schemas }];
+  let plugins: any = [{ options, rules, changes, utils, schema }];
   if (!options.externalRenderer) {
-    plugins = [...plugins, { ...Renderer(pluginOptions, pluginsWrapper) }];
+    plugins = [...plugins, { ...Renderer() }];
   }
   return {
     plugins

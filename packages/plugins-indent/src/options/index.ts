@@ -5,6 +5,7 @@ export interface TypeOptions {
   indentable: string[];
   maxIndentation: number;
   dataField: string;
+  withHandlers: boolean;
 }
 
 const defaultOptions = {
@@ -26,7 +27,8 @@ const defaultOptions = {
     "check-list"
   ],
   maxIndentation: 8,
-  dataField: "indentation"
+  dataField: "indentation",
+  withHandlers: true
 };
 
 class Options extends Record(defaultOptions) {
@@ -34,6 +36,7 @@ class Options extends Record(defaultOptions) {
   indentable: string[];
   maxIndentation: number;
   dataField: string;
+  withHandlers: boolean;
 }
 
 export default Options;

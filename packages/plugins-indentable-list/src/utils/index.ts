@@ -1,59 +1,67 @@
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
-import { Value, Node } from "slate";
-import { TypeOptions } from "../options";
+import { Value, Node, Block } from "slate";
+import { List } from "immutable";
+import { TypeOptions, BlockTypes } from "../options";
 
-function selectedOrderedList(opts: TypeOptions, value: Value) {
-  const { ordered } = opts;
-  return getHighestSelectedBlocks(value).filter(node => node.type === ordered);
-}
-
-function isOrderedNode(opts: TypeOptions, node: Node) {
-  const { ordered } = opts;
-  return node.type === ordered;
-}
-
-function isUnorderedNode(opts: TypeOptions, node: Node) {
-  const { unordered } = opts;
-  return node.type === unordered;
-}
-
-function isCheckNode(opts: TypeOptions, node: Node) {
-  const { checkList } = opts;
-  return node.type === checkList;
-}
-
-function isListNode(opts: TypeOptions, node: Node) {
-  const { ordered, unordered, checkList } = opts;
-  const listTypes = [ordered, unordered, checkList];
-  return listTypes.includes(node.type);
-}
-
-function isOrderedList(opts: TypeOptions, value: Value) {
-  return getHighestSelectedBlocks(value).every(node =>
-    isOrderedNode(opts, node)
+function selectedOrderedList(opts: BlockTypes, value: Value) {
+  const { orderedlist } = opts;
+  return List(getHighestSelectedBlocks(value)).filter(
+    (node: any) =>
+      !!(node && Block.isBlock(node) && node && node.type === orderedlist)
   );
 }
 
-function isUnorderedList(opts: TypeOptions, value: Value) {
-  return getHighestSelectedBlocks(value).every(node =>
-    isUnorderedNode(opts, node)
+function isOrderedNode(opts: BlockTypes, node: Node) {
+  const { orderedlist } = opts;
+  return Block.isBlock(node) && node.type === orderedlist;
+}
+
+function isUnorderedNode(opts: BlockTypes, node: Node) {
+  const { unorderedlist } = opts;
+  return Block.isBlock(node) && node.type === unorderedlist;
+}
+
+function isCheckNode(opts: BlockTypes, node: Node) {
+  const { checklist } = opts;
+  return Block.isBlock(node) && node.type === checklist;
+}
+
+function isListNode(opts: BlockTypes, node: Node) {
+  const { orderedlist, unorderedlist, checklist } = opts;
+  const listTypes = [orderedlist, unorderedlist, checklist];
+  return Block.isBlock(node) && listTypes.includes(node.type);
+}
+
+function isOrderedList(opts: BlockTypes, value: Value) {
+  return List(getHighestSelectedBlocks(value)).every(
+    node => Block.isBlock(node) && isOrderedNode(opts, node)
   );
 }
 
-function isCheckList(opts: TypeOptions, value: Value) {
-  return getHighestSelectedBlocks(value).every(node => isCheckNode(opts, node));
+function isUnorderedList(opts: BlockTypes, value: Value) {
+  return List(getHighestSelectedBlocks(value)).every(
+    node => Block.isBlock(node) && isUnorderedNode(opts, node)
+  );
+}
+
+function isCheckList(opts: BlockTypes, value: Value) {
+  return List(getHighestSelectedBlocks(value)).every(
+    node => Block.isBlock(node) && isCheckNode(opts, node)
+  );
 }
 
 function createUtils(opts: TypeOptions) {
+  const { blockTypes } = opts;
   return {
-    isListNode: (node: Node) => isListNode(opts, node),
-    isOrderedNode: (node: Node) => isOrderedNode(opts, node),
-    isUnorderedNode: (node: Node) => isUnorderedNode(opts, node),
-    isCheckNode: (node: Node) => isCheckNode(opts, node),
-    isOrderedList: (value: Value) => isOrderedList(opts, value),
-    isUnorderedList: (value: Value) => isUnorderedList(opts, value),
-    isCheckList: (value: Value) => isCheckList(opts, value),
-    selectedOrderedList: (value: Value) => selectedOrderedList(opts, value)
+    isListNode: (node: Node) => isListNode(blockTypes, node),
+    isOrderedNode: (node: Node) => isOrderedNode(blockTypes, node),
+    isUnorderedNode: (node: Node) => isUnorderedNode(blockTypes, node),
+    isCheckNode: (node: Node) => isCheckNode(blockTypes, node),
+    isOrderedList: (value: Value) => isOrderedList(blockTypes, value),
+    isUnorderedList: (value: Value) => isUnorderedList(blockTypes, value),
+    isCheckList: (value: Value) => isCheckList(blockTypes, value),
+    selectedOrderedList: (value: Value) =>
+      selectedOrderedList(blockTypes, value)
   };
 }
 

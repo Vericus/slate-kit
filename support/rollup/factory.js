@@ -8,9 +8,9 @@ import resolve from "rollup-plugin-node-resolve";
 import { uglify } from "rollup-plugin-uglify";
 import visualizer from "rollup-plugin-visualizer";
 import typescript from "rollup-plugin-typescript2";
-// import progress from "rollup-plugin-progress";
 import { startCase } from "lodash";
 import fs from "fs";
+import path from "path";
 
 /**
  * Return a Rollup configuration for a `pkg` with `env` and `target`.
@@ -30,7 +30,8 @@ function configure(pkg, location, env, target) {
     : `${location}/src/index.ts`;
   const watch = {
     chokidar: true,
-    include: `${location}/src/**`
+    include: `${location}/src/**`,
+    exclude: `${location}/node_modules/**`
   };
 
   const isTypescript = /\.(ts|tsx)$/i.test(input);
@@ -65,7 +66,8 @@ function configure(pkg, location, env, target) {
             "Stack",
             "is"
           ],
-          react: ["createElement"],
+          "fbjs/lib/shallowEqual": ["shallowEqual"],
+          react: ["createElement", "Component"],
           "react-dom": ["findDOMNode"],
           "react-dom/server": ["renderToStaticMarkup"]
         }
@@ -87,7 +89,23 @@ function configure(pkg, location, env, target) {
       typescript({
         tsconfig: `${location}/tsconfig.rollup.json`,
         typescript: require("typescript"),
-        useTsconfigDeclarationDir: true
+        useTsconfigDeclarationDir: true,
+        tsconfigOverride: {
+          compilerOptions: {
+            rootDir: path.resolve(location, "src"),
+            paths: {
+              "@vericus/slate-kit*": [
+                `${path.resolve(location, "..")}/*/src`,
+                `${path.resolve(location, "..")}/*/lib`
+              ],
+              "slate*": [
+                `${path.resolve(location, "../../node_modules")}/*`,
+                `${path.resolve(location, "..")}/typescript-typings/types/*`
+              ]
+            }
+          },
+          include: [path.resolve(location, "src")]
+        }
       }),
 
     // Use Babel to transpile the result, limiting it to the source code.

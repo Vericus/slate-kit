@@ -1,5 +1,6 @@
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import { Change, Block, Node } from "slate";
+import { List } from "immutable";
 import { TypeOptions } from "../options";
 import {
   isOrderedList,
@@ -23,49 +24,58 @@ function resetBlockChecked(opts: TypeOptions, change: Change, block: Block) {
 }
 
 function resetStartAt(opts: TypeOptions, change: Change) {
+  const { blockTypes } = opts;
   const { value } = change;
-  const selectedBlocks = selectedOrderedList(opts, value);
+  const selectedBlocks = selectedOrderedList(blockTypes, value);
   change.withoutNormalization(c => {
-    selectedBlocks.forEach(block => {
-      resetBlockStartAt(opts, c, block);
-    });
+    selectedBlocks.forEach(
+      block => Block.isBlock(block) && resetBlockStartAt(opts, c, block)
+    );
   });
 }
 
 function resetChecked(opts: TypeOptions, change: Change) {
+  const { blockTypes } = opts;
   const { value } = change;
-  const selectedBlocks = selectedOrderedList(opts, value);
+  const selectedBlocks = selectedOrderedList(blockTypes, value);
   change.withoutNormalization(c => {
-    selectedBlocks.forEach(block => {
-      resetBlockChecked(opts, c, block);
-    });
+    selectedBlocks.forEach(
+      block => Block.isBlock(block) && resetBlockChecked(opts, c, block)
+    );
   });
 }
 
-function changeListType(opts: TypeOptions, change: Change, type: string) {
-  const { ordered, unordered, checkList } = opts;
-  const { value } = change;
-  const selectedBlocks = getHighestSelectedBlocks(value);
-  const shouldUnwrap =
-    (type === checkList && isCheckList(opts, value)) ||
-    (type === ordered && isOrderedList(opts, value)) ||
-    (type === unordered && isUnorderedList(opts, value));
-  if (shouldUnwrap) {
-    change.withoutNormalization(c =>
-      selectedBlocks.forEach(block => {
-        c.setNodeByKey(block.key, "paragraph");
-      })
-    );
-  } else {
-    change.withoutNormalization(c => {
-      selectedBlocks.forEach(block => {
-        c.setNodeByKey(block.key, type);
-        resetBlockStartAt(opts, c, block);
-        resetBlockChecked(opts, c, block);
+function createChangeListType(opts: TypeOptions) {
+  const { blockTypes } = opts;
+  const { orderedlist, unorderedlist, checklist } = blockTypes;
+  return (change: Change, type: string) => {
+    const { value } = change;
+    const selectedBlocks = List(getHighestSelectedBlocks(value));
+    const shouldUnwrap =
+      (type === checklist && isCheckList(blockTypes, value)) ||
+      (type === orderedlist && isOrderedList(blockTypes, value)) ||
+      (type === unorderedlist && isUnorderedList(blockTypes, value));
+    if (shouldUnwrap) {
+      change.withoutNormalization(c =>
+        selectedBlocks.forEach(block => {
+          if (Block.isBlock(block)) {
+            c.setNodeByKey(block.key, "paragraph");
+          }
+        })
+      );
+    } else {
+      change.withoutNormalization(c => {
+        selectedBlocks.forEach(block => {
+          if (Block.isBlock(block)) {
+            c.setNodeByKey(block.key, type);
+            resetBlockStartAt(opts, c, block);
+            resetBlockChecked(opts, c, block);
+          }
+        });
       });
-    });
-  }
-  return change;
+    }
+    return change;
+  };
 }
 
 function createListWithType(
@@ -107,27 +117,27 @@ function unwrapList(
   }
 }
 
-function toggleCheck(opts: TypeOptions, change: Change, node: Node) {
+function toggleCheck(opts: TypeOptions, change: Change, block: Block) {
   const { checkField } = opts;
-  return change.setNodeByKey(node.key, {
-    data: node.data.set(checkField, !node.data.get(checkField))
+  return change.setNodeByKey(block.key, {
+    data: block.data.set(checkField, !block.data.get(checkField))
   });
 }
 
 function createChanges(opts: TypeOptions, pluginsWrapper: any) {
+  const changeListType = createChangeListType(opts);
   return {
     createListWithType: (change: Change, type: string, startAt: number) =>
       createListWithType(opts, change, type, startAt),
-    changeListType: (change: Change, type: string) =>
-      changeListType(opts, change, type),
+    changeListType,
     resetBlockStartAt: (change: Change, block: Block) =>
       resetBlockStartAt(opts, change, block),
     resetBlockChecked: (change: Change, block: Block) =>
       resetBlockChecked(opts, change, block),
     resetChecked: (change: Change) => resetChecked(opts, change),
     resetStartAt: (change: Change) => resetStartAt(opts, change),
-    toggleCheck: (change: Change, node: Node) =>
-      toggleCheck(opts, change, node),
+    toggleCheck: (change: Change, block: Block) =>
+      toggleCheck(opts, change, block),
     unwrapList: (change: Change, isDelete: boolean) =>
       unwrapList(opts, change, isDelete, pluginsWrapper)
   };
@@ -136,7 +146,7 @@ function createChanges(opts: TypeOptions, pluginsWrapper: any) {
 export default createChanges;
 export {
   createListWithType,
-  changeListType,
+  createChangeListType,
   resetBlockChecked,
   resetBlockStartAt,
   resetChecked,

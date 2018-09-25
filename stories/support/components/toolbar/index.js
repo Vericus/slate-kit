@@ -5,7 +5,7 @@ import Popover from "react-popover";
 import classnames from "classnames";
 import QuillIcons from "quill-icons";
 
-class IconButton extends Component {
+export class IconButton extends Component {
   shouldComponentUpdate(nextProps) {
     return (
       this.props.active !== nextProps.active ||
@@ -146,6 +146,7 @@ class ColorPicker extends Component {
         background: "white",
         padding: "0",
         margin: "0",
+        marginTop: "50px",
         display: "flex",
         flexDirection: "column",
         borderRadius: "3px",
@@ -213,6 +214,8 @@ export default class Toolbar extends Component {
     this.alignChanges = pluginsWrapper.getChanges("align");
     this.alignUtils = pluginsWrapper.getUtils("align");
     this.historyUtils = pluginsWrapper.getUtils("history");
+    this.mediaChanges = pluginsWrapper.getChanges("media");
+    this.mediaUtils = pluginsWrapper.getUtils("media");
     this.currentTypography = hasTypography
       ? pluginsWrapper.getUtils("basic-typhography").currentTypography
       : () => true;
@@ -247,6 +250,13 @@ export default class Toolbar extends Component {
       },
       paragraph: {
         icon: "Header5",
+        change: hasTypography
+          ? pluginsWrapper.getChanges("basic-typhography").toggleTypography
+          : () => {},
+        disabled: !hasTypography
+      },
+      blockquote: {
+        icon: "Blockquote",
         change: hasTypography
           ? pluginsWrapper.getChanges("basic-typhography").toggleTypography
           : () => {},
@@ -515,6 +525,26 @@ export default class Toolbar extends Component {
     this.props.onChange(this.props.value.change().call(change, ...options));
   };
 
+  onImageInsert = e => {
+    this.props.onChange(
+      this.mediaChanges.insertImage(this.props.value.change())
+    );
+  };
+
+  renderMedia = () => {
+    return (
+      <IconButton
+        icon="Image"
+        onMouseDown={e => {
+          e.preventDefault();
+          this.onImageInsert();
+        }}
+        disabled={this.mediaUtils === undefined || this.props.isReadOnly}
+        size="18"
+      />
+    );
+  };
+
   handleColorChange = (change, color) => {
     this.call(change, [color.hex]);
   };
@@ -584,6 +614,7 @@ export default class Toolbar extends Component {
         {this.renderAllignment()}
         {this.renderList()}
         {this.renderMarks()}
+        {this.renderMedia()}
         {this.renderTextColor()}
         {this.renderBackgroundColor()}
         {this.renderHistories()}

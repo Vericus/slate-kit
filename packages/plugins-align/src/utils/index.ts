@@ -5,14 +5,20 @@ import isAligned from "./isAligned";
 import isAlignable from "./isAlignable";
 import { TypeOptions } from "../options";
 
-function createUtils(opts: TypeOptions) {
+export interface AlignUtils {
+  getAlignBlocks: (value: Value) => Node[];
+  getAlignBlocksInBlock: (node: Node) => Node[];
+  getAlignment: (block: Block) => string | undefined;
+  isAligned: (value: Value, alignment: string) => boolean;
+  isAlignable: (value: Value) => boolean;
+}
+
+function createUtils(opts: TypeOptions): AlignUtils {
   return {
-    getAlignBlocks: (value: Node[]): Node[] => getAlignBlocks(opts, value),
-    getAlignBlocksInBlock: (node: Node[]): Node[] =>
-      getAlignBlocksInBlock(opts, node),
-    getAlignment: (block: Block) => getAlignment(opts, block),
-    isAligned: (value: Value, alignment: string) =>
-      isAligned(opts, value, alignment),
+    getAlignBlocks: value => getAlignBlocks(opts, value),
+    getAlignBlocksInBlock: node => getAlignBlocksInBlock(opts, node),
+    getAlignment: block => getAlignment(opts, block),
+    isAligned: (value, alignment) => isAligned(opts, value, alignment),
     isAlignable: (value: Value) => isAlignable(opts, value)
   };
 }

@@ -7,10 +7,15 @@ export interface KeyBinding {
   change?: (change: Change) => void;
 }
 
+export type MarkTypes = "bold" | "italic" | "underline" | "strikethrough";
+
+export type TextMark = { [key in MarkTypes]?: string | null };
+
 export interface TypeOptions {
   externalRenderer: boolean;
   keyBindings: KeyBinding[];
-  marks: string[];
+  marks: TextMark;
+  withHandlers: boolean;
 }
 
 const defaultOption: TypeOptions = {
@@ -19,14 +24,21 @@ const defaultOption: TypeOptions = {
     { hotkeys: "mod+i", changeName: "toggleItalic" },
     { hotkeys: "mod+u", changeName: "toggleUnderline" }
   ],
-  marks: ["bold", "italic", "underline", "strikethrough"],
-  externalRenderer: false
+  marks: {
+    bold: "bold",
+    italic: "italic",
+    underline: "underline",
+    strikethrough: "strikethrough"
+  },
+  externalRenderer: false,
+  withHandlers: true
 };
 
 class Options extends Record(defaultOption) {
   externalRenderer: boolean;
   keyBindings: KeyBinding[];
-  marks: string[];
+  marks: TextMark;
+  withHandlers: boolean;
 }
 
 export default Options;

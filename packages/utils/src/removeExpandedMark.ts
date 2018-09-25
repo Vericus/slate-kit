@@ -5,9 +5,9 @@ export default function removeExpandedMark(
   selection: Selection,
   change: Change,
   type: string
-): void {
+): any {
   return document
     .getMarksAtRange(selection)
-    .filter(mark => mark.type === type)
-    .forEach(mark => change.removeMarkAtRange(selection, mark));
+    .filter(mark => !!(mark && mark.type === type))
+    .forEach(mark => mark && change.removeMarkAtRange(selection, mark));
 }

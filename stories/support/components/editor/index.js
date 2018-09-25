@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { compose } from "recompose";
 import {
   getEventRange,
   getEventTransfer,
@@ -10,13 +11,15 @@ import {
 import { Value } from "slate";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import { WithReadOnly } from "@vericus/slate-kit-read-only";
+import { WithRenderers } from "@vericus/slate-kit-renderer";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import pasteCleaner from "@vericus/slate-kit-paste-helpers";
 import Toolbar from "../toolbar";
 
-const pluginsWrapper = new PluginsWrapper();
-
-const EditorWithReadOnly = WithReadOnly(Editor);
+const EnchancedEditor = compose(
+  WithRenderers,
+  WithReadOnly
+)(Editor);
 
 export default class SlateKitEditor extends Component {
   constructor(props) {
@@ -24,7 +27,8 @@ export default class SlateKitEditor extends Component {
     this.state = {
       value: Value.fromJSON(props.initialState)
     };
-    this.plugins = pluginsWrapper.makePlugins(this.props.pluginOpts);
+    this.pluginsWrapper = new PluginsWrapper();
+    this.plugins = this.pluginsWrapper.makePlugins(this.props.pluginOpts);
   }
 
   onChange = ({ value }) => {
@@ -37,7 +41,7 @@ export default class SlateKitEditor extends Component {
     const data = getEventTransfer(event);
     if (data.html) {
       const { origin, cleanedHTML } = pasteCleaner(data.html);
-      const parser = pluginsWrapper.getSerializer();
+      const parser = this.pluginsWrapper.getSerializer();
       const { document } = parser.deserialize(cleanedHTML);
       change.insertFragment(document);
       return true;
@@ -46,7 +50,7 @@ export default class SlateKitEditor extends Component {
 
   renderToolbar = () => (
     <Toolbar
-      pluginsWrapper={pluginsWrapper}
+      pluginsWrapper={this.pluginsWrapper}
       value={this.state.value}
       onChange={this.onChange}
       isReadOnly={this.props.isReadOnly}
@@ -58,12 +62,13 @@ export default class SlateKitEditor extends Component {
       <div>
         {this.renderToolbar()}
         <div className="editorContainer">
-          <EditorWithReadOnly
+          <EnchancedEditor
             placeholder={"Enter some text..."}
             plugins={this.plugins}
             value={this.state.value}
             onChange={this.onChange}
             onPaste={this.onPaste}
+            pluginsWrapper={this.pluginsWrapper}
             {...this.props}
           />
         </div>

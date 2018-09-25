@@ -1,19 +1,13 @@
 import classnames from "classnames";
+import { toggleCheck } from "../changes";
 
 export default function createProps(opts, pluginsWrapper) {
-  const {
-    ordered,
-    unordered,
-    checkList,
-    startAtField,
-    checkField,
-    changes
-  } = opts;
-  const listTypes = [ordered, unordered, checkList];
+  const { blockTypes, startAtField, checkField } = opts;
+  const { orderedlist, unorderedlist, checklist } = blockTypes;
+  const listTypes = [orderedlist, unorderedlist, checklist];
   return {
     getProps: nodeProps => {
       const { getIndentationLevel } = pluginsWrapper.getUtils("indent");
-      const { toggleCheck } = changes;
       if (!nodeProps.node || !listTypes.includes(nodeProps.node.type)) {
         return nodeProps;
       }
@@ -42,15 +36,23 @@ export default function createProps(opts, pluginsWrapper) {
         prevIndentation < indentation ||
         startAt;
       const onMouseDown =
-        nodeProps.node.type === checkList
+        nodeProps.node.type === checklist
           ? e => {
-              const { top, left } = e.target.getBoundingClientRect();
+              const { top } = e.target.getBoundingClientRect();
+              let left;
+              if (e.target.children && e.target.children[0]) {
+                const {
+                  left: leftBound
+                } = e.target.children[0].getBoundingClientRect();
+                left = leftBound;
+              }
               const targetStyle = getComputedStyle(e.target);
               const fontSize = parseInt(targetStyle.fontSize || "16px", 10);
               if (
                 !(
-                  e.clientX >= left &&
-                  e.clientX <= left + fontSize &&
+                  left &&
+                  e.clientX >= left - 2 * fontSize &&
+                  e.clientX <= left &&
                   e.clientY >= top + fontSize * 0.3 &&
                   e.clientY <= top + fontSize * 1.3 &&
                   e.target.nodeName.toLowerCase() === "li"
@@ -73,6 +75,7 @@ export default function createProps(opts, pluginsWrapper) {
               } = nodeProps.editor;
               onChange(
                 toggleCheck(
+                  opts,
                   stateValue ? stateValue.change() : value.change(),
                   node
                 )
@@ -84,9 +87,9 @@ export default function createProps(opts, pluginsWrapper) {
         "list-reset": shouldReset,
         [`list-reset-${indentation}`]: indentation && shouldReset,
         checked: !!checked,
-        checkList: nodeProps.node.type === checkList,
+        checkList: nodeProps.node.type === checklist,
         readOnly:
-          nodeProps.node.type === checkList && nodeProps.editor.props.isReadOnly
+          nodeProps.node.type === checklist && nodeProps.editor.props.isReadOnly
       });
       return {
         ...nodeProps,

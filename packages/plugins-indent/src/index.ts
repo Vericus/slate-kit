@@ -17,7 +17,7 @@ function createIndentPlugin(pluginOptions: TypeOptions) {
   return {
     utils,
     props,
-    onKeyDown,
+    onKeyDown: options.withHandlers ? onKeyDown : undefined,
     changes,
     options,
     style,

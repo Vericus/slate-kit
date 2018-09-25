@@ -1,5 +1,6 @@
 import { getHighestSelectedBlocks } from "@vericus/slate-kit-plugins-utils";
 import { Value, Block } from "slate";
+import { List } from "immutable";
 import { TypeOptions } from "../options";
 
 function isIndentable(opts: TypeOptions, block: Block) {
@@ -8,8 +9,8 @@ function isIndentable(opts: TypeOptions, block: Block) {
 }
 
 function getIndentableBlocks(opts: TypeOptions, value: Value) {
-  return getHighestSelectedBlocks(value).filter(block =>
-    isIndentable(opts, block)
+  return List(getHighestSelectedBlocks(value)).filter(
+    block => Block.isBlock(block) && isIndentable(opts, block)
   );
 }
 
@@ -22,6 +23,7 @@ function canBeOutdented(opts: TypeOptions, value: Value) {
   const indentableBlocks = getIndentableBlocks(opts, value);
   if (indentableBlocks.size === 0) return false;
   return indentableBlocks.some(block => {
+    if (!Block.isBlock(block)) return false;
     const indentation = getIndentationLevel(opts, block);
     return indentation > 0;
   });
@@ -32,6 +34,7 @@ function canBeIndented(opts: TypeOptions, value: Value) {
   const indentableBlocks = getIndentableBlocks(opts, value);
   if (indentableBlocks.size === 0) return false;
   return indentableBlocks.some(block => {
+    if (!Block.isBlock(block)) return false;
     const indentation = getIndentationLevel(opts, block);
     return indentation < maxIndentation;
   });

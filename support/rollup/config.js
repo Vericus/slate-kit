@@ -11,17 +11,32 @@ const configurations = getPackages(path.resolve("."))
     if (/renderer/gi.test(pkg.package.name)) {
       return {
         ...pkg,
-        buildOrder: 1
+        buildOrder: 3
       };
     } else if (/util/gi.test(pkg.package.name)) {
       return {
         ...pkg,
+        buildOrder: 2
+      };
+    } else if (/wrapper/gi.test(pkg.package.name)) {
+      return {
+        ...pkg,
+        buildOrder: 1
+      };
+    } else if (/serializer/gi.test(pkg.package.name)) {
+      return {
+        ...pkg,
         buildOrder: 0
+      };
+    } else if (/hotkey/gi.test(pkg.package.name)) {
+      return {
+        ...pkg,
+        buildOrder: 4
       };
     }
     return {
       ...pkg,
-      buildOrder: 2
+      buildOrder: 5
     };
   })
   .sort((pkg1, pkg2) => pkg1.buildOrder - pkg2.buildOrder)

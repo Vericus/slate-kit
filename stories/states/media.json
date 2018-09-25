@@ -1,0 +1,188 @@
+{
+  "document": {
+    "nodes": [
+      {
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "text": "This is editable "
+              },
+              {
+                "text": "rich",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ]
+              },
+              {
+                "text": " text, "
+              },
+              {
+                "text": "much",
+                "marks": [
+                  {
+                    "type": "italic"
+                  }
+                ]
+              },
+              {
+                "text": " better than a <textarea>"
+              },
+              {
+                "text": "!"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "text": "Since it's rich text, you can do things like turn a selection of text "
+              },
+              {
+                "text": "bold",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ]
+              },
+              {
+                "text": ", or add a semantically rendered block quote in the middle of the page, like this:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "heading-one",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "text": "A wise quote."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "media",
+        "nodes": [
+          {
+            "object": "block",
+            "type": "mediaCaption",
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "text": "test caption"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "media",
+        "nodes": [
+          {
+            "object": "block",
+            "type": "image",
+            "data": {
+              "src": "https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half/public/field_blog_entry_images/2018-02/cloned_dogs_mdorottya_123rf.png?itok=yiaSkqQA",
+              "width": "fitToScreen"
+            }
+          },
+          {
+            "object": "block",
+            "type": "mediaCaption",
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "text": "dog 2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "media",
+        "nodes": [
+          {
+            "object": "block",
+            "type": "image",
+            "data": {
+              "src": "https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half/public/field_blog_entry_images/2018-02/vicious_dog_0.png?itok=nsghKOHs",
+              "width": "original"
+            }
+          },
+          {
+            "object": "block",
+            "type": "mediaCaption",
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "text": "dog 1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "media",
+        "nodes": [
+          {
+            "object": "block",
+            "type": "image",
+            "data": {
+              "src": "http://static1.squarespace.com/static/552da8bae4b07cc792521ef3/55c7eafee4b0583e4400afb0/5b10c0ed2b6a28c2b517f289/1527824791929/Common-dog-behaviors-explained.jpg?format=1000w",
+              "width": "full"
+            }
+          },
+          {
+            "object": "block",
+            "type": "mediaCaption",
+            "nodes": [
+              {
+                "object": "text",
+                "leaves": [
+                  {
+                    "text": "dog 3"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

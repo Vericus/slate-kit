@@ -1,6 +1,6 @@
 {
   "linters": {
-    "**/*.{js,jsx,md,json,css}": [
+    "**/*.{ts,tsx,js,jsx,md,json,css}": [
       "prettier --write",
       "git add"
     ]
