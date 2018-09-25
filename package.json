@@ -23,7 +23,7 @@
     "new-module": "support/script/new-module",
     "precommit": "lint-staged",
     "prettier": "prettier --write '**/*.{js,jsx,md,json,css}'",
-    "release:build": "NODE_OPTIONS=--max-old-space-size=120000 NODE_ENV=production yarn build && lerna publish",
+    "release:build": "NODE_OPTIONS=--max-old-space-size=120000 NODE_ENV=production yarn build && NODE_OPTIONS=--max-old-space-size=120000 NODE_ENV=production yarn build:packages && lerna publish",
     "release:gh-pages": "yarn build-storybook && yarn gh-pages",
     "storybook": "start-storybook -p 6006",
     "test": "jest --no-cache --logHeapUsage --colors",
