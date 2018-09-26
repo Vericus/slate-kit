@@ -1,5 +1,5 @@
 {
-  "version": "0.1.6",
+  "version": "0.1.7",
   "name": "@vericus/slate-kit-basic-typhography",
   "description": "plugin that provides basic typography functionality to slate",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -38,7 +38,7 @@
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils"
   },
   "dependencies": {
-    "@vericus/slate-kit-basic-typography-renderer": "^0.1.6",
+    "@vericus/slate-kit-basic-typography-renderer": "^0.1.7",
     "debug": "^3.1.0",
     "immutable": "^3.8.2",
     "is-plain-obj": "^1.1.0",
