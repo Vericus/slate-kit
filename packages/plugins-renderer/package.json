@@ -1,5 +1,5 @@
 {
-  "version": "0.0.7",
+  "version": "0.0.8",
   "name": "@vericus/slate-kit-renderer",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -39,7 +39,7 @@
     "recompose": "Recompose"
   },
   "dependencies": {
-    "@vericus/slate-kit-plugins-wrapper": "^0.1.5",
+    "@vericus/slate-kit-plugins-wrapper": "^0.1.6",
     "hoist-non-react-statics": "^3.0.1",
     "immutable": "^3.8.2",
     "react": "^16.4.2",
