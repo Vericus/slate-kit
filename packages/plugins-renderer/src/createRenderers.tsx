@@ -1,5 +1,6 @@
 import * as React from "react";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
+import { compose } from "recompose";
 import Options, { TypeOptions } from "./options";
 
 export interface Props {
@@ -103,6 +104,7 @@ export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
   if (pluginsWrapper) {
     const renderers = pluginsWrapper.getRenderers();
     const mapping = pluginsWrapper.getNodeMappings();
+    const hocs = pluginsWrapper.getRenderersHOC();
     defaultNodeRenderer = mapping.nodes.default;
     options = {
       ...options,
@@ -116,9 +118,16 @@ export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
                   ...mapRenderers[key],
                   ...Object.entries(value).reduce(
                     (acc, [mapKey, mapRenderer]) => {
+                      let enhancedMapRenderer = mapRenderer;
+                      if (hocs && Array.isArray(hocs)) {
+                        enhancedMapRenderer = hocs.reduce(
+                          (render, hoc) => compose(hoc)(render),
+                          enhancedMapRenderer
+                        );
+                      }
                       return {
                         ...acc,
-                        [mapping[key][mapKey]]: mapRenderer
+                        [mapping[key][mapKey]]: enhancedMapRenderer
                       };
                     },
                     {}
