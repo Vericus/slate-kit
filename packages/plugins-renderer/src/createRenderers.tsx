@@ -102,13 +102,13 @@ export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
   let options = opts;
   let defaultNodeRenderer;
   if (pluginsWrapper) {
-    const renderers = pluginsWrapper.getRenderers();
+    const renderersDefinition = pluginsWrapper.getRenderers();
     const mapping = pluginsWrapper.getNodeMappings();
     const hocs = pluginsWrapper.getRenderersHOC();
     defaultNodeRenderer = mapping.nodes.default;
     options = {
       ...options,
-      ...Object.entries(renderers).reduce(
+      ...Object.entries(renderersDefinition).reduce(
         (mapRenderers, [key, value]) => {
           return {
             ...mapRenderers,
@@ -119,8 +119,9 @@ export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
                   ...Object.entries(value).reduce(
                     (acc, [mapKey, mapRenderer]) => {
                       let enhancedMapRenderer = mapRenderer;
-                      if (hocs && Array.isArray(hocs)) {
-                        enhancedMapRenderer = hocs.reduce(
+                      const nodeHocs = hocs && hocs[key];
+                      if (nodeHocs && Array.isArray(nodeHocs)) {
+                        enhancedMapRenderer = nodeHocs.reduce(
                           (render, hoc) => compose(hoc)(render),
                           enhancedMapRenderer
                         );
