@@ -10,49 +10,49 @@ export interface Props {
 }
 
 export const HeadingOne: React.SFC<Props> = props => {
-  const { attributes, children, ...rest } = props;
+  const { attributes, children, className } = props;
   return (
-    <h1 {...attributes} {...rest}>
+    <h1 {...attributes} className={className}>
       {children}
     </h1>
   );
 };
 export const HeadingTwo: React.SFC<Props> = props => {
-  const { attributes, children, ...rest } = props;
+  const { attributes, children, className } = props;
   return (
-    <h2 {...attributes} {...rest}>
+    <h2 {...attributes} className={className}>
       {children}
     </h2>
   );
 };
 export const HeadingThree: React.SFC<Props> = props => {
-  const { attributes, children, ...rest } = props;
+  const { attributes, children, className } = props;
   return (
-    <h3 {...attributes} {...rest}>
+    <h3 {...attributes} className={className}>
       {children}
     </h3>
   );
 };
 export const HeadingFour: React.SFC<Props> = props => {
-  const { attributes, children, ...rest } = props;
+  const { attributes, children, className } = props;
   return (
-    <h4 {...attributes} {...rest}>
+    <h4 {...attributes} className={className}>
       {children}
     </h4>
   );
 };
 export const Paragraph: React.SFC<Props> = props => {
-  const { attributes, children, ...rest } = props;
+  const { attributes, children, className } = props;
   return (
-    <p {...attributes} {...rest}>
+    <p {...attributes} className={className}>
       {children}
     </p>
   );
 };
 export const Blockquote: React.SFC<Props> = props => {
-  const { attributes, children, ...rest } = props;
+  const { attributes, children, className } = props;
   return (
-    <blockquote {...attributes} {...rest}>
+    <blockquote {...attributes} className={className}>
       {children}
     </blockquote>
   );

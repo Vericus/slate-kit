@@ -6,6 +6,7 @@ export interface Props {
   mark: Mark;
   children: JSX.Element;
   attributes: any;
+  className?: string;
 }
 
 const defaultStyle = {
@@ -13,9 +14,9 @@ const defaultStyle = {
   textDecorationColor: "inherit"
 };
 
-const renderMark: React.SFC<Props> = ({ children, attributes, ...rest }) => {
+const renderMark: React.SFC<Props> = ({ children, attributes, className }) => {
   return (
-    <span {...attributes} {...rest}>
+    <span {...attributes} className={className}>
       {children}
     </span>
   );

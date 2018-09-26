@@ -4,16 +4,9 @@ import Options, { TypeOptions } from "./options";
 
 export interface Props {
   children: (...args: any[]) => JSX.Element;
-  isFocused?: boolean;
-  isSelected?: boolean;
 }
 
-const SlateKitNode: React.SFC<Props> = ({
-  children,
-  isFocused,
-  isSelected,
-  ...rest
-}) => children({ ...rest });
+const SlateKitNode: React.SFC<Props> = props => props.children(props);
 
 const createRenderToolbar = (
   toolbarOptions,
