@@ -80,6 +80,7 @@ export default class PluginsWrapper {
   STYLES: StylesMap;
   RULES: RulesMap;
   RENDERERS: RenderersMap;
+  RENDERERSHOC: ObjectMap;
   constructor() {
     this[CHANGES] = {};
     this[OPTIONS] = {};
@@ -89,6 +90,7 @@ export default class PluginsWrapper {
     this[UTILS] = {};
     this[RULES] = {};
     this[RENDERERS] = {};
+    this[RENDERERSHOC] = {};
     this.serializer = null;
   }
 
