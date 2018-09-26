@@ -39,3 +39,5 @@ packages/**/.flowconfig
 
 # rollup-typescript-cache
 **/.rpt2_cache/**
+
+**/*.tgz
