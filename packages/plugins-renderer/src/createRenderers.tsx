@@ -119,7 +119,7 @@ export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
                   ...Object.entries(value).reduce(
                     (acc, [mapKey, mapRenderer]) => {
                       let enhancedMapRenderer = mapRenderer;
-                      const nodeHocs = hocs && hocs[key];
+                      const nodeHocs = hocs && hocs[mapKey];
                       if (nodeHocs && Array.isArray(nodeHocs)) {
                         enhancedMapRenderer = nodeHocs.reduce(
                           (render, hoc) => compose(hoc)(render),
