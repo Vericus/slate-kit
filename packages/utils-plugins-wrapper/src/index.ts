@@ -9,6 +9,7 @@ const STYLES = Symbol("styles");
 const UTILS = Symbol("utils");
 const RULES = Symbol("rules");
 const RENDERERS = Symbol("renderers");
+const RENDERERSHOC = Symbol("hocs");
 
 export interface ObjectMap {
   [label: string]: object;
@@ -106,6 +107,8 @@ export default class PluginsWrapper {
       []
     )
   ];
+
+  getRenderersHOC = () => this[RENDERERSHOC];
 
   getRenderers = () =>
     Object.values(this[RENDERERS]).reduce(
@@ -327,6 +330,15 @@ export default class PluginsWrapper {
       case "renderers":
         this[RENDERERS][label] = value;
         break;
+      case "rendererHOC":
+        Object.entries(value).forEach(([node, hoc]) => {
+          if (this[RENDERERSHOC][node]) {
+            this[RENDERERSHOC][node] = [...this[RENDERERSHOC][node], hoc];
+          } else {
+            this[RENDERERSHOC][node] = [hoc];
+          }
+        });
+        return;
       default:
         break;
     }
