@@ -4,6 +4,7 @@ import getSource from "./getSource";
 import getSelectedMediaBlock from "./getSelectedMediaBlock";
 import getImageWidth from "./getImageWidth";
 import getClosestMedia from "./getClosestMedia";
+import getClosestMediaContainer from "./getClosestMediaContainer";
 
 export default function createUtils(opts: TypeOption) {
   const { mediaTypes } = opts;
@@ -20,8 +21,15 @@ export default function createUtils(opts: TypeOption) {
       mediaTypes && mediaTypes.image && getSource(block, mediaTypes.image),
     getImageWidth: (block: Block) =>
       mediaTypes && mediaTypes.image && getImageWidth(block, mediaTypes.image),
-    getClosestMedia: getClosestMedia(opts)
+    getClosestMedia: getClosestMedia(opts),
+    getClosestMediaContainer: getClosestMediaContainer(opts)
   };
 }
 
-export { getSource, getSelectedMediaBlock, getImageWidth, getClosestMedia };
+export {
+  getSource,
+  getSelectedMediaBlock,
+  getImageWidth,
+  getClosestMedia,
+  getClosestMediaContainer
+};

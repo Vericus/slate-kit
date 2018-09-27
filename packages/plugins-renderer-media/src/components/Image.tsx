@@ -13,6 +13,7 @@ interface Props extends GenericProps {
   getSource: (block: Block) => string;
   getImageWidth: (block: Block) => string;
   updateImageSource: (change: Change, block: Block, src: string) => any;
+  toggleCaption: (change: Change, node?: Block) => any;
   extensions: string;
   onInsert: (...args: any[]) => any;
 }
@@ -44,10 +45,11 @@ export default class Image extends React.Component<Props, States> {
   }
 
   onImageSelected = src => {
-    const { node, updateImageSource, editor } = this.props;
+    const { node, updateImageSource, editor, toggleCaption } = this.props;
     if (Block.isBlock(node)) {
       editor.change(c => {
         updateImageSource(c, node, src);
+        toggleCaption(c, node);
       });
     }
   };

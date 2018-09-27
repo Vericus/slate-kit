@@ -12,6 +12,7 @@ export default function updateImageSource(opts: TypeOption, utils) {
           data: block.data.set(srcField, src)
         });
       }
+      return change;
     };
   } else {
     return (change: Change) => change;

@@ -24,7 +24,7 @@ const createToolbar = (mediaLabel, pluginsWrapper) => {
     const src = utils.getSource(node);
     if (!src || src === "") return;
     if (!(start.isInNode(node) || end.isInNode(node))) return;
-    return <Toolbar {...props} changes={changes} />;
+    return <Toolbar {...props} changes={changes} utils={utils} />;
   };
 };
 

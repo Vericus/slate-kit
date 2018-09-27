@@ -47,7 +47,15 @@ const Toolbar = props => {
         Original
       </ToolbarButton>
       <ToolbarButton
-        change={change => props.changes.toggleCaption(change)}
+        change={change => {
+          const { changes, editor, node, utils } = props;
+          const { getClosestMedia } = utils;
+
+          props.changes.toggleCaption(
+            change,
+            utils.getClosestMedia(change.value.document, node)
+          );
+        }}
         {...props}
       >
         Cap
