@@ -10,7 +10,13 @@ class ToolbarButton extends React.Component {
   };
   render() {
     return (
-      <button style={{ height: "45px" }} onMouseDown={this.onMouseDown}>
+      <button
+        style={{
+          height: "45px",
+          color: this.props.active ? "blue" : "inherit"
+        }}
+        onMouseDown={this.onMouseDown}
+      >
         {this.props.children}
       </button>
     );
@@ -18,6 +24,9 @@ class ToolbarButton extends React.Component {
 }
 
 const Toolbar = props => {
+  const { changes, editor, node, utils } = props;
+  const { changeWidth, toggleCaption, deleteMedia } = changes;
+  const { hasCaption, getClosestMedia, getImageWidth } = utils;
   return (
     <div
       style={{
@@ -29,41 +38,36 @@ const Toolbar = props => {
       }}
     >
       <ToolbarButton
-        change={change => props.changes.changeWidth(change, "fitToText")}
+        change={change => changeWidth(change, "fitToText")}
+        active={getImageWidth(node) === "fitToText"}
         {...props}
       >
         Fit
       </ToolbarButton>
       <ToolbarButton
-        change={change => props.changes.changeWidth(change, "full")}
+        change={change => changeWidth(change, "full")}
+        active={getImageWidth(node) === "full"}
         {...props}
       >
         Full
       </ToolbarButton>
       <ToolbarButton
-        change={change => props.changes.changeWidth(change, "original")}
+        change={change => changeWidth(change, "original")}
+        active={getImageWidth(node) === "original"}
         {...props}
       >
         Original
       </ToolbarButton>
       <ToolbarButton
         change={change => {
-          const { changes, editor, node, utils } = props;
-          const { getClosestMedia } = utils;
-
-          props.changes.toggleCaption(
-            change,
-            utils.getClosestMedia(change.value.document, node)
-          );
+          toggleCaption(change, getClosestMedia(change.value.document, node));
         }}
+        active={hasCaption(editor.value.document, node)}
         {...props}
       >
         Cap
       </ToolbarButton>
-      <ToolbarButton
-        change={change => props.changes.deleteMedia(change)}
-        {...props}
-      >
+      <ToolbarButton change={change => deleteMedia(change)} {...props}>
         Delete
       </ToolbarButton>
     </div>

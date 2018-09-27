@@ -1,6 +1,7 @@
-import { Block, Document, Node } from "slate";
+import { Block, Node, Document } from "slate";
 import { TypeOption } from "../options";
-export default function getClosestMediaContainer(opts: TypeOption) {
+
+export default function hasCaption(opts: TypeOption) {
   const { type, captionType, mediaTypes } = opts;
   const imageType = mediaTypes.image ? mediaTypes.image.type : undefined;
   return imageType
@@ -14,8 +15,10 @@ export default function getClosestMediaContainer(opts: TypeOption) {
           mediaBlock = document.getClosestBlock(mediaBlock.key);
         }
         return Block.isBlock(mediaBlock) && mediaBlock.type === type
-          ? mediaBlock
-          : undefined;
+          ? mediaBlock.nodes.some(
+              n => (n ? Block.isBlock(n) && n.type === captionType : false)
+            )
+          : false;
       }
     : () => {};
 }
