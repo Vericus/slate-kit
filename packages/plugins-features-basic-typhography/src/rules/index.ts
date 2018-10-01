@@ -5,7 +5,8 @@ const blocks = {
   h3: "heading-three",
   h4: "heading-four",
   h5: "heading-four",
-  h6: "heading-four"
+  h6: "heading-four",
+  blockquote: "blockquote"
 };
 
 export default function createRule(options, getData) {
