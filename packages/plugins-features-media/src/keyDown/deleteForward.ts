@@ -11,11 +11,12 @@ export default function deleteForward(
 ) {
   const { value } = change;
   const { document, selection, startBlock, nextBlock } = value;
-  const { isExpanded } = selection;
+  const { isExpanded, start } = selection;
   if (
     nextBlock &&
     types.includes(nextBlock.type) &&
     nextBlock.type !== captionType &&
+    start.offset === startBlock.text.length &&
     !isExpanded
   ) {
     const mediaBlock = utils.getClosestMedia(document, nextBlock);
