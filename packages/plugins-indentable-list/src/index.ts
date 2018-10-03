@@ -20,7 +20,7 @@ export function createPlugin(
   const { createListWithType } = changes;
   const schema = createSchema(options);
   const props = createProps(options, pluginsWrapper);
-  const rules = createRule(options);
+  const rules = createRule;
   const onKeyDown = createOnKeyDown(options, pluginsWrapper);
   let plugins = [
     {

@@ -114,13 +114,13 @@ function deserializeFlat(blocks, getData, el, block, childNodes, next) {
   return deserializeFlatList(blocks, data, marks, block, childNodes, next);
 }
 
-export default function createRule(options) {
+export default function createRule(options, getData) {
   const { blockTypes } = options;
   const blocks = {
     ul: blockTypes.unorderedlist,
     ol: blockTypes.orderedlist
   };
-  return getData => [
+  return [
     {
       deserialize(el: HTMLElement, next) {
         const block = blocks[el.tagName.toLowerCase()];
