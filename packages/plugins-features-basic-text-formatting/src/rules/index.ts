@@ -16,7 +16,11 @@ export default function createRule(options, getData) {
       deserialize(el, next) {
         const mark = markTags[el.tagName.toLowerCase()];
         if (!mark) return undefined;
-        if (![...el.childNodes].every(node => node.nodeName === "#text")) {
+        if (
+          !Array.from(el.childNodes).every(
+            (node: HTMLElement) => node.nodeName === "#text"
+          )
+        ) {
           return {
             object: "mark",
             type: markTypes[mark],
@@ -25,7 +29,7 @@ export default function createRule(options, getData) {
         }
         return {
           object: "text",
-          leaves: [...el.childNodes].map(node => ({
+          leaves: Array.from(el.childNodes).map((node: HTMLElement) => ({
             object: "leaf",
             text: node.nodeValue,
             marks: [
