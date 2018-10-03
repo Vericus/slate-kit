@@ -31,10 +31,12 @@ const Toolbar = props => {
     <div
       style={{
         width: "100%",
-        position: "relative",
+        position: "absolute",
         display: "flex",
-        height: 0,
-        justifyContent: "center"
+        height: "100%",
+        justifyContent: "center",
+        background: "rgba(255,255,255,0.8)",
+        top: "0"
       }}
     >
       <ToolbarButton

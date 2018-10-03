@@ -186,6 +186,9 @@ const Styled = styled.div`
 
     figure {
       margin: 0;
+      [data-slate-void] {
+        position: relative;
+      }
     }
 
     h1 {
