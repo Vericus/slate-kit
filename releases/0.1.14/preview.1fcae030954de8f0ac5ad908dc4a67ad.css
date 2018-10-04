@@ -1,0 +1,90 @@
+.ql-color-label {
+  stroke: red; }
+
+.ql-transparent {
+  opacity: 0.2; }
+
+.ql-thin {
+  stroke-width: 0.5; }
+
+:not(.colored-icon) .ql-stroke {
+  stroke: #000;
+  fill: transparent; }
+
+:not(.colored-icon) .ql-stroke-mitter {
+  stroke: #000;
+  fill: transparent; }
+
+:not(.colored-icon) .ql-fill {
+  fill: #000; }
+
+:not(.colored-icon) .ql-even {
+  stroke: #000;
+  fill: #fff; }
+
+:not(.colored-icon) .ql-thin {
+  stroke: #000;
+  fill: transparent; }
+
+.colored-icon .ql-stroke {
+  stroke: inherit;
+  fill: transparent;
+  stroke-width: 2; }
+
+.colored-icon .ql-stroke-mitter {
+  stroke: inherit;
+  fill: transparent;
+  stroke-width: 2; }
+
+.colored-icon .ql-fill {
+  fill: inherit; }
+
+.colored-icon .ql-even {
+  stroke: inherit;
+  fill: inherit; }
+
+.colored-icon .ql-thin {
+  stroke: inherit;
+  fill: inherit;
+  stroke-width: 1; }
+
+.btn-icon--disabled .ql-stroke {
+  stroke: rgba(0, 0, 0, 0.23) !important; }
+
+.btn-icon--disabled .ql-stroke-mitter {
+  stroke: rgba(0, 0, 0, 0.23) !important; }
+
+.btn-icon--disabled .ql-fill {
+  fill: rgba(0, 0, 0, 0.23) !important; }
+
+.btn-icon--disabled .ql-even {
+  stroke: rgba(0, 0, 0, 0.23) !important;
+  fill: #fff !important; }
+
+.btn-icon--disabled .ql-thin {
+  stroke: rgba(0, 0, 0, 0.23) !important; }
+
+.btn-icon--disabled .ql-color-label {
+  stroke: rgba(0, 0, 0, 0.23) !important; }
+
+.btn-icon--active .ql-fill {
+  fill: blue; }
+
+.btn-icon--active .ql-stroke {
+  stroke: blue;
+  stroke-width: 2; }
+
+.btn-icon--active .ql-stroke-mitter {
+  stroke: blue;
+  stroke-width: 2; }
+
+.btn-icon--active .ql-thin {
+  stroke: blue;
+  stroke-width: 1; }
+
+.slate-read-only * {
+  caret-color: transparent;
+  color: transparent;
+  text-shadow: 0 0 0 #000; }
+
+/*# sourceMappingURL=preview.1fcae030954de8f0ac5ad908dc4a67ad.css.map*/
