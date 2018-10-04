@@ -13,7 +13,9 @@ class ToolbarButton extends React.Component {
       <button
         style={{
           height: "45px",
-          color: this.props.active ? "blue" : "inherit"
+          color: this.props.active ? "blue" : "inherit",
+          pointerEvents: "auto",
+          userSelect: "none"
         }}
         onMouseDown={this.onMouseDown}
       >
@@ -36,7 +38,8 @@ const Toolbar = props => {
         height: "100%",
         justifyContent: "center",
         background: "rgba(255,255,255,0.8)",
-        top: "0"
+        top: "0",
+        pointerEvents: "none"
       }}
     >
       <ToolbarButton

@@ -17,7 +17,8 @@ export default function createSchema(opts: TypeOption) {
               ],
               []
             ),
-            min: 1
+            min: 1,
+            max: 1
           },
           {
             match: { type: captionType },
@@ -46,18 +47,26 @@ export default function createSchema(opts: TypeOption) {
       },
       [captionType]: {
         parent: { type },
+        previous: Object.values(mediaTypes).reduce(
+          (allowedTypes, mediaType: CommonOption) => [
+            ...allowedTypes,
+            {
+              type: mediaType.type
+            }
+          ],
+          []
+        ),
         nodes: [{ match: { object: "text", min: 1 } }],
         normalize: (change: Change, error: SlateError) => {
           switch (error.code) {
             case "parent_type_invalid":
-              change.removeNodeByKey(error.node.key);
-              return;
+              return change.unwrapNodeByKey(error.parent.key);
             case "child_object_invalid":
-              change.removeNodeByKey(error.child.key);
-              return;
+              return change.removeNodeByKey(error.child.key);
             case "child_required":
-              change.insertNodeByKey(error.node.key, 0, Text.create(""));
-              return;
+              return change.insertNodeByKey(error.node.key, 0, Text.create(""));
+            case "previous_sibling_type_invalid":
+              return change.removeNodeByKey(error.node.key);
           }
         }
       },
