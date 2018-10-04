@@ -45,18 +45,20 @@ const createRenderNodes = (
   pluginsWrapper: PluginsWrapper
 ) => props => {
   const newProps = pluginsWrapper.getProps(props);
-  return [
-    renderToolbar(props),
-    <SlateKitNode>
-      {() =>
-        nodesOptions[props.node.type]
-          ? nodesOptions[props.node.type](newProps)
-          : nodesOptions.default
-            ? nodesOptions.default(newProps)
-            : undefined
-      }
-    </SlateKitNode>
-  ];
+  return (
+    <React.Fragment>
+      {renderToolbar(props)}
+      <SlateKitNode>
+        {() =>
+          nodesOptions[props.node.type]
+            ? nodesOptions[props.node.type](newProps)
+            : nodesOptions.default
+              ? nodesOptions.default(newProps)
+              : undefined
+        }
+      </SlateKitNode>
+    </React.Fragment>
+  );
 };
 
 const placeholderStyle: React.CSSProperties = {

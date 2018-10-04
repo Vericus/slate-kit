@@ -369,6 +369,7 @@ export default class Toolbar extends Component {
     return Object.entries(this.typographies).map(([type, options]) => {
       return (
         <IconButton
+          key={options.icon}
           icon={options.icon}
           onMouseDown={e => this.handleClickTypography(e, options.change, type)}
           disabled={options.disabled || this.props.isReadOnly}
@@ -389,6 +390,7 @@ export default class Toolbar extends Component {
     return Object.entries(this.lists).map(([type, options]) => {
       return (
         <IconButton
+          key={options.icon}
           icon={options.icon}
           onMouseDown={e => this.handleClickList(e, options.change, type)}
           disabled={options.disabled || this.props.isReadOnly}
@@ -434,12 +436,14 @@ export default class Toolbar extends Component {
   renderIndent = () => {
     return [
       <IconButton
+        key="Indent"
         icon="Indent"
         onMouseDown={e => this.handleClickIndent(e)}
         disabled={this.props.isReadOnly || !this.indentUtils}
         size="18"
       />,
       <IconButton
+        key="Outdent"
         icon="Outdent"
         onMouseDown={e => this.handleClickOutdent(e)}
         disabled={this.props.isReadOnly || !this.indentUtils}
@@ -458,6 +462,7 @@ export default class Toolbar extends Component {
     return Object.entries(this.allignments).map(([type, options]) => {
       return (
         <IconButton
+          key={options.icon}
           icon={options.icon}
           onMouseDown={e => this.handleClickAlignment(e, options.change, type)}
           disabled={
@@ -476,6 +481,7 @@ export default class Toolbar extends Component {
     return Object.entries(this.marks).map(([type, options]) => {
       return (
         <IconButton
+          key={options.icon}
           icon={options.icon}
           onMouseDown={e => this.handleClickMark(e, options.change)}
           disabled={options.disabled || this.props.isReadOnly}
@@ -506,12 +512,14 @@ export default class Toolbar extends Component {
     return this.hasHistory
       ? [
           <IconButton
+            key="Undo"
             icon="Undo"
             onMouseDown={e => this.handleHistory(e, "undo")}
             disabled={!this.hasHistory("undo") || this.props.isReadOnly}
             size="18"
           />,
           <IconButton
+            key="Redo"
             icon="Redo"
             onMouseDown={e => this.handleHistory(e, "redo")}
             disabled={!this.hasHistory("redo") || this.props.isReadOnly}
@@ -534,6 +542,7 @@ export default class Toolbar extends Component {
   renderMedia = () => {
     return (
       <IconButton
+        key="Image"
         icon="Image"
         onMouseDown={e => {
           e.preventDefault();
@@ -555,6 +564,7 @@ export default class Toolbar extends Component {
     const colorUtils = pluginsWrapper.getUtils(label);
     return colorUtils && colorChanges ? (
       <ColorPicker
+        key={icon}
         icon={icon}
         colors={colors}
         color={colorUtils.currentColor(this.props.value)}
