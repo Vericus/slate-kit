@@ -1,7 +1,7 @@
 {
   "name": "slate-kit",
   "description": "A collection of slate's plugins and utils",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
   "license": "MIT",
