@@ -1,8 +1,10 @@
 import { Block, Node, Document } from "slate";
 import { TypeOption } from "../options";
+import hideCaption from "./hideCaption";
 
 export default function hasCaption(opts: TypeOption) {
   const { type, captionType, mediaTypes } = opts;
+  const captionHidden = hideCaption(opts);
   const imageType = mediaTypes.image ? mediaTypes.image.type : undefined;
   return imageType
     ? (document: Document, block: Block) => {
@@ -16,7 +18,12 @@ export default function hasCaption(opts: TypeOption) {
         }
         return Block.isBlock(mediaBlock) && mediaBlock.type === type
           ? mediaBlock.nodes.some(
-              n => (n ? Block.isBlock(n) && n.type === captionType : false)
+              n =>
+                n
+                  ? Block.isBlock(n) &&
+                    n.type === captionType &&
+                    !captionHidden(n)
+                  : false
             )
           : false;
       }
