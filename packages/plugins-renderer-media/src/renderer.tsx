@@ -14,12 +14,17 @@ const createMediaRenderer = (imageType: any | undefined) => {
   return props => <Media {...props} imageType={type} />;
 };
 
-const createMediaCaption = (imageType: any | undefined, utils) => {
-  const { getSource } = utils;
+const createMediaCaption = (
+  imageType: any | undefined,
+  utils,
+  captionHideField: string | null
+) => {
+  const { getSource, hideCaption } = utils;
   const { type } = imageType || { type: undefined };
-  return props => (
-    <ImageCaption {...props} imageType={type} getSource={getSource} />
-  );
+  return props =>
+    hideCaption(props.node) ? null : (
+      <ImageCaption {...props} imageType={type} getSource={getSource} />
+    );
 };
 
 const createCaptionPlaceholder = (
@@ -65,7 +70,7 @@ const createImage = (changes, utils, onInsert, extensions) => {
 };
 
 export default function createRenderer(opts, changes, utils) {
-  const { mediaTypes, captionType } = opts;
+  const { mediaTypes, captionType, captionHideField } = opts;
   const { image } = mediaTypes || { image: undefined };
   let onInsert;
   let extensions;
@@ -85,7 +90,7 @@ export default function createRenderer(opts, changes, utils) {
     nodes: {
       media: createMediaRenderer(image),
       image: createImage(changes, utils, onInsert, extensions),
-      mediacaption: createMediaCaption(image, utils)
+      mediacaption: createMediaCaption(image, utils, captionHideField)
     },
     placeholders: [
       createCaptionPlaceholder(captionType, image && image.type, utils)

@@ -6,6 +6,7 @@ import getImageWidth from "./getImageWidth";
 import getClosestMedia from "./getClosestMedia";
 import getClosestMediaContainer from "./getClosestMediaContainer";
 import hasCaption from "./hasCaption";
+import hideCaption from "./hideCaption";
 
 export default function createUtils(opts: TypeOption) {
   const { mediaTypes } = opts;
@@ -24,7 +25,8 @@ export default function createUtils(opts: TypeOption) {
       mediaTypes && mediaTypes.image && getImageWidth(block, mediaTypes.image),
     getClosestMedia: getClosestMedia(opts),
     getClosestMediaContainer: getClosestMediaContainer(opts),
-    hasCaption: hasCaption(opts)
+    hasCaption: hasCaption(opts),
+    hideCaption: hideCaption(opts)
   };
 }
 
@@ -33,5 +35,6 @@ export {
   getSelectedMediaBlock,
   getImageWidth,
   getClosestMedia,
-  getClosestMediaContainer
+  getClosestMediaContainer,
+  hideCaption
 };

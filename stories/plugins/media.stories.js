@@ -45,10 +45,10 @@ const pluginOpts = [
     label: "media",
     createPlugin: MediaPlugin,
     options: {
+      captionHideField: "hide",
       mediaTypes: {
         image: {
           onInsert: src => {
-            console.log(src);
             return new Promise((resolve, reject) => {
               setTimeout(() => {
                 resolve(src);
