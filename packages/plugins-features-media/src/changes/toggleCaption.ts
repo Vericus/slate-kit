@@ -28,7 +28,7 @@ export default function toggleCaption(opts: TypeOption, utils) {
           type: captionType,
           nodes: [Text.create("")]
         });
-        change.insertNodeByKey(media.key, media.nodes.size + 1, captionBlock);
+        change.insertNodeByKey(media.key, media.nodes.size, captionBlock);
       }
     }
     return change;
