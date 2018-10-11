@@ -572,7 +572,7 @@ export class Change extends Immutable.Record({}) {
   applyOperations(operations: Operation[]): Change;
   applyOperation(operation: Operation): Change;
 
-  withoutNormalization(fn: (change: Change) => void): Change;
+  withoutNormalizing(fn: (change: Change) => void): Change;
   setOperationFlag(key: string, value: any): Change;
   getFlag(key: string, options?: object): any;
   unsetOperationFlag(key: string): Change;
