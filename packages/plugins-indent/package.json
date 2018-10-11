@@ -47,7 +47,7 @@
   "devDependencies": {
     "expect": "^23.1.0",
     "is-hotkey": ">=0.1.2",
-    "slate": ">=0.40.0 <0.41.0",
+    "slate": ">=0.41.0 <0.42.0",
     "slate-dev-environment": ">=0.2.0",
     "slate-hotkeys": ">=0.2.3",
     "slate-simulator": ">=0.4.59",
@@ -56,7 +56,7 @@
   "peerDependencies": {
     "@vericus/slate-kit-plugins-utils": "^0.1.0",
     "is-hotkey": ">=0.1.2",
-    "slate": ">=0.40.0 <0.41.0",
+    "slate": ">=0.41.0 <0.42.0",
     "slate-dev-environment": ">=0.2.0",
     "slate-hotkeys": ">=0.2.3",
     "slate-prop-types": ">=0.4.0"

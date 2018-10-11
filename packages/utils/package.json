@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "expect": "^23.1.0",
-    "slate": ">=0.40.0 <0.41.0",
+    "slate": ">=0.41.0 <0.42.0",
     "slate-simulator": ">=0.4.59",
     "to-camel-case": "^1.0.0"
   },
