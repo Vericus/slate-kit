@@ -17,13 +17,13 @@ export default function createSchema(opts: TypeOptions) {
             if (error.code === "node_data_invalid") {
               const data = error.node.data.get(dataField);
               if (typeof data !== "number" || data < 0) {
-                change.withoutNormalization(c =>
+                change.withoutNormalizing(c =>
                   c.setNodeByKey(error.node.key, {
                     data: error.node.data.delete(dataField)
                   })
                 );
               } else {
-                change.withoutNormalization(c =>
+                change.withoutNormalizing(c =>
                   c.setNodeByKey(error.node.key, {
                     data: error.node.data.set(dataField, maxIndentation)
                   })

@@ -29,7 +29,7 @@ export default function createSchema(opts: TypeOption) {
         normalize: (change: Change, error: SlateError) => {
           switch (error.code) {
             case "child_type_invalid":
-              change.withoutNormalization(c =>
+              change.withoutNormalizing(c =>
                 c
                   .removeNodeByKey(error.child.key)
                   .removeNodeByKey(error.node.key)

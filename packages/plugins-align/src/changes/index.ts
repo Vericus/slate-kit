@@ -6,7 +6,7 @@ function removeAlign(opts: TypeOptions) {
   const { dataField } = opts;
   return (change: Change, align: string): Change => {
     const { value } = change;
-    change.withoutNormalization(c => {
+    change.withoutNormalizing(c => {
       getAlignBlocks(opts, value)
         .filter(n => align && n.data && n.data.get(dataField) === align)
         .forEach(n =>
@@ -23,7 +23,7 @@ function setAlign(opts: TypeOptions) {
     const { value } = change;
     const { alignments } = opts;
     if (!alignments || !alignments.includes(align)) return change;
-    change.withoutNormalization(c => {
+    change.withoutNormalizing(c => {
       getAlignBlocks(opts, value).forEach(n => {
         c.setNodeByKey(n.key, { data: n.data.set(dataField, align) });
       });

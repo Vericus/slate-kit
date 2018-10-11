@@ -27,7 +27,7 @@ function resetStartAt(opts: TypeOptions, change: Change) {
   const { blockTypes } = opts;
   const { value } = change;
   const selectedBlocks = selectedOrderedList(blockTypes, value);
-  change.withoutNormalization(c => {
+  change.withoutNormalizing(c => {
     selectedBlocks.forEach(
       block => Block.isBlock(block) && resetBlockStartAt(opts, c, block)
     );
@@ -38,7 +38,7 @@ function resetChecked(opts: TypeOptions, change: Change) {
   const { blockTypes } = opts;
   const { value } = change;
   const selectedBlocks = selectedOrderedList(blockTypes, value);
-  change.withoutNormalization(c => {
+  change.withoutNormalizing(c => {
     selectedBlocks.forEach(
       block => Block.isBlock(block) && resetBlockChecked(opts, c, block)
     );
@@ -56,7 +56,7 @@ function createChangeListType(opts: TypeOptions) {
       (type === orderedlist && isOrderedList(blockTypes, value)) ||
       (type === unorderedlist && isUnorderedList(blockTypes, value));
     if (shouldUnwrap) {
-      change.withoutNormalization(c =>
+      change.withoutNormalizing(c =>
         selectedBlocks.forEach(block => {
           if (Block.isBlock(block)) {
             c.setNodeByKey(block.key, "paragraph");
@@ -64,7 +64,7 @@ function createChangeListType(opts: TypeOptions) {
         })
       );
     } else {
-      change.withoutNormalization(c => {
+      change.withoutNormalizing(c => {
         selectedBlocks.forEach(block => {
           if (Block.isBlock(block)) {
             c.setNodeByKey(block.key, type);
@@ -87,7 +87,7 @@ function createListWithType(
   const { startAtField } = opts;
   const { value } = change;
   const { startBlock } = value;
-  change.withoutNormalization(c => {
+  change.withoutNormalizing(c => {
     if (startAt) {
       c.setNodeByKey(startBlock.key, {
         type,

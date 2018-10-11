@@ -29,7 +29,7 @@ export default function createSchema(opts: TypeOptions) {
               ) {
                 blockData = blockData.delete(startAtField);
               }
-              change.withoutNormalization(c =>
+              change.withoutNormalizing(c =>
                 c.setNodeByKey(error.node.key, { data: blockData })
               );
             }
@@ -42,7 +42,7 @@ export default function createSchema(opts: TypeOptions) {
           },
           normalize: (change: Change, error) => {
             if (error.code === "node_data_invalid") {
-              change.withoutNormalization(c =>
+              change.withoutNormalizing(c =>
                 c.setNodeByKey(error.node.key, {
                   data: error.node.data.delete(checkField).delete(startAtField)
                 })
@@ -64,7 +64,7 @@ export default function createSchema(opts: TypeOptions) {
               if (typeof blockData.get(checkField) !== "boolean") {
                 blockData = blockData.set(checkField, false);
               }
-              change.withoutNormalization(c =>
+              change.withoutNormalizing(c =>
                 c.setNodeByKey(error.node.key, { data: blockData })
               );
             }

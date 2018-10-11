@@ -6,7 +6,7 @@ export default function changeWidth(opts: TypeOption, utils) {
   return (change: Change, width: string) => {
     const media = utils.getSelectedMediaBlock(change.value);
     if (media && mediaTypes && Block.isBlock(media)) {
-      return change.withoutNormalization(c => {
+      return change.withoutNormalizing(c => {
         media.nodes.map(node => {
           if (!Block.isBlock(node)) return;
           const { type } = node;
