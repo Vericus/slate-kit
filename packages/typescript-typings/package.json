@@ -1,6 +1,6 @@
 {
   "name": "@vericus/slate-kit-typescript-typings",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Typescript type roots for external projects and internal modifications",
   "license": "MIT",
   "homepage": "https://github.com/Vericus/slate-kit/",
