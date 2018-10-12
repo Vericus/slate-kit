@@ -335,7 +335,13 @@ export default class PluginsWrapper {
       case "rendererHOC":
         Object.entries(value).forEach(([node, hoc]) => {
           if (this[RENDERERSHOC][node]) {
-            this[RENDERERSHOC][node] = [...this[RENDERERSHOC][node], hoc];
+            if (
+              !this[RENDERERSHOC][node].find(
+                a => a.toString() === hoc.toString()
+              )
+            ) {
+              this[RENDERERSHOC][node] = [...this[RENDERERSHOC][node], hoc];
+            }
           } else {
             this[RENDERERSHOC][node] = [hoc];
           }
