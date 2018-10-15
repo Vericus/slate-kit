@@ -45,19 +45,30 @@ const createRenderNodes = (
   pluginsWrapper: PluginsWrapper
 ) => props => {
   const newProps = pluginsWrapper.getProps(props);
-  return (
+  const nodeRenderer = nodesOptions[props.node.type];
+  if (props.node.object === "block") {
+    return (
+      <React.Fragment>
+        {renderToolbar(props)}
+        <SlateKitNode>
+          {() =>
+            nodeRenderer
+              ? nodeRenderer(newProps)
+              : nodesOptions.default
+                ? nodesOptions.default(newProps)
+                : null
+          }
+        </SlateKitNode>
+      </React.Fragment>
+    );
+  }
+  return nodeRenderer ? (
     <React.Fragment>
       {renderToolbar(props)}
-      <SlateKitNode>
-        {() =>
-          nodesOptions[props.node.type]
-            ? nodesOptions[props.node.type](newProps)
-            : nodesOptions.default && props.node.object === "block"
-              ? nodesOptions.default(newProps)
-              : undefined
-        }
-      </SlateKitNode>
+      <SlateKitNode>{() => nodeRenderer(newProps)}</SlateKitNode>
     </React.Fragment>
+  ) : (
+    undefined
   );
 };
 
