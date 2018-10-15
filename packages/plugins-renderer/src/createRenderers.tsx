@@ -52,7 +52,7 @@ const createRenderNodes = (
         {() =>
           nodesOptions[props.node.type]
             ? nodesOptions[props.node.type](newProps)
-            : nodesOptions.default
+            : nodesOptions.default && props.node.object === "block"
               ? nodesOptions.default(newProps)
               : undefined
         }
