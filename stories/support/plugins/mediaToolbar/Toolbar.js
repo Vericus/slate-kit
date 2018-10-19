@@ -65,7 +65,11 @@ const Toolbar = props => {
       </ToolbarButton>
       <ToolbarButton
         change={change => {
-          toggleCaption(change, getClosestMedia(change.value.document, node));
+          toggleCaption(
+            change,
+            getClosestMedia(change.value.document, node),
+            true
+          );
         }}
         active={hasCaption(editor.value.document, node)}
         {...props}
