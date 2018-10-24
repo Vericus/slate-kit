@@ -16,7 +16,10 @@ export default function handleUndo(
     newValue = change.value;
   }
   newValue.history.undos.some(undo => {
-    if (undo.size === 1 && undo.get(0).type === "set_selection") {
+    if (
+      undo.size === 1 &&
+      (undo.get(0).type === "set_selection" || undo.get(0).type === "set_value")
+    ) {
       return false;
     }
     if (onUndo && typeof onUndo === "function") {
