@@ -17,6 +17,8 @@ export default function deleteBackward(
     previousBlock &&
     previousBlock.type === captionType &&
     start.offset === 0 &&
+    startBlock &&
+    startBlock.type &&
     !types.includes(startBlock.type)
   ) {
     const mediaBlock = utils.getClosestMedia(document, previousBlock);

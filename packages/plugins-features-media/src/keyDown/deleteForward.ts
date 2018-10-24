@@ -16,6 +16,8 @@ export default function deleteForward(
     nextBlock &&
     types.includes(nextBlock.type) &&
     nextBlock.type !== captionType &&
+    startBlock &&
+    startBlock.text &&
     start.offset === startBlock.text.length &&
     !isExpanded
   ) {
