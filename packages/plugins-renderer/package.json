@@ -35,12 +35,10 @@
     "immutable": "Immutable",
     "slate": "Slate",
     "tslib": "TSLib",
-    "hoist-non-react-statics": "HoistNonReactStatics",
     "recompose": "Recompose"
   },
   "dependencies": {
     "@vericus/slate-kit-plugins-wrapper": "^0.1.10",
-    "hoist-non-react-statics": "^3.0.1",
     "immutable": "^3.8.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
@@ -49,7 +47,6 @@
   },
   "peerDepencies": {
     "@vericus/slate-kit-plugins-wrapper": "^0.1.4",
-    "hoist-non-react-statics": "^3.0.1",
     "immutable": "^3.8.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
