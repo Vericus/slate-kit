@@ -26,6 +26,13 @@ export default function createSchema(opts: TypeOption) {
             max: 1
           }
         ],
+        last: {
+          type: type =>
+            [
+              ...Object.values(mediaTypes).map(mediaType => mediaType.type),
+              captionType
+            ].includes(type)
+        },
         normalize: (change: Change, error: SlateError) => {
           switch (error.code) {
             case "child_type_invalid":
@@ -41,6 +48,9 @@ export default function createSchema(opts: TypeOption) {
               return;
             case "child_unknown":
               change.removeNodeByKey(error.child.key);
+              return;
+            case "last_child_type_invalid":
+              change.setNodeByKey(error.child.key, captionType);
               return;
           }
         }
