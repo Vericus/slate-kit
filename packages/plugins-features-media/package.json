@@ -42,7 +42,7 @@
     "@vericus/slate-kit-media-renderer": "^0.0.2",
     "immutable": "^3.8.2",
     "is-hotkey": "^0.1.3",
-    "slate": "^0.40.2",
+    "slate": ">=0.41.0 <0.42.0",
     "slate-hotkeys": "^0.2.3",
     "tslib": "^1.9.3"
   },
@@ -56,6 +56,5 @@
     "Vericus",
     "slate",
     "slate-kit"
-  ],
-  "gitHead": "d20431823a3f386ebb69be9518fe14c05d8d7607"
+  ]
 }

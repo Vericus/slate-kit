@@ -48,12 +48,17 @@
     "tslib": "^1.9.3"
   },
   "peerDepencies": {
-    "@vericus/slate-kit-plugins-wrapper": "^0.1.4"
+    "@vericus/slate-kit-plugins-wrapper": "^0.1.4",
+    "hoist-non-react-statics": "^3.0.1",
+    "immutable": "^3.8.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "recompose": "^0.30.0",
+    "tslib": "^1.9.3"
   },
   "keywords": [
     "Vericus",
     "slate",
     "slate-kit"
-  ],
-  "gitHead": "5b72fd34471ce338c017768bf4346fea448d163f"
+  ]
 }

@@ -10,6 +10,8 @@ import IndentPlugin from "@vericus/slate-kit-indent";
 import ListPlugin from "@vericus/slate-kit-indentable-list";
 import AlignPlugin from "@vericus/slate-kit-align";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
+import MediaPlugin from "@vericus/slate-kit-media";
+import MediaToolbar from "./support/plugins/mediaToolbar";
 import initialState from "./states/fullText.json";
 import Editor from "./support/components/editor";
 
@@ -34,6 +36,24 @@ const pluginOpts = [
       data: "color",
       defaultColor: "black",
       styles: ["textDecorationColor", "color"]
+    }
+  },
+  {
+    label: "media",
+    createPlugin: MediaPlugin,
+    options: {
+      captionHideField: "hide",
+      mediaTypes: {
+        image: {
+          onInsert: src => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve(src);
+              }, 5000);
+            });
+          }
+        }
+      }
     }
   },
   {
