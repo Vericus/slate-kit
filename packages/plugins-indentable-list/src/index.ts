@@ -39,7 +39,9 @@ export function createPlugin(
             before: /^(\d+)(\.)$/,
             change: (change, e, matches) => {
               const type = orderedlist;
-              return change.call(createListWithType, type, matches.before[1]);
+              return change
+                .call(createListWithType, type, matches.before[1])
+                .normalize();
             }
           }),
           AutoReplace({
@@ -47,7 +49,7 @@ export function createPlugin(
             before: /^(-)$/,
             change: change => {
               const type = unorderedlist;
-              return change.call(createListWithType, type);
+              return change.call(createListWithType, type).normalize();
             }
           }),
           AutoReplace({
@@ -55,7 +57,7 @@ export function createPlugin(
             before: /^(\[\])$/,
             change: change => {
               const type = checklist;
-              return change.call(createListWithType, type);
+              return change.call(createListWithType, type).normalize();
             }
           })
         ]
