@@ -50,7 +50,11 @@ export default function createSchema(opts: TypeOption) {
               change.removeNodeByKey(error.child.key);
               return;
             case "last_child_type_invalid":
-              change.setNodeByKey(error.child.key, captionType);
+              if (Block.isBlock(error.child)) {
+                change.setNodeByKey(error.child.key, captionType);
+              } else {
+                change.unwrapBlockByKey(error.node.key);
+              }
               return;
           }
         }
