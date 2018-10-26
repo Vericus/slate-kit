@@ -6,8 +6,6 @@ function createOnKeyDown(opts: Options) {
   const { hotkeys } = opts;
   const { change: changeFn, changeArgs } = opts;
   const hotkeyArrays = Array.isArray(hotkeys) ? hotkeys : [hotkeys];
-  console.log(changeArgs);
-
   function checkHotKey(event): boolean {
     return hotkeyArrays.some(hotkey => isHotkey(hotkey)(event));
   }
