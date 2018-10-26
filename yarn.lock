@@ -13030,7 +13030,7 @@ slash@^1.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
   integrity sha1-xB8vbDn8FtHNF61LXYlhFK5HDVU=
 
-slate-auto-replace@>=0.11.0:
+slate-auto-replace@^0.11.0:
   version "0.11.2"
   resolved "https://registry.yarnpkg.com/slate-auto-replace/-/slate-auto-replace-0.11.2.tgz#48dfb4daf7a9c90b02bd2f6d48ee0743a3ab7d8a"
   integrity sha512-w+WGDo9qZbpd6NvJfJiriFIUJLbae54JCHoIW25IQhzhZAs7rbdu845GeoXvLEYrLC6Qu0ASVRTcMG8PJzDxvg==
