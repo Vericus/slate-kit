@@ -14,7 +14,7 @@ function createOnKeyDown(opts: Options) {
   return (event, change: Change): void | Change | boolean => {
     if (checkHotKey(event)) {
       if (changeArgs) {
-        change.call(changeFn, changeArgs);
+        change.call(changeFn, ...changeArgs);
       } else {
         change.call(changeFn);
       }
