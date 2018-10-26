@@ -567,7 +567,7 @@ export class Change extends Immutable.Record({}) {
   value: Value;
   operations: Immutable.List<Operation>;
 
-  call(customChange: (change: Change, ...args: any[]) => Change): Change;
+  call(customChange: (change: Change) => Change, ...args: any[]): Change;
 
   applyOperations(operations: Operation[]): Change;
   applyOperation(operation: Operation): Change;
