@@ -4,7 +4,10 @@ export default function(opt, changes) {
   const { keyBindings } = opt;
   return keyBindings
     ? keyBindings.map(({ hotkeys, changeName, change }) =>
-        BindHotKey({ hotkeys, change: change || changes[changeName] })
+        BindHotKey({
+          hotkeys,
+          change: change || (changeName && changes[changeName])
+        })
       )
     : [];
 }
