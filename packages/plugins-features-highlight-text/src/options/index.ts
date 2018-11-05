@@ -2,6 +2,7 @@ import { Record } from "immutable";
 import isPlainObject from "is-plain-obj";
 
 export interface TypeOptions {
+  name: string;
   type: string;
   marks: {
     [type: string]: string;
@@ -14,6 +15,7 @@ export interface TypeOptions {
 }
 
 const defaultOptions = {
+  name: undefined,
   marks: undefined,
   type: undefined,
   styles: undefined,
@@ -24,6 +26,7 @@ const defaultOptions = {
 };
 
 class Options extends Record(defaultOptions, "highlight text option") {
+  name: string;
   marks: {
     [type: string]: string;
   };

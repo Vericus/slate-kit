@@ -1,15 +1,7 @@
 import { Change, Node, Block } from "slate";
-import { Editor } from "slate-react";
 
-export default function deleteForward(
-  utils,
-  types,
-  captionType,
-  event,
-  change: Change,
-  editor: Editor
-) {
-  const { value } = change;
+export default function deleteForward(editor, types, captionType, event, next) {
+  const { value } = editor;
   const { document, selection, startBlock, nextBlock } = value;
   const { isExpanded, start } = selection;
   if (
@@ -21,20 +13,21 @@ export default function deleteForward(
     start.offset === startBlock.text.length &&
     !isExpanded
   ) {
-    const mediaBlock = utils.getClosestMedia(document, nextBlock);
+    const mediaBlock = editor.getClosestMedia(document, nextBlock);
     if (mediaBlock && Block.isBlock(mediaBlock)) {
       event.preventDefault();
-      change.moveToRangeOfNode(mediaBlock);
-      return true;
+      editor.moveToRangeOfNode(mediaBlock);
+      return;
     }
   } else {
     event.preventDefault();
     if (isExpanded) {
-      change.deleteForwardAtRange(selection, {});
+      editor.deleteForwardAtRange(selection, {});
     } else {
-      change.deleteForward(1);
+      editor.deleteForward(1);
     }
-    change.normalize({ normalize: true });
-    return true;
+    editor.normalize({ normalize: true });
+    return;
   }
+  return next();
 }

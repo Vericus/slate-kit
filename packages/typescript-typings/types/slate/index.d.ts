@@ -1520,4 +1520,6 @@ export namespace PathUtils {
   ): Immutable.List<number>;
 }
 
+export type Editor = any;
+
 export {};

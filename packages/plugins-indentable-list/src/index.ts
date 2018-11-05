@@ -2,8 +2,8 @@ import Renderer from "@vericus/slate-kit-indentable-list-renderer";
 import AutoReplace from "slate-auto-replace";
 import createProps from "./props";
 import Options, { TypeOptions } from "./options";
-import createUtils from "./utils";
-import createChanges from "./changes";
+import createQueries from "./queries";
+import createCommands from "./commands";
 import createOnKeyDown from "./onKeyDown";
 import createSchema from "./schemas";
 import createRule from "./rules";
@@ -15,9 +15,8 @@ export function createPlugin(
   const options = new Options(pluginOptions);
   const { blockTypes } = options;
   const { orderedlist, unorderedlist, checklist } = blockTypes;
-  const utils = createUtils(options);
-  const changes = createChanges(options, pluginsWrapper);
-  const { createListWithType } = changes;
+  const queries = createQueries(options);
+  const commands = createCommands(options, pluginsWrapper);
   const schema = createSchema(options);
   const props = createProps(options, pluginsWrapper);
   const rules = createRule;
@@ -25,8 +24,8 @@ export function createPlugin(
   let plugins = [
     {
       rules,
-      utils,
-      changes,
+      queries,
+      commands,
       onKeyDown: options.withHandlers ? onKeyDown : undefined,
       options,
       props,
@@ -37,27 +36,27 @@ export function createPlugin(
           AutoReplace({
             trigger: "space",
             before: /^(\d+)(\.)$/,
-            change: (change, e, matches) => {
+            change: (editor, e, matches) => {
               const type = orderedlist;
-              return change
-                .call(createListWithType, type, matches.before[1])
+              return editor
+                .createListWithType(type, matches.before[1])
                 .normalize();
             }
           }),
           AutoReplace({
             trigger: "space",
             before: /^(-)$/,
-            change: change => {
+            change: (editor, e, matches) => {
               const type = unorderedlist;
-              return change.call(createListWithType, type).normalize();
+              return editor.createListWithType(type).normalize();
             }
           }),
           AutoReplace({
             trigger: "space",
             before: /^(\[\])$/,
-            change: change => {
+            change: (editor, e, matches) => {
               const type = checklist;
-              return change.call(createListWithType, type).normalize();
+              return editor.createListWithType(type).normalize();
             }
           })
         ]

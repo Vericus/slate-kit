@@ -38,26 +38,26 @@
   },
   "dependencies": {
     "debug": "^3.1.0",
-    "immutable": "^3.8.2",
+    "immutable": ">=3.8.2",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "slate-prop-types": ">=0.4.0",
+    "slate-prop-types": ">=0.5.7",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
     "expect": "^23.1.0",
     "react": ">=16.0.0",
     "react-dom": ">=16.3.2",
-    "slate": ">=0.41.0 <0.42.0",
-    "slate-prop-types": ">=0.4.0",
+    "slate": ">=0.43.0 <0.44.0",
+    "slate-prop-types": ">=0.5.7",
     "slate-simulator": ">=0.4.59",
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "slate": ">=0.41.0 <0.42.0",
-    "slate-prop-types": ">=0.4.0"
+    "slate": ">=0.43.0 <0.44.0",
+    "slate-prop-types": ">=0.5.7"
   },
   "keywords": [
     "Vericus",

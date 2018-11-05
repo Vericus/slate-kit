@@ -1,7 +1,16 @@
 // ported from https://github.com/DefinitelyTyped/DefinitelyTyped
-// definitions for slate-react 0.18
+// definitions for slate-react 0.20
 // TypeScript Version: 2.8
-import { Mark, Node, Change, Schema, Value, Stack, Document } from "slate";
+import {
+  Mark,
+  Node,
+  Change,
+  Schema,
+  Value,
+  Stack,
+  Document,
+  Editor as SlateEditor
+} from "slate";
 import * as Immutable from "immutable";
 import * as React from "react";
 
@@ -13,7 +22,7 @@ export interface RenderAttributes {
 export interface RenderMarkProps {
   attributes: RenderAttributes;
   children: React.ReactNode;
-  editor: Editor;
+  editor: SlateEditor;
   mark: Mark;
   marks: Immutable.Set<Mark>;
   node: Node;
@@ -24,7 +33,7 @@ export interface RenderMarkProps {
 export interface RenderNodeProps {
   attributes: RenderAttributes;
   children: React.ReactNode;
-  editor: Editor;
+  editor: SlateEditor;
   isSelected: boolean;
   key: string;
   node: Node;
@@ -35,39 +44,94 @@ export interface Plugin {
   onBeforeInput?: (
     event: Event,
     change: Change,
-    editor: Editor
+    editor: SlateEditor
   ) => Change | void;
-  onBlur?: (event: Event, change: Change, editor?: Editor) => Change | void;
-  onFocus?: (event: Event, change: Change, editor?: Editor) => Change | void;
-  onClick?: (event: Event, change: Change, editor?: Editor) => Change | void;
-  onCopy?: (event: Event, change: Change, editor?: Editor) => Change | void;
-  onCut?: (event: Event, change: Change, editor?: Editor) => Change | void;
-  onDragEnd?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onBlur?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
+  onFocus?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
+  onClick?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
+  onCopy?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
+  onCut?: (event: Event, change: Change, editor?: SlateEditor) => Change | void;
+  onDragEnd?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
   onDragEnter?: (
     event: Event,
     change: Change,
-    editor?: Editor
+    editor?: SlateEditor
   ) => Change | void;
-  onDragExit?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onDragExit?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
   onDragLeave?: (
     event: Event,
     change: Change,
-    editor?: Editor
+    editor?: SlateEditor
   ) => Change | void;
-  onDragOver?: (event: Event, change: Change, editor?: Editor) => Change | void;
+  onDragOver?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
   onDragStart?: (
     event: Event,
     change: Change,
-    editor?: Editor
+    editor?: SlateEditor
   ) => Change | void;
-  onDrop?: (event: Event, change: Change, editor?: Editor) => Change | void;
-  onInput?: (event: Event, change: Change, editor?: Editor) => Change | void;
-  onKeyDown?: (event: Event, change: Change, editor?: Editor) => Change | void;
-  onKeyUp?: (event: Event, change: Change, editor?: Editor) => Change | void;
-  onPaste?: (event: Event, change: Change, editor?: Editor) => Change | void;
-  onSelect?: (event: Event, change: Change, editor?: Editor) => Change | void;
-  onChange?: (change: Change, editor?: Editor) => any;
-  renderEditor?: (props: RenderAttributes, editor?: Editor) => object | void;
+  onDrop?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
+  onInput?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
+  onKeyDown?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
+  onKeyUp?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
+  onPaste?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
+  onSelect?: (
+    event: Event,
+    change: Change,
+    editor?: SlateEditor
+  ) => Change | void;
+  onChange?: (change: Change, editor?: SlateEditor) => any;
+  renderEditor?: (
+    props: RenderAttributes,
+    editor?: SlateEditor
+  ) => object | void;
   schema?: Schema;
   decorateNode?: (node: Node) => Range[] | void;
   renderMark?: (props: RenderMarkProps) => any;
@@ -126,8 +190,7 @@ export type SlateType =
 
 export function cloneFragment(
   event: Event,
-  value: Value,
-  fragment?: Document,
+  editor: SlateEditor,
   callback?: () => void
 ): void;
 export function findDOMNode(node: Node, win?: Window): Element;

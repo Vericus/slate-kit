@@ -3,8 +3,7 @@ import { Change } from "slate";
 
 export interface KeyBinding {
   hotkeys: string;
-  changeName?: string;
-  change?: (change: Change) => void;
+  commandName?: string;
 }
 
 export type MarkTypes = "bold" | "italic" | "underline" | "strikethrough";
@@ -20,9 +19,9 @@ export interface TypeOptions {
 
 const defaultOption: TypeOptions = {
   keyBindings: [
-    { hotkeys: "mod+b", changeName: "toggleBold" },
-    { hotkeys: "mod+i", changeName: "toggleItalic" },
-    { hotkeys: "mod+u", changeName: "toggleUnderline" }
+    { hotkeys: "mod+b", commandName: "toggleBold" },
+    { hotkeys: "mod+i", commandName: "toggleItalic" },
+    { hotkeys: "mod+u", commandName: "toggleUnderline" }
   ],
   marks: {
     bold: "bold",

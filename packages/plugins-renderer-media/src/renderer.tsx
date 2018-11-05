@@ -16,35 +16,31 @@ const createMediaRenderer = (imageType: any | undefined) => {
 
 const createMediaCaption = (
   imageType: any | undefined,
-  utils,
   captionHideField: string | null
 ) => {
-  const { getSource, hideCaption } = utils;
   const { type } = imageType || { type: undefined };
   return props =>
-    hideCaption(props.node) ? null : (
-      <ImageCaption {...props} imageType={type} getSource={getSource} />
+    props.editor.hideCaption(props.node) ? null : (
+      <ImageCaption {...props} imageType={type} />
     );
 };
 
 const createCaptionPlaceholder = (
   captionType: string,
-  imageType: string | undefined,
-  utils
+  imageType: string | undefined
 ) => {
-  const { getSource } = utils;
   return {
     condition: props => {
       if (!imageType) return false;
       if (props.node.type !== captionType) return false;
-      const { parent } = props;
+      const { parent, editor } = props;
       const imageBlock =
         imageType &&
         parent.nodes
           .toArray()
           .find(n => Block.isBlock(n) && n.type === imageType);
       if (imageBlock) {
-        const src = getSource(imageBlock);
+        const src = editor.getSource(imageBlock);
         return !((src && src === "") || !src) && props.node.text === "";
       }
       return props.node.text === "";
@@ -53,23 +49,13 @@ const createCaptionPlaceholder = (
   };
 };
 
-const createImage = (changes, utils, onInsert, extensions) => {
-  const { getImageWidth, getSource } = utils;
-  const { updateImageSource, toggleCaption } = changes;
+const createImage = (onInsert, extensions) => {
   return props => (
-    <Image
-      {...props}
-      extensions={extensions}
-      onInsert={onInsert}
-      getImageWidth={getImageWidth}
-      getSource={getSource}
-      updateImageSource={updateImageSource}
-      toggleCaption={toggleCaption}
-    />
+    <Image {...props} extensions={extensions} onInsert={onInsert} />
   );
 };
 
-export default function createRenderer(opts, changes, utils) {
+export default function createRenderer(opts) {
   const { mediaTypes, captionType, captionHideField } = opts;
   const { image } = mediaTypes || { image: undefined };
   let onInsert;
@@ -89,12 +75,10 @@ export default function createRenderer(opts, changes, utils) {
   return {
     nodes: {
       media: createMediaRenderer(image),
-      image: createImage(changes, utils, onInsert, extensions),
-      mediacaption: createMediaCaption(image, utils, captionHideField)
+      image: createImage(onInsert, extensions),
+      mediacaption: createMediaCaption(image, captionHideField)
     },
-    placeholders: [
-      createCaptionPlaceholder(captionType, image && image.type, utils)
-    ]
+    placeholders: [createCaptionPlaceholder(captionType, image && image.type)]
   };
 }
 

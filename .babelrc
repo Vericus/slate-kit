@@ -1,32 +1,30 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/env",
       {
         "modules": false
       }
     ],
-    "react",
-    "stage-0"
+    "@babel/react"
   ],
   "env": {
     "webpack": {
       "presets": [
         [
-          "env",
+          "@babel/env",
           {
             "modules": false
           }
         ],
-        "react",
-        "stage-0"
+        "@babel/react"
       ],
-      "plugins": ["transform-runtime", "react-hot-loader/babel"]
+      "plugins": ["@babel/plugin-transform-runtime"]
     },
     "test": {
       "presets": [
         [
-          "env",
+          "@babel/env",
           {
             "modules": "commonjs",
             "useBuiltIns": "usage",
@@ -34,36 +32,35 @@
           }
         ],
         "stage-0",
-        "react",
-        "jest"
+        "@babel/react",
+        "@babel/jest"
       ],
       "plugins": [
-        "transform-runtime",
-        "transform-es2015-modules-commonjs"
+        "@babel/plugin-transform-runtime",
+        "@babel/transform-modules-commonjs"
       ]
     },
     "build": {
       "presets": [
-        "react",
-        "env"
+        "@babel/react",
+        "@babel/env"
       ],
       "plugins": [
-        "transform-runtime",
-        "transform-class-properties",
-        "transform-object-rest-spread"
+        "@babel/plugin-transform-runtime",
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-object-rest-spread"
       ]
     },
     "gh-pages": {
       "presets": [
-         "env",
-         "stage-0",
-         "react"
+         "@babel/env",
+         "@babel/react"
       ],
       "plugins": [
-        ["babel-plugin-transform-builtin-extend", {
+        ["@babel/plugin-transform-builtin-extend", {
             "globals": ["Error", "Array"]
         }],
-        "transform-runtime"
+        "@babel/plugin-transform-runtime"
       ]
     }
   }

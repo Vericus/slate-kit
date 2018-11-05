@@ -1,24 +1,28 @@
-import { Change } from "slate";
+import { Editor } from "slate";
 import hotkeys from "slate-hotkeys";
 import Options, { TypeOptions } from "./options";
-import * as utils from "./utils";
+// import CreateCommands from "./commands";
+// import CreateQueries from "./queries";
 
 export default function History(pluginOptions: TypeOptions = {}) {
   const opts = new Options(pluginOptions);
   const { onUndo, onRedo } = opts;
 
-  function onKeyDown(e: KeyboardEvent, change: Change) {
-    const { value } = change;
+  // const queries = CreateQueries(opts);
+  // const commands = CreateCommands(opts);
+
+  function onKeyDown(e: KeyboardEvent, editor: Editor, next) {
     if (hotkeys.isUndo(e)) {
-      return utils.handleUndo(value, change, onUndo);
+      return editor.handleUndo(onUndo);
     } else if (hotkeys.isRedo(e)) {
-      return utils.handleRedo(value, change, onRedo);
+      return editor.handleRedo(onRedo);
     }
-    return undefined;
+    return next();
   }
 
   return {
-    onKeyDown,
-    utils
+    // commands,
+    // queries,
+    // onKeyDown
   };
 }

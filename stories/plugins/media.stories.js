@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import { storiesOf } from "@storybook/react";
 import { Value } from "slate";
-import { withKnobs, boolean } from "@storybook/addon-knobs/react";
+import { withKnobs, boolean } from "@storybook/addon-knobs";
 import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
 import BasicTypography from "@vericus/slate-kit-basic-typhography";
 import HighlightText from "@vericus/slate-kit-highlight-text";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import MediaPlugin from "@vericus/slate-kit-media";
+import Util from "@vericus/slate-kit-plugins-utils";
 import MediaToolbar from "../support/plugins/mediaToolbar";
 import initialState from "../states/media.json";
 import Editor from "../support/components/editor";
 
 const pluginOpts = [
+  { label: "util", createPlugin: Util },
   {
     label: "history",
     createPlugin: HistoryPlugin

@@ -204,7 +204,7 @@ class ColorPicker extends Component {
 export default class Toolbar extends Component {
   constructor(props) {
     super(props);
-    const { pluginsWrapper } = props;
+    const { pluginsWrapper, editor } = props;
     const hasTypography = pluginsWrapper.getChanges("basic-typhography");
     const hasMarks = pluginsWrapper.getChanges("basic-text-format");
     this.indentChanges = pluginsWrapper.getChanges("indent");

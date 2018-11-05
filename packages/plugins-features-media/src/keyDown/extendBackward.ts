@@ -1,14 +1,13 @@
 import { Change } from "slate";
-import { Editor } from "slate-react";
 
 export default function extendBackward(
+  editor,
   types,
   captionType,
   event,
-  change: Change,
-  editor: Editor
+  next
 ) {
-  const { value } = change;
+  const { value } = editor;
   const {
     document,
     selection,
@@ -24,8 +23,9 @@ export default function extendBackward(
       (focus.offset !== 0 && isBackward) ||
       (!isBackward && !(isCollapsed && focus.offset === 0))
     ) {
-      change.moveFocusBackward(1);
+      editor.moveFocusBackward(1);
     }
-    return true;
+    return;
   }
+  return next();
 }

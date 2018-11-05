@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Block, Change } from "slate";
+import { Block, Change, Editor, Node } from "slate";
 import { Props as GenericProps } from "../types";
 import ImageUploader from "./ImageUploader";
 
@@ -10,10 +10,6 @@ interface States {
 }
 
 interface Props extends GenericProps {
-  getSource: (block: Block) => string;
-  getImageWidth: (block: Block) => string;
-  updateImageSource: (change: Change, block: Block, src: string) => any;
-  toggleCaption: (change: Change, node?: Block) => any;
   extensions: string;
   onInsert: (...args: any[]) => any;
 }
@@ -21,19 +17,21 @@ interface Props extends GenericProps {
 export default class Image extends React.Component<Props, States> {
   constructor(props) {
     super(props);
+    const { editor } = this.props;
     this.state = {
       src: Block.isBlock(this.props.node)
-        ? this.props.getSource(this.props.node)
+        ? editor.getSource(this.props.node)
         : "",
       width: Block.isBlock(this.props.node)
-        ? this.props.getImageWidth(this.props.node)
+        ? editor.getImageWidth(this.props.node)
         : ""
     };
   }
 
   static getDerivedStateFromProps(props, state) {
-    const width = props.getImageWidth(props.node);
-    const src = props.getSource(props.node);
+    const { editor, node } = props;
+    const width = editor.getImageWidth(node);
+    const src = editor.getSource(node);
     if (width !== state.width || src !== state.src) {
       return {
         ...state,
@@ -45,11 +43,11 @@ export default class Image extends React.Component<Props, States> {
   }
 
   onImageSelected = src => {
-    const { node, updateImageSource, editor, toggleCaption } = this.props;
+    const { node, editor } = this.props;
     if (Block.isBlock(node)) {
       editor.change(c => {
-        updateImageSource(c, node, src);
-        toggleCaption(c, node);
+        editor.updateImageSource(node, src);
+        editor.toggleCaption(node);
       });
     }
   };

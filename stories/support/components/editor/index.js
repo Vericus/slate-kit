@@ -29,6 +29,7 @@ export default class SlateKitEditor extends Component {
     };
     this.pluginsWrapper = new PluginsWrapper();
     this.plugins = this.pluginsWrapper.makePlugins(this.props.pluginOpts);
+    this.editorRef = React.createRef();
   }
 
   onChange = ({ value }) => {
@@ -54,13 +55,14 @@ export default class SlateKitEditor extends Component {
       value={this.state.value}
       onChange={this.onChange}
       isReadOnly={this.props.isReadOnly}
+      editor={this.editorRef}
     />
   );
 
   render() {
     return (
       <div>
-        {this.renderToolbar()}
+        {/* {this.renderToolbar()} */}
         <div className="editorContainer">
           <EnchancedEditor
             placeholder={"Enter some text..."}
@@ -69,6 +71,7 @@ export default class SlateKitEditor extends Component {
             onChange={this.onChange}
             onPaste={this.onPaste}
             pluginsWrapper={this.pluginsWrapper}
+            ref={this.editorRef}
             {...this.props}
           />
         </div>

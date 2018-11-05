@@ -1,14 +1,7 @@
 import { Change } from "slate";
-import { Editor } from "slate-react";
 
-export default function extendForward(
-  types,
-  captionType,
-  event,
-  change: Change,
-  editor: Editor
-) {
-  const { value } = change;
+export default function extendForward(editor, types, captionType, event, next) {
+  const { value } = editor;
   const {
     document,
     selection,
@@ -21,8 +14,9 @@ export default function extendForward(
   if (startBlock === endBlock && startBlock.type === captionType) {
     event.preventDefault();
     if ((isForward && focus.offset !== startBlock.text.length) || !isForward) {
-      change.moveFocusForward(1);
+      editor.moveFocusForward(1);
     }
-    return true;
+    return;
   }
+  return next();
 }

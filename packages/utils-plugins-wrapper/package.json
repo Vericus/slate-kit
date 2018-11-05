@@ -41,17 +41,17 @@
     "@vericus/slate-kit-html-serializer": "^0.1.2",
     "debug": ">=3.1.0",
     "es6-symbol": ">=3.1.1",
-    "immutable": "^3.8.2",
+    "immutable": ">=3.8.2",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "slate": ">=0.41.0 <0.42.0",
+    "slate": ">=0.43.0 <0.44.0",
     "slate-simulator": ">=0.4.59",
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
     "@vericus/slate-kit-html-serializer": "^0.1.0",
-    "slate": ">=0.41.0 <0.42.0"
+    "slate": ">=0.43.0 <0.44.0"
   },
   "keywords": [
     "Vericus",

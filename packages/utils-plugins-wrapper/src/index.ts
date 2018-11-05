@@ -1,12 +1,10 @@
 import Symbol from "es6-symbol";
 import HTMLSerializer from "@vericus/slate-kit-html-serializer";
 
-const CHANGES = Symbol("changes");
 const OPTIONS = Symbol("options");
 const PLUGINS = Symbol("plugins");
 const PROPS = Symbol("props");
 const STYLES = Symbol("styles");
-const UTILS = Symbol("utils");
 const RULES = Symbol("rules");
 const RENDERERS = Symbol("renderers");
 const RENDERERSHOC = Symbol("hocs");
@@ -74,20 +72,16 @@ export interface PluginOption {
 
 export default class PluginsWrapper {
   serializer: null | object;
-  CHANGES: ObjectMap;
   OPTIONS: ObjectMap;
-  UTILS: ObjectMap;
   STYLES: StylesMap;
   RULES: RulesMap;
   RENDERERS: RenderersMap;
   RENDERERSHOC: ObjectMap;
   constructor() {
-    this[CHANGES] = {};
     this[OPTIONS] = {};
     this[PLUGINS] = {};
     this[PROPS] = {};
     this[STYLES] = {};
-    this[UTILS] = {};
     this[RULES] = {};
     this[RENDERERS] = {};
     this[RENDERERSHOC] = {};
@@ -220,11 +214,6 @@ export default class PluginsWrapper {
       }
     );
 
-  getUtils = (label?: string) => (label ? this[UTILS][label] : this[UTILS]);
-
-  getChanges = (label?: string) =>
-    label ? this[CHANGES][label] : this[CHANGES];
-
   getPlugins = (label?: string) =>
     label
       ? this.getFlattenPlugins(this[PLUGINS], label)
@@ -286,27 +275,6 @@ export default class PluginsWrapper {
           };
         } else {
           this[STYLES][label] = value;
-        }
-        break;
-      case "utils":
-      case "helpers":
-        if (this[UTILS][label]) {
-          this[UTILS][label] = {
-            ...this[UTILS][label],
-            ...value
-          };
-        } else {
-          this[UTILS][label] = value;
-        }
-        break;
-      case "changes":
-        if (this[CHANGES][label]) {
-          this[CHANGES][label] = {
-            ...this[CHANGES][label],
-            ...value
-          };
-        } else {
-          this[CHANGES][label] = value;
         }
         break;
       case "props":

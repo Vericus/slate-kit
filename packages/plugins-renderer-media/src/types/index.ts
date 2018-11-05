@@ -1,5 +1,4 @@
-import { Node } from "slate";
-import { Editor } from "slate-react";
+import { Node, Editor } from "slate";
 export interface Props {
   attributes: any;
   children: JSX.Element;

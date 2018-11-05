@@ -1,9 +1,7 @@
-import { Change } from "slate";
+import { Editor } from "slate";
 import { isKeyHotkey } from "is-hotkey";
 import hotkeys from "slate-hotkeys";
 import { TypeOptions } from "../options";
-import { resetStartAt, unwrapList } from "../changes";
-import { isListNode } from "../utils";
 
 export default function createOnKeyDown(
   opts: TypeOptions,
@@ -22,8 +20,8 @@ export default function createOnKeyDown(
   const isDelete = e =>
     isDeleteBackward(e) || isDeleteLineBackward(e) || isDeleteWordBackward(e);
 
-  return (e, change: Change) => {
-    const { value } = change;
+  return (e, editor: Editor, next) => {
+    const { value } = editor;
     const { startBlock, endBlock, selection } = value;
     const {
       isCollapsed,
@@ -31,7 +29,7 @@ export default function createOnKeyDown(
     } = selection;
     const isIndent = isTab(e) && !isShiftTab(e);
     const isSplitBlock =
-      isEnter(e) && !isShiftEnter(e) && isListNode(blockTypes, startBlock);
+      isEnter(e) && !isShiftEnter(e) && editor.isListNode(startBlock);
     const isDeleting = isDelete(e);
     const isOutdent =
       isShiftTab(e) ||
@@ -39,50 +37,50 @@ export default function createOnKeyDown(
         startBlock === endBlock &&
         isCollapsed &&
         startOffset === 0);
-    if (!(isIndent || isSplitBlock || isOutdent)) return undefined;
+    if (!(isIndent || isSplitBlock || isOutdent)) return next();
     if (isIndent) {
       e.preventDefault();
       e.stopPropagation();
-      resetStartAt(opts, change);
-      return undefined;
+      editor.resetStartAt();
+      return next();
     } else if (isSplitBlock) {
       const { text, data, key } = startBlock;
       if (startBlock === endBlock && isCollapsed && text === "") {
         e.preventDefault();
         e.stopPropagation();
-        unwrapList(opts, change, true, pluginsWrapper);
-        return true;
+        editor.unwrapList(true, pluginsWrapper);
+        return;
       } else if (startBlock === endBlock && startOffset === text.length) {
-        change.insertBlock({
+        editor.insertBlock({
           type: startBlock.type,
           data: data.delete(startAtField).delete(checkField)
         });
-        return true;
+        return;
       } else if (startBlock === endBlock) {
-        change.setNodeByKey(key, {
+        editor.setNodeByKey(key, {
           data: data.delete(startAtField).delete(checkField)
         });
         if (startOffset !== 0) {
-          change.splitBlock(1);
+          editor.splitBlock(1);
         } else {
-          change.insertBlock({
+          editor.insertBlock({
             type: startBlock.type,
             data: data.delete(startAtField).delete(checkField)
           });
         }
-        change.setNodeByKey(key, {
+        editor.setNodeByKey(key, {
           data
         });
-        return true;
+        return;
       }
-      return undefined;
+      return next();
     }
-    if (isListNode(blockTypes, startBlock)) {
+    if (editor.isListNode(blockTypes, startBlock)) {
       e.preventDefault();
       e.stopPropagation();
-      unwrapList(opts, change, isDeleting, pluginsWrapper);
-      return true;
+      editor.unwrapList(isDeleting, pluginsWrapper);
+      return;
     }
-    return undefined;
+    return next();
   };
 }
