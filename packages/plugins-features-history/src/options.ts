@@ -1,9 +1,9 @@
-import { Record } from "immutable";
-import { Change } from "slate";
+import { Record, List } from "immutable";
+import { Operation } from "slate";
 
 export interface TypeOptions {
-  onUndo?: (change: Change) => void;
-  onRedo?: (change: Change) => void;
+  onUndo?: (operations: List<Operation>) => void;
+  onRedo?: (operations: List<Operation>) => void;
 }
 
 const defaultOptions: TypeOptions = {
@@ -12,8 +12,8 @@ const defaultOptions: TypeOptions = {
 };
 
 class Options extends Record(defaultOptions) {
-  onUndo: (change: Change) => void;
-  onRedo: (change: Change) => void;
+  onUndo: (operations: List<Operation>) => void;
+  onRedo: (operations: List<Operation>) => void;
 }
 
 export default Options;

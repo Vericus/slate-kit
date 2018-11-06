@@ -27,7 +27,6 @@ export default function createBasicTextFormatPlugin(
     },
     ...(withHandlers ? createKeyBindings(options) : [])
   ];
-  console.log(plugins);
   if (!externalRenderer || pluginsWrapper) {
     plugins = [...plugins, Renderer()];
   }
