@@ -1,5 +1,5 @@
 import Renderer from "@vericus/slate-kit-indentable-list-renderer";
-import AutoReplace from "slate-auto-replace";
+import AutoReplace from "@vericus/slate-kit-utils-auto-replace";
 import createProps from "./props";
 import Options, { TypeOptions } from "./options";
 import createQueries from "./queries";
@@ -21,7 +21,7 @@ export function createPlugin(
   const props = createProps(options, pluginsWrapper);
   const rules = createRule;
   const onKeyDown = createOnKeyDown(options, pluginsWrapper);
-  let plugins = [
+  let plugins: any[] = [
     {
       rules,
       queries,
@@ -34,36 +34,36 @@ export function createPlugin(
     ...(options.withHandlers
       ? [
           AutoReplace({
-            trigger: "space",
-            before: /^(\d+)(\.)$/,
-            change: (editor, e, matches) => {
-              const type = orderedlist;
-              return editor
-                .createListWithType(type, matches.before[1])
-                .normalize();
+            trigger: " ",
+            before: /^(\d+\.)$/,
+            command: (editor, matches, next) => {
+              if (matches && matches.before && matches.before[0]) {
+                const numMatch = matches.before[0].match(/(^\d+)/);
+                numMatch &&
+                  numMatch[0] &&
+                  editor.createListWithType(orderedlist, numMatch[0]);
+                return;
+              }
+              return next();
             }
           }),
           AutoReplace({
-            trigger: "space",
+            trigger: " ",
             before: /^(-)$/,
-            change: (editor, e, matches) => {
-              const type = unorderedlist;
-              return editor.createListWithType(type).normalize();
-            }
+            command: (editor, matches, next) =>
+              editor.createListWithType(unorderedlist)
           }),
           AutoReplace({
-            trigger: "space",
+            trigger: " ",
             before: /^(\[\])$/,
-            change: (editor, e, matches) => {
-              const type = checklist;
-              return editor.createListWithType(type).normalize();
-            }
+            command: (editor, matches, next) =>
+              editor.createListWithType(checklist)
           })
         ]
       : [])
   ];
   if (!options.externalRenderer) {
-    plugins = [...plugins, { ...Renderer() }];
+    plugins = [Renderer(), ...plugins];
   }
   return {
     plugins

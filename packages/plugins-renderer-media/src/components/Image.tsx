@@ -45,10 +45,7 @@ export default class Image extends React.Component<Props, States> {
   onImageSelected = src => {
     const { node, editor } = this.props;
     if (Block.isBlock(node)) {
-      editor.change(c => {
-        editor.updateImageSource(node, src);
-        editor.toggleCaption(node);
-      });
+      editor.updateImageSource(node, src).toggleCaption(node);
     }
   };
 

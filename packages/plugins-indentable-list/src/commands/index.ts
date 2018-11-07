@@ -56,7 +56,7 @@ function createChangeListType(opts: TypeOptions) {
       editor.withoutNormalizing(e =>
         selectedBlocks.forEach(block => {
           if (block && Block.isBlock(block)) {
-            e.setNodeByKey(block.key, "paragraph");
+            e.setToDefaultNodeByKey(block.key);
           }
         })
       );
@@ -85,6 +85,7 @@ function createListWithType(
   const { startBlock } = value;
   editor.withoutNormalizing(c => {
     if (startAt) {
+      console.log("called");
       c.setNodeByKey(startBlock.key, {
         type,
         data: startBlock.data.set(startAtField, startAt)
@@ -101,7 +102,7 @@ function unwrapList(opts: TypeOptions, editor: Editor, isDelete: boolean) {
   if (editor.canBeOutdented(value)) {
     editor.decreaseIndent();
   } else if (isDelete) {
-    editor.setNodeByKey(startBlock.key, "paragraph");
+    editor.setToDefaultNodeByKey(startBlock.key);
   }
 }
 

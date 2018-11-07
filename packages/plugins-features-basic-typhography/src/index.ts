@@ -9,7 +9,7 @@ export default function createPlugin(
   pluginOptions: TypeOptions,
   pluginsWrapper: any
 ) {
-  const options = new Options(pluginOptions);
+  const options = Options.create(pluginOptions);
   const queries = createQueries(options);
   const commands = createCommands(options);
   const schema = createSchema(options);

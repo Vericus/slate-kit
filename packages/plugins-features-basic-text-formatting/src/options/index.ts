@@ -38,6 +38,14 @@ class Options extends Record(defaultOption) {
   keyBindings: KeyBinding[];
   marks: TextMark;
   withHandlers: boolean;
+
+  static create(option: Partial<TypeOptions>): TypeOptions {
+    let options = {
+      ...defaultOption,
+      ...option
+    };
+    return new Options(options);
+  }
 }
 
 export default Options;

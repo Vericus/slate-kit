@@ -11,7 +11,7 @@ export default function createBasicTextFormatPlugin(
   pluginOptions: Partial<TypeOptions>,
   pluginsWrapper?: PluginsWrapper
 ) {
-  const options = new Options(pluginOptions);
+  const options = Options.create(pluginOptions);
   const commands = createCommands(options);
   const queries = createQueries(options);
   const style = createStyle(options);

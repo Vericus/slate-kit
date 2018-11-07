@@ -48,7 +48,7 @@ export default function createOnKeyDown(
       if (startBlock === endBlock && isCollapsed && text === "") {
         e.preventDefault();
         e.stopPropagation();
-        editor.unwrapList(true, pluginsWrapper);
+        editor.unwrapList(true);
         return;
       } else if (startBlock === endBlock && startOffset === text.length) {
         editor.insertBlock({
@@ -78,7 +78,7 @@ export default function createOnKeyDown(
     if (editor.isListNode(blockTypes, startBlock)) {
       e.preventDefault();
       e.stopPropagation();
-      editor.unwrapList(isDeleting, pluginsWrapper);
+      editor.unwrapList(isDeleting);
       return;
     }
     return next();

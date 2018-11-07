@@ -2,7 +2,7 @@ import { Editor, Block } from "slate";
 import { TypeOptions } from "../options";
 
 export default function createCommands(pluginOptions: TypeOptions) {
-  const { blockTypes } = pluginOptions;
+  const { blockTypes, defaultBlock } = pluginOptions;
   const validBlockTypes: { [key: string]: string } = Object.entries(
     blockTypes
   ).reduce((types, [type, typeName]) => {
@@ -33,6 +33,16 @@ export default function createCommands(pluginOptions: TypeOptions) {
         });
         editor.focus();
       }
-    }
+    },
+    insertDefault: (editor: Editor) =>
+      blockTypes &&
+      defaultBlock &&
+      blockTypes[defaultBlock] &&
+      editor.insertBlock(blockTypes[defaultBlock]),
+    setToDefaultNodeByKey: (editor: Editor, key: string) =>
+      blockTypes &&
+      defaultBlock &&
+      blockTypes[defaultBlock] &&
+      editor.setNodeByKey(key, blockTypes[defaultBlock])
   };
 }

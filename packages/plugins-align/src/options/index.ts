@@ -7,7 +7,7 @@ export interface TypeOptions {
   dataField: string;
 }
 
-const defaultOption: TypeOptions = {
+export const defaultOption: TypeOptions = {
   floatBlocks: [],
   textBlocks: [
     "paragraph",
@@ -26,6 +26,14 @@ class Options extends Record(defaultOption) {
   textBlocks: string[];
   alignments: string[];
   dataField: string;
+
+  static create(option: Partial<TypeOptions>): TypeOptions {
+    let options = {
+      ...defaultOption,
+      ...option
+    };
+    return new Options(options);
+  }
 }
 
 export default Options;

@@ -6,7 +6,7 @@ import CreateSchema from "./schemas";
 import createStyle from "./style";
 
 function createAlignPlugin(pluginOptions: Partial<TypeOptions> = {}) {
-  const options = new Options(pluginOptions);
+  const options = Options.create(pluginOptions);
   const queries = CreateQueries(options);
   const commands = CreateCommands(options);
   const props = CreateProps(options);
