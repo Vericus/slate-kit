@@ -39,9 +39,9 @@ export function createPlugin(
             command: (editor, matches, next) => {
               if (matches && matches.before && matches.before[0]) {
                 const numMatch = matches.before[0].match(/(^\d+)/);
-                numMatch &&
-                  numMatch[0] &&
+                if (numMatch && numMatch[0]) {
                   editor.createListWithType(orderedlist, numMatch[0]);
+                }
                 return;
               }
               return next();

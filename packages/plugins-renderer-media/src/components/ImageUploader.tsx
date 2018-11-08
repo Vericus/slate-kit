@@ -65,6 +65,13 @@ export default class ImageUploader extends React.Component<
       fileInput.click();
     }
   };
+  onImageChange = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.target && e.target.files) {
+      this.onImageSelected(e.target.files[0]);
+    }
+  };
   render() {
     if (!this.state.src || this.state.src === "") {
       return (
@@ -76,13 +83,7 @@ export default class ImageUploader extends React.Component<
             multiple={false}
             accept={this.props.extensions}
             style={{ display: "none" }}
-            onChange={e => {
-              e.preventDefault();
-              e.stopPropagation();
-              if (e.target && e.target.files) {
-                this.onImageSelected(e.target.files[0]);
-              }
-            }}
+            onChange={this.onImageChange}
             capture
           />
         </div>

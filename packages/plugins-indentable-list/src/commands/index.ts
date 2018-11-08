@@ -4,18 +4,20 @@ import { TypeOptions } from "../options";
 
 function resetBlockStartAt(opts: TypeOptions, editor: Editor, block: Block) {
   const { startAtField } = opts;
-  block &&
+  if (block) {
     editor.setNodeByKey(block.key, {
       data: block.data.delete(startAtField)
     });
+  }
 }
 
 function resetBlockChecked(opts: TypeOptions, editor: Editor, block: Block) {
   const { checkField } = opts;
-  block &&
+  if (block) {
     editor.setNodeByKey(block.key, {
       data: block.data.delete(checkField)
     });
+  }
 }
 
 function resetStartAt(opts: TypeOptions, editor: Editor) {
@@ -85,7 +87,6 @@ function createListWithType(
   const { startBlock } = value;
   editor.withoutNormalizing(c => {
     if (startAt) {
-      console.log("called");
       c.setNodeByKey(startBlock.key, {
         type,
         data: startBlock.data.set(startAtField, startAt)

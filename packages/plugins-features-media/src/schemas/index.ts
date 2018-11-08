@@ -27,11 +27,11 @@ export default function createSchema(opts: TypeOption) {
           }
         ],
         last: {
-          type: type =>
+          type: nodeType =>
             [
               ...Object.values(mediaTypes).map(mediaType => mediaType.type),
               captionType
-            ].includes(type)
+            ].includes(nodeType)
         },
         normalize: (change: Change, error: SlateError) => {
           switch (error.code) {

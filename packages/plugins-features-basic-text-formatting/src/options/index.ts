@@ -40,7 +40,7 @@ class Options extends Record(defaultOption) {
   withHandlers: boolean;
 
   static create(option: Partial<TypeOptions>): TypeOptions {
-    let options = {
+    const options = {
       ...defaultOption,
       ...option
     };

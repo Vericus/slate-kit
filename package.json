@@ -19,7 +19,7 @@
     "build:packages": "rollup --config ./support/rollup/config.js",
     "clean": "lerna clean --yes && lerna run clean && rm -rf ./node_modules",
     "gh-pages": "NODE_ENV=gh-pages babel-node support/gh-pages/deploy.js",
-    "lint": "tslint packages",
+    "lint": "tslint --project .",
     "new-module": "support/script/new-module",
     "precommit": "lint-staged",
     "prettier": "prettier --write '**/*.{js,jsx,md,json,css}'",

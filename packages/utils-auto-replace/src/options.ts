@@ -27,7 +27,7 @@ class Options extends Record(defaultOption) {
   command: (editor: Editor, matches: Matches, next) => any;
 
   static create(option: Partial<TypeOptions>): TypeOptions {
-    let options = {
+    const options = {
       ...defaultOption,
       ...option
     };

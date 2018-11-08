@@ -28,7 +28,7 @@ class Options extends Record(defaultOption) {
   dataField: string;
 
   static create(option: Partial<TypeOptions>): TypeOptions {
-    let options = {
+    const options = {
       ...defaultOption,
       ...option
     };

@@ -19,43 +19,43 @@ export default function AutoReplace(pluginOptions: Partial<TypeOptions> = {}) {
     const { selection, startText } = value;
     const { start } = selection;
     const { text } = startText;
-    let after: any[] | null = null;
-    let before: any[] | null = null;
+    let afterMatches: any[] | null = null;
+    let beforeMatches: any[] | null = null;
 
-    if (options.after) {
-      const string = text.slice(start.offset);
-      after = string.match(options.after);
+    if (after) {
+      const textString = text.slice(start.offset);
+      afterMatches = textString.match(after);
     }
 
-    if (options.before) {
-      const string = text.slice(0, start.offset);
-      before = string.match(options.before);
+    if (before) {
+      const textString = text.slice(0, start.offset);
+      beforeMatches = textString.match(before);
     }
 
     // If both sides, require that both are matched, otherwise null.
-    if (options.before && options.after && !before) after = null;
-    if (options.before && options.after && !after) before = null;
+    if (before && after && !beforeMatches) afterMatches = null;
+    if (before && after && !afterMatches) beforeMatches = null;
 
     // Return null unless we have a match.
-    if (!before && !after) return null;
+    if (!beforeMatches && !afterMatches) return null;
 
-    if (after) after[0] = after[0].replace(/\s+$/, "");
-    if (before) before[0] = before[0].replace(/^\s+/, "");
+    if (afterMatches) afterMatches[0] = afterMatches[0].replace(/\s+$/, "");
+    if (beforeMatches) beforeMatches[0] = beforeMatches[0].replace(/^\s+/, "");
 
-    return { before, after };
+    return { beforeMatches, afterMatches };
   }
 
   function getOffsets(matches, start) {
-    const { before, after } = matches;
+    const { beforeMatches, afterMatches } = matches;
     const offsets: Offset[] = [];
     let totalRemoved = 0;
 
-    if (before) {
-      const match = before[0];
+    if (beforeMatches) {
+      const match = beforeMatches[0];
       let startOffset = 0;
       let matchIndex = 0;
 
-      before.slice(1, before.length).forEach(current => {
+      beforeMatches.slice(1, beforeMatches.length).forEach(current => {
         if (current === undefined) return;
 
         matchIndex = match.indexOf(current, matchIndex);
@@ -72,12 +72,12 @@ export default function AutoReplace(pluginOptions: Partial<TypeOptions> = {}) {
       });
     }
 
-    if (after) {
-      const match = after[0];
+    if (afterMatches) {
+      const match = afterMatches[0];
       let startOffset = 0;
       let matchIndex = 0;
 
-      after.slice(1, after.length).forEach(current => {
+      afterMatches.slice(1, afterMatches.length).forEach(current => {
         if (current === undefined) return;
 
         matchIndex = match.indexOf(current, matchIndex);
@@ -124,8 +124,8 @@ export default function AutoReplace(pluginOptions: Partial<TypeOptions> = {}) {
   }
 
   return {
-    onCommand: (command, editor, next) => {
-      const { type, args } = command;
+    onCommand: (editorCommand, editor, next) => {
+      const { type, args } = editorCommand;
       if (type === "insertText" && args[0] && args[0] === trigger) {
         return replace(editor, next);
       }

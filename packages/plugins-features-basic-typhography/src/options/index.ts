@@ -35,7 +35,7 @@ class Options extends Record(defaultOptions, "Typhography Options") {
   externalRenderer: boolean;
 
   static create(option: Partial<TypeOptions>): TypeOptions {
-    let options = {
+    const options = {
       ...defaultOptions,
       ...option
     };
