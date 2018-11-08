@@ -4,9 +4,7 @@ import { IconButton } from "../../components/toolbar";
 class ToolbarButton extends React.Component {
   onMouseDown = e => {
     e.preventDefault();
-    this.props.editor.change(change => {
-      this.props.change(change);
-    });
+    this.props.change();
   };
   render() {
     return (
@@ -26,9 +24,7 @@ class ToolbarButton extends React.Component {
 }
 
 const Toolbar = props => {
-  const { changes, editor, node, utils } = props;
-  const { changeWidth, toggleCaption, deleteMedia } = changes;
-  const { hasCaption, getClosestMedia, getImageWidth } = utils;
+  const { editor, node } = props;
   return (
     <div
       style={{
@@ -43,40 +39,39 @@ const Toolbar = props => {
       }}
     >
       <ToolbarButton
-        change={change => changeWidth(change, "fitToText")}
-        active={getImageWidth(node) === "fitToText"}
+        change={() => editor.changeWidth("fitToText")}
+        active={editor.getImageWidth(node) === "fitToText"}
         {...props}
       >
         Fit
       </ToolbarButton>
       <ToolbarButton
-        change={change => changeWidth(change, "full")}
-        active={getImageWidth(node) === "full"}
+        change={() => editor.changeWidth("full")}
+        active={editor.getImageWidth(node) === "full"}
         {...props}
       >
         Full
       </ToolbarButton>
       <ToolbarButton
-        change={change => changeWidth(change, "original")}
-        active={getImageWidth(node) === "original"}
+        change={() => editor.changeWidth("original")}
+        active={editor.getImageWidth(node) === "original"}
         {...props}
       >
         Original
       </ToolbarButton>
       <ToolbarButton
-        change={change => {
-          toggleCaption(
-            change,
-            getClosestMedia(change.value.document, node),
+        change={() => {
+          editor.toggleCaption(
+            editor.getClosestMedia(editor.value.document, node),
             true
           );
         }}
-        active={hasCaption(editor.value.document, node)}
+        active={editor.hasCaption(editor.value.document, node)}
         {...props}
       >
         Cap
       </ToolbarButton>
-      <ToolbarButton change={change => deleteMedia(change)} {...props}>
+      <ToolbarButton change={() => editor.deleteMedia()} {...props}>
         Delete
       </ToolbarButton>
     </div>
