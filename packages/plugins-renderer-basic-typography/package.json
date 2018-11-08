@@ -55,7 +55,7 @@
   "peerDependencies": {
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "slate": ">=0.32.0",
+    "slate" : ">=0.43.0 <0.44.0",
     "slate-prop-types": ">=0.5.7"
   },
   "keywords": [

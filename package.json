@@ -118,7 +118,6 @@
     "rollup-plugin-uglify": "^6.0.0",
     "rollup-plugin-visualizer": "^0.9.0",
     "slate": ">=0.43.0 <0.44.0",
-    "slate-auto-replace": "^0.12.0",
     "slate-base64-serializer": "*",
     "slate-dev-environment": "*",
     "slate-hotkeys": "*",
@@ -145,7 +144,6 @@
     "npm": "^5.8.0"
   },
   "resolutions": {
-    "slate-auto-replace/**/is-hotkey": "^0.1.2",
     "is-hotkey": "^0.1.2",
     "rollup-plugin-babel/**/rollup-pluginutils": "^2.0.1"
   }

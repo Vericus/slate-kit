@@ -20,24 +20,20 @@ const createRenderToolbar = (
   return result;
 };
 
-const defaultMark = props => (
-  <span {...props.attributes}>{props.children}</span>
-);
-
-const createRenderMarks = (
-  marksOptions,
-  pluginsWrapper: PluginsWrapper
-) => props => {
+const createRenderMarks = (marksOptions, pluginsWrapper: PluginsWrapper) => (
+  props,
+  editor,
+  next
+) => {
   const newProps = pluginsWrapper.getProps(props);
-  return (
-    <SlateKitNode>
-      {() =>
-        marksOptions[props.mark.type]
-          ? marksOptions[props.mark.type](newProps)
-          : defaultMark(newProps)
-      }
-    </SlateKitNode>
-  );
+  if (marksOptions[props.mark.type]) {
+    return (
+      <SlateKitNode>
+        {() => marksOptions[props.mark.type](newProps)}
+      </SlateKitNode>
+    );
+  }
+  return next();
 };
 const createRenderNodes = (
   nodesOptions,
@@ -55,8 +51,8 @@ const createRenderNodes = (
             nodeRenderer
               ? nodeRenderer(newProps)
               : nodesOptions.default
-                ? nodesOptions.default(newProps)
-                : null
+              ? nodesOptions.default(newProps)
+              : null
           }
         </SlateKitNode>
       </React.Fragment>
