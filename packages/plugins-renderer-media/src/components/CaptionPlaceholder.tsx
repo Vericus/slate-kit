@@ -5,12 +5,14 @@ const CaptionPlaceholder: React.SFC<Props> = props => {
   const { isSelected, children } = props;
   const placeholderStyle: React.CSSProperties = {
     pointerEvents: "none",
-    display: "inline-block",
-    maxWidth: "100%",
+    display: "inline-flex",
+    width: "100%",
     whiteSpace: "nowrap",
+    flexDirection: "column-reverse",
     opacity: 0.333
   };
   const innerStyle: React.CSSProperties = {
+    position: "absolute",
     whiteSpace: "pre-wrap",
     width: "100%",
     left: 0,
@@ -19,20 +21,18 @@ const CaptionPlaceholder: React.SFC<Props> = props => {
     overflow: "hidden"
   };
   return (
-    <React.Fragment>
-      <span
-        contentEditable={false}
-        style={placeholderStyle}
-        className="placeholder"
-      >
-        {isSelected ? null : (
-          <span className="innerPlaceholder" style={innerStyle}>
-            Add Caption Here
-          </span>
-        )}
-      </span>
+    <span style={placeholderStyle} className="placeholder">
+      {isSelected ? null : (
+        <span
+          contentEditable={false}
+          className="innerPlaceholder"
+          style={innerStyle}
+        >
+          Add Caption Here
+        </span>
+      )}
       {children}
-    </React.Fragment>
+    </span>
   );
 };
 
