@@ -1,6 +1,6 @@
 {
-  "version": "0.0.3",
-  "name": "@vericus/slate-kit-media-renderer",
+  "version": "0.0.1",
+  "name": "@vericus/slate-kit-utils-placeholders",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
@@ -17,11 +17,11 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-media-renderer.js",
+  "main": "lib/slate-kit-utils-placeholders.js",
   "types": "lib/index.d.ts",
-  "module": "lib/slate-kit-media-renderer.es.js",
-  "umd": "dist/slate-kit-media-renderer.js",
-  "umdMin": "dist/slate-kit-media-renderer.min.js",
+  "module": "lib/slate-kit-utils-placeholders.es.js",
+  "umd": "dist/slate-kit-utils-placeholders.js",
+  "umdMin": "dist/slate-kit-utils-placeholders.min.js",
   "scripts": {
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
@@ -31,28 +31,23 @@
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate",
-    "react": "React",
-    "tslib": "TSLib"
+    "slate": "Slate"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-placeholders": "^0.0.1",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
+    "immutable": ">=3.8.2",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "slate": ">=0.43.0 <0.44.0",
-    "slate-prop-types": ">=0.5.7"
+    "slate": ">=0.43.0 <0.44.0"
   },
   "peerDependencies": {
-    "@vericus/slate-kit-utils-placeholders": "^0.0.1",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "slate": ">=0.43.0 <0.44.0",
-    "slate-prop-types": ">=0.5.7"
+    "slate": ">=0.43.0 <0.44.0"
   },
   "keywords": [
     "Vericus",

@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Node, Block } from "slate";
-import { ImageCaption, Media, Image } from "./components";
+import { Node, Block, Editor } from "slate";
+import Placeholder from "@vericus/slate-kit-utils-placeholders";
+import { ImageCaption, Media, Image, CaptionPlaceholder } from "./components";
 
 export interface Props {
   attributes: any;
@@ -49,11 +50,25 @@ export default function createRenderer(opts) {
       .join(", ");
   }
   return {
-    nodes: {
-      media: createMediaRenderer(image),
-      image: createImage(onInsert, extensions),
-      mediacaption: createMediaCaption(image, captionHideField)
-    }
+    plugins: [
+      {
+        renderers: {
+          nodes: {
+            media: createMediaRenderer(image),
+            image: createImage(onInsert, extensions),
+            mediacaption: createMediaCaption(image, captionHideField)
+          }
+        }
+      },
+      Placeholder({
+        when: (editor: Editor, node: Node) => {
+          if (!image || !image.type) return false;
+          if (!Block.isBlock(node)) return false;
+          return captionType && node.type === captionType && node.text === "";
+        },
+        render: props => <CaptionPlaceholder {...props} />
+      })
+    ]
   };
 }
 

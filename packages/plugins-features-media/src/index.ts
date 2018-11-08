@@ -15,11 +15,15 @@ export default function createPlugin(
   const schema = createSchema(options);
   const onKeyDown = createOnKeyDown(options, pluginsWrapper);
   return {
-    queries,
-    commands,
-    schema,
-    options,
-    onKeyDown: options.withHandlers ? onKeyDown : undefined,
-    ...(options.externalRenderer ? {} : Renderer(options))
+    plugins: [
+      {
+        queries,
+        commands,
+        schema,
+        options,
+        onKeyDown: options.withHandlers ? onKeyDown : undefined
+      },
+      ...(options.externalRenderer ? [] : Renderer(options).plugins)
+    ]
   };
 }
