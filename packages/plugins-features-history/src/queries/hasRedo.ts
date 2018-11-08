@@ -1,7 +1,9 @@
 import { Value } from "slate";
 
-export default function hasRedo(value: Value) {
-  const redos = value.data.get("redos");
+export default function hasRedo(editor, value?: Value) {
+  const redos = value
+    ? value.data.get("redos")
+    : editor.value.data.get("redos");
   return !(
     redos &&
     redos

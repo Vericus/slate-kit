@@ -1,7 +1,9 @@
 import { Value } from "slate";
 
-export default function hasUndo(value: Value) {
-  const undos = value.data.get("undos");
+export default function hasUndo(editor, value?: Value) {
+  const undos = value
+    ? value.data.get("undos")
+    : editor.value.data.get("undos");
   return !(
     undos &&
     undos

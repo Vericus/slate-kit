@@ -34,7 +34,7 @@ const pluginOpts = [
     label: "colored-text",
     createPlugin: HighlightText,
     options: {
-      name: "text",
+      name: "Text",
       type: "textColor",
       data: "color",
       defaultColor: "black",
@@ -63,7 +63,7 @@ const pluginOpts = [
     label: "background-colored-text",
     createPlugin: HighlightText,
     options: {
-      name: "background",
+      name: "Background",
       type: "textBackground",
       alpha: 0.54,
       data: "backgroundColor",
