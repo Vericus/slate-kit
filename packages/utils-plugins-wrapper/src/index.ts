@@ -42,11 +42,7 @@ export interface SlateRenderers {
   [key: string]: (...args: any[]) => JSX.Element;
 }
 
-export type RenderersType =
-  | "renderMarks"
-  | "renderNodes"
-  | "renderEditor"
-  | "renderPlaceholder";
+export type RenderersType = "renderMarks" | "renderNodes" | "renderEditor";
 
 export type RenderersMap = { [label in RenderersType]: SlateRenderers };
 
@@ -128,15 +124,6 @@ export default class PluginsWrapper {
             }
           };
         }
-        if (renderer.placeholders) {
-          newRenderers = {
-            ...newRenderers,
-            placeholders: [
-              ...(newRenderers.placeholders ? newRenderers.placeholders : []),
-              ...renderer.placeholders
-            ]
-          };
-        }
         if (renderer.toolbars) {
           newRenderers = {
             ...newRenderers,
@@ -148,7 +135,7 @@ export default class PluginsWrapper {
         }
         return newRenderers;
       },
-      { marks: {}, nodes: {}, placeholders: [], toolbars: [] }
+      { marks: {}, nodes: {}, toolbars: [] }
     );
 
   getFlattenOptions = () =>
@@ -163,9 +150,8 @@ export default class PluginsWrapper {
     let defaultBlock = "";
     Object.values(this[OPTIONS]).some((option: any) => {
       if (Array.isArray(option)) {
-        return option.some(
-          o =>
-            o.defaultBlock ? ((defaultBlock = o.defaultBlock), true) : false
+        return option.some(o =>
+          o.defaultBlock ? ((defaultBlock = o.defaultBlock), true) : false
         );
       }
       return option.defaultBlock

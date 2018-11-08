@@ -35,6 +35,7 @@ const createRenderMarks = (marksOptions, pluginsWrapper: PluginsWrapper) => (
   }
   return next();
 };
+
 const createRenderNodes = (
   nodesOptions,
   renderToolbar,
@@ -68,43 +69,12 @@ const createRenderNodes = (
   );
 };
 
-const placeholderStyle: React.CSSProperties = {
-  pointerEvents: "none",
-  display: "inline-block",
-  whiteSpace: "nowrap",
-  opacity: 0.333,
-  float: "left",
-  position: "relative",
-  width: "100%"
-};
-
-const createRenderPlaceholders = placeholdersOptions => {
-  return {
-    renderPlaceholder: props => {
-      const placeholder = placeholdersOptions.find(option => {
-        return option.condition(props);
-      });
-      if (!placeholder) return;
-      return (
-        <span
-          contentEditable={false}
-          style={placeholderStyle}
-          className="placeholder"
-        >
-          {placeholder.render(props)}
-        </span>
-      );
-    }
-  };
-};
-
 const renderers = (opts: TypeOptions, pluginsWrapper: PluginsWrapper) => {
-  const { marks, nodes, placeholders, toolbars } = opts;
+  const { marks, nodes, toolbars } = opts;
   const renderToolbar = createRenderToolbar(toolbars, pluginsWrapper);
   const renderMark = createRenderMarks(marks, pluginsWrapper);
   const renderNode = createRenderNodes(nodes, renderToolbar, pluginsWrapper);
-  const renderPlaceholders = createRenderPlaceholders(placeholders);
-  return [renderPlaceholders, { renderMark, renderNode }];
+  return [{ renderMark, renderNode }];
 };
 
 export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
@@ -148,7 +118,6 @@ export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
         {
           marks: {},
           nodes: {},
-          placeholders: [],
           toolbars: []
         }
       )

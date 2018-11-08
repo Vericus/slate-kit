@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Node, Block } from "slate";
-import { ImageCaption, CaptionPlaceholder, Media, Image } from "./components";
+import { ImageCaption, Media, Image } from "./components";
 
 export interface Props {
   attributes: any;
@@ -23,30 +23,6 @@ const createMediaCaption = (
     props.editor.hideCaption(props.node) ? null : (
       <ImageCaption {...props} imageType={type} />
     );
-};
-
-const createCaptionPlaceholder = (
-  captionType: string,
-  imageType: string | undefined
-) => {
-  return {
-    condition: props => {
-      if (!imageType) return false;
-      if (props.node.type !== captionType) return false;
-      const { parent, editor } = props;
-      const imageBlock =
-        imageType &&
-        parent.nodes
-          .toArray()
-          .find(n => Block.isBlock(n) && n.type === imageType);
-      if (imageBlock) {
-        const src = editor.getSource(imageBlock);
-        return !((src && src === "") || !src) && props.node.text === "";
-      }
-      return props.node.text === "";
-    },
-    render: props => <CaptionPlaceholder {...props} />
-  };
 };
 
 const createImage = (onInsert, extensions) => {
@@ -77,8 +53,7 @@ export default function createRenderer(opts) {
       media: createMediaRenderer(image),
       image: createImage(onInsert, extensions),
       mediacaption: createMediaCaption(image, captionHideField)
-    },
-    placeholders: [createCaptionPlaceholder(captionType, image && image.type)]
+    }
   };
 }
 
