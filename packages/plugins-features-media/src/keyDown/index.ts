@@ -1,4 +1,4 @@
-import { Change, Editor } from "slate";
+import { Change, Editor, Block } from "slate";
 import Hotkeys from "slate-hotkeys";
 import isHotkey from "is-hotkey";
 import { TypeOption } from "../options";
@@ -13,7 +13,7 @@ export default function createOnKeyDown(opts: TypeOption, pluginsWrapper) {
   const types = [captionType, type, ...[imageType ? imageType.type : []]];
   return (event, editor: Editor, next) => {
     const { value } = editor;
-    const { startBlock, endBlock, previousBlock, nextBlock } = value;
+    const { startBlock, endBlock, previousBlock, nextBlock, document } = value;
     if (
       !(
         types.includes(startBlock.type) ||
@@ -36,12 +36,25 @@ export default function createOnKeyDown(opts: TypeOption, pluginsWrapper) {
       const mediaBlock = editor.getSelectedMediaBlock(value);
       if (mediaBlock) {
         const defaultBlock = pluginsWrapper.getDefaultBlock();
-        event.preventDefault();
-        editor.moveToEndOfNode(mediaBlock);
         if (defaultBlock) {
-          editor.insertBlock(defaultBlock);
+          const parent = document.getParent(mediaBlock.key);
+          const index =
+            parent && parent.nodes && parent.nodes.indexOf(mediaBlock);
+          if (parent && index !== null && index !== undefined) {
+            event.preventDefault();
+            editor
+              .insertNodeByKey(
+                parent.key,
+                index + 1,
+                Block.create({
+                  type: defaultBlock
+                })
+              )
+              .moveToEndOfNode(mediaBlock)
+              .moveForward(1);
+            return;
+          }
         }
-        return;
       }
     }
     return next();
