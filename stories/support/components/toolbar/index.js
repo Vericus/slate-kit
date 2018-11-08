@@ -502,7 +502,6 @@ export default class Toolbar extends Component {
 
   renderColorButton = (label, colors, icon) => {
     const { editor } = this.props;
-    console.log(editor, editor[`current${label}Color`]);
     return editor[`current${label}Color`] ? (
       <ColorPicker
         key={icon}
