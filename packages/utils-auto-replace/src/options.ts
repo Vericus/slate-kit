@@ -2,8 +2,8 @@ import { Record } from "immutable";
 import { Editor } from "slate";
 
 export interface Matches {
-  before?: any[] | null;
-  after?: any[] | null;
+  beforeMatches?: any[] | null;
+  afterMatches?: any[] | null;
 }
 
 export interface TypeOptions {

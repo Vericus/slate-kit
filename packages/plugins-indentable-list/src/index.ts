@@ -37,8 +37,12 @@ export function createPlugin(
             trigger: " ",
             before: /^(\d+\.)$/,
             command: (editor, matches, next) => {
-              if (matches && matches.before && matches.before[0]) {
-                const numMatch = matches.before[0].match(/(^\d+)/);
+              if (
+                matches &&
+                matches.beforeMatches &&
+                matches.beforeMatches[0]
+              ) {
+                const numMatch = matches.beforeMatches[0].match(/(^\d+)/);
                 if (numMatch && numMatch[0]) {
                   editor.createListWithType(orderedlist, numMatch[0]);
                 }
