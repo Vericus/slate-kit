@@ -117,7 +117,7 @@
     "rollup-plugin-typescript2": "^0.17.2",
     "rollup-plugin-uglify": "^6.0.0",
     "rollup-plugin-visualizer": "^0.9.0",
-    "slate": ">=0.43.0 <0.44.0",
+    "slate": ">=0.44.0 <0.45.0",
     "slate-base64-serializer": "*",
     "slate-dev-environment": "*",
     "slate-hotkeys": "*",

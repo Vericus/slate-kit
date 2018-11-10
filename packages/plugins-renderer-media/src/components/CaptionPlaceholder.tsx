@@ -2,7 +2,7 @@ import * as React from "react";
 import { Props } from "../types";
 
 const CaptionPlaceholder: React.SFC<Props> = props => {
-  const { isSelected, children } = props;
+  const { children } = props;
   const placeholderStyle: React.CSSProperties = {
     pointerEvents: "none",
     display: "inline-flex",
@@ -22,15 +22,13 @@ const CaptionPlaceholder: React.SFC<Props> = props => {
   };
   return (
     <span style={placeholderStyle} className="placeholder">
-      {isSelected ? null : (
-        <span
-          contentEditable={false}
-          className="innerPlaceholder"
-          style={innerStyle}
-        >
-          Add Caption Here
-        </span>
-      )}
+      <span
+        contentEditable={false}
+        className="innerPlaceholder"
+        style={innerStyle}
+      >
+        Add Caption Here
+      </span>
       {children}
     </span>
   );

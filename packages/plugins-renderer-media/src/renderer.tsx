@@ -61,6 +61,7 @@ export default function createRenderer(opts) {
         }
       },
       Placeholder({
+        type: "mediaCaption",
         when: (editor: Editor, node: Node) => {
           if (!image || !image.type) return false;
           if (!Block.isBlock(node)) return false;

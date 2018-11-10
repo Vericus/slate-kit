@@ -1,5 +1,5 @@
 // ported from https://github.com/DefinitelyTyped/DefinitelyTyped
-// definitions for slate 0.40
+// definitions for slate 0.43
 // TypeScript Version: 2.3
 import * as Immutable from "immutable";
 
@@ -1458,7 +1458,9 @@ export type ErrorCode =
   | "parent_object_invalid"
   | "parent_type_invalid"
   | "previous_sibling_object_invalid"
-  | "previous_sibling_type_invalid";
+  | "previous_sibling_type_invalid"
+  | "child_min_invalid"
+  | "child_max_invalid";
 
 export class SlateError extends Error {
   code: ErrorCode;
