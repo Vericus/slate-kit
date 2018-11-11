@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Block, Change, Editor, Node } from "slate";
+import { Block } from "slate";
 import { Props as GenericProps } from "../types";
 import ImageUploader from "./ImageUploader";
 

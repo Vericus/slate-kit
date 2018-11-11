@@ -1,4 +1,3 @@
-import { Change } from "slate";
 import { TypeOption } from "../options";
 import changeWidth from "./changeWidth";
 import toggleCaption from "./toggleCaption";

@@ -1,5 +1,4 @@
-import renderMark, { Props } from "./renderMark";
-import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
+import renderMark from "./renderMark";
 
 export function createRenderer(type: string) {
   return {

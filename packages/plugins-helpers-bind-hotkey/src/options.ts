@@ -1,5 +1,4 @@
 import { Record } from "immutable";
-import { Editor } from "slate";
 
 export interface TypeOptions {
   hotkeys?: string | string[];

@@ -1,6 +1,5 @@
-import { Change, Editor, Block } from "slate";
+import { Editor, Block } from "slate";
 import Hotkeys from "slate-hotkeys";
-import isHotkey from "is-hotkey";
 import { TypeOption } from "../options";
 import extendForward from "./extendForward";
 import extendBackward from "./extendBackward";

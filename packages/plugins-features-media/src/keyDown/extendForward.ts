@@ -1,16 +1,7 @@
-import { Change } from "slate";
-
 export default function extendForward(editor, types, captionType, event, next) {
   const { value } = editor;
-  const {
-    document,
-    selection,
-    startBlock,
-    endBlock,
-    previousBlock,
-    nextBlock
-  } = value;
-  const { anchor, focus, isForward } = selection;
+  const { selection, startBlock, endBlock } = value;
+  const { focus, isForward } = selection;
   if (startBlock === endBlock && startBlock.type === captionType) {
     event.preventDefault();
     if ((isForward && focus.offset !== startBlock.text.length) || !isForward) {

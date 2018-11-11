@@ -1,4 +1,4 @@
-import { Change, Block, Node, Editor } from "slate";
+import { Block, Editor } from "slate";
 import { List } from "immutable";
 import { TypeOptions } from "../options";
 
@@ -21,7 +21,6 @@ function resetBlockChecked(opts: TypeOptions, editor: Editor, block: Block) {
 }
 
 function resetStartAt(opts: TypeOptions, editor: Editor) {
-  const { blockTypes } = opts;
   const { value } = editor;
   const selectedBlocks = editor.selectedOrderedList(value);
   editor.withoutNormalizing(c => {
@@ -32,7 +31,6 @@ function resetStartAt(opts: TypeOptions, editor: Editor) {
 }
 
 function resetChecked(opts: TypeOptions, editor: Editor) {
-  const { blockTypes } = opts;
   const { value } = editor;
   const selectedBlocks = editor.selectedOrderedList(value);
   editor.withoutNormalizing(e => {

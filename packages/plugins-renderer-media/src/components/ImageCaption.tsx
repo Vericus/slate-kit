@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Block, Editor } from "slate";
+import { Block } from "slate";
 import { Props } from "../types";
 
 const ImageCaption: React.SFC<Props> = props => {

@@ -1,5 +1,5 @@
 import { List } from "immutable";
-import { Value, Editor, Operation } from "slate";
+import { Editor, Operation } from "slate";
 
 export default function handleRedo(
   editor: Editor,

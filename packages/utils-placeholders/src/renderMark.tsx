@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Editor } from "slate";
-import Options, { TypeOptions } from "./options";
+import { TypeOptions } from "./options";
 
 export default function createRenderMark(options: TypeOptions) {
   const { render, placeholder, type } = options;

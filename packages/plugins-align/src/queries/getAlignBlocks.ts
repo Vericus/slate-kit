@@ -1,4 +1,4 @@
-import { Value, Node, Block, Editor } from "slate";
+import { Block, Editor } from "slate";
 import { List } from "immutable";
 import { TypeOptions } from "../options";
 

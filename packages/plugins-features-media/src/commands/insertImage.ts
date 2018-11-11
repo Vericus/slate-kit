@@ -34,4 +34,5 @@ export default function insertImage(opts: TypeOption, pluginsWrapper) {
       editor.focus();
     };
   }
+  return (editor: Editor) => undefined;
 }

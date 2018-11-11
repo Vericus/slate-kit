@@ -1,7 +1,7 @@
 import { Block, Document, Node, Editor } from "slate";
 import { TypeOption } from "../options";
 export default function getClosestMedia(opts: TypeOption) {
-  const { type, captionType, mediaTypes } = opts;
+  const { type, mediaTypes } = opts;
   const imageType = mediaTypes.image ? mediaTypes.image.type : undefined;
   return imageType
     ? (editor: Editor, document: Document, block: Block) => {

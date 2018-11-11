@@ -1,4 +1,4 @@
-import { Change, Block } from "slate";
+import { Change } from "slate";
 import { TypeOptions } from "../options";
 
 export default function createSchema(opts: TypeOptions) {

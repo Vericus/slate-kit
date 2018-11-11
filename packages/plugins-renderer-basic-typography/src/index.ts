@@ -4,8 +4,7 @@ import createRenderNode, {
   HeadingThree,
   HeadingFour,
   Paragraph,
-  Blockquote,
-  Props
+  Blockquote
 } from "./renderNode";
 
 export function createRenderer() {

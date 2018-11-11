@@ -4,7 +4,7 @@ import createRenderMark from "./renderMark";
 
 export default function Placeholder(opts: Partial<TypeOptions>) {
   const options = Options.create(opts);
-  const { when, render, placeholder, type } = options;
+  const { when, type } = options;
 
   const renderMark = createRenderMark(options);
 

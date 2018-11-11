@@ -12,7 +12,6 @@ export default function createProps(opts: TypeOptions) {
     getProps: props => {
       if (!props.mark || props.mark.type !== type) return props;
       const {
-        children,
         attributes,
         mark: { data }
       } = props;

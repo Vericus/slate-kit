@@ -1,4 +1,4 @@
-import { Node, Block } from "slate";
+import { Block } from "slate";
 
 export default function deleteBackward(
   editor,

@@ -2,7 +2,7 @@ import { Editor, Block, Text } from "slate";
 import { TypeOption } from "../options";
 
 export default function toggleCaption(opts: TypeOption) {
-  const { type, captionType, mediaTypes, captionHideField } = opts;
+  const { captionType, captionHideField } = opts;
   return (editor: Editor, node?: Block, focus?: boolean) => {
     const media = node
       ? editor.getClosestMediaContainer(editor.value.document, node)

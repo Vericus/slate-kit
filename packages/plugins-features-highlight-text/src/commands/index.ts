@@ -1,4 +1,4 @@
-import { Mark, Data, Selection } from "slate";
+import { Mark, Data } from "slate";
 import { Editor } from "slate";
 import tinycolor from "tinycolor2";
 import { TypeOptions } from "../options";
@@ -8,7 +8,7 @@ export default function createCommands(opt: TypeOptions) {
   return {
     [`change${name}Color`]: (editor: Editor, color: string) => {
       const { value } = editor;
-      const { selection, document } = value;
+      const { selection } = value;
       if (editor.hasMark(value, type)) {
         if (tinycolor(color).toName() === defaultColor) {
           if (selection.isCollapsed) {

@@ -1,5 +1,3 @@
-import { Change } from "slate";
-
 export default function extendBackward(
   editor,
   types,
@@ -8,15 +6,8 @@ export default function extendBackward(
   next
 ) {
   const { value } = editor;
-  const {
-    document,
-    selection,
-    startBlock,
-    endBlock,
-    previousBlock,
-    nextBlock
-  } = value;
-  const { anchor, focus, isBackward, isCollapsed } = selection;
+  const { selection, startBlock, endBlock } = value;
+  const { focus, isBackward, isCollapsed } = selection;
   if (startBlock === endBlock && startBlock.type === captionType) {
     event.preventDefault();
     if (

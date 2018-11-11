@@ -1,4 +1,4 @@
-import { Change, Node, Block } from "slate";
+import { Block } from "slate";
 
 export default function deleteForward(editor, types, captionType, event, next) {
   const { value } = editor;

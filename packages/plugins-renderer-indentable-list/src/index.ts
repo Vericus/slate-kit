@@ -1,8 +1,7 @@
 import createRenderNode, {
   OrderedList,
   UnOrderedList,
-  CheckList,
-  Props
+  CheckList
 } from "./renderNode";
 
 function createRenderer() {

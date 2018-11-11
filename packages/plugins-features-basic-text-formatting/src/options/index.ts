@@ -1,5 +1,4 @@
 import { Record } from "immutable";
-import { Change } from "slate";
 
 export interface KeyBinding {
   hotkeys: string;

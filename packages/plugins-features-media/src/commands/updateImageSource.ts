@@ -14,4 +14,5 @@ export default function updateImageSource(opts: TypeOption) {
       }
     };
   }
+  return (editor: Editor) => undefined;
 }

@@ -10,13 +10,6 @@ import hideCaption from "./hideCaption";
 
 export default function createQueries(opts: TypeOption) {
   const { mediaTypes } = opts;
-  const mediaOptions = Object.entries(mediaTypes).reduce(
-    (mappings, [mediaKey, mediaOption]) => ({
-      ...mappings,
-      [mediaOption.type]: mediaOption
-    }),
-    {}
-  );
   return {
     getSelectedMediaBlock: getSelectedMediaBlock(opts),
     getSource: (editor: Editor, block: Block) =>
