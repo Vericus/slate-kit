@@ -57,7 +57,7 @@
          "@babel/react"
       ],
       "plugins": [
-        ["@babel/plugin-transform-builtin-extend", {
+        ["@babel/plugin-transform-classes", {
             "globals": ["Error", "Array"]
         }],
         "@babel/plugin-transform-runtime"
