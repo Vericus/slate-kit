@@ -1004,6 +1004,8 @@ export interface EditorProperties {
   value?: Value;
 }
 
+export type EditorFn = (editor: Editor, ...args: any) => Editor | any;
+
 export class Editor {
   object: "editor";
   onChange: (
@@ -1025,8 +1027,8 @@ export class Editor {
    */
   flush(): Editor;
 
-  command(name: string, ...args: any[]): void;
-  query(query: string, ...args: any[]): any;
+  command(name: string | EditorFn, ...args: any[]): void;
+  query(query: string | EditorFn, ...args: any[]): any;
 
   /**
    * Add a new command by type with the editor. This will make the command available as a top-level method on the editor
@@ -1057,7 +1059,7 @@ export class Editor {
   /**
    * Add a mark to the characters in the current selection
    */
-  addMark(mark: Mark | MarkProperties | string): Editor;
+  addMark(mark: Mark | Partial<MarkProperties> | string): Editor;
 
   /**
    * Delete everything in the current selection.
@@ -1080,7 +1082,7 @@ export class Editor {
    * Insert a new block at the same level as the current block, splitting the current block to make room if it is non-empty.
    * If the selection is expanded, it will be deleted first.
    */
-  insertBlock(block: Block | BlockProperties | string): Editor;
+  insertBlock(block: Block | Partial<BlockProperties> | string): Editor;
 
   /**
    * Insert a document fragment at the current selection. If the selection is expanded, it will be deleted first.
@@ -1091,7 +1093,7 @@ export class Editor {
    * Insert a new inline at the current cursor position, splitting the text to make room if it is non-empty.
    * If the selection is expanded, it will be deleted first.
    */
-  insertInline(inline: Inline | InlineProperties): Editor;
+  insertInline(inline: Inline | Partial<InlineProperties>): Editor;
 
   /**
    * Insert a string of text at the current selection. If the selection is expanded, it will be deleted first
@@ -1102,13 +1104,13 @@ export class Editor {
    * Set the properties of the Blocks in the current selection.
    * Passing a string will set the blocks' type only.
    */
-  setBlocks(properties: BlockProperties | string): Editor;
+  setBlocks(properties: Partial<BlockProperties> | string): Editor;
 
   /**
    * Set the properties of the Inlines nodes in the current selection.
    * Passing a string will set the nodes' type only.
    */
-  setInlines(properties: InlineProperties | string): Editor;
+  setInlines(properties: Partial<InlineProperties> | string): Editor;
 
   /**
    * Split the Block in the current selection by depth levels.
@@ -1126,42 +1128,42 @@ export class Editor {
    * Remove a mark from the characters in the current selection.
    * Passing a string will implicitly create a Mark of that type for removal.
    */
-  removeMark(mark: Mark | MarkProperties | string): Editor;
+  removeMark(mark: Mark | Partial<MarkProperties> | string): Editor;
 
   /**
    * Remove a mark from the characters in the current selection.
    * Passing a string will implicitly create a Mark of that type.
    */
   replaceMark(
-    mark: Mark | MarkProperties | string,
-    newMark: Mark | MarkProperties | string
+    mark: Mark | Partial<MarkProperties> | string,
+    newMark: Mark | Partial<MarkProperties> | string
   ): Editor;
 
   /**
    * Add or remove a mark from the characters in the current selection, depending on it already exists on any or not.
    * Passing a string will implicitly create a Mark of that type to toggle.
    */
-  toggleMark(mark: Mark | MarkProperties | string): Editor;
+  toggleMark(mark: Mark | Partial<MarkProperties> | string): Editor;
 
   /**
    * Unwrap all Block nodes in the current selection that match a type and/or data
    */
-  unwrapBlock(properties: BlockProperties | string): Editor;
+  unwrapBlock(properties: Partial<BlockProperties> | string): Editor;
 
   /**
    * Unwrap all Inline nodes in the current selection that match a type and/or data
    */
-  unwrapInline(properties: InlineProperties | string): Editor;
+  unwrapInline(properties: Partial<InlineProperties> | string): Editor;
 
   /**
    * Wrap the Block nodes in the current selection with a new Block
    */
-  wrapBlock(properties: BlockProperties | string): Editor;
+  wrapBlock(properties: Partial<BlockProperties> | string): Editor;
 
   /**
    *  Wrap the Block nodes in the current selection with a new Inline
    */
-  wrapInline(properties: InlineProperties | string): Editor;
+  wrapInline(properties: Partial<InlineProperties> | string): Editor;
 
   /**
    * Surround the text in the current selection with prefix and suffix strings.
@@ -1731,126 +1733,148 @@ export class Editor {
    * Add a mark to the characters in the range.
    * Passing a string as `mark` will implicitly create a mark with that `type`
    */
-  addMarkAtRange(range: Range, mark: Mark | MarkProperties | string): Editor;
+  addMarkAtRange(
+    range: Range | Selection,
+    mark: Mark | MarkProperties | string
+  ): Editor;
   /**
    * Delete everything in the range
    */
-  deleteAtRange(range: Range): Editor;
+  deleteAtRange(range: Range | Selection): Editor;
   /**
    * Delete backward until the char boundary at a range
    */
-  deleteCharBackwardAtRange(range: Range): Editor;
+  deleteCharBackwardAtRange(range: Range | Selection): Editor;
   /**
    * Delete backward until the line boundary at a range
    */
-  deleteLineBackwardAtRange(range: Range): Editor;
+  deleteLineBackwardAtRange(range: Range | Selection): Editor;
   /**
    * Delete backward until the word boundary at a range
    */
-  deleteWordBackwardAtRange(range: Range): Editor;
+  deleteWordBackwardAtRange(range: Range | Selection): Editor;
   /**
    * Delete backward n characters at a range
    */
-  deleteBackwardAtRange(range: Range, n: number): Editor;
+  deleteBackwardAtRange(range: Range | Selection, n: number): Editor;
   /**
    * Delete forward until the char boundary at a range
    */
-  deleteCharForwardAtRange(range: Range): Editor;
+  deleteCharForwardAtRange(range: Range | Selection): Editor;
   /**
    * Delete forward until the line boundary at a range
    */
-  deleteLineForwardAtRange(range: Range): Editor;
+  deleteLineForwardAtRange(range: Range | Selection): Editor;
   /**
    * Delete forward until the word boundary at a range
    */
-  deleteWordForwardAtRange(range: Range): Editor;
+  deleteWordForwardAtRange(range: Range | Selection): Editor;
   /**
    * Delete forward n characters at a range
    */
-  deleteForwardAtRange(range: Range, n: number): Editor;
+  deleteForwardAtRange(range: Range | Selection, n: number): Editor;
 
   /**
    * Insert a block node at range, splitting text to make room if it is non-empty.
    * If the range is expanded, it will be deleted first.
    */
   insertBlockAtRange(
-    range: Range,
-    block: Block | BlockProperties | string
+    range: Range | Selection,
+    block: Block | Partial<BlockProperties> | string
   ): Editor;
   /**
    * Insert a document fragment at a range, if the range is expanded, it will be deleted first.
    */
-  insertFragmentAtRange(range: Range, fragment: Document): Editor;
+  insertFragmentAtRange(range: Range | Selection, fragment: Document): Editor;
   /**
    * Insert a new inline at range, splitting text to make room if it is non-empty.
    * If the range is expanded, it will be deleted first.
    */
-  insertInlineAtRange(range: Range, inline: Inline | InlineProperties): Editor;
+  insertInlineAtRange(
+    range: Range | Selection,
+    inline: Inline | Partial<InlineProperties>
+  ): Editor;
   /**
    * Insert text at range. If the range is expanded it will be deleted first
    */
-  insertTextAtRange(range: Range, text: string): Editor;
+  insertTextAtRange(range: Range | Selection, text: string): Editor;
   /**
    * Set the properties of the block nodes in a range.
    * Passing a string will set the nodes' type only
    */
-  setBlocksAtRange(range: Range, properties: BlockProperties | string): Editor;
+  setBlocksAtRange(
+    range: Range | Selection,
+    properties: Partial<BlockProperties> | string
+  ): Editor;
   /**
    * Set the properties of the inline nodes in a range.
    * Passing a string will set the nodes' type only
    */
   setInlinesAtRange(
-    range: Range,
+    range: Range | Selection,
     properties: InlineProperties | string
   ): Editor;
   /**
    * Split the block in a range by depth levels. If the range is expanded it will be deleted first.
    */
-  splitBlockAtRange(range: Range, depth: number): Editor;
+  splitBlockAtRange(range: Range | Selection, depth: number): Editor;
   /**
    * Split the inline in a range by depth levels. If the range is expanded it will be deleted first.
    */
-  splitInlineAtRange(range: Range, depth: number): Editor;
+  splitInlineAtRange(range: Range | Selection, depth: number): Editor;
   /**
    * Remove a mark from characters in the range. Passing a string will
    * implicitly create a mark of that type for deletion.
    */
-  removeMarkAtRange(range: Range, mark: Mark | MarkProperties | string): Editor;
+  removeMarkAtRange(
+    range: Range | Selection,
+    mark: Mark | Partial<MarkProperties> | string
+  ): Editor;
   /**
    * Add or remove a mark from characters in the range. Passing a string will
    * implicitly create a mark of that type for deletion.
    */
-  toggleMarkAtRange(range: Range, mark: Mark | MarkProperties | string): Editor;
+  toggleMarkAtRange(
+    range: Range | Selection,
+    mark: Mark | Partial<MarkProperties> | string
+  ): Editor;
   /**
    * Unwrap all block nodes in a range that match properties
    */
   unwrapBlockAtRange(
-    range: Range,
-    properties: BlockProperties | string
+    range: Range | Selection,
+    properties: Partial<BlockProperties> | string
   ): Editor;
   /**
    * Unwrap all inline nodes in a range that match properties
    */
   unwrapInlineAtRange(
-    range: Range,
-    properties: InlineProperties | string
+    range: Range | Selection,
+    properties: Partial<InlineProperties> | string
   ): Editor;
   /**
    * wrap all block nodes in a range with a new block node with the provided properties
    */
-  wrapBlockAtRange(range: Range, properties: BlockProperties | string): Editor;
+  wrapBlockAtRange(
+    range: Range | Selection,
+    properties: Partial<BlockProperties> | string
+  ): Editor;
   /**
    * wrap all inline nodes in a range with a new inline node with the provided properties
    */
   wrapInlineAtRange(
-    range: Range,
-    properties: InlineProperties | string
+    range: Range | Selection,
+    properties: Partial<InlineProperties> | string
   ): Editor;
   /**
    * Surround the text in a range with a prefix and suffix. If the suffix is ommitted,
    * the prefix will be used instead.
    */
-  wrapTextAtRange(range: Range, prefix: string, suffix?: string): Editor;
+  wrapTextAtRange(
+    range: Range | Selection,
+    prefix: string,
+    suffix?: string
+  ): Editor;
 
   // Node commands //
   /**
@@ -1860,7 +1884,7 @@ export class Editor {
     key: string,
     offset: number,
     length: number,
-    mark: MarkProperties | Mark | string
+    mark: Partial<MarkProperties> | Mark | string
   ): Editor;
   /**
    * Add a mark to length characters starting at an offset in a node by path
@@ -1869,7 +1893,7 @@ export class Editor {
     path: Path,
     offset: number,
     length: number,
-    mark: MarkProperties | Mark | string
+    mark: Partial<MarkProperties> | Mark | string
   ): Editor;
   /**
    * Insert a node at index inside a parent node by key
@@ -1928,7 +1952,7 @@ export class Editor {
     key: string,
     offset: number,
     length: number,
-    mark: Mark | Mark | string
+    mark: Partial<MarkProperties> | Mark | string
   ): Editor;
   /**
    * Remove a mark from length characters starting at an offset in a node by path
@@ -1937,7 +1961,7 @@ export class Editor {
     path: Path,
     offset: number,
     length: number,
-    mark: MarkProperties | Mark | string
+    mark: Partial<MarkProperties> | Mark | string
   ): Editor;
   /**
    * Remove a node from the document by its key
@@ -1971,7 +1995,7 @@ export class Editor {
     offset: number,
     length: number,
     mark: Mark,
-    properties: MarkProperties
+    properties: Partial<MarkProperties>
   ): Editor;
   /**
    * Set a dictionary of properties on a mark by its path.
@@ -1981,21 +2005,21 @@ export class Editor {
     offset: number,
     length: number,
     mark: Mark,
-    properties: MarkProperties
+    properties: Partial<MarkProperties>
   ): Editor;
   /**
    * Set a dictionary of properties on a node by its key.
    */
   setNodeByKey(
     key: string,
-    properties: BlockProperties | InlineProperties | string
+    properties?: Partial<BlockProperties | InlineProperties> | string
   ): Editor;
   /**
    * Set a dictionary of properties on a node by its key.
    */
   setNodeByPath(
     path: Path,
-    properties: NodeProperties | InlineProperties | string
+    properties?: Partial<BlockProperties | InlineProperties> | string
   ): Editor;
   /**
    * Split a node by its key at an offset
@@ -2008,19 +2032,31 @@ export class Editor {
   /**
    * Unwrap all inner content of an inline node by its key that match properties
    */
-  unwrapInlineByKey(key: string, properties: InlineProperties | string): Editor;
+  unwrapInlineByKey(
+    key: string,
+    properties?: Partial<InlineProperties> | string
+  ): Editor;
   /**
    * Unwrap all inner content of an inline node by its path that match properties
    */
-  unwrapInlineByPath(path: Path, properties: InlineProperties | string): Editor;
+  unwrapInlineByPath(
+    path: Path,
+    properties?: Partial<InlineProperties> | string
+  ): Editor;
   /**
    * Unwrap all inner content of a block node by its key that match properties
    */
-  unwrapBlockByKey(key: string, properties: BlockProperties | string): Editor;
+  unwrapBlockByKey(
+    key: string,
+    properties?: Partial<BlockProperties> | string
+  ): Editor;
   /**
    * Unwrap all inner content of a block node by its path that match properties
    */
-  unwrapBlockByPath(path: Path, properties: BlockProperties | string): Editor;
+  unwrapBlockByPath(
+    path: Path,
+    properties?: Partial<BlockProperties> | string
+  ): Editor;
   /**
    * Unwrap a single node from its parent. if the node is surrounded with siblings the parent will be split.
    * If the node is an only child, it will replace the parent
@@ -2034,15 +2070,24 @@ export class Editor {
   /**
    * Wrap the given node by key in an Inline node that matches properties.
    */
-  wrapInlineByKey(key: string, properties: InlineProperties | string): Editor;
+  wrapInlineByKey(
+    key: string,
+    properties: Partial<InlineProperties> | string
+  ): Editor;
   /**
    * Wrap the given node by path in an Inline node that matches properties.
    */
-  wrapInlineByPath(path: Path, properties: InlineProperties | string): Editor;
+  wrapInlineByPath(
+    path: Path,
+    properties: Partial<InlineProperties> | string
+  ): Editor;
   /**
    * Wrap the given node by key in a block node that matches properties.
    */
-  wrapBlockByKey(key: string, properties: BlockProperties | string): Editor;
+  wrapBlockByKey(
+    key: string,
+    properties: Partial<BlockProperties> | string
+  ): Editor;
   /**
    * Wrap the given node by path in a block node that matches properties.
    */
@@ -2068,17 +2113,17 @@ export class Editor {
    *
    * This allows for sequence change operations to not be interrupted by normalization
    */
-  withoutNormalizing(fn: () => void): Editor;
+  withoutNormalizing(fn: (editor: Editor) => void): Editor;
   /**
    * By default all operations are saved to the editor's history. If you have
    * changes that you don't want to show up in history, use this function.
    */
-  withoutSaving(fn: () => void): Editor;
+  withoutSaving(fn: (editor: Editor) => void): Editor;
   /**
    * Usually all command operations are merged into a single save point in history,
    * if more control is desired, create single save points using this function.
    */
-  withoutMerging(fn: () => void): Editor;
+  withoutMerging(fn: (editor: Editor) => void): Editor;
 
   // History Commands //
   /**
@@ -2093,6 +2138,8 @@ export class Editor {
    * Snapshot the current selection for undo purposes.
    */
   snapshotSelection(): Editor;
+
+  [key: string]: any;
 }
 
 export {};

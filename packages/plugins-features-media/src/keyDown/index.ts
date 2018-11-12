@@ -1,4 +1,4 @@
-import { Editor, Block } from "slate";
+import { Editor, Block, Text } from "slate";
 import Hotkeys from "slate-hotkeys";
 import { TypeOption } from "../options";
 import extendForward from "./extendForward";
@@ -37,9 +37,13 @@ export default function createOnKeyDown(opts: TypeOption, pluginsWrapper) {
         const defaultBlock = pluginsWrapper.getDefaultBlock();
         if (defaultBlock) {
           const parent = document.getParent(mediaBlock.key);
-          const index =
-            parent && parent.nodes && parent.nodes.indexOf(mediaBlock);
-          if (parent && index !== null && index !== undefined) {
+          if (
+            parent &&
+            !Text.isText(parent) &&
+            parent.nodes &&
+            parent.nodes.toArray().indexOf(mediaBlock) !== -1
+          ) {
+            const index = parent.nodes.toArray().indexOf(mediaBlock);
             event.preventDefault();
             editor
               .insertNodeByKey(

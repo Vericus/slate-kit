@@ -21,5 +21,6 @@ export default function changeWidth(opts: TypeOption) {
         });
       });
     }
+    return;
   };
 }

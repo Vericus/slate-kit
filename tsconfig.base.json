@@ -38,7 +38,5 @@
       ]
     }
   },
-  "include": ["packages/**/src/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"],
   "types": ["react", "jest"]
 }

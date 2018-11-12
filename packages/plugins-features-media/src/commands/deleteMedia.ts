@@ -8,5 +8,6 @@ export default function deleteMedia(opts: TypeOption) {
     if (media && mediaTypes && Block.isBlock(media)) {
       return editor.removeNodeByKey(media.key);
     }
+    return;
   };
 }
