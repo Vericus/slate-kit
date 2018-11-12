@@ -47,7 +47,7 @@
   "devDependencies": {
     "expect": "^23.1.0",
     "react": ">=16.0.0",
-    "react-dom": ">=16.3.2",
+    "react-dom": ">=16.0.0",
     "slate": ">=0.44.0 <0.45.0",
     "slate-prop-types": ">=0.5.7",
     "slate-simulator": ">=0.4.59",
