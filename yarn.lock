@@ -2174,9 +2174,9 @@
   integrity sha512-ZBFR7TROLVzCkswA3Fmqq+IIJt62/T7aY/Dmz+QkU7CaW2QFqAitCE8Ups7IzmGhcN1YWMBT4Qcoc07jU9hOJQ==
 
 "@types/react@^16.4.9":
-  version "16.4.18"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.18.tgz#2e28a2e7f92d3fa7d6a65f2b73275c3e3138a13d"
-  integrity sha512-eFzJKEg6pdeaukVLVZ8Xb79CTl/ysX+ExmOfAAqcFlCCK5TgFDD9kWR0S18sglQ3EmM8U+80enjUqbfnUyqpdA==
+  version "16.7.3"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.7.3.tgz#dd96b19b21c450fab7d136f71d48f4b8fc72777e"
+  integrity sha512-ve/2lnXuLNaTDR1SPvsEX25m+NoNW3PMJxL2jd372UR8oJPwR5+jgtcheUoN27O+qKLFmQy0y0YKRwZcwtny3w==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -7731,7 +7731,7 @@ is-hexadecimal@^1.0.0:
   resolved "https://registry.yarnpkg.com/is-hexadecimal/-/is-hexadecimal-1.0.2.tgz#b6e710d7d07bb66b98cb8cece5c9b4921deeb835"
   integrity sha512-but/G3sapV3MNyqiDBLrOi4x8uCIw0RY3o/Vb5GT0sMFHrVV7731wFSVy41T5FO1og7G0gXLJh0MkgPRouko/A==
 
-is-hotkey@*, is-hotkey@0.1.4, is-hotkey@>=0.1.2, is-hotkey@^0.1.2, is-hotkey@^0.1.3:
+is-hotkey@*, is-hotkey@0.1.4, is-hotkey@>=0.1.2, is-hotkey@^0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/is-hotkey/-/is-hotkey-0.1.4.tgz#c34d2c85d6ec8d09a871dcf71931c8067a824c7d"
   integrity sha512-Py+aW4r5mBBY18TGzGz286/gKS+fCQ0Hee3qkaiSmEPiD0PqFpe0wuA3l7rTOUKyeXl8Mxf3XzJxIoTlSv+kxA==
@@ -11422,9 +11422,9 @@ preserve@^0.2.0:
   integrity sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
 
 prettier@^1.14.3:
-  version "1.15.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.15.1.tgz#06c67106afb1b40e74b002353b2079cc7e0e67bf"
-  integrity sha512-4rgV2hyc/5Pk0XHH4VjJWHRgVjgRbpMfLQjREAhHBtyW1UvTFkjJEsueGYNYYZd9mn97K+1qv0EBwm11zoaSgA==
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.15.2.tgz#d31abe22afa4351efa14c7f8b94b58bb7452205e"
+  integrity sha512-YgPLFFA0CdKL4Eg2IHtUSjzj/BWgszDHiNQAe0VAIBse34148whfdzLagRL+QiKS+YfK5ftB6X4v/MBw8yCoug==
 
 pretty-bytes@^4.0.2:
   version "4.0.2"
@@ -13043,10 +13043,10 @@ slash@^2.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-2.0.0.tgz#de552851a1759df3a8f206535442f5ec4ddeab44"
   integrity sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==
 
-slate-base64-serializer@*, slate-base64-serializer@^0.2.85:
-  version "0.2.85"
-  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.85.tgz#8774370ae0d5ec55274952008bf9bf68e4bf8384"
-  integrity sha512-JMwzp8tUTxkHme8k1QfrXwtuQg3xHbr6Lra4nax4R2VUW/lwAwVHniJ8byXLbH/LFj9ARbUcJi9f+rAT8Y2zPA==
+slate-base64-serializer@*, slate-base64-serializer@^0.2.90:
+  version "0.2.90"
+  resolved "https://registry.yarnpkg.com/slate-base64-serializer/-/slate-base64-serializer-0.2.90.tgz#080bd5ec776905aca9bb56794aba821886bfb803"
+  integrity sha512-Fm5jHASvLTwUvsn3jpAn1k2rjL7/xIvkov5nY+Vnsz9YDt7abVMHbob0zFB+r2N7TX/MGU2/zC8CE/jaKo1HgQ==
   dependencies:
     isomorphic-base64 "^1.0.2"
 
@@ -13066,38 +13066,38 @@ slate-hotkeys@*, slate-hotkeys@>=0.2.3, slate-hotkeys@^0.2.3, slate-hotkeys@^0.2
     slate-dev-environment "^0.2.0"
 
 slate-html-serializer@*, "slate-html-serializer@>=0.7.0 < 0.8.0":
-  version "0.7.24"
-  resolved "https://registry.yarnpkg.com/slate-html-serializer/-/slate-html-serializer-0.7.24.tgz#c251b7cede47b048f892c67fe2830411b984eb5f"
-  integrity sha512-tfvq9B3eQgj/voF8JWnTey182umdnZyxgZ9YXmurA68qEjNCOp5khOU3CpBjkdK9oMv/qVkEdDTeWistJet6EA==
+  version "0.7.29"
+  resolved "https://registry.yarnpkg.com/slate-html-serializer/-/slate-html-serializer-0.7.29.tgz#c2c8dda71ec095526b035a1b488143ea6d5cbd88"
+  integrity sha512-/hjhk34rqRfBMy3Bd1ZgtanGNLGz7BLUWkVSfD0RoJgxkxGndQ3xWM0kXRMtPiYQMFZqZQE4t7FxHeYX2YC2yg==
   dependencies:
     type-of "^2.0.1"
 
 slate-hyperscript@*, slate-hyperscript@>=0.5.10:
-  version "0.11.15"
-  resolved "https://registry.yarnpkg.com/slate-hyperscript/-/slate-hyperscript-0.11.15.tgz#d82de078bb65ca927bdd7fe0e424574a3754efd1"
-  integrity sha512-pqZUeCqK1VbYbN4S8CV475nSOTtN49I90X8ABXkNVZjyd+GyMSDxWxc6Yz/XQvgY8lbz4N9ufsW+/hFhie/NDQ==
+  version "0.11.20"
+  resolved "https://registry.yarnpkg.com/slate-hyperscript/-/slate-hyperscript-0.11.20.tgz#36691315d7d5fbfeb36bf8421e834b6ef8f7b893"
+  integrity sha512-K89kFcWOhfNzHuEm5hSyqICJdoOnMyCN26PnGt+efOpmUJmywCImnzcrYej0+b7BQTSiFJd56RE2kHD9QDqDyQ==
   dependencies:
     is-plain-object "^2.0.4"
 
-slate-plain-serializer@*, slate-plain-serializer@^0.6.24:
-  version "0.6.24"
-  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.24.tgz#1b95fbdf60304aefccb07267b0793f1233fa778a"
-  integrity sha512-dX75khbGGYISFpxh5fi2nhHxg8pUP1VVyYr+uX68bnIWyC5+mXWzkgF+Bve4R6nDZvAOxvE4ED5Er+W7TgQVkQ==
+slate-plain-serializer@*, slate-plain-serializer@^0.6.29:
+  version "0.6.29"
+  resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.29.tgz#e6deed0414b5de64e2945c8ce43d801e891864df"
+  integrity sha512-XwYv6Hx+X7RPk1+zrz4a/UCropDlYMWpSR3wuKnfr9xLsP9fWxX87e36y3OeZgy0u00FhOR1wF+0MMNgooj9fw==
 
-slate-prop-types@*, slate-prop-types@>=0.5.7, slate-prop-types@^0.5.15:
-  version "0.5.15"
-  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.15.tgz#9e036ad2409697f4e1dfd9b1d5cc8a0e3b5355b8"
-  integrity sha512-Kzh+L+NIIejLJuacEJEondt0b8VxSb4rzbPSEfexU3qh45WqeRel/JJo7xVYNr/brLcC/+V6kdDA0nZQ5bMcPg==
+slate-prop-types@*, slate-prop-types@>=0.5.7, slate-prop-types@^0.5.20:
+  version "0.5.20"
+  resolved "https://registry.yarnpkg.com/slate-prop-types/-/slate-prop-types-0.5.20.tgz#beaf569a1bc70db6c72841f9e351036737268452"
+  integrity sha512-P644QR727dQBF64QwWnahFqfqdvZJf0QiH1GzSBSGyCvCJlpjN3Tqceb2w4DjktVupvRcN3mBVrl50qMaIA5Hg==
 
-slate-react-placeholder@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/slate-react-placeholder/-/slate-react-placeholder-0.1.3.tgz#7a5143b69fc93a7606607e65b2d1965c921823a4"
-  integrity sha512-zJUljDuOV1AOr6ATWoVxYtnMVZNglbYvfxpwHggvbzqHqYUphsAVUuuD6TEHvNR+2o+fSkHnkl5UV3k0H2FIbg==
+slate-react-placeholder@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/slate-react-placeholder/-/slate-react-placeholder-0.1.8.tgz#f23be835ccbc67ad18b1130ad522debbb696ba99"
+  integrity sha512-oafZcp7nfx4q+5bMSRVN+klf1psBRlGUmWB58Zeh8kcUXEv5sS4v7mxl2GcJeTBtbLHwqeW9b09gjNNfCxbJzQ==
 
 "slate-react@>=0.20.0 <0.22.0":
-  version "0.21.6"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.21.6.tgz#76aa3db05bd78ce66b440680d82243361273a7a9"
-  integrity sha512-Ot+CQL/I9cCXz2DNzaGBklVgYp4nUQrUIefVF8XpFJYOOUwDNrOken0fBKoKf2fiHxgrSqkVj65JmdFazeUFoQ==
+  version "0.21.11"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.21.11.tgz#b250750b427b847506369ee838d4056adf1377f8"
+  integrity sha512-m1J87sZ6MP4v3AMERuog9zugL7Hv5q/fgIOOkZge0LiN9h6fiEsqGXDFPBMpANCWUdJVSKvDHzBOodzyTSNp8A==
   dependencies:
     debug "^3.1.0"
     get-window "^1.1.1"
@@ -13107,12 +13107,12 @@ slate-react-placeholder@^0.1.3:
     prop-types "^15.5.8"
     react-immutable-proptypes "^2.1.0"
     selection-is-backward "^1.0.0"
-    slate-base64-serializer "^0.2.85"
+    slate-base64-serializer "^0.2.90"
     slate-dev-environment "^0.2.0"
     slate-hotkeys "^0.2.7"
-    slate-plain-serializer "^0.6.24"
-    slate-prop-types "^0.5.15"
-    slate-react-placeholder "^0.1.3"
+    slate-plain-serializer "^0.6.29"
+    slate-prop-types "^0.5.20"
+    slate-react-placeholder "^0.1.8"
     tiny-invariant "^1.0.1"
     tiny-warning "^0.0.3"
 
@@ -13122,9 +13122,9 @@ slate-simulator@*, slate-simulator@>=0.4.59, slate-simulator@^0.4.33:
   integrity sha512-k1HM0Olv7mUjpwrLgOcnjMorlh9Y6vve/ngsHix1j7lXVfsHFdEkolXPeCy3+HsqW2s1dANc0a7hiOZuw4hc0A==
 
 "slate@>=0.44.0 <0.45.0":
-  version "0.44.4"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.44.4.tgz#b8b82c2d906805aaed42e86ad331963246386aa4"
-  integrity sha512-urjuqA5fhyfsOMxWpbv5NJvdGxbcBuzRaQgqCSbsnEngpmM6kLo4n02kocaj81QMK/3mQzv4thFBK8CXCF6u/w==
+  version "0.44.5"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.44.5.tgz#31186421bc4af28ea21ec59ac140e3e21ee8e134"
+  integrity sha512-Hr0UB7Cgqng/Tn5IFMTTQM70hW5MZCp1qsmdNhS4s1srGjBwWlZ9xHjkG6+lUMCbDW62LvmNKQ4fgBGN5uQAFQ==
   dependencies:
     debug "^3.1.0"
     direction "^0.1.5"
