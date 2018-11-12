@@ -114,7 +114,10 @@ function deserializeFlat(blocks, getData, el, block, childNodes, next) {
 }
 
 export default function createRule(options, getData) {
-  const { blockTypes } = options;
+  const { blockTypes } = Array.isArray(options)
+    ? options.find(option => option.blockTypes)
+    : options;
+  if (!blockTypes) return [];
   const blocks = {
     ul: blockTypes.unorderedlist,
     ol: blockTypes.orderedlist

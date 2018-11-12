@@ -275,9 +275,13 @@ export default class PluginsWrapper {
         break;
       case "options":
         if (this[OPTIONS][label]) {
-          this[OPTIONS][label] = [...this[OPTIONS][label], value];
+          if (Array.isArray(this[OPTIONS][label])) {
+            this[OPTIONS][label] = [...this[OPTIONS][label], value];
+          } else {
+            this[OPTIONS][label] = [this[OPTIONS][label], value];
+          }
         } else {
-          this[OPTIONS][label] = value;
+          this[OPTIONS][label] = [value];
         }
         break;
       case "rules":

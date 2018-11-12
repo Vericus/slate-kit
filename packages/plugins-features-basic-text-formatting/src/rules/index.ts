@@ -10,7 +10,9 @@ const markTags = {
 };
 
 export default function createRule(options, getData) {
-  const { marks: markTypes } = options;
+  const { marks: markTypes } = Array.isArray(options)
+    ? options.find(option => option.marks)
+    : options;
   return [
     {
       deserialize(el, next) {
