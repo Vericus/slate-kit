@@ -1,5 +1,5 @@
 {
-  "version": "0.0.4",
+  "version": "0.0.5",
   "name": "@vericus/slate-kit-media-renderer",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -36,7 +36,7 @@
     "tslib": "TSLib"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-placeholders": "^0.0.2",
+    "@vericus/slate-kit-utils-placeholders": "^0.0.3",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
     "tslib": "^1.9.3"
