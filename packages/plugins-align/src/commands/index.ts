@@ -1,4 +1,4 @@
-import { Editor } from "slate";
+import { Editor, Block, Inline } from "slate";
 import { TypeOptions } from "../options";
 
 function removeAlign(opts: TypeOptions) {
@@ -9,7 +9,7 @@ function removeAlign(opts: TypeOptions) {
       editor
         .getAlignBlocks(value)
         .filter(n => align && n.data && n.data.get(dataField) === align)
-        .forEach(n =>
+        .forEach((n: Block | Inline) =>
           e.setNodeByKey(n.key, { data: n.data.delete(dataField) })
         );
     });
@@ -23,7 +23,7 @@ function setAlign(opts: TypeOptions) {
     const { alignments } = opts;
     if (!alignments || !alignments.includes(align)) return;
     editor.withoutNormalizing(e => {
-      editor.getAlignBlocks(value).forEach(n => {
+      editor.getAlignBlocks(value).forEach((n: Block | Inline) => {
         e.setNodeByKey(n.key, { data: n.data.set(dataField, align) });
       });
     });

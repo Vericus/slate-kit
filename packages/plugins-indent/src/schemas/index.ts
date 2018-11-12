@@ -1,4 +1,4 @@
-import { Change } from "slate";
+import { Editor, SlateError, Block, Inline } from "slate";
 import { TypeOptions } from "../options";
 
 export default function createSchema(opts: TypeOptions) {
@@ -13,19 +13,23 @@ export default function createSchema(opts: TypeOptions) {
               !indentation ||
               (indentation && indentation <= maxIndentation && indentation >= 0)
           },
-          normalize: (change: Change, error) => {
-            if (error.code === "node_data_invalid") {
-              const data = error.node.data.get(dataField);
+          normalize: (editor: Editor, error: SlateError) => {
+            const { code, node } = error;
+            if (
+              code === "node_data_invalid" &&
+              (Block.isBlock(node) || Inline.isInline(node))
+            ) {
+              const data = node.data.get(dataField);
               if (typeof data !== "number" || data < 0) {
-                change.withoutNormalizing(c =>
-                  c.setNodeByKey(error.node.key, {
-                    data: error.node.data.delete(dataField)
+                editor.withoutNormalizing(e =>
+                  e.setNodeByKey(node.key, {
+                    data: node.data.delete(dataField)
                   })
                 );
               } else {
-                change.withoutNormalizing(c =>
-                  c.setNodeByKey(error.node.key, {
-                    data: error.node.data.set(dataField, maxIndentation)
+                editor.withoutNormalizing(e =>
+                  e.setNodeByKey(node.key, {
+                    data: node.data.set(dataField, maxIndentation)
                   })
                 );
               }

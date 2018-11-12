@@ -1,4 +1,4 @@
-import { Block, Change, SlateError, Document } from "slate";
+import { Block, SlateError, Document, Editor } from "slate";
 import { TypeOptions } from "../options";
 
 export default function createSchema(opts: TypeOptions) {
@@ -6,12 +6,12 @@ export default function createSchema(opts: TypeOptions) {
   return {
     document: {
       last: Object.values(blockTypes).map(type => ({ type })),
-      normalize: (change: Change, error: SlateError) => {
+      normalize: (editor: Editor, error: SlateError) => {
         switch (error.code) {
           case "last_child_type_invalid":
             const paragraph = Block.create(defaultBlock);
             if (Document.isDocument(error.node)) {
-              change.insertNodeByKey(
+              editor.insertNodeByKey(
                 error.node.key,
                 error.node.nodes.size,
                 paragraph
@@ -30,13 +30,13 @@ export default function createSchema(opts: TypeOptions) {
               isVoid: false,
               parent: { object: "document" },
               nodes: [{ match: [{ object: "text" }, { object: "inline" }] }],
-              normalize: (change: Change, error: SlateError) => {
+              normalize: (editor: Editor, error: SlateError) => {
                 switch (error.code) {
                   case "child_object_invalid":
-                    change.removeNodeByKey(error.child.key);
+                    editor.removeNodeByKey(error.child.key);
                     return;
                   case "parent_object_invalid":
-                    change.unwrapBlockByKey(error.node.key);
+                    editor.unwrapBlockByKey(error.node.key);
                     return;
                   default:
                     return;

@@ -1,4 +1,4 @@
-import { Change, Block } from "slate";
+import { Editor, Block, SlateError, Inline } from "slate";
 import { TypeOptions } from "../options";
 
 export interface SlateSchemas {
@@ -18,9 +18,13 @@ export default function createSchema(opts: TypeOptions) {
               !startAt || typeof parseInt(startAt, 10) === "number",
             [checkField]: checked => checked === undefined
           },
-          normalize: (change: Change, error) => {
-            if (error.code === "node_data_invalid") {
-              let blockData = error.node.data;
+          normalize: (editor: Editor, error: SlateError) => {
+            const { code, node } = error;
+            if (
+              code === "node_data_invalid" &&
+              (Block.isBlock(node) || Inline.isInline(node))
+            ) {
+              let blockData = node.data;
               if (blockData.get(checkField) !== undefined) {
                 blockData = blockData.delete(checkField);
               }
@@ -29,8 +33,8 @@ export default function createSchema(opts: TypeOptions) {
               ) {
                 blockData = blockData.delete(startAtField);
               }
-              change.withoutNormalizing(c =>
-                c.setNodeByKey(error.node.key, { data: blockData })
+              editor.withoutNormalizing(e =>
+                e.setNodeByKey(node.key, { data: blockData })
               );
             }
           }
@@ -40,11 +44,15 @@ export default function createSchema(opts: TypeOptions) {
             [startAtField]: startAt => startAt === undefined,
             [checkField]: checked => checked === undefined
           },
-          normalize: (change: Change, error) => {
-            if (error.code === "node_data_invalid") {
-              change.withoutNormalizing(c =>
-                c.setNodeByKey(error.node.key, {
-                  data: error.node.data.delete(checkField).delete(startAtField)
+          normalize: (editor: Editor, error: SlateError) => {
+            const { code, node } = error;
+            if (
+              code === "node_data_invalid" &&
+              (Block.isBlock(node) || Inline.isInline(node))
+            ) {
+              editor.withoutNormalizing(e =>
+                e.setNodeByKey(node.key, {
+                  data: node.data.delete(checkField).delete(startAtField)
                 })
               );
             }
@@ -55,17 +63,21 @@ export default function createSchema(opts: TypeOptions) {
             [startAtField]: startAt => startAt === undefined,
             [checkField]: checked => typeof checked === "boolean"
           },
-          normalize: (change: Change, error) => {
-            if (error.code === "node_data_invalid") {
-              let blockData = error.node.data;
+          normalize: (editor: Editor, error: SlateError) => {
+            const { code, node } = error;
+            if (
+              code === "node_data_invalid" &&
+              (Block.isBlock(node) || Inline.isInline(node))
+            ) {
+              let blockData = node.data;
               if (blockData.get(startAtField) !== undefined) {
                 blockData = blockData.delete(startAtField);
               }
               if (typeof blockData.get(checkField) !== "boolean") {
                 blockData = blockData.set(checkField, false);
               }
-              change.withoutNormalizing(c =>
-                c.setNodeByKey(error.node.key, { data: blockData })
+              editor.withoutNormalizing(e =>
+                e.setNodeByKey(node.key, { data: blockData })
               );
             }
           }

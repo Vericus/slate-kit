@@ -41,14 +41,14 @@ export default function createSchema(opts: TypeOption) {
           switch (error.code) {
             case "child_unknown":
               editor.removeNodeByKey(error.child.key);
-              return;
+              break;
             case "last_child_type_invalid":
               if (Block.isBlock(error.child)) {
                 editor.setNodeByKey(error.child.key, captionType);
               } else {
                 editor.unwrapBlockByKey(error.node.key);
               }
-              return;
+              break;
           }
         }
       },
@@ -58,11 +58,14 @@ export default function createSchema(opts: TypeOption) {
         normalize: (editor: Editor, error: SlateError) => {
           switch (error.code) {
             case "parent_type_invalid":
-              return editor.unwrapNodeByKey(error.parent.key);
+              editor.unwrapNodeByKey(error.parent.key);
+              break;
             case "child_object_invalid":
-              return editor.removeNodeByKey(error.child.key);
+              editor.removeNodeByKey(error.child.key);
+              break;
             case "child_required":
-              return editor.insertNodeByKey(error.node.key, 0, Text.create(""));
+              editor.insertNodeByKey(error.node.key, 0, Text.create(""));
+              break;
           }
         }
       },
@@ -96,7 +99,7 @@ export default function createSchema(opts: TypeOption) {
               switch (error.code) {
                 case "parent_type_invalid":
                   editor.wrapBlockByKey(error.node.key, type);
-                  return;
+                  break;
                 case "node_data_invalid":
                   const { key, node } = error;
                   const defaultKey = `default${key.replace(/\w/, c =>
@@ -111,7 +114,7 @@ export default function createSchema(opts: TypeOption) {
                       data: node.data.set(key, mediaType[defaultKey])
                     });
                   }
-                  return;
+                  break;
               }
             }
           }
