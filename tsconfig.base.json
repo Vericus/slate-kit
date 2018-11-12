@@ -13,11 +13,17 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
-    "lib": ["es2018", "dom"],
+    "lib": ["es5", "es6", "es7", "es2017", "dom"],
     "sourceMap": true,
     "pretty": true,
     "jsx": "react",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
     "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "downlevelIteration": true,
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
@@ -32,5 +38,7 @@
       ]
     }
   },
+  "include": ["packages/**/src/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
   "types": ["react", "jest"]
 }

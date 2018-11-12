@@ -1,9 +1,9 @@
 import Renderer from "@vericus/slate-kit-indentable-list-renderer";
-import AutoReplace from "slate-auto-replace";
+import AutoReplace from "@vericus/slate-kit-utils-auto-replace";
 import createProps from "./props";
 import Options, { TypeOptions } from "./options";
-import createUtils from "./utils";
-import createChanges from "./changes";
+import createQueries from "./queries";
+import createCommands from "./commands";
 import createOnKeyDown from "./onKeyDown";
 import createSchema from "./schemas";
 import createRule from "./rules";
@@ -15,18 +15,17 @@ export function createPlugin(
   const options = new Options(pluginOptions);
   const { blockTypes } = options;
   const { orderedlist, unorderedlist, checklist } = blockTypes;
-  const utils = createUtils(options);
-  const changes = createChanges(options, pluginsWrapper);
-  const { createListWithType } = changes;
+  const queries = createQueries(options);
+  const commands = createCommands(options, pluginsWrapper);
   const schema = createSchema(options);
   const props = createProps(options, pluginsWrapper);
   const rules = createRule;
   const onKeyDown = createOnKeyDown(options, pluginsWrapper);
-  let plugins = [
+  let plugins: any[] = [
     {
       rules,
-      utils,
-      changes,
+      queries,
+      commands,
       onKeyDown: options.withHandlers ? onKeyDown : undefined,
       options,
       props,
@@ -35,36 +34,40 @@ export function createPlugin(
     ...(options.withHandlers
       ? [
           AutoReplace({
-            trigger: "space",
-            before: /^(\d+)(\.)$/,
-            change: (change, e, matches) => {
-              const type = orderedlist;
-              return change
-                .call(createListWithType, type, matches.before[1])
-                .normalize();
+            trigger: " ",
+            before: /^(\d+\.)$/,
+            command: (editor, matches, next) => {
+              if (
+                matches &&
+                matches.beforeMatches &&
+                matches.beforeMatches[0]
+              ) {
+                const numMatch = matches.beforeMatches[0].match(/(^\d+)/);
+                if (numMatch && numMatch[0]) {
+                  editor.createListWithType(orderedlist, numMatch[0]);
+                }
+                return;
+              }
+              return next();
             }
           }),
           AutoReplace({
-            trigger: "space",
+            trigger: " ",
             before: /^(-)$/,
-            change: change => {
-              const type = unorderedlist;
-              return change.call(createListWithType, type).normalize();
-            }
+            command: (editor, matches, next) =>
+              editor.createListWithType(unorderedlist)
           }),
           AutoReplace({
-            trigger: "space",
+            trigger: " ",
             before: /^(\[\])$/,
-            change: change => {
-              const type = checklist;
-              return change.call(createListWithType, type).normalize();
-            }
+            command: (editor, matches, next) =>
+              editor.createListWithType(checklist)
           })
         ]
       : [])
   ];
   if (!options.externalRenderer) {
-    plugins = [...plugins, { ...Renderer() }];
+    plugins = [Renderer(), ...plugins];
   }
   return {
     plugins

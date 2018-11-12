@@ -1,10 +1,6 @@
 import * as React from "react";
 import { Block } from "slate";
-import { Props as GenericProps } from "../types";
-
-interface Props extends GenericProps {
-  getSource: (...args: any[]) => any;
-}
+import { Props } from "../types";
 
 const ImageCaption: React.SFC<Props> = props => {
   const {
@@ -14,7 +10,7 @@ const ImageCaption: React.SFC<Props> = props => {
     imageType,
     node,
     parent,
-    getSource
+    editor
   } = props;
   if (node && Block.isBlock(node) && node.nodes && Block.isBlock(parent)) {
     const imageBlock =
@@ -23,7 +19,7 @@ const ImageCaption: React.SFC<Props> = props => {
         .toArray()
         .find(n => Block.isBlock(n) && n.type === imageType);
     if (imageBlock) {
-      const src = getSource(imageBlock);
+      const src = editor.getSource(imageBlock);
       if (src) {
         return (
           <figcaption className={className} {...attributes}>

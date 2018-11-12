@@ -33,6 +33,14 @@ class Options extends Record(defaultOptions, "Typhography Options") {
   blockTypes: BlockTypes;
   defaultBlock: string;
   externalRenderer: boolean;
+
+  static create(option: Partial<TypeOptions>): TypeOptions {
+    const options = {
+      ...defaultOptions,
+      ...option
+    };
+    return new Options(options);
+  }
 }
 
 export default Options;

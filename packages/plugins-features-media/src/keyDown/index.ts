@@ -1,24 +1,18 @@
-import { Change } from "slate";
-import { Editor } from "slate-react";
+import { Editor, Block } from "slate";
 import Hotkeys from "slate-hotkeys";
-import isHotkey from "is-hotkey";
 import { TypeOption } from "../options";
 import extendForward from "./extendForward";
 import extendBackward from "./extendBackward";
 import deleteBackward from "./deleteBackward";
 import deleteForward from "./deleteForward";
 
-export default function createOnKeyDown(
-  opts: TypeOption,
-  utils,
-  pluginsWrapper
-) {
+export default function createOnKeyDown(opts: TypeOption, pluginsWrapper) {
   const { captionType, type, mediaTypes } = opts;
   const imageType = mediaTypes.image;
   const types = [captionType, type, ...[imageType ? imageType.type : []]];
-  return (event, change: Change, editor: Editor) => {
-    const { value } = change;
-    const { startBlock, endBlock, previousBlock, nextBlock } = value;
+  return (event, editor: Editor, next) => {
+    const { value } = editor;
+    const { startBlock, endBlock, previousBlock, nextBlock, document } = value;
     if (
       !(
         types.includes(startBlock.type) ||
@@ -27,27 +21,41 @@ export default function createOnKeyDown(
         (nextBlock && types.includes(nextBlock.type))
       )
     ) {
-      return;
+      return next();
     }
     if (Hotkeys.isExtendForward(event)) {
-      return extendForward(types, captionType, event, change, editor);
+      return extendForward(editor, types, captionType, event, next);
     } else if (Hotkeys.isExtendBackward(event)) {
-      return extendBackward(types, captionType, event, change, editor);
+      return extendBackward(editor, types, captionType, event, next);
     } else if (Hotkeys.isDeleteBackward(event)) {
-      return deleteBackward(utils, types, captionType, event, change, editor);
+      return deleteBackward(editor, types, captionType, event, next);
     } else if (Hotkeys.isDeleteForward(event)) {
-      return deleteForward(utils, types, captionType, event, change, editor);
+      return deleteForward(editor, types, captionType, event, next);
     } else if (Hotkeys.isSplitBlock(event)) {
-      const mediaBlock = utils.getSelectedMediaBlock(value);
+      const mediaBlock = editor.getSelectedMediaBlock(value);
       if (mediaBlock) {
         const defaultBlock = pluginsWrapper.getDefaultBlock();
-        event.preventDefault();
-        change.moveToEndOfNode(mediaBlock);
         if (defaultBlock) {
-          change.insertBlock(defaultBlock);
+          const parent = document.getParent(mediaBlock.key);
+          const index =
+            parent && parent.nodes && parent.nodes.indexOf(mediaBlock);
+          if (parent && index !== null && index !== undefined) {
+            event.preventDefault();
+            editor
+              .insertNodeByKey(
+                parent.key,
+                index + 1,
+                Block.create({
+                  type: defaultBlock
+                })
+              )
+              .moveToEndOfNode(mediaBlock)
+              .moveForward(1);
+            return;
+          }
         }
-        return true;
       }
     }
+    return next();
   };
 }

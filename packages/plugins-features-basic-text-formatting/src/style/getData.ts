@@ -1,6 +1,6 @@
 import { Set, List } from "immutable";
 import { Mark } from "slate";
-import { TextMark, MarkTypes } from "../options";
+import { TextMark } from "../options";
 
 function getFontStyleMark(marksOption: TextMark, fontStyle): Mark | undefined {
   switch (fontStyle) {

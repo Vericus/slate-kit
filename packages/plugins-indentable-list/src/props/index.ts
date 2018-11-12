@@ -1,5 +1,4 @@
 import classnames from "classnames";
-import { toggleCheck } from "../changes";
 
 export default function createProps(opts, pluginsWrapper) {
   const { blockTypes, startAtField, checkField } = opts;
@@ -7,7 +6,6 @@ export default function createProps(opts, pluginsWrapper) {
   const listTypes = [orderedlist, unorderedlist, checklist];
   return {
     getProps: nodeProps => {
-      const { getIndentationLevel } = pluginsWrapper.getUtils("indent");
       if (!nodeProps.node || !listTypes.includes(nodeProps.node.type)) {
         return nodeProps;
       }
@@ -19,8 +17,8 @@ export default function createProps(opts, pluginsWrapper) {
       } = editor;
       const previousBlock = document.getPreviousBlock(key);
       const prevIndentation =
-        previousBlock && getIndentationLevel(previousBlock);
-      const indentation = getIndentationLevel(nodeProps.node);
+        previousBlock && editor.getIndentationLevel(previousBlock);
+      const indentation = editor.getIndentationLevel(nodeProps.node);
       const startAt = nodeProps.node.data.get(startAtField);
       const checked = nodeProps.node.data.get(checkField);
       const style =
@@ -64,22 +62,12 @@ export default function createProps(opts, pluginsWrapper) {
               e.stopPropagation();
               if (
                 nodeProps.editor.props.isReadOnly ||
-                !toggleCheck ||
+                !editor.toggleCheck ||
                 nodeProps.editor.props.readOnly
               ) {
                 return;
               }
-              const {
-                state: { value: stateValue },
-                props: { onChange, value }
-              } = nodeProps.editor;
-              onChange(
-                toggleCheck(
-                  opts,
-                  stateValue ? stateValue.change() : value.change(),
-                  node
-                )
-              );
+              nodeProps.editor.toggleCheck(node);
             }
           : () => {};
       const className = classnames({

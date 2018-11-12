@@ -113,6 +113,14 @@
           },
           {
             "object": "block",
+            "type": "image",
+            "data": {
+              "src": "https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half/public/field_blog_entry_images/2018-02/cloned_dogs_mdorottya_123rf.png?itok=yiaSkqQA",
+              "width": "fitToScreen"
+            }
+          },
+          {
+            "object": "block",
             "type": "mediaCaption",
             "nodes": [
               {

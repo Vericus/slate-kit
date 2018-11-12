@@ -39,7 +39,7 @@
     "tinycolor2": "TinyColor"
   },
   "dependencies": {
-    "immutable": "^3.8.2",
+    "immutable": ">=3.8.2",
     "is-plain-obj": "^1.1.0",
     "tinycolor2": "^1.4.1",
     "tslib": "^1.9.3"
@@ -47,13 +47,13 @@
   "devDependencies": {
     "@vericus/slate-kit-utils-hyperscript": "^0.1.1",
     "expect": "^23.1.0",
-    "slate": ">=0.41.0 <0.42.0",
+    "slate": ">=0.44.0 <0.45.0",
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
     "@vericus/slate-kit-highlight-text-renderer": "^0.1.0",
     "@vericus/slate-kit-plugins-utils": "^0.1.0",
-    "slate": ">=0.41.0 <0.42.0"
+    "slate": ">=0.44.0 <0.45.0"
   },
   "keywords": [
     "Vericus",

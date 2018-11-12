@@ -1,24 +1,23 @@
 import isHotkey from "is-hotkey";
-import { Change } from "slate";
 import Options from "./options";
 
 function createOnKeyDown(opts: Options) {
   const { hotkeys } = opts;
-  const { change: changeFn, changeArgs } = opts;
+  const { commandName, commandArgs } = opts;
   const hotkeyArrays = Array.isArray(hotkeys) ? hotkeys : [hotkeys];
   function checkHotKey(event): boolean {
     return hotkeyArrays.some(hotkey => isHotkey(hotkey)(event));
   }
-  return (event, change: Change): void | Change | boolean => {
-    if (checkHotKey(event)) {
-      if (changeArgs) {
-        change.call(changeFn, ...changeArgs);
+  return (event, editor, next): boolean => {
+    if (checkHotKey(event) && editor[commandName]) {
+      if (commandArgs) {
+        editor[commandName](...commandArgs);
       } else {
-        change.call(changeFn);
+        editor[commandName]();
       }
       return true;
     }
-    return undefined;
+    return next();
   };
 }
 

@@ -8,31 +8,31 @@ export default function ReadOnly() {
 
     e.preventDefault();
     e.stopPropagation();
-    return true;
+    return;
   }
 
   function onBeforeInput(e) {
     e.preventDefault();
     e.stopPropagation();
-    return true;
+    return;
   }
 
   function onDrop(e) {
     e.preventDefault();
     e.stopPropagation();
-    return true;
+    return;
   }
 
   function onInput(e) {
     e.preventDefault();
     e.stopPropagation();
-    return true;
+    return;
   }
 
   function onCut(e) {
     e.preventDefault();
     e.stopPropagation();
-    return true;
+    return;
   }
 
   return {

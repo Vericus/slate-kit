@@ -1,8 +1,8 @@
 import Renderer from "@vericus/slate-kit-highlight-text-renderer";
 import Options, { TypeOptions } from "./options";
 import createProps from "./props";
-import createChanges from "./changes";
-import createUtils from "./utils";
+import createCommands from "./commands";
+import createQueries from "./queries";
 
 export default function createPlugin(
   pluginOptions: TypeOptions,
@@ -10,13 +10,13 @@ export default function createPlugin(
 ) {
   const options = Options.create(pluginOptions);
   const { type } = options;
-  const changes = createChanges(options);
-  const utils = createUtils(options);
+  const commands = createCommands(options);
+  const queries = createQueries(options);
   const props = createProps(options);
   const plugin: any = {
     options,
-    changes,
-    utils,
+    commands,
+    queries,
     props
   };
   if (!options.externalRenderer) {

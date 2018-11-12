@@ -1,4 +1,4 @@
-import { Change, SlateError, Block, Text } from "slate";
+import { Editor, SlateError, Block, Text } from "slate";
 import { TypeOption, CommonOption } from "../options";
 
 export default function createSchema(opts: TypeOption) {
@@ -21,39 +21,32 @@ export default function createSchema(opts: TypeOption) {
             max: 1
           },
           {
-            match: { type: captionType },
+            match: [{ type: captionType }],
             min: 0,
             max: 1
           }
         ],
         last: {
-          type: type =>
-            [
-              ...Object.values(mediaTypes).map(mediaType => mediaType.type),
+          type: nodeType => {
+            return [
+              ...Object.values(mediaTypes).reduce(
+                (acc, mediaType) => [...acc, mediaType.type],
+                []
+              ),
               captionType
-            ].includes(type)
+            ].includes(nodeType);
+          }
         },
-        normalize: (change: Change, error: SlateError) => {
+        normalize: (editor: Editor, error: SlateError) => {
           switch (error.code) {
-            case "child_type_invalid":
-              change.withoutNormalizing(c =>
-                c
-                  .removeNodeByKey(error.child.key)
-                  .removeNodeByKey(error.node.key)
-              );
-
-              return;
-            case "child_required":
-              change.removeNodeByKey(error.node.key);
-              return;
             case "child_unknown":
-              change.removeNodeByKey(error.child.key);
+              editor.removeNodeByKey(error.child.key);
               return;
             case "last_child_type_invalid":
               if (Block.isBlock(error.child)) {
-                change.setNodeByKey(error.child.key, captionType);
+                editor.setNodeByKey(error.child.key, captionType);
               } else {
-                change.unwrapBlockByKey(error.node.key);
+                editor.unwrapBlockByKey(error.node.key);
               }
               return;
           }
@@ -61,26 +54,15 @@ export default function createSchema(opts: TypeOption) {
       },
       [captionType]: {
         parent: { type },
-        previous: Object.values(mediaTypes).reduce(
-          (allowedTypes, mediaType: CommonOption) => [
-            ...allowedTypes,
-            {
-              type: mediaType.type
-            }
-          ],
-          []
-        ),
-        nodes: [{ match: { object: "text", min: 1 } }],
-        normalize: (change: Change, error: SlateError) => {
+        nodes: [{ match: [{ object: "text" }], min: 1 }],
+        normalize: (editor: Editor, error: SlateError) => {
           switch (error.code) {
             case "parent_type_invalid":
-              return change.unwrapNodeByKey(error.parent.key);
+              return editor.unwrapNodeByKey(error.parent.key);
             case "child_object_invalid":
-              return change.removeNodeByKey(error.child.key);
+              return editor.removeNodeByKey(error.child.key);
             case "child_required":
-              return change.insertNodeByKey(error.node.key, 0, Text.create(""));
-            case "previous_sibling_type_invalid":
-              return change.removeNodeByKey(error.node.key);
+              return editor.insertNodeByKey(error.node.key, 0, Text.create(""));
           }
         }
       },
@@ -109,10 +91,11 @@ export default function createSchema(opts: TypeOption) {
               }
               return data;
             }, {}),
-            normalize: (change: Change, error: SlateError) => {
+            normalize: (editor: Editor, error: SlateError) => {
+              console.log(JSON.stringify(error));
               switch (error.code) {
                 case "parent_type_invalid":
-                  change.wrapBlockByKey(error.node.key, type);
+                  editor.wrapBlockByKey(error.node.key, type);
                   return;
                 case "node_data_invalid":
                   const { key, node } = error;
@@ -124,7 +107,7 @@ export default function createSchema(opts: TypeOption) {
                     mediaType[defaultKey] &&
                     Block.isBlock(node)
                   ) {
-                    change.setNodeByKey(node.key, {
+                    editor.setNodeByKey(node.key, {
                       data: node.data.set(key, mediaType[defaultKey])
                     });
                   }

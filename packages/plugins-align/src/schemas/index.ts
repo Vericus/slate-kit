@@ -1,4 +1,4 @@
-import { Change, Node, SlateError, Text } from "slate";
+import { Change, SlateError, Text } from "slate";
 import { TypeOptions } from "../options";
 
 export default function createSchema(opts: TypeOptions) {

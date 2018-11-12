@@ -1,5 +1,3 @@
-import getAlignment from "../utils/getAlignment";
-
 export default function createProps(opts) {
   const { floatBlocks, textBlocks } = opts;
   return {
@@ -14,7 +12,7 @@ export default function createProps(opts) {
       ) {
         return props;
       }
-      const alignment = getAlignment(opts, props.node);
+      const alignment = props.editor.getAlignment(props.node);
       let style = (props.attributes && props.attributes.style) || {};
       if (textBlocks.includes(props.node.type)) {
         style = {

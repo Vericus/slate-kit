@@ -1,16 +1,11 @@
-import getHighestSelectedBlocks from "./getHighestSelectedBlocks";
-import hasActiveMark from "./hasActiveMark";
-import hasBlock from "./hasBlock";
-import hasMark from "./hasMark";
-import removeExpandedMark from "./removeExpandedMark";
-import removeCollapsedMark from "./removeCollapsedMark";
+import createCommands from "./commands";
+import createQueries from "./queries";
 
-// eslint-disable-next-line import/prefer-default-export
-export {
-  getHighestSelectedBlocks,
-  hasMark,
-  hasActiveMark,
-  hasBlock,
-  removeExpandedMark,
-  removeCollapsedMark
-};
+export default function create() {
+  const queries = createQueries();
+  const commands = createCommands();
+  return {
+    queries,
+    commands
+  };
+}

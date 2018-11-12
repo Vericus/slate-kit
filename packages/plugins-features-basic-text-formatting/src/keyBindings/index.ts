@@ -1,12 +1,12 @@
 import BindHotKey from "@vericus/slate-kit-bind-hotkey";
 
-export default function(opt, changes) {
+export default function(opt) {
   const { keyBindings } = opt;
   return keyBindings
-    ? keyBindings.map(({ hotkeys, changeName, change }) =>
+    ? keyBindings.map(({ hotkeys, commandName }) =>
         BindHotKey({
           hotkeys,
-          change: change || (changeName && changes[changeName])
+          commandName
         })
       )
     : [];

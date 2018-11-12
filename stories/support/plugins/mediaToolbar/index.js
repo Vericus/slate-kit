@@ -3,8 +3,6 @@ import Toolbar from "./Toolbar";
 
 const createToolbar = (mediaLabel, pluginsWrapper) => {
   const mediaOptions = pluginsWrapper.getOptions(mediaLabel);
-  const changes = pluginsWrapper.getChanges(mediaLabel);
-  const utils = pluginsWrapper.getUtils(mediaLabel);
   if (!mediaOptions) return;
   const { mediaTypes } = mediaOptions;
   if (!mediaTypes) return;
@@ -19,12 +17,12 @@ const createToolbar = (mediaLabel, pluginsWrapper) => {
     const { value } = editor.props;
     const { selection } = value;
     const { start, end } = selection;
-    const selectedMedia = utils.getSelectedMediaBlock(value);
+    const selectedMedia = editor.getSelectedMediaBlock(value);
     if (!selectedMedia) return;
-    const src = utils.getSource(node);
+    const src = editor.getSource(node);
     if (!src || src === "") return;
     if (!(start.isInNode(node) || end.isInNode(node))) return;
-    return <Toolbar {...props} changes={changes} utils={utils} />;
+    return <Toolbar {...props} />;
   };
 };
 

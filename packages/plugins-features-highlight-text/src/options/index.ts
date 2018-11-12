@@ -2,6 +2,7 @@ import { Record } from "immutable";
 import isPlainObject from "is-plain-obj";
 
 export interface TypeOptions {
+  name: string;
   type: string;
   marks: {
     [type: string]: string;
@@ -14,6 +15,7 @@ export interface TypeOptions {
 }
 
 const defaultOptions = {
+  name: undefined,
   marks: undefined,
   type: undefined,
   styles: undefined,
@@ -24,6 +26,7 @@ const defaultOptions = {
 };
 
 class Options extends Record(defaultOptions, "highlight text option") {
+  name: string;
   marks: {
     [type: string]: string;
   };
@@ -46,7 +49,7 @@ class Options extends Record(defaultOptions, "highlight text option") {
   static fromJSON(object: any) {
     if (Options.isOptions(object)) return object;
 
-    const { type, data, styles, defaultColor, alpha = 1 } = object;
+    const { name, type, data, styles, defaultColor, alpha = 1 } = object;
     if (!type || !data || !styles || !defaultColor || !Array.isArray(styles)) {
       throw new Error("Highlight text require type, data and style option");
     }
@@ -63,7 +66,8 @@ class Options extends Record(defaultOptions, "highlight text option") {
       data,
       styles,
       alpha,
-      defaultColor
+      defaultColor,
+      name
     });
   }
 

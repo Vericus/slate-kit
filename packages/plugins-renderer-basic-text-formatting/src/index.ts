@@ -1,4 +1,4 @@
-import createRenderMark, * as RenderMark from "./renderMark";
+import createRenderMark from "./renderMark";
 
 export default function createRenderer() {
   return {

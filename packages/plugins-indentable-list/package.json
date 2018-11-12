@@ -33,18 +33,19 @@
     "classnames": "ClassNames",
     "immutable": "Immutable",
     "slate": "Slate",
-    "slate-auto-replace": "SlateAutoReplace",
     "is-hotkey": "IsHotkey",
     "@vericus/slate-kit-indentable-list-renderer": "IndentableListRenderer",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
+    "@vericus/slate-kit-utils-auto-replace": "SlateKitAutoReplace",
     "tslib": "TSLib",
     "slate-hotkeys": "SlateHotKeys",
     "slate-dev-environment": "SlateDevEnvironment"
   },
   "dependencies": {
+    "@vericus/slate-kit-utils-auto-replace": "^0.0.1",
     "classnames": ">=2.2.5",
     "debug": ">=3.1.0",
-    "immutable": "^3.8.2",
+    "immutable": ">=3.8.2",
     "is-plain-object": ">=2.0.4",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
@@ -55,28 +56,23 @@
     "is-hotkey": ">=0.1.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "slate": ">=0.41.0 <0.42.0",
-    "slate-auto-replace": "^0.11.0",
+    "slate": ">=0.44.0 <0.45.0",
     "slate-dev-environment": ">=0.2.0",
-    "slate-prop-types": ">=0.4.27",
+    "slate-prop-types": ">=0.5.7",
     "slate-simulator": "^0.4.33",
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
     "@vericus/slate-kit-indentable-list-renderer": "^0.1.0",
     "@vericus/slate-kit-plugins-utils": "^0.1.0",
+    "@vericus/slate-kit-utils-auto-replace": "^0.0.1",
     "is-hotkey": ">=0.1.2",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "slate": ">=0.41.0 <0.42.0",
-    "slate-auto-replace": "^0.11.0",
+    "slate": ">=0.44.0 <0.45.0",
     "slate-dev-environment": ">=0.2.0",
     "slate-hotkeys": ">=0.2.3",
-    "slate-prop-types": ">=0.4.0"
-  },
-  "resolutions": {
-    "slate-auto-replace/**/is-hotkey": ">=0.1.2",
-    "is-hotkey": ">=0.1.2"
+    "slate-prop-types": ">=0.5.7"
   },
   "keywords": [
     "Vericus",

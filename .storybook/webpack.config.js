@@ -1,26 +1,12 @@
 const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-const extractCss = new ExtractTextPlugin({
-  filename: "[name].[contenthash].css",
-  disable: process.env.NODE_ENV === "development"
-});
-
-module.exports = (storybookBaseConfig, configType) => {
-  storybookBaseConfig.module.rules.push({
-    test: /\.s?css$/,
-    use: extractCss.extract({
-      use: [
-        {
-          loader: "css-loader"
-        }
-      ],
-      // use style-loader in development
-      fallback: "style-loader"
-    })
+module.exports = (baseConfig, env, config) => {
+  config.module.rules.push({
+    test: /\.(ts|tsx)$/,
+    loader: require.resolve("awesome-typescript-loader")
   });
-
-  storybookBaseConfig.module.rules.push({
+  config.resolve.extensions.push(".ts", ".tsx");
+  config.module.rules.push({
     test: /\.stories\.jsx?$/,
     loaders: [
       {
@@ -28,8 +14,23 @@ module.exports = (storybookBaseConfig, configType) => {
         options: {
           prettierConfig: {
             printWidth: 80,
+            tabWidth: 2
+          }
+        }
+      }
+    ],
+    enforce: "pre"
+  });
+  config.module.rules.push({
+    test: /\.stories\.tsx?$/,
+    loaders: [
+      {
+        loader: require.resolve("@storybook/addon-storysource/loader"),
+        options: {
+          prettierConfig: {
+            printWidth: 80,
             tabWidth: 2,
-            parser: "babylon"
+            parser: "typescript"
           }
         }
       }
@@ -37,6 +38,5 @@ module.exports = (storybookBaseConfig, configType) => {
     enforce: "pre"
   });
 
-  storybookBaseConfig.plugins.push(extractCss);
-  return storybookBaseConfig;
+  return config;
 };

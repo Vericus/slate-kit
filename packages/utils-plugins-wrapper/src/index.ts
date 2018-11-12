@@ -1,12 +1,10 @@
 import Symbol from "es6-symbol";
 import HTMLSerializer from "@vericus/slate-kit-html-serializer";
 
-const CHANGES = Symbol("changes");
 const OPTIONS = Symbol("options");
 const PLUGINS = Symbol("plugins");
 const PROPS = Symbol("props");
 const STYLES = Symbol("styles");
-const UTILS = Symbol("utils");
 const RULES = Symbol("rules");
 const RENDERERS = Symbol("renderers");
 const RENDERERSHOC = Symbol("hocs");
@@ -44,11 +42,7 @@ export interface SlateRenderers {
   [key: string]: (...args: any[]) => JSX.Element;
 }
 
-export type RenderersType =
-  | "renderMarks"
-  | "renderNodes"
-  | "renderEditor"
-  | "renderPlaceholder";
+export type RenderersType = "renderMarks" | "renderNodes" | "renderEditor";
 
 export type RenderersMap = { [label in RenderersType]: SlateRenderers };
 
@@ -74,20 +68,16 @@ export interface PluginOption {
 
 export default class PluginsWrapper {
   serializer: null | object;
-  CHANGES: ObjectMap;
   OPTIONS: ObjectMap;
-  UTILS: ObjectMap;
   STYLES: StylesMap;
   RULES: RulesMap;
   RENDERERS: RenderersMap;
   RENDERERSHOC: ObjectMap;
   constructor() {
-    this[CHANGES] = {};
     this[OPTIONS] = {};
     this[PLUGINS] = {};
     this[PROPS] = {};
     this[STYLES] = {};
-    this[UTILS] = {};
     this[RULES] = {};
     this[RENDERERS] = {};
     this[RENDERERSHOC] = {};
@@ -134,15 +124,6 @@ export default class PluginsWrapper {
             }
           };
         }
-        if (renderer.placeholders) {
-          newRenderers = {
-            ...newRenderers,
-            placeholders: [
-              ...(newRenderers.placeholders ? newRenderers.placeholders : []),
-              ...renderer.placeholders
-            ]
-          };
-        }
         if (renderer.toolbars) {
           newRenderers = {
             ...newRenderers,
@@ -154,7 +135,7 @@ export default class PluginsWrapper {
         }
         return newRenderers;
       },
-      { marks: {}, nodes: {}, placeholders: [], toolbars: [] }
+      { marks: {}, nodes: {}, toolbars: [] }
     );
 
   getFlattenOptions = () =>
@@ -169,9 +150,8 @@ export default class PluginsWrapper {
     let defaultBlock = "";
     Object.values(this[OPTIONS]).some((option: any) => {
       if (Array.isArray(option)) {
-        return option.some(
-          o =>
-            o.defaultBlock ? ((defaultBlock = o.defaultBlock), true) : false
+        return option.some(o =>
+          o.defaultBlock ? ((defaultBlock = o.defaultBlock), true) : false
         );
       }
       return option.defaultBlock
@@ -219,11 +199,6 @@ export default class PluginsWrapper {
         nodes: {}
       }
     );
-
-  getUtils = (label?: string) => (label ? this[UTILS][label] : this[UTILS]);
-
-  getChanges = (label?: string) =>
-    label ? this[CHANGES][label] : this[CHANGES];
 
   getPlugins = (label?: string) =>
     label
@@ -286,27 +261,6 @@ export default class PluginsWrapper {
           };
         } else {
           this[STYLES][label] = value;
-        }
-        break;
-      case "utils":
-      case "helpers":
-        if (this[UTILS][label]) {
-          this[UTILS][label] = {
-            ...this[UTILS][label],
-            ...value
-          };
-        } else {
-          this[UTILS][label] = value;
-        }
-        break;
-      case "changes":
-        if (this[CHANGES][label]) {
-          this[CHANGES][label] = {
-            ...this[CHANGES][label],
-            ...value
-          };
-        } else {
-          this[CHANGES][label] = value;
         }
         break;
       case "props":

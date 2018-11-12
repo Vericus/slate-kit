@@ -1,6 +1,6 @@
 import Options, { TypeOptions } from "./options";
-import createChanges from "./changes";
-import createUtils from "./utils";
+import createCommands from "./commands";
+import createQueries from "./queries";
 import createOnKeyDown from "./onKeyDown";
 import createProps from "./props";
 import createSchema from "./schemas";
@@ -8,17 +8,17 @@ import createStyle from "./style";
 
 function createIndentPlugin(pluginOptions: TypeOptions) {
   const options = new Options(pluginOptions);
-  const utils = createUtils(options);
-  const changes = createChanges(options);
+  const queries = createQueries(options);
+  const commands = createCommands(options);
   const onKeyDown = createOnKeyDown(options);
   const props = createProps(options);
   const schema = createSchema(options);
   const style = createStyle(options);
   return {
-    utils,
+    queries,
     props,
     onKeyDown: options.withHandlers ? onKeyDown : undefined,
-    changes,
+    commands,
     options,
     style,
     schema,

@@ -1,9 +1,7 @@
-import { Change } from "slate";
+import { Editor } from "slate";
 import isHotkey from "is-hotkey";
 import hotkeys from "slate-hotkeys";
 import { TypeOptions } from "../options";
-import { increaseIndent, decreaseIndent } from "../changes";
-import { getIndentationLevel } from "../utils";
 
 export default function createOnKeyDown(opts: TypeOptions) {
   const { tabable } = opts;
@@ -15,8 +13,8 @@ export default function createOnKeyDown(opts: TypeOptions) {
   const isDelete = e =>
     isDeleteBackward(e) || isDeleteLineBackward(e) || isDeleteWordBackward(e);
 
-  return (event, change: Change) => {
-    const { value } = change;
+  return (event, editor: Editor, next) => {
+    const { value } = editor;
     const { startBlock, endBlock, selection } = value;
     const {
       isCollapsed,
@@ -29,13 +27,12 @@ export default function createOnKeyDown(opts: TypeOptions) {
         startBlock === endBlock &&
         isCollapsed &&
         startOffset === 0);
-    if (!(isIndent || isOutdent)) return undefined;
     if (isOutdent) {
       event.preventDefault();
       event.stopPropagation();
-      if (getIndentationLevel(opts, startBlock) !== 0) {
-        decreaseIndent(opts, change);
-        return true;
+      if (editor.getIndentationLevel(startBlock) !== 0) {
+        editor.decreaseIndent();
+        return;
       }
     } else if (isIndent) {
       event.preventDefault();
@@ -45,11 +42,12 @@ export default function createOnKeyDown(opts: TypeOptions) {
         selection.isCollapsed &&
         tabable.includes(startBlock.type)
       ) {
-        change.insertText("\t");
-        return undefined;
+        editor.insertText("\t");
+        return;
       }
-      increaseIndent(opts, change);
+      editor.increaseIndent();
+      return;
     }
-    return undefined;
+    return next();
   };
 }

@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Node, Block } from "slate";
-import { ImageCaption, CaptionPlaceholder, Media, Image } from "./components";
+import { Node, Block, Editor } from "slate";
+import Placeholder from "@vericus/slate-kit-utils-placeholders";
+import { ImageCaption, Media, Image, CaptionPlaceholder } from "./components";
 
 export interface Props {
   attributes: any;
@@ -16,60 +17,22 @@ const createMediaRenderer = (imageType: any | undefined) => {
 
 const createMediaCaption = (
   imageType: any | undefined,
-  utils,
   captionHideField: string | null
 ) => {
-  const { getSource, hideCaption } = utils;
   const { type } = imageType || { type: undefined };
   return props =>
-    hideCaption(props.node) ? null : (
-      <ImageCaption {...props} imageType={type} getSource={getSource} />
+    props.editor.hideCaption(props.node) ? null : (
+      <ImageCaption {...props} imageType={type} />
     );
 };
 
-const createCaptionPlaceholder = (
-  captionType: string,
-  imageType: string | undefined,
-  utils
-) => {
-  const { getSource } = utils;
-  return {
-    condition: props => {
-      if (!imageType) return false;
-      if (props.node.type !== captionType) return false;
-      const { parent } = props;
-      const imageBlock =
-        imageType &&
-        parent.nodes
-          .toArray()
-          .find(n => Block.isBlock(n) && n.type === imageType);
-      if (imageBlock) {
-        const src = getSource(imageBlock);
-        return !((src && src === "") || !src) && props.node.text === "";
-      }
-      return props.node.text === "";
-    },
-    render: props => <CaptionPlaceholder {...props} />
-  };
-};
-
-const createImage = (changes, utils, onInsert, extensions) => {
-  const { getImageWidth, getSource } = utils;
-  const { updateImageSource, toggleCaption } = changes;
+const createImage = (onInsert, extensions) => {
   return props => (
-    <Image
-      {...props}
-      extensions={extensions}
-      onInsert={onInsert}
-      getImageWidth={getImageWidth}
-      getSource={getSource}
-      updateImageSource={updateImageSource}
-      toggleCaption={toggleCaption}
-    />
+    <Image {...props} extensions={extensions} onInsert={onInsert} />
   );
 };
 
-export default function createRenderer(opts, changes, utils) {
+export default function createRenderer(opts) {
   const { mediaTypes, captionType, captionHideField } = opts;
   const { image } = mediaTypes || { image: undefined };
   let onInsert;
@@ -87,13 +50,25 @@ export default function createRenderer(opts, changes, utils) {
       .join(", ");
   }
   return {
-    nodes: {
-      media: createMediaRenderer(image),
-      image: createImage(changes, utils, onInsert, extensions),
-      mediacaption: createMediaCaption(image, utils, captionHideField)
-    },
-    placeholders: [
-      createCaptionPlaceholder(captionType, image && image.type, utils)
+    plugins: [
+      {
+        renderers: {
+          nodes: {
+            media: createMediaRenderer(image),
+            image: createImage(onInsert, extensions),
+            mediacaption: createMediaCaption(image, captionHideField)
+          }
+        }
+      },
+      Placeholder({
+        type: "mediaCaption",
+        when: (editor: Editor, node: Node) => {
+          if (!image || !image.type) return false;
+          if (!Block.isBlock(node)) return false;
+          return captionType && node.type === captionType && node.text === "";
+        },
+        render: props => <CaptionPlaceholder {...props} />
+      })
     ]
   };
 }

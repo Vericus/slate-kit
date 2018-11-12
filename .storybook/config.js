@@ -1,6 +1,6 @@
 import React from "react";
 import { configure, addDecorator } from "@storybook/react";
-import { setOptions } from "@storybook/addon-options";
+import { withOptions } from "@storybook/addon-options";
 import { ThemeProvider, injectGlobal } from "styled-components";
 import theme from "./theme";
 import Styled from "./Styled";
@@ -18,17 +18,19 @@ body {
   ${normalizeCss}
 `;
 
-setOptions({
-  name: "Slate-Kit",
-  url: "https://github.com/Vericus/slate-kit",
-  addonPanelInRight: true
-});
-
 // automatically import all files ending in *.stories.js
 const req = require.context("../stories", true, /.stories.js$/);
 function loadStories() {
   req.keys().forEach(filename => req(filename));
 }
+
+addDecorator(
+  withOptions({
+    name: "Slate-Kit",
+    url: "https://github.com/Vericus/slate-kit",
+    addonPanelInRight: true
+  })
+);
 
 addDecorator(story => (
   <ThemeProvider theme={theme}>

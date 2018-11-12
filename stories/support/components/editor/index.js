@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { compose } from "recompose";
+import { compose, mapProps } from "recompose";
 import {
   getEventRange,
   getEventTransfer,
@@ -18,8 +18,13 @@ import Toolbar from "../toolbar";
 
 const EnchancedEditor = compose(
   WithRenderers,
-  WithReadOnly
+  WithReadOnly,
+  mapProps(({ forwardedRef, ...rest }) => ({ ref: forwardedRef, ...rest }))
 )(Editor);
+
+const EnchancedEditorWithRef = React.forwardRef(({ ...props }, ref) => (
+  <EnchancedEditor {...props} forwardedRef={ref} />
+));
 
 export default class SlateKitEditor extends Component {
   constructor(props) {
@@ -29,6 +34,7 @@ export default class SlateKitEditor extends Component {
     };
     this.pluginsWrapper = new PluginsWrapper();
     this.plugins = this.pluginsWrapper.makePlugins(this.props.pluginOpts);
+    this.editor = React.createRef();
   }
 
   onChange = ({ value }) => {
@@ -48,27 +54,32 @@ export default class SlateKitEditor extends Component {
     }
   };
 
-  renderToolbar = () => (
-    <Toolbar
-      pluginsWrapper={this.pluginsWrapper}
-      value={this.state.value}
-      onChange={this.onChange}
-      isReadOnly={this.props.isReadOnly}
-    />
-  );
+  renderToolbar = () => {
+    if (this.editor && this.editor.current) {
+      return (
+        <Toolbar
+          pluginsWrapper={this.pluginsWrapper}
+          onChange={this.onChange}
+          isReadOnly={this.props.isReadOnly}
+          editor={this.editor.current}
+        />
+      );
+    }
+  };
 
   render() {
     return (
       <div>
         {this.renderToolbar()}
         <div className="editorContainer">
-          <EnchancedEditor
+          <EnchancedEditorWithRef
             placeholder={"Enter some text..."}
             plugins={this.plugins}
             value={this.state.value}
             onChange={this.onChange}
             onPaste={this.onPaste}
             pluginsWrapper={this.pluginsWrapper}
+            ref={this.editor}
             {...this.props}
           />
         </div>

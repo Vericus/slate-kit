@@ -204,151 +204,108 @@ class ColorPicker extends Component {
 export default class Toolbar extends Component {
   constructor(props) {
     super(props);
-    const { pluginsWrapper } = props;
-    const hasTypography = pluginsWrapper.getChanges("basic-typhography");
-    const hasMarks = pluginsWrapper.getChanges("basic-text-format");
-    this.indentChanges = pluginsWrapper.getChanges("indent");
-    this.indentUtils = pluginsWrapper.getUtils("indent");
-    this.listChanges = pluginsWrapper.getChanges("list");
-    this.listUtils = pluginsWrapper.getUtils("list");
-    this.alignChanges = pluginsWrapper.getChanges("align");
-    this.alignUtils = pluginsWrapper.getUtils("align");
-    this.historyUtils = pluginsWrapper.getUtils("history");
-    this.mediaChanges = pluginsWrapper.getChanges("media");
-    this.mediaUtils = pluginsWrapper.getUtils("media");
-    this.currentTypography = hasTypography
-      ? pluginsWrapper.getUtils("basic-typhography").currentTypography
+    const { pluginsWrapper, editor } = props;
+    this.currentTypography = editor.currentTypography
+      ? editor.currentTypography
       : () => true;
     this.typographies = {
       "heading-one": {
         icon: "Header",
-        change: hasTypography
-          ? pluginsWrapper.getChanges("basic-typhography").toggleTypography
-          : () => {},
-        disabled: !hasTypography
+        change: editor.toggleTypography ? editor.toggleTypography : () => {},
+        disabled: !editor.toggleTypography
       },
       "heading-two": {
         icon: "Header2",
-        change: hasTypography
-          ? pluginsWrapper.getChanges("basic-typhography").toggleTypography
-          : () => {},
-        disabled: !hasTypography
+        change: editor.toggleTypography ? editor.toggleTypography : () => {},
+        disabled: !editor.toggleTypography
       },
       "heading-three": {
         icon: "Header3",
-        change: hasTypography
-          ? pluginsWrapper.getChanges("basic-typhography").toggleTypography
-          : () => {},
-        disabled: !hasTypography
+        change: editor.toggleTypography ? editor.toggleTypography : () => {},
+        disabled: !editor.toggleTypography
       },
       "heading-four": {
         icon: "Header4",
-        change: hasTypography
-          ? pluginsWrapper.getChanges("basic-typhography").toggleTypography
-          : () => {},
-        disabled: !hasTypography
+        change: editor.toggleTypography ? editor.toggleTypography : () => {},
+        disabled: !editor.toggleTypography
       },
       paragraph: {
         icon: "Header5",
-        change: hasTypography
-          ? pluginsWrapper.getChanges("basic-typhography").toggleTypography
-          : () => {},
-        disabled: !hasTypography
+        change: editor.toggleTypography ? editor.toggleTypography : () => {},
+        disabled: !editor.toggleTypography
       },
       blockquote: {
         icon: "Blockquote",
-        change: hasTypography
-          ? pluginsWrapper.getChanges("basic-typhography").toggleTypography
-          : () => {},
-        disabled: !hasTypography
+        change: editor.toggleTypography ? editor.toggleTypography : () => {},
+        disabled: !editor.toggleTypography
       }
     };
     this.lists = {
       "ol-list": {
         icon: "ListOrdered",
-        change: this.listChanges ? this.listChanges.changeListType : () => {},
-        disabled: !this.listChanges,
-        isActive: this.listUtils ? this.listUtils.isOrderedList : () => false
+        change: editor.changeListType ? editor.changeListType : () => {},
+        disabled: !editor.changeListType,
+        isActive: editor.isOrderedList ? editor.isOrderedList : () => false
       },
       "ul-list": {
         icon: "ListBullet",
-        change: this.listChanges ? this.listChanges.changeListType : () => {},
-        disabled: !this.listChanges,
-        isActive: this.listUtils ? this.listUtils.isUnorderedList : () => false
+        change: editor.changeListType ? editor.changeListType : () => {},
+        disabled: !editor.changeListType,
+        isActive: editor.isUnorderedList ? editor.isUnorderedList : () => false
       },
       "check-list": {
         icon: "ListCheck",
-        change: this.listChanges ? this.listChanges.changeListType : () => {},
-        disabled: !this.listChanges,
-        isActive: this.listUtils ? this.listUtils.isCheckList : () => false
+        change: editor.changeListType ? editor.changeListType : () => {},
+        disabled: !editor.changeListType,
+        isActive: editor.isCheckList ? editor.isCheckList : () => false
       }
     };
     this.marks = {
       bold: {
         icon: "Bold",
-        change: hasMarks
-          ? pluginsWrapper.getChanges("basic-text-format").toggleBold
-          : () => {},
-        disabled: !hasMarks,
-        isActive: hasMarks
-          ? pluginsWrapper.getUtils("basic-text-format").isBold
-          : () => false
+        change: editor.toggleBold ? editor.toggleBold : () => {},
+        disabled: !editor.toggleBold,
+        isActive: editor.isBold ? editor.isBold : () => false
       },
       italic: {
         icon: "Italic",
-        change: hasMarks
-          ? pluginsWrapper.getChanges("basic-text-format").toggleItalic
-          : () => {},
-        disabled: !hasMarks,
-        isActive: hasMarks
-          ? pluginsWrapper.getUtils("basic-text-format").isItalic
-          : () => false
+        change: editor.toggleItalic ? editor.toggleItalic : () => {},
+        disabled: !editor.toggleItalic,
+        isActive: editor.isItalic ? editor.isItalic : () => false
       },
       underline: {
         icon: "Underline",
-        change: hasMarks
-          ? pluginsWrapper.getChanges("basic-text-format").toggleUnderline
-          : () => {},
-        disabled: !hasMarks,
-        isActive: hasMarks
-          ? pluginsWrapper.getUtils("basic-text-format").isUnderline
-          : () => false
+        change: editor.toggleUnderline ? editor.toggleUnderline : () => {},
+        disabled: !editor.toggleUnderline,
+        isActive: editor.isUnderline ? editor.isUnderline : () => false
       },
       strikethrough: {
         icon: "Strike",
-        change: hasMarks
-          ? pluginsWrapper.getChanges("basic-text-format").toggleStrikethrough
+        change: editor.toggleStrikethrough
+          ? editor.toggleStrikethrough
           : () => {},
-        disabled: !hasMarks,
-        isActive: hasMarks
-          ? pluginsWrapper.getUtils("basic-text-format").isStrikethrough
-          : () => false
+        disabled: !editor.toggleStrikethrough,
+        isActive: editor.isStrikethrough ? editor.isStrikethrough : () => false
       }
     };
     this.allignments = {
       left: {
         icon: "AlignLeft",
-        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
-        disabled: !this.alignUtils,
-        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
+        change: editor.setAlign ? editor.setAlign : () => {},
+        disabled: !editor.setAlign,
+        isActive: editor.isAligned ? editor.isAligned : () => false
       },
       center: {
         icon: "AlignCenter",
-        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
-        disabled: !this.alignUtils,
-        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
+        change: editor.setAlign ? editor.setAlign : () => {},
+        disabled: !editor.setAlign,
+        isActive: editor.isAligned ? editor.isAligned : () => false
       },
       right: {
         icon: "AlignRight",
-        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
-        disabled: !this.alignUtils,
-        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
-      },
-      justify: {
-        icon: "AlignJustify",
-        change: this.alignChanges ? this.alignChanges.setAlign : () => {},
-        disabled: !this.alignUtils,
-        isActive: this.alignUtils ? this.alignUtils.isAligned : () => false
+        change: editor.setAlign ? editor.setAlign : () => {},
+        disabled: !editor.setAlign,
+        isActive: editor.isAligned ? editor.isAligned : () => false
       }
     };
   }
@@ -356,13 +313,13 @@ export default class Toolbar extends Component {
   handleClickMark = (event, change) => {
     event.preventDefault();
     event.stopPropagation();
-    this.props.onChange(change(this.props.value.change()));
+    change();
   };
 
   handleClickTypography = (event, change, type) => {
     event.preventDefault();
     event.stopPropagation();
-    this.props.onChange(change(this.props.value.change(), type));
+    change(type);
   };
 
   renderTyphography = () => {
@@ -373,7 +330,7 @@ export default class Toolbar extends Component {
           icon={options.icon}
           onMouseDown={e => this.handleClickTypography(e, options.change, type)}
           disabled={options.disabled || this.props.isReadOnly}
-          active={this.currentTypography(this.props.value) === type}
+          active={this.currentTypography() === type}
           size="18"
         />
       );
@@ -383,7 +340,7 @@ export default class Toolbar extends Component {
   handleClickList = (event, change, type) => {
     event.preventDefault();
     event.stopPropagation();
-    this.props.onChange(change(this.props.value.change(), type));
+    change(type);
   };
 
   renderList = () => {
@@ -394,7 +351,7 @@ export default class Toolbar extends Component {
           icon={options.icon}
           onMouseDown={e => this.handleClickList(e, options.change, type)}
           disabled={options.disabled || this.props.isReadOnly}
-          active={options.isActive(this.props.value)}
+          active={options.isActive()}
           size="18"
         />
       );
@@ -402,35 +359,27 @@ export default class Toolbar extends Component {
   };
 
   handleClickIndent = event => {
+    const { editor } = this.props;
     event.preventDefault();
     event.stopPropagation();
-    const change = this.props.value.change();
-    const { value } = change;
-    change.withoutNormalization(c => {
-      this.indentChanges.increaseIndent(c);
-    });
-    this.props.onChange(change);
+    editor.increaseIndent();
   };
 
   handleClickOutdent = event => {
+    const { editor } = this.props;
     event.preventDefault();
     event.stopPropagation();
-    const change = this.props.value.change();
-    const { value } = change;
-    change.withoutNormalization(c => {
-      this.indentChanges.decreaseIndent(c);
-    });
-    this.props.onChange(change);
+    editor.decreaseIndent();
   };
 
   canBeIndented = () => {
-    if (!this.indentUtils) return false;
-    return this.indentUtils.canBeIndented(this.props.value);
+    const { editor } = this.props;
+    return editor.canBeIndented ? editor.canBeIndented() : false;
   };
 
   canBeOutdented = () => {
-    if (!this.indentUtils) return false;
-    return this.indentUtils.canBeOutdented(this.props.value);
+    const { editor } = this.props;
+    return editor.canBeIndented ? editor.canBeOutdented() : false;
   };
 
   renderIndent = () => {
@@ -439,14 +388,14 @@ export default class Toolbar extends Component {
         key="Indent"
         icon="Indent"
         onMouseDown={e => this.handleClickIndent(e)}
-        disabled={this.props.isReadOnly || !this.indentUtils}
+        disabled={this.props.isReadOnly || !this.props.editor.increaseIndent}
         size="18"
       />,
       <IconButton
         key="Outdent"
         icon="Outdent"
         onMouseDown={e => this.handleClickOutdent(e)}
-        disabled={this.props.isReadOnly || !this.indentUtils}
+        disabled={this.props.isReadOnly || !this.props.editor.decreaseIndent}
         size="18"
       />
     ];
@@ -455,10 +404,11 @@ export default class Toolbar extends Component {
   handleClickAlignment = (event, change, type) => {
     event.preventDefault();
     event.stopPropagation();
-    this.props.onChange(change(this.props.value.change(), type));
+    change(type);
   };
 
   renderAllignment = () => {
+    const { editor } = this.props;
     return Object.entries(this.allignments).map(([type, options]) => {
       return (
         <IconButton
@@ -466,11 +416,9 @@ export default class Toolbar extends Component {
           icon={options.icon}
           onMouseDown={e => this.handleClickAlignment(e, options.change, type)}
           disabled={
-            options.disabled ||
-            this.props.isReadOnly ||
-            !this.alignUtils.isAlignable(this.props.value)
+            options.disabled || this.props.isReadOnly || !editor.isAlignable()
           }
-          active={options.isActive(this.props.value, type)}
+          active={options.isActive(type)}
           size="18"
         />
       );
@@ -485,7 +433,7 @@ export default class Toolbar extends Component {
           icon={options.icon}
           onMouseDown={e => this.handleClickMark(e, options.change)}
           disabled={options.disabled || this.props.isReadOnly}
-          active={options.isActive(this.props.value)}
+          active={options.isActive()}
           size="18"
         />
       );
@@ -493,19 +441,17 @@ export default class Toolbar extends Component {
   };
 
   handleHistory = (event, type) => {
+    const { editor } = this.props;
     event.preventDefault();
     event.stopPropagation();
-    const handler =
-      type === "undo"
-        ? this.historyUtils.handleUndo
-        : this.historyUtils.handleRedo;
-    handler(this.props.value, this.props.value.change(), this.props.onChange);
+    const handler = type === "undo" ? editor.handleUndo : editor.handleRedo;
+    handler();
   };
 
   hasHistory = type => {
-    const check =
-      type === "undo" ? this.historyUtils.hasUndo : this.historyUtils.hasRedo;
-    return check(this.props.value);
+    const { editor } = this.props;
+    const check = type === "undo" ? editor.hasUndo : editor.hasRedo;
+    return check();
   };
 
   renderHistories = () => {
@@ -529,17 +475,13 @@ export default class Toolbar extends Component {
       : null;
   };
 
-  call = (change, options = []) => {
-    this.props.onChange(this.props.value.change().call(change, ...options));
-  };
-
   onImageInsert = e => {
-    this.props.onChange(
-      this.mediaChanges.insertImage(this.props.value.change())
-    );
+    const { editor } = this.props;
+    editor.insertImage();
   };
 
   renderMedia = () => {
+    const { editor } = this.props;
     return (
       <IconButton
         key="Image"
@@ -548,28 +490,26 @@ export default class Toolbar extends Component {
           e.preventDefault();
           this.onImageInsert();
         }}
-        disabled={this.mediaUtils === undefined || this.props.isReadOnly}
+        disabled={!editor.insertImage || this.props.isReadOnly}
         size="18"
       />
     );
   };
 
   handleColorChange = (change, color) => {
-    this.call(change, [color.hex]);
+    change(color.hex);
   };
 
   renderColorButton = (label, colors, icon) => {
-    const { pluginsWrapper } = this.props;
-    const colorChanges = pluginsWrapper.getChanges(label);
-    const colorUtils = pluginsWrapper.getUtils(label);
-    return colorUtils && colorChanges ? (
+    const { editor } = this.props;
+    return editor[`current${label}Color`] ? (
       <ColorPicker
         key={icon}
         icon={icon}
         colors={colors}
-        color={colorUtils.currentColor(this.props.value)}
+        color={editor[`current${label}Color`]()}
         onChange={color =>
-          this.handleColorChange(colorChanges.changeColor, color)
+          this.handleColorChange(editor[`change${label}Color`], color)
         }
         isReadOnly={this.props.isReadOnly}
       />
@@ -577,28 +517,20 @@ export default class Toolbar extends Component {
   };
 
   renderTextColor = () => {
-    return this.renderColorButton("colored-text", textColors, "Color");
+    return this.renderColorButton("Text", textColors, "Color");
   };
 
   renderBackgroundColor = () => {
-    return this.renderColorButton(
-      "background-colored-text",
-      highlightColors,
-      "Background"
-    );
+    return this.renderColorButton("Background", highlightColors, "Background");
   };
   renderStateLogger = () => {
+    const { editor } = this.props;
     return [
-      <button
-        onMouseDown={e => console.log(this.props.value)}
-        key="state-logger"
-      >
+      <button onMouseDown={e => console.log(editor.value)} key="state-logger">
         Log State
       </button>,
       <button
-        onMouseDown={e =>
-          console.log(JSON.stringify(this.props.value.toJSON()))
-        }
+        onMouseDown={e => console.log(JSON.stringify(editor.value.toJSON()))}
         key="json-state-logger"
       >
         Log JSON State

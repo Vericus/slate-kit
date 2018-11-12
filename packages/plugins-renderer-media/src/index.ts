@@ -1,9 +1,7 @@
 import createRenderer from "./renderer";
 
-export function createMediaRenderer(opts, changes, utils) {
-  return {
-    renderers: createRenderer(opts, changes, utils)
-  };
+export function createMediaRenderer(opts) {
+  return createRenderer(opts);
 }
 
 export default createMediaRenderer;

@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { storiesOf } from "@storybook/react";
 import { Value } from "slate";
-import { withKnobs, boolean } from "@storybook/addon-knobs/react";
+import { withKnobs, boolean } from "@storybook/addon-knobs";
 import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
 import BasicTypography from "@vericus/slate-kit-basic-typhography";
 import HighlightText from "@vericus/slate-kit-highlight-text";
 import HistoryPlugin from "@vericus/slate-kit-history";
+import Util from "@vericus/slate-kit-plugins-utils";
 import initialState from "../states/highlightedText.json";
 import Editor from "../support/components/editor";
 
 const pluginOpts = [
+  { label: "util", createPlugin: Util },
   {
     label: "history",
     createPlugin: HistoryPlugin
@@ -22,6 +24,7 @@ const pluginOpts = [
     label: "background-colored-text",
     createPlugin: HighlightText,
     options: {
+      name: "Background",
       type: "textBackground",
       alpha: 0.4,
       data: "backgroundColor",
@@ -33,6 +36,7 @@ const pluginOpts = [
     label: "colored-text",
     createPlugin: HighlightText,
     options: {
+      name: "Text",
       type: "textColor",
       data: "color",
       defaultColor: "transparent",
