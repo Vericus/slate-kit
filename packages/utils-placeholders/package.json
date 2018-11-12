@@ -31,6 +31,7 @@
   },
   "umdGlobals": {
     "immutable": "Immutable",
+    "react": "React",
     "slate": "Slate"
   },
   "dependencies": {

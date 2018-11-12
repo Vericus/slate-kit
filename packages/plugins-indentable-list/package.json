@@ -42,7 +42,7 @@
     "slate-dev-environment": "SlateDevEnvironment"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-auto-replace": "^0.0.2",
+    "@vericus/slate-kit-utils-auto-replace": ">=0.0.1",
     "classnames": ">=2.2.5",
     "debug": ">=3.1.0",
     "immutable": ">=3.8.2",
@@ -65,7 +65,7 @@
   "peerDependencies": {
     "@vericus/slate-kit-indentable-list-renderer": "^0.1.0",
     "@vericus/slate-kit-plugins-utils": "^0.1.0",
-    "@vericus/slate-kit-utils-auto-replace": "^0.0.1",
+    "@vericus/slate-kit-utils-auto-replace": ">=0.0.1",
     "is-hotkey": ">=0.1.2",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",

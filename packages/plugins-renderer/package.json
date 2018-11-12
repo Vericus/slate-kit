@@ -38,7 +38,7 @@
     "recompose": "Recompose"
   },
   "dependencies": {
-    "@vericus/slate-kit-plugins-wrapper": "^0.1.11",
+    "@vericus/slate-kit-plugins-wrapper": ">=0.1.11",
     "immutable": ">=3.8.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
@@ -46,7 +46,7 @@
     "tslib": "^1.9.3"
   },
   "peerDepencies": {
-    "@vericus/slate-kit-plugins-wrapper": "^0.1.4",
+    "@vericus/slate-kit-plugins-wrapper": ">=0.1.11",
     "immutable": ">=3.8.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
