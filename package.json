@@ -21,7 +21,6 @@
     "gh-pages": "NODE_ENV=gh-pages babel-node support/gh-pages/deploy.js",
     "lint": "tslint --project .",
     "new-module": "support/script/new-module",
-    "precommit": "lint-staged",
     "prettier": "prettier --write '**/*.{js,jsx,md,json,css}'",
     "release:build": "NODE_OPTIONS=--max-old-space-size=120000 NODE_ENV=production yarn build && NODE_OPTIONS=--max-old-space-size=120000 NODE_ENV=production yarn build:packages && lerna publish",
     "release:gh-pages": "yarn build-storybook && yarn gh-pages",
@@ -33,6 +32,11 @@
     "watch:build-packages": "yarn run build:packages --watch",
     "watch:build": "lerna run --parallel dev",
     "watch:dev": "npm-run-all --parallel --print-label watch:build watch:build-packages"
+  },
+  "husky": {
+    "hooks": {
+      "precommit": "lint-staged"
+    }
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
