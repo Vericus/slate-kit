@@ -41,8 +41,17 @@ class Options extends Record(defaultOption) {
   static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {
       ...defaultOption,
+      marks: {
+        ...defaultOption.marks,
+        ...(option.marks ? option.marks : {})
+      },
+      keyBindings: [
+        ...defaultOption.keyBindings,
+        ...(option.keyBindings ? option.keyBindings : [])
+      ],
       ...option
     };
+    console.log(options);
     return new Options(options);
   }
 }

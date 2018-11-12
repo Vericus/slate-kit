@@ -30,7 +30,19 @@ class Options extends Record(defaultOption) {
   static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {
       ...defaultOption,
-      ...option
+      ...option,
+      floatBlocks: [
+        ...defaultOption.floatBlocks,
+        ...(option.floatBlocks ? option.floatBlocks : [])
+      ],
+      alignments: [
+        ...defaultOption.alignments,
+        ...(option.alignments ? option.alignments : [])
+      ],
+      textBlocks: [
+        ...defaultOption.textBlocks,
+        ...(option.textBlocks ? option.textBlocks : [])
+      ]
     };
     return new Options(options);
   }
