@@ -125,7 +125,6 @@ export interface EditorState {
 
 export class Editor extends React.Component<EditorProps, EditorState> {
   schema: Schema;
-  value: Value;
   stack: Stack;
 
   readonly plugins: Plugin[];

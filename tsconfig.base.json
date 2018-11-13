@@ -28,15 +28,7 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "importHelpers": true,
-    "paths": {
-      "@vericus/slate-kit*": ["packages/*/src", "packages/*/lib"],
-      "*": [
-        "node_modules/*",
-        "node_modules/@types/*",
-        "packages/typescript-typings/types/*",
-        "*"
-      ]
-    }
-  },
-  "types": ["react", "jest"]
+    "typeRoots": ["./node_modules/@types", "packages/typescript-typings/types"],
+    "types": ["react", "jest", "slate", "slate-react", "immutable"]
+  }
 }
