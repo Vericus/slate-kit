@@ -33,11 +33,11 @@ function createIndentPlugin(pluginOptions: Partial<TypeOptions> = {}) {
     commands,
     options,
     schema,
-    shouldNodeComponentUpdate: (currProps, nextProps) => {
+    shouldNodeComponentUpdate: (currProps, nextProps, editor: Editor, next) => {
       if (currProps.node.data !== nextProps.node.data) {
         return true;
       }
-      return undefined;
+      return next();
     }
   };
 }
