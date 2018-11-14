@@ -31,7 +31,8 @@
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate"
+    "slate": "Slate",
+    "tslib": "TSLib"
   },
   "dependencies": {
     "immutable": ">=3.8.2",
