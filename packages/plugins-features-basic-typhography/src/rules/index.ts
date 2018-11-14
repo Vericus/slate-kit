@@ -9,13 +9,13 @@ const blocks = {
   blockquote: "blockquote"
 };
 
-export default function createRule(options, getData) {
+export default function createRule(options, editor) {
   return [
     {
       deserialize(el, next) {
         const block = blocks[el.tagName.toLowerCase()];
         if (!block) return undefined;
-        const { data, marks } = getData(el);
+        const { data, marks } = editor.getData(el);
         return {
           object: "block",
           data,

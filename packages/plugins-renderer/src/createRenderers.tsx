@@ -11,7 +11,6 @@ const SlateKitNode: React.SFC<Props> = props => props.children(props);
 export default function createRenderers() {
   let nodes = {};
   let nodeHOCs = {};
-  let toolbars = {};
   let marks = {};
   let markHOCs = {};
   const nodeMappings = {};
@@ -22,12 +21,8 @@ export default function createRenderers() {
       registerPropsGetter: (_editor: Editor, getter) => {
         propsGetter = [...propsGetter, getter];
       },
-      getProps: (_editor: Editor, props) => {
-        return propsGetter.reduce(
-          (memo, propGetter) => propGetter(memo),
-          props
-        );
-      },
+      getProps: (_editor: Editor, props) =>
+        propsGetter.reduce((memo, propGetter) => propGetter(memo), props),
       registerNodeMapping: (
         _editor: Editor,
         nodeName: string,
@@ -47,13 +42,6 @@ export default function createRenderers() {
       },
       registerMarkRenderer: (_editor: Editor, markType: string, renderer) => {
         marks[markType] = renderer;
-      },
-      registerToolbarRenderer: (
-        _editor: Editor,
-        nodeType: string,
-        renderer
-      ) => {
-        toolbars[nodeType] = renderer;
       },
       registerNodeHocRenderer: (
         _editor: Editor,
@@ -85,10 +73,7 @@ export default function createRenderers() {
       getMarkRenderer: (_editor: Editor, markType: string) => marks[markType],
       getMarkHOCRenderer: (_editor: Editor, markType: string) =>
         markHOCs[markType],
-      getMarkType: (_editor: Editor, markName: string) =>
-        markMappings[markName],
-      getToolbarRenderer: (_editor: Editor, nodeType: string) =>
-        toolbars[nodeType]
+      getMarkType: (_editor: Editor, markName: string) => markMappings[markName]
     },
     renderNode: (props, editor: Editor, next) => {
       const { node } = props;
@@ -96,26 +81,24 @@ export default function createRenderers() {
         editor.getNodeRenderer(node.type) ||
         (node.object === "block" && editor.getNodeRenderer("default"));
       const hoc = editor.getNodeHOCRenderer(node.type);
-      const toolbar = editor.getToolbarRenderer(node.type);
       const newProps = editor.getProps(props);
-      console.log(hoc, newProps, node);
+      const toolbar = editor.run("renderToolbar", props);
       if (renderer) {
         if (hoc) {
           return (
             <React.Fragment>
-              {toolbar ? toolbar(props) : undefined}
+              {toolbar}
               <SlateKitNode>{() => hoc(renderer(newProps))}</SlateKitNode>
             </React.Fragment>
           );
         }
         return (
           <React.Fragment>
-            {toolbar ? toolbar(props) : undefined}
+            {toolbar}
             <SlateKitNode>{() => renderer(newProps)}</SlateKitNode>
           </React.Fragment>
         );
       }
-      console.log("here");
       return next();
     },
     renderMark: (props, editor: Editor, next) => {

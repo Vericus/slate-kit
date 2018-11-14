@@ -6,7 +6,7 @@ import extendBackward from "./extendBackward";
 import deleteBackward from "./deleteBackward";
 import deleteForward from "./deleteForward";
 
-export default function createOnKeyDown(opts: TypeOption, pluginsWrapper) {
+export default function createOnKeyDown(opts: TypeOption) {
   const { captionType, type, mediaTypes } = opts;
   const imageType = mediaTypes.image;
   const types = [captionType, type, ...[imageType ? imageType.type : []]];
@@ -34,7 +34,7 @@ export default function createOnKeyDown(opts: TypeOption, pluginsWrapper) {
     } else if (Hotkeys.isSplitBlock(event)) {
       const mediaBlock = editor.getSelectedMediaBlock(value);
       if (mediaBlock) {
-        const defaultBlock = pluginsWrapper.getDefaultBlock();
+        const defaultBlock = editor.getDefaultBlock();
         if (defaultBlock) {
           const parent = document.getParent(mediaBlock.key);
           if (

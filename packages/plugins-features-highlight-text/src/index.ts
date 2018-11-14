@@ -5,10 +5,7 @@ import createProps from "./props";
 import createCommands from "./commands";
 import createQueries from "./queries";
 
-export default function createPlugin(
-  pluginOptions: TypeOptions,
-  pluginsWrapper
-) {
+export default function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const options = Options.create(pluginOptions);
   const { type, marks } = options;
   const commands = createCommands(options);
@@ -37,7 +34,5 @@ export default function createPlugin(
     plugins = [...plugins, { ...Renderer(type) }];
   }
 
-  return {
-    plugins
-  };
+  return plugins;
 }

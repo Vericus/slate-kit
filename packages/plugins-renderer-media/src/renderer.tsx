@@ -64,22 +64,20 @@ export default function createRenderer(opts) {
     return next();
   }
 
-  return {
-    plugins: [
-      {
-        onConstruct
+  return [
+    {
+      onConstruct
+    },
+    Placeholder({
+      type: "mediaCaption",
+      when: (editor: Editor, node: Node) => {
+        if (!image || !image.type) return false;
+        if (!Block.isBlock(node)) return false;
+        return captionType && node.type === captionType && node.text === "";
       },
-      Placeholder({
-        type: "mediaCaption",
-        when: (editor: Editor, node: Node) => {
-          if (!image || !image.type) return false;
-          if (!Block.isBlock(node)) return false;
-          return captionType && node.type === captionType && node.text === "";
-        },
-        render: props => <CaptionPlaceholder {...props} />
-      })
-    ]
-  };
+      render: props => <CaptionPlaceholder {...props} />
+    })
+  ];
 }
 
 export { ImageCaption };

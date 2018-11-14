@@ -27,7 +27,7 @@ export default function PasteHelpers(): PasteHelperPlugin {
       cleanedDocsHTML: (_editor: Editor, html: string) => googleDocsClean(html),
       cleanedGenericHTML: (_editor: Editor, html: string) => genericClean(html),
       cleanHTML: (editor: Editor, html: string) => {
-        if (editor.isWordHtml(html)) {
+        if (editor.isWordHTML(html)) {
           return { origin: "word", cleanedHTML: editor.cleanedWordHTML(html) };
         } else if (editor.isGoogleDocsHTML(html)) {
           return { origin: "docs", cleanedHTML: editor.cleanedDocsHTML(html) };

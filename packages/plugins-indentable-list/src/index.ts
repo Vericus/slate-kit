@@ -20,7 +20,6 @@ export function createPlugin(
   const commands = createCommands(options, pluginsWrapper);
   const schema = createSchema(options);
   const props = createProps(options, pluginsWrapper);
-  const rules = createRule;
   const onKeyDown = createOnKeyDown(options, pluginsWrapper);
 
   function onConstruct(editor: Editor, next) {
@@ -30,12 +29,14 @@ export function createPlugin(
     if (editor.registerPropsGetter) {
       editor.registerPropsGetter(props);
     }
+    if (editor.registerHTMLRule) {
+      editor.registerHTMLRule(createRule(options, editor));
+    }
     return next();
   }
 
   let plugins: any[] = [
     {
-      rules,
       queries,
       commands,
       onKeyDown: options.withHandlers ? onKeyDown : undefined,
@@ -81,9 +82,7 @@ export function createPlugin(
   if (!options.externalRenderer) {
     plugins = [...plugins, Renderer()];
   }
-  return {
-    plugins
-  };
+  return plugins;
 }
 
 export default createPlugin;

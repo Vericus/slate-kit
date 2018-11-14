@@ -7,18 +7,21 @@ import createProps from "./props";
 import createSchema from "./schemas";
 import createStyle from "./style";
 
-function createIndentPlugin(pluginOptions: TypeOptions) {
+function createIndentPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const options = new Options(pluginOptions);
   const queries = createQueries(options);
   const commands = createCommands(options);
   const onKeyDown = createOnKeyDown(options);
   const props = createProps(options);
   const schema = createSchema(options);
-  const style = createStyle(options);
+  const { getData } = createStyle(options);
 
   function onConstruct(editor: Editor, next) {
     if (editor.registerPropsGetter) {
       editor.registerPropsGetter(props);
+    }
+    if (editor.registerDataGetter) {
+      editor.registerDataGetter(getData);
     }
     return next();
   }
@@ -29,7 +32,6 @@ function createIndentPlugin(pluginOptions: TypeOptions) {
     onConstruct,
     commands,
     options,
-    style,
     schema,
     shouldNodeComponentUpdate: (currProps, nextProps) => {
       if (currProps.node.data !== nextProps.node.data) {

@@ -12,16 +12,19 @@ function createAlignPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const commands = CreateCommands(options);
   const props = CreateProps(options);
   const schema = CreateSchema(options);
-  const style = createStyle(options);
+  const { getData } = createStyle(options);
 
   function onConstruct(editor: Editor, next) {
     if (editor.registerPropsGetter) {
       editor.registerPropsGetter(props);
     }
+    if (editor.registerDataGetter) {
+      editor.registerDataGetter(getData);
+    }
     return next();
   }
 
-  return { options, onConstruct, style, queries, commands, schema };
+  return { options, onConstruct, queries, commands, schema };
 }
 
 export default createAlignPlugin;

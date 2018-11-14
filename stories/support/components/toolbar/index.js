@@ -451,7 +451,8 @@ export default class Toolbar extends Component {
   hasHistory = type => {
     const { editor } = this.props;
     const check = type === "undo" ? editor.hasUndo : editor.hasRedo;
-    return check();
+    if (check) return check();
+    return false;
   };
 
   renderHistories = () => {

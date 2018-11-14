@@ -8,7 +8,6 @@ export default function createProps(opts, pluginsWrapper) {
     if (!nodeProps.node || !listTypes.includes(nodeProps.node.type)) {
       return nodeProps;
     }
-    console.log("getting list props");
     const { editor, key, node } = nodeProps;
     const {
       props: {

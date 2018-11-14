@@ -1,6 +1,5 @@
 import { Editor } from "slate";
 import Renderer from "@vericus/slate-kit-basic-text-formatting-renderer";
-import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import Options, { TypeOptions } from "./options";
 import createCommands from "./commands";
 import createQueries from "./queries";
@@ -9,21 +8,25 @@ import createStyle from "./style";
 import createRule from "./rules";
 
 export default function createBasicTextFormatPlugin(
-  pluginOptions: Partial<TypeOptions>,
-  pluginsWrapper?: PluginsWrapper
+  pluginOptions: Partial<TypeOptions> = {}
 ) {
   const options = Options.create(pluginOptions);
   const { marks } = options;
   const commands = createCommands(options);
   const queries = createQueries(options);
-  const style = createStyle(options);
-  const rules = createRule;
+  const { getData } = createStyle(options);
   const { externalRenderer, withHandlers } = options;
 
   function onConstruct(editor: Editor, next) {
     Object.entries(marks).map(([markName, markType]) => {
       editor.registerMarkMapping(markName, markType);
     });
+    if (editor.registerDataGetter) {
+      editor.registerDataGetter(getData);
+    }
+    if (editor.registerHTMLRule) {
+      editor.registerHTMLRule(createRule(options, editor));
+    }
     return next();
   }
 
@@ -31,17 +34,13 @@ export default function createBasicTextFormatPlugin(
     {
       options,
       commands,
-      style,
       queries,
-      onConstruct,
-      rules: withHandlers ? rules : undefined
+      onConstruct
     },
     ...(withHandlers ? createKeyBindings(options) : [])
   ];
-  if (!externalRenderer || pluginsWrapper) {
+  if (!externalRenderer) {
     plugins = [...plugins, Renderer()];
   }
-  return {
-    plugins
-  };
+  return plugins;
 }
