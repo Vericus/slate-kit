@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Mark } from "slate";
+import { Mark, Editor } from "slate";
 
 export interface Props {
   mark: Mark;
@@ -10,15 +10,21 @@ export interface Props {
 
 export default function createRenderMark(type) {
   return {
-    marks: {
-      [type]: (props: Props) => {
-        const { attributes, children, className } = props;
-        return (
-          <span {...attributes} className={className}>
-            {children}
-          </span>
+    onConstruct: (editor: Editor, next) => {
+      if ((editor.registerMarkRenderer, editor.getMarkType)) {
+        editor.registerMarkRenderer(
+          editor.getMarkType(type),
+          (props: Props) => {
+            const { attributes, children, className } = props;
+            return (
+              <span {...attributes} className={className}>
+                {children}
+              </span>
+            );
+          }
         );
       }
+      return next();
     }
   };
 }

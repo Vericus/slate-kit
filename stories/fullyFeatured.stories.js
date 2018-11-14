@@ -12,11 +12,13 @@ import AlignPlugin from "@vericus/slate-kit-align";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import MediaPlugin from "@vericus/slate-kit-media";
 import Util from "@vericus/slate-kit-plugins-utils";
+import Renderer from "@vericus/slate-kit-renderer";
 import MediaToolbar from "./support/plugins/mediaToolbar";
 import initialState from "./states/fullText.json";
 import Editor from "./support/components/editor";
 
 const pluginOpts = [
+  { label: "renderer", createPlugin: Renderer },
   { label: "util", createPlugin: Util },
   {
     label: "history",

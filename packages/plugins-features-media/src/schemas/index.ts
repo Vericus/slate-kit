@@ -95,7 +95,6 @@ export default function createSchema(opts: TypeOption) {
               return data;
             }, {}),
             normalize: (editor: Editor, error: SlateError) => {
-              console.log(JSON.stringify(error));
               switch (error.code) {
                 case "parent_type_invalid":
                   editor.wrapBlockByKey(error.node.key, type);

@@ -1,3 +1,4 @@
+import { Editor } from "slate";
 import Renderer from "@vericus/slate-kit-basic-text-formatting-renderer";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import Options, { TypeOptions } from "./options";
@@ -12,17 +13,27 @@ export default function createBasicTextFormatPlugin(
   pluginsWrapper?: PluginsWrapper
 ) {
   const options = Options.create(pluginOptions);
+  const { marks } = options;
   const commands = createCommands(options);
   const queries = createQueries(options);
   const style = createStyle(options);
   const rules = createRule;
   const { externalRenderer, withHandlers } = options;
+
+  function onConstruct(editor: Editor, next) {
+    Object.entries(marks).map(([markName, markType]) => {
+      editor.registerMarkMapping(markName, markType);
+    });
+    return next();
+  }
+
   let plugins = [
     {
       options,
       commands,
       style,
       queries,
+      onConstruct,
       rules: withHandlers ? rules : undefined
     },
     ...(withHandlers ? createKeyBindings(options) : [])

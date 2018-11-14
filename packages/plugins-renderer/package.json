@@ -38,6 +38,7 @@
     "recompose": "Recompose"
   },
   "dependencies": {
+    "@types/react": "^16.7.3",
     "@vericus/slate-kit-plugins-wrapper": ">=0.1.11",
     "immutable": ">=3.8.2",
     "react": "^16.4.2",
@@ -57,5 +58,8 @@
     "Vericus",
     "slate",
     "slate-kit"
-  ]
+  ],
+  "devDependencies": {
+    "@types/recompose": "^0.27.0"
+  }
 }

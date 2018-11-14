@@ -7,14 +7,8 @@ import createRenderNode, {
   Blockquote
 } from "./renderNode";
 
-export function createRenderer() {
-  return {
-    renderers: createRenderNode()
-  };
-}
-
 export {
-  createRenderer as default,
+  createRenderNode as default,
   HeadingOne,
   HeadingTwo,
   HeadingThree,

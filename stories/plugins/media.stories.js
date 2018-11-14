@@ -8,11 +8,13 @@ import HighlightText from "@vericus/slate-kit-highlight-text";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import MediaPlugin from "@vericus/slate-kit-media";
 import Util from "@vericus/slate-kit-plugins-utils";
+import Renderer from "@vericus/slate-kit-renderer";
 import MediaToolbar from "../support/plugins/mediaToolbar";
 import initialState from "../states/media.json";
 import Editor from "../support/components/editor";
 
 const pluginOpts = [
+  { label: "renderer", createPlugin: Renderer },
   { label: "util", createPlugin: Util },
   {
     label: "history",

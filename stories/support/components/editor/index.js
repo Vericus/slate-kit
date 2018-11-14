@@ -11,13 +11,9 @@ import {
 import { Value } from "slate";
 import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import { WithReadOnly } from "@vericus/slate-kit-read-only";
-import { WithRenderers } from "@vericus/slate-kit-renderer";
-import HistoryPlugin from "@vericus/slate-kit-history";
-import pasteCleaner from "@vericus/slate-kit-paste-helpers";
 import Toolbar from "../toolbar";
 
 const EnchancedEditor = compose(
-  WithRenderers,
   WithReadOnly,
   mapProps(({ forwardedRef, ...rest }) => ({ ref: forwardedRef, ...rest }))
 )(Editor);
@@ -41,17 +37,6 @@ export default class SlateKitEditor extends Component {
     this.setState({
       value
     });
-  };
-
-  onPaste = (event, change) => {
-    const data = getEventTransfer(event);
-    if (data.html) {
-      const { origin, cleanedHTML } = pasteCleaner(data.html);
-      const parser = this.pluginsWrapper.getSerializer();
-      const { document } = parser.deserialize(cleanedHTML);
-      change.insertFragment(document);
-      return true;
-    }
   };
 
   renderToolbar = () => {

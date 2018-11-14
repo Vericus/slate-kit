@@ -1,139 +1,118 @@
 import * as React from "react";
-import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
+import { Editor } from "slate";
 import { compose } from "recompose";
-import Options, { TypeOptions } from "./options";
 
 export interface Props {
   children: (...args: any[]) => JSX.Element;
 }
-
-const SlateKitNode: React.SFC<Props> = props => props.children(props);
-
-const createRenderToolbar = (
-  toolbarOptions,
-  pluginsWrapper: PluginsWrapper
-) => props => {
-  let result = null;
-  toolbarOptions.some(renderer => {
-    return renderer(props) ? ((result = renderer(props)), true) : false;
-  });
-  return result;
-};
-
-const createRenderMarks = (marksOptions, pluginsWrapper: PluginsWrapper) => (
-  props,
-  editor,
-  next
-) => {
-  const newProps = pluginsWrapper.getProps(props);
-  if (marksOptions[props.mark.type]) {
-    return (
-      <SlateKitNode>
-        {() => marksOptions[props.mark.type](newProps)}
-      </SlateKitNode>
-    );
-  }
-  return next();
-};
-
-const createRenderNodes = (
-  nodesOptions,
-  renderToolbar,
-  pluginsWrapper: PluginsWrapper
-) => props => {
-  const newProps = pluginsWrapper.getProps(props);
-  const nodeRenderer = nodesOptions[props.node.type];
-  if (props.node.object === "block") {
-    return (
-      <React.Fragment>
-        {renderToolbar(props)}
-        <SlateKitNode>
-          {() =>
-            nodeRenderer
-              ? nodeRenderer(newProps)
-              : nodesOptions.default
-              ? nodesOptions.default(newProps)
-              : null
-          }
-        </SlateKitNode>
-      </React.Fragment>
-    );
-  }
-  return nodeRenderer ? (
-    <React.Fragment>
-      {renderToolbar(props)}
-      <SlateKitNode>{() => nodeRenderer(newProps)}</SlateKitNode>
-    </React.Fragment>
-  ) : (
-    undefined
-  );
-};
-
-const renderers = (opts: TypeOptions, pluginsWrapper: PluginsWrapper) => {
-  const { marks, nodes, toolbars } = opts;
-  const renderToolbar = createRenderToolbar(toolbars, pluginsWrapper);
-  const renderMark = createRenderMarks(marks, pluginsWrapper);
-  const renderNode = createRenderNodes(nodes, renderToolbar, pluginsWrapper);
-  return [{ renderMark, renderNode }];
-};
-
-export default function createRenderers(opts, pluginsWrapper: PluginsWrapper) {
-  let options = opts;
-  let defaultNodeRenderer;
-  if (pluginsWrapper) {
-    const renderersDefinition = pluginsWrapper.getRenderers();
-    const mapping = pluginsWrapper.getNodeMappings();
-    const hocs = pluginsWrapper.getRenderersHOC();
-    defaultNodeRenderer = mapping.nodes.default;
-    options = {
-      ...options,
-      ...Object.entries(renderersDefinition).reduce(
-        (mapRenderers, [key, value]) => {
-          return {
-            ...mapRenderers,
-            [key]: Array.isArray(value)
-              ? [...mapRenderers[key], ...value]
-              : {
-                  ...mapRenderers[key],
-                  ...Object.entries(value).reduce(
-                    (acc, [mapKey, mapRenderer]) => {
-                      let enhancedMapRenderer = mapRenderer;
-                      const nodeHocs = hocs && hocs[mapKey];
-                      if (nodeHocs && Array.isArray(nodeHocs)) {
-                        enhancedMapRenderer = nodeHocs.reduce(
-                          (render, hoc) => compose(hoc)(render),
-                          enhancedMapRenderer
-                        );
-                      }
-                      return {
-                        ...acc,
-                        [mapping[key][mapKey]]: enhancedMapRenderer
-                      };
-                    },
-                    {}
-                  )
-                }
-          };
-        },
-        {
-          marks: {},
-          nodes: {},
-          toolbars: []
-        }
-      )
-    };
-  }
-  if (defaultNodeRenderer) {
-    options = {
-      ...options,
-      nodes: {
-        ...options.nodes,
-        default: options.nodes[defaultNodeRenderer]
-      }
-    };
-  }
-  const pluginOptions = new Options(options);
+export default function createRenderers() {
+  let nodes = {};
+  let nodeHOCs = {};
+  let toolbars = {};
+  let marks = {};
+  let markHOCs = {};
+  const nodeMappings = {};
+  const markMappings = {};
   return {
-    plugins: [...renderers(pluginOptions, pluginsWrapper)]
+    queries: {
+      registerNodeMapping: (
+        _editor: Editor,
+        nodeName: string,
+        nodeType: string
+      ) => {
+        nodeMappings[nodeName] = nodeType;
+      },
+      registerMarkMapping: (
+        _editor: Editor,
+        markName: string,
+        markType: string
+      ) => {
+        markMappings[markName] = markType;
+      },
+      registerNodeRenderer: (_editor: Editor, nodeType: string, renderer) => {
+        nodes[nodeType] = renderer;
+      },
+      registerMarkRenderer: (_editor: Editor, markType: string, renderer) => {
+        marks[markType] = renderer;
+      },
+      registerToolbarRenderer: (
+        _editor: Editor,
+        nodeType: string,
+        renderer
+      ) => {
+        toolbars[nodeType] = renderer;
+      },
+      registerNodeHocRenderer: (
+        _editor: Editor,
+        nodeType: string,
+        renderer
+      ) => {
+        if (nodeHOCs[nodeType]) {
+          nodeHOCs[nodeType] = compose(nodeHOCs[nodeType])(renderer);
+        } else {
+          nodeHOCs[nodeType] = renderer;
+        }
+      },
+      registerMarkHocRenderer: (
+        _editor: Editor,
+        markType: string,
+        renderer
+      ) => {
+        if (markHOCs[markType]) {
+          markHOCs[markType] = compose(markHOCs[markType])(renderer);
+        } else {
+          markHOCs[markType] = renderer;
+        }
+      },
+      getNodeRenderer: (_editor: Editor, nodeType: string) => nodes[nodeType],
+      getNodeHOCRenderer: (_editor: Editor, nodeType: string) =>
+        nodeHOCs[nodeType],
+      getNodeType: (_editor: Editor, nodeName: string) =>
+        nodeMappings[nodeName],
+      getMarkRenderer: (_editor: Editor, markType: string) => marks[markType],
+      getMarkHOCRenderer: (_editor: Editor, markType: string) =>
+        markHOCs[markType],
+      getMarkType: (_editor: Editor, markName: string) =>
+        markMappings[markName],
+      getToolbarRenderer: (_editor: Editor, nodeType: string) => nodes[nodeType]
+    },
+    renderNode: (props, editor: Editor, next) => {
+      const { node } = props;
+      const renderer =
+        editor.getNodeRenderer(node.type) ||
+        (node.object === "block" && editor.getNodeRenderer("default"));
+      const hoc = editor.getNodeHOCRenderer(node.type);
+      const toolbar = editor.getToolbarRenderer(node.type);
+      const newProps = props;
+      if (renderer) {
+        if (hoc) {
+          return (
+            <React.Fragment>
+              {toolbar ? toolbar(props) : undefined}
+              {hoc(renderer(newProps))}
+            </React.Fragment>
+          );
+        }
+        return (
+          <React.Fragment>
+            {toolbar ? toolbar(props) : undefined}
+            {() => renderer(newProps)}
+          </React.Fragment>
+        );
+      }
+      return next();
+    },
+    renderMark: (props, editor: Editor, next) => {
+      const { mark } = props;
+      const renderer = editor.getMarkRenderer(mark.type);
+      const hoc = editor.getMarkHOCRenderer(mark.type);
+      if (renderer) {
+        if (hoc) {
+          return <React.Fragment>{hoc(renderer(props))}</React.Fragment>;
+        }
+        return <React.Fragment>{renderer(props)}</React.Fragment>;
+      }
+      return next();
+    }
   };
 }

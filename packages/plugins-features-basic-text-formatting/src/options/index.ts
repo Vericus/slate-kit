@@ -51,7 +51,6 @@ class Options extends Record(defaultOption) {
       ],
       ...option
     };
-    console.log(options);
     return new Options(options);
   }
 }

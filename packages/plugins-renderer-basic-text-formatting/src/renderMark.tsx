@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Mark } from "slate";
+import { Mark, Editor } from "slate";
 import SlateTypes from "slate-prop-types";
 
 export interface Props {
@@ -65,12 +65,20 @@ export function strikethrough(props: Props) {
 }
 
 export default function createRenderMark() {
+  const marks = {
+    bold,
+    italic,
+    underline,
+    strikethrough
+  };
   return {
-    marks: {
-      bold,
-      italic,
-      underline,
-      strikethrough
+    onConstruct: (editor: Editor, next) => {
+      Object.entries(marks).map(([type, renderer]) => {
+        if (editor.registerMarkRenderer && editor.getMarkType) {
+          editor.registerMarkRenderer(editor.getMarkType(type), renderer);
+        }
+      });
+      return next();
     }
   };
 }

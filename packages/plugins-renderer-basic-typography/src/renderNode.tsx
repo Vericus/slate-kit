@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Node } from "slate";
+import { Node, Editor } from "slate";
 import SlateTypes from "slate-prop-types";
 
 export interface Props {
@@ -66,14 +66,26 @@ Paragraph.propTypes = SlateTypes.Block;
 Blockquote.propTypes = SlateTypes.Block;
 
 export default function createRenderNode() {
+  const nodes = {
+    paragraph: Paragraph,
+    "heading-one": HeadingOne,
+    "heading-two": HeadingTwo,
+    "heading-three": HeadingThree,
+    "heading-four": HeadingFour,
+    blockquote: Blockquote
+  };
   return {
-    nodes: {
-      paragraph: Paragraph,
-      "heading-one": HeadingOne,
-      "heading-two": HeadingTwo,
-      "heading-three": HeadingThree,
-      "heading-four": HeadingFour,
-      blockquote: Blockquote
+    onConstruct: (editor: Editor, next) => {
+      if (editor.registerNodeRenderer && editor.getNodeType) {
+        const defaultBlock = editor.getNodeType("default");
+        if (defaultBlock) {
+          editor.registerNodeRenderer("default", nodes[defaultBlock]);
+        }
+        Object.entries(nodes).map(([type, renderer]) => {
+          editor.registerNodeRenderer(editor.getNodeType(type), renderer);
+        });
+      }
+      return next();
     }
   };
 }

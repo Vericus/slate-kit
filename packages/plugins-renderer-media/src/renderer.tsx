@@ -49,16 +49,25 @@ export default function createRenderer(opts) {
       .map(ext => (ext.match(/^\./) ? ext : `.${ext}`))
       .join(", ");
   }
+  const nodes = {
+    media: createMediaRenderer(image),
+    image: createImage(onInsert, extensions),
+    mediacaption: createMediaCaption(image, captionHideField)
+  };
+
+  function onConstruct(editor: Editor, next) {
+    if (editor.registerNodeRenderer && editor.getNodeType) {
+      Object.entries(nodes).map(([nodeName, renderer]) => {
+        editor.registerNodeRenderer(editor.getNodeType(nodeName), renderer);
+      });
+    }
+    return next();
+  }
+
   return {
     plugins: [
       {
-        renderers: {
-          nodes: {
-            media: createMediaRenderer(image),
-            image: createImage(onInsert, extensions),
-            mediacaption: createMediaCaption(image, captionHideField)
-          }
-        }
+        onConstruct
       },
       Placeholder({
         type: "mediaCaption",

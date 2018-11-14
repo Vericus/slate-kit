@@ -37,6 +37,9 @@
     "tinymce-word-paste-filter": "^0.6.1",
     "tslib": "^1.9.3"
   },
+  "devDependencies": {
+    "slate": ">=0.44.0 <0.45.0"
+  },
   "keywords": [
     "Vericus",
     "slate",

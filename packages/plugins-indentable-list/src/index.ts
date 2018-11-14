@@ -1,3 +1,4 @@
+import { Editor } from "slate";
 import Renderer from "@vericus/slate-kit-indentable-list-renderer";
 import AutoReplace from "@vericus/slate-kit-utils-auto-replace";
 import createProps from "./props";
@@ -21,6 +22,14 @@ export function createPlugin(
   const props = createProps(options, pluginsWrapper);
   const rules = createRule;
   const onKeyDown = createOnKeyDown(options, pluginsWrapper);
+
+  function onConstruct(editor: Editor, next) {
+    Object.entries(blockTypes).map(([nodeName, nodeType]) => {
+      editor.registerNodeMapping(nodeName, nodeType);
+    });
+    return next();
+  }
+
   let plugins: any[] = [
     {
       rules,
@@ -29,6 +38,7 @@ export function createPlugin(
       onKeyDown: options.withHandlers ? onKeyDown : undefined,
       options,
       props,
+      onConstruct,
       schema
     },
     ...(options.withHandlers
@@ -67,7 +77,7 @@ export function createPlugin(
       : [])
   ];
   if (!options.externalRenderer) {
-    plugins = [Renderer(), ...plugins];
+    plugins = [...plugins, Renderer()];
   }
   return {
     plugins
