@@ -1,3 +1,4 @@
+import { Editor } from "slate";
 import Options, { TypeOptions } from "./options";
 import createCommands from "./commands";
 import createQueries from "./queries";
@@ -14,10 +15,18 @@ function createIndentPlugin(pluginOptions: TypeOptions) {
   const props = createProps(options);
   const schema = createSchema(options);
   const style = createStyle(options);
+
+  function onConstruct(editor: Editor, next) {
+    if (editor.registerPropsGetter) {
+      editor.registerPropsGetter(props);
+    }
+    return next();
+  }
+
   return {
     queries,
-    props,
     onKeyDown: options.withHandlers ? onKeyDown : undefined,
+    onConstruct,
     commands,
     options,
     style,

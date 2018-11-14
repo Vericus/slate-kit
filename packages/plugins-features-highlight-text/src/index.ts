@@ -19,6 +19,9 @@ export default function createPlugin(
     Object.entries(marks).map(([markName, markType]) => {
       editor.registerMarkMapping(markName, markType);
     });
+    if (editor.registerPropsGetter) {
+      editor.registerPropsGetter(props);
+    }
     return next();
   }
 
@@ -27,7 +30,6 @@ export default function createPlugin(
       options,
       commands,
       queries,
-      props,
       onConstruct
     }
   ];

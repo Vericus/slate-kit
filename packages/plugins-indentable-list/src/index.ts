@@ -27,6 +27,9 @@ export function createPlugin(
     Object.entries(blockTypes).map(([nodeName, nodeType]) => {
       editor.registerNodeMapping(nodeName, nodeType);
     });
+    if (editor.registerPropsGetter) {
+      editor.registerPropsGetter(props);
+    }
     return next();
   }
 
@@ -37,7 +40,6 @@ export function createPlugin(
       commands,
       onKeyDown: options.withHandlers ? onKeyDown : undefined,
       options,
-      props,
       onConstruct,
       schema
     },

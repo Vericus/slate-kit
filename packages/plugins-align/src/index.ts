@@ -1,3 +1,4 @@
+import { Editor } from "slate";
 import Options, { TypeOptions } from "./options";
 import CreateQueries from "./queries";
 import CreateCommands from "./commands";
@@ -12,7 +13,15 @@ function createAlignPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const props = CreateProps(options);
   const schema = CreateSchema(options);
   const style = createStyle(options);
-  return { options, style, queries, commands, props, schema };
+
+  function onConstruct(editor: Editor, next) {
+    if (editor.registerPropsGetter) {
+      editor.registerPropsGetter(props);
+    }
+    return next();
+  }
+
+  return { options, onConstruct, style, queries, commands, schema };
 }
 
 export default createAlignPlugin;
