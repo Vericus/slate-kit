@@ -4,7 +4,7 @@ import { Editor, Operation } from "slate";
 export default function handleUndo(
   editor: Editor,
   onUndo?: (operations: List<Operation>) => void
-) {
+): void {
   if (!editor.hasUndo()) return;
   editor.undo();
   if (onUndo && typeof onUndo === "function") {

@@ -1,6 +1,6 @@
 import classnames from "classnames";
 
-export default function createProps(opts, pluginsWrapper) {
+export default function createProps(opts) {
   const { blockTypes, startAtField, checkField } = opts;
   const { orderedlist, unorderedlist, checklist } = blockTypes;
   const listTypes = [orderedlist, unorderedlist, checklist];

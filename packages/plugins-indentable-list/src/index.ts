@@ -1,4 +1,4 @@
-import { Editor } from "slate";
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import Renderer from "@vericus/slate-kit-indentable-list-renderer";
 import AutoReplace from "@vericus/slate-kit-utils-auto-replace";
 import createProps from "./props";
@@ -9,39 +9,23 @@ import createOnKeyDown from "./onKeyDown";
 import createSchema from "./schemas";
 import createRule from "./rules";
 
-export function createPlugin(
-  pluginOptions: Partial<TypeOptions> = {},
-  pluginsWrapper: any
-) {
+export function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const options = new Options(pluginOptions);
   const { blockTypes } = options;
   const { orderedlist, unorderedlist, checklist } = blockTypes;
   const queries = createQueries(options);
-  const commands = createCommands(options, pluginsWrapper);
+  const commands = createCommands(options);
   const schema = createSchema(options);
-  const props = createProps(options, pluginsWrapper);
-  const onKeyDown = createOnKeyDown(options, pluginsWrapper);
-
-  function onConstruct(editor: Editor, next) {
-    Object.entries(blockTypes).map(([nodeName, nodeType]) => {
-      editor.registerNodeMapping(nodeName, nodeType);
-    });
-    if (editor.registerPropsGetter) {
-      editor.registerPropsGetter(props);
-    }
-    if (editor.registerHTMLRule) {
-      editor.registerHTMLRule(createRule(options, editor));
-    }
-    return next();
-  }
+  const props = createProps(options);
+  const onKeyDown = createOnKeyDown(options);
 
   let plugins: any[] = [
+    Register({ nodes: blockTypes, props, createRule, ruleOptions: options }),
     {
       queries,
       commands,
       onKeyDown: options.withHandlers ? onKeyDown : undefined,
       options,
-      onConstruct,
       schema
     },
     ...(options.withHandlers

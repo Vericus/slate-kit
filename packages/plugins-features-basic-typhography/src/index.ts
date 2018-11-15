@@ -1,4 +1,4 @@
-import { Editor } from "slate";
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import Renderer from "@vericus/slate-kit-basic-typography-renderer";
 import Options, { TypeOptions } from "./options";
 import createCommands from "./commands";
@@ -12,21 +12,14 @@ export default function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const queries = createQueries(options);
   const commands = createCommands(options);
   const schema = createSchema(options);
-
-  function onConstruct(editor: Editor, next) {
-    if (editor.registerNodeMapping) {
-      Object.entries(blockTypes).map(([nodeName, nodeType]) => {
-        editor.registerNodeMapping(nodeName, nodeType);
-      });
-      editor.registerNodeMapping("default", defaultBlock);
-    }
-    if (editor.registerHTMLRule) {
-      editor.registerHTMLRule(createRule(options, editor));
-    }
-    return next();
-  }
-
-  let plugins: any = [{ options, commands, queries, onConstruct, schema }];
+  const nodes = {
+    ...blockTypes,
+    default: defaultBlock
+  };
+  let plugins: any = [
+    Register({ nodes, createRule, ruleOptions: options }),
+    { options, commands, queries, schema }
+  ];
   if (!options.externalRenderer) {
     plugins = [...plugins, { ...Renderer() }];
   }

@@ -1,3 +1,3 @@
-export default function isGoogleDocsHTML(html: string) {
+export default function isGoogleDocsHTML(html: string): boolean {
   return html.indexOf('id="docs-internal-guid') >= 0;
 }

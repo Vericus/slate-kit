@@ -1,4 +1,4 @@
-export default function isWordHTML(html: string) {
+export default function isWordHTML(html: string): boolean {
   return (
     html
       .toString()

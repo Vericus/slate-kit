@@ -57,6 +57,7 @@
     "slate-kit"
   ],
   "devDependencies": {
-    "@types/recompose": "^0.27.0"
+    "@types/recompose": "^0.27.0",
+    "@vericus/slate-kit-typescript-typings": "^1.0.11"
   }
 }

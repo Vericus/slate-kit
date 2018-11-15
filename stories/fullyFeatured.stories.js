@@ -14,24 +14,9 @@ import Util from "@vericus/slate-kit-plugins-utils";
 import Renderer from "@vericus/slate-kit-renderer";
 import HTMLSerializer from "@vericus/slate-kit-html-serializer";
 import PasteHelper from "@vericus/slate-kit-paste-helpers";
-import MediaToolbar from "./support/plugins/mediaToolbar";
+import MediaToolbar from "./support/components/mediaToolbar";
 import initialState from "./states/fullText.json";
 import Editor from "./support/components/editor";
-
-const media = MediaPlugin({
-  captionHideField: "hide",
-  mediaTypes: {
-    image: {
-      onInsert: src => {
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve(src);
-          }, 5000);
-        });
-      }
-    }
-  }
-});
 
 const plugins = [
   PasteHelper(),
@@ -56,11 +41,24 @@ const plugins = [
     styles: ["textDecorationColor", "color"]
   }),
   BasicTypography(),
-  media,
-  MediaToolbar(media[0].options),
   ListPlugin(),
   IndentPlugin(),
-  AlignPlugin()
+  AlignPlugin(),
+  MediaPlugin({
+    captionHideField: "hide",
+    mediaTypes: {
+      image: {
+        onInsert: src => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(src);
+            }, 5000);
+          });
+        }
+      }
+    },
+    toolbarRenderer: props => <MediaToolbar {...props} />
+  })
 ].flat();
 
 storiesOf("editor", module)

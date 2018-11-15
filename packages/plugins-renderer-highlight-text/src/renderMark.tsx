@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Mark, Editor } from "slate";
+import Register from "@vericus/slate-kit-utils-register-helpers";
+import { Mark } from "slate";
 
 export interface Props {
   mark: Mark;
@@ -8,23 +9,22 @@ export interface Props {
   className?: string;
 }
 
-export default function createRenderMark(type) {
-  return {
-    onConstruct: (editor: Editor, next) => {
-      if ((editor.registerMarkRenderer, editor.getMarkType)) {
-        editor.registerMarkRenderer(
-          editor.getMarkType(type),
-          (props: Props) => {
-            const { attributes, children, className } = props;
-            return (
-              <span {...attributes} className={className}>
-                {children}
-              </span>
-            );
-          }
-        );
-      }
-      return next();
-    }
-  };
+export default function createRenderMark(marks) {
+  const marksRenderer = Object.entries(marks).reduce(
+    (renderers, [markName, markType]) => {
+      return {
+        ...renderers,
+        [markName]: (props: Props) => {
+          const { attributes, children, className } = props;
+          return (
+            <span {...attributes} className={className}>
+              {children}
+            </span>
+          );
+        }
+      };
+    },
+    {}
+  );
+  return Register({ marksRenderer });
 }

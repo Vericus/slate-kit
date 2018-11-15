@@ -1,4 +1,5 @@
 import * as React from "react";
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import { Node, Block, Editor } from "slate";
 import Placeholder from "@vericus/slate-kit-utils-placeholders";
 import { ImageCaption, Media, Image, CaptionPlaceholder } from "./components";
@@ -49,25 +50,14 @@ export default function createRenderer(opts) {
       .map(ext => (ext.match(/^\./) ? ext : `.${ext}`))
       .join(", ");
   }
-  const nodes = {
+  const nodesRenderer = {
     media: createMediaRenderer(image),
     image: createImage(onInsert, extensions),
     mediacaption: createMediaCaption(image, captionHideField)
   };
 
-  function onConstruct(editor: Editor, next) {
-    if (editor.registerNodeRenderer && editor.getNodeType) {
-      Object.entries(nodes).map(([nodeName, renderer]) => {
-        editor.registerNodeRenderer(editor.getNodeType(nodeName), renderer);
-      });
-    }
-    return next();
-  }
-
   return [
-    {
-      onConstruct
-    },
+    Register({ nodesRenderer }),
     Placeholder({
       type: "mediaCaption",
       when: (editor: Editor, node: Node) => {

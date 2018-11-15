@@ -4,7 +4,7 @@ import { Editor, Operation } from "slate";
 export default function handleRedo(
   editor: Editor,
   onRedo?: (operations: List<Operation>) => void
-) {
+): void {
   if (!editor.hasRedo()) return;
   editor.redo();
 

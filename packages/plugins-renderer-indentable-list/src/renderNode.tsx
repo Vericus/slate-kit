@@ -1,6 +1,7 @@
 import * as React from "react";
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import SlateTypes from "slate-prop-types";
-import { Node, Editor } from "slate";
+import { Node } from "slate";
 
 export interface Props {
   attributes: any;
@@ -42,21 +43,12 @@ UnOrderedList.propTypes = SlateTypes.Block;
 CheckList.propTypes = SlateTypes.Block;
 
 export function createRenderNode() {
-  const nodes = {
+  const nodesRenderer = {
     orderedlist: OrderedList,
     unorderedlist: UnOrderedList,
     checklist: CheckList
   };
-  return {
-    onConstruct: (editor: Editor, next) => {
-      if (editor.registerNodeRenderer && editor.getNodeType) {
-        Object.entries(nodes).map(([type, renderer]) => {
-          editor.registerNodeRenderer(editor.getNodeType(type), renderer);
-        });
-      }
-      return next();
-    }
-  };
+  return Register({ nodesRenderer });
 }
 
 export { createRenderNode as default, OrderedList, UnOrderedList, CheckList };

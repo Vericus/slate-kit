@@ -1,4 +1,4 @@
-import { Editor } from "slate";
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import Renderer from "@vericus/slate-kit-highlight-text-renderer";
 import Options, { TypeOptions } from "./options";
 import createProps from "./props";
@@ -7,31 +7,21 @@ import createQueries from "./queries";
 
 export default function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const options = Options.create(pluginOptions);
-  const { type, marks } = options;
+  const { marks } = options;
   const commands = createCommands(options);
   const queries = createQueries(options);
   const props = createProps(options);
 
-  function onConstruct(editor: Editor, next) {
-    Object.entries(marks).map(([markName, markType]) => {
-      editor.registerMarkMapping(markName, markType);
-    });
-    if (editor.registerPropsGetter) {
-      editor.registerPropsGetter(props);
-    }
-    return next();
-  }
-
   let plugins: any = [
+    Register({ marks, props }),
     {
       options,
       commands,
-      queries,
-      onConstruct
+      queries
     }
   ];
   if (!options.externalRenderer) {
-    plugins = [...plugins, { ...Renderer(type) }];
+    plugins = [...plugins, { ...Renderer(marks) }];
   }
 
   return plugins;

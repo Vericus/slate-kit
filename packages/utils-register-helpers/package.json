@@ -1,0 +1,44 @@
+{
+  "version": "0.0.1",
+  "name": "@vericus/slate-kit-utils-register-helpers",
+  "description": "TODO: fill in this description later",
+  "homepage": "https://github.com/Vericus/slate-kit/",
+  "repository": "git://github.com/Vericus/slate-kit.git",
+  "author": "Cadmus",
+  "slate-kit": {
+    "type": "module"
+  },
+  "files": [
+    "dist/",
+    "lib/",
+    "module/"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/slate-kit-utils-register-helpers.js",
+  "types": "lib/index.d.ts",
+  "module": "lib/slate-kit-utils-register-helpers.es.js",
+  "umd": "dist/slate-kit-utils-register-helpers.js",
+  "umdMin": "dist/slate-kit-utils-register-helpers.min.js",
+  "scripts": {
+    "clean": "yarn run clean:module && yarn run clean:build",
+    "clean:module": "rm -rf ./node_modules",
+    "clean:build": "rm -rf ./dist ./lib ./module",
+    "build": "tsc -b .",
+    "dev": "tsc -w"
+  },
+  "umdGlobals": {
+    "immutable": "Immutable",
+    "slate": "Slate"
+  },
+  "dependencies": {
+    "tslib": "^1.9.3"
+  },
+  "keywords": [
+    "Vericus",
+    "slate",
+    "slate-kit"
+  ]
+}
