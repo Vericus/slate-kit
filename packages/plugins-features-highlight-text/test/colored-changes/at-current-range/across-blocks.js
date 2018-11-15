@@ -1,18 +1,22 @@
 /** @jsx h */
 import h from "@vericus/slate-kit-utils-hyperscript";
 
-export default function(change, colorText) {
-  colorText(change, "#FF00FF");
+export default function(editor, name) {
+  editor[`change${name}Color`]("#FF00FF");
 }
 
 export const input = (
   <value>
     <document>
       <paragraph>
-        wo<anchor />rd
+        wo
+        <anchor />
+        rd
       </paragraph>
       <paragraph>
-        an<focus />other
+        an
+        <focus />
+        other
       </paragraph>
     </document>
   </value>
@@ -22,12 +26,14 @@ export const output = (
   <value>
     <document>
       <paragraph>
-        wo<anchor />
+        wo
+        <anchor />
         <color color="#FF00FF">rd</color>
       </paragraph>
       <paragraph>
         <color color="#FF00FF">an</color>
-        <focus />other
+        <focus />
+        other
       </paragraph>
     </document>
   </value>

@@ -2,16 +2,24 @@ import expect from "expect";
 import fs from "fs";
 import toCamel from "to-camel-case";
 import { basename, extname, resolve } from "path";
+import { Editor } from "slate";
 
 import HighlightText from "../../src/index.ts";
+import Utils from "../../../utils/src/index.ts";
 
-const plugin = HighlightText({
-  type: "textBackground",
-  alpha: 0.4,
-  data: "backgroundColor",
-  defaultColor: "black",
-  styles: ["backgroundColor"]
-});
+const name = "Background";
+
+const plugins = [
+  HighlightText({
+    type: "textBackground",
+    alpha: 0.4,
+    data: "backgroundColor",
+    defaultColor: "black",
+    styles: ["backgroundColor"],
+    name
+  }),
+  Utils()
+];
 
 describe("changes", () => {
   const dir = resolve(__dirname);
@@ -36,11 +44,12 @@ describe("changes", () => {
               test.concurrent(test, async () => {
                 const module = require(resolve(testDir, test));
                 const { input, output } = module;
+                const editor = new Editor({ plugins });
                 const fn = module.default;
-                const change = input.change();
-                fn(change, plugin.changes.changeColor);
-                const opts = { preserveSelection: true, preserveData: true };
-                const actual = change.value.toJSON(opts);
+                editor.setValue(input);
+                fn(editor, name);
+                const opts = { preserveSelection: true };
+                const actual = editor.value.toJSON(opts);
                 const expected = output.toJSON(opts);
                 expect(expected).toEqual(actual);
               });
@@ -50,11 +59,12 @@ describe("changes", () => {
           test.concurrent(method, async () => {
             const module = require(resolve(categoryDir, method));
             const { input, output } = module;
+            const editor = new Editor({ plugins });
             const fn = module.default;
-            const change = input.change();
-            fn(change, plugin.changes.changeColor);
-            const opts = { preserveSelection: true, preserveData: true };
-            const actual = change.value.toJSON(opts);
+            editor.setValue(input);
+            fn(editor, name);
+            const opts = { preserveSelection: true };
+            const actual = editor.value.toJSON(opts);
             const expected = output.toJSON(opts);
             expect(expected).toEqual(actual);
           });
