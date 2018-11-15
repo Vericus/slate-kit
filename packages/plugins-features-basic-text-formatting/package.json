@@ -43,7 +43,6 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-plugins-wrapper": "^0.1.11",
     "expect": "^23.1.0",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
