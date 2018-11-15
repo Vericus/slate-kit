@@ -9,81 +9,57 @@ import HistoryPlugin from "@vericus/slate-kit-history";
 import IndentPlugin from "@vericus/slate-kit-indent";
 import ListPlugin from "@vericus/slate-kit-indentable-list";
 import AlignPlugin from "@vericus/slate-kit-align";
-import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import MediaPlugin from "@vericus/slate-kit-media";
 import Util from "@vericus/slate-kit-plugins-utils";
-import MediaToolbar from "./support/plugins/mediaToolbar";
+import Renderer from "@vericus/slate-kit-renderer";
+import HTMLSerializer from "@vericus/slate-kit-html-serializer";
+import PasteHelper from "@vericus/slate-kit-paste-helpers";
+import MediaToolbar from "./support/components/mediaToolbar";
 import initialState from "./states/fullText.json";
 import Editor from "./support/components/editor";
 
-const pluginOpts = [
-  { label: "util", createPlugin: Util },
-  {
-    label: "history",
-    createPlugin: HistoryPlugin
-  },
-  {
-    label: "basic-text-format",
-    createPlugin: BasicTextFormat
-  },
-  {
-    label: "basic-typhography",
-    createPlugin: BasicTypography
-  },
-  {
-    label: "colored-text",
-    createPlugin: HighlightText,
-    options: {
-      name: "Text",
-      type: "textColor",
-      data: "color",
-      defaultColor: "black",
-      styles: ["textDecorationColor", "color"]
-    }
-  },
-  {
-    label: "media",
-    createPlugin: MediaPlugin,
-    options: {
-      captionHideField: "hide",
-      mediaTypes: {
-        image: {
-          onInsert: src => {
-            return new Promise((resolve, reject) => {
-              setTimeout(() => {
-                resolve(src);
-              }, 5000);
-            });
-          }
+const plugins = [
+  PasteHelper(),
+  HTMLSerializer(),
+  Renderer(),
+  Util(),
+  HistoryPlugin(),
+  BasicTextFormat(),
+  HighlightText({
+    name: "Background",
+    type: "textBackground",
+    alpha: 0.4,
+    data: "backgroundColor",
+    defaultColor: "black",
+    styles: ["backgroundColor"]
+  }),
+  HighlightText({
+    name: "Text",
+    type: "textColor",
+    data: "color",
+    defaultColor: "transparent",
+    styles: ["textDecorationColor", "color"]
+  }),
+  BasicTypography(),
+  ListPlugin(),
+  IndentPlugin(),
+  AlignPlugin(),
+  MediaPlugin({
+    captionHideField: "hide",
+    mediaTypes: {
+      image: {
+        onInsert: src => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(src);
+            }, 5000);
+          });
         }
       }
-    }
-  },
-  {
-    label: "background-colored-text",
-    createPlugin: HighlightText,
-    options: {
-      name: "Background",
-      type: "textBackground",
-      alpha: 0.54,
-      data: "backgroundColor",
-      defaultColor: "transparent",
-      styles: ["backgroundColor"]
-    }
-  },
-  {
-    label: "list",
-    createPlugin: ListPlugin
-  },
-  {
-    label: "indent",
-    createPlugin: IndentPlugin
-  },
-  {
-    label: "align",
-    createPlugin: AlignPlugin
-  }
-];
+    },
+    toolbarRenderer: props => <MediaToolbar {...props} />
+  })
+].flat();
 
 storiesOf("editor", module)
   .addDecorator(withKnobs)
@@ -91,7 +67,7 @@ storiesOf("editor", module)
     return (
       <Editor
         initialState={initialState}
-        pluginOpts={pluginOpts}
+        plugins={plugins}
         isReadOnly={boolean("ReadOnly", false)}
         spellCheck={boolean("SpellCheck", false)}
       />

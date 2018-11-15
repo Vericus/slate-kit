@@ -1,5 +1,5 @@
 import Renderer from "@vericus/slate-kit-basic-text-formatting-renderer";
-import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import Options, { TypeOptions } from "./options";
 import createCommands from "./commands";
 import createQueries from "./queries";
@@ -8,29 +8,30 @@ import createStyle from "./style";
 import createRule from "./rules";
 
 export default function createBasicTextFormatPlugin(
-  pluginOptions: Partial<TypeOptions>,
-  pluginsWrapper?: PluginsWrapper
+  pluginOptions: Partial<TypeOptions> = {}
 ) {
   const options = Options.create(pluginOptions);
+  const { marks } = options;
   const commands = createCommands(options);
   const queries = createQueries(options);
-  const style = createStyle(options);
-  const rules = createRule;
+  const { getData } = createStyle(options);
   const { externalRenderer, withHandlers } = options;
+
   let plugins = [
+    Register({
+      marks,
+      getData,
+      createRule,
+      options
+    }),
     {
-      options,
       commands,
-      style,
-      queries,
-      rules: withHandlers ? rules : undefined
+      queries
     },
     ...(withHandlers ? createKeyBindings(options) : [])
   ];
-  if (!externalRenderer || pluginsWrapper) {
+  if (!externalRenderer) {
     plugins = [...plugins, Renderer()];
   }
-  return {
-    plugins
-  };
+  return plugins;
 }

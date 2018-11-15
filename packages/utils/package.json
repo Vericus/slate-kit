@@ -42,6 +42,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
+    "@vericus/slate-kit-typescript-typings": "^1.0.11",
     "expect": "^23.1.0",
     "slate": ">=0.44.0 <0.45.0",
     "slate-simulator": ">=0.4.59",

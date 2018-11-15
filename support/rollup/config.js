@@ -23,11 +23,6 @@ const configurations = getPackages(path.resolve("."))
         ...pkg,
         buildOrder: 1
       };
-    } else if (/serializer/gi.test(pkg.package.name)) {
-      return {
-        ...pkg,
-        buildOrder: 0
-      };
     } else if (/hotkey/gi.test(pkg.package.name)) {
       return {
         ...pkg,

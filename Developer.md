@@ -1,5 +1,1 @@
-run the command bellow to release as it doesn't work as expected as npm script:
-
-```sh
-lerna exec --bail=false -- "can-npm-publish --verbose && npm publish"
-```
+if `yarn release` doesn't work, check if your parent folders have `node_modules` that contains older version of yarn as lerna seems to pick that if it exist thinking that it's a local yarn instead of using globally installed yarn

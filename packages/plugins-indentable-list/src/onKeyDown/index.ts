@@ -3,10 +3,7 @@ import { isKeyHotkey } from "is-hotkey";
 import hotkeys from "slate-hotkeys";
 import { TypeOptions } from "../options";
 
-export default function createOnKeyDown(
-  opts: TypeOptions,
-  pluginsWrapper: any
-) {
+export default function createOnKeyDown(opts: TypeOptions) {
   const { startAtField, checkField, blockTypes } = opts;
   const isTab = isKeyHotkey("tab");
   const isShiftTab = isKeyHotkey("shift+tab");

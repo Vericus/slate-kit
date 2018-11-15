@@ -1,4 +1,5 @@
 import * as React from "react";
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import { Node } from "slate";
 import SlateTypes from "slate-prop-types";
 
@@ -66,14 +67,13 @@ Paragraph.propTypes = SlateTypes.Block;
 Blockquote.propTypes = SlateTypes.Block;
 
 export default function createRenderNode() {
-  return {
-    nodes: {
-      paragraph: Paragraph,
-      "heading-one": HeadingOne,
-      "heading-two": HeadingTwo,
-      "heading-three": HeadingThree,
-      "heading-four": HeadingFour,
-      blockquote: Blockquote
-    }
+  const nodesRenderer = {
+    paragraph: Paragraph,
+    "heading-one": HeadingOne,
+    "heading-two": HeadingTwo,
+    "heading-three": HeadingThree,
+    "heading-four": HeadingFour,
+    blockquote: Blockquote
   };
+  return Register({ nodesRenderer });
 }

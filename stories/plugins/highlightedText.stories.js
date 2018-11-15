@@ -7,47 +7,36 @@ import BasicTypography from "@vericus/slate-kit-basic-typhography";
 import HighlightText from "@vericus/slate-kit-highlight-text";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import Util from "@vericus/slate-kit-plugins-utils";
+import Renderer from "@vericus/slate-kit-renderer";
+import HTMLSerializer from "@vericus/slate-kit-html-serializer";
+import PasteHelper from "@vericus/slate-kit-paste-helpers";
 import initialState from "../states/highlightedText.json";
 import Editor from "../support/components/editor";
 
-const pluginOpts = [
-  { label: "util", createPlugin: Util },
-  {
-    label: "history",
-    createPlugin: HistoryPlugin
-  },
-  {
-    label: "basic-text-format",
-    createPlugin: BasicTextFormat
-  },
-  {
-    label: "background-colored-text",
-    createPlugin: HighlightText,
-    options: {
-      name: "Background",
-      type: "textBackground",
-      alpha: 0.4,
-      data: "backgroundColor",
-      defaultColor: "black",
-      styles: ["backgroundColor"]
-    }
-  },
-  {
-    label: "colored-text",
-    createPlugin: HighlightText,
-    options: {
-      name: "Text",
-      type: "textColor",
-      data: "color",
-      defaultColor: "transparent",
-      styles: ["textDecorationColor", "color"]
-    }
-  },
-  {
-    label: "basic-typhography",
-    createPlugin: BasicTypography
-  }
-];
+const plugins = [
+  PasteHelper(),
+  HTMLSerializer(),
+  Renderer(),
+  Util(),
+  HistoryPlugin(),
+  BasicTextFormat(),
+  HighlightText({
+    name: "Background",
+    type: "textBackground",
+    alpha: 0.4,
+    data: "backgroundColor",
+    defaultColor: "black",
+    styles: ["backgroundColor"]
+  }),
+  HighlightText({
+    name: "Text",
+    type: "textColor",
+    data: "color",
+    defaultColor: "transparent",
+    styles: ["textDecorationColor", "color"]
+  }),
+  BasicTypography()
+].flat();
 
 storiesOf("plugins/features", module)
   .addDecorator(withKnobs)
@@ -55,7 +44,7 @@ storiesOf("plugins/features", module)
     return (
       <Editor
         initialState={initialState}
-        pluginOpts={pluginOpts}
+        plugins={plugins}
         isReadOnly={boolean("ReadOnly", false)}
         spellCheck={boolean("SpellCheck", false)}
       />

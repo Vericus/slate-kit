@@ -1,4 +1,5 @@
 import * as React from "react";
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import { Mark } from "slate";
 import SlateTypes from "slate-prop-types";
 
@@ -65,12 +66,11 @@ export function strikethrough(props: Props) {
 }
 
 export default function createRenderMark() {
-  return {
-    marks: {
-      bold,
-      italic,
-      underline,
-      strikethrough
-    }
+  const marksRenderer = {
+    bold,
+    italic,
+    underline,
+    strikethrough
   };
+  return Register({ marksRenderer });
 }

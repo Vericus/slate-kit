@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "module"
-  },
-  "includes": ["src/**/*.ts"]
+    "declarationDir": "./lib",
+    "declaration": true
+  }
 }

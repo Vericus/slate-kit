@@ -2,7 +2,7 @@ import { Editor, Block, Data, Text } from "slate";
 import { List } from "immutable";
 import { TypeOption } from "../options";
 
-export default function insertImage(opts: TypeOption, pluginsWrapper) {
+export default function insertImage(opts: TypeOption) {
   const { type, mediaTypes, captionType } = opts;
   const { image } = mediaTypes || { image: undefined };
   const { type: imageType, srcField } = image
@@ -10,7 +10,7 @@ export default function insertImage(opts: TypeOption, pluginsWrapper) {
     : { type: undefined, srcField: undefined };
   if (imageType && captionType && srcField) {
     return (editor: Editor, src, temporary) => {
-      const defaultBlock = pluginsWrapper.getDefaultBlock();
+      const defaultBlock = editor.getDefaultBlock();
       const media = Block.create({
         type,
         object: "block",

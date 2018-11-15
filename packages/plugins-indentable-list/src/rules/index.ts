@@ -29,8 +29,8 @@ function deserializeFlatList(blocks, data, marks, block, childNodes, next) {
   });
 }
 
-function deserializeNested(blocks, getData, el, block, childNodes, next) {
-  const { data, marks } = getData(el);
+function deserializeNested(blocks, editor, el, block, childNodes, next) {
+  const { data, marks } = editor.getData(el);
   const initialIndentation = data && data.indentation ? data.indentation : 0;
   const nodes: Node[] = Array.from(childNodes);
   return nodes
@@ -50,7 +50,9 @@ function deserializeNested(blocks, getData, el, block, childNodes, next) {
           next
         );
       }
-      const { data: nodeData = {}, marks: nodeMarks } = getData(updatedNode);
+      const { data: nodeData = {}, marks: nodeMarks } = editor.getData(
+        updatedNode
+      );
       const indentation =
         nodeData && nodeData.indentation
           ? nodeData.indentation
@@ -95,7 +97,7 @@ function deserializeNested(blocks, getData, el, block, childNodes, next) {
       }
       return deserializeNested(
         blocks,
-        getData,
+        editor,
         updatedNode,
         nodeBlock,
         nodeChildNodes,
@@ -108,12 +110,12 @@ function deserializeNested(blocks, getData, el, block, childNodes, next) {
     );
 }
 
-function deserializeFlat(blocks, getData, el, block, childNodes, next) {
-  const { data, marks } = getData(el);
+function deserializeFlat(blocks, editor, el, block, childNodes, next) {
+  const { data, marks } = editor.getData(el);
   return deserializeFlatList(blocks, data, marks, block, childNodes, next);
 }
 
-export default function createRule(options, getData) {
+export default function createRule(options, editor) {
   const { blockTypes } = Array.isArray(options)
     ? options.find(option => option.blockTypes)
     : options;
@@ -144,8 +146,8 @@ export default function createRule(options, getData) {
           );
         });
         return isFlat
-          ? deserializeFlat(blocks, getData, el, block, childNodes, next)
-          : deserializeNested(blocks, getData, el, block, childNodes, next);
+          ? deserializeFlat(blocks, editor, el, block, childNodes, next)
+          : deserializeNested(blocks, editor, el, block, childNodes, next);
       }
     }
   ];

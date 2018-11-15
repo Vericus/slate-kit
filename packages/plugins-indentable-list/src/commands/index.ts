@@ -112,7 +112,7 @@ function toggleCheck(opts: TypeOptions, editor: Editor, block: Block) {
   });
 }
 
-export default function createCommands(opts: TypeOptions, pluginsWrapper: any) {
+export default function createCommands(opts: TypeOptions) {
   const changeListType = createChangeListType(opts);
   return {
     createListWithType: (editor: Editor, type: string, startAt: number) =>

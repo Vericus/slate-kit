@@ -1,3 +1,5 @@
+import { Editor } from "slate";
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import Options, { TypeOptions } from "./options";
 import createCommands from "./commands";
 import createQueries from "./queries";
@@ -6,29 +8,35 @@ import createProps from "./props";
 import createSchema from "./schemas";
 import createStyle from "./style";
 
-function createIndentPlugin(pluginOptions: TypeOptions) {
+function createIndentPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const options = new Options(pluginOptions);
   const queries = createQueries(options);
   const commands = createCommands(options);
   const onKeyDown = createOnKeyDown(options);
   const props = createProps(options);
   const schema = createSchema(options);
-  const style = createStyle(options);
-  return {
-    queries,
-    props,
-    onKeyDown: options.withHandlers ? onKeyDown : undefined,
-    commands,
-    options,
-    style,
-    schema,
-    shouldNodeComponentUpdate: (currProps, nextProps) => {
-      if (currProps.node.data !== nextProps.node.data) {
-        return true;
+  const { getData } = createStyle(options);
+
+  return [
+    Register({ getData, props, options }),
+    {
+      queries,
+      onKeyDown: options.withHandlers ? onKeyDown : undefined,
+      commands,
+      schema,
+      shouldNodeComponentUpdate: (
+        currProps,
+        nextProps,
+        editor: Editor,
+        next
+      ) => {
+        if (currProps.node.data !== nextProps.node.data) {
+          return true;
+        }
+        return next();
       }
-      return undefined;
     }
-  };
+  ];
 }
 
 export default createIndentPlugin;

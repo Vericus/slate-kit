@@ -30,6 +30,8 @@ export interface TypeOption {
   externalRenderer: boolean;
   mediaTypes: MediaOption;
   withHandlers: boolean;
+  toolbarRenderer?: (props: any) => JSX.Element;
+  label: string;
 }
 
 export const defaultImageOptions: ImageOption = {
@@ -54,7 +56,9 @@ export const defaultOptions: TypeOption = {
   externalRenderer: false,
   mediaTypes: defaultMediaTypesOption,
   blockTypes: {},
-  withHandlers: true
+  withHandlers: true,
+  toolbarRenderer: undefined,
+  label: "media"
 };
 
 export default class Options extends Record(defaultOptions) {
@@ -65,6 +69,8 @@ export default class Options extends Record(defaultOptions) {
   mediaTypes: MediaOption;
   blockTypes: BlockTypes;
   withHandlers: boolean;
+  label: string;
+
   static create(option: Partial<TypeOption>): TypeOption {
     let options = {
       ...defaultOptions,

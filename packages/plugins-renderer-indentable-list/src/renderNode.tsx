@@ -1,4 +1,5 @@
 import * as React from "react";
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import SlateTypes from "slate-prop-types";
 import { Node } from "slate";
 
@@ -42,13 +43,12 @@ UnOrderedList.propTypes = SlateTypes.Block;
 CheckList.propTypes = SlateTypes.Block;
 
 export function createRenderNode() {
-  return {
-    nodes: {
-      orderedlist: OrderedList,
-      unorderedlist: UnOrderedList,
-      checklist: CheckList
-    }
+  const nodesRenderer = {
+    orderedlist: OrderedList,
+    unorderedlist: UnOrderedList,
+    checklist: CheckList
   };
+  return Register({ nodesRenderer });
 }
 
 export { createRenderNode as default, OrderedList, UnOrderedList, CheckList };

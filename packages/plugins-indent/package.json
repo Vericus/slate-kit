@@ -33,6 +33,7 @@
     "immutable": "Immutable",
     "slate": "Slate",
     "is-hotkey": "IsHotkey",
+    "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
     "tslib": "TSLib",
     "slate-hotkeys": "SlateHotKeys",
@@ -40,11 +41,13 @@
     "classnames": "ClassNames"
   },
   "dependencies": {
+    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
     "classnames": "^2.2.5",
     "immutable": ">=3.8.2",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
+    "@vericus/slate-kit-typescript-typings": "^1.0.11",
     "expect": "^23.1.0",
     "is-hotkey": ">=0.1.2",
     "slate": ">=0.44.0 <0.45.0",
@@ -54,6 +57,7 @@
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
+    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
     "@vericus/slate-kit-plugins-utils": "^0.1.0",
     "is-hotkey": ">=0.1.2",
     "slate": ">=0.44.0 <0.45.0",

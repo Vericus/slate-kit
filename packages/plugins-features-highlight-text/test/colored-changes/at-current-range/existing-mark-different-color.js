@@ -1,8 +1,8 @@
 /** @jsx h */
 import h from "@vericus/slate-kit-utils-hyperscript";
 
-export default function(change, colorText) {
-  return colorText(change, "#FF00FF");
+export default function(editor, name) {
+  editor[`change${name}Color`]("#FF00FF");
 }
 
 export const input = (

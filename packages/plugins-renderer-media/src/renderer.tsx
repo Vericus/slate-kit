@@ -1,4 +1,5 @@
 import * as React from "react";
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import { Node, Block, Editor } from "slate";
 import Placeholder from "@vericus/slate-kit-utils-placeholders";
 import { ImageCaption, Media, Image, CaptionPlaceholder } from "./components";
@@ -49,28 +50,24 @@ export default function createRenderer(opts) {
       .map(ext => (ext.match(/^\./) ? ext : `.${ext}`))
       .join(", ");
   }
-  return {
-    plugins: [
-      {
-        renderers: {
-          nodes: {
-            media: createMediaRenderer(image),
-            image: createImage(onInsert, extensions),
-            mediacaption: createMediaCaption(image, captionHideField)
-          }
-        }
-      },
-      Placeholder({
-        type: "mediaCaption",
-        when: (editor: Editor, node: Node) => {
-          if (!image || !image.type) return false;
-          if (!Block.isBlock(node)) return false;
-          return captionType && node.type === captionType && node.text === "";
-        },
-        render: props => <CaptionPlaceholder {...props} />
-      })
-    ]
+  const nodesRenderer = {
+    media: createMediaRenderer(image),
+    image: createImage(onInsert, extensions),
+    mediacaption: createMediaCaption(image, captionHideField)
   };
+
+  return [
+    Register({ nodesRenderer }),
+    Placeholder({
+      type: "mediaCaption",
+      when: (editor: Editor, node: Node) => {
+        if (!image || !image.type) return false;
+        if (!Block.isBlock(node)) return false;
+        return captionType && node.type === captionType && node.text === "";
+      },
+      render: props => <CaptionPlaceholder {...props} />
+    })
+  ];
 }
 
 export { ImageCaption };

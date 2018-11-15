@@ -1,3 +1,4 @@
+import { Editor, Value } from "slate";
 import hasRedo from "./hasRedo";
 import hasUndo from "./hasUndo";
 import isRedo from "./isRedo";
@@ -7,7 +8,9 @@ export default function createQueries() {
   return {
     hasRedo,
     hasUndo,
-    isRedo: (editor, prevValue, currValue) => isRedo(prevValue, currValue),
-    isUndo: (editor, prevValue, currValue) => isUndo(prevValue, currValue)
+    isRedo: (editor: Editor, prevValue: Value, currValue: Value) =>
+      isRedo(prevValue, currValue),
+    isUndo: (editor: Editor, prevValue: Value, currValue: Value) =>
+      isUndo(prevValue, currValue)
   };
 }

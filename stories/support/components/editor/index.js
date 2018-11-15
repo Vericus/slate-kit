@@ -9,15 +9,10 @@ import {
   Editor
 } from "slate-react";
 import { Value } from "slate";
-import PluginsWrapper from "@vericus/slate-kit-plugins-wrapper";
 import { WithReadOnly } from "@vericus/slate-kit-read-only";
-import { WithRenderers } from "@vericus/slate-kit-renderer";
-import HistoryPlugin from "@vericus/slate-kit-history";
-import pasteCleaner from "@vericus/slate-kit-paste-helpers";
 import Toolbar from "../toolbar";
 
 const EnchancedEditor = compose(
-  WithRenderers,
   WithReadOnly,
   mapProps(({ forwardedRef, ...rest }) => ({ ref: forwardedRef, ...rest }))
 )(Editor);
@@ -32,8 +27,6 @@ export default class SlateKitEditor extends Component {
     this.state = {
       value: Value.fromJSON(props.initialState)
     };
-    this.pluginsWrapper = new PluginsWrapper();
-    this.plugins = this.pluginsWrapper.makePlugins(this.props.pluginOpts);
     this.editor = React.createRef();
   }
 
@@ -43,13 +36,12 @@ export default class SlateKitEditor extends Component {
     });
   };
 
-  onPaste = (event, change) => {
+  onPaste = (event, editor) => {
     const data = getEventTransfer(event);
     if (data.html) {
-      const { origin, cleanedHTML } = pasteCleaner(data.html);
-      const parser = this.pluginsWrapper.getSerializer();
-      const { document } = parser.deserialize(cleanedHTML);
-      change.insertFragment(document);
+      const { origin, cleanedHTML } = editor.cleanHTML(data.html);
+      const { document } = editor.deserializeHTML(cleanedHTML);
+      editor.insertFragment(document);
       return true;
     }
   };
@@ -58,7 +50,6 @@ export default class SlateKitEditor extends Component {
     if (this.editor && this.editor.current) {
       return (
         <Toolbar
-          pluginsWrapper={this.pluginsWrapper}
           onChange={this.onChange}
           isReadOnly={this.props.isReadOnly}
           editor={this.editor.current}
@@ -74,11 +65,10 @@ export default class SlateKitEditor extends Component {
         <div className="editorContainer">
           <EnchancedEditorWithRef
             placeholder={"Enter some text..."}
-            plugins={this.plugins}
+            plugins={this.props.plugins}
             value={this.state.value}
             onChange={this.onChange}
             onPaste={this.onPaste}
-            pluginsWrapper={this.pluginsWrapper}
             ref={this.editor}
             {...this.props}
           />

@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton } from "../../components/toolbar";
+import { IconButton } from "../toolbar";
 
 class ToolbarButton extends React.Component {
   onMouseDown = e => {

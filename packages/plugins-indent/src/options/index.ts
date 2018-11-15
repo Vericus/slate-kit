@@ -6,6 +6,7 @@ export interface TypeOptions {
   maxIndentation: number;
   dataField: string;
   withHandlers: boolean;
+  label: string;
 }
 
 const defaultOptions = {
@@ -28,7 +29,8 @@ const defaultOptions = {
   ],
   maxIndentation: 8,
   dataField: "indentation",
-  withHandlers: true
+  withHandlers: true,
+  label: "indent"
 };
 
 class Options extends Record(defaultOptions) {
@@ -37,6 +39,7 @@ class Options extends Record(defaultOptions) {
   maxIndentation: number;
   dataField: string;
   withHandlers: boolean;
+  label: string;
 }
 
 export default Options;

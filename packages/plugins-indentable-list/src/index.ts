@@ -1,3 +1,4 @@
+import Register from "@vericus/slate-kit-utils-register-helpers";
 import Renderer from "@vericus/slate-kit-indentable-list-renderer";
 import AutoReplace from "@vericus/slate-kit-utils-auto-replace";
 import createProps from "./props";
@@ -8,27 +9,22 @@ import createOnKeyDown from "./onKeyDown";
 import createSchema from "./schemas";
 import createRule from "./rules";
 
-export function createPlugin(
-  pluginOptions: Partial<TypeOptions> = {},
-  pluginsWrapper: any
-) {
+export function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const options = new Options(pluginOptions);
   const { blockTypes } = options;
   const { orderedlist, unorderedlist, checklist } = blockTypes;
   const queries = createQueries(options);
-  const commands = createCommands(options, pluginsWrapper);
+  const commands = createCommands(options);
   const schema = createSchema(options);
-  const props = createProps(options, pluginsWrapper);
-  const rules = createRule;
-  const onKeyDown = createOnKeyDown(options, pluginsWrapper);
+  const props = createProps(options);
+  const onKeyDown = createOnKeyDown(options);
+
   let plugins: any[] = [
+    Register({ nodes: blockTypes, props, createRule, options }),
     {
-      rules,
       queries,
       commands,
       onKeyDown: options.withHandlers ? onKeyDown : undefined,
-      options,
-      props,
       schema
     },
     ...(options.withHandlers
@@ -67,11 +63,9 @@ export function createPlugin(
       : [])
   ];
   if (!options.externalRenderer) {
-    plugins = [Renderer(), ...plugins];
+    plugins = [...plugins, Renderer()];
   }
-  return {
-    plugins
-  };
+  return plugins;
 }
 
 export default createPlugin;

@@ -31,13 +31,15 @@
   },
   "umdGlobals": {
     "immutable": "Immutable",
-    "slate": "Slate"
+    "slate": "Slate",
+    "tslib": "TSLib"
   },
   "dependencies": {
     "immutable": ">=3.8.2",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
+    "@vericus/slate-kit-typescript-typings": "^1.0.11",
     "slate": ">=0.44.0 <0.45.0"
   },
   "peerDependencies": {

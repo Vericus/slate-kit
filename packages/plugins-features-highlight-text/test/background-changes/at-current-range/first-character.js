@@ -1,15 +1,16 @@
 /** @jsx h */
 import h from "@vericus/slate-kit-utils-hyperscript";
 
-export default function(change, highlighText) {
-  return highlighText(change, "red");
+export default function(editor, name) {
+  editor[`change${name}Color`]("red");
 }
 
 export const input = (
   <value>
     <document>
       <paragraph>
-        <anchor />w<focus />ord
+        <anchor />w<focus />
+        ord
       </paragraph>
     </document>
   </value>
@@ -21,7 +22,8 @@ export const output = (
       <paragraph>
         <anchor />
         <highlight backgroundColor="red">w</highlight>
-        <focus />ord
+        <focus />
+        ord
       </paragraph>
     </document>
   </value>
