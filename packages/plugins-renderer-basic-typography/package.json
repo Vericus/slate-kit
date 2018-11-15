@@ -47,8 +47,8 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
     "@vericus/slate-kit-typescript-typings": "^1.0.11",
+    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
     "expect": "^23.1.0",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
