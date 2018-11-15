@@ -22,10 +22,9 @@ export default function createBasicTextFormatPlugin(
       marks,
       getData,
       createRule,
-      ruleOptions: options
+      options
     }),
     {
-      options,
       commands,
       queries
     },

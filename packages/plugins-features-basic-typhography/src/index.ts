@@ -17,8 +17,8 @@ export default function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
     default: defaultBlock
   };
   let plugins: any = [
-    Register({ nodes, createRule, ruleOptions: options }),
-    { options, commands, queries, schema }
+    Register({ nodes, createRule, options }),
+    { commands, queries, schema }
   ];
   if (!options.externalRenderer) {
     plugins = [...plugins, { ...Renderer() }];

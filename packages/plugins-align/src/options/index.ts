@@ -5,6 +5,7 @@ export interface TypeOptions {
   textBlocks: string[];
   alignments: string[];
   dataField: string;
+  label: string;
 }
 
 export const defaultOption: TypeOptions = {
@@ -18,7 +19,8 @@ export const defaultOption: TypeOptions = {
     "blockquote"
   ],
   alignments: ["left", "right", "center", "justify"],
-  dataField: "textAlign"
+  dataField: "textAlign",
+  label: "align"
 };
 
 class Options extends Record(defaultOption) {
@@ -26,6 +28,7 @@ class Options extends Record(defaultOption) {
   textBlocks: string[];
   alignments: string[];
   dataField: string;
+  label: string;
 
   static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {

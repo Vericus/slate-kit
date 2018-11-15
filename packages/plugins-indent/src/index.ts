@@ -18,12 +18,11 @@ function createIndentPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const { getData } = createStyle(options);
 
   return [
-    Register({ getData, props }),
+    Register({ getData, props, options }),
     {
       queries,
       onKeyDown: options.withHandlers ? onKeyDown : undefined,
       commands,
-      options,
       schema,
       shouldNodeComponentUpdate: (
         currProps,

@@ -14,7 +14,7 @@ function createAlignPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const schema = CreateSchema(options);
   const { getData } = createStyle(options);
 
-  return [Register({ props, getData }), { options, queries, commands, schema }];
+  return [Register({ props, getData, options }), { queries, commands, schema }];
 }
 
 export default createAlignPlugin;

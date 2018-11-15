@@ -30,6 +30,7 @@
     "dev": "tsc -w"
   },
   "umdGlobals": {
+    "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
     "immutable": "Immutable",
     "slate": "Slate",
     "react": "React",
@@ -46,6 +47,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
+    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
     "@vericus/slate-kit-typescript-typings": "^1.0.11",
     "expect": "^23.1.0",
     "react": ">=16.0.0",

@@ -30,6 +30,7 @@
     "dev": "tsc -w"
   },
   "umdGlobals": {
+    "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
     "immutable": "Immutable",
     "react-dom/server": "ReactDomServer",
     "slate-html-serializer": "SlateHTMLSerializer",
@@ -40,6 +41,7 @@
     "slate-html-serializer": ">=0.7.0 < 0.8.0"
   },
   "peerDependencies": {
+    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
     "slate-html-serializer": ">=0.7.0 <0.8.0"
   },
   "keywords": [

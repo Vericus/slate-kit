@@ -14,6 +14,7 @@ export interface TypeOptions {
   keyBindings: KeyBinding[];
   marks: TextMark;
   withHandlers: boolean;
+  label: string;
 }
 
 const defaultOption: TypeOptions = {
@@ -29,7 +30,8 @@ const defaultOption: TypeOptions = {
     strikethrough: "strikethrough"
   },
   externalRenderer: false,
-  withHandlers: true
+  withHandlers: true,
+  label: "basic-text-formatting"
 };
 
 class Options extends Record(defaultOption) {
@@ -37,6 +39,7 @@ class Options extends Record(defaultOption) {
   keyBindings: KeyBinding[];
   marks: TextMark;
   withHandlers: boolean;
+  label: string;
 
   static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {

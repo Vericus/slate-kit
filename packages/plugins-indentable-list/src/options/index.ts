@@ -10,6 +10,7 @@ export interface TypeOptions {
   startAtField: string;
   checkField: string;
   withHandlers: boolean;
+  label: string;
 }
 
 const defaultOptions = {
@@ -21,7 +22,8 @@ const defaultOptions = {
   externalRenderer: false,
   startAtField: "startAt",
   checkField: "checked",
-  withHandlers: true
+  withHandlers: true,
+  label: "indentable-list"
 };
 
 class Options extends Record(defaultOptions) {
@@ -30,6 +32,7 @@ class Options extends Record(defaultOptions) {
   startAtField: string;
   checkField: string;
   withHandlers: boolean;
+  label: string;
 }
 
 export default Options;

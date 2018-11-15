@@ -30,6 +30,8 @@
     "dev": "tsc -w"
   },
   "umdGlobals": {
+    "@vericus/slate-kit-utils-toolbars": "SlateKitToolbar",
+    "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
     "@vericus/slate-kit-media-renderer": "SlateKitMediaRenderer",
     "is-hotkey": "IsHotkey",
@@ -50,6 +52,8 @@
   },
   "peerDependencies": {
     "@vericus/slate-kit-plugins-utils": "^0.1.0",
+    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
+    "@vericus/slate-kit-utils-toolbars": "^0.0.1",
     "debug": ">=3.1.0",
     "slate": ">=0.44.0 <0.45.0",
     "slate-hotkeys": ">=0.2.3"

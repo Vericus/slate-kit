@@ -1,6 +1,7 @@
 import { Editor } from "slate";
 
-export default function register(options) {
+export default function register(pluginOptions) {
+  const editorOptions = {};
   const {
     marks,
     marksRenderer,
@@ -9,9 +10,15 @@ export default function register(options) {
     props,
     getData,
     createRule,
-    ruleOptions = {}
-  } = options;
+    options = {}
+  } = pluginOptions;
   return {
+    queries: {
+      registerOptions: (_editor: Editor, label: string, options: any) => {
+        editorOptions[label] = options;
+      },
+      getOptions: (_editor: Editor, label: string) => editorOptions[label]
+    },
     onConstruct: (editor: Editor, next) => {
       if (editor.registerPropsGetter && props) {
         editor.registerPropsGetter(props);
@@ -19,9 +26,14 @@ export default function register(options) {
       if (editor.registerDataGetter && getData) {
         editor.registerDataGetter(getData);
       }
-      if (editor.registerHTMLRule && createRule && ruleOptions) {
-        editor.registerHTMLRule(createRule(ruleOptions, editor));
+      if (editor.registerHTMLRule && createRule && options) {
+        editor.registerHTMLRule(createRule(options, editor));
       }
+
+      if (options.label) {
+        editor.registerOptions(options.label, options);
+      }
+
       if (editor.registerMarkMapping && marks) {
         Object.entries(marks).map(([markName, markType]) => {
           editor.registerMarkMapping(markName, markType);

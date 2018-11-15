@@ -14,6 +14,7 @@ export interface TypeOptions {
   blockTypes: BlockTypes;
   defaultBlock: string;
   externalRenderer: boolean;
+  label: string;
 }
 
 const defaultOptions: Partial<TypeOptions> = {
@@ -26,13 +27,15 @@ const defaultOptions: Partial<TypeOptions> = {
     blockquote: "blockquote"
   },
   defaultBlock: "paragraph",
-  externalRenderer: false
+  externalRenderer: false,
+  label: "basic-typography"
 };
 
 class Options extends Record(defaultOptions, "Typhography Options") {
   blockTypes: BlockTypes;
   defaultBlock: string;
   externalRenderer: boolean;
+  label: string;
 
   static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {

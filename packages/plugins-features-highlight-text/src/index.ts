@@ -13,9 +13,12 @@ export default function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const props = createProps(options);
 
   let plugins: any = [
-    Register({ marks, props }),
-    {
+    Register({
       options,
+      marks,
+      props
+    }),
+    {
       commands,
       queries
     }

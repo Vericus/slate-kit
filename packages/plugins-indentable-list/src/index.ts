@@ -20,12 +20,11 @@ export function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const onKeyDown = createOnKeyDown(options);
 
   let plugins: any[] = [
-    Register({ nodes: blockTypes, props, createRule, ruleOptions: options }),
+    Register({ nodes: blockTypes, props, createRule, options }),
     {
       queries,
       commands,
       onKeyDown: options.withHandlers ? onKeyDown : undefined,
-      options,
       schema
     },
     ...(options.withHandlers

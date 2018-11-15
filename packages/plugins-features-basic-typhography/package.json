@@ -34,6 +34,7 @@
     "tslib": "TSLib",
     "slate": "Slate",
     "is-plain-obj": "IsPlainObj",
+    "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
     "@vericus/slate-kit-basic-typography-renderer": "TypographyRenderer",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils"
   },
@@ -59,6 +60,7 @@
   "peerDependencies": {
     "@vericus/slate-kit-basic-typography-renderer": "^0.1.0",
     "@vericus/slate-kit-plugins-utils": "^0.1.0",
+    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
     "slate": ">=0.44.0 <0.45.0"

@@ -25,7 +25,6 @@ export default function createPlugin(pluginOptions: Partial<TypeOption> = {}) {
       queries,
       commands,
       schema,
-      options,
       onKeyDown: options.withHandlers ? onKeyDown : undefined
     },
     ...(toolbarRenderer
@@ -45,7 +44,7 @@ export default function createPlugin(pluginOptions: Partial<TypeOption> = {}) {
           render: toolbarRenderer
         })
       : []),
-    Register({ nodes: blockTypes }),
+    Register({ nodes: blockTypes, options }),
     ...(externalRenderer ? [] : Renderer(options))
   ];
 }

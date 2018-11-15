@@ -33,9 +33,11 @@
     "immutable": "Immutable",
     "tslib": "TSLib",
     "slate": "Slate",
+    "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils"
   },
   "dependencies": {
+    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
     "debug": "^3.1.0",
     "immutable": ">=3.8.2",
     "tslib": "^1.9.3"
@@ -49,6 +51,7 @@
   },
   "peerDependencies": {
     "@vericus/slate-kit-plugins-utils": "^0.1.0",
+    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
     "slate": ">=0.44.0 <0.45.0"
   },
   "keywords": [

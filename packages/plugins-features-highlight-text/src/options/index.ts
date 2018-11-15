@@ -12,6 +12,7 @@ export interface TypeOptions {
   styles: string[];
   defaultColor: string;
   externalRenderer: boolean;
+  label: string;
 }
 
 const defaultOptions = {
@@ -22,7 +23,8 @@ const defaultOptions = {
   data: undefined,
   defaultColor: undefined,
   alpha: 1,
-  externalRenderer: false
+  externalRenderer: false,
+  label: undefined
 };
 
 class Options extends Record(defaultOptions, "highlight text option") {
@@ -36,6 +38,7 @@ class Options extends Record(defaultOptions, "highlight text option") {
   alpha: number;
   defaultColor: string;
   externalRenderer: boolean;
+  label: string;
 
   static create(attrs: any = {}) {
     if (Options.isOptions(attrs)) return attrs;
