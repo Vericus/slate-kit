@@ -10,6 +10,7 @@
   ],
   "compilerOptions": {
     "baseUrl": ".",
+    "rootDir": ".",
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
@@ -34,18 +35,6 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "importHelpers": true,
-    "paths": {
-      "@vericus/slate-kit*": [
-        "packages/*/src",
-        "packages/*/lib"
-      ],
-      "*": [
-        "node_modules/*",
-        "node_modules/@types/*",
-        "packages/typescript-typings/types/*",
-        "*"
-      ]
-    },
     "typeRoots": [
       "./node_modules/@types",
       "./packages/typescript-typings/types"

@@ -1,8 +1,16 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "module",
-    "jsx": "react"
+    "rootDir": "./src",
+    "outDir": "./module",
+    "jsx": "react",
+    "typeRoots": [
+      "../../node_modules/@vericus/typescript-typings/types",
+      "./node_modules/@vericus/typescript-typings/types",
+      "../../node_modules/@types",
+      "./node_modules/@types"
+    ],
+
   },
   "includes": ["./src/**/*"]
 }
