@@ -41,7 +41,7 @@
     "slate-html-serializer": ">=0.7.0 < 0.8.0"
   },
   "peerDependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
     "slate-html-serializer": ">=0.7.0 <0.8.0"
   },
   "keywords": [

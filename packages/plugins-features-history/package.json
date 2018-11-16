@@ -52,7 +52,7 @@
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
-    "@vericus/slate-kit-plugins-utils": "^0.1.0",
+    "@vericus/slate-kit-plugins-utils": "^0.2.0",
     "debug": ">=3.1.0",
     "slate": ">=0.44.0 <0.45.0",
     "slate-hotkeys": ">=0.2.3"

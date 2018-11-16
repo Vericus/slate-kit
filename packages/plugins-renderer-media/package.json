@@ -52,8 +52,8 @@
     "slate-prop-types": ">=0.5.7"
   },
   "peerDependencies": {
-    "@vericus/slate-kit-utils-placeholders": ">=0.0.1",
-    "@vericus/slate-kit-utils-register-helpers": "^0.0.1",
+    "@vericus/slate-kit-utils-placeholders": "^0.1.0",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
     "slate": ">=0.44.0 <0.45.0",
