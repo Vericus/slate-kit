@@ -1,0 +1,304 @@
+.ql-color-label {
+  stroke: red; }
+
+.ql-transparent {
+  opacity: 0.2; }
+
+.ql-thin {
+  stroke-width: 0.5; }
+
+:not(.colored-icon) .ql-stroke {
+  stroke: #000;
+  fill: transparent; }
+
+:not(.colored-icon) .ql-stroke-mitter {
+  stroke: #000;
+  fill: transparent; }
+
+:not(.colored-icon) .ql-fill {
+  fill: #000; }
+
+:not(.colored-icon) .ql-even {
+  stroke: #000;
+  fill: #fff; }
+
+:not(.colored-icon) .ql-thin {
+  stroke: #000;
+  fill: transparent; }
+
+.colored-icon .ql-stroke {
+  stroke: inherit;
+  fill: transparent;
+  stroke-width: 2; }
+
+.colored-icon .ql-stroke-mitter {
+  stroke: inherit;
+  fill: transparent;
+  stroke-width: 2; }
+
+.colored-icon .ql-fill {
+  fill: inherit; }
+
+.colored-icon .ql-even {
+  stroke: inherit;
+  fill: inherit; }
+
+.colored-icon .ql-thin {
+  stroke: inherit;
+  fill: inherit;
+  stroke-width: 1; }
+
+.btn-icon--disabled .ql-stroke {
+  stroke: rgba(0, 0, 0, 0.23) !important; }
+
+.btn-icon--disabled .ql-stroke-mitter {
+  stroke: rgba(0, 0, 0, 0.23) !important; }
+
+.btn-icon--disabled .ql-fill {
+  fill: rgba(0, 0, 0, 0.23) !important; }
+
+.btn-icon--disabled .ql-even {
+  stroke: rgba(0, 0, 0, 0.23) !important;
+  fill: #fff !important; }
+
+.btn-icon--disabled .ql-thin {
+  stroke: rgba(0, 0, 0, 0.23) !important; }
+
+.btn-icon--disabled .ql-color-label {
+  stroke: rgba(0, 0, 0, 0.23) !important; }
+
+.btn-icon--active .ql-fill {
+  fill: blue; }
+
+.btn-icon--active .ql-stroke {
+  stroke: blue;
+  stroke-width: 2; }
+
+.btn-icon--active .ql-stroke-mitter {
+  stroke: blue;
+  stroke-width: 2; }
+
+.btn-icon--active .ql-thin {
+  stroke: blue;
+  stroke-width: 1; }
+
+.slate-read-only * {
+  caret-color: transparent;
+  color: transparent;
+  text-shadow: 0 0 0 #000; }
+
+ul, ol {
+  padding-left: 3em; }
+  ul li, ol li {
+    position: relative;
+    text-indent: -3.5em; }
+  ul li::before, ol li::before {
+    user-select: all;
+    text-align: right;
+    display: inline-block;
+    width: 3em;
+    margin-right: 0.5em; }
+
+ol.list-reset:not(.indented) {
+  counter-reset: ol var(--start-at, 0); }
+
+ul {
+  list-style-type: none;
+  counter-increment: ul; }
+  ul li::before {
+    content: counter(ul, disc) "  "; }
+
+ol {
+  list-style-type: none;
+  counter-increment: ol; }
+  ol li::before {
+    content: counter(ol, decimal) ". "; }
+
+ul.checkList {
+  padding-left: 3em; }
+  ul.checkList li::before {
+    display: inline-block;
+    width: 3em;
+    height: 1em;
+    background-repeat: no-repeat;
+    content: '';
+    user-select: none;
+    text-align: right;
+    background-size: 1em 1em;
+    background-position: right;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAADpJREFUKFO1yqERwDAAxLDsv3QKLPplEfT5vHR/maINpmiDKdpgijaYog2maIMp2mCKNpiiDaYHzvkAci8q5Gg0BsgAAAAASUVORK5CYII=); }
+
+.checkList.checked {
+  text-decoration: line-through; }
+  .checkList.checked li::before {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAEpJREFUKFO1ykEOwCAMxMD8/9Mtqq1ogXJkTsFL3fSc+aOZN87JZdYTh9hSdm6R2hJ5yvY5Fdn+/g1EZeJOdPWbbcE0cdk4X1D1AhcH8g67+AATAAAAAElFTkSuQmCC); }
+
+.indentation-1:not(ul):not(ol) {
+  padding-left: 99px; }
+
+ul.indentation-1, ol.indentation-1, .checkList.indentation-1 {
+  padding-left: calc(99px + 3em); }
+  ul.indentation-1 .checkbox, ol.indentation-1 .checkbox, .checkList.indentation-1 .checkbox {
+    padding-left: calc(99px); }
+
+ul.indentation-1:not(.checkList) {
+  counter-increment: ul-1; }
+  ul.indentation-1:not(.checkList) li::before {
+    content: counter(ul-1, circle) "  "; }
+
+ol.indentation-1 {
+  counter-increment: ol-1; }
+  ol.indentation-1 li::before {
+    content: counter(ol-1, lower-alpha) ". "; }
+
+ol.list-reset-1 {
+  counter-reset: ol-1 var(--start-at, 0); }
+
+.indentation-2:not(ul):not(ol) {
+  padding-left: 198px; }
+
+ul.indentation-2, ol.indentation-2, .checkList.indentation-2 {
+  padding-left: calc(198px + 3em); }
+  ul.indentation-2 .checkbox, ol.indentation-2 .checkbox, .checkList.indentation-2 .checkbox {
+    padding-left: calc(198px); }
+
+ul.indentation-2:not(.checkList) {
+  counter-increment: ul-2; }
+  ul.indentation-2:not(.checkList) li::before {
+    content: counter(ul-2, square) "  "; }
+
+ol.indentation-2 {
+  counter-increment: ol-2; }
+  ol.indentation-2 li::before {
+    content: counter(ol-2, lower-roman) ". "; }
+
+ol.list-reset-2 {
+  counter-reset: ol-2 var(--start-at, 0); }
+
+.indentation-3:not(ul):not(ol) {
+  padding-left: 297px; }
+
+ul.indentation-3, ol.indentation-3, .checkList.indentation-3 {
+  padding-left: calc(297px + 3em); }
+  ul.indentation-3 .checkbox, ol.indentation-3 .checkbox, .checkList.indentation-3 .checkbox {
+    padding-left: calc(297px); }
+
+ul.indentation-3:not(.checkList) {
+  counter-increment: ul-3; }
+  ul.indentation-3:not(.checkList) li::before {
+    content: counter(ul-3, disc) "  "; }
+
+ol.indentation-3 {
+  counter-increment: ol-3; }
+  ol.indentation-3 li::before {
+    content: counter(ol-3, decimal) ". "; }
+
+ol.list-reset-3 {
+  counter-reset: ol-3 var(--start-at, 0); }
+
+.indentation-4:not(ul):not(ol) {
+  padding-left: 396px; }
+
+ul.indentation-4, ol.indentation-4, .checkList.indentation-4 {
+  padding-left: calc(396px + 3em); }
+  ul.indentation-4 .checkbox, ol.indentation-4 .checkbox, .checkList.indentation-4 .checkbox {
+    padding-left: calc(396px); }
+
+ul.indentation-4:not(.checkList) {
+  counter-increment: ul-4; }
+  ul.indentation-4:not(.checkList) li::before {
+    content: counter(ul-4, circle) "  "; }
+
+ol.indentation-4 {
+  counter-increment: ol-4; }
+  ol.indentation-4 li::before {
+    content: counter(ol-4, lower-alpha) ". "; }
+
+ol.list-reset-4 {
+  counter-reset: ol-4 var(--start-at, 0); }
+
+.indentation-5:not(ul):not(ol) {
+  padding-left: 495px; }
+
+ul.indentation-5, ol.indentation-5, .checkList.indentation-5 {
+  padding-left: calc(495px + 3em); }
+  ul.indentation-5 .checkbox, ol.indentation-5 .checkbox, .checkList.indentation-5 .checkbox {
+    padding-left: calc(495px); }
+
+ul.indentation-5:not(.checkList) {
+  counter-increment: ul-5; }
+  ul.indentation-5:not(.checkList) li::before {
+    content: counter(ul-5, square) "  "; }
+
+ol.indentation-5 {
+  counter-increment: ol-5; }
+  ol.indentation-5 li::before {
+    content: counter(ol-5, lower-roman) ". "; }
+
+ol.list-reset-5 {
+  counter-reset: ol-5 var(--start-at, 0); }
+
+.indentation-6:not(ul):not(ol) {
+  padding-left: 594px; }
+
+ul.indentation-6, ol.indentation-6, .checkList.indentation-6 {
+  padding-left: calc(594px + 3em); }
+  ul.indentation-6 .checkbox, ol.indentation-6 .checkbox, .checkList.indentation-6 .checkbox {
+    padding-left: calc(594px); }
+
+ul.indentation-6:not(.checkList) {
+  counter-increment: ul-6; }
+  ul.indentation-6:not(.checkList) li::before {
+    content: counter(ul-6, disc) "  "; }
+
+ol.indentation-6 {
+  counter-increment: ol-6; }
+  ol.indentation-6 li::before {
+    content: counter(ol-6, decimal) ". "; }
+
+ol.list-reset-6 {
+  counter-reset: ol-6 var(--start-at, 0); }
+
+.indentation-7:not(ul):not(ol) {
+  padding-left: 693px; }
+
+ul.indentation-7, ol.indentation-7, .checkList.indentation-7 {
+  padding-left: calc(693px + 3em); }
+  ul.indentation-7 .checkbox, ol.indentation-7 .checkbox, .checkList.indentation-7 .checkbox {
+    padding-left: calc(693px); }
+
+ul.indentation-7:not(.checkList) {
+  counter-increment: ul-7; }
+  ul.indentation-7:not(.checkList) li::before {
+    content: counter(ul-7, circle) "  "; }
+
+ol.indentation-7 {
+  counter-increment: ol-7; }
+  ol.indentation-7 li::before {
+    content: counter(ol-7, lower-alpha) ". "; }
+
+ol.list-reset-7 {
+  counter-reset: ol-7 var(--start-at, 0); }
+
+.indentation-8:not(ul):not(ol) {
+  padding-left: 792px; }
+
+ul.indentation-8, ol.indentation-8, .checkList.indentation-8 {
+  padding-left: calc(792px + 3em); }
+  ul.indentation-8 .checkbox, ol.indentation-8 .checkbox, .checkList.indentation-8 .checkbox {
+    padding-left: calc(792px); }
+
+ul.indentation-8:not(.checkList) {
+  counter-increment: ul-8; }
+  ul.indentation-8:not(.checkList) li::before {
+    content: counter(ul-8, square) "  "; }
+
+ol.indentation-8 {
+  counter-increment: ol-8; }
+  ol.indentation-8 li::before {
+    content: counter(ol-8, lower-roman) ". "; }
+
+ol.list-reset-8 {
+  counter-reset: ol-8 var(--start-at, 0); }
+
+/*# sourceMappingURL=preview.9f7a32f4f7e5e45480ffdcc33165980c.css.map*/
