@@ -7,6 +7,7 @@ import getClosestMedia from "./getClosestMedia";
 import getClosestMediaContainer from "./getClosestMediaContainer";
 import hasCaption from "./hasCaption";
 import hideCaption from "./hideCaption";
+import hasMedia from "./hasMedia";
 
 export default function createQueries(opts: TypeOption) {
   const { mediaTypes } = opts;
@@ -23,7 +24,8 @@ export default function createQueries(opts: TypeOption) {
     getClosestMedia: getClosestMedia(opts),
     getClosestMediaContainer: getClosestMediaContainer(opts),
     hasCaption: hasCaption(opts),
-    hideCaption: hideCaption(opts)
+    hideCaption: hideCaption(opts),
+    hasMedia: hasMedia(opts)
   };
 }
 
@@ -33,5 +35,6 @@ export {
   getImageWidth,
   getClosestMedia,
   getClosestMediaContainer,
-  hideCaption
+  hideCaption,
+  hasMedia
 };

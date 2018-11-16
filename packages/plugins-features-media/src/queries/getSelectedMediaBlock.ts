@@ -1,4 +1,4 @@
-import { Value, Editor } from "slate";
+import { Editor } from "slate";
 import { TypeOption } from "../options";
 
 export default function getSelectedMediaBlock(opts: TypeOption) {
@@ -7,9 +7,10 @@ export default function getSelectedMediaBlock(opts: TypeOption) {
     (types, mediaOption) => [...types, mediaOption.type],
     [captionType]
   );
-  return (editor: Editor, value: Value) => {
+  return (editor: Editor) => {
+    const { value } = editor;
     const { document } = value;
-    const selectedBlocks = editor.getHighestSelectedBlocks(value);
+    const selectedBlocks = editor.getHighestSelectedBlocks();
     if (selectedBlocks.size !== 1) return;
     const block = selectedBlocks.get(0);
     if (block && block.type === type) return block;

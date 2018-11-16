@@ -1,10 +1,10 @@
-import { Value, Node, Block, Editor } from "slate";
+import { Node, Block, Editor } from "slate";
 import { List } from "immutable";
 import { TypeOptions, BlockTypes } from "../options";
 
 function selectedOrderedList(editor: Editor, opts: BlockTypes) {
   const { orderedlist } = opts;
-  return List(editor.getHighestSelectedBlocks(editor.value)).filter(
+  return List(editor.getHighestSelectedBlocks()).filter(
     (node: any) =>
       !!(node && Block.isBlock(node) && node && node.type === orderedlist)
   );
@@ -31,20 +31,20 @@ function isListNode(editor: Editor, opts: BlockTypes, node: Node) {
   return Block.isBlock(node) && listTypes.includes(node.type);
 }
 
-function isOrderedList(editor: Editor, value: Value) {
-  return List(editor.getHighestSelectedBlocks(value)).every(
+function isOrderedList(editor: Editor) {
+  return List(editor.getHighestSelectedBlocks()).every(
     node => Block.isBlock(node) && editor.isOrderedNode(node)
   );
 }
 
-function isUnorderedList(editor: Editor, value: Value) {
-  return List(editor.getHighestSelectedBlocks(value)).every(
+function isUnorderedList(editor: Editor) {
+  return List(editor.getHighestSelectedBlocks()).every(
     node => Block.isBlock(node) && editor.isUnorderedNode(node)
   );
 }
 
-function isCheckList(editor: Editor, opts: BlockTypes, value: Value) {
-  return List(editor.getHighestSelectedBlocks(value)).every(
+function isCheckList(editor: Editor, opts: BlockTypes) {
+  return List(editor.getHighestSelectedBlocks()).every(
     node => Block.isBlock(node) && editor.isCheckNode(node)
   );
 }
@@ -60,12 +60,9 @@ export default function createQueries(opts: TypeOptions) {
       isUnorderedNode(editor, blockTypes, node),
     isCheckNode: (editor: Editor, node: Node) =>
       isCheckNode(editor, blockTypes, node),
-    isOrderedList: (editor: Editor, value: Value) =>
-      isOrderedList(editor, value),
-    isUnorderedList: (editor: Editor, value: Value) =>
-      isUnorderedList(editor, value),
-    isCheckList: (editor: Editor, value: Value) =>
-      isCheckList(editor, blockTypes, value),
+    isOrderedList: (editor: Editor) => isOrderedList(editor),
+    isUnorderedList: (editor: Editor) => isUnorderedList(editor),
+    isCheckList: (editor: Editor) => isCheckList(editor, blockTypes),
     selectedOrderedList: (editor: Editor) =>
       selectedOrderedList(editor, blockTypes)
   };

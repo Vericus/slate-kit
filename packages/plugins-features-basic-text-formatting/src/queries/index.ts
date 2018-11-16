@@ -1,24 +1,21 @@
-import { Value, Editor } from "slate";
+import { Editor } from "slate";
 import { TypeOptions } from "../options";
 
-const returnFalse = (editor: Editor, value: Value) => false;
+const returnFalse = (editor: Editor) => false;
 
 export default function createQueries(options: TypeOptions) {
   const { marks } = options;
   const { bold, italic, underline, strikethrough } = marks;
   return {
-    isBold: bold
-      ? (editor: Editor, value: Value) => editor.hasActiveMark(value, bold)
-      : returnFalse,
+    isBold: bold ? (editor: Editor) => editor.hasActiveMark(bold) : returnFalse,
     isItalic: italic
-      ? (editor: Editor, value: Value) => editor.hasActiveMark(value, italic)
+      ? (editor: Editor) => editor.hasActiveMark(italic)
       : returnFalse,
     isUnderline: underline
-      ? (editor: Editor, value: Value) => editor.hasActiveMark(value, underline)
+      ? (editor: Editor) => editor.hasActiveMark(underline)
       : returnFalse,
     isStrikethrough: strikethrough
-      ? (editor: Editor, value: Value) =>
-          editor.hasActiveMark(value, strikethrough)
+      ? (editor: Editor) => editor.hasActiveMark(strikethrough)
       : returnFalse
   };
 }

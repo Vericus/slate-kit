@@ -1,4 +1,4 @@
-import { Value, Block, Editor } from "slate";
+import { Block, Editor } from "slate";
 import { List } from "immutable";
 import { TypeOptions } from "../options";
 
@@ -7,8 +7,8 @@ function isIndentable(opts: TypeOptions, block: Block) {
   return indentable.includes(block.type);
 }
 
-function getIndentableBlocks(opts: TypeOptions, editor: Editor, value: Value) {
-  return List(editor.getHighestSelectedBlocks(value)).filter(
+function getIndentableBlocks(opts: TypeOptions, editor: Editor) {
+  return List(editor.getHighestSelectedBlocks()).filter(
     block => Block.isBlock(block) && isIndentable(opts, block)
   );
 }
@@ -18,8 +18,8 @@ function getIndentationLevel(opts: TypeOptions, editor: Editor, block: Block) {
   return block.data.get(dataField) || 0;
 }
 
-function canBeOutdented(opts: TypeOptions, editor: Editor, value: Value) {
-  const indentableBlocks = editor.getIndentableBlocks(value);
+function canBeOutdented(opts: TypeOptions, editor: Editor) {
+  const indentableBlocks = editor.getIndentableBlocks();
   if (indentableBlocks.size === 0) return false;
   return indentableBlocks.some(block => {
     if (!Block.isBlock(block)) return false;
@@ -28,9 +28,9 @@ function canBeOutdented(opts: TypeOptions, editor: Editor, value: Value) {
   });
 }
 
-function canBeIndented(opts: TypeOptions, editor: Editor, value: Value) {
+function canBeIndented(opts: TypeOptions, editor: Editor) {
   const { maxIndentation } = opts;
-  const indentableBlocks = editor.getIndentableBlocks(value);
+  const indentableBlocks = editor.getIndentableBlocks();
   if (indentableBlocks.size === 0) return false;
   return indentableBlocks.some(block => {
     if (!Block.isBlock(block)) return false;
@@ -44,11 +44,8 @@ export default function createQueries(opts: TypeOptions) {
     getIndentationLevel: (editor: Editor, block: Block) =>
       getIndentationLevel(opts, editor, block),
     isIndentable: (editor: Editor, block: Block) => isIndentable(opts, block),
-    getIndentableBlocks: (editor: Editor, value: Value) =>
-      getIndentableBlocks(opts, editor, value),
-    canBeIndented: (editor: Editor, value: Value) =>
-      canBeIndented(opts, editor, value),
-    canBeOutdented: (editor: Editor, value: Value) =>
-      canBeOutdented(opts, editor, value)
+    getIndentableBlocks: (editor: Editor) => getIndentableBlocks(opts, editor),
+    canBeIndented: (editor: Editor) => canBeIndented(opts, editor),
+    canBeOutdented: (editor: Editor) => canBeOutdented(opts, editor)
   };
 }

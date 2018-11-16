@@ -1,4 +1,4 @@
-import { Node, Value, Block, Editor } from "slate";
+import { Node, Block, Editor } from "slate";
 import { List } from "immutable";
 import { TypeOptions, BlockTypes } from "../options";
 
@@ -6,15 +6,9 @@ function isTypography(types: string[], node: Node) {
   return Block.isBlock(node) && types.includes(node.type);
 }
 
-function currentTypography(
-  editor: Editor,
-  types: Partial<BlockTypes>,
-  value: Value
-) {
+function currentTypography(editor: Editor, types: Partial<BlockTypes>) {
   const blockType = Object.entries(types).find(([type, typeName]) => {
-    const selectedBlocks: List<Block> = List(
-      editor.getHighestSelectedBlocks(value)
-    );
+    const selectedBlocks: List<Block> = List(editor.getHighestSelectedBlocks());
     if (selectedBlocks) {
       const headBlock = selectedBlocks.get(0);
       if (headBlock) {
@@ -47,7 +41,7 @@ export default function createQueries(opts: TypeOptions) {
   return {
     isTypography: (editor: Editor, node: Node) =>
       isTypography(slateBlockTypes, node),
-    currentTypography: (editor: Editor, value: Value) =>
-      currentTypography(editor, validBlockTypes, value)
+    currentTypography: (editor: Editor) =>
+      currentTypography(editor, validBlockTypes)
   };
 }

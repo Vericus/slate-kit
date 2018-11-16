@@ -1,10 +1,11 @@
-import { Value, Mark } from "slate";
+import { Editor, Mark } from "slate";
 import { TypeOptions } from "../options";
 
 export default function createUtils(opts: TypeOptions) {
   const { defaultColor, data, type, name } = opts;
   return {
-    [`current${name}Color`]: (value: Value) => {
+    [`current${name}Color`]: (editor: Editor) => {
+      const { value } = editor;
       if (value.selection && value.selection.isFocused && value.activeMarks) {
         const activeColorMarks = value.activeMarks
           .filter(mark => !!(mark && mark.type === type))
