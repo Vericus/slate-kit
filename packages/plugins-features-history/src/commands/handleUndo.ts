@@ -1,14 +1,10 @@
-import { List } from "immutable";
-import { Editor, Operation } from "slate";
+import { Editor } from "slate";
 
-export default function handleUndo(
-  editor: Editor,
-  onUndo?: (operations: List<Operation>) => void
-): void {
+export default function handleUndo(editor: Editor): void {
   if (!editor.hasUndo()) return;
   editor.undo();
-  if (onUndo && typeof onUndo === "function") {
-    onUndo(
+  if (editor.props.onUndo && typeof editor.props.onUndo === "function") {
+    editor.props.onUndo(
       editor.operations.filter(operation => operation.type !== "set_value")
     );
   }
