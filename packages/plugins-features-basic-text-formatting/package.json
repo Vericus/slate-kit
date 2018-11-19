@@ -1,5 +1,5 @@
 {
-  "version": "0.2.3",
+  "version": "0.2.4",
   "name": "@vericus/slate-kit-basic-text-formatting",
   "description": "Plugin that provides `expected` functionality on `strike-through, underlined, bold, italicised` text on slate",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -38,7 +38,7 @@
     "@vericus/slate-kit-bind-hotkey": "SlateKitBindHotKey"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.1",
     "debug": "^3.1.0",
     "immutable": ">=3.8.2",
     "tslib": "^1.9.3"

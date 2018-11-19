@@ -1,5 +1,5 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.3",
   "name": "@vericus/slate-kit-indent",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -41,7 +41,7 @@
     "classnames": "ClassNames"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.1",
     "classnames": "^2.2.5",
     "immutable": ">=3.8.2",
     "tslib": "^1.9.3"

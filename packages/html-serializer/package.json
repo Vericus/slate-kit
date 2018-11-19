@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
+  "version": "0.2.2",
   "name": "@vericus/slate-kit-html-serializer",
   "description": "slate-html-serializer's rules builder for slate-kit style plugins",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -55,7 +55,7 @@
     "xml"
   ],
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.1",
     "tslib": "^1.9.3"
   }
 }

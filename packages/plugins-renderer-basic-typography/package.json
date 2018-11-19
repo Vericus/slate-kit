@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
+  "version": "0.2.2",
   "name": "@vericus/slate-kit-basic-typography-renderer",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -38,7 +38,7 @@
     "slate-prop-types": "SlatePropTypes"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.1",
     "debug": "^3.1.0",
     "immutable": ">=3.8.2",
     "react": ">=16.0.0",
