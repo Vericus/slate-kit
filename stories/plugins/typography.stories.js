@@ -11,10 +11,12 @@ import Util from "@vericus/slate-kit-plugins-utils";
 import Renderer from "@vericus/slate-kit-renderer";
 import HTMLSerializer from "@vericus/slate-kit-html-serializer";
 import PasteHelper from "@vericus/slate-kit-paste-helpers";
+import ReadOnly from "@vericus/slate-kit-read-only";
 import initialState from "../states/typography.json";
 import Editor from "../support/components/editor";
 
 const plugins = [
+  ReadOnly(),
   PasteHelper(),
   HTMLSerializer(),
   Renderer(),

@@ -9,11 +9,9 @@ import {
   Editor
 } from "slate-react";
 import { Value } from "slate";
-import { WithReadOnly } from "@vericus/slate-kit-read-only";
 import Toolbar from "../toolbar";
 
 const EnchancedEditor = compose(
-  WithReadOnly,
   mapProps(({ forwardedRef, ...rest }) => ({ ref: forwardedRef, ...rest }))
 )(Editor);
 
