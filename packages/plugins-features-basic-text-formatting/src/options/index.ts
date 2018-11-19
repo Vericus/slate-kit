@@ -10,7 +10,7 @@ export type MarkTypes = "bold" | "italic" | "underline" | "strikethrough";
 export type TextMark = { [key in MarkTypes]?: string | null };
 
 export interface TypeOptions {
-  externalRenderer: boolean;
+  renderer?: (...args: any[]) => any;
   keyBindings: KeyBinding[];
   marks: TextMark;
   withHandlers: boolean;
@@ -29,13 +29,13 @@ const defaultOption: TypeOptions = {
     underline: "underline",
     strikethrough: "strikethrough"
   },
-  externalRenderer: false,
+  renderer: undefined,
   withHandlers: true,
   label: "basic-text-formatting"
 };
 
 class Options extends Record(defaultOption) {
-  externalRenderer: boolean;
+  renderer: (...args: any[]) => any;
   keyBindings: KeyBinding[];
   marks: TextMark;
   withHandlers: boolean;

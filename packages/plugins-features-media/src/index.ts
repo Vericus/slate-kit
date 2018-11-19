@@ -1,6 +1,5 @@
 import { Editor } from "slate";
 import Register from "@vericus/slate-kit-utils-register-helpers";
-import Renderer from "@vericus/slate-kit-media-renderer";
 import Toolbar from "@vericus/slate-kit-utils-toolbars";
 import Options, { TypeOption } from "./options";
 import createQueries from "./queries";
@@ -10,7 +9,7 @@ import createOnKeyDown from "./keyDown";
 
 export default function createPlugin(pluginOptions: Partial<TypeOption> = {}) {
   const options = Options.create(pluginOptions);
-  const { blockTypes, toolbarRenderer, externalRenderer, mediaTypes } = options;
+  const { blockTypes, toolbarRenderer, renderer, mediaTypes } = options;
   const mediaTypesOptions = Object.values(mediaTypes).reduce(
     (types, media) => [...types, media.type],
     []
@@ -20,7 +19,7 @@ export default function createPlugin(pluginOptions: Partial<TypeOption> = {}) {
   const schema = createSchema(options);
   const onKeyDown = createOnKeyDown(options);
 
-  return [
+  let plugins = [
     {
       queries,
       commands,
@@ -44,7 +43,17 @@ export default function createPlugin(pluginOptions: Partial<TypeOption> = {}) {
           render: toolbarRenderer
         })
       : []),
-    Register({ nodes: blockTypes, options }),
-    ...(externalRenderer ? [] : Renderer(options))
+    Register({ nodes: blockTypes, options })
   ];
+
+  if (renderer) {
+    const rendererPlugins = renderer(options);
+    if (Array.isArray(rendererPlugins)) {
+      plugins = [...plugins, ...rendererPlugins];
+    } else {
+      plugins = [...plugins, rendererPlugins];
+    }
+  }
+
+  return plugins;
 }

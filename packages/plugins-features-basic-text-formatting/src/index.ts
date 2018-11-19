@@ -1,4 +1,3 @@
-import Renderer from "@vericus/slate-kit-basic-text-formatting-renderer";
 import Register from "@vericus/slate-kit-utils-register-helpers";
 import Options, { TypeOptions } from "./options";
 import createCommands from "./commands";
@@ -15,7 +14,7 @@ export default function createBasicTextFormatPlugin(
   const commands = createCommands(options);
   const queries = createQueries(options);
   const { getData } = createStyle(options);
-  const { externalRenderer, withHandlers } = options;
+  const { renderer, withHandlers } = options;
 
   let plugins = [
     Register({
@@ -30,8 +29,13 @@ export default function createBasicTextFormatPlugin(
     },
     ...(withHandlers ? createKeyBindings(options) : [])
   ];
-  if (!externalRenderer) {
-    plugins = [...plugins, Renderer()];
+  if (renderer) {
+    const rendererPlugins = renderer(options);
+    if (Array.isArray(rendererPlugins)) {
+      plugins = [...plugins, ...rendererPlugins];
+    } else {
+      plugins = [...plugins, rendererPlugins];
+    }
   }
   return plugins;
 }

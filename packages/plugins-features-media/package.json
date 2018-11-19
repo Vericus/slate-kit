@@ -33,7 +33,6 @@
     "@vericus/slate-kit-utils-toolbars": "SlateKitToolbar",
     "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
-    "@vericus/slate-kit-media-renderer": "SlateKitMediaRenderer",
     "is-hotkey": "IsHotkey",
     "immutable": "Immutable",
     "slate": "Slate",
@@ -41,7 +40,6 @@
     "tslib": "TSLib"
   },
   "dependencies": {
-    "@vericus/slate-kit-media-renderer": "^0.1.1",
     "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
     "@vericus/slate-kit-utils-toolbars": "^0.1.0",
     "immutable": ">=3.8.2",

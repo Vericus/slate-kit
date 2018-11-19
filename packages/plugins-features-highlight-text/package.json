@@ -34,7 +34,6 @@
     "slate": "Slate",
     "is-plain-obj": "IsPlainObj",
     "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
-    "@vericus/slate-kit-highlight-text-renderer": "HighlightTextRenderer",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
     "tslib": "TSLib",
     "tinycolor2": "TinyColor"
@@ -54,7 +53,6 @@
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
-    "@vericus/slate-kit-highlight-text-renderer": "^0.2.0",
     "@vericus/slate-kit-plugins-utils": "^0.2.0",
     "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
     "slate": ">=0.44.0 <0.45.0"

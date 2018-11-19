@@ -34,7 +34,6 @@
     "tslib": "TSLib",
     "slate": "Slate",
     "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
-    "@vericus/slate-kit-basic-text-formatting-renderer": "TextFormatRenderer",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
     "@vericus/slate-kit-bind-hotkey": "SlateKitBindHotKey"
   },
@@ -55,7 +54,6 @@
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
-    "@vericus/slate-kit-basic-text-formatting-renderer": "^0.2.0",
     "@vericus/slate-kit-bind-hotkey": "^0.2.0",
     "@vericus/slate-kit-plugins-utils": "^0.2.0",
     "@vericus/slate-kit-utils-register-helpers": "^0.1.0",

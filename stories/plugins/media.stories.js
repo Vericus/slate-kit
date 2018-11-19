@@ -3,10 +3,14 @@ import { storiesOf } from "@storybook/react";
 import { Value } from "slate";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
+import BasicTextFormatRenderer from "@vericus/slate-kit-basic-text-formatting-renderer";
 import BasicTypography from "@vericus/slate-kit-basic-typhography";
+import BasicTypographyRenderer from "@vericus/slate-kit-basic-typography-renderer";
 import HighlightText from "@vericus/slate-kit-highlight-text";
+import HighlightRenderer from "@vericus/slate-kit-highlight-text-renderer";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import MediaPlugin from "@vericus/slate-kit-media";
+import MediaRenderer from "@vericus/slate-kit-media-renderer";
 import Util from "@vericus/slate-kit-plugins-utils";
 import Renderer from "@vericus/slate-kit-renderer";
 import HTMLSerializer from "@vericus/slate-kit-html-serializer";
@@ -21,24 +25,27 @@ const plugins = [
   Renderer(),
   Util(),
   HistoryPlugin(),
-  BasicTextFormat(),
+  BasicTextFormat({ renderer: BasicTextFormatRenderer }),
   HighlightText({
     name: "Background",
     type: "textBackground",
     alpha: 0.4,
     data: "backgroundColor",
     defaultColor: "black",
-    styles: ["backgroundColor"]
+    styles: ["backgroundColor"],
+    renderer: HighlightRenderer
   }),
   HighlightText({
     name: "Text",
     type: "textColor",
     data: "color",
     defaultColor: "transparent",
-    styles: ["textDecorationColor", "color"]
+    styles: ["textDecorationColor", "color"],
+    renderer: HighlightRenderer
   }),
-  BasicTypography(),
+  BasicTypography({ renderer: BasicTypographyRenderer }),
   MediaPlugin({
+    renderer: MediaRenderer,
     captionHideField: "hide",
     mediaTypes: {
       image: {

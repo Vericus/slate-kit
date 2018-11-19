@@ -35,11 +35,9 @@
     "slate": "Slate",
     "is-plain-obj": "IsPlainObj",
     "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
-    "@vericus/slate-kit-basic-typography-renderer": "TypographyRenderer",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils"
   },
   "dependencies": {
-    "@vericus/slate-kit-basic-typography-renderer": "^0.2.1",
     "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
     "debug": "^3.1.0",
     "immutable": ">=3.8.2",
@@ -58,7 +56,6 @@
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
-    "@vericus/slate-kit-basic-typography-renderer": "^0.2.0",
     "@vericus/slate-kit-plugins-utils": "^0.2.0",
     "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
     "react": ">=16.0.0",

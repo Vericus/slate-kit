@@ -27,7 +27,7 @@ export interface TypeOption {
   type: string;
   captionType: string;
   captionHideField: string | null;
-  externalRenderer: boolean;
+  renderer?: (...args: any[]) => any;
   mediaTypes: MediaOption;
   withHandlers: boolean;
   toolbarRenderer?: (props: any) => JSX.Element;
@@ -53,7 +53,7 @@ export const defaultOptions: TypeOption = {
   type: "media",
   captionHideField: null,
   captionType: "mediaCaption",
-  externalRenderer: false,
+  renderer: undefined,
   mediaTypes: defaultMediaTypesOption,
   blockTypes: {},
   withHandlers: true,
@@ -65,7 +65,7 @@ export default class Options extends Record(defaultOptions) {
   type: string;
   captionType: string;
   captionHideField: string | null;
-  externalRenderer: boolean;
+  renderer: (...args: any[]) => any;
   mediaTypes: MediaOption;
   blockTypes: BlockTypes;
   withHandlers: boolean;
@@ -112,11 +112,7 @@ export default class Options extends Record(defaultOptions) {
         mediacaption: option.captionType
           ? option.captionType
           : defaultOptions.captionType
-      },
-      externalRenderer:
-        option.externalRenderer !== undefined
-          ? option.externalRenderer
-          : defaultOptions.externalRenderer
+      }
     };
     return new Options(options);
   }

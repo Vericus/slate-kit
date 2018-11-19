@@ -3,7 +3,9 @@ import { storiesOf } from "@storybook/react";
 import { Value } from "slate";
 import { withKnobs, boolean } from "@storybook/addon-knobs/react";
 import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
+import BasicTextFormatRenderer from "@vericus/slate-kit-basic-text-formatting-renderer";
 import BasicTypography from "@vericus/slate-kit-basic-typhography";
+import BasicTypographyRenderer from "@vericus/slate-kit-basic-typography-renderer";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import Util from "@vericus/slate-kit-plugins-utils";
 import Renderer from "@vericus/slate-kit-renderer";
@@ -18,8 +20,8 @@ const plugins = [
   Renderer(),
   Util(),
   HistoryPlugin(),
-  BasicTextFormat(),
-  BasicTypography()
+  BasicTextFormat({ renderer: BasicTextFormatRenderer }),
+  BasicTypography({ renderer: BasicTypographyRenderer })
 ].flat();
 
 storiesOf("plugins/features", module)

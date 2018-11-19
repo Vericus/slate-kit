@@ -9,7 +9,8 @@ export interface Props {
   className?: string;
 }
 
-export default function createRenderMark(marks) {
+export default function createRenderMark(options) {
+  const { marks } = options;
   const marksRenderer = Object.entries(marks).reduce(
     (renderers, [markName, markType]) => {
       return {
