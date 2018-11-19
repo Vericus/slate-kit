@@ -5,8 +5,10 @@ export default function register(pluginOptions) {
   const {
     marks,
     marksRenderer,
+    marksHOCRenderer,
     nodes,
     nodesRenderer,
+    nodesHOCRenderer,
     props,
     getData,
     createRule,
@@ -53,6 +55,34 @@ export default function register(pluginOptions) {
         Object.entries(nodesRenderer).map(([nodeName, renderer]) => {
           editor.registerNodeRenderer(editor.getNodeType(nodeName), renderer);
         });
+      }
+      if (
+        editor.getNodeType &&
+        editor.registerNodeHocRenderer &&
+        nodesHOCRenderer
+      ) {
+        Object.entries(nodesHOCRenderer).map(
+          ([nodeName, renderers]: [string, any[]]) => {
+            const nodeType = editor.getNodeType(nodeName);
+            renderers.forEach(renderer => {
+              editor.registerNodeHocRenderer(nodeType, renderer);
+            });
+          }
+        );
+      }
+      if (
+        editor.getNodeType &&
+        editor.registerMarkHocRenderer &&
+        marksHOCRenderer
+      ) {
+        Object.entries(marksHOCRenderer).map(
+          ([markName, renderers]: [string, any[]]) => {
+            const markType = editor.getMarkType(markName);
+            renderers.forEach(renderer => {
+              editor.registerMarkHocRenderer(markType, renderer);
+            });
+          }
+        );
       }
       return next();
     }
