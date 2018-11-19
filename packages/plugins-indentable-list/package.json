@@ -34,7 +34,6 @@
     "immutable": "Immutable",
     "slate": "Slate",
     "is-hotkey": "IsHotkey",
-    "@vericus/slate-kit-indentable-list-renderer": "IndentableListRenderer",
     "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
     "@vericus/slate-kit-utils-auto-replace": "SlateKitAutoReplace",
@@ -66,7 +65,6 @@
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {
-    "@vericus/slate-kit-indentable-list-renderer": "^0.2.0",
     "@vericus/slate-kit-plugins-utils": "^0.2.0",
     "@vericus/slate-kit-utils-auto-replace": "^0.1.0",
     "@vericus/slate-kit-utils-register-helpers": "^0.1.0",

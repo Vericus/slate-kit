@@ -11,6 +11,7 @@ import HighlightRenderer from "@vericus/slate-kit-highlight-text-renderer";
 import HistoryPlugin from "@vericus/slate-kit-history";
 import IndentPlugin from "@vericus/slate-kit-indent";
 import ListPlugin from "@vericus/slate-kit-indentable-list";
+import ListRenderer from "@vericus/slate-kit-indentable-list-renderer";
 import AlignPlugin from "@vericus/slate-kit-align";
 import MediaPlugin from "@vericus/slate-kit-media";
 import MediaRenderer from "@vericus/slate-kit-media-renderer";
@@ -49,7 +50,7 @@ const plugins = [
     renderer: HighlightRenderer
   }),
   BasicTypography({ renderer: BasicTypographyRenderer }),
-  ListPlugin(),
+  ListPlugin({ renderer: ListRenderer }),
   IndentPlugin(),
   AlignPlugin(),
   MediaPlugin({

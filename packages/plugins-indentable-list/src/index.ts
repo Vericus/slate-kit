@@ -1,5 +1,4 @@
 import Register from "@vericus/slate-kit-utils-register-helpers";
-import Renderer from "@vericus/slate-kit-indentable-list-renderer";
 import AutoReplace from "@vericus/slate-kit-utils-auto-replace";
 import createProps from "./props";
 import Options, { TypeOptions } from "./options";
@@ -11,7 +10,7 @@ import createRule from "./rules";
 
 export function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const options = new Options(pluginOptions);
-  const { blockTypes } = options;
+  const { blockTypes, renderer } = options;
   const { orderedlist, unorderedlist, checklist } = blockTypes;
   const queries = createQueries(options);
   const commands = createCommands(options);
@@ -62,8 +61,13 @@ export function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
         ]
       : [])
   ];
-  if (!options.externalRenderer) {
-    plugins = [...plugins, Renderer()];
+  if (renderer) {
+    const rendererPlugins = renderer(options);
+    if (Array.isArray(rendererPlugins)) {
+      plugins = [...plugins, ...rendererPlugins];
+    } else {
+      plugins = [...plugins, rendererPlugins];
+    }
   }
   return plugins;
 }

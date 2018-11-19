@@ -6,7 +6,7 @@ export type BlockTypes = { [key in ListTypes]?: string | null };
 
 export interface TypeOptions {
   blockTypes: BlockTypes;
-  externalRenderer: boolean;
+  renderer?: (...args: any[]) => any;
   startAtField: string;
   checkField: string;
   withHandlers: boolean;
@@ -19,7 +19,7 @@ const defaultOptions = {
     unorderedlist: "ul-list",
     checklist: "check-list"
   },
-  externalRenderer: false,
+  renderer: undefined,
   startAtField: "startAt",
   checkField: "checked",
   withHandlers: true,
@@ -28,7 +28,7 @@ const defaultOptions = {
 
 class Options extends Record(defaultOptions) {
   blockTypes: BlockTypes;
-  externalRenderer: boolean;
+  renderer: (...args: any[]) => any;
   startAtField: string;
   checkField: string;
   withHandlers: boolean;
