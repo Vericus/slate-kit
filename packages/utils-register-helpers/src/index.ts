@@ -61,28 +61,24 @@ export default function register(pluginOptions) {
         editor.registerNodeHocRenderer &&
         nodesHOCRenderer
       ) {
-        Object.entries(nodesHOCRenderer).map(
-          ([nodeName, renderers]: [string, any[]]) => {
-            const nodeType = editor.getNodeType(nodeName);
-            renderers.forEach(renderer => {
-              editor.registerNodeHocRenderer(nodeType, renderer);
-            });
-          }
-        );
+        Object.entries(nodesHOCRenderer).map(([nodeName, renderer]) => {
+          editor.registerNodeHocRenderer(
+            editor.getNodeType(nodeName),
+            renderer
+          );
+        });
       }
       if (
         editor.getNodeType &&
         editor.registerMarkHocRenderer &&
         marksHOCRenderer
       ) {
-        Object.entries(marksHOCRenderer).map(
-          ([markName, renderers]: [string, any[]]) => {
-            const markType = editor.getMarkType(markName);
-            renderers.forEach(renderer => {
-              editor.registerMarkHocRenderer(markType, renderer);
-            });
-          }
-        );
+        Object.entries(marksHOCRenderer).map(([markName, renderer]) => {
+          editor.registerMarkHocRenderer(
+            editor.getMarkType(markName),
+            renderer
+          );
+        });
       }
       return next();
     }
