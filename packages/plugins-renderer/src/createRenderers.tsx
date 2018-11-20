@@ -10,8 +10,10 @@ const SlateKitNode: React.SFC<Props> = props => props.children(props);
 
 export default function createRenderers() {
   let nodes = {};
+  let nodeHOCsLabel = {};
   let nodeHOCs = {};
   let marks = {};
+  let markHOCsLabel = {};
   let markHOCs = {};
   const nodeMappings = {};
   const markMappings = {};
@@ -46,28 +48,48 @@ export default function createRenderers() {
       registerNodeHocRenderer: (
         _editor: Editor,
         nodeType: string,
+        label: string,
         renderer
       ) => {
-        if (nodeHOCs[nodeType]) {
-          nodeHOCs[nodeType] = compose(
-            nodeHOCs[nodeType],
-            renderer
-          );
+        if (nodeHOCs[nodeType] && nodeHOCsLabel[nodeType]) {
+          if (!nodeHOCsLabel[nodeType][label]) {
+            nodeHOCs[nodeType] = compose(
+              nodeHOCs[nodeType],
+              renderer
+            );
+          }
         } else {
+          if (nodeHOCsLabel[nodeType]) {
+            nodeHOCsLabel[nodeType][label] = true;
+          } else {
+            nodeHOCsLabel[nodeType] = {
+              [label]: true
+            };
+          }
           nodeHOCs[nodeType] = compose(renderer);
         }
       },
       registerMarkHocRenderer: (
         _editor: Editor,
         markType: string,
+        label: string,
         renderer
       ) => {
         if (markHOCs[markType]) {
-          markHOCs[markType] = compose(
-            markHOCs[markType],
-            renderer
-          );
+          if (!markHOCsLabel[markType][label]) {
+            markHOCs[markType] = compose(
+              markHOCs[markType],
+              renderer
+            );
+          }
         } else {
+          if (markHOCsLabel[markType]) {
+            markHOCsLabel[markType][label] = true;
+          } else {
+            markHOCsLabel[markType] = {
+              [label]: true
+            };
+          }
           markHOCs[markType] = compose(renderer);
         }
       },
