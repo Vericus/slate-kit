@@ -49,7 +49,10 @@ export default function createRenderers() {
         renderer
       ) => {
         if (nodeHOCs[nodeType]) {
-          nodeHOCs[nodeType] = compose(nodeHOCs[nodeType])(renderer);
+          nodeHOCs[nodeType] = compose(
+            nodeHOCs[nodeType],
+            renderer
+          );
         } else {
           nodeHOCs[nodeType] = renderer;
         }
@@ -60,7 +63,10 @@ export default function createRenderers() {
         renderer
       ) => {
         if (markHOCs[markType]) {
-          markHOCs[markType] = compose(markHOCs[markType])(renderer);
+          markHOCs[markType] = compose(
+            markHOCs[markType],
+            renderer
+          );
         } else {
           markHOCs[markType] = renderer;
         }
