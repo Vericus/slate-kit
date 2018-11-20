@@ -94,7 +94,7 @@ export default function createRenderers() {
           return (
             <React.Fragment>
               {toolbar}
-              <SlateKitNode>{() => hoc(renderer(newProps))}</SlateKitNode>
+              <SlateKitNode>{() => hoc(renderer)(newProps)}</SlateKitNode>
             </React.Fragment>
           );
         }
@@ -116,7 +116,7 @@ export default function createRenderers() {
         if (hoc) {
           return (
             <React.Fragment>
-              <SlateKitNode>{() => hoc(renderer(newProps))}</SlateKitNode>
+              <SlateKitNode>{() => hoc(renderer)(newProps)}</SlateKitNode>
             </React.Fragment>
           );
         }
