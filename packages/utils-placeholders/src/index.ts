@@ -16,7 +16,14 @@ export default function Placeholder(opts: Partial<TypeOptions>) {
     const others = next() || [];
     const first = node.getFirstText();
     const last = node.getLastText();
-    if (first && last) {
+    const containsPlaceholders = others.some(
+      decoration =>
+        decoration &&
+        decoration.mark &&
+        decoration.mark.type &&
+        /.*-placeholder$/.test(decoration.mark.type)
+    );
+    if (first && last && !containsPlaceholders) {
       const decoration = {
         anchor: { key: first.key, offset: 0 },
         focus: { key: last.key, offset: 0 },
