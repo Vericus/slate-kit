@@ -47,7 +47,7 @@ export default function ReadOnly() {
         spellCheck: editor.props.isReadOnly ? false : editor.props.spellCheck
       })
     );
-    return <React.Fragment>{childrenWithReadOnly}></React.Fragment>;
+    return <React.Fragment>{childrenWithReadOnly}</React.Fragment>;
   }
 
   return {
