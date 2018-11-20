@@ -54,7 +54,7 @@ export default function createRenderers() {
             renderer
           );
         } else {
-          nodeHOCs[nodeType] = renderer;
+          nodeHOCs[nodeType] = compose(renderer);
         }
       },
       registerMarkHocRenderer: (
@@ -68,7 +68,7 @@ export default function createRenderers() {
             renderer
           );
         } else {
-          markHOCs[markType] = renderer;
+          markHOCs[markType] = compose(renderer);
         }
       },
       getNodeRenderer: (_editor: Editor, nodeType: string) => nodes[nodeType],
