@@ -1,5 +1,4 @@
 import babel from "rollup-plugin-babel";
-import builtins from "rollup-plugin-node-builtins";
 import commonjs from "rollup-plugin-commonjs";
 import globals from "rollup-plugin-node-globals";
 import json from "rollup-plugin-json";
@@ -44,7 +43,8 @@ function configure(pkg, location, env, target) {
     // Allow Rollup to resolve modules from `node_modules`, since it only
     // resolves local modules by default.
     resolve({
-      browser: true
+      browser: true,
+      preferBuiltins: true
     }),
 
     // Allow Rollup to resolve CommonJS modules, since it only resolves ES2015
@@ -81,9 +81,6 @@ function configure(pkg, location, env, target) {
     replace({
       "process.env.NODE_ENV": JSON.stringify(env)
     }),
-
-    // Register Node.js builtins for browserify compatibility.
-    builtins(),
 
     isTypescript &&
       typescript({
