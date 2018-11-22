@@ -38,15 +38,15 @@
   },
   "dependencies": {
     "immutable": ">=3.8.2",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "react": ">=16.4.2",
+    "react-dom": ">=16.4.2",
     "recompose": "^0.30.0",
     "tslib": "^1.9.3"
   },
   "peerDepencies": {
     "immutable": ">=3.8.2",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "react": ">=16.4.2",
+    "react-dom": ">=16.4.2",
     "recompose": "^0.30.0",
     "tslib": "^1.9.3"
   },
