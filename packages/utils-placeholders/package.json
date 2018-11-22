@@ -37,19 +37,19 @@
   },
   "dependencies": {
     "immutable": ">=3.8.2",
-    "react": ">=16.0.0",
-    "react-dom": ">=16.0.0",
+    "react": ">=16.0.0 || ^16.7.0-alpha",
+    "react-dom": ">=16.0.0 || ^16.7.0-alpha",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@vericus/slate-kit-typescript-typings": "^1.1.0",
-    "react": ">=16.0.0",
-    "react-dom": ">=16.0.0",
+    "react": ">=16.0.0 || ^16.7.0-alpha",
+    "react-dom": ">=16.0.0 || ^16.7.0-alpha",
     "slate": ">=0.44.0 <0.45.0"
   },
   "peerDependencies": {
-    "react": ">=16.0.0",
-    "react-dom": ">=16.0.0",
+    "react": ">=16.0.0 || ^16.7.0-alpha",
+    "react-dom": ">=16.0.0 || ^16.7.0-alpha",
     "slate": ">=0.44.0 <0.45.0"
   },
   "keywords": [
