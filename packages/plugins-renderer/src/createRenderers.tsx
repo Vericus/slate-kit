@@ -107,7 +107,8 @@ export default function createRenderers() {
       const { node } = props;
       const renderer =
         editor.getNodeRenderer(node.type) ||
-        (node.object === "block" && editor.getNodeRenderer("default"));
+        (node.object === "block" &&
+          editor.getNodeRenderer(editor.getNodeType("default")));
       const hoc = editor.getNodeHOCRenderer(node.type);
       const newProps = editor.getProps(props);
       const toolbar = editor.run("renderToolbar", props);

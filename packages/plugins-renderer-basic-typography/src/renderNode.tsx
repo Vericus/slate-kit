@@ -73,8 +73,7 @@ export default function createRenderNode() {
     "heading-two": HeadingTwo,
     "heading-three": HeadingThree,
     "heading-four": HeadingFour,
-    blockquote: Blockquote,
-    default: Paragraph
+    blockquote: Blockquote
   };
   return Register({ nodesRenderer });
 }
