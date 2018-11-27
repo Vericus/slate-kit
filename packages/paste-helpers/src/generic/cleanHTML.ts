@@ -1,7 +1,5 @@
 // remove everything from HTML string except the content of <body/>
 export default function cleanHTML(html: string): string {
-  return html.replace(
-    /[.\s\S\w\W<>]*<body[^>]*>([.\s\S\w\W<>]*)<\/body>[.\s\S\w\W<>]*/gi,
-    "$1"
-  );
+  const dom = new DOMParser().parseFromString(html, "text/html");
+  return (dom && dom.body && dom.body.innerHTML) || "";
 }
