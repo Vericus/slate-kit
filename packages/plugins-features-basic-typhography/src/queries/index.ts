@@ -25,7 +25,7 @@ function currentTypography(editor: Editor, types: Partial<BlockTypes>) {
 }
 
 export default function createQueries(opts: TypeOptions) {
-  const { blockTypes } = opts;
+  const { blockTypes, defaultBlock } = opts;
   const validBlockTypes: { [key: string]: string } = Object.entries(
     blockTypes
   ).reduce((types, [type, typeName]) => {
@@ -42,6 +42,8 @@ export default function createQueries(opts: TypeOptions) {
     isTypography: (editor: Editor, node: Node) =>
       isTypography(slateBlockTypes, node),
     currentTypography: (editor: Editor) =>
-      currentTypography(editor, validBlockTypes)
+      currentTypography(editor, validBlockTypes),
+    getDefaultBlock: (editor: Editor) =>
+      editor.getNodeType && editor.getNodeType(defaultBlock)
   };
 }
