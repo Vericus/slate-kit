@@ -43,7 +43,8 @@
     ],
     "types": [
       "react",
-      "jest"
+      "jest",
+      "node"
     ]
   },
   "types": [
