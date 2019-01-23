@@ -9,7 +9,7 @@ export default function insertImage(opts: TypeOption) {
     ? image
     : { type: undefined, srcField: undefined };
   if (imageType && captionType && srcField) {
-    return (editor: Editor, src, temporary) => {
+    return (editor: Editor, src) => {
       const defaultBlock = editor.getDefaultBlock();
       const media = Block.create({
         type,

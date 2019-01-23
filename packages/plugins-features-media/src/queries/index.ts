@@ -25,7 +25,12 @@ export default function createQueries(opts: TypeOption) {
     getClosestMediaContainer: getClosestMediaContainer(opts),
     hasCaption: hasCaption(opts),
     hideCaption: hideCaption(opts),
-    hasMedia: hasMedia(opts)
+    hasMedia: hasMedia(opts),
+    isAllowedImageExtension: (editor: Editor, extension: string) =>
+      mediaTypes &&
+      mediaTypes.image &&
+      mediaTypes.image.allowedExtensions &&
+      mediaTypes.image.allowedExtensions.includes(extension)
   };
 }
 
