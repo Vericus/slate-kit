@@ -84,12 +84,13 @@ class Options extends Record(defaultOptions, "highlight text option") {
   }
 
   static isOptions(args: any) {
-    return !!(
-      args instanceof Record &&
-      ["marks", "type", "data", "styles", "defaultColor"].every(key =>
-        args.has(key)
-      )
-    );
+    if (args instanceof Record) {
+      const record = args as Options;
+      return ["marks", "type", "data", "styles", "defaultColor"].every(key =>
+        record.has(key)
+      );
+    }
+    return false;
   }
 }
 
