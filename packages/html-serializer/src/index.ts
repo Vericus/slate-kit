@@ -86,9 +86,9 @@ function HTMLSerializer() {
         registerDataGetter: (_editor: Editor, getter) => {
           dataGetter = [...dataGetter, getter];
         },
-        getData: (_editor: Editor, element) =>
+        getData: (editor: Editor, element) =>
           dataGetter.reduce((memo, getter) => {
-            const passData = getter(element);
+            const passData = getter(editor, element);
             const marks = [
               ...(memo.marks ? memo.marks : []),
               ...(passData.mark ? [passData.mark] : [])
