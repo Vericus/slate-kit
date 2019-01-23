@@ -42,15 +42,15 @@
     "debug": "^3.1.0",
     "immutable": ">=3.8.2",
     "is-plain-obj": "^1.1.0",
-    "react": ">=16.0.0 || ^16.7.0-alpha",
-    "react-dom": ">=16.0.0 || ^16.7.0-alpha",
+    "react": ">=16.0.0 || ^16.8.0-alpha",
+    "react-dom": ">=16.0.0 || ^16.8.0-alpha",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@vericus/slate-kit-typescript-typings": "^1.1.0",
     "expect": "^23.1.0",
-    "react": ">=16.0.0 || ^16.7.0-alpha",
-    "react-dom": ">=16.0.0 || ^16.7.0-alpha",
+    "react": ">=16.0.0 || ^16.8.0-alpha",
+    "react-dom": ">=16.0.0 || ^16.8.0-alpha",
     "slate": ">=0.44.0 <0.45.0",
     "slate-simulator": ">=0.4.59",
     "to-camel-case": "^1.0.0"
@@ -58,8 +58,8 @@
   "peerDependencies": {
     "@vericus/slate-kit-plugins-utils": "^0.2.0",
     "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
-    "react": ">=16.0.0 || ^16.7.0-alpha",
-    "react-dom": ">=16.0.0 || ^16.7.0-alpha",
+    "react": ">=16.0.0 || ^16.8.0-alpha",
+    "react-dom": ">=16.0.0 || ^16.8.0-alpha",
     "slate": ">=0.44.0 <0.45.0"
   },
   "keywords": [
