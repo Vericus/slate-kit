@@ -891,17 +891,17 @@ export interface Operations {
 }
 
 export interface StackProperties {
-  plugins?: any[];
+  plugins?: Plugin[];
 }
 
 export interface StackJSON {
   object: "stack";
-  plugins: any[];
+  plugins: Plugin[];
 }
 
 export class Stack extends Immutable.Record({}) {
   object: "stack";
-  plugins: any[];
+  plugins: Plugin[];
 
   static create(attrs: StackProperties): Stack;
   static isStack(maybeStack: any): maybeStack is Stack;
@@ -1007,12 +1007,122 @@ export interface EditorProperties {
   value?: Value;
 }
 
+// Values prefixed with "data-..." (Used for spellchecking according to docs)
+export interface RenderAttributes {
+  [key: string]: any;
+}
+
+export interface RenderMarkProps {
+  attributes: RenderAttributes;
+  children: React.ReactNode;
+  editor: Editor;
+  mark: Mark;
+  marks: Immutable.Set<Mark>;
+  node: Node;
+  offset: number;
+  text: string;
+}
+
+export interface RenderNodeProps {
+  attributes: RenderAttributes;
+  children: React.ReactNode;
+  editor: Editor;
+  isFocused: boolean;
+  isSelected: boolean;
+  key: string;
+  node: Block | Inline;
+  parent: Node;
+  readOnly: boolean;
+}
+
+export type EventHook = (event: Event, editor: Editor, next: () => any) => any;
+
+export type QueryHook = (editor: Editor, ...args: any[]) => any;
+
+export interface QueryHooks {
+  [key: string]: QueryHook;
+}
+
+export type CommandHook = (editor: Editor, ...args: any[]) => any;
+
+export interface CommandHooks {
+  [key: string]: CommandHook;
+}
+
+export interface Hook {
+  type: string;
+  args?: any[]
+}
+
+export type OnHook = (hook: Hook, editor: Editor, next: ()=> any);
+
+export interface Plugin {
+  decorateNode?: (node: Node, editor: Editor, next: () => any) => any;
+  renderEditor?: (props: EditorProps, editor: Editor, next: () => any) => any;
+  renderMark?: (props: RenderMarkProps, editor: Editor, next: () => any) => any;
+  renderNode?: (props: RenderNodeProps, editor: Editor, next: () => any) => any;
+  shouldNodeComponentUpdate?: (
+    previousProps: RenderNodeProps,
+    props: RenderNodeProps,
+    editor: Editor,
+    next: () => any
+  ) => any;
+
+  onBeforeInput?: EventHook;
+  onBlur?: EventHook;
+  onClick?: EventHook;
+  onCompositionEnd?: EventHook;
+  onCompositionStart?: EventHook;
+  onCopy?: EventHook;
+  onCut?: EventHook;
+  onDragEnd?: EventHook;
+  onDragEnter?: EventHook;
+  onDragExit?: EventHook;
+  onDragLeave?: EventHook;
+  onDragOver?: EventHook;
+  onDragStart?: EventHook;
+  onDrop?: EventHook;
+  onFocus?: EventHook;
+  onInput?: EventHook;
+  onKeyDown?: EventHook;
+  onKeyUp?: EventHook;
+  onMouseDown?: EventHook;
+  onMouseUp?: EventHook;
+  onPaste?: EventHook;
+  onSelect?: EventHook;
+  onCommand?: OnHook;
+  onQuery?: OnHook;
+  onConstruct?: (editor: Editor, next: () => any);
+  queries?: QueryHooks;
+  commands?: CommandHooks;
+  [key: string]: any;
+}
+
+export interface BasicEditorProps {
+  value: Value;
+  autoCorrect?: boolean;
+  autoFocus?: boolean;
+  className?: string;
+  onChange?: (change: Change) => any;
+  placeholder?: any;
+  plugins?: Plugin[];
+  readOnly?: boolean;
+  role?: string;
+  schema?: Schema;
+  spellCheck?: boolean;
+  style?: React.CSSProperties;
+  tabIndex?: number;
+}
+
+// tsling:disable interface-over-type-literal
+export type EditorProps = BasicEditorProps & Plugin;
+
 export type EditorFn = (editor: Editor, ...args: any) => Editor | any;
 
 export class Editor {
   object: "editor";
   onChange: (change: Change) => void;
-  plugins: any[];
+  plugins: Plugin[];
   readOnly: boolean;
   value: Value;
   constructor(attributes: EditorProperties);

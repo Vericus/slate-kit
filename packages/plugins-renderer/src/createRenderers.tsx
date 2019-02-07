@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Editor } from "slate";
+import { Editor, Plugin } from "slate";
 import { compose } from "recompose";
 
 export interface Props {
@@ -8,7 +8,7 @@ export interface Props {
 
 const SlateKitNode: React.SFC<Props> = props => props.children(props);
 
-export default function createRenderers() {
+export default function createRenderers(): Plugin {
   let nodes = {};
   let nodeHOCsLabel = {};
   let nodeHOCs = {};

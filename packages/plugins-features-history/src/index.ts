@@ -1,9 +1,9 @@
-import { Editor } from "slate";
+import { Editor, Plugin } from "slate";
 import hotkeys from "slate-hotkeys";
 import CreateCommands from "./commands";
 import CreateQueries from "./queries";
 
-export default function History() {
+export default function History(): Plugin {
   const queries = CreateQueries();
   const commands = CreateCommands();
 

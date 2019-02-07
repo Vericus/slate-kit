@@ -1,4 +1,4 @@
-import { Editor } from "slate";
+import { Editor, Plugin } from "slate";
 import Register from "@vericus/slate-kit-utils-register-helpers";
 import Options, { TypeOptions } from "./options";
 import createCommands from "./commands";
@@ -8,7 +8,9 @@ import createProps from "./props";
 import createSchema from "./schemas";
 import createStyle from "./style";
 
-function createIndentPlugin(pluginOptions: Partial<TypeOptions> = {}) {
+function createIndentPlugin(
+  pluginOptions: Partial<TypeOptions> = {}
+): Plugin[] {
   const options = new Options(pluginOptions);
   const queries = createQueries(options);
   const commands = createCommands(options);

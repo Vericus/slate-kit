@@ -1,6 +1,6 @@
-import { Editor } from "slate";
+import { Editor, Plugin } from "slate";
 
-export default function toolbar(options) {
+export default function toolbar(options): Plugin {
   const { when, render } = options;
   return {
     renderToolbar: (props, editor: Editor, next) => {

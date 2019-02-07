@@ -1,7 +1,8 @@
 import isHotKey from "is-hotkey";
+import { Plugin } from "slate";
 import * as React from "react";
 
-export default function ReadOnly() {
+export default function ReadOnly(): Plugin {
   const COPY = isHotKey("mod+c");
 
   function onKeyDown(e, editor, next) {

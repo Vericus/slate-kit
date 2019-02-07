@@ -1,8 +1,8 @@
-import { Node, Editor } from "slate";
+import { Node, Editor, Plugin } from "slate";
 import Options, { TypeOptions } from "./options";
 import createRenderMark from "./renderMark";
 
-export default function Placeholder(opts: Partial<TypeOptions>) {
+export default function Placeholder(opts: Partial<TypeOptions>): Plugin {
   const options = Options.create(opts);
   const { when, type } = options;
 

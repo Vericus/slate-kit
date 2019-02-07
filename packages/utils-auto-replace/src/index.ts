@@ -3,6 +3,7 @@
  * (https://github.com/ianstormtaylor/slate-plugins/tree/master/packages/slate-auto-replace)
  * but using command intercept instead of onKeyDown
  */
+import { Plugin } from "slate";
 import Options, { TypeOptions, Matches } from "./options";
 
 export interface Offset {
@@ -11,7 +12,9 @@ export interface Offset {
   total: number;
 }
 
-export default function AutoReplace(pluginOptions: Partial<TypeOptions> = {}) {
+export default function AutoReplace(
+  pluginOptions: Partial<TypeOptions> = {}
+): Plugin {
   const options = Options.create(pluginOptions);
   const { before, after, trigger, command } = options;
 

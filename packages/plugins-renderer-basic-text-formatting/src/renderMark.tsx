@@ -1,6 +1,6 @@
 import * as React from "react";
 import Register from "@vericus/slate-kit-utils-register-helpers";
-import { Mark } from "slate";
+import { Mark, Plugin } from "slate";
 import SlateTypes from "slate-prop-types";
 
 export interface Props {
@@ -65,7 +65,7 @@ export function strikethrough(props: Props) {
   });
 }
 
-export default function createRenderMark() {
+export default function createRenderMark(): Plugin {
   const marksRenderer = {
     bold,
     italic,

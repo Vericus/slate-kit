@@ -1,17 +1,20 @@
 import Register from "@vericus/slate-kit-utils-register-helpers";
+import { Plugin } from "slate";
 import Options, { TypeOptions } from "./options";
 import createProps from "./props";
 import createCommands from "./commands";
 import createQueries from "./queries";
 
-export default function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
+export default function createPlugin(
+  pluginOptions: Partial<TypeOptions> = {}
+): Plugin[] {
   const options = Options.create(pluginOptions);
   const { marks, renderer } = options;
   const commands = createCommands(options);
   const queries = createQueries(options);
   const props = createProps(options);
 
-  let plugins: any = [
+  let plugins: Plugin[] = [
     Register({
       options,
       marks,

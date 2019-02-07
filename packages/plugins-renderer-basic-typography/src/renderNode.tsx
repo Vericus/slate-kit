@@ -1,6 +1,6 @@
 import * as React from "react";
 import Register from "@vericus/slate-kit-utils-register-helpers";
-import { Node } from "slate";
+import { Node, Plugin } from "slate";
 import SlateTypes from "slate-prop-types";
 
 export interface Props {
@@ -66,7 +66,7 @@ HeadingFour.propTypes = SlateTypes.Block;
 Paragraph.propTypes = SlateTypes.Block;
 Blockquote.propTypes = SlateTypes.Block;
 
-export default function createRenderNode() {
+export default function createRenderNode(): Plugin {
   const nodesRenderer = {
     paragraph: Paragraph,
     "heading-one": HeadingOne,

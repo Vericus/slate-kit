@@ -1,6 +1,6 @@
 import * as React from "react";
 import Register from "@vericus/slate-kit-utils-register-helpers";
-import { Mark } from "slate";
+import { Mark, Plugin } from "slate";
 
 export interface Props {
   mark: Mark;
@@ -9,7 +9,7 @@ export interface Props {
   className?: string;
 }
 
-export default function createRenderMark(options) {
+export default function createRenderMark(options): Plugin {
   const { marks } = options;
   const marksRenderer = Object.entries(marks).reduce(
     (renderers, [markName, markType]) => {

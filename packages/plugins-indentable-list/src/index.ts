@@ -1,5 +1,6 @@
 import Register from "@vericus/slate-kit-utils-register-helpers";
 import AutoReplace from "@vericus/slate-kit-utils-auto-replace";
+import { Plugin } from "slate";
 import createProps from "./props";
 import Options, { TypeOptions } from "./options";
 import createQueries from "./queries";
@@ -8,7 +9,9 @@ import createOnKeyDown from "./onKeyDown";
 import createSchema from "./schemas";
 import createRule from "./rules";
 
-export function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
+export function createPlugin(
+  pluginOptions: Partial<TypeOptions> = {}
+): Plugin[] {
   const options = new Options(pluginOptions);
   const { blockTypes, renderer } = options;
   const { orderedlist, unorderedlist, checklist } = blockTypes;
@@ -18,7 +21,7 @@ export function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
   const props = createProps(options);
   const onKeyDown = createOnKeyDown(options);
 
-  let plugins: any[] = [
+  let plugins: Plugin[] = [
     Register({ nodes: blockTypes, props, createRule, options }),
     {
       queries,

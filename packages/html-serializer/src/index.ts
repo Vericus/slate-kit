@@ -1,8 +1,8 @@
-import { Editor, Value } from "slate";
+import { Editor, Value, Plugin } from "slate";
 import Register from "@vericus/slate-kit-utils-register-helpers";
 import HTML from "slate-html-serializer";
 
-function HTMLSerializer() {
+function HTMLSerializer(): Plugin[] {
   let rules: any[] = [];
   let serializers = new HTML();
   let dataGetter: any[] = [];

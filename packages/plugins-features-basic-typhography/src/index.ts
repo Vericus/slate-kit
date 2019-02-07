@@ -1,11 +1,14 @@
 import Register from "@vericus/slate-kit-utils-register-helpers";
+import { Plugin } from "slate";
 import Options, { TypeOptions } from "./options";
 import createCommands from "./commands";
 import createQueries from "./queries";
 import createSchema from "./schemas";
 import createRule from "./rules";
 
-export default function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
+export default function createPlugin(
+  pluginOptions: Partial<TypeOptions> = {}
+): Plugin[] {
   const options = Options.create(pluginOptions);
   const { blockTypes, defaultBlock, renderer } = options;
   const queries = createQueries(options);
@@ -15,7 +18,7 @@ export default function createPlugin(pluginOptions: Partial<TypeOptions> = {}) {
     ...blockTypes,
     default: defaultBlock
   };
-  let plugins: any = [
+  let plugins: Plugin[] = [
     Register({ nodes, createRule, options }),
     { commands, queries, schema }
   ];

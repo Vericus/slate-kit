@@ -1,6 +1,6 @@
-import { Editor } from "slate";
+import { Editor, Plugin } from "slate";
 
-export default function register(pluginOptions) {
+export default function register(pluginOptions): Plugin {
   const editorOptions = {};
   const {
     marks,

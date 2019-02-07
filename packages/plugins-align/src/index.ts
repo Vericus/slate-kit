@@ -1,4 +1,5 @@
 import Register from "@vericus/slate-kit-utils-register-helpers";
+import { Plugin } from "slate";
 import Options, { TypeOptions } from "./options";
 import CreateQueries from "./queries";
 import CreateCommands from "./commands";
@@ -6,7 +7,7 @@ import CreateProps from "./props";
 import CreateSchema from "./schemas";
 import createStyle from "./style";
 
-function createAlignPlugin(pluginOptions: Partial<TypeOptions> = {}) {
+function createAlignPlugin(pluginOptions: Partial<TypeOptions> = {}): Plugin[] {
   const options = Options.create(pluginOptions);
   const queries = CreateQueries(options);
   const commands = CreateCommands(options);

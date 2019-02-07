@@ -1,4 +1,4 @@
-import { Editor } from "slate";
+import { Editor, Plugin } from "slate";
 import Register from "@vericus/slate-kit-utils-register-helpers";
 import Toolbar from "@vericus/slate-kit-utils-toolbars";
 import Options, { TypeOption } from "./options";
@@ -7,7 +7,9 @@ import createCommands from "./commands";
 import createSchema from "./schemas";
 import createOnKeyDown from "./keyDown";
 
-export default function createPlugin(pluginOptions: Partial<TypeOption> = {}) {
+export default function createPlugin(
+  pluginOptions: Partial<TypeOption> = {}
+): Plugin[] {
   const options = Options.create(pluginOptions);
   const { blockTypes, toolbarRenderer, renderer, mediaTypes } = options;
   const mediaTypesOptions = Object.values(mediaTypes).reduce(
@@ -19,7 +21,7 @@ export default function createPlugin(pluginOptions: Partial<TypeOption> = {}) {
   const schema = createSchema(options);
   const onKeyDown = createOnKeyDown(options);
 
-  let plugins = [
+  let plugins: Plugin[] = [
     {
       queries,
       commands,

@@ -1,6 +1,6 @@
 import * as React from "react";
 import Register from "@vericus/slate-kit-utils-register-helpers";
-import { Node, Block, Editor } from "slate";
+import { Node, Block, Editor, Plugin } from "slate";
 import Placeholder from "@vericus/slate-kit-utils-placeholders";
 import { ImageCaption, Media, Image, CaptionPlaceholder } from "./components";
 
@@ -33,7 +33,7 @@ const createImage = (onInsert, extensions) => {
   );
 };
 
-export default function createRenderer(opts) {
+export default function createRenderer(opts): Plugin[] {
   const { mediaTypes, captionType, captionHideField } = opts;
   const { image } = mediaTypes || { image: undefined };
   let onInsert;

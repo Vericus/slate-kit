@@ -1,9 +1,9 @@
-import { Editor } from "slate";
+import { Editor, Plugin } from "slate";
 import genericClean from "./generic";
 import wordClean, { isWordHTML } from "./microsoft-word";
 import googleDocsClean, { isGoogleDocsHTML } from "./google-docs";
 
-export interface PasteHelperPlugin {
+export interface PasteHelperPlugin extends Plugin {
   queries: {
     isWordHTML: (editor: Editor, HTMLstring: string) => boolean;
     isGoogleDocsHTML: (editor: Editor, HTMLstring: string) => boolean;
