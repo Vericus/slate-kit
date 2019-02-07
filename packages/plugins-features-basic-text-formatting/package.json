@@ -46,8 +46,8 @@
   "devDependencies": {
     "@vericus/slate-kit-typescript-typings": "^1.1.0",
     "expect": "^23.1.0",
-    "react": ">=16.0.0 || ^16.8.0-alpha",
-    "react-dom": ">=16.0.0 || ^16.8.0-alpha",
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0",
     "slate": ">=0.44.0 <0.45.0",
     "slate-prop-types": ">=0.5.7",
     "slate-simulator": ">=0.4.59",
@@ -57,8 +57,8 @@
     "@vericus/slate-kit-bind-hotkey": "^0.2.0",
     "@vericus/slate-kit-plugins-utils": "^0.2.0",
     "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
-    "react": ">=16.0.0 || ^16.8.0-alpha",
-    "react-dom": ">=16.0.0 || ^16.8.0-alpha",
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0",
     "slate": ">=0.44.0 <0.45.0",
     "slate-prop-types": ">=0.5.7"
   },

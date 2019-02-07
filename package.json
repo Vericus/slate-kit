@@ -144,8 +144,8 @@
   "dependencies": {
     "debug": "^3.1.0",
     "immutable": ">=3.8.2",
-    "react": ">=16.0.0 || ^16.8.0-alpha",
-    "react-dom": ">=16.0.0 || ^16.8.0-alpha"
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
   },
   "resolutions": {
     "is-hotkey": "^0.1.2",
