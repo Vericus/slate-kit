@@ -1,5 +1,5 @@
 {
-  "version": "0.2.7",
+  "version": "0.2.8",
   "name": "@vericus/slate-kit-highlight-text",
   "description": "plugin that provide a way to color/highlight a group of text on slate",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -46,8 +46,8 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.0",
-    "@vericus/slate-kit-utils-hyperscript": "^0.2.0",
+    "@vericus/slate-kit-typescript-typings": "^1.1.1",
+    "@vericus/slate-kit-utils-hyperscript": "^0.2.1",
     "expect": "^23.1.0",
     "slate": ">=0.44.0 <0.45.0",
     "to-camel-case": "^1.0.0"

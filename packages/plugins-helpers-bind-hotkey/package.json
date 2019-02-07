@@ -1,6 +1,6 @@
 {
   "name": "@vericus/slate-kit-bind-hotkey",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "a slate helper plugin to associate hotkey(s) to slate change",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
@@ -40,7 +40,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.0",
+    "@vericus/slate-kit-typescript-typings": "^1.1.1",
     "expect": "^23.1.0",
     "is-hotkey": ">=0.1.2",
     "slate": ">=0.44.0 <0.45.0",
