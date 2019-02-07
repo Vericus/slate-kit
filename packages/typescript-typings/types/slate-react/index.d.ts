@@ -12,7 +12,8 @@ import {
   Document,
   Editor as Controller,
   Operations,
-  Operation
+  Operation,
+  Change
 } from "slate";
 import * as Immutable from "immutable";
 import * as React from "react";
@@ -92,6 +93,9 @@ export interface Plugin {
   onFocus?: EventHook;
   onInput?: EventHook;
   onKeyDown?: EventHook;
+  onKeyUp?: EventHook;
+  onMouseDown?: EventHook;
+  onMouseUp?: EventHook;
   onPaste?: EventHook;
   onSelect?: EventHook;
 }
@@ -101,9 +105,7 @@ export interface BasicEditorProps {
   autoCorrect?: boolean;
   autoFocus?: boolean;
   className?: string;
-  onChange?: (
-    change: { operations: Immutable.List<Operation>; value: Value }
-  ) => any;
+  onChange?: (change: Change) => any;
   placeholder?: any;
   plugins?: Plugin[];
   readOnly?: boolean;
@@ -160,6 +162,7 @@ export type SlateType =
 export function cloneFragment(
   event: Event,
   editor: Controller,
+  fragment?: Document,
   callback?: () => void
 ): void;
 export function findDOMNode(node: Node, win?: Window): Element;

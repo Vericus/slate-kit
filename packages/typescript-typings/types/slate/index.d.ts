@@ -299,7 +299,7 @@ export class Text extends Immutable.Record({}) {
   getString(): string;
   searchLeafAtOffset(offset: number): LeafAndOffset;
   addMark(index: number, length: number, mark: Mark): Text;
-  addMarks(index: number, lenght: number, marks: Immutable.Set<Mark>): Text;
+  addMarks(index: number, length: number, marks: Immutable.Set<Mark>): Text;
   getLeaves(decorations?: Range[]): Immutable.List<Leaf>;
   getActiveMarksBetweenOffset(
     startOffset: number,
@@ -995,10 +995,13 @@ export namespace PathUtils {
   ): Immutable.List<number>;
 }
 
+export interface Change {
+  operations: Immutable.List<Operation>;
+  value: Value;
+}
+
 export interface EditorProperties {
-  onChange?: (
-    change: { operations: Immutable.List<Operation>; value: Value }
-  ) => void;
+  onChange?: (change: Change) => void;
   plugins?: any[];
   readOnly?: boolean;
   value?: Value;
@@ -1008,9 +1011,7 @@ export type EditorFn = (editor: Editor, ...args: any) => Editor | any;
 
 export class Editor {
   object: "editor";
-  onChange: (
-    change: { operations: Immutable.List<Operation>; value: Value }
-  ) => void;
+  onChange: (change: Change) => void;
   plugins: any[];
   readOnly: boolean;
   value: Value;
