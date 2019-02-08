@@ -74,6 +74,7 @@ export function getEventRange(event: Event, value: Value): Range;
 export function getEventTransfer(
   event: Event
 ): {
+  type: SlateType;
   files: File[];
   fragment: Document;
   html: string;

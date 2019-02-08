@@ -567,8 +567,6 @@ export interface SelectionJSON {
 
 export class Selection extends BaseRange {
   object: "selection";
-  anchor: Point;
-  focus: Point;
   isFocused: boolean;
   marks: Immutable.Set<Mark> | null;
 
@@ -675,6 +673,8 @@ declare class BaseRange extends Immutable.Record({}) {
   readonly isSet: boolean;
   readonly start: Point;
   readonly end: Point;
+  focus: Point;
+  anchor: Point;
 
   flip(): RangeType;
   moveForward(n?: number): RangeType;
