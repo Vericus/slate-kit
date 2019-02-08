@@ -9,7 +9,7 @@ export default function createCommands(opt: TypeOptions) {
     [`change${name}Color`]: (editor: Editor, color: string) => {
       const { value } = editor;
       const { selection } = value;
-      if (editor.hasMark(value, type)) {
+      if (editor.hasMark(type)) {
         if (tinycolor(color).toName() === defaultColor) {
           if (selection.isCollapsed) {
             editor.removeCollapsedMark(type);
