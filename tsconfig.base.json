@@ -37,18 +37,15 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "importHelpers": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./packages/typescript-typings/types"
-    ],
+    "paths": {
+      "*": [
+        "packages/typescript-typings/types/*"
+      ]
+    },
     "types": [
       "react",
       "jest",
       "node"
     ]
-  },
-  "types": [
-    "react",
-    "jest"
-  ]
+  }
 }

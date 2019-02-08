@@ -13,11 +13,9 @@ export default function insertImage(opts: TypeOption) {
       const defaultBlock = editor.getDefaultBlock();
       const media = Block.create({
         type,
-        object: "block",
         nodes: List([
           Block.create({
             type: imageType,
-            object: "block",
             data: src ? Data.create({ [srcField]: src }) : undefined
           })
         ])
@@ -26,7 +24,6 @@ export default function insertImage(opts: TypeOption) {
       if (defaultBlock) {
         const paragraph = Block.create({
           type: defaultBlock,
-          object: "block",
           nodes: List([Text.create("")])
         });
         editor.insertBlock(paragraph);

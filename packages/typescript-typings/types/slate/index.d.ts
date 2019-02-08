@@ -1051,10 +1051,10 @@ export interface CommandHooks {
 
 export interface Hook {
   type: string;
-  args?: any[]
+  args?: any[];
 }
 
-export type OnHook = (hook: Hook, editor: Editor, next: ()=> any);
+export type OnHook = (hook: Hook, editor: Editor, next: () => any) => any;
 
 export interface Plugin {
   decorateNode?: (node: Node, editor: Editor, next: () => any) => any;
@@ -1092,7 +1092,7 @@ export interface Plugin {
   onSelect?: EventHook;
   onCommand?: OnHook;
   onQuery?: OnHook;
-  onConstruct?: (editor: Editor, next: () => any);
+  onConstruct?: (editor: Editor, next: () => any) => any;
   queries?: QueryHooks;
   commands?: CommandHooks;
   [key: string]: any;

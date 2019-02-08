@@ -129,7 +129,7 @@ export default function AutoReplace(
   return {
     onCommand: (editorCommand, editor, next) => {
       const { type, args } = editorCommand;
-      if (type === "insertText" && args[0] && args[0] === trigger) {
+      if (type === "insertText" && args && args[0] && args[0] === trigger) {
         return replace(editor, next);
       }
       return next();

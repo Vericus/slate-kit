@@ -1,11 +1,11 @@
-import { Node, Block, Editor } from "slate";
+import { Node, Block, Editor, QueryHooks } from "slate";
 import getAlignBlocks, { getAlignBlocksInBlock } from "./getAlignBlocks";
 import getAlignment from "./getAlignment";
 import isAligned from "./isAligned";
 import isAlignable from "./isAlignable";
 import { TypeOptions } from "../options";
 
-export interface AlignUtils {
+export interface AlignUtils extends QueryHooks {
   getAlignBlocks: (editor: Editor) => Node[];
   getAlignBlocksInBlock: (editor: Editor, node: Node) => Node[];
   getAlignment: (editor: Editor, block: Block) => string | undefined;

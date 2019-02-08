@@ -29,21 +29,23 @@ export default function createPlugin(
       onKeyDown: options.withHandlers ? onKeyDown : undefined
     },
     ...(toolbarRenderer
-      ? Toolbar({
-          when: (editor: Editor, node) => {
-            if (!mediaTypesOptions.includes(node.type)) return false;
-            const { value } = editor.props;
-            const { selection } = value;
-            const { start, end } = selection;
-            const selectedMedia = editor.getSelectedMediaBlock(value);
-            if (!selectedMedia) return false;
-            const src = editor.getSource(node);
-            if (!src || src === "") return false;
-            if (!(start.isInNode(node) || end.isInNode(node))) return false;
-            return true;
-          },
-          render: toolbarRenderer
-        })
+      ? [
+          Toolbar({
+            when: (editor: Editor, node) => {
+              if (!mediaTypesOptions.includes(node.type)) return false;
+              const { value } = editor.props;
+              const { selection } = value;
+              const { start, end } = selection;
+              const selectedMedia = editor.getSelectedMediaBlock(value);
+              if (!selectedMedia) return false;
+              const src = editor.getSource(node);
+              if (!src || src === "") return false;
+              if (!(start.isInNode(node) || end.isInNode(node))) return false;
+              return true;
+            },
+            render: toolbarRenderer
+          })
+        ]
       : []),
     Register({ nodes: blockTypes, options })
   ];
