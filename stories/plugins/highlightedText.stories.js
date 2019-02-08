@@ -30,7 +30,7 @@ const plugins = [
     type: "textBackground",
     alpha: 0.4,
     data: "backgroundColor",
-    defaultColor: "black",
+    defaultColor: "transparent",
     styles: ["backgroundColor"],
     renderer: HighlightRenderer
   }),
@@ -38,7 +38,7 @@ const plugins = [
     name: "Text",
     type: "textColor",
     data: "color",
-    defaultColor: "transparent",
+    defaultColor: "black",
     styles: ["textDecorationColor", "color"],
     renderer: HighlightRenderer
   }),
