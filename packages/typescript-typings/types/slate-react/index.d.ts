@@ -15,6 +15,7 @@ import {
   Operation,
   Change,
   Plugin,
+  Range,
   EditorProps
 } from "slate";
 import * as Immutable from "immutable";
@@ -70,7 +71,16 @@ export function findDOMRange(range: Range, win?: Window): Range;
 export function findNode(element: Element, value: Value): Node;
 export function findRange(selection: Selection, value: Value): Range;
 export function getEventRange(event: Event, value: Value): Range;
-export function getEventTransfer(event: Event): { type: SlateType; node: Node };
+export function getEventTransfer(
+  event: Event
+): {
+  files: File[];
+  fragment: Document;
+  html: string;
+  node: Node;
+  rich: string;
+  text: string;
+};
 export function setEventTransfer(
   event: Event,
   type: SlateType,

@@ -278,7 +278,7 @@ export interface LeafAndOffset {
   leaf: Leaf;
 }
 
-export class Text extends Immutable.Record({}) {
+export class Text extends BaseNode {
   object: "text";
   key: string;
 
@@ -298,7 +298,6 @@ export class Text extends Immutable.Record({}) {
 
   getString(): string;
   searchLeafAtOffset(offset: number): LeafAndOffset;
-  addMark(index: number, length: number, mark: Mark): Text;
   addMarks(index: number, length: number, marks: Immutable.Set<Mark>): Text;
   getLeaves(decorations?: Range[]): Immutable.List<Leaf>;
   getActiveMarksBetweenOffset(
@@ -319,10 +318,7 @@ export class Text extends Immutable.Record({}) {
   getNode(key: string): Node | null;
   getPath(key: string | Path): Path;
   hasNode(key: string): boolean;
-  insertText(offset: number, text: string, marks?: Immutable.Set<Mark>): Text;
   regenerateKey(): Text;
-  removeMark(index: number, length: Mark, mark: Mark): Text;
-  removeText(start: number, length: number): Text;
   resolvePath(path: Path, index: number): Immutable.List<string>;
   updateMark(
     index: number,
@@ -333,7 +329,6 @@ export class Text extends Immutable.Record({}) {
   splitText(offset: number): Text[];
   mergeText(text: Text): Text;
   normalize(schema: Schema): () => void | null;
-  validate(schema: Schema): Error | null;
   getFirstInvalidNode(schema: Schema): Text | null;
   setLeaves(leaves: Immutable.List<Leaf>): Text;
 }
