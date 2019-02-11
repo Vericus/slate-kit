@@ -1,5 +1,5 @@
 {
-  "version": "0.1.13",
+  "version": "0.1.14",
   "name": "@vericus/slate-kit-media",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -63,6 +63,6 @@
     "slate-kit"
   ],
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.6"
+    "@vericus/slate-kit-typescript-typings": "^1.1.7"
   }
 }
