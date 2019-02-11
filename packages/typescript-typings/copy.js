@@ -27,9 +27,9 @@ const preprocessDestPath = (srcPath, dest) => {
         ])) {
           const dest = preprocessDestPath(
             matchFile,
-            path.join("../@types", file)
+            path.join("../../@types", file)
           );
-          await fs.ensureDir(path.join("../@types", file));
+          await fs.ensureDir(path.join("../../@types", file));
           fs.copyFileSync(matchFile, dest);
         }
       }
