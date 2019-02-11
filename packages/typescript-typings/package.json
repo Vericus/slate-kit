@@ -7,12 +7,16 @@
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
   "files": [
-    "types"
+    "types",
+    "copy.js"
   ],
   "scripts": {
-    "lint": "dtslint types"
+    "lint": "dtslint types",
+    "postinstall": "node copy.js"
   },
   "devDependencies": {
-    "dtslint": "github:Microsoft/dtslint#production"
+    "dtslint": "github:Microsoft/dtslint#production",
+    "fs-extra": "^7.0.1",
+    "globby": "^9.0.0"
   }
 }
