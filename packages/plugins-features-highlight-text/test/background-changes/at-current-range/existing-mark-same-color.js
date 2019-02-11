@@ -2,7 +2,7 @@
 import h from "@vericus/slate-kit-utils-hyperscript";
 
 export default function(editor, name) {
-  editor[`change${name}Color`]("#red");
+  editor[`change${name}Color`]("red");
 }
 
 export const input = (
