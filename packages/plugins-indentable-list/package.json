@@ -1,5 +1,5 @@
 {
-  "version": "0.2.14",
+  "version": "0.2.15",
   "name": "@vericus/slate-kit-indentable-list",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -43,7 +43,7 @@
     "slate-dev-environment": "SlateDevEnvironment"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-auto-replace": "^0.1.5",
+    "@vericus/slate-kit-utils-auto-replace": "^0.1.6",
     "@vericus/slate-kit-utils-register-helpers": "^0.1.5",
     "classnames": ">=2.2.5",
     "debug": ">=3.1.0",
@@ -54,7 +54,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.5",
+    "@vericus/slate-kit-typescript-typings": "^1.1.6",
     "expect": "^23.1.0",
     "is-hotkey": ">=0.1.2",
     "react": ">=16.0.0",

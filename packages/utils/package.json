@@ -1,5 +1,5 @@
 {
-  "version": "0.2.5",
+  "version": "0.2.6",
   "name": "@vericus/slate-kit-plugins-utils",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -43,7 +43,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.5",
+    "@vericus/slate-kit-typescript-typings": "^1.1.6",
     "expect": "^23.1.0",
     "slate": ">=0.44.0 <0.45.0",
     "slate-simulator": ">=0.4.59",
