@@ -5,9 +5,9 @@ import json from "rollup-plugin-json";
 import replace from "rollup-plugin-replace";
 import resolve from "rollup-plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
-import visualizer from "rollup-plugin-visualizer";
 import typescript from "rollup-plugin-typescript2";
 import { startCase } from "lodash";
+import analyze from "rollup-plugin-analyzer";
 import fs from "fs";
 import path from "path";
 
@@ -106,14 +106,13 @@ function configure(pkg, location, env, target) {
         plugins: ["external-helpers"]
       }),
 
-    visualizer({
-      filename: `tmp/stats/${pkg.name}-${target}-${env}.html`,
-      title: `${pkg.name}`,
-      sourcemap: true
-    }),
-
     // Register Node.js globals for browserify compatibility.
     globals(),
+    analyze({
+      writeTo: string => {
+        fs.writeFileSync(`tmp/stats/${pkg.name}-${target}-${env}.txt`, string);
+      }
+    }),
 
     // Only minify the output in production, since it is very slow. And only
     // for UMD builds, since modules will be bundled by the consumer.

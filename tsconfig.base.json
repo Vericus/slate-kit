@@ -15,7 +15,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "module": "commonjs",
+    "module": "ES2015",
     "moduleResolution": "node",
     "target": "es5",
     "lib": [
