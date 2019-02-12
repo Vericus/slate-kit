@@ -1,13 +1,13 @@
 import React from "react";
 import { configure, addDecorator } from "@storybook/react";
 import { withOptions } from "@storybook/addon-options";
-import { ThemeProvider, injectGlobal } from "styled-components";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "./theme";
 import Styled from "./Styled";
 
 import normalizeCss from "./normalize";
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
 body {
   font-size: 16px;
   font-family: Roboto, -apple-system, sans-serif;
@@ -33,9 +33,12 @@ addDecorator(
 );
 
 addDecorator(story => (
-  <ThemeProvider theme={theme}>
-    <Styled>{story()}</Styled>
-  </ThemeProvider>
+  <React.Fragment>
+    <ThemeProvider theme={theme}>
+      <Styled>{story()}</Styled>
+    </ThemeProvider>
+    <GlobalStyle />
+  </React.Fragment>
 ));
 
 configure(loadStories, module);
