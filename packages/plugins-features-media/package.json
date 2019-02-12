@@ -1,5 +1,5 @@
 {
-  "version": "0.1.14",
+  "version": "0.1.15",
   "name": "@vericus/slate-kit-media",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -41,8 +41,8 @@
     "tslib": "TSLib"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.5",
-    "@vericus/slate-kit-utils-toolbars": "^0.1.2",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.6",
+    "@vericus/slate-kit-utils-toolbars": "^0.1.3",
     "immutable": ">=3.8.2",
     "is-hotkey": "^0.1.3",
     "slate": ">=0.44.0 <0.45.0",
@@ -63,6 +63,6 @@
     "slate-kit"
   ],
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.7"
+    "@vericus/slate-kit-typescript-typings": "^1.1.8"
   }
 }
