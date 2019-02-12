@@ -7,13 +7,13 @@ export interface PasteHelperPlugin extends Plugin {
   queries: {
     isWordHTML: (editor: Editor, HTMLstring: string) => boolean;
     isGoogleDocsHTML: (editor: Editor, HTMLstring: string) => boolean;
-    cleanedWordHTML: (editor: Editor, HTMLstring: string) => string;
-    cleanedDocsHTML: (editor: Editor, HTMLstring: string) => string;
-    cleanedGenericHTML: (editor: Editor, HTMLstring: string) => string;
+    cleanedWordHTML: (editor: Editor, HTMLstring: string) => Promise<string>;
+    cleanedDocsHTML: (editor: Editor, HTMLstring: string) => Promise<string>;
+    cleanedGenericHTML: (editor: Editor, HTMLstring: string) => Promise<string>;
     cleanHTML: (
       editor: Editor,
       HTMLstring: string
-    ) => { origin: "word" | "docs" | "generic"; cleanedHTML: string };
+    ) => Promise<{ origin: "word" | "docs" | "generic"; cleanedHTML: string }>;
   };
 }
 
@@ -23,18 +23,31 @@ export default function PasteHelpers(): PasteHelperPlugin {
       isWordHTML: (_editor: Editor, html: string) => isWordHTML(html),
       isGoogleDocsHTML: (_editor: Editor, html: string) =>
         isGoogleDocsHTML(html),
-      cleanedWordHTML: (_editor: Editor, html: string) => wordClean(html),
-      cleanedDocsHTML: (_editor: Editor, html: string) => googleDocsClean(html),
-      cleanedGenericHTML: (_editor: Editor, html: string) => genericClean(html),
-      cleanHTML: (editor: Editor, html: string) => {
+      cleanedWordHTML: async (_editor: Editor, html: string) =>
+        await wordClean(html),
+      cleanedDocsHTML: async (_editor: Editor, html: string) =>
+        await googleDocsClean(html),
+      cleanedGenericHTML: async (_editor: Editor, html: string) =>
+        await genericClean(html),
+      cleanHTML: async (editor: Editor, html: string) => {
+        let cleanedHTML;
         if (editor.isWordHTML(html)) {
-          return { origin: "word", cleanedHTML: editor.cleanedWordHTML(html) };
+          cleanedHTML = await editor.cleanedWordHTML(html);
+          return {
+            origin: "word",
+            cleanedHTML
+          };
         } else if (editor.isGoogleDocsHTML(html)) {
-          return { origin: "docs", cleanedHTML: editor.cleanedDocsHTML(html) };
+          cleanedHTML = await editor.cleanedDocsHTML(html);
+          return {
+            origin: "docs",
+            cleanedHTML
+          };
         }
+        cleanedHTML = await editor.cleanedGenericHTML(html);
         return {
           origin: "generic",
-          cleanedHTML: editor.cleanedGenericHTML(html)
+          cleanedHTML
         };
       }
     }

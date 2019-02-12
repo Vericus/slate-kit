@@ -15,7 +15,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "module": "ES2015",
+    "module": "esNext",
     "moduleResolution": "node",
     "target": "es5",
     "lib": [

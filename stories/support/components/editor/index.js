@@ -34,10 +34,10 @@ export default class SlateKitEditor extends Component {
     });
   };
 
-  onPaste = (event, editor) => {
+  onPaste = async (event, editor) => {
     const data = getEventTransfer(event);
     if (data.html) {
-      const { origin, cleanedHTML } = editor.cleanHTML(data.html);
+      const { origin, cleanedHTML } = await editor.cleanHTML(data.html);
       const { document } = editor.deserializeHTML(cleanedHTML);
       editor.insertFragment(document);
       return true;
