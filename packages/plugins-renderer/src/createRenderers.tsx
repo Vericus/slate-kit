@@ -9,12 +9,12 @@ export interface Props {
 const SlateKitNode: React.SFC<Props> = props => props.children(props);
 
 export default function createRenderers(): Plugin {
-  let nodes = {};
-  let nodeHOCsLabel = {};
-  let nodeHOCs = {};
-  let marks = {};
-  let markHOCsLabel = {};
-  let markHOCs = {};
+  const nodes = {};
+  const nodeHOCsLabel = {};
+  const nodeHOCs = {};
+  const marks = {};
+  const markHOCsLabel = {};
+  const markHOCs = {};
   const nodeMappings = {};
   const markMappings = {};
   let propsGetter: any[] = [];

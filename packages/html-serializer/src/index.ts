@@ -11,8 +11,9 @@ function HTMLSerializer(): Plugin[] {
     return [
       {
         deserialize(el: HTMLElement, next) {
-          if (!el.tagName || el.tagName.toLowerCase() !== "div")
+          if (!el.tagName || el.tagName.toLowerCase() !== "div") {
             return undefined;
+          }
           if (!el.textContent || (el.textContent && el.textContent !== "")) {
             return undefined;
           }

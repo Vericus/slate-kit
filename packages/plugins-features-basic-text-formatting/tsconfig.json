@@ -5,5 +5,5 @@
     "outDir": "./module",
     "jsx": "react"
   },
-  "includes": ["./src/**/*"]
+  "include": ["./src/**/*"]
 }

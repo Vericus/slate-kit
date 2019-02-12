@@ -9,6 +9,9 @@
     "**/dist/**/*.ts",
     "**/module/**/*.ts"
   ],
+  "include": [
+    "packages/**/src/**/*.ts"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",

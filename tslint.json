@@ -10,7 +10,8 @@
     "member-ordering": false,
     "member-access": false,
     "curly": [true, "ignore-same-line"],
-    "no-empty": [true, "allow-empty-functions"]
+    "no-empty": [true, "allow-empty-functions"],
+    "variable-name": ["allow-leading-underscore"]
   },
   "rulesDirectory": [],
   "linterOptions": {

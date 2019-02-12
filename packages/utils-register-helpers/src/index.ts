@@ -16,8 +16,8 @@ export default function register(pluginOptions): Plugin {
   } = pluginOptions;
   return {
     queries: {
-      registerOptions: (_editor: Editor, label: string, options: any) => {
-        editorOptions[label] = options;
+      registerOptions: (_editor: Editor, label: string, newOption: any) => {
+        editorOptions[label] = newOption;
       },
       getOptions: (_editor: Editor, label: string) => editorOptions[label]
     },
