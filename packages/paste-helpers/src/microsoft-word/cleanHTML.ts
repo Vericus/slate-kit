@@ -2,6 +2,8 @@
 // metadata tags that shouldn't be deserialize on pasting
 export default async function cleanHTML(html: string): Promise<string> {
   return import("tinymce-word-paste-filter").then(wordFilter => {
-    return wordFilter(html);
+    const fn =
+      wordFilter && wordFilter.default ? wordFilter.default : wordFilter;
+    return fn(html);
   });
 }
