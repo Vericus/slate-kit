@@ -33,13 +33,20 @@ describe("highlight text", () => {
     const fn = module.default;
     const editor = new Editor({ plugins: backgroundPlugins });
     const opts = { preserveSelection: true, ...options };
-
-    editor.setValue(input);
-    fn(editor, "Background");
-    const actual = editor.value.toJSON(opts);
     editor.setValue(output);
-    const expected = editor.value.toJSON(opts);
-    expect(expected).toEqual(actual);
+    const outputValue = editor.value.toJSON(opts);
+    editor.setValue(input);
+    const inputValue = editor.value.toJSON(opts);
+
+    fn(editor, "Background");
+    editor.flush();
+    expect(editor.value.toJSON(opts)).toEqual(outputValue);
+    editor.undo();
+    editor.flush();
+    expect(editor.value.toJSON(opts)).toEqual(inputValue);
+    editor.redo();
+    editor.flush();
+    expect(editor.value.toJSON(opts)).toEqual(outputValue);
   });
 
   fixtures(__dirname, "colored-changes", ({ module }) => {
@@ -47,12 +54,20 @@ describe("highlight text", () => {
     const fn = module.default;
     const editor = new Editor({ plugins: coloredPlugins });
     const opts = { preserveSelection: true, ...options };
+    editor.setValue(output);
+    const outputValue = editor.value.toJSON(opts);
+    editor.setValue(input);
+    const inputValue = editor.value.toJSON(opts);
 
     editor.setValue(input);
     fn(editor, "Text");
-    const actual = editor.value.toJSON(opts);
-    editor.setValue(output);
-    const expected = editor.value.toJSON(opts);
-    expect(expected).toEqual(actual);
+    editor.flush();
+    expect(editor.value.toJSON(opts)).toEqual(outputValue);
+    editor.undo();
+    editor.flush();
+    expect(editor.value.toJSON(opts)).toEqual(inputValue);
+    editor.redo();
+    editor.flush();
+    expect(editor.value.toJSON(opts)).toEqual(outputValue);
   });
 });
