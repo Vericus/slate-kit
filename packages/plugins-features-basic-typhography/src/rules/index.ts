@@ -14,7 +14,7 @@ export default function createRule(options, editor) {
     {
       deserialize(el, next) {
         const block = blocks[el.tagName.toLowerCase()];
-        if (!block) return undefined;
+        if (!block) return next();
         const { data, marks } = editor.getData(el);
         return {
           object: "block",

@@ -4,8 +4,9 @@ import { fixtures, testWithHistory } from "../../../support/test-helpers";
 import Typography from "../src/index";
 import Utils from "../../utils/src/index";
 import Renderer from "../../plugins-renderer/src/index";
+import HTMLSerializer from "../../html-serializer/src/index";
 
-const plugins = [Typography(), Utils()];
+const plugins = [HTMLSerializer(), Renderer(), Typography(), Utils()];
 
 describe("typography", () => {
   fixtures(__dirname, "commands", ({ module }) => {
@@ -17,10 +18,23 @@ describe("typography", () => {
 
   fixtures(__dirname, "queries", ({ module }) => {
     const { input, output, options = {}, default: fn } = module;
-    const editor = new Editor({ plugins });
-    editor.setValue(input);
-    const opts = { preserveSelection: true, ...options };
+    const editor = new Editor({ value: input, plugins });
     expect(output).toEqual(fn(editor));
+  });
+
+  fixtures(__dirname, "schemas", ({ module }) => {
+    const { input, output } = module;
+    const editor = new Editor({ value: input, plugins });
+    const actual = editor.value.toJSON();
+    editor.setValue(output);
+    const expected = editor.value.toJSON();
+    expect(expected).toEqual(actual);
+  });
+
+  fixtures(__dirname, "rules", ({ module }) => {
+    const { input, output, default: fn } = module;
+    const editor = new Editor({ plugins });
+    expect(output.toJSON()).toEqual(fn(editor, input).toJSON());
   });
 
   describe("queries", () => {

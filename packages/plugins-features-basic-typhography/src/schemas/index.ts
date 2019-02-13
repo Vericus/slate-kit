@@ -1,4 +1,4 @@
-import { Block, SlateError, Document, Editor } from "slate";
+import { Block, SlateError, Document, Editor, Text } from "slate";
 import { TypeOptions } from "../options";
 
 export default function createSchema(opts: TypeOptions) {
@@ -9,7 +9,10 @@ export default function createSchema(opts: TypeOptions) {
       normalize: (editor: Editor, error: SlateError) => {
         switch (error.code) {
           case "last_child_type_invalid":
-            const paragraph = Block.create(defaultBlock);
+            const paragraph = Block.create({
+              type: defaultBlock,
+              nodes: [Text.create("")]
+            });
             if (Document.isDocument(error.node)) {
               editor.insertNodeByKey(
                 error.node.key,
