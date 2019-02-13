@@ -1,6 +1,6 @@
 import { Editor } from "slate";
 import expect from "expect";
-import { fixtures } from "../../../support/test-helpers";
+import { fixtures, testWithHistory } from "../../../support/test-helpers";
 import HighlightText from "../src/index";
 import Utils from "../../utils/src/index";
 
@@ -29,45 +29,16 @@ const coloredPlugins = [
 
 describe("highlight text", () => {
   fixtures(__dirname, "background-changes", ({ module }) => {
-    const { input, output, options = {} } = module;
-    const fn = module.default;
+    const { input, output, options = {}, default: fn } = module;
     const editor = new Editor({ plugins: backgroundPlugins });
     const opts = { preserveSelection: true, ...options };
-    editor.setValue(output);
-    const outputValue = editor.value.toJSON(opts);
-    editor.setValue(input);
-    const inputValue = editor.value.toJSON(opts);
-
-    fn(editor, "Background");
-    editor.flush();
-    expect(editor.value.toJSON(opts)).toEqual(outputValue);
-    editor.undo();
-    editor.flush();
-    expect(editor.value.toJSON(opts)).toEqual(inputValue);
-    editor.redo();
-    editor.flush();
-    expect(editor.value.toJSON(opts)).toEqual(outputValue);
+    testWithHistory(input, output, editor, opts, fn, "Background");
   });
 
   fixtures(__dirname, "colored-changes", ({ module }) => {
-    const { input, output, options = {} } = module;
-    const fn = module.default;
+    const { input, output, options = {}, default: fn } = module;
     const editor = new Editor({ plugins: coloredPlugins });
     const opts = { preserveSelection: true, ...options };
-    editor.setValue(output);
-    const outputValue = editor.value.toJSON(opts);
-    editor.setValue(input);
-    const inputValue = editor.value.toJSON(opts);
-
-    editor.setValue(input);
-    fn(editor, "Text");
-    editor.flush();
-    expect(editor.value.toJSON(opts)).toEqual(outputValue);
-    editor.undo();
-    editor.flush();
-    expect(editor.value.toJSON(opts)).toEqual(inputValue);
-    editor.redo();
-    editor.flush();
-    expect(editor.value.toJSON(opts)).toEqual(outputValue);
+    testWithHistory(input, output, editor, opts, fn, "Text");
   });
 });

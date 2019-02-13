@@ -6,7 +6,25 @@
 
 import fs from "fs";
 import { basename, extname, resolve } from "path";
-import { KeyUtils } from "slate";
+import { KeyUtils, Editor } from "slate";
+import expect from "expect";
+
+export const testWithHistory = (input, output, editor, opts, fn, ...args) => {
+  editor.setValue(output);
+  const outputValue = editor.value.toJSON(opts);
+  editor.setValue(input);
+  const inputValue = editor.value.toJSON(opts);
+  editor.setValue(input);
+  fn(editor, ...args);
+  editor.flush();
+  expect(editor.value.toJSON(opts)).toEqual(outputValue);
+  editor.undo();
+  editor.flush();
+  expect(editor.value.toJSON(opts)).toEqual(inputValue);
+  editor.redo();
+  editor.flush();
+  expect(editor.value.toJSON(opts)).toEqual(outputValue);
+};
 
 export const fixtures = (...args) => {
   let fn = args.pop();
