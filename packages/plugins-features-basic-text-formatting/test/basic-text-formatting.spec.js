@@ -17,14 +17,6 @@ describe("text formatting", () => {
     testWithHistory(input, output, editor, opts, fn);
   });
 
-  fixtures(__dirname, "keyBindings", ({ module }) => {
-    const { input, output, options = {}, default: fn } = module;
-    const pluginsWithReact = ReactPlugin({ plugins });
-    const editor = new Editor({ plugins: pluginsWithReact });
-    const opts = { preserveSelection: true, ...options };
-    testWithHistory(input, output, editor, opts, fn);
-  });
-
   fixtures(__dirname, "queries", ({ module }) => {
     const { input, output, options = {}, default: fn } = module;
     const editor = new Editor({ value: input, plugins });
