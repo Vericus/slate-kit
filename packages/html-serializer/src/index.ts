@@ -92,11 +92,14 @@ function HTMLSerializer(): Plugin[] {
             const passData = getter(editor, element);
             const marks = [
               ...(memo.marks ? memo.marks : []),
-              ...(passData.mark ? [passData.mark] : [])
+              ...(passData.marks ? passData.marks : [])
             ];
+            const data = {
+              ...memo.data,
+              ...passData.data
+            };
             return {
-              ...memo,
-              ...passData,
+              data,
               marks
             };
           }, {}),

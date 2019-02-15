@@ -1,4 +1,4 @@
-import { Set, List } from "immutable";
+import { Set } from "immutable";
 import { Mark } from "slate";
 import { TextMark } from "../options";
 
@@ -36,9 +36,9 @@ function getFontWeightMark(
   fontWeight
 ): Mark | undefined {
   if (fontWeight === "bold") {
-    return marksOption.bold ? new Mark({ type: "bold" }) : undefined;
+    return marksOption.bold ? Mark.create({ type: "bold" }) : undefined;
   } else if (parseInt(fontWeight, 10) > 400) {
-    return marksOption.bold ? new Mark({ type: "bold" }) : undefined;
+    return marksOption.bold ? Mark.create({ type: "bold" }) : undefined;
   }
   return undefined;
 }
@@ -46,7 +46,7 @@ function getFontWeightMark(
 export default function getData(
   marksOption: TextMark,
   el: HTMLElement
-): { marks?: List<Mark> } {
+): { marks?: Mark[] } {
   let marks = Set<Mark>();
   const { style } = el;
   if (style) {
@@ -63,7 +63,7 @@ export default function getData(
       const weightMark = getFontWeightMark(marksOption, fontWeight);
       if (weightMark) marks = marks.add(weightMark);
     }
-    return { marks: marks.toList() };
+    return { marks: marks.toArray() };
   }
   return {};
 }

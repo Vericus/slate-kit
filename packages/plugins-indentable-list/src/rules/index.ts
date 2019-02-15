@@ -128,7 +128,7 @@ export default function createRule(options, editor) {
     {
       deserialize(el: HTMLElement, next) {
         const block = blocks[el.tagName.toLowerCase()];
-        if (!block) return next();
+        if (!block) return undefined;
         const nodes = Array.from(el.childNodes);
         const childNodes = nodes.filter(
           node =>

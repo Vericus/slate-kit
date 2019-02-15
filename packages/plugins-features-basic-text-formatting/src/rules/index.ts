@@ -17,7 +17,7 @@ export default function createRule(options, editor) {
     {
       deserialize(el, next) {
         const mark = markTags[el.tagName.toLowerCase()];
-        if (!mark) return next();
+        if (!mark) return undefined;
         if (
           !Array.from(el.childNodes).every(
             (node: HTMLElement) => node.nodeName === "#text"
