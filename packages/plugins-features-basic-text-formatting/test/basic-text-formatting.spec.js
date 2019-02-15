@@ -1,7 +1,10 @@
 import { Editor, Block } from "slate";
-import { ReactPlugin } from "slate-react";
 import expect from "expect";
-import { fixtures, testWithHistory } from "../../../support/test-helpers";
+import {
+  fixtures,
+  testWithHistory,
+  createEvent
+} from "../../../support/test-helpers";
 import TextFormatting from "../src/index";
 import Utils from "../../utils/src/index";
 import Renderer from "../../plugins-renderer/src/index";
@@ -21,6 +24,13 @@ describe("text formatting", () => {
     const { input, output, options = {}, default: fn } = module;
     const editor = new Editor({ value: input, plugins });
     expect(output).toEqual(fn(editor));
+  });
+
+  fixtures(__dirname, "keyBindings", ({ module }) => {
+    const { input, output, options = {}, default: fn } = module;
+    const editor = new Editor({ plugins });
+    const opts = { preserveSelection: true, ...options };
+    testWithHistory(input, output, editor, opts, fn, createEvent);
   });
 
   fixtures(__dirname, "rules", ({ module }) => {

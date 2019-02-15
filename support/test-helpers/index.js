@@ -7,7 +7,23 @@
 import fs from "fs";
 import { basename, extname, resolve } from "path";
 import { KeyUtils, Editor } from "slate";
+import simulateEvent from "simulate-event";
+import { toKeyCode } from "is-hotkey";
 import expect from "expect";
+
+export const createEvent = (eventName, options) => {
+  if (/^key/.test(eventName)) {
+    const { key } = options;
+    const keyCode = toKeyCode(key);
+    return simulateEvent.generate(eventName, {
+      ...options,
+      key,
+      keyCode,
+      which: keyCode
+    });
+  }
+  return simulateEvent.generate(eventName, options);
+};
 
 export const testWithHistory = (input, output, editor, opts, fn, ...args) => {
   editor.setValue(output);
