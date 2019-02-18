@@ -59,15 +59,18 @@ export default function createOnKeyDown(opts: TypeOptions) {
         });
         if (startOffset !== 0) {
           editor.splitBlock(1);
+          editor.setNodeByKey(key, {
+            data
+          });
         } else {
           editor.insertBlock({
             type: startBlock.type,
-            data: data.delete(startAtField).delete(checkField)
+            data: data.delete(checkField)
+          });
+          editor.setNodeByKey(key, {
+            data: data.delete(startAtField)
           });
         }
-        editor.setNodeByKey(key, {
-          data
-        });
         return;
       }
       return next();
