@@ -1,5 +1,5 @@
 {
-  "version": "0.2.13",
+  "version": "0.2.14",
   "name": "@vericus/slate-kit-align",
   "description": "Plugins to provide a way to align blocks on slate",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -38,13 +38,13 @@
     "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.6",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.7",
     "debug": "^3.1.0",
     "immutable": ">=3.8.2",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.8",
+    "@vericus/slate-kit-typescript-typings": "^1.1.9",
     "expect": "^23.1.0",
     "slate": ">=0.44.0 <0.45.0",
     "slate-simulator": ">=0.4.59",
