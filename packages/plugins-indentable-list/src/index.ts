@@ -8,6 +8,7 @@ import createCommands from "./commands";
 import createOnKeyDown from "./onKeyDown";
 import createSchema from "./schemas";
 import createRule from "./rules";
+import createStyle from "./style";
 
 export function createPlugin(
   pluginOptions: Partial<TypeOptions> = {}
@@ -20,9 +21,10 @@ export function createPlugin(
   const schema = createSchema(options);
   const props = createProps(options);
   const onKeyDown = createOnKeyDown(options);
+  const { getData } = createStyle(options);
 
   let plugins: Plugin[] = [
-    Register({ nodes: blockTypes, props, createRule, options }),
+    Register({ getData, nodes: blockTypes, props, createRule, options }),
     {
       queries,
       commands,

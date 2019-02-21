@@ -8,7 +8,7 @@ export default function createProps(opts) {
     const indentLevel = editor.getIndentationLevel(node);
     const className = classnames({
       [props.className]: props.className,
-      [`indentation-${indentLevel}`]: indentLevel,
+      [`indentation-${indentLevel + 1}`]: indentLevel,
       indented: indentLevel
     });
     return {

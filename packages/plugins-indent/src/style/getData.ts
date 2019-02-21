@@ -28,7 +28,7 @@ export default function getData(el, opts) {
   let indentLevel = 0;
   if (Array.isArray(classNames)) {
     classNames.forEach(classname => {
-      const result = classname.match(/(.*)(indent|level)(.*)(\d+)/);
+      const result = classname.match(/(.*)(indentation|indent|level)(.*)(\d+)/);
       const indentation = result && result[4] && parseInt(result[4], 10);
       if (indentation && indentation > 1) {
         if (indentation - 1 <= maxIndentation) {

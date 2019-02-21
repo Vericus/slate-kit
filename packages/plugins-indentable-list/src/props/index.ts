@@ -32,6 +32,7 @@ export default function createProps(opts) {
       (previousBlock && previousBlock.type !== node.type) ||
       prevIndentation < indentation ||
       startAt;
+
     const onMouseDown =
       nodeProps.node.type === checklist
         ? e => {
@@ -72,7 +73,7 @@ export default function createProps(opts) {
     const className = classnames({
       [nodeProps.className]: nodeProps.className,
       "list-reset": shouldReset,
-      [`list-reset-${indentation}`]: indentation && shouldReset,
+      [`list-reset-${indentation + 1}`]: indentation && shouldReset,
       checked: !!checked,
       checkList: nodeProps.node.type === checklist,
       readOnly:

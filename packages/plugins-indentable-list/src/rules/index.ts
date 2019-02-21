@@ -19,6 +19,7 @@ function deserializeFlatList(blocks, data, marks, block, childNodes, next) {
       },
       []
     );
+
     return {
       object: "block",
       type: block,
@@ -63,14 +64,27 @@ function deserializeNested(blocks, editor, el, block, childNodes, next) {
       const containsIndentation =
         classNames &&
         classNames.some(className =>
-          /(.*)(indent|level)(.*)(\d+)/.test(className)
+          /(.*)(indentation|indent|level)(.*)(\d+)/.test(className)
         );
       if (!containsIndentation && classNames) {
-        updatedNodeElement.classList.add(`indent-${indentation + 1}`);
+        updatedNodeElement.classList.add(`indent-${indentation}`);
       } else if (!classNames) {
-        updatedNodeElement.className = `indent-${indentation + 1}`;
+        updatedNodeElement.className = `indent-${indentation}`;
       }
-      const nodeBlock = blocks[updatedNodeElement.tagName.toLowerCase()];
+      let nodeBlock = blocks[updatedNodeElement.tagName.toLowerCase()];
+      if (nodeBlock === blocks.ul) {
+        const blockClassNames =
+          updatedNodeElement.className &&
+          updatedNodeElement.className.split(" ");
+        if (
+          Array.isArray(blockClassNames) &&
+          blockClassNames.some(className =>
+            /(list-task|checklist)/i.test(className)
+          )
+        ) {
+          nodeBlock = blocks.check;
+        }
+      }
       const nodeChildNodes = Array.from(updatedNode.childNodes).filter(
         childNode =>
           childNode.nodeName !== "#text" ||
@@ -122,13 +136,25 @@ export default function createRule(options, editor) {
   if (!blockTypes) return [];
   const blocks = {
     ul: blockTypes.unorderedlist,
-    ol: blockTypes.orderedlist
+    ol: blockTypes.orderedlist,
+    check: blockTypes.checklist
   };
   return [
     {
       deserialize(el: HTMLElement, next) {
-        const block = blocks[el.tagName.toLowerCase()];
+        let block = blocks[el.tagName.toLowerCase()];
         if (!block) return undefined;
+        if (block === blocks.ul) {
+          const classNames = el.className && el.className.split(" ");
+          if (
+            Array.isArray(classNames) &&
+            classNames.some(className =>
+              /(list-task|checklist)/i.test(className)
+            )
+          ) {
+            block = blocks.check;
+          }
+        }
         const nodes = Array.from(el.childNodes);
         const childNodes = nodes.filter(
           node =>

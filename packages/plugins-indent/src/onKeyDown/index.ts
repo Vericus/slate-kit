@@ -30,10 +30,8 @@ export default function createOnKeyDown(opts: TypeOptions) {
     if (isOutdent) {
       event.preventDefault();
       event.stopPropagation();
-      if (editor.getIndentationLevel(startBlock) !== 0) {
-        editor.decreaseIndent();
-        return;
-      }
+      editor.decreaseIndent();
+      return;
     } else if (isIndent) {
       event.preventDefault();
       event.stopPropagation();
