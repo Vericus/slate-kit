@@ -35,20 +35,21 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "downlevelIteration": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
     "importHelpers": true,
-    "paths": {
-      "*": [
-        "packages/typescript-typings/types/*"
-      ]
-    },
+    "typeRoots": ["./node_modules/@types", "./packages/typescript-typings/types"],
     "types": [
       "react",
       "jest",
-      "node"
+      "node",
+      "slate",
+      "slate-react",
+      "slate-plain-serializer",
+      "slate-html-serializer",
+      "slate-base64-serializer"
     ]
   }
 }

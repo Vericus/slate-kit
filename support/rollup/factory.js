@@ -89,11 +89,7 @@ function configure(pkg, location, env, target) {
         useTsconfigDeclarationDir: true,
         tsconfigOverride: {
           compilerOptions: {
-            rootDir: path.resolve(location, "src"),
-            typeRoots: [
-              "./node_modules/@vericus/typescript-typings/types",
-              "./node_modules/@types"
-            ]
+            rootDir: path.resolve(location, "src")
           },
           include: [path.resolve(location, "src")]
         }
