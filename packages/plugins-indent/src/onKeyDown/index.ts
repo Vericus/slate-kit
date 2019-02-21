@@ -10,7 +10,7 @@ export default function createOnKeyDown(opts: TypeOptions) {
     isDeleteLineBackward,
     isDeleteWordBackward
   } = hotkeys;
-  const isDelete = e =>
+  const isDeleteHotKey = e =>
     isDeleteBackward(e) || isDeleteLineBackward(e) || isDeleteWordBackward(e);
 
   return (event, editor: Editor, next) => {
@@ -21,17 +21,17 @@ export default function createOnKeyDown(opts: TypeOptions) {
       start: { offset: startOffset }
     } = selection;
     const isIndent = isHotkey("tab", event);
+    const isDelete = isDeleteHotKey(event);
     const isOutdent =
       isHotkey("shift+tab", event) ||
-      (isDelete(event) &&
-        startBlock === endBlock &&
-        isCollapsed &&
-        startOffset === 0);
+      (isDelete && startBlock === endBlock && isCollapsed && startOffset === 0);
     if (isOutdent) {
       event.preventDefault();
       event.stopPropagation();
-      editor.decreaseIndent();
-      return;
+      if (!isDelete || editor.getIndentationLevel(startBlock) !== 0) {
+        editor.decreaseIndent();
+        return;
+      }
     } else if (isIndent) {
       event.preventDefault();
       event.stopPropagation();
