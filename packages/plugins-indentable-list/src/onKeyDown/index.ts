@@ -4,7 +4,7 @@ import hotkeys from "slate-hotkeys";
 import { TypeOptions } from "../options";
 
 export default function createOnKeyDown(opts: TypeOptions) {
-  const { startAtField, checkField, blockTypes } = opts;
+  const { startAtField, checkField } = opts;
   const isTab = isKeyHotkey("tab");
   const isShiftTab = isKeyHotkey("shift+tab");
   const isEnter = isKeyHotkey("enter");
@@ -75,7 +75,7 @@ export default function createOnKeyDown(opts: TypeOptions) {
       }
       return next();
     }
-    if (editor.isListNode(blockTypes, startBlock)) {
+    if (editor.isListNode(startBlock)) {
       e.preventDefault();
       e.stopPropagation();
       editor.unwrapList(isDeleting);
