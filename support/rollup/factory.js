@@ -103,7 +103,7 @@ function configure(pkg, location, env, target) {
     !isTypescript &&
       babel({
         include: [`${location}/src/**`],
-        plugins: ["external-helpers"]
+        plugins: ["@babel/external-helpers"]
       }),
 
     // Register Node.js globals for browserify compatibility.
