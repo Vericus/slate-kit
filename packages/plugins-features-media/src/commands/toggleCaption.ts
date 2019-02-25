@@ -5,8 +5,8 @@ export default function toggleCaption(opts: TypeOption) {
   const { captionType, captionHideField } = opts;
   return (editor: Editor, node?: Block, focus?: boolean) => {
     const media = node
-      ? editor.getClosestMediaContainer(editor.value.document, node)
-      : editor.getSelectedMediaBlock(editor.value);
+      ? editor.getClosestMediaContainer(node)
+      : editor.getSelectedMediaBlock();
 
     if (media && Block.isBlock(media)) {
       const caption = media.findDescendant(

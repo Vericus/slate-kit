@@ -1,10 +1,10 @@
-import { Block, Document, Node, Editor } from "slate";
+import { Block, Node, Editor } from "slate";
 import { TypeOption } from "../options";
 export default function getClosestMedia(opts: TypeOption) {
   const { type, mediaTypes } = opts;
   const imageType = mediaTypes.image ? mediaTypes.image.type : undefined;
   return imageType
-    ? (editor: Editor, document: Document, block: Block) => {
+    ? (editor: Editor, block: Block) => {
         let mediaBlock: Node | null = block;
         while (
           mediaBlock &&
@@ -12,14 +12,16 @@ export default function getClosestMedia(opts: TypeOption) {
           mediaBlock.type !== imageType
         ) {
           if (mediaBlock.type === type) {
-            const child = document.getChild(mediaBlock.key);
+            const child = editor.value.document.getChild(mediaBlock.key);
             if (child) {
               mediaBlock = child.first();
             } else {
               break;
             }
           } else {
-            mediaBlock = document.getPreviousSibling(mediaBlock.key);
+            mediaBlock = editor.value.document.getPreviousSibling(
+              mediaBlock.key
+            );
           }
         }
         return Block.isBlock(mediaBlock) && mediaBlock.type === imageType
