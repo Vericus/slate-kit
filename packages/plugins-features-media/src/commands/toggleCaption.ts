@@ -16,16 +16,16 @@ export default function toggleCaption(opts: TypeOption) {
         if (captionHideField) {
           const { key: captionKey, data: captionData } = caption;
           const hidden = captionData.get(captionHideField);
+          const { selection } = editor.value;
+          const { start, end } = selection;
+          if (!hidden && (start.isInNode(caption) || end.isInNode(caption))) {
+            editor.moveToEndOfPreviousBlock().focus();
+          }
           editor.setNodeByKey(captionKey, {
             data: captionData.set(captionHideField, !hidden)
           });
-          if (focus && !hidden) {
+          if (focus && hidden) {
             editor.moveToEndOfNode(caption).focus();
-          }
-          const { selection } = editor.value;
-          const { start, end } = selection;
-          if (hidden && (start.isInNode(caption) || end.isInNode(caption))) {
-            editor.moveToEndOfBlock().moveForward(1);
           }
         } else {
           editor.removeNodeByKey(caption.key);
