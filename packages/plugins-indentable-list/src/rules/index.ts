@@ -163,7 +163,7 @@ export default function createRule(options, editor) {
               node.textContent &&
               node.textContent.trim() !== "")
         );
-        const isFlat = childNodes.every((node, index, array) => {
+        const isFlat = childNodes.every(node => {
           const nodeElement = node as HTMLElement;
           return !!(
             nodeElement &&

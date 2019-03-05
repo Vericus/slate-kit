@@ -8,7 +8,7 @@ declare module "slate-html-serializer" {
   export interface Rule {
     deserialize?: (
       el: Element,
-      next: (elements: Element[] | NodeList | Array<Node & ChildNode>) => any
+      next: (elements: Element[] | NodeList | (Node & ChildNode)[]) => any
     ) => any;
     serialize?: (obj: any, children: string) => React.ReactNode;
   }

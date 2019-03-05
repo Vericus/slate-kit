@@ -28,19 +28,27 @@ const defaultOptions = {
 };
 
 class Options extends Record(defaultOptions, "highlight text option") {
-  name: string;
-  marks: {
+  public name: string;
+
+  public marks: {
     [type: string]: string;
   };
-  type: string;
-  styles: string[];
-  data: string;
-  alpha: number;
-  defaultColor: string;
-  renderer: (...args: any[]) => any;
-  label: string;
 
-  static create(attrs: any = {}) {
+  public type: string;
+
+  public styles: string[];
+
+  public data: string;
+
+  public alpha: number;
+
+  public defaultColor: string;
+
+  public renderer: (...args: any[]) => any;
+
+  public label: string;
+
+  public static create(attrs: any = {}) {
     if (Options.isOptions(attrs)) return attrs;
     if (isPlainObject(attrs)) return Options.fromJSON(attrs);
 
@@ -49,7 +57,7 @@ class Options extends Record(defaultOptions, "highlight text option") {
     );
   }
 
-  static fromJSON(object: any) {
+  public static fromJSON(object: any) {
     if (Options.isOptions(object)) return object;
 
     const {
@@ -83,7 +91,7 @@ class Options extends Record(defaultOptions, "highlight text option") {
     });
   }
 
-  static isOptions(args: any) {
+  public static isOptions(args: any) {
     if (args instanceof Record) {
       const record = args as Options;
       return ["marks", "type", "data", "styles", "defaultColor"].every(key =>

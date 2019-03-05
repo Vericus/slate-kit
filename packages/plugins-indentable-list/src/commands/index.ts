@@ -23,9 +23,9 @@ function resetBlockChecked(opts: TypeOptions, editor: Editor, block: Block) {
 function resetStartAt(opts: TypeOptions, editor: Editor) {
   const { value } = editor;
   const selectedBlocks = editor.selectedOrderedList(value);
-  editor.withoutNormalizing(c => {
+  editor.withoutNormalizing(e => {
     selectedBlocks.forEach(
-      block => Block.isBlock(block) && editor.resetBlockStartAt(block)
+      block => Block.isBlock(block) && e.resetBlockStartAt(block)
     );
   });
 }
@@ -35,7 +35,7 @@ function resetChecked(opts: TypeOptions, editor: Editor) {
   const selectedBlocks = editor.selectedOrderedList(value);
   editor.withoutNormalizing(e => {
     selectedBlocks.forEach(
-      block => Block.isBlock(block) && editor.resetBlockChecked(block)
+      block => Block.isBlock(block) && e.resetBlockChecked(block)
     );
   });
 }

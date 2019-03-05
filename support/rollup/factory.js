@@ -8,6 +8,7 @@ import { terser } from "rollup-plugin-terser";
 import typescript from "rollup-plugin-typescript2";
 import { startCase } from "lodash";
 import analyze from "rollup-plugin-analyzer";
+import { eslint } from "rollup-plugin-eslint";
 import fs from "fs";
 import path from "path";
 
@@ -46,6 +47,8 @@ function configure(pkg, location, env, target) {
       browser: true,
       preferBuiltins: true
     }),
+
+    eslint({}),
 
     // Allow Rollup to resolve CommonJS modules, since it only resolves ES2015
     // modules by default.

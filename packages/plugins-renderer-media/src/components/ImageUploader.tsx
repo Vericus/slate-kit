@@ -12,39 +12,33 @@ interface UploaderProps {
 
 interface UploaderStates {
   src: string;
-  uploading: boolean;
 }
 
 export default class ImageUploader extends React.Component<
   UploaderProps,
   UploaderStates
 > {
-  fileRef: React.RefObject<HTMLInputElement>;
-  fileReader: FileReader;
-  constructor(props) {
+  public constructor(props) {
     super(props);
     this.fileRef = React.createRef();
     this.state = {
-      src: this.props.src,
-      uploading: false
+      src: this.props.src
     };
   }
 
-  onImageUploaded = (src: string) => {
+  private onImageUploaded = (src: string) => {
     this.setState({
-      src,
-      uploading: false
+      src
     });
     this.props.onChange(src);
   };
 
-  handleImageRead = e => {
+  private handleImageRead = _e => {
     const src = this.fileReader.result as string;
     if (src && src !== "") {
       this.setState(
         {
-          src,
-          uploading: true
+          src
         },
         () => {
           this.props.onInsert(src).then(this.onImageUploaded);
@@ -52,12 +46,14 @@ export default class ImageUploader extends React.Component<
       );
     }
   };
-  onImageSelected = file => {
+
+  private onImageSelected = file => {
     this.fileReader = new FileReader();
     this.fileReader.onloadend = this.handleImageRead;
     this.fileReader.readAsDataURL(file);
   };
-  onImageSelect = e => {
+
+  private onImageSelect = e => {
     e.preventDefault();
     e.stopPropagation();
     const fileInput = this.fileRef.current;
@@ -65,14 +61,20 @@ export default class ImageUploader extends React.Component<
       fileInput.click();
     }
   };
-  onImageChange = e => {
+
+  private onImageChange = e => {
     e.preventDefault();
     e.stopPropagation();
     if (e.target && e.target.files) {
       this.onImageSelected(e.target.files[0]);
     }
   };
-  render() {
+
+  private fileRef: React.RefObject<HTMLInputElement>;
+
+  private fileReader: FileReader;
+
+  public render() {
     if (!this.state.src || this.state.src === "") {
       return (
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -95,6 +97,7 @@ export default class ImageUploader extends React.Component<
         data-image-is-selected={this.props.isSelected}
         src={this.state.src}
         className={this.props.className}
+        alt={this.state.src}
       />
     );
   }

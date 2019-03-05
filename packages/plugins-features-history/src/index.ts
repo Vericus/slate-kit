@@ -10,7 +10,8 @@ export default function History(): Plugin {
   function onKeyDown(e: KeyboardEvent, editor: Editor, next) {
     if (hotkeys.isUndo(e)) {
       return editor.handleUndo();
-    } else if (hotkeys.isRedo(e)) {
+    }
+    if (hotkeys.isRedo(e)) {
       return editor.handleRedo();
     }
     return next();

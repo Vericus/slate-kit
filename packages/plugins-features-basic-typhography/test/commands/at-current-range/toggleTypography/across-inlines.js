@@ -9,16 +9,16 @@ export const input = (
   <value>
     <document>
       <paragraph>
-        <link>
+        <hyperlink>
           <anchor />
           word
-        </link>
+        </hyperlink>
       </paragraph>
       <paragraph>
-        <link>
+        <hyperlink>
           <focus />
           another
-        </link>
+        </hyperlink>
       </paragraph>
     </document>
   </value>
@@ -28,16 +28,16 @@ export const output = (
   <value>
     <document>
       <h1>
-        <link>
+        <hyperlink>
           <anchor />
           word
-        </link>
+        </hyperlink>
       </h1>
       <h1>
-        <link>
+        <hyperlink>
           <focus />
           another
-        </link>
+        </hyperlink>
       </h1>
     </document>
   </value>

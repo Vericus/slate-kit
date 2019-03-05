@@ -17,7 +17,7 @@ describe("typography", () => {
   });
 
   fixtures(__dirname, "queries", ({ module }) => {
-    const { input, output, options = {}, default: fn } = module;
+    const { input, output, default: fn } = module;
     const editor = new Editor({ value: input, plugins });
     expect(output).toEqual(fn(editor));
   });
@@ -40,17 +40,19 @@ describe("typography", () => {
   describe("queries", () => {
     describe("getDefaultBlock", () => {
       it("on-any-range", () => {
+        /* eslint-disable array-callback-return */
         ["paragraph", "heading-one", "heading-two", "heading-three"].map(
           type => {
-            const plugins = [
+            const testPlugins = [
               Renderer(),
               Typography({ defaultBlock: type }),
               Utils()
             ];
-            const editor = new Editor({ plugins });
+            const editor = new Editor({ plugins: testPlugins });
             expect(editor.getDefaultBlock()).toEqual(type);
           }
         );
+        /* eslint-enable */
       });
     });
   });
@@ -58,8 +60,8 @@ describe("typography", () => {
   describe("queries", () => {
     describe("isTypography", () => {
       it("on-any-range", () => {
-        const plugins = [Renderer(), Typography(), Utils()];
-        const editor = new Editor({ plugins });
+        const testPlugins = [Renderer(), Typography(), Utils()];
+        const editor = new Editor({ plugins: testPlugins });
         ["paragraph", "heading-one", "heading-two", "heading-three"].forEach(
           type => {
             const block = Block.create({

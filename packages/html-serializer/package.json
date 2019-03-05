@@ -39,10 +39,13 @@
   },
   "devDependencies": {
     "@vericus/slate-kit-typescript-typings": "^1.1.9",
+    "@vericus/slate-kit-utils-hyperscript": "^0.2.9",
+    "slate": ">=0.44.0 <0.45.0",
     "slate-html-serializer": ">=0.7.0 < 0.8.0"
   },
   "peerDependencies": {
     "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
+    "slate": ">=0.44.0 <0.45.0",
     "slate-html-serializer": ">=0.7.0 <0.8.0"
   },
   "keywords": [

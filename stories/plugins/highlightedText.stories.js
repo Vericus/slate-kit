@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import { storiesOf } from "@storybook/react";
-import { Value } from "slate";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
 import BasicTextFormatRenderer from "@vericus/slate-kit-basic-text-formatting-renderer";

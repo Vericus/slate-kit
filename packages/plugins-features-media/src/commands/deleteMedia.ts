@@ -6,8 +6,7 @@ export default function deleteMedia(opts: TypeOption) {
   return (editor: Editor) => {
     const media = editor.getSelectedMediaBlock(editor.value);
     if (media && mediaTypes && Block.isBlock(media)) {
-      return editor.removeNodeByKey(media.key);
+      editor.removeNodeByKey(media.key);
     }
-    return;
   };
 }

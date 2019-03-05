@@ -13,9 +13,11 @@ const defaultOptions: TypeOptions = {
 };
 
 class Options extends Record(defaultOptions) {
-  hotkeys: string | string[];
-  commandName: string;
-  commandArgs?: any[];
+  public hotkeys: string | string[];
+
+  public commandName: string;
+
+  public commandArgs?: any[];
 }
 
 export default Options;

@@ -11,11 +11,12 @@ export default function getSelectedMediaBlock(opts: TypeOption) {
     const { value } = editor;
     const { document } = value;
     const selectedBlocks = editor.getHighestSelectedBlocks();
-    if (selectedBlocks.size !== 1) return;
+    if (selectedBlocks.size !== 1) return undefined;
     const block = selectedBlocks.get(0);
     if (block && block.type === type) return block;
     if (block && mediaTypesOpts.includes(block.type)) {
       return document.getParent(document.getPath(block.key));
     }
+    return undefined;
   };
 }

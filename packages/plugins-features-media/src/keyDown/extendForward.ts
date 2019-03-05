@@ -7,7 +7,7 @@ export default function extendForward(editor, types, captionType, event, next) {
     if ((isForward && focus.offset !== startBlock.text.length) || !isForward) {
       editor.moveFocusForward(1);
     }
-    return;
+    return undefined;
   }
   return next();
 }

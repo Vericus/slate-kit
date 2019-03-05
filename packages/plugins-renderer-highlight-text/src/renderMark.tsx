@@ -12,9 +12,10 @@ export interface Props {
 export default function createRenderMark(options): Plugin {
   const { marks } = options;
   const marksRenderer = Object.entries(marks).reduce(
-    (renderers, [markName, markType]) => {
+    (renderers, [markName, _markType]) => {
       return {
         ...renderers,
+        // eslint-disable-next-line react/display-name
         [markName]: (props: Props) => {
           const { attributes, children, className } = props;
           return (

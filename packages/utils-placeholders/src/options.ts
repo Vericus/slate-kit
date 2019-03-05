@@ -10,18 +10,21 @@ export interface TypeOptions {
 
 const defaultOption: TypeOptions = {
   type: "",
-  when: (editor: Editor, node: Node) => false,
+  when: (_editor: Editor, _node: Node) => false,
   placeholder: undefined,
   render: undefined
 };
 
 export default class Options extends Record(defaultOption) {
-  type: string;
-  when: (editor: Editor, node: Node) => boolean;
-  placeholder: string | undefined;
-  render: ((props) => JSX.Element) | undefined;
+  public type: string;
 
-  static create(option: Partial<TypeOptions>): TypeOptions {
+  public when: (editor: Editor, node: Node) => boolean;
+
+  public placeholder: string | undefined;
+
+  public render: ((props) => JSX.Element) | undefined;
+
+  public static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {
       ...defaultOption,
       ...option

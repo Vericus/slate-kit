@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import { storiesOf } from "@storybook/react";
-import { Value } from "slate";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import BasicTextFormat from "@vericus/slate-kit-basic-text-formatting";
 import BasicTextFormatRenderer from "@vericus/slate-kit-basic-text-formatting-renderer";
@@ -59,7 +58,7 @@ const plugins = [
     mediaTypes: {
       image: {
         onInsert: src => {
-          return new Promise((resolve, reject) => {
+          return new Promise(resolve => {
             setTimeout(() => {
               resolve(src);
             }, 5000);
@@ -67,6 +66,7 @@ const plugins = [
         }
       }
     },
+    // eslint-disable-next-line react/display-name
     toolbarRenderer: props => <MediaToolbar {...props} />
   })
 ].flat();

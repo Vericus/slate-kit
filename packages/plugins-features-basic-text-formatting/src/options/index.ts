@@ -35,13 +35,17 @@ const defaultOption: TypeOptions = {
 };
 
 class Options extends Record(defaultOption) {
-  renderer: (...args: any[]) => any;
-  keyBindings: KeyBinding[];
-  marks: TextMark;
-  withHandlers: boolean;
-  label: string;
+  public renderer: (...args: any[]) => any;
 
-  static create(option: Partial<TypeOptions>): TypeOptions {
+  public keyBindings: KeyBinding[];
+
+  public marks: TextMark;
+
+  public withHandlers: boolean;
+
+  public label: string;
+
+  public static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {
       ...defaultOption,
       marks: {

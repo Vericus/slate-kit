@@ -1,5 +1,6 @@
-import { ImageOption } from "../options";
 import { Block, Editor } from "slate";
+import { ImageOption } from "../options";
+
 export default function getImageSource(
   editor: Editor,
   block: Block,

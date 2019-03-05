@@ -15,7 +15,7 @@ interface Props extends GenericProps {
 }
 
 export default class Image extends React.Component<Props, States> {
-  constructor(props) {
+  private constructor(props) {
     super(props);
     const { editor } = this.props;
     this.state = {
@@ -28,7 +28,7 @@ export default class Image extends React.Component<Props, States> {
     };
   }
 
-  static getDerivedStateFromProps(props, state) {
+  public static getDerivedStateFromProps(props, state) {
     const { editor, node } = props;
     const width = editor.getImageWidth(node);
     const src = editor.getSource(node);
@@ -42,14 +42,14 @@ export default class Image extends React.Component<Props, States> {
     return null;
   }
 
-  onImageSelected = src => {
+  private onImageSelected = src => {
     const { node, editor } = this.props;
     if (Block.isBlock(node)) {
       editor.updateImageSource(node, src).toggleCaption(node);
     }
   };
 
-  render() {
+  public render() {
     const {
       className,
       attributes,
@@ -61,7 +61,7 @@ export default class Image extends React.Component<Props, States> {
     if (!src || src === "") {
       return (
         <ImageUploader
-          className={className}
+          className={className || ""}
           onChange={this.onImageSelected}
           extensions={extensions}
           onInsert={onInsert}
@@ -75,6 +75,7 @@ export default class Image extends React.Component<Props, States> {
       <img
         className={className}
         src={src}
+        alt={src}
         data-image-width={width}
         data-image-is-selected={isSelected}
         {...attributes}

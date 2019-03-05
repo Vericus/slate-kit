@@ -22,7 +22,7 @@ describe("indent", () => {
   });
 
   fixtures(__dirname, "queries", ({ module }) => {
-    const { input, output, options = {}, default: fn } = module;
+    const { input, output, default: fn } = module;
     const editor = new Editor({ value: input, plugins });
     expect(output).toEqual(fn(editor));
   });

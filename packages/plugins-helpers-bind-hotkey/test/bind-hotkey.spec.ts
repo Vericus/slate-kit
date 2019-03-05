@@ -9,7 +9,7 @@ describe("bind hotKey", () => {
     const plugins = [
       {
         commands: {
-          testCommand: editor => testCommand()
+          testCommand: _editor => testCommand()
         }
       },
       BindHotKey({
@@ -30,7 +30,7 @@ describe("bind hotKey", () => {
     const plugins = [
       {
         commands: {
-          testCommand: editor => testCommand()
+          testCommand: _editor => testCommand()
         }
       },
       BindHotKey({

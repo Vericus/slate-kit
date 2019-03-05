@@ -29,11 +29,11 @@ declare module "slate" {
     first?: ObjectAndType | ObjectAndType[];
     isVoid?: boolean;
     last?: ObjectAndType | ObjectAndType[];
-    nodes?: Array<{
+    nodes?: {
       min?: number;
       max?: number;
       match?: ObjectAndType | ObjectAndType[];
-    }>;
+    }[];
     normalize?: (editor: Editor, error: SlateError) => void;
     parent?: ObjectAndType | ObjectAndType[];
     text?: RegExp;
@@ -204,7 +204,7 @@ declare module "slate" {
   export interface BlockJSON {
     type: string;
     key?: string;
-    nodes?: Array<BlockJSON | InlineJSON | TextJSON>;
+    nodes?: (BlockJSON | InlineJSON | TextJSON)[];
     data?: { [key: string]: any };
     object: "block";
   }
@@ -354,7 +354,7 @@ declare module "slate" {
     static splitLeaves(
       leaves: Immutable.List<Leaf>,
       offset: number
-    ): Array<Immutable.List<Leaf>>;
+    ): Immutable.List<Leaf>[];
     static createList(
       attrs?:
         | Leaf[]
@@ -967,7 +967,7 @@ declare module "slate" {
       a: Immutable.List<number>,
       b: Immutable.List<number>,
       size?: number
-    ): Array<Immutable.List<number>>;
+    ): Immutable.List<number>[];
     function decrement(
       path: Immutable.List<number>,
       n?: number,

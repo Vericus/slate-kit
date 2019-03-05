@@ -1,0 +1,9 @@
+packages/**/lib/**/*
+packages/**/module/**/*
+packages/**/dist/**/*
+node_modules
+/storybook-static
+support
+/tools
+**/*.d.ts
+packages/typescript-typings/*

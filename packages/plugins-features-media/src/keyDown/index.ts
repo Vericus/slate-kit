@@ -15,8 +15,8 @@ export default function createOnKeyDown(opts: TypeOption) {
     const { startBlock, endBlock, previousBlock, nextBlock, document } = value;
     if (
       !(
-        types.includes(startBlock.type) ||
-        types.includes(endBlock.type) ||
+        (startBlock && types.includes(startBlock.type)) ||
+        (endBlock && types.includes(endBlock.type)) ||
         (previousBlock && types.includes(previousBlock.type)) ||
         (nextBlock && types.includes(nextBlock.type))
       )
@@ -25,13 +25,17 @@ export default function createOnKeyDown(opts: TypeOption) {
     }
     if (Hotkeys.isExtendForward(event)) {
       return extendForward(editor, types, captionType, event, next);
-    } else if (Hotkeys.isExtendBackward(event)) {
+    }
+    if (Hotkeys.isExtendBackward(event)) {
       return extendBackward(editor, types, captionType, event, next);
-    } else if (Hotkeys.isDeleteBackward(event)) {
+    }
+    if (Hotkeys.isDeleteBackward(event)) {
       return deleteBackward(editor, types, captionType, event, next);
-    } else if (Hotkeys.isDeleteForward(event)) {
+    }
+    if (Hotkeys.isDeleteForward(event)) {
       return deleteForward(editor, types, captionType, event, next);
-    } else if (Hotkeys.isSplitBlock(event)) {
+    }
+    if (Hotkeys.isSplitBlock(event)) {
       const mediaBlock = editor.getSelectedMediaBlock(value);
       if (mediaBlock) {
         const defaultBlock = editor.getDefaultBlock();
@@ -55,12 +59,11 @@ export default function createOnKeyDown(opts: TypeOption) {
               )
               .moveToEndOfNode(mediaBlock)
               .moveForward(1);
-            return;
+            return undefined;
           }
         }
       }
     } else if (Hotkeys.isMoveForward(event)) {
-      const nextBlock = editor.value.document.getNextBlock(startBlock.key);
       if (
         nextBlock &&
         nextBlock.type === captionType &&
@@ -71,21 +74,20 @@ export default function createOnKeyDown(opts: TypeOption) {
           event.preventDefault();
           editor.moveToEndOfNode(mediaBlock).moveForward(1);
         }
-        return;
+        return undefined;
       }
     } else if (Hotkeys.isMoveBackward(event)) {
-      const prevBlock = editor.value.document.getPreviousBlock(startBlock.key);
       if (
-        prevBlock &&
-        prevBlock.type === captionType &&
-        editor.hideCaption(prevBlock)
+        previousBlock &&
+        previousBlock.type === captionType &&
+        editor.hideCaption(previousBlock)
       ) {
-        const mediaBlock = editor.getClosestMedia(prevBlock);
+        const mediaBlock = editor.getClosestMedia(previousBlock);
         if (mediaBlock) {
           event.preventDefault();
           editor.moveToRangeOfNode(mediaBlock);
         }
-        return;
+        return undefined;
       }
     }
     return next();

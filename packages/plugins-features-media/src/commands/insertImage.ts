@@ -5,9 +5,10 @@ import { TypeOption } from "../options";
 export default function insertImage(opts: TypeOption) {
   const { type, mediaTypes, captionType } = opts;
   const { image } = mediaTypes || { image: undefined };
-  const { type: imageType, srcField } = image
-    ? image
-    : { type: undefined, srcField: undefined };
+  const { type: imageType, srcField } = image || {
+    type: undefined,
+    srcField: undefined
+  };
   if (imageType && captionType && srcField) {
     return (editor: Editor, src) => {
       const defaultBlock = editor.getDefaultBlock();
@@ -31,5 +32,5 @@ export default function insertImage(opts: TypeOption) {
       editor.focus();
     };
   }
-  return (editor: Editor) => undefined;
+  return (_editor: Editor) => undefined;
 }

@@ -13,14 +13,13 @@ export interface Props {
 
 const createMediaRenderer = (imageType: any | undefined) => {
   const { type } = imageType || { type: undefined };
+  // eslint-disable-next-line react/display-name
   return props => <Media {...props} imageType={type} />;
 };
 
-const createMediaCaption = (
-  imageType: any | undefined,
-  captionHideField: string | null
-) => {
+const createMediaCaption = (imageType: any | undefined) => {
   const { type } = imageType || { type: undefined };
+  // eslint-disable-next-line react/display-name
   return props =>
     props.editor.hideCaption(props.node) ? null : (
       <ImageCaption {...props} imageType={type} />
@@ -28,19 +27,17 @@ const createMediaCaption = (
 };
 
 const createImage = (onInsert, extensions) => {
+  // eslint-disable-next-line react/display-name
   return props => (
     <Image {...props} extensions={extensions} onInsert={onInsert} />
   );
 };
 
 export default function createRenderer(opts): Plugin[] {
-  const { mediaTypes, captionType, captionHideField } = opts;
+  const { mediaTypes, captionType } = opts;
   const { image } = mediaTypes || { image: undefined };
-  let onInsert;
+  const { onInsert } = image || { onInsert: undefined };
   let extensions;
-  if (image && image.onInsert) {
-    onInsert = image.onInsert;
-  }
   if (
     image &&
     image.allowedExtensions &&
@@ -53,7 +50,7 @@ export default function createRenderer(opts): Plugin[] {
   const nodesRenderer = {
     media: createMediaRenderer(image),
     image: createImage(onInsert, extensions),
-    mediacaption: createMediaCaption(image, captionHideField)
+    mediacaption: createMediaCaption(image)
   };
 
   return [
@@ -65,6 +62,7 @@ export default function createRenderer(opts): Plugin[] {
         if (!Block.isBlock(node)) return false;
         return captionType && node.type === captionType && node.text === "";
       },
+      // eslint-disable-next-line react/display-name
       render: props => <CaptionPlaceholder {...props} />
     })
   ];

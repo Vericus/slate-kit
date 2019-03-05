@@ -49,6 +49,8 @@ export default function createSchema(opts: TypeOption) {
                 editor.unwrapBlockByKey(error.node.key);
               }
               break;
+            default:
+              break;
           }
         }
       },
@@ -65,6 +67,8 @@ export default function createSchema(opts: TypeOption) {
               break;
             case "child_required":
               editor.insertNodeByKey(error.node.key, 0, Text.create(""));
+              break;
+            default:
               break;
           }
         }
@@ -95,15 +99,15 @@ export default function createSchema(opts: TypeOption) {
               return data;
             }, {}),
             normalize: (editor: Editor, error: SlateError) => {
-              switch (error.code) {
+              const { key, node, code } = error;
+              const defaultKey = `default${key.replace(/\w/, c =>
+                c.toUpperCase()
+              )}`;
+              switch (code) {
                 case "parent_type_invalid":
                   editor.wrapBlockByKey(error.node.key, type);
                   break;
                 case "node_data_invalid":
-                  const { key, node } = error;
-                  const defaultKey = `default${key.replace(/\w/, c =>
-                    c.toUpperCase()
-                  )}`;
                   if (
                     mediaType[`${key}Options`] &&
                     mediaType[defaultKey] &&
@@ -113,6 +117,8 @@ export default function createSchema(opts: TypeOption) {
                       data: node.data.set(key, mediaType[defaultKey])
                     });
                   }
+                  break;
+                default:
                   break;
               }
             }

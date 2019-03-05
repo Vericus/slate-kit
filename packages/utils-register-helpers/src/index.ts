@@ -37,40 +37,38 @@ export default function register(pluginOptions): Plugin {
       }
 
       if (editor.registerMarkMapping && marks) {
-        Object.entries(marks).map(([markName, markType]) => {
-          editor.registerMarkMapping(markName, markType);
-        });
+        Object.entries(marks).map(([markName, markType]) =>
+          editor.registerMarkMapping(markName, markType)
+        );
       }
       if (editor.registerNodeMapping && nodes) {
-        Object.entries(nodes).map(([nodeName, nodeType]) => {
-          editor.registerNodeMapping(nodeName, nodeType);
-        });
+        Object.entries(nodes).map(([nodeName, nodeType]) =>
+          editor.registerNodeMapping(nodeName, nodeType)
+        );
       }
       if (editor.getMarkType && editor.registerMarkRenderer && marksRenderer) {
-        Object.entries(marksRenderer).map(([markName, renderer]) => {
-          editor.registerMarkRenderer(editor.getMarkType(markName), renderer);
-        });
+        Object.entries(marksRenderer).map(([markName, renderer]) =>
+          editor.registerMarkRenderer(editor.getMarkType(markName), renderer)
+        );
       }
       if (editor.getNodeType && editor.registerNodeRenderer && nodesRenderer) {
-        Object.entries(nodesRenderer).map(([nodeName, renderer]) => {
-          editor.registerNodeRenderer(editor.getNodeType(nodeName), renderer);
-        });
+        Object.entries(nodesRenderer).map(([nodeName, renderer]) =>
+          editor.registerNodeRenderer(editor.getNodeType(nodeName), renderer)
+        );
       }
       if (
         editor.getNodeType &&
         editor.registerNodeHocRenderer &&
         nodesHOCRenderer
       ) {
-        Object.entries(nodesHOCRenderer).map(
-          ([nodeName, rendererCollection]) => {
-            Object.entries(rendererCollection).map(([label, renderer]) =>
-              editor.registerNodeHocRenderer(
-                editor.getNodeType(nodeName),
-                label,
-                renderer
-              )
-            );
-          }
+        Object.entries(nodesHOCRenderer).map(([nodeName, rendererCollection]) =>
+          Object.entries(rendererCollection).map(([label, renderer]) =>
+            editor.registerNodeHocRenderer(
+              editor.getNodeType(nodeName),
+              label,
+              renderer
+            )
+          )
         );
       }
       if (
@@ -78,16 +76,14 @@ export default function register(pluginOptions): Plugin {
         editor.registerMarkHocRenderer &&
         marksHOCRenderer
       ) {
-        Object.entries(marksHOCRenderer).map(
-          ([markName, rendererCollection]) => {
-            Object.entries(rendererCollection).map(([label, renderer]) =>
-              editor.registerMarkHocRenderer(
-                editor.getMarkType(markName),
-                label,
-                renderer
-              )
-            );
-          }
+        Object.entries(marksHOCRenderer).map(([markName, rendererCollection]) =>
+          Object.entries(rendererCollection).map(([label, renderer]) =>
+            editor.registerMarkHocRenderer(
+              editor.getMarkType(markName),
+              label,
+              renderer
+            )
+          )
         );
       }
       return next();
