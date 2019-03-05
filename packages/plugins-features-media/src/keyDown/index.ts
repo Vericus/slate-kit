@@ -59,6 +59,34 @@ export default function createOnKeyDown(opts: TypeOption) {
           }
         }
       }
+    } else if (Hotkeys.isMoveForward(event)) {
+      const nextBlock = editor.value.document.getNextBlock(startBlock.key);
+      if (
+        nextBlock &&
+        nextBlock.type === captionType &&
+        editor.hideCaption(nextBlock)
+      ) {
+        const mediaBlock = editor.value.document.getParent(nextBlock.key);
+        if (mediaBlock) {
+          event.preventDefault();
+          editor.moveToEndOfNode(mediaBlock).moveForward(1);
+        }
+        return;
+      }
+    } else if (Hotkeys.isMoveBackward(event)) {
+      const prevBlock = editor.value.document.getPreviousBlock(startBlock.key);
+      if (
+        prevBlock &&
+        prevBlock.type === captionType &&
+        editor.hideCaption(prevBlock)
+      ) {
+        const mediaBlock = editor.getClosestMedia(prevBlock);
+        if (mediaBlock) {
+          event.preventDefault();
+          editor.moveToRangeOfNode(mediaBlock);
+        }
+        return;
+      }
     }
     return next();
   };
