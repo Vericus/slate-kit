@@ -15,9 +15,9 @@ export default function createSchema(opts: TypeOptions) {
           },
           normalize: (editor: Editor, error: SlateError) => {
             if (error.code === "node_data_invalid") {
-              editor.withoutNormalizing(e => {
+              editor.withoutNormalizing(() => {
                 if (!Text.isText(error.node)) {
-                  e.setNodeByKey(error.node.key, {
+                  editor.setNodeByKey(error.node.key, {
                     data: error.node.data.delete(dataField)
                   });
                 }

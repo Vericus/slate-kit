@@ -23,9 +23,9 @@ function resetBlockChecked(opts: TypeOptions, editor: Editor, block: Block) {
 function resetStartAt(opts: TypeOptions, editor: Editor) {
   const { value } = editor;
   const selectedBlocks = editor.selectedOrderedList(value);
-  editor.withoutNormalizing(e => {
+  editor.withoutNormalizing(() => {
     selectedBlocks.forEach(
-      block => Block.isBlock(block) && e.resetBlockStartAt(block)
+      block => Block.isBlock(block) && editor.resetBlockStartAt(block)
     );
   });
 }
@@ -33,9 +33,9 @@ function resetStartAt(opts: TypeOptions, editor: Editor) {
 function resetChecked(opts: TypeOptions, editor: Editor) {
   const { value } = editor;
   const selectedBlocks = editor.selectedOrderedList(value);
-  editor.withoutNormalizing(e => {
+  editor.withoutNormalizing(() => {
     selectedBlocks.forEach(
-      block => Block.isBlock(block) && e.resetBlockChecked(block)
+      block => Block.isBlock(block) && editor.resetBlockChecked(block)
     );
   });
 }
@@ -53,20 +53,21 @@ function createChangeListType(opts: TypeOptions) {
       (type === orderedlist && editor.isOrderedList(value)) ||
       (type === unorderedlist && editor.isUnorderedList(value));
     if (shouldUnwrap) {
-      editor.withoutNormalizing(e =>
+      editor.withoutNormalizing(() =>
         selectedBlocks.forEach(block => {
           if (block && Block.isBlock(block)) {
-            e.setToDefaultNodeByKey(block.key);
+            editor.setToDefaultNodeByKey(block.key);
           }
         })
       );
     } else {
-      editor.withoutNormalizing(e => {
+      editor.withoutNormalizing(() => {
         selectedBlocks.forEach(block => {
           if (block && Block.isBlock(block)) {
-            e.setNodeByKey(block.key, type);
-            e.resetBlockStartAt(block);
-            e.resetBlockChecked(block);
+            editor
+              .setNodeByKey(block.key, type)
+              .resetBlockStartAt(block)
+              .resetBlockChecked(block);
           }
         });
       });
@@ -83,14 +84,14 @@ function createListWithType(
   const { startAtField } = opts;
   const { value } = editor;
   const { startBlock } = value;
-  editor.withoutNormalizing(c => {
+  editor.withoutNormalizing(() => {
     if (startAt) {
-      c.setNodeByKey(startBlock.key, {
+      editor.setNodeByKey(startBlock.key, {
         type,
         data: startBlock.data.set(startAtField, startAt)
       });
     } else {
-      c.setNodeByKey(startBlock.key, type);
+      editor.setNodeByKey(startBlock.key, type);
     }
   });
 }

@@ -15,7 +15,6 @@ import {
 
 const data = Data.create({ foo: "bar " });
 const value = Value.create({ data });
-const selection = value.selection;
 
 const node: BlockJSON = {
   object: "block",
@@ -26,6 +25,7 @@ const node: BlockJSON = {
       key: "a",
       leaves: [
         {
+          object: "leaf",
           text: "example",
           marks: [
             {
@@ -58,6 +58,7 @@ editor.setReadOnly(true).setValue(value);
 editor.command("testCommand");
 editor.query("testQuery");
 editor.run("testCommand");
+
 // Test all editor commands
 editor
   .addMark("bold")
@@ -224,7 +225,7 @@ editor
   .moveToEndOfPreviousText()
   .moveToEndOfText()
   .moveToFocus()
-  .moveToRangeOf(inline)
+  .moveToRangeOfNode(inline)
   .moveToRangeOfDocument()
   .moveToStart()
   .moveToStartOfBlock()
