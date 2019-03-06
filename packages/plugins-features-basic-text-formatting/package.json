@@ -39,8 +39,8 @@
     "@vericus/slate-kit-bind-hotkey": "SlateKitBindHotKey"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.7",
     "@vericus/slate-kit-utils-hyperscript": "^0.2.9",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.7",
     "debug": "^3.1.0",
     "immutable": ">=3.8.2",
     "tslib": "^1.9.3"
