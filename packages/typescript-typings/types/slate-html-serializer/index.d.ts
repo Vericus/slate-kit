@@ -1,14 +1,21 @@
 // ported from https://github.com/DefinitelyTyped/DefinitelyTyped
 // definitions for slate-html-serializer 0.6
-// TypeScript Version: 2.8
+// TypeScript Version: 3.1
 declare module "slate-html-serializer" {
   import * as React from "react";
-  import { BlockProperties, ValueJSON, Value, Node, Mark, Leaf } from "slate";
+  import {
+    BlockProperties,
+    ValueJSON,
+    Value,
+    Node as SlateNode,
+    Mark,
+    Leaf
+  } from "slate";
 
   export interface Rule {
     deserialize?: (
       el: Element,
-      next: (elements: Element[] | NodeList | (Node & ChildNode)[]) => any
+      next: (elements: Element[] | NodeList | Array<Node & ChildNode>) => any
     ) => any;
     serialize?: (obj: any, children: string) => React.ReactNode;
   }
@@ -32,12 +39,14 @@ declare module "slate-html-serializer" {
     protected defaultBlock: BlockProperties;
     protected parseHtml: (html: string) => HTMLElement;
 
-    protected deserializeElements: (elements: HTMLElement[]) => Node[];
+    protected deserializeElements: (elements: HTMLElement[]) => SlateNode[];
     protected deserializeElement: (element: HTMLElement) => any;
-    protected deserializeMark: (mark: Mark) => Node[];
+    protected deserializeMark: (mark: Mark) => SlateNode[];
 
-    protected serializeNode: (node: Node) => string;
+    protected serializeNode: (node: SlateNode) => string;
     protected serializeLeaf: (leaf: Leaf) => string;
     protected serializeString: (string: string) => string;
   }
+
+  export {};
 }

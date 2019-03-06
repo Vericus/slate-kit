@@ -1,13 +1,13 @@
 // ported from https://github.com/DefinitelyTyped/DefinitelyTyped
 // definitions for slate-react 0.20
-// TypeScript Version: 2.8
+// TypeScript Version: 3.1
 declare module "slate-react" {
   import {
     Mark,
     Node,
     Block,
     Inline,
-    Schema,
+    SchemaProperties,
     Value,
     Stack,
     Document,
@@ -23,15 +23,10 @@ declare module "slate-react" {
   import * as React from "react";
 
   export interface EditorState {
-    schema: Schema;
     value: Value;
-    stack: Stack; // [TODO] define stack
   }
 
   export class Editor extends React.Component<EditorProps, EditorState> {
-    schema: Schema;
-    stack: Stack;
-
     readonly plugins: Plugin[];
     readonly operations: Immutable.List<Operation>;
     readonly readOnly: boolean;
@@ -46,7 +41,7 @@ declare module "slate-react" {
     query(...args: any[]): Controller;
     resolveController(
       plugins: Plugin[],
-      schema: Schema,
+      schema: SchemaProperties,
       commands: any[],
       queries: any[]
     ): void;
@@ -88,4 +83,6 @@ declare module "slate-react" {
     type: SlateType,
     data: any
   ): void;
+
+  export {};
 }

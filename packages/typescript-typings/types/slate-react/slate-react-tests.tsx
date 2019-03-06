@@ -1,5 +1,12 @@
-import { Editor, Plugin, EditorProps, RenderNodeProps } from "slate-react";
-import { Value, Editor as Controller, Operation } from "slate";
+import { Editor } from "slate-react";
+import {
+  Value,
+  Editor as Controller,
+  Operation,
+  Plugin,
+  EditorProps,
+  RenderNodeProps
+} from "slate";
 import * as React from "react";
 import * as Immutable from "immutable";
 
@@ -17,13 +24,11 @@ class MyPlugin implements Plugin {
       }
     }
   }
-
   onChange = (change: {
     operations: Immutable.List<Operation>;
     value: Value;
-  }) => {
-    console.log(change.value);
-  };
+  }) => console.log(change.value)
+  // prettier-ignore
 }
 
 const myPlugin = new MyPlugin();

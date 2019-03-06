@@ -1,6 +1,6 @@
 // ported from https://github.com/DefinitelyTyped/DefinitelyTyped
 // definitions for slate 0.44
-// TypeScript Version: 2.8
+// TypeScript Version: 3.1
 declare module "slate" {
   import * as Immutable from "immutable";
   import { SyntheticEvent } from "react";
@@ -19,7 +19,7 @@ declare module "slate" {
 
   export interface ObjectAndType {
     object?: string;
-    types?: string;
+    type?: string;
   }
 
   export interface Rules {
@@ -29,11 +29,11 @@ declare module "slate" {
     first?: ObjectAndType | ObjectAndType[];
     isVoid?: boolean;
     last?: ObjectAndType | ObjectAndType[];
-    nodes?: {
+    nodes?: Array<{
       min?: number;
       max?: number;
       match?: ObjectAndType | ObjectAndType[];
-    }[];
+    }>;
     normalize?: (editor: Editor, error: SlateError) => void;
     parent?: ObjectAndType | ObjectAndType[];
     text?: RegExp;
@@ -45,39 +45,9 @@ declare module "slate" {
     inlines?: RulesByNodeType;
   }
 
-  export class Schema extends Immutable.Record({}) {
-    stack: Stack;
-    rules: Rules[];
-    object: "schema";
-
-    static create(properties: SchemaProperties | Schema): Schema;
-    static fromJSON(object: SchemaProperties): Schema;
-    static fromJS(object: SchemaProperties): Schema;
-    static isSchema(maybeSchema: any): maybeSchema is Schema;
-
-    validateNode(node: Node): SlateError | void;
-    testNode(node: Node): boolean;
-    assertNode(node: Node): boolean;
-    getNodeRules(node: Node): any[];
-    isVoid(node: Node): boolean;
-    isAtomic(mark: Mark): boolean;
-    normalizeNode(node: Node): () => void;
-    testRules(object: any, rules: object | any[]): boolean;
-    validateRules(
-      object: any,
-      rule: object | any[],
-      rules: any[] | null,
-      options?: object
-    ): Error | void;
-
-    toJSON(): SchemaProperties;
-    toJS(): SchemaProperties;
-  }
-
   export interface ValueProperties {
     document?: Document;
     selection?: Selection;
-    schema?: Schema;
     data?: Data;
     decorations?: Immutable.List<Decoration> | null;
   }
@@ -91,12 +61,11 @@ declare module "slate" {
     object?: "value";
   }
 
-  export type Path = Immutable.List<number> | string;
+  export type Path = Immutable.List<number> | string | number;
 
   export class Value extends Immutable.Record({}) {
     document: Document;
     selection: Selection;
-    schema: Schema;
     data: Data;
     object: "value";
     decorations: Immutable.List<Decoration>;
@@ -204,7 +173,7 @@ declare module "slate" {
   export interface BlockJSON {
     type: string;
     key?: string;
-    nodes?: (BlockJSON | InlineJSON | TextJSON)[];
+    nodes?: Array<BlockJSON | InlineJSON | TextJSON>;
     data?: { [key: string]: any };
     object: "block";
   }
@@ -301,7 +270,7 @@ declare module "slate" {
     searchLeafAtOffset(offset: number): LeafAndOffset;
     addMarks(index: number, length: number, marks: Immutable.Set<Mark>): Text;
     getLeaves(decorations?: Range[]): Immutable.List<Leaf>;
-    getActiveMarksBetweenOffset(
+    getActiveMarksBetweenOffsets(
       startOffset: number,
       endOffset: number
     ): Immutable.Set<Mark>;
@@ -309,13 +278,13 @@ declare module "slate" {
     getFirstText(): Text;
     getLastText(): Text;
     getText(): string;
-    getMarksBetweenOffset(
+    getMarksBetweenOffsets(
       startOffset: number,
       endOffset: number
     ): Immutable.Set<Mark>;
     getMarks(): Immutable.OrderedSet<Mark>;
     getMarksAsArray(): Mark[];
-    getMarksAtIndex(index: number): Mark;
+    getMarksAtIndex(index: number): Immutable.OrderedSet<Mark>;
     getNode(key: string): Node | null;
     getPath(key: string | Path): Path;
     hasNode(key: string): boolean;
@@ -340,7 +309,7 @@ declare module "slate" {
   }
 
   export interface LeafJSON {
-    marks?: Mark[];
+    marks?: MarkJSON[];
     text?: string;
   }
 
@@ -354,7 +323,7 @@ declare module "slate" {
     static splitLeaves(
       leaves: Immutable.List<Leaf>,
       offset: number
-    ): Immutable.List<Leaf>[];
+    ): Array<Immutable.List<Leaf>>;
     static createList(
       attrs?:
         | Leaf[]
@@ -967,7 +936,7 @@ declare module "slate" {
       a: Immutable.List<number>,
       b: Immutable.List<number>,
       size?: number
-    ): Immutable.List<number>[];
+    ): Array<Immutable.List<number>>;
     function decrement(
       path: Immutable.List<number>,
       n?: number,
@@ -1124,7 +1093,7 @@ declare module "slate" {
     plugins?: Plugin[];
     readOnly?: boolean;
     role?: string;
-    schema?: Schema;
+    schema?: SchemaProperties;
     spellCheck?: boolean;
     style?: React.CSSProperties;
     tabIndex?: number;
@@ -1133,7 +1102,9 @@ declare module "slate" {
   // tsling:disable interface-over-type-literal
   export type EditorProps = BasicEditorProps & Plugin;
 
-  export type EditorFn = (editor: Editor, ...args: any) => Editor | any;
+  export type EditorQuery = (editor: Editor, ...args: any) => any;
+
+  export type EditorCommand = (editor: Editor, ...args: any) => Editor;
 
   export class Editor {
     object: "editor";
@@ -1154,8 +1125,8 @@ declare module "slate" {
      */
     flush(): Editor;
 
-    command(name: string | EditorFn, ...args: any[]): void;
-    query(query: string | EditorFn, ...args: any[]): any;
+    command(name: string | EditorCommand, ...args: any[]): void;
+    query(query: string | EditorQuery, ...args: any[]): any;
 
     /**
      * Add a new command by type with the editor. This will make the command available as a top-level method on the editor

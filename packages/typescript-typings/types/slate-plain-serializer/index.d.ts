@@ -1,6 +1,6 @@
 // ported from https://github.com/DefinitelyTyped/DefinitelyTyped
 // definitions for slate-plain-serializer 0.5
-// TypeScript Version: 2.6
+// TypeScript Version: 3.1
 declare module "slate-plain-serializer" {
   import { BlockProperties, MarkProperties, Value } from "slate";
 
