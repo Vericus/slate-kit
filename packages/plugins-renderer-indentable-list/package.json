@@ -54,7 +54,6 @@
     "react-dom": ">=16.0.0",
     "slate": ">=0.44.0 <0.45.0",
     "slate-prop-types": ">=0.5.7",
-    "slate-simulator": "^0.4.33",
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {

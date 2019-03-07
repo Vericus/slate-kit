@@ -17426,11 +17426,6 @@ slate-react-placeholder@^0.1.14:
     tiny-invariant "^1.0.1"
     tiny-warning "^0.0.3"
 
-slate-simulator@*, slate-simulator@>=0.4.59, slate-simulator@^0.4.33:
-  version "0.4.67"
-  resolved "https://registry.yarnpkg.com/slate-simulator/-/slate-simulator-0.4.67.tgz#9313c84736db1e23d6aebacd536f582b6d54723c"
-  integrity sha512-k1HM0Olv7mUjpwrLgOcnjMorlh9Y6vve/ngsHix1j7lXVfsHFdEkolXPeCy3+HsqW2s1dANc0a7hiOZuw4hc0A==
-
 "slate@>=0.44.0 <0.45.0":
   version "0.44.11"
   resolved "https://registry.yarnpkg.com/slate/-/slate-0.44.11.tgz#0cdf454726a6d45a6dbf3174ea3f6261ad1a0428"
