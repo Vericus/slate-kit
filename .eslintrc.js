@@ -2,6 +2,9 @@ const path = require("path");
 
 module.exports = {
   settings: {
+    react: {
+      version: "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
+    },
     "import/resolver": {
       node: {
         extensions: [".js", ".jsx", ".ts", ".tsx"]
@@ -14,10 +17,11 @@ module.exports = {
   root: true,
   extends: [
     "airbnb",
-    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
     "prettier",
     "prettier/@typescript-eslint",
+    "prettier/babel",
     "prettier/react",
     "prettier/standard"
   ],
@@ -31,6 +35,8 @@ module.exports = {
   ],
   parserOptions: {
     sourceType: "module",
+    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features,
+    useJSXTextNode: true,
     ecmaFeatures: {
       jsx: true
     }
@@ -40,6 +46,8 @@ module.exports = {
     browser: true
   },
   rules: {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { extensions: [".js", ".tsx"] }],
     "react/destructuring-assignment": 0,
     "prettier/prettier": "error",
