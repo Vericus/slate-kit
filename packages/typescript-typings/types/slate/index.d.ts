@@ -472,6 +472,7 @@ declare module "slate" {
     ): Node;
     isLeafBlock(): boolean;
     isLeafInline(): boolean;
+    isNodeInRange(path: Path, range: Range | Selection): boolean;
     mapChildren(iterator: () => void): Node;
     mapDescendants(iterator: () => void): Node;
     mergeNode(path: Path): Node;
