@@ -382,8 +382,6 @@ declare module "slate" {
     findDescendant(iterator: (node: Node) => boolean): Node | null;
     getActiveMarksAtRange(range: Range | Selection): Immutable.Set<Mark>;
     getAncestors(path: Path): Immutable.List<Node> | null;
-    getBlocksAtRange(range: Range | Selection): Immutable.List<Block>;
-    getBlocksAtRangeAsArray(range: Range | Selection): Block[];
     getBlocks(): Immutable.List<Block>;
     getBlocksAsArray(): Block[];
     getBlocksByType(type: string): Immutable.List<Block>;
@@ -413,6 +411,8 @@ declare module "slate" {
     getInsertMarksAtRange(range: Range | Selection): Immutable.Set<Mark>;
     getKeysToPathsTable(): object;
     getLastText(): Text | null;
+    getLeafBlocksAtRange(range: Range): Immutable.List<Block>;
+    getLeafBlocksAtRangeAsArray(range: Range): Block[];
     getMarks(): Immutable.Set<Mark>;
     getMarksAsArray(): Mark[];
     getMarksAtPosition(key: string, offset: number): Immutable.Set<Mark>;
@@ -443,6 +443,8 @@ declare module "slate" {
     getPreviousNode(path: Path): Node | null;
     getPreviousSibling(path: Path): Node | null;
     getPreviousText(path: Path): Text | null;
+    getRootBlocksAtRange(range: Range): Immutable.List<Block>;
+    getRootInlinesAtRange(range: Range): Immutable.List<Block>;
     getSelectionIndexes(
       range: Range | Selection,
       isSelected?: boolean
