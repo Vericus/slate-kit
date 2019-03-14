@@ -1,5 +1,5 @@
 {
-  "version": "0.2.19",
+  "version": "0.2.20",
   "name": "@vericus/slate-kit-basic-text-formatting",
   "description": "Plugin that provides `expected` functionality on `strike-through, underlined, bold, italicised` text on slate",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -39,14 +39,14 @@
     "@vericus/slate-kit-bind-hotkey": "SlateKitBindHotKey"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-hyperscript": "^0.2.9",
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.7",
+    "@vericus/slate-kit-utils-hyperscript": "^0.2.10",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.8",
     "debug": "^3.1.0",
     "immutable": ">=3.8.2",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.9",
+    "@vericus/slate-kit-typescript-typings": "^1.1.10",
     "expect": "^23.1.0",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",

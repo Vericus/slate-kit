@@ -1,5 +1,5 @@
 {
-  "version": "0.1.9",
+  "version": "0.1.10",
   "name": "@vericus/slate-kit-utils-auto-replace",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -40,7 +40,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.9",
+    "@vericus/slate-kit-typescript-typings": "^1.1.10",
     "slate": ">=0.44.0 <0.45.0"
   },
   "peerDependencies": {

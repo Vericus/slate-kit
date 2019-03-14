@@ -1,5 +1,5 @@
 {
-  "version": "0.2.17",
+  "version": "0.2.18",
   "name": "@vericus/slate-kit-indent",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -42,14 +42,14 @@
     "classnames": "ClassNames"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.7",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.8",
     "classnames": "^2.2.5",
     "immutable": ">=3.8.2",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.9",
-    "@vericus/slate-kit-utils-hyperscript": "^0.2.9",
+    "@vericus/slate-kit-typescript-typings": "^1.1.10",
+    "@vericus/slate-kit-utils-hyperscript": "^0.2.10",
     "expect": "^23.1.0",
     "is-hotkey": ">=0.1.2",
     "slate": ">=0.44.0 <0.45.0",
