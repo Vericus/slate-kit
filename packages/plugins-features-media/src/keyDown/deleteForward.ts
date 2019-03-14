@@ -17,7 +17,7 @@ export default function deleteForward(editor, types, captionType, event, next) {
     if (mediaBlock && Block.isBlock(mediaBlock)) {
       event.preventDefault();
       editor.moveToRangeOfNode(mediaBlock);
-      return;
+      return undefined;
     }
   } else {
     event.preventDefault();
@@ -27,7 +27,7 @@ export default function deleteForward(editor, types, captionType, event, next) {
       editor.deleteForward(1);
     }
     editor.normalize({ normalize: true });
-    return;
+    return undefined;
   }
   return next();
 }

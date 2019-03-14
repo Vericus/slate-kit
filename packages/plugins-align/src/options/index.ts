@@ -24,13 +24,17 @@ export const defaultOption: TypeOptions = {
 };
 
 class Options extends Record(defaultOption) {
-  floatBlocks: string[];
-  textBlocks: string[];
-  alignments: string[];
-  dataField: string;
-  label: string;
+  public floatBlocks: string[];
 
-  static create(option: Partial<TypeOptions>): TypeOptions {
+  public textBlocks: string[];
+
+  public alignments: string[];
+
+  public dataField: string;
+
+  public label: string;
+
+  public static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {
       ...defaultOption,
       ...option,

@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@vericus/slate-kit-typescript-typings": "^1.1.9",
+    "@vericus/slate-kit-utils-hyperscript": "^0.2.9",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
     "slate": ">=0.44.0 <0.45.0",

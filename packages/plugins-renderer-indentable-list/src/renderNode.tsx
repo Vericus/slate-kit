@@ -29,6 +29,7 @@ const UnOrderedList: React.SFC<Props> = props => {
   );
 };
 
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 const CheckList: React.SFC<Props> = props => {
   const { attributes, children, onMouseDown, className } = props;
   return (
@@ -37,6 +38,7 @@ const CheckList: React.SFC<Props> = props => {
     </ul>
   );
 };
+/* eslint-enable */
 
 OrderedList.propTypes = SlateTypes.Block;
 UnOrderedList.propTypes = SlateTypes.Block;

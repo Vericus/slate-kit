@@ -23,7 +23,7 @@ export default function deleteBackward(
     if (mediaBlock && Block.isBlock(mediaBlock)) {
       event.preventDefault();
       editor.moveToRangeOfNode(mediaBlock);
-      return;
+      return undefined;
     }
   } else {
     event.preventDefault();
@@ -33,7 +33,7 @@ export default function deleteBackward(
       editor.deleteBackward(1);
     }
     editor.normalize({ normalize: true });
-    return;
+    return undefined;
   }
   return next();
 }

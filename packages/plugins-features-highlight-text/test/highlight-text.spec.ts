@@ -1,5 +1,4 @@
 import { Editor } from "slate";
-import expect from "expect";
 import { fixtures, testWithHistory } from "../../../support/test-helpers";
 import HighlightText from "../src/index";
 import Utils from "../../utils/src/index";

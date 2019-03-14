@@ -1,5 +1,5 @@
 import React from "react";
-import { configure, addDecorator } from "@storybook/react";
+import { configure, addDecorator, addParameters } from "@storybook/react";
 import { withOptions } from "@storybook/addon-options";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "./theme";
@@ -24,13 +24,13 @@ function loadStories() {
   req.keys().forEach(filename => req(filename));
 }
 
-addDecorator(
-  withOptions({
+addParameters({
+  options: {
     name: "Slate-Kit",
     url: "https://github.com/Vericus/slate-kit",
-    addonPanelInRight: true
-  })
-);
+    panelPosition: "right"
+  }
+});
 
 addDecorator(story => (
   <React.Fragment>

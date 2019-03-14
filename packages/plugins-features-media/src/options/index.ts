@@ -40,7 +40,7 @@ export const defaultImageOptions: ImageOption = {
   srcField: "src",
   widthField: "width",
   maxSize: 1024000,
-  allowedExtensions: ["png", "tif", "gif", "bmp", "jpg"],
+  allowedExtensions: ["png", "tif", "gif", "bmp", "jpg", "jpeg"],
   type: "image",
   onInsert: () => {}
 };
@@ -62,16 +62,23 @@ export const defaultOptions: TypeOption = {
 };
 
 export default class Options extends Record(defaultOptions) {
-  type: string;
-  captionType: string;
-  captionHideField: string | null;
-  renderer: (...args: any[]) => any;
-  mediaTypes: MediaOption;
-  blockTypes: BlockTypes;
-  withHandlers: boolean;
-  label: string;
+  public type: string;
 
-  static create(option: Partial<TypeOption>): TypeOption {
+  public captionType: string;
+
+  public captionHideField: string | null;
+
+  public renderer: (...args: any[]) => any;
+
+  public mediaTypes: MediaOption;
+
+  public blockTypes: BlockTypes;
+
+  public withHandlers: boolean;
+
+  public label: string;
+
+  public static create(option: Partial<TypeOption>): TypeOption {
     let options = {
       ...defaultOptions,
       ...option

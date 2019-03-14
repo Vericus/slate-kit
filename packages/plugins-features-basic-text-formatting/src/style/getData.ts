@@ -37,7 +37,8 @@ function getFontWeightMark(
 ): Mark | undefined {
   if (fontWeight === "bold") {
     return marksOption.bold ? Mark.create({ type: "bold" }) : undefined;
-  } else if (parseInt(fontWeight, 10) > 400) {
+  }
+  if (parseInt(fontWeight, 10) > 400) {
     return marksOption.bold ? Mark.create({ type: "bold" }) : undefined;
   }
   return undefined;

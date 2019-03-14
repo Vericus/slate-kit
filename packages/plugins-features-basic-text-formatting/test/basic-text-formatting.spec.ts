@@ -1,4 +1,4 @@
-import { Editor, Block } from "slate";
+import { Editor } from "slate";
 import expect from "expect";
 import {
   fixtures,
@@ -21,7 +21,7 @@ describe("text formatting", () => {
   });
 
   fixtures(__dirname, "queries", ({ module }) => {
-    const { input, output, options = {}, default: fn } = module;
+    const { input, output, default: fn } = module;
     const editor = new Editor({ value: input, plugins });
     expect(output).toEqual(fn(editor));
   });

@@ -33,8 +33,8 @@ export default function createSchema(opts: TypeOptions) {
               ) {
                 blockData = blockData.delete(startAtField);
               }
-              editor.withoutNormalizing(e =>
-                e.setNodeByKey(node.key, { data: blockData })
+              editor.withoutNormalizing(() =>
+                editor.setNodeByKey(node.key, { data: blockData })
               );
             }
           }
@@ -50,8 +50,8 @@ export default function createSchema(opts: TypeOptions) {
               code === "node_data_invalid" &&
               (Block.isBlock(node) || Inline.isInline(node))
             ) {
-              editor.withoutNormalizing(e =>
-                e.setNodeByKey(node.key, {
+              editor.withoutNormalizing(() =>
+                editor.setNodeByKey(node.key, {
                   data: node.data.delete(checkField).delete(startAtField)
                 })
               );
@@ -76,8 +76,8 @@ export default function createSchema(opts: TypeOptions) {
               if (typeof blockData.get(checkField) !== "boolean") {
                 blockData = blockData.set(checkField, false);
               }
-              editor.withoutNormalizing(e =>
-                e.setNodeByKey(node.key, { data: blockData })
+              editor.withoutNormalizing(() =>
+                editor.setNodeByKey(node.key, { data: blockData })
               );
             }
           }

@@ -21,12 +21,15 @@ const defaultOption: TypeOptions = {
 };
 
 class Options extends Record(defaultOption) {
-  trigger: string;
-  before: RegExp;
-  after: RegExp;
-  command: (editor: Editor, matches: Matches, next) => any;
+  public trigger: string;
 
-  static create(option: Partial<TypeOptions>): TypeOptions {
+  public before: RegExp;
+
+  public after: RegExp;
+
+  public command: (editor: Editor, matches: Matches, next) => any;
+
+  public static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {
       ...defaultOption,
       ...option

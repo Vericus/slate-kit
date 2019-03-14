@@ -10,35 +10,35 @@ export default function ReadOnly(): Plugin {
     if (!editor.props.isReadOnly) return next();
     e.preventDefault();
     e.stopPropagation();
-    return;
+    return true;
   }
 
   function onBeforeInput(e, editor, next) {
     if (!editor.props.isReadOnly) return next();
     e.preventDefault();
     e.stopPropagation();
-    return;
+    return true;
   }
 
   function onDrop(e, editor, next) {
     if (!editor.props.isReadOnly) return next();
     e.preventDefault();
     e.stopPropagation();
-    return;
+    return true;
   }
 
   function onInput(e, editor, next) {
     if (!editor.props.isReadOnly) return next();
     e.preventDefault();
     e.stopPropagation();
-    return;
+    return true;
   }
 
   function onCut(e, editor, next) {
     if (!editor.props.isReadOnly) return next();
     e.preventDefault();
     e.stopPropagation();
-    return;
+    return true;
   }
 
   function renderEditor(props, editor, next) {

@@ -49,12 +49,12 @@
   },
   "devDependencies": {
     "@vericus/slate-kit-typescript-typings": "^1.1.9",
+    "@vericus/slate-kit-utils-hyperscript": "^0.2.9",
     "expect": "^23.1.0",
     "is-hotkey": ">=0.1.2",
     "slate": ">=0.44.0 <0.45.0",
     "slate-dev-environment": ">=0.2.0",
     "slate-hotkeys": ">=0.2.3",
-    "slate-simulator": ">=0.4.59",
     "to-camel-case": "^1.0.0"
   },
   "peerDependencies": {

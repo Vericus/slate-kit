@@ -21,14 +21,14 @@ export default function createSchema(opts: TypeOptions) {
             ) {
               const data = node.data.get(dataField);
               if (typeof data !== "number" || data < 0) {
-                editor.withoutNormalizing(e =>
-                  e.setNodeByKey(node.key, {
+                editor.withoutNormalizing(() =>
+                  editor.setNodeByKey(node.key, {
                     data: node.data.delete(dataField)
                   })
                 );
               } else {
-                editor.withoutNormalizing(e =>
-                  e.setNodeByKey(node.key, {
+                editor.withoutNormalizing(() =>
+                  editor.setNodeByKey(node.key, {
                     data: node.data.set(dataField, maxIndentation)
                   })
                 );

@@ -43,7 +43,7 @@ function isUnorderedList(editor: Editor) {
   );
 }
 
-function isCheckList(editor: Editor, opts: BlockTypes) {
+function isCheckList(editor: Editor, _opts: BlockTypes) {
   return List(editor.getHighestSelectedBlocks()).every(
     node => Block.isBlock(node) && editor.isCheckNode(node)
   );

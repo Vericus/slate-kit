@@ -1,7 +1,7 @@
 import { Editor } from "slate";
 import { TypeOptions } from "../options";
 
-const returnFalse = (editor: Editor) => false;
+const returnFalse = (_editor: Editor) => false;
 
 export default function createQueries(options: TypeOptions) {
   const { marks } = options;

@@ -38,6 +38,9 @@
   "dependencies": {
     "tslib": "^1.9.3"
   },
+  "peerDependencies": {
+    "slate": ">=0.44.0 <0.45.0"
+  },
   "keywords": [
     "Vericus",
     "slate",

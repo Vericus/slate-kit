@@ -1,5 +1,6 @@
 import { Block, Editor } from "slate";
 import { ImageOption } from "../options";
+
 const getImageWidth = (
   editor: Editor,
   block: Block,

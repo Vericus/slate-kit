@@ -25,7 +25,7 @@ const h = createHyperscript({
     check: "check-list"
   },
   inlines: {
-    link: "link",
+    hyperlink: "link",
     hashtag: "hashtag",
     comment: "comment",
     emoji: {

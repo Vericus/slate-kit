@@ -1,5 +1,5 @@
-import { TypeOptions } from "../options";
 import tinycolor from "tinycolor2";
+import { TypeOptions } from "../options";
 
 const defaultStyle = {
   textDecoration: "inherit",

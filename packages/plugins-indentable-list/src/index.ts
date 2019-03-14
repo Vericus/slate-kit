@@ -46,7 +46,7 @@ export function createPlugin(
                 if (numMatch && numMatch[0]) {
                   editor.createListWithType(orderedlist, numMatch[0]);
                 }
-                return;
+                return undefined;
               }
               return next();
             }
@@ -54,13 +54,13 @@ export function createPlugin(
           AutoReplace({
             trigger: " ",
             before: /^(-)$/,
-            command: (editor, matches, next) =>
+            command: (editor, _matches, _next) =>
               editor.createListWithType(unorderedlist)
           }),
           AutoReplace({
             trigger: " ",
             before: /^(\[\])$/,
-            command: (editor, matches, next) =>
+            command: (editor, _matches, _next) =>
               editor.createListWithType(checklist)
           })
         ]

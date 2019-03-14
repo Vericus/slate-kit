@@ -15,7 +15,7 @@ export const output = (
     <document>
       <paragraph>word</paragraph>
       <ol>word</ol>
-      <paragraph>{""}</paragraph>
+      <paragraph />
     </document>
   </value>
 );

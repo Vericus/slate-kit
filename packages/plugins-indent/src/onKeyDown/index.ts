@@ -30,7 +30,7 @@ export default function createOnKeyDown(opts: TypeOptions) {
       event.stopPropagation();
       if (!isDelete || editor.getIndentationLevel(startBlock) !== 0) {
         editor.decreaseIndent();
-        return;
+        return undefined;
       }
     } else if (isIndent) {
       event.preventDefault();
@@ -41,10 +41,10 @@ export default function createOnKeyDown(opts: TypeOptions) {
         tabable.includes(startBlock.type)
       ) {
         editor.insertText("\t");
-        return;
+        return undefined;
       }
       editor.increaseIndent();
-      return;
+      return undefined;
     }
     return next();
   };

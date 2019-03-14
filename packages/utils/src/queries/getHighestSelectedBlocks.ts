@@ -22,9 +22,11 @@ export default function getHighestSelectedBlocks(editor: Editor): List<Block> {
       }
       if (startBlock && !endBlock) {
         return List([startBlock]);
-      } else if (endBlock && !startBlock) {
+      }
+      if (endBlock && !startBlock) {
         return List([endBlock]);
-      } else if (startBlock === endBlock && startBlock) {
+      }
+      if (startBlock === endBlock && startBlock) {
         return List([startBlock]);
       }
       if (startBlock && endBlock) {

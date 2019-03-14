@@ -34,12 +34,17 @@ const defaultOptions = {
 };
 
 class Options extends Record(defaultOptions) {
-  tabable: string[];
-  indentable: string[];
-  maxIndentation: number;
-  dataField: string;
-  withHandlers: boolean;
-  label: string;
+  public tabable: string[];
+
+  public indentable: string[];
+
+  public maxIndentation: number;
+
+  public dataField: string;
+
+  public withHandlers: boolean;
+
+  public label: string;
 }
 
 export default Options;

@@ -1,5 +1,4 @@
-import { Mark, Data } from "slate";
-import { Editor } from "slate";
+import { Mark, Data, Editor } from "slate";
 import tinycolor from "tinycolor2";
 import { TypeOptions } from "../options";
 
@@ -46,7 +45,6 @@ export default function createCommands(opt: TypeOptions) {
         }
       }
       editor.focus();
-      return;
     }
   };
 }

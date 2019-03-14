@@ -16,8 +16,8 @@
     "access": "public"
   },
   "dependencies": {
-    "chalk": "^2.1.0",
-    "yeoman-generator": "^2.0.4"
+    "chalk": "^2.4.2",
+    "yeoman-generator": "^3.2.0"
   },
   "keywords": [
     "yeoman-generator"

@@ -1,4 +1,4 @@
-module.exports = function(api) {
+module.exports = function babelConfig(api) {
   let presets = [];
   let plugins = [];
   if (api.env("webpack")) {

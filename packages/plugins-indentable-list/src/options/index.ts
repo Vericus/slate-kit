@@ -27,12 +27,17 @@ const defaultOptions = {
 };
 
 class Options extends Record(defaultOptions) {
-  blockTypes: BlockTypes;
-  renderer: (...args: any[]) => any;
-  startAtField: string;
-  checkField: string;
-  withHandlers: boolean;
-  label: string;
+  public blockTypes: BlockTypes;
+
+  public renderer: (...args: any[]) => any;
+
+  public startAtField: string;
+
+  public checkField: string;
+
+  public withHandlers: boolean;
+
+  public label: string;
 }
 
 export default Options;

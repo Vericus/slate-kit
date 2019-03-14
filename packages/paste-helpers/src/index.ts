@@ -23,12 +23,11 @@ export default function PasteHelpers(): PasteHelperPlugin {
       isWordHTML: (_editor: Editor, html: string) => isWordHTML(html),
       isGoogleDocsHTML: (_editor: Editor, html: string) =>
         isGoogleDocsHTML(html),
-      cleanedWordHTML: async (_editor: Editor, html: string) =>
-        await wordClean(html),
+      cleanedWordHTML: async (_editor: Editor, html: string) => wordClean(html),
       cleanedDocsHTML: async (_editor: Editor, html: string) =>
-        await googleDocsClean(html),
+        googleDocsClean(html),
       cleanedGenericHTML: async (_editor: Editor, html: string) =>
-        await genericClean(html),
+        genericClean(html),
       cleanHTML: async (editor: Editor, html: string) => {
         let cleanedHTML;
         if (editor.isWordHTML(html)) {
@@ -37,7 +36,8 @@ export default function PasteHelpers(): PasteHelperPlugin {
             origin: "word",
             cleanedHTML
           };
-        } else if (editor.isGoogleDocsHTML(html)) {
+        }
+        if (editor.isGoogleDocsHTML(html)) {
           cleanedHTML = await editor.cleanedDocsHTML(html);
           return {
             origin: "docs",

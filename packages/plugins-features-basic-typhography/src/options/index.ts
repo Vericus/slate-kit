@@ -32,12 +32,15 @@ const defaultOptions: Partial<TypeOptions> = {
 };
 
 class Options extends Record(defaultOptions, "Typhography Options") {
-  blockTypes: BlockTypes;
-  defaultBlock: string;
-  renderer: (...args: any[]) => any;
-  label: string;
+  public blockTypes: BlockTypes;
 
-  static create(option: Partial<TypeOptions>): TypeOptions {
+  public defaultBlock: string;
+
+  public renderer: (...args: any[]) => any;
+
+  public label: string;
+
+  public static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {
       ...defaultOptions,
       ...option,

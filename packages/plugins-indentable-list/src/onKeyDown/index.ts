@@ -40,20 +40,23 @@ export default function createOnKeyDown(opts: TypeOptions) {
       e.stopPropagation();
       editor.resetStartAt();
       return next();
-    } else if (isSplitBlock) {
+    }
+    if (isSplitBlock) {
       const { text, data, key } = startBlock;
       if (startBlock === endBlock && isCollapsed && text === "") {
         e.preventDefault();
         e.stopPropagation();
         editor.unwrapList(true);
-        return;
-      } else if (startBlock === endBlock && startOffset === text.length) {
+        return undefined;
+      }
+      if (startBlock === endBlock && startOffset === text.length) {
         editor.insertBlock({
           type: startBlock.type,
           data: data.delete(startAtField).delete(checkField)
         });
-        return;
-      } else if (startBlock === endBlock) {
+        return undefined;
+      }
+      if (startBlock === endBlock) {
         editor.setNodeByKey(key, {
           data: data.delete(startAtField).delete(checkField)
         });
@@ -71,7 +74,7 @@ export default function createOnKeyDown(opts: TypeOptions) {
             data: data.delete(startAtField)
           });
         }
-        return;
+        return undefined;
       }
       return next();
     }
@@ -79,7 +82,7 @@ export default function createOnKeyDown(opts: TypeOptions) {
       e.preventDefault();
       e.stopPropagation();
       editor.unwrapList(isDeleting);
-      return;
+      return undefined;
     }
     return next();
   };

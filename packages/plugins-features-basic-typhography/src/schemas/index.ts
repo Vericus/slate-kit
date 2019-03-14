@@ -7,20 +7,19 @@ export default function createSchema(opts: TypeOptions) {
     document: {
       last: Object.values(blockTypes).map(type => ({ type })),
       normalize: (editor: Editor, error: SlateError) => {
-        switch (error.code) {
+        const { code, node } = error;
+        const paragraph = Block.create({
+          type: defaultBlock,
+          nodes: [Text.create("")]
+        });
+        switch (code) {
           case "last_child_type_invalid":
-            const paragraph = Block.create({
-              type: defaultBlock,
-              nodes: [Text.create("")]
-            });
-            if (Document.isDocument(error.node)) {
-              editor.insertNodeByKey(
-                error.node.key,
-                error.node.nodes.size,
-                paragraph
-              );
+            if (Document.isDocument(node)) {
+              editor.insertNodeByKey(node.key, node.nodes.size, paragraph);
             }
-            return;
+            break;
+          default:
+            break;
         }
       }
     },
@@ -37,12 +36,12 @@ export default function createSchema(opts: TypeOptions) {
                 switch (error.code) {
                   case "child_object_invalid":
                     editor.removeNodeByKey(error.child.key);
-                    return;
+                    break;
                   case "parent_object_invalid":
                     editor.unwrapBlockByKey(error.node.key);
-                    return;
+                    break;
                   default:
-                    return;
+                    break;
                 }
               }
             }

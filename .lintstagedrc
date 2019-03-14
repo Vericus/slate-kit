@@ -2,6 +2,7 @@
   "linters": {
     "**/*.{ts,tsx,js,jsx,md,json,css}": [
       "prettier --write",
+      "eslint . --fix",
       "git add"
     ]
   }

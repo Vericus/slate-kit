@@ -6,11 +6,12 @@
   "homepage": "https://github.com/Vericus/slate-kit/",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
+  "types": "types",
   "files": [
     "types"
   ],
   "scripts": {
-    "lint": "dtslint types"
+    "lint": "dtslint types/slate && dtslint types/slate-base64-serializer && dtslint types/slate-html-serializer && dtslint types/slate-plain-serializer && dtslint types/slate-react"
   },
   "devDependencies": {
     "dtslint": "github:Microsoft/dtslint#production"
