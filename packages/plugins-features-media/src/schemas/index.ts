@@ -100,9 +100,9 @@ export default function createSchema(opts: TypeOption) {
             }, {}),
             normalize: (editor: Editor, error: SlateError) => {
               const { key, node, code } = error;
-              const defaultKey = `default${key.replace(/\w/, c =>
-                c.toUpperCase()
-              )}`;
+              const defaultKey = key
+                ? `default${key.replace(/\w/, c => c.toUpperCase())}`
+                : "";
               switch (code) {
                 case "parent_type_invalid":
                   editor.wrapBlockByKey(error.node.key, type);
