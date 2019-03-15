@@ -142,6 +142,7 @@ export default function createRule(options, editor) {
   return [
     {
       deserialize(el: HTMLElement, next) {
+        if (!el || !el.tagName) return next();
         let block = blocks[el.tagName.toLowerCase()];
         if (!block) return undefined;
         if (block === blocks.ul) {
