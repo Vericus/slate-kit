@@ -98,10 +98,13 @@ export default function createRenderers(): Plugin {
         nodeHOCs[nodeType],
       getNodeType: (_editor: Editor, nodeName: string) =>
         nodeMappings[nodeName],
+      getNodeTypes: (_editor: Editor): string[] => Object.values(nodeMappings),
       getMarkRenderer: (_editor: Editor, markType: string) => marks[markType],
       getMarkHOCRenderer: (_editor: Editor, markType: string) =>
         markHOCs[markType],
-      getMarkType: (_editor: Editor, markName: string) => markMappings[markName]
+      getMarkType: (_editor: Editor, markName: string) =>
+        markMappings[markName],
+      getMarkTypes: (_editor: Editor): string[] => Object.values(markMappings)
     },
     renderNode: (props, editor: Editor, next) => {
       const { node } = props;
