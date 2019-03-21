@@ -5,10 +5,10 @@ export default function createProps(opts) {
   const { orderedlist, unorderedlist, checklist } = blockTypes;
   const listTypes = [orderedlist, unorderedlist, checklist];
   return nodeProps => {
-    if (!nodeProps.node || !listTypes.includes(nodeProps.node.type)) {
+    const { editor, node, key } = nodeProps;
+    if (!node || !key || !listTypes.includes(node.type)) {
       return nodeProps;
     }
-    const { editor, key, node } = nodeProps;
     const {
       props: {
         value: { document }
@@ -17,7 +17,7 @@ export default function createProps(opts) {
     const previousBlock = document.getPreviousBlock(key);
     const prevIndentation =
       previousBlock && editor.getIndentationLevel(previousBlock);
-    const indentation = editor.getIndentationLevel(nodeProps.node);
+    const indentation = editor.getIndentationLevel(node);
     const startAt = nodeProps.node.data.get(startAtField);
     const checked = nodeProps.node.data.get(checkField);
     const style =
