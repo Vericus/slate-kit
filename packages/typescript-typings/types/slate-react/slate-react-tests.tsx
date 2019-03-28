@@ -10,7 +10,8 @@ import {
   Mark,
   Range,
   Document,
-  RenderNodeProps
+  RenderNodeProps,
+  Decoration
 } from "slate";
 import * as React from "react";
 import * as Immutable from "immutable";
@@ -64,6 +65,14 @@ const point = Point.create({ key: "a", offset: 0 });
 const range = Range.create({ anchor: point, focus: point });
 const inline = Inline.create("text");
 const mark = Mark.create("bold");
+const decorations = Decoration.createList([
+  {
+    anchor: Point.create({ key: "a", offset: 0 }),
+    focus: Point.create({ key: "a", offset: 0 }),
+    mark
+  }
+]);
+
 const doc = Document.fromJSON({
   object: "document",
   data: {},
@@ -262,6 +271,7 @@ editor
   .replaceNodeByKey("a", inline)
   .replaceNodeByPath("a", inline)
   .select(range)
+  .setDecorations(decorations)
   .setBlocks("paragraph")
   .setBlocksAtRange(range, "paragraph")
   .setInlines("paragraph")

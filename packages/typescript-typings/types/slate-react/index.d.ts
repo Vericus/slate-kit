@@ -262,6 +262,7 @@ declare module "slate-react" {
         replaceNodeByPath: CoreEditor["replaceNodeByPath"];
         removeTextByKey: CoreEditor["removeTextByKey"];
         removeTextByPath: CoreEditor["removeTextByPath"];
+        setDecorations: CoreEditor["setDecorations"];
         setMarkByKey: CoreEditor["setMarkByKey"];
         setMarksByPath: CoreEditor["setMarksByPath"];
         setNodeByKey: CoreEditor["setNodeByKey"];
@@ -304,17 +305,23 @@ declare module "slate-react" {
         | "files";
 
     export function cloneFragment(
-        event: Event,
-        editor: Controller,
+        event: Event | React.SyntheticEvent,
+        editor: CoreEditor,
         callback?: () => void
     ): void;
     export function findDOMNode(node: Node, win?: Window): Element;
     export function findDOMRange(range: Range, win?: Window): Range;
-    export function findNode(element: Element, value: Value): Node;
-    export function findRange(selection: Selection, value: Value): Range;
-    export function getEventRange(event: Event, value: Value): Range;
+    export function findNode(element: Element, editor: CoreEditor): Node;
+    export function findRange(
+        selection: Selection | Range,
+        editor: CoreEditor
+    ): Range;
+    export function getEventRange(
+        event: Event | React.SyntheticEvent,
+        editor: CoreEditor
+    ): Range;
     export function getEventTransfer(
-        event: Event
+        event: Event | React.SyntheticEvent
     ): {
         type: SlateType;
         files: File[];
@@ -325,7 +332,7 @@ declare module "slate-react" {
         text: string;
     };
     export function setEventTransfer(
-        event: Event,
+        event: Event | React.SyntheticEvent,
         type: SlateType,
         data: any
     ): void;

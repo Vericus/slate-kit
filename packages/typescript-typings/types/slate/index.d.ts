@@ -174,7 +174,7 @@ declare module "slate" {
     key?: string;
     nodes?: Array<BlockJSON | InlineJSON | TextJSON>;
     data?: { [key: string]: any };
-    object: "block";
+    object?: "block";
   }
 
   export class Block extends BaseNode {
@@ -207,7 +207,7 @@ declare module "slate" {
     key?: string;
     nodes?: NodeJSON[];
     data?: { [key: string]: any };
-    object: "inline";
+    object?: "inline";
   }
 
   export class Inline extends BaseNode {
@@ -237,7 +237,7 @@ declare module "slate" {
   export interface TextJSON {
     key?: string;
     leaves: LeafJSON[];
-    object: "text";
+    object?: "text";
   }
 
   export interface LeafAndOffset {
@@ -308,7 +308,7 @@ declare module "slate" {
   export interface LeafJSON {
     marks?: MarkJSON[];
     text?: string;
-    object: "leaf";
+    object?: "leaf";
   }
 
   export class Leaf extends Immutable.Record({}) {
@@ -508,7 +508,7 @@ declare module "slate" {
   export interface MarkJSON {
     type: string;
     data?: { [key: string]: any };
-    object: "mark";
+    object?: "mark";
   }
 
   export class Mark extends Immutable.Record({}) {
@@ -1378,6 +1378,9 @@ declare module "slate" {
     replaceNodeByPath(path: Path, newNode: Node): Editor;
     removeTextByKey(key: string, offset: number, length: number): Editor;
     removeTextByPath(path: Path, offset: number, length: number): Editor;
+    setDecorations(
+      decorations: Immutable.List<Decoration> | Decoration[]
+    ): Editor;
     setMarkByKey(
       key: string,
       offset: number,
@@ -2399,6 +2402,12 @@ declare module "slate" {
      * Remove length characters of text starting at an offset in a node by path
      */
     removeTextByPath(path: Path, offset: number, length: number): Controller;
+    /**
+     * Set Decorations
+     */
+    setDecorations(
+      decorations: Immutable.List<Decoration> | Decoration[]
+    ): Controller;
     /**
      * Set a dictionary of properties on a mark by its key.
      */
