@@ -34,6 +34,7 @@ declare module "slate" {
       max?: number;
       match?: ObjectAndType | ObjectAndType[];
     }>;
+    marks?: Array<{ type: string }>;
     normalize?: (editor: Editor, error: SlateError) => void;
     parent?: ObjectAndType | ObjectAndType[];
     text?: RegExp;

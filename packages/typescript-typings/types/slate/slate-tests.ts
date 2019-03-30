@@ -346,6 +346,9 @@ const schema: SchemaProperties = {
   blocks: {
     image: {
       isVoid: true
+    },
+    paragraph: {
+      marks: [{ type: "bold" }, { type: "italic" }, { type: "underline" }]
     }
   }
 };
