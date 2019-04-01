@@ -10,9 +10,7 @@ export default function createProps(opts) {
       return nodeProps;
     }
     const {
-      props: {
-        value: { document }
-      }
+      value: { document }
     } = editor;
     const previousBlock = document.getPreviousBlock(key);
     const prevIndentation =
