@@ -52,7 +52,7 @@
     "@vericus/slate-kit-utils-hyperscript": "^0.2.10",
     "expect": "^23.1.0",
     "is-hotkey": ">=0.1.2",
-    "slate": ">=0.44.0 <0.45.0",
+    "slate": ">=0.44.0 <0.46.0",
     "slate-dev-environment": ">=0.2.0",
     "slate-hotkeys": ">=0.2.3",
     "to-camel-case": "^1.0.0"
@@ -61,7 +61,7 @@
     "@vericus/slate-kit-plugins-utils": "^0.2.0",
     "@vericus/slate-kit-utils-register-helpers": "^0.1.0",
     "is-hotkey": ">=0.1.2",
-    "slate": ">=0.44.0 <0.45.0",
+    "slate": ">=0.44.0 <0.46.0",
     "slate-dev-environment": ">=0.2.0",
     "slate-hotkeys": ">=0.2.3",
     "slate-prop-types": ">=0.5.7"

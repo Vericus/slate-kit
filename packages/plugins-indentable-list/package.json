@@ -60,7 +60,7 @@
     "is-hotkey": ">=0.1.2",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "slate": ">=0.44.0 <0.45.0",
+    "slate": ">=0.44.0 <0.46.0",
     "slate-dev-environment": ">=0.2.0",
     "slate-prop-types": ">=0.5.7",
     "to-camel-case": "^1.0.0"
@@ -72,7 +72,7 @@
     "is-hotkey": ">=0.1.2",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "slate": ">=0.44.0 <0.45.0",
+    "slate": ">=0.44.0 <0.46.0",
     "slate-dev-environment": ">=0.2.0",
     "slate-hotkeys": ">=0.2.3",
     "slate-prop-types": ">=0.5.7"

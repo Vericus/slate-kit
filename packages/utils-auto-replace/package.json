@@ -41,10 +41,10 @@
   },
   "devDependencies": {
     "@vericus/slate-kit-typescript-typings": "^1.1.10",
-    "slate": ">=0.44.0 <0.45.0"
+    "slate": ">=0.44.0 <0.46.0"
   },
   "peerDependencies": {
-    "slate": ">=0.44.0 <0.45.0"
+    "slate": ">=0.44.0 <0.46.0"
   },
   "keywords": [
     "Vericus",

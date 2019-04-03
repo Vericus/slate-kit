@@ -137,7 +137,7 @@
     "rollup-plugin-terser": "^4.0.4",
     "rollup-plugin-typescript2": "^0.20.1",
     "simulate-event": "^1.4.0",
-    "slate": ">=0.44.0 <0.45.0",
+    "slate": ">=0.44.0 <0.46.0",
     "slate-base64-serializer": "*",
     "slate-dev-environment": "*",
     "slate-hotkeys": "*",
