@@ -457,7 +457,10 @@ declare module "slate" {
     getTextsAsArray(): Text[];
     getTextsAtRange(range: Range | Selection): Immutable.List<Text>;
     getTextsAtRangeAsArray(range: Range | Selection): Text[];
-    getTextsBetweenPositionsAsArray(startKey: string, endKey: string): Text[];
+    getTextsBetweenPathPositionsAsArray(
+      startKey: string,
+      endKey: string
+    ): Text[];
     hasBlockChildren(): boolean;
     hasChild(path: Path): boolean;
     hasInlineChildren(): boolean;
@@ -941,6 +944,7 @@ declare module "slate" {
       target: Immutable.List<number>
     ): boolean;
     function lift(path: Immutable.List<number>): Immutable.List<number>;
+    function drop(path: Immutable.List<number>): Immutable.List<number>;
     function max(a: Immutable.List<number>, b: Immutable.List<number>): number;
     function min(a: Immutable.List<number>, b: Immutable.List<number>): number;
     function relate(
