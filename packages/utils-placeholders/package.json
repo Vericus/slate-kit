@@ -46,12 +46,12 @@
     "@vericus/slate-kit-typescript-typings": "^1.1.10",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "slate": ">=0.44.0 <0.45.0"
+    "slate": ">=0.44.0 <0.46.0"
   },
   "peerDependencies": {
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
-    "slate": ">=0.44.0 <0.45.0"
+    "slate": ">=0.44.0 <0.46.0"
   },
   "keywords": [
     "Vericus",

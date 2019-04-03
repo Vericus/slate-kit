@@ -34,6 +34,7 @@ declare module "slate" {
       max?: number;
       match?: ObjectAndType | ObjectAndType[];
     }>;
+    marks?: Array<{ type: string }>;
     normalize?: (editor: Editor, error: SlateError) => void;
     parent?: ObjectAndType | ObjectAndType[];
     text?: RegExp;
@@ -174,7 +175,7 @@ declare module "slate" {
     key?: string;
     nodes?: Array<BlockJSON | InlineJSON | TextJSON>;
     data?: { [key: string]: any };
-    object: "block";
+    object?: "block";
   }
 
   export class Block extends BaseNode {
@@ -207,7 +208,7 @@ declare module "slate" {
     key?: string;
     nodes?: NodeJSON[];
     data?: { [key: string]: any };
-    object: "inline";
+    object?: "inline";
   }
 
   export class Inline extends BaseNode {
@@ -237,7 +238,7 @@ declare module "slate" {
   export interface TextJSON {
     key?: string;
     leaves: LeafJSON[];
-    object: "text";
+    object?: "text";
   }
 
   export interface LeafAndOffset {
@@ -308,7 +309,7 @@ declare module "slate" {
   export interface LeafJSON {
     marks?: MarkJSON[];
     text?: string;
-    object: "leaf";
+    object?: "leaf";
   }
 
   export class Leaf extends Immutable.Record({}) {
@@ -456,7 +457,10 @@ declare module "slate" {
     getTextsAsArray(): Text[];
     getTextsAtRange(range: Range | Selection): Immutable.List<Text>;
     getTextsAtRangeAsArray(range: Range | Selection): Text[];
-    getTextsBetweenPositionsAsArray(startKey: string, endKey: string): Text[];
+    getTextsBetweenPathPositionsAsArray(
+      startKey: string,
+      endKey: string
+    ): Text[];
     hasBlockChildren(): boolean;
     hasChild(path: Path): boolean;
     hasInlineChildren(): boolean;
@@ -508,7 +512,7 @@ declare module "slate" {
   export interface MarkJSON {
     type: string;
     data?: { [key: string]: any };
-    object: "mark";
+    object?: "mark";
   }
 
   export class Mark extends Immutable.Record({}) {
@@ -940,6 +944,7 @@ declare module "slate" {
       target: Immutable.List<number>
     ): boolean;
     function lift(path: Immutable.List<number>): Immutable.List<number>;
+    function drop(path: Immutable.List<number>): Immutable.List<number>;
     function max(a: Immutable.List<number>, b: Immutable.List<number>): number;
     function min(a: Immutable.List<number>, b: Immutable.List<number>): number;
     function relate(
@@ -1378,6 +1383,9 @@ declare module "slate" {
     replaceNodeByPath(path: Path, newNode: Node): Editor;
     removeTextByKey(key: string, offset: number, length: number): Editor;
     removeTextByPath(path: Path, offset: number, length: number): Editor;
+    setDecorations(
+      decorations: Immutable.List<Decoration> | Decoration[]
+    ): Editor;
     setMarkByKey(
       key: string,
       offset: number,
@@ -2399,6 +2407,12 @@ declare module "slate" {
      * Remove length characters of text starting at an offset in a node by path
      */
     removeTextByPath(path: Path, offset: number, length: number): Controller;
+    /**
+     * Set Decorations
+     */
+    setDecorations(
+      decorations: Immutable.List<Decoration> | Decoration[]
+    ): Controller;
     /**
      * Set a dictionary of properties on a mark by its key.
      */

@@ -52,7 +52,7 @@
   "peerDependencies": {
     "react": ">=16.0.0 || ^16.7.0-alpha",
     "react-dom": ">=16.0.0 || ^16.7.0-alpha",
-    "slate": ">=0.44.0 <0.45.0"
+    "slate": ">=0.44.0 <0.46.0"
   },
   "keywords": [
     "Vericus",

@@ -39,12 +39,12 @@
     "tslib": "^1.9.3"
   },
   "peerDependencies": {
-    "slate": ">=0.44.0 <0.45.0"
+    "slate": ">=0.44.0 <0.46.0"
   },
   "devDependencies": {
     "@vericus/slate-kit-typescript-typings": "^1.1.10",
     "@vericus/slate-kit-utils-hyperscript": "^0.2.10",
-    "slate": ">=0.44.0 <0.45.0"
+    "slate": ">=0.44.0 <0.46.0"
   },
   "keywords": [
     "Vericus",

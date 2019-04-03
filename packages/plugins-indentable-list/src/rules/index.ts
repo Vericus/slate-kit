@@ -10,6 +10,7 @@ function deserializeFlatList(blocks, data, marks, block, childNodes, next) {
       (acc, childNode) => {
         const childNodeELement = childNode as HTMLElement;
         if (
+          childNodeELement &&
           childNodeELement.tagName &&
           rejectedBlocks.includes(childNodeELement.tagName.toLowerCase())
         ) {
@@ -38,10 +39,8 @@ function deserializeNested(blocks, editor, el, block, childNodes, next) {
     .map(node => {
       const updatedNode = node;
       const updatedNodeElement = node as HTMLElement;
-      if (
-        updatedNodeElement.tagName &&
-        updatedNodeElement.tagName.toLowerCase() === "li"
-      ) {
+      if (!updatedNodeElement || !updatedNodeElement.tagName) return undefined;
+      if (updatedNodeElement.tagName.toLowerCase() === "li") {
         return deserializeFlatList(
           blocks,
           data,
@@ -118,10 +117,10 @@ function deserializeNested(blocks, editor, el, block, childNodes, next) {
         next
       );
     })
-    .reduce(
-      (acc, val) => (Array.isArray(val) ? [...acc, ...val] : [...acc, val]),
-      []
-    );
+    .reduce((acc, val) => {
+      if (!val) return acc;
+      return Array.isArray(val) ? [...acc, ...val] : [...acc, val];
+    }, []);
 }
 
 function deserializeFlat(blocks, editor, el, block, childNodes, next) {
