@@ -1,6 +1,6 @@
 {
   "name": "@vericus/slate-kit-utils-hyperscript",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "hyperscript helpers for testing purposes",
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
@@ -43,7 +43,7 @@
     "test"
   ],
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.10",
+    "@vericus/slate-kit-typescript-typings": "^1.1.11",
     "to-camel-case": "^1.0.0"
   }
 }

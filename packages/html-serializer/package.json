@@ -1,5 +1,5 @@
 {
-  "version": "0.2.16",
+  "version": "0.2.17",
   "name": "@vericus/slate-kit-html-serializer",
   "description": "slate-html-serializer's rules builder for slate-kit style plugins",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -38,8 +38,8 @@
     "tslib": "TSLib"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.10",
-    "@vericus/slate-kit-utils-hyperscript": "^0.2.10",
+    "@vericus/slate-kit-typescript-typings": "^1.1.11",
+    "@vericus/slate-kit-utils-hyperscript": "^0.2.11",
     "slate": ">=0.44.0 <0.46.0",
     "slate-html-serializer": ">=0.7.0 < 0.8.0"
   },
@@ -59,7 +59,7 @@
     "xml"
   ],
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.8",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.9",
     "tslib": "^1.9.3"
   }
 }
