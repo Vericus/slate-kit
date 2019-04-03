@@ -19,6 +19,7 @@ module.exports = function babelConfig(api) {
         {
           modules: "commonjs",
           useBuiltIns: "usage",
+          corejs: 2,
           debug: false
         }
       ],

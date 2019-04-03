@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Editor, Plugin } from "slate";
-import { compose } from "recompose";
 
 export interface Props {
   children: (...args: any[]) => JSX.Element;
 }
 
 const SlateKitNode: React.SFC<Props> = props => props.children(props);
+
+const compose = (...funcs) =>
+  funcs.reduce((a, b) => (...args) => a(b(...args)), arg => arg);
 
 export default function createRenderers(): Plugin {
   const nodes = {};
