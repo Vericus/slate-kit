@@ -34,7 +34,7 @@ declare module "slate" {
       max?: number;
       match?: ObjectAndType | ObjectAndType[];
     }>;
-    marks?: Array<{ type: string }>;
+    marks?: Array<{ type: ((type: string) => boolean) | string }>;
     normalize?: (editor: Editor, error: SlateError) => void;
     parent?: ObjectAndType | ObjectAndType[];
     text?: RegExp;
@@ -776,22 +776,24 @@ declare module "slate" {
 
   export interface InsertTextOperation {
     type: "insert_text";
-    path: number[];
+    path: Path;
     offset: number;
     text: string;
     marks: Mark[];
+    data: Data;
   }
 
   export interface RemoveTextOperation {
     type: "remove_text";
-    path: number[];
+    path: Path;
     offset: number;
     text: string;
+    data: Data;
   }
 
   export interface AddMarkOperation {
     type: "add_mark";
-    path: number[];
+    path: Path;
     offset: number;
     length: number;
     mark: Mark;
@@ -799,68 +801,82 @@ declare module "slate" {
 
   export interface RemoveMarkOperation {
     type: "remove_mark";
-    path: number[];
+    path: Path;
     offset: number;
     length: number;
     mark: Mark;
+    data: Data;
   }
 
   export interface SetMarkOperation {
     type: "set_mark";
-    path: number[];
+    path: Path;
     offset: number;
     length: number;
     mark: Mark;
     properties: MarkProperties;
+    newProperties: MarkProperties;
+    data: Data;
   }
 
   export interface InsertNodeOperation {
     type: "insert_node";
-    path: number[];
+    path: Path;
     node: Node;
+    data: Data;
   }
 
   export interface MergeNodeOperation {
     type: "merge_node";
-    path: number[];
+    path: Path;
     position: number;
+    properties: NodeProperties;
+    data: Data;
   }
 
   export interface MoveNodeOperation {
     type: "move_node";
-    path: number[];
-    newPath: number[];
+    path: Path;
+    newPath: Path;
+    data: Data;
   }
 
   export interface RemoveNodeOperation {
     type: "remove_node";
-    path: number[];
+    path: Path;
     node: Node;
+    data: Data;
   }
 
   export interface SetNodeOperation {
     type: "set_node";
-    path: number[];
-    properties: BlockProperties | InlineProperties | TextProperties;
+    path: Path;
+    properties: NodeProperties;
+    newProperties: NodeProperties;
+    data: Data;
   }
 
   export interface SplitNodeOperation {
     type: "split_node";
-    path: number[];
+    path: Path;
     position: number;
     target: number;
+    properties: NodeProperties;
+    data: Data;
   }
 
   export interface SetSelectionOperation {
     type: "set_selection";
-    properties: RangeProperties;
-    selection: Range;
+    properties: SelectionProperties;
+    newProperties: SelectionProperties;
+    data: Data;
   }
 
   export interface SetValueOperation {
     type: "set_value";
     properties: ValueProperties;
-    value: Value;
+    newProperties: ValueProperties;
+    data: Data;
   }
 
   export interface Operations {
@@ -1091,6 +1107,7 @@ declare module "slate" {
   export class Editor implements Controller {
     object: "editor";
     onChange: (change: Change) => void;
+    operations: Immutable.List<Operation>;
     plugins: Plugin[];
     readOnly: boolean;
     value: Value;
