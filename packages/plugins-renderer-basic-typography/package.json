@@ -1,5 +1,5 @@
 {
-  "version": "0.2.18",
+  "version": "0.2.19",
   "name": "@vericus/slate-kit-basic-typography-renderer",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -48,8 +48,8 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.11",
-    "@vericus/slate-kit-utils-hyperscript": "^0.2.11",
+    "@vericus/slate-kit-typescript-typings": "^1.1.12",
+    "@vericus/slate-kit-utils-hyperscript": "^0.2.12",
     "expect": "^23.1.0",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",

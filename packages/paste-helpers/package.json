@@ -1,5 +1,5 @@
 {
-  "version": "0.2.13",
+  "version": "0.2.14",
   "name": "@vericus/slate-kit-paste-helpers",
   "description": "HTML paste cleaner",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -42,8 +42,8 @@
     "slate": ">=0.44.0 <0.46.0"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.11",
-    "@vericus/slate-kit-utils-hyperscript": "^0.2.11",
+    "@vericus/slate-kit-typescript-typings": "^1.1.12",
+    "@vericus/slate-kit-utils-hyperscript": "^0.2.12",
     "slate": ">=0.44.0 <0.46.0"
   },
   "keywords": [
