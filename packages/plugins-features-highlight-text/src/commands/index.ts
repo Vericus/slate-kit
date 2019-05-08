@@ -23,10 +23,7 @@ export default function createCommands(opt: TypeOptions) {
             })
           });
           if (selection.isCollapsed) {
-            editor
-              .removeCollapsedMark(type)
-              .focus()
-              .addMark(newMark);
+            editor.removeCollapsedMark(type).addMark(newMark);
           } else {
             editor.removeExpandedMark(type).addMarkAtRange(selection, newMark);
           }
@@ -39,7 +36,7 @@ export default function createCommands(opt: TypeOptions) {
           })
         });
         if (selection.isCollapsed) {
-          editor.addMark(mark);
+          editor.removeCollapsedMark(type).addMark(mark);
         } else {
           editor.removeExpandedMark(type).addMarkAtRange(selection, mark);
         }
