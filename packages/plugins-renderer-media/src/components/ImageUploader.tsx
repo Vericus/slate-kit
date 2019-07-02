@@ -18,6 +18,10 @@ export default class ImageUploader extends React.Component<
   UploaderProps,
   UploaderStates
 > {
+  private fileRef: React.RefObject<HTMLInputElement>;
+
+  private fileReader: FileReader;
+
   public constructor(props) {
     super(props);
     this.fileRef = React.createRef();
@@ -69,10 +73,6 @@ export default class ImageUploader extends React.Component<
       this.onImageSelected(e.target.files[0]);
     }
   };
-
-  private fileRef: React.RefObject<HTMLInputElement>;
-
-  private fileReader: FileReader;
 
   public render() {
     if (!this.state.src || this.state.src === "") {
