@@ -10,6 +10,8 @@ function createOnKeyDown(opts: Options) {
   }
   return (event, editor, next): boolean => {
     if (checkHotKey(event) && editor[commandName]) {
+      event.preventDefault();
+      event.stopPropagation();
       if (commandArgs) {
         editor[commandName](...commandArgs);
       } else {
