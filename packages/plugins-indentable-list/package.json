@@ -1,5 +1,5 @@
 {
-  "version": "0.2.26",
+  "version": "0.2.27",
   "name": "@vericus/slate-kit-indentable-list",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@vericus/slate-kit-utils-auto-replace": "^0.1.13",
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.9",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.10",
     "classnames": ">=2.2.5",
     "debug": ">=3.1.0",
     "immutable": ">=3.8.2",

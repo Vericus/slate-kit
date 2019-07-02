@@ -1,5 +1,5 @@
 {
-  "version": "0.2.20",
+  "version": "0.2.21",
   "name": "@vericus/slate-kit-highlight-text-renderer",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -39,7 +39,7 @@
     "tinycolor2": "TinyColor"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.9",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.10",
     "is-plain-object": "^2.0.4",
     "prop-types": "^15.6.1",
     "react": ">=16.0.0",

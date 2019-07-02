@@ -1,5 +1,5 @@
 {
-  "version": "0.2.19",
+  "version": "0.2.20",
   "name": "@vericus/slate-kit-indentable-list-renderer",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -39,7 +39,7 @@
     "tslib": "TSLib"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.9",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.10",
     "debug": "^3.1.0",
     "immutable": ">=3.8.2",
     "react": ">=16.0.0",
