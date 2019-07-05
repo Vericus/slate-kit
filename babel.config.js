@@ -18,8 +18,6 @@ module.exports = function babelConfig(api) {
         "@babel/env",
         {
           modules: "commonjs",
-          useBuiltIns: "usage",
-          corejs: 2,
           debug: false
         }
       ],
