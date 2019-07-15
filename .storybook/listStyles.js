@@ -168,6 +168,10 @@ export default css`
     ${includeIndentation(8)};
   }
 
+  .indentation-9:not(ul):not(ol) {
+    ${includeIndentation(9)};
+  }
+
   ${includeListStyle(1)}
   ${includeListStyle(2)}
   ${includeListStyle(3)}
@@ -176,4 +180,5 @@ export default css`
   ${includeListStyle(6)}
   ${includeListStyle(7)}
   ${includeListStyle(8)}
+  ${includeListStyle(9)}
     `;
