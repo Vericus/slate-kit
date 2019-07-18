@@ -33,7 +33,8 @@ export default function createProps(opts: TypeOptions) {
       ...props,
       attributes: {
         ...props.attributes,
-        style
+        style,
+        [`data-cadmus-${type}`]: color.setAlpha(alpha).toRgbString()
       }
     };
   };

@@ -44,26 +44,49 @@ function getFontWeightMark(
   return undefined;
 }
 
+function getLeafNode(el: HTMLElement): HTMLElement | null {
+  if (el.hasAttributes()) {
+    const { parentNode } = el;
+    if (el.getAttribute("data-slate-leaf") === "true") {
+      return el;
+    }
+    if (parentNode) {
+      return getLeafNode(parentNode as HTMLElement);
+    }
+  }
+  return null;
+}
+
 export default function getData(
   marksOption: TextMark,
   el: HTMLElement
 ): { marks?: Mark[] } {
   let marks = Set<Mark>();
-  const { style } = el;
-  if (style) {
-    const { fontStyle, textDecoration, fontWeight } = style;
-    if (fontStyle) {
-      const fontMark = getFontStyleMark(marksOption, fontStyle);
-      if (fontMark) marks = marks.add(fontMark);
+  let node = getLeafNode(el);
+  while (node) {
+    const { style, firstChild } = node;
+    if (style) {
+      const { fontStyle, textDecoration, fontWeight } = style;
+      if (fontStyle) {
+        const fontMark = getFontStyleMark(marksOption, fontStyle);
+        if (fontMark) marks = marks.add(fontMark);
+      }
+      if (textDecoration) {
+        const decorationMark = getTextDecorationMark(
+          marksOption,
+          textDecoration
+        );
+        if (decorationMark) marks = marks.add(decorationMark);
+      }
+      if (fontWeight) {
+        const weightMark = getFontWeightMark(marksOption, fontWeight);
+        if (weightMark) marks = marks.add(weightMark);
+      }
     }
-    if (textDecoration) {
-      const decorationMark = getTextDecorationMark(marksOption, textDecoration);
-      if (decorationMark) marks = marks.add(decorationMark);
-    }
-    if (fontWeight) {
-      const weightMark = getFontWeightMark(marksOption, fontWeight);
-      if (weightMark) marks = marks.add(weightMark);
-    }
+    console.log(firstChild);
+    node = firstChild as HTMLElement;
+  }
+  if (marks && marks.size > 0) {
     return { marks: marks.toArray() };
   }
   return {};
