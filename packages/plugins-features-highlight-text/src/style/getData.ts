@@ -20,7 +20,7 @@ export default function getData(
   el: HTMLElement
 ): { marks?: Mark[] } {
   let marks = Set<Mark>();
-  let node = getLeafNode(el);
+  let node = getLeafNode(el) || el;
   while (node) {
     const { firstChild } = node;
     if (node.hasAttributes && node.hasAttributes()) {

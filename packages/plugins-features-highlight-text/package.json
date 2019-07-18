@@ -6,9 +6,7 @@
   "repository": "git://github.com/Vericus/slate-kit.git",
   "author": "Cadmus",
   "files": [
-    "dist/",
-    "lib/",
-    "module/"
+    "lib/"
   ],
   "slate-kit": {
     "type": "module"
@@ -17,27 +15,22 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-highlight-text.js",
+  "main": "lib/slate-kit-highlight-text.cjs.js",
   "types": "lib/index.d.ts",
   "module": "lib/slate-kit-highlight-text.es.js",
-  "umd": "dist/slate-kit-highlight-text.js",
-  "umdMin": "dist/slate-kit-highlight-text.min.js",
+  "umd": "lib/slate-kit-highlight-text.umd.js",
+  "umdMin": "lib/slate-kit-highlight-text.umd.min.js",
   "scripts": {
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
-    "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "tsc -b .",
-    "dev": "tsc -w",
-    "debug": "tsc --traceResolution ./src"
-  },
-  "umdGlobals": {
-    "immutable": "Immutable",
-    "slate": "Slate",
-    "is-plain-obj": "IsPlainObj",
-    "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
-    "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
-    "tslib": "TSLib",
-    "tinycolor2": "TinyColor"
+    "clean:build": "rm -rf ./lib",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run type-check -- --watch",
+    "build": "tsc -p .",
+    "build:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run build -- --watch",
+    "postbuild": "rollup -c ./rollup.config.ts",
+    "postbuild:watch": "npm run postbuild -- --watch",
+    "watch": "npx npm-run-all -l -r -n -p *:watch"
   },
   "dependencies": {
     "@vericus/slate-kit-utils-register-helpers": "^0.1.10",

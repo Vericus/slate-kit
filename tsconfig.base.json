@@ -9,22 +9,12 @@
     "**/dist/**/*.ts",
     "**/module/**/*.ts"
   ],
-  "include": [
-    "packages/**/src/**/*.ts"
-  ],
+  "include": ["packages/**/src/**/*.ts"],
   "compilerOptions": {
-    "baseUrl": ".",
-    "rootDir": ".",
     "module": "esNext",
     "moduleResolution": "node",
     "target": "es5",
-    "lib": [
-      "es5",
-      "es6",
-      "es7",
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es5", "es6", "es7", "es2017", "dom"],
     "sourceMap": true,
     "pretty": true,
     "jsx": "react",
@@ -40,7 +30,13 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "importHelpers": true,
-    "typeRoots": ["./node_modules/@types", "./packages/typescript-typings/types"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./packages/typescript-typings/types"
+    ],
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
     "types": [
       "react",
       "jest",

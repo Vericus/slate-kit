@@ -62,7 +62,7 @@ export default function getData(
   el: HTMLElement
 ): { marks?: Mark[] } {
   let marks = Set<Mark>();
-  let node = getLeafNode(el);
+  let node = getLeafNode(el) || el;
   while (node) {
     const { style, firstChild } = node;
     if (style) {
@@ -83,7 +83,6 @@ export default function getData(
         if (weightMark) marks = marks.add(weightMark);
       }
     }
-    console.log(firstChild);
     node = firstChild as HTMLElement;
   }
   if (marks && marks.size > 0) {

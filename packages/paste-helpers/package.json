@@ -9,37 +9,36 @@
     "type": "module"
   },
   "files": [
-    "dist/",
-    "lib/",
-    "module"
+    "lib/"
   ],
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-paste-helpers.js",
+  "main": "lib/slate-kit-paste-helpers.cjs.js",
   "types": "lib/index.d.ts",
   "module": "lib/slate-kit-paste-helpers.es.js",
-  "umd": "dist/slate-kit-paste-helpers.js",
-  "umdMin": "dist/slate-kit-paste-helpers.min.js",
-  "umdGlobals": {
-    "tinymce-word-paste-filter": "WordPasteFilter",
-    "tslib": "TSLib"
-  },
+  "umd": "lib/slate-kit-paste-helpers.umd.js",
+  "umdMin": "lib/slate-kit-paste-helpers.umd.min.js",
   "scripts": {
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
-    "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "tsc -b .",
-    "dev": "tsc -w",
-    "debug": "tsc --traceResolution ./src"
+    "clean:build": "rm -rf ./lib",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run type-check -- --watch",
+    "build": "tsc -p .",
+    "build:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run build -- --watch",
+    "postbuild": "rollup -c ./rollup.config.ts",
+    "postbuild:watch": "npm run postbuild -- --watch",
+    "watch": "npx npm-run-all -l -r -n -p *:watch"
   },
   "dependencies": {
     "tinymce-word-paste-filter": "^0.6.1",
     "tslib": "^1.9.3"
   },
   "peerDependencies": {
-    "slate": ">=0.44.0 <0.46.0"
+    "slate": ">=0.44.0 <0.46.0",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@vericus/slate-kit-typescript-typings": "^1.1.12",

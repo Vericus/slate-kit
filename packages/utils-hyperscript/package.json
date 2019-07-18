@@ -8,18 +8,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-utils-hyperscript.js",
+  "main": "lib/slate-kit-utils-hyperscript.cjs.js",
   "module": "lib/slate-kit-utils-hyperscript.es.js",
-  "umd": "dist/slate-kit-utils-hyperscript.js",
-  "umdMin": "dist/slate-kit-utils-hyperscript.min.js",
-  "umdGlobals": {
-    "slate-hyperscript": "SlateHyperScript",
-    "tslib": "TSLib"
-  },
+  "umd": "lib/slate-kit-utils-hyperscript.umd.js",
+  "umdMin": "lib/slate-kit-utils-hyperscript.umd.min.js",
   "files": [
-    "dist/",
-    "lib/",
-    "module"
+    "lib/"
   ],
   "slate-kit": {
     "type": "module"
@@ -27,10 +21,14 @@
   "scripts": {
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
-    "clean:build": "rm -rf ./dist ./lib ./module",
-    "build": "tsc -b .",
-    "dev": "tsc -w",
-    "debug": "tsc --traceResolution ./src"
+    "clean:build": "rm -rf ./lib",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run type-check -- --watch",
+    "build": "tsc -p .",
+    "build:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run build -- --watch",
+    "postbuild": "rollup -c ./rollup.config.ts",
+    "postbuild:watch": "npm run postbuild -- --watch",
+    "watch": "npx npm-run-all -l -r -n -p *:watch"
   },
   "dependencies": {
     "slate-hyperscript": ">=0.5.10",
