@@ -1,5 +1,5 @@
 {
-  "version": "0.2.21",
+  "version": "0.2.22",
   "name": "@vericus/slate-kit-highlight-text",
   "description": "plugin that provide a way to color/highlight a group of text on slate",
   "homepage": "https://github.com/Vericus/slate-kit/",
