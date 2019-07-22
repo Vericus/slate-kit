@@ -24,7 +24,7 @@ export default function getData(
   while (node) {
     const { firstChild } = node;
     if (node.hasAttributes && node.hasAttributes()) {
-      const color = node.getAttribute(`data-cadmus-${type}`);
+      const color = node.getAttribute(`data-slate-kit-${type.toLowerCase()}`);
       if (color) {
         marks = marks.add(
           new Mark({

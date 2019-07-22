@@ -34,7 +34,9 @@ export default function createProps(opts: TypeOptions) {
       attributes: {
         ...props.attributes,
         style,
-        [`data-cadmus-${type}`]: color.setAlpha(alpha).toRgbString()
+        [`data-slate-kit-${type.toLowerCase()}`]: color
+          .setAlpha(alpha)
+          .toRgbString()
       }
     };
   };
