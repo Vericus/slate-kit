@@ -25,7 +25,7 @@
     "clean:build": "rm -rf ./lib",
     "type-check": "tsc --noEmit",
     "type-check:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run type-check -- --watch",
-    "build": "tsc -b .",
+    "build": "tsc -p .",
     "build:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run build -- --watch",
     "postbuild": "rollup -c ./rollup.config.ts",
     "postbuild:watch": "npm run postbuild -- --watch",
