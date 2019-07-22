@@ -37,7 +37,7 @@ const releasesIndex = `${releasesFolder}/index.html`;
 const latestFolder = `${ghPagesFolder}/latest`;
 const mainIndex = `${ghPagesFolder}/index.html`;
 const packageJson = require(path.resolve(__dirname, "../../package.json"));
-const commitMsg = "update github pages with version ";
+const commitMsg = "[skip ci] update github pages with version ";
 
 const isDirectory = source => fs.lstatSync(source).isDirectory();
 const getDirectories = source =>
