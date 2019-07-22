@@ -79,7 +79,7 @@ module.exports = function babelConfig(api) {
       "@babel/plugin-proposal-json-strings"
     ];
   } else if (api.env("build")) {
-    presets = ["@babel/preset-typescript", "@babel/react", "@babel/env"];
+    presets = [["@babel/preset-typescript", {isTSX: true, allExtensions: true}], "@babel/react", "@babel/env"];
     plugins = [
       "@babel/plugin-transform-typescript",
       "@babel/plugin-syntax-dynamic-import",
@@ -88,7 +88,7 @@ module.exports = function babelConfig(api) {
       "@babel/plugin-proposal-object-rest-spread"
     ];
   } else if (api.env("gh-pages")) {
-    presets = ["@babel/preset-typescript", "@babel/env", "@babel/react"];
+    presets = [["@babel/preset-typescript", {isTSX: true, allExtensions: true}], "@babel/env", "@babel/react"];
     plugins = [
       "@babel/plugin-transform-typescript",
       "@babel/plugin-syntax-dynamic-import",
