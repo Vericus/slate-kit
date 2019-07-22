@@ -3,11 +3,8 @@
   "extends": "./tsconfig.json",
   "includes": "packages/*/src",
   "compilerOptions": {
+    "allowJs": true,
     "jsx": "react",
-    "types": [
-      "react",
-      "jest",
-      "node"
-    ]
+    "types": ["react", "jest", "node"]
   }
 }

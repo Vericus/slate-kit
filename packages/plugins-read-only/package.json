@@ -9,33 +9,28 @@
     "type": "module"
   },
   "files": [
-    "dist/",
-    "lib/",
-    "module/"
+    "lib/"
   ],
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-read-only.js",
+  "main": "lib/slate-kit-read-only.cjs.js",
   "types": "lib/index.d.ts",
   "module": "lib/slate-kit-read-only.es.js",
-  "umd": "dist/slate-kit-read-only.js",
-  "umdMin": "dist/slate-kit-read-only.min.js",
+  "umd": "lib/slate-kit-read-only.umd.js",
+  "umdMin": "lib/slate-kit-read-only.umd.min.js",
   "scripts": {
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
-    "clean:build": "rm -rf ./dist ./lib ./module",
+    "clean:build": "rm -rf ./lib",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run type-check -- --watch",
     "build": "tsc -b .",
-    "dev": "tsc -w",
-    "debug": "tsc --traceResolution ./src"
-  },
-  "umdGlobals": {
-    "is-hotkey": "IsHotkey",
-    "react": "react",
-    "prop-types": "PropTypes",
-    "tslib": "TSLib",
-    "hoist-non-react-statics": "HoistNonReactStatics"
+    "build:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run build -- --watch",
+    "postbuild": "rollup -c ./rollup.config.ts",
+    "postbuild:watch": "npm run postbuild -- --watch",
+    "watch": "npx npm-run-all -l -r -n -p *:watch"
   },
   "dependencies": {
     "hoist-non-react-statics": ">=2.5.0",

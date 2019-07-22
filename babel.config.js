@@ -1,29 +1,39 @@
 module.exports = function babelConfig(api) {
   let presets = [];
   let plugins = [];
-  if (api.env("webpack")) {
+  if (api.env("production")) {
     presets = [
+      ["@babel/preset-typescript", { isTSX: true, allExtensions: true }],
+      "@babel/react",
       [
         "@babel/env",
         {
-          modules: false
+          modules: false,
+          useBuiltIns: "usage",
+          corejs: 3
         }
-      ],
-      "@babel/react"
+      ]
     ];
-    plugins = ["@babel/plugin-transform-runtime"];
+    plugins = [
+      "@babel/plugin-transform-typescript",
+      "@babel/plugin-syntax-dynamic-import",
+      "@babel/plugin-transform-runtime"
+    ];
   } else if (api.env("test")) {
     presets = [
+      ["@babel/preset-typescript", { isTSX: true, allExtensions: true }],
+      "@babel/react",
       [
         "@babel/env",
         {
           modules: "commonjs",
-          debug: false
+          useBuiltIns: "usage",
+          corejs: 3
         }
-      ],
-      "@babel/react"
+      ]
     ];
     plugins = [
+      "@babel/plugin-transform-typescript",
       "@babel/plugin-transform-runtime",
       "@babel/transform-modules-commonjs",
       "@babel/plugin-proposal-function-bind",
@@ -69,15 +79,19 @@ module.exports = function babelConfig(api) {
       "@babel/plugin-proposal-json-strings"
     ];
   } else if (api.env("build")) {
-    presets = ["@babel/react", "@babel/env"];
+    presets = ["@babel/preset-typescript", "@babel/react", "@babel/env"];
     plugins = [
+      "@babel/plugin-transform-typescript",
+      "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-transform-runtime",
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-object-rest-spread"
     ];
   } else if (api.env("gh-pages")) {
-    presets = ["@babel/env", "@babel/react"];
+    presets = ["@babel/preset-typescript", "@babel/env", "@babel/react"];
     plugins = [
+      "@babel/plugin-transform-typescript",
+      "@babel/plugin-syntax-dynamic-import",
       [
         "@babel/plugin-transform-classes",
         {
@@ -88,6 +102,7 @@ module.exports = function babelConfig(api) {
     ];
   } else {
     presets = [
+      "@babel/preset-typescript",
       [
         "@babel/env",
         {
@@ -96,8 +111,14 @@ module.exports = function babelConfig(api) {
       ],
       "@babel/react"
     ];
+    plugins = [
+      "@babel/plugin-transform-typescript",
+      "@babel/plugin-syntax-dynamic-import",
+      "transform-dynamic-import",
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread"
+    ];
   }
-
   return {
     presets,
     plugins

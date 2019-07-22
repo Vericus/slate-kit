@@ -1,10 +1,8 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "../../tsconfig.json",
+  "include": ["./src/**/*"],
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./module",
-    "jsx": "react",
-    "typeRoots": ["../../node_modules/@types", "../typescript-typings/types"]
-  },
-  "include": ["./src/**/*"]
+    "outDir": "./lib",
+    "tsBuildInfoFile": "./.tsbuildinfo"
+  }
 }

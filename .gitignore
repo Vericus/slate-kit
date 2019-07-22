@@ -42,3 +42,7 @@ packages/**/.flowconfig
 **/.cache/**
 
 **/*.tgz
+
+# typescript cache
+.tsbuildinfo
+.tern-port

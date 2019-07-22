@@ -9,34 +9,28 @@
     "type": "module"
   },
   "files": [
-    "dist/",
-    "lib/",
-    "module/"
+    "lib/"
   ],
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-indentable-list-renderer.js",
+  "main": "lib/slate-kit-indentable-list-renderer.cjs.js",
   "types": "lib/index.d.ts",
   "module": "lib/slate-kit-indentable-list-renderer.es.js",
-  "umd": "dist/slate-kit-indentable-list-renderer.js",
-  "umdMin": "dist/slate-kit-indentable-list-renderer.min.js",
+  "umd": "lib/slate-kit-indentable-list-renderer.umd.js",
+  "umdMin": "lib/slate-kit-indentable-list-renderer.umd.min.js",
   "scripts": {
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
-    "clean:build": "rm -rf ./dist ./lib ./module",
+    "clean:build": "rm -rf ./lib",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run type-check -- --watch",
     "build": "tsc -b .",
-    "dev": "tsc -w",
-    "debug": "tsc --traceResolution ./src"
-  },
-  "umdGlobals": {
-    "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
-    "immutable": "Immutable",
-    "slate": "Slate",
-    "slate-prop-types": "SlatePropTypes",
-    "react": "React",
-    "tslib": "TSLib"
+    "build:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run build -- --watch",
+    "postbuild": "rollup -c ./rollup.config.ts",
+    "postbuild:watch": "npm run postbuild -- --watch",
+    "watch": "npx npm-run-all -l -r -n -p *:watch"
   },
   "dependencies": {
     "@vericus/slate-kit-utils-register-helpers": "^0.1.10",

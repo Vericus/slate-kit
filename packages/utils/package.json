@@ -9,32 +9,28 @@
     "type": "module"
   },
   "files": [
-    "dist/",
-    "lib/",
-    "module"
+    "lib/"
   ],
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-plugins-utils.js",
+  "main": "lib/slate-kit-plugins-utils.cjs.js",
   "types": "lib/index.d.ts",
   "module": "lib/slate-kit-plugins-utils.es.js",
-  "umd": "dist/slate-kit-plugins-utils.js",
-  "umdMin": "dist/slate-kit-plugins-utils.min.js",
+  "umd": "lib/slate-kit-plugins-utils.umd.js",
+  "umdMin": "lib/slate-kit-plugins-utils.umd.min.js",
   "scripts": {
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
-    "clean:build": "rm -rf ./dist ./lib ./module",
+    "clean:build": "rm -rf ./lib",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run type-check -- --watch",
     "build": "tsc -b .",
-    "dev": "tsc -w",
-    "debug": "tsc --traceResolution ./src"
-  },
-  "umdGlobals": {
-    "immutable": "Immutable",
-    "slate": "Slate",
-    "is-in-browser": "IsInBrowser",
-    "tslib": "TSLib"
+    "build:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run build -- --watch",
+    "postbuild": "rollup -c ./rollup.config.ts",
+    "postbuild:watch": "npm run postbuild -- --watch",
+    "watch": "npx npm-run-all -l -r -n -p *:watch"
   },
   "dependencies": {
     "debug": ">=3.1.0",

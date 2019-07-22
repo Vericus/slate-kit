@@ -9,36 +9,28 @@
     "type": "module"
   },
   "files": [
-    "dist/",
-    "lib/",
-    "module/"
+    "lib/"
   ],
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-media.js",
+  "main": "lib/slate-kit-media.cjs.js",
   "types": "module/index.d.ts",
   "module": "lib/slate-kit-media.es.js",
-  "umd": "dist/slate-kit-media.js",
-  "umdMin": "dist/slate-kit-media.min.js",
+  "umd": "lib/slate-kit-media.umd.js",
+  "umdMin": "lib/slate-kit-media.umd.min.js",
   "scripts": {
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
-    "clean:build": "rm -rf ./dist ./lib ./module",
+    "clean:build": "rm -rf ./lib",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run type-check -- --watch",
     "build": "tsc -b .",
-    "dev": "tsc -w",
-    "debug": "tsc --traceResolution ./src"
-  },
-  "umdGlobals": {
-    "@vericus/slate-kit-utils-toolbars": "SlateKitToolbar",
-    "@vericus/slate-kit-utils-register-helpers": "SlateKitRegister",
-    "@vericus/slate-kit-plugins-utils": "SlateKitPluginsutils",
-    "is-hotkey": "IsHotkey",
-    "immutable": "Immutable",
-    "slate": "Slate",
-    "slate-hotkeys": "SlateHotkeys",
-    "tslib": "TSLib"
+    "build:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run build -- --watch",
+    "postbuild": "rollup -c ./rollup.config.ts",
+    "postbuild:watch": "npm run postbuild -- --watch",
+    "watch": "npx npm-run-all -l -r -n -p *:watch"
   },
   "dependencies": {
     "@vericus/slate-kit-utils-register-helpers": "^0.1.10",

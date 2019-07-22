@@ -1,5 +1,22 @@
 {
+  "presets": [
+    [
+      "@babel/preset-typescript",
+      {
+        "isTSX": true,
+        "allExtensions": true
+      }
+    ],
+    "@babel/react",
+    [
+      "@babel/env",
+      {
+        "modules": false
+      }
+    ]
+  ],
   "plugins": [
+    "@babel/plugin-transform-typescript",
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-transform-modules-commonjs",
     "@babel/plugin-transform-runtime",

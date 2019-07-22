@@ -67,11 +67,11 @@ export const fixtures = (...args) => {
 
       if (
         stat.isFile() &&
-        file.endsWith(".js") &&
+        (file.endsWith(".js") || file.endsWith(".jsx")) &&
         !file.startsWith(".") &&
         // Ignoring `index.js` files allows us to use the fixtures directly
         // from the top-level directory itself, instead of only children.
-        file !== "index.js"
+        file !== "index.js" && file !== "index.jsx"
       ) {
         const name = basename(file, extname(file));
 
