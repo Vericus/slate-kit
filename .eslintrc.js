@@ -23,7 +23,7 @@ module.exports = {
   rules: {
     "@typescript-eslint/explicit-function-return-type": "off",
     "prettier/prettier": "error",
-    "react/jsx-filename-extension": [1, { extensions: [".js", ".tsx"] }],
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".tsx", "jsx"] }],
     "react/destructuring-assignment": 0,
     "prettier/prettier": "error",
     "jsx-a11y/click-events-have-key-events": 0,
@@ -45,7 +45,7 @@ module.exports = {
         peerDependencies: true
       }
     ],
-    "import/prefer-default-export": false,
+    "import/prefer-default-export": 0,
     "react/prop-types": 0,
     "react/button-has-type": 0
   },

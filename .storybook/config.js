@@ -1,5 +1,6 @@
 import React from "react";
 import { configure, addDecorator, addParameters } from "@storybook/react";
+import { themes } from '@storybook/theming';
 import { withOptions } from "@storybook/addon-options";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "./theme";
@@ -28,7 +29,8 @@ addParameters({
   options: {
     name: "Slate-Kit",
     url: "https://github.com/Vericus/slate-kit",
-    panelPosition: "right"
+    panelPosition: "right",
+    theme: themes.light
   }
 });
 

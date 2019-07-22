@@ -1,17 +1,18 @@
 module.exports = function babelConfig(api) {
   let presets = [];
   let plugins = [];
-  if (api.env("webpack")) {
+  if (api.env("production")) {
     presets = [
+      ["@babel/preset-typescript", { isTSX: true, allExtensions: true }],
+      "@babel/react",
       [
-        "@babel/preset-typescript",
-
         "@babel/env",
         {
-          modules: false
+          modules: false,
+          useBuiltIns: "usage",
+          corejs: 3
         }
-      ],
-      "@babel/react"
+      ]
     ];
     plugins = [
       "@babel/plugin-transform-typescript",
@@ -20,17 +21,19 @@ module.exports = function babelConfig(api) {
     ];
   } else if (api.env("test")) {
     presets = [
-      "@babel/preset-typescript",
+      ["@babel/preset-typescript", { isTSX: true, allExtensions: true }],
+      "@babel/react",
       [
         "@babel/env",
         {
           modules: "commonjs",
-          debug: false
+          useBuiltIns: "usage",
+          corejs: 3
         }
-      ],
-      "@babel/react"
+      ]
     ];
     plugins = [
+      "@babel/plugin-transform-typescript",
       "@babel/plugin-transform-runtime",
       "@babel/transform-modules-commonjs",
       "@babel/plugin-proposal-function-bind",
