@@ -4,6 +4,7 @@
     "composite": true,
     "traceResolution": true,
     "listEmittedFiles": true,
-    "listFiles": true
+    "listFiles": true,
+    "showConfig": true
   }
 }
