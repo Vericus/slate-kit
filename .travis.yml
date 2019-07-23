@@ -3,6 +3,6 @@ node_js: "12"
 cache: yarn
 
 script:
-  - yarn postbuild
+  - yarn build:rollup
   - yarn lint
   - yarn test
