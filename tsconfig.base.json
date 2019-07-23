@@ -47,31 +47,5 @@
       "slate-html-serializer",
       "slate-base64-serializer"
     ]
-  },
-  "references": [
-    {"path":"packages/html-serializer"},
-    {"path":"packages/paste-helpers"},
-    {"path":"packages/plugins-align"},
-    {"path":"packages/plugins-features-basic-text-formatting"},
-    {"path":"packages/plugins-features-basic-typhography"},
-    {"path":"packages/plugins-features-highlight-text"},
-    {"path":"packages/plugins-features-history"},
-    {"path":"packages/plugins-features-media"},
-    {"path":"packages/plugins-helpers-bind-hotkey"},
-    {"path":"packages/plugins-indent"},
-    {"path":"packages/plugins-indentable-list"},
-    {"path":"packages/plugins-read-only"},
-    {"path":"packages/plugins-renderer"},
-    {"path":"packages/plugins-renderer-basic-text-formatting"},
-    {"path":"packages/plugins-renderer-basic-typography"},
-    {"path":"packages/plugins-renderer-highlight-text"},
-    {"path":"packages/plugins-renderer-indentable-list"},
-    {"path":"packages/plugins-renderer-media"},
-    {"path":"packages/utils"},
-    {"path":"packages/utils-auto-replace"},
-    {"path":"packages/utils-hyperscript"},
-    {"path":"packages/utils-placeholders"},
-    {"path":"packages/utils-register-helpers"},
-    {"path":"packages/utils-toolbars"}
-  ]
+  }
 }

@@ -13,7 +13,8 @@
     "bootstrap": "npx lerna bootstrap && yarn",
     "bootstrap:build": "yarn bootstrap && yarn build",
     "build-storybook": "build-storybook",
-    "build": "lerna run build --stream",
+    "build": "tsc -b packages",
+    "postbuild": "lerna run postbuild --stream",
     "build:clean": "lerna run clean:build && yarn run build",
     "build:rollup": "lerna run postbuild",
     "clean": "lerna clean --yes && lerna run clean && rm -rf ./node_modules",
@@ -24,9 +25,10 @@
     "storybook": "start-storybook -p 6006",
     "test": "jest --no-cache --logHeapUsage --colors",
     "updated": "lerna updated || exit 0",
-    "watch": "npm-run-all --parallel --print-label watch:test watch:build storybook",
+    "watch": "npm-run-all --parallel --print-label watch:test watch:build watch:postbuild storybook",
     "watch:test": "yarn run test --watch",
-    "watch:build": "lerna run --parallel watch --stream"
+    "watch:build": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling yarn run build -- --watch",
+    "watch:postbuild": "lerna run --parallel postbuild:watch --stream"
   },
   "husky": {
     "hooks": {

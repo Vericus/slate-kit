@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.settings.json",
   "include": ["./src/**/*"],
   "compilerOptions": {
     "rootDir": "src",
@@ -7,28 +7,7 @@
     "tsBuildInfoFile": "./.tsbuildinfo"
   },
   "references": [
-    {"path":"../paste-helpers"},
-    {"path":"../plugins-align"},
-    {"path":"../plugins-features-basic-text-formatting"},
-    {"path":"../plugins-features-basic-typhography"},
-    {"path":"../plugins-features-highlight-text"},
-    {"path":"../plugins-features-history"},
-    {"path":"../plugins-features-media"},
-    {"path":"../plugins-helpers-bind-hotkey"},
-    {"path":"../plugins-indent"},
-    {"path":"../plugins-indentable-list"},
-    {"path":"../plugins-read-only"},
-    {"path":"../plugins-renderer"},
-    {"path":"../plugins-renderer-basic-text-formatting"},
-    {"path":"../plugins-renderer-basic-typography"},
-    {"path":"../plugins-renderer-highlight-text"},
-    {"path":"../plugins-renderer-indentable-list"},
-    {"path":"../plugins-renderer-media"},
-    {"path":"../utils"},
-    {"path":"../utils-auto-replace"},
     {"path":"../utils-hyperscript"},
-    {"path":"../utils-placeholders"},
-    {"path":"../utils-register-helpers"},
-    {"path":"../utils-toolbars"}
+    {"path":"../utils-register-helpers"}
   ]
 }

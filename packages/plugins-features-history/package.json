@@ -15,7 +15,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/slate-kit-historyc.cjs.js",
+  "main": "lib/slate-kit-history.cjs.js",
   "types": "lib/index.d.ts",
   "module": "lib/slate-kit-history.es.js",
   "umd": "lib/slate-kit-history.umd.js",
