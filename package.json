@@ -15,6 +15,7 @@
     "build-storybook": "build-storybook",
     "build": "lerna run build --stream",
     "build:clean": "lerna run clean:build && yarn run build",
+    "build:rollup": "lerna run postbuild",
     "clean": "lerna clean --yes && lerna run clean && rm -rf ./node_modules",
     "gh-pages": "NODE_ENV=gh-pages babel-node support/gh-pages/deploy.js",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",

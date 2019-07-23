@@ -23,7 +23,7 @@
   "scripts": {
     "clean": "yarn run clean:module && yarn run clean:build",
     "clean:module": "rm -rf ./node_modules",
-    "clean:build": "rm -rf ./lib",
+    "clean:build": "rm -rf ./lib ./.tsbuildinfo",
     "type-check": "tsc --noEmit",
     "type-check:watch": "TSC_WATCHFILE=UseFsEventsWithFallbackDynamicPolling npm run type-check -- --watch",
     "build": "tsc -p .",
