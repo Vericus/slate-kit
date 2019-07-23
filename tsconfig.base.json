@@ -67,7 +67,6 @@
     {"path":"packages/plugins-renderer-highlight-text"},
     {"path":"packages/plugins-renderer-indentable-list"},
     {"path":"packages/plugins-renderer-media"},
-    {"path":"packages/typescript-typings"},
     {"path":"packages/utils"},
     {"path":"packages/utils-auto-replace"},
     {"path":"packages/utils-hyperscript"},
