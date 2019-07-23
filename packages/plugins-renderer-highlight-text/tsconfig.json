@@ -22,7 +22,6 @@
     {"path":"../plugins-renderer"},
     {"path":"../plugins-renderer-basic-text-formatting"},
     {"path":"../plugins-renderer-basic-typography"},
-    {"path":"../plugins-renderer-highlight-text"},
     {"path":"../plugins-renderer-indentable-list"},
     {"path":"../plugins-renderer-media"},
     {"path":"../utils"},

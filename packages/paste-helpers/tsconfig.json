@@ -8,7 +8,6 @@
   },
   "references": [
     {"path":"../html-serializer"},
-    {"path":"../paste-helpers"},
     {"path":"../plugins-align"},
     {"path":"../plugins-features-basic-text-formatting"},
     {"path":"../plugins-features-basic-typhography"},

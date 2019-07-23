@@ -7,7 +7,6 @@
     "tsBuildInfoFile": "./.tsbuildinfo"
   },
   "references": [
-    {"path":"../html-serializer"},
     {"path":"../paste-helpers"},
     {"path":"../plugins-align"},
     {"path":"../plugins-features-basic-text-formatting"},

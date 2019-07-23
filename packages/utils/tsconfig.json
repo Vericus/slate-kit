@@ -25,7 +25,6 @@
     {"path":"../plugins-renderer-highlight-text"},
     {"path":"../plugins-renderer-indentable-list"},
     {"path":"../plugins-renderer-media"},
-    {"path":"../utils"},
     {"path":"../utils-auto-replace"},
     {"path":"../utils-hyperscript"},
     {"path":"../utils-placeholders"},

@@ -18,7 +18,6 @@
     {"path":"../plugins-helpers-bind-hotkey"},
     {"path":"../plugins-indent"},
     {"path":"../plugins-indentable-list"},
-    {"path":"../plugins-read-only"},
     {"path":"../plugins-renderer"},
     {"path":"../plugins-renderer-basic-text-formatting"},
     {"path":"../plugins-renderer-basic-typography"},

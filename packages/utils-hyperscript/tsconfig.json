@@ -27,7 +27,6 @@
     {"path":"../plugins-renderer-media"},
     {"path":"../utils"},
     {"path":"../utils-auto-replace"},
-    {"path":"../utils-hyperscript"},
     {"path":"../utils-placeholders"},
     {"path":"../utils-register-helpers"},
     {"path":"../utils-toolbars"}
