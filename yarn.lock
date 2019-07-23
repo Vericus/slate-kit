@@ -3244,10 +3244,10 @@
   resolved "https://registry.yarnpkg.com/@vericus/eslint-config-vericus-base/-/eslint-config-vericus-base-1.0.1.tgz#ecd2865abd6bec61fb821359a82ef8a05f3f97a8"
   integrity sha512-LBqJoW1YcGdHu29Zl8/HlA0sHYl2a/3sod4FtT95PSpDJ26bu9HlqTPVxk+eH8pmzHSleUA4mstTYtkcLxDCJQ==
 
-"@vericus/rollup-config@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@vericus/rollup-config/-/rollup-config-1.0.2.tgz#e594ccf9617eedd7390dec80a98135e8099347cc"
-  integrity sha512-mh+VwG0pXFeCBOy389SzKUgFRTJj35vcbaH872A6lDgZpRTNXrEDMf+8jAs+lfLGhOfssjVTHhxvneXf6tOCPw==
+"@vericus/rollup-config@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@vericus/rollup-config/-/rollup-config-1.0.3.tgz#b30b414064de9eed303eb9ffcac408fe8e733ba1"
+  integrity sha512-dn37za/PC8oxuPmp/cOI+I2384PlTHEwreadKAb2P0UkH1b8ymjf4I6gtcf62bkIip5et7oerkyD5y3LdTr5FQ==
   dependencies:
     "@lerna/package" "^3.14.2"
     camelcase "^5.3.1"
@@ -6408,7 +6408,7 @@ eslint-visitor-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
   integrity sha512-qzm/XxIbxm/FHyH341ZrbnMUpe+5Bocte9xkmFMzPMjRaZMcXww+MpBptFvtU+79L362nqiLhekCxCxDPaUMBQ==
 
-eslint@^5.15.0, eslint@^5.16.0:
+eslint@^5.15.0:
   version "5.16.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.16.0.tgz#a1e3ac1aae4a3fbd8296fcf8f7ab7314cbb6abea"
   integrity sha512-S3Rz11i7c8AA5JPv7xAH+dOyq/Cu/VXHiHXBPOU1k/JAM5dXqQPt3qcrhpHSorXmrpu2g0gkIBVXAqCpzfoZIg==
@@ -12284,14 +12284,6 @@ rollup-plugin-babel@^4.3.3:
     "@babel/helper-module-imports" "^7.0.0"
     rollup-pluginutils "^2.8.1"
 
-rollup-plugin-eslint@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-eslint/-/rollup-plugin-eslint-6.0.0.tgz#4b182c0586330ed25c90bd41309feec458152303"
-  integrity sha512-iNH5l1LYNPCKCwQuLWzXdE0nd8d96yXuefP6YxDsh9WCF/+IS9n1n6F3yM/AMWEyIdquDwe7upG3vEYoV4BDpA==
-  dependencies:
-    eslint "^5.16.0"
-    rollup-pluginutils "^2.7.1"
-
 rollup-plugin-node-resolve@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-5.2.0.tgz#730f93d10ed202473b1fb54a5997a7db8c6d8523"
@@ -12314,7 +12306,7 @@ rollup-plugin-terser@^5.1.1:
     serialize-javascript "^1.7.0"
     terser "^4.1.0"
 
-rollup-pluginutils@^2.7.1, rollup-pluginutils@^2.8.1:
+rollup-pluginutils@^2.8.1:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.8.1.tgz#8fa6dd0697344938ef26c2c09d2488ce9e33ce97"
   integrity sha512-J5oAoysWar6GuZo0s+3bZ6sVZAC0pfqKz68De7ZgDi5z63jOVZn1uJL/+z1jeKHNbGII8kAyHF5q8LnxSX5lQg==

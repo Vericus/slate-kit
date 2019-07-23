@@ -1,6 +1,9 @@
+// eslint-disable-next-line
 import { rollup } from "@vericus/rollup-config";
-var rollupConfig = rollup({
+
+const rollupConfig = rollup({
   workspaceRoot: __dirname,
   globals: {}
 });
+
 export { rollupConfig as rollup };
