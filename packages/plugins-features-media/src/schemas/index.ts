@@ -60,7 +60,11 @@ export default function createSchema(opts: TypeOption) {
         normalize: (editor: Editor, error: SlateError) => {
           switch (error.code) {
             case "parent_type_invalid":
-              editor.unwrapNodeByKey(error.parent.key);
+              if (error.parent.object === "document") {
+                editor.setNodeByKey(error.node.key, editor.getDefaultBlock());
+              } else {
+                editor.unwrapNodeByKey(error.node.key);
+              }
               break;
             case "child_object_invalid":
               editor.removeNodeByKey(error.child.key);
