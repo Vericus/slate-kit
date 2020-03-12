@@ -75,6 +75,10 @@ function HTMLSerializer(): Plugin[] {
   return [
     Register({ createRule }),
     {
+      onConstruct: (editor, next) => {
+        dataGetter = [];
+        return next();
+      },
       queries: {
         registerHTMLRule: (editor: Editor, newRules) => {
           if (Array.isArray(newRules)) {
