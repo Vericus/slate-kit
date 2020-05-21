@@ -7,7 +7,7 @@ function increaseBlockIndent(opts: TypeOptions, editor: Editor, block: Block) {
   const indentLevel = editor.getIndentationLevel(block);
   if (indentLevel + 1 > maxIndentation) return;
   editor.setNodeByKey(block.key, {
-    data: block.data.set(dataField, indentLevel + 1)
+    data: block.data.set(dataField, indentLevel + 1),
   });
 }
 
@@ -22,7 +22,7 @@ function decreaseBlockIndent(opts: TypeOptions, editor: Editor, block: Block) {
     newData = block.data.set(dataField, indentLevel - 1);
   }
   editor.setNodeByKey(block.key, {
-    data: newData
+    data: newData,
   });
 }
 
@@ -31,7 +31,8 @@ function increaseIndent(opts: TypeOptions, editor: Editor) {
   editor
     .getIndentableBlocks(value)
     .forEach(
-      block => Block.isBlock(block) && increaseBlockIndent(opts, editor, block)
+      (block) =>
+        Block.isBlock(block) && increaseBlockIndent(opts, editor, block)
     );
 }
 
@@ -40,7 +41,8 @@ function decreaseIndent(opts: TypeOptions, editor: Editor) {
   editor
     .getIndentableBlocks(value)
     .forEach(
-      block => Block.isBlock(block) && decreaseBlockIndent(opts, editor, block)
+      (block) =>
+        Block.isBlock(block) && decreaseBlockIndent(opts, editor, block)
     );
 }
 
@@ -51,7 +53,7 @@ function createChanges(opts: TypeOptions) {
     increaseBlockIndent: (editor: Editor, block: Block) =>
       increaseBlockIndent(opts, editor, block),
     increaseIndent: (editor: Editor) => increaseIndent(opts, editor),
-    decreaseIndent: (editor: Editor) => decreaseIndent(opts, editor)
+    decreaseIndent: (editor: Editor) => decreaseIndent(opts, editor),
   };
 }
 
@@ -60,5 +62,5 @@ export {
   decreaseBlockIndent,
   increaseBlockIndent,
   decreaseIndent,
-  increaseIndent
+  increaseIndent,
 };

@@ -6,7 +6,7 @@ const blocks = {
   h4: "heading-four",
   h5: "heading-four",
   h6: "heading-four",
-  blockquote: "blockquote"
+  blockquote: "blockquote",
 };
 
 export default function createRule(options, editor) {
@@ -21,9 +21,9 @@ export default function createRule(options, editor) {
           data,
           marks,
           type: block,
-          nodes: next(el.childNodes)
+          nodes: next(el.childNodes),
         };
-      }
-    }
+      },
+    },
   ];
 }

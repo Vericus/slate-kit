@@ -15,11 +15,11 @@ export interface AlignUtils extends QueryHooks {
 
 function createUtils(opts: TypeOptions): AlignUtils {
   return {
-    getAlignBlocks: editor => getAlignBlocks(opts, editor),
+    getAlignBlocks: (editor) => getAlignBlocks(opts, editor),
     getAlignBlocksInBlock: (editor, node) => getAlignBlocksInBlock(opts, node),
     getAlignment: (editor, block) => getAlignment(opts, block),
     isAligned: (editor, alignment) => isAligned(opts, editor, alignment),
-    isAlignable: (editor: Editor) => isAlignable(opts, editor)
+    isAlignable: (editor: Editor) => isAlignable(opts, editor),
   };
 }
 export default createUtils;

@@ -24,7 +24,7 @@ const defaultOptions = {
   defaultColor: undefined,
   alpha: 1,
   renderer: undefined,
-  label: undefined
+  label: undefined,
 };
 
 class Options extends Record(defaultOptions, "highlight text option") {
@@ -67,7 +67,7 @@ class Options extends Record(defaultOptions, "highlight text option") {
       styles,
       defaultColor,
       alpha = 1,
-      renderer
+      renderer,
     } = object;
     if (!type || !data || !styles || !defaultColor || !Array.isArray(styles)) {
       throw new Error("Highlight text require type, data and style option");
@@ -79,7 +79,7 @@ class Options extends Record(defaultOptions, "highlight text option") {
 
     return new Options({
       marks: {
-        [type]: type
+        [type]: type,
       },
       type,
       data,
@@ -87,14 +87,14 @@ class Options extends Record(defaultOptions, "highlight text option") {
       alpha,
       defaultColor,
       name,
-      renderer
+      renderer,
     });
   }
 
   public static isOptions(args: any) {
     if (args instanceof Record) {
       const record = args as Options;
-      return ["marks", "type", "data", "styles", "defaultColor"].every(key =>
+      return ["marks", "type", "data", "styles", "defaultColor"].every((key) =>
         record.has(key)
       );
     }

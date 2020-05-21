@@ -17,7 +17,7 @@ const defaultOption: TypeOptions = {
   trigger: " ",
   before: undefined,
   after: undefined,
-  command: (editor: Editor, matches: Matches, next) => next()
+  command: (editor: Editor, matches: Matches, next) => next(),
 };
 
 class Options extends Record(defaultOption) {
@@ -32,7 +32,7 @@ class Options extends Record(defaultOption) {
   public static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {
       ...defaultOption,
-      ...option
+      ...option,
     };
     return new Options(options);
   }

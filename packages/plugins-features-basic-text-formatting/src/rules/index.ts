@@ -6,18 +6,18 @@ const markTags = {
   u: "underline",
   s: "strikethrough",
   strike: "strikethrough",
-  del: "strikethrough"
+  del: "strikethrough",
 };
 
 export default function createRule(options, editor) {
   const { marks: markTypes } = Array.isArray(options)
-    ? options.find(option => option.marks)
+    ? options.find((option) => option.marks)
     : options;
   return [
     {
       deserialize(el, next) {
         const mark = markTags[el.tagName.toLowerCase()];
-        if (!mark) return undefined;
+        if (!mark || !el.childNodes) return undefined;
         if (
           !Array.from(el.childNodes).every(
             (node: HTMLElement) => node.nodeName === "#text"
@@ -26,7 +26,7 @@ export default function createRule(options, editor) {
           return {
             object: "mark",
             type: markTypes[mark],
-            nodes: next(el.childNodes)
+            nodes: next(el.childNodes),
           };
         }
         return {
@@ -37,12 +37,12 @@ export default function createRule(options, editor) {
             marks: [
               {
                 object: "mark",
-                type: markTypes[mark]
-              }
-            ]
-          }))
+                type: markTypes[mark],
+              },
+            ],
+          })),
         };
-      }
+      },
     },
     {
       deserialize(el) {
@@ -56,13 +56,13 @@ export default function createRule(options, editor) {
                 object: "leaf",
                 text: el.nodeValue,
                 data,
-                marks
-              }
-            ]
+                marks,
+              },
+            ],
           };
         }
         return undefined;
-      }
-    }
+      },
+    },
   ];
 }

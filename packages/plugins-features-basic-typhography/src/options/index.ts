@@ -24,11 +24,11 @@ const defaultOptions: Partial<TypeOptions> = {
     "heading-two": "heading-two",
     "heading-three": "heading-three",
     "heading-four": "heading-four",
-    blockquote: "blockquote"
+    blockquote: "blockquote",
   },
   defaultBlock: "paragraph",
   renderer: undefined,
-  label: "basic-typography"
+  label: "basic-typography",
 };
 
 class Options extends Record(defaultOptions, "Typhography Options") {
@@ -46,8 +46,8 @@ class Options extends Record(defaultOptions, "Typhography Options") {
       ...option,
       blockTypes: {
         ...defaultOptions.blockTypes,
-        ...(option.blockTypes ? option.blockTypes : {})
-      }
+        ...(option.blockTypes ? option.blockTypes : {}),
+      },
     };
     return new Options(options);
   }

@@ -21,12 +21,12 @@ export default function createPlugin(
       options,
       marks,
       props,
-      getData
+      getData,
     }),
     {
       commands,
-      queries
-    }
+      queries,
+    },
   ];
   if (renderer) {
     const rendererPlugins = renderer(options);

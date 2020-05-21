@@ -2,7 +2,7 @@ import { Editor } from "slate";
 // import expect from "expect";
 import {
   fixtures,
-  testWithHistory
+  testWithHistory,
   // createEvent
 } from "../../../support/test-helpers";
 import Align from "../src/index";
@@ -18,7 +18,7 @@ const plugins = [
   Typography(),
   Utils(),
   List(),
-  Align()
+  Align(),
 ];
 
 describe("align", () => {

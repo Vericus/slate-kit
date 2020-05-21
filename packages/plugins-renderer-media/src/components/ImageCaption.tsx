@@ -2,7 +2,7 @@ import * as React from "react";
 import { Block } from "slate";
 import { Props } from "../types";
 
-const ImageCaption: React.SFC<Props> = props => {
+const ImageCaption: React.SFC<Props> = (props) => {
   const {
     className,
     attributes,
@@ -10,14 +10,14 @@ const ImageCaption: React.SFC<Props> = props => {
     imageType,
     node,
     parent,
-    editor
+    editor,
   } = props;
   if (node && Block.isBlock(node) && node.nodes && Block.isBlock(parent)) {
     const imageBlock =
       imageType &&
       parent.nodes
         .toArray()
-        .find(n => Block.isBlock(n) && n.type === imageType);
+        .find((n) => Block.isBlock(n) && n.type === imageType);
     if (imageBlock) {
       const src = editor.getSource(imageBlock);
       if (src) {

@@ -17,7 +17,7 @@ export default function Placeholder(opts: Partial<TypeOptions>): Plugin {
     const first = node.getFirstText();
     const last = node.getLastText();
     const containsPlaceholders = others.some(
-      decoration =>
+      (decoration) =>
         decoration &&
         decoration.mark &&
         decoration.mark.type &&
@@ -27,7 +27,7 @@ export default function Placeholder(opts: Partial<TypeOptions>): Plugin {
       const decoration = {
         anchor: { key: first.key, offset: 0 },
         focus: { key: last.key, offset: 0 },
-        mark: { type: `${type}-placeholder` }
+        mark: { type: `${type}-placeholder` },
       };
       return [...others, decoration];
     }
@@ -37,6 +37,6 @@ export default function Placeholder(opts: Partial<TypeOptions>): Plugin {
 
   return {
     decorateNode,
-    renderMark
+    renderMark,
   };
 }

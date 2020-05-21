@@ -5,8 +5,8 @@ module.exports = ({ config, mode }) => {
     test: /\.(ts|tsx)$/,
     loader: require.resolve("babel-loader"),
     options: {
-      presets: [["react-app", { flow: false, typescript: true }]]
-    }
+      presets: [["react-app", { flow: false, typescript: true }]],
+    },
   });
   config.resolve.extensions.push(".ts", ".tsx");
   config.module.rules.push({
@@ -17,12 +17,12 @@ module.exports = ({ config, mode }) => {
         options: {
           prettierConfig: {
             printWidth: 80,
-            tabWidth: 2
-          }
-        }
-      }
+            tabWidth: 2,
+          },
+        },
+      },
     ],
-    enforce: "pre"
+    enforce: "pre",
   });
   config.module.rules.push({
     test: /\.stories\.tsx?$/,
@@ -33,12 +33,12 @@ module.exports = ({ config, mode }) => {
           prettierConfig: {
             printWidth: 80,
             tabWidth: 2,
-            parser: "typescript"
-          }
-        }
-      }
+            parser: "typescript",
+          },
+        },
+      },
     ],
-    enforce: "pre"
+    enforce: "pre",
   });
 
   return config;

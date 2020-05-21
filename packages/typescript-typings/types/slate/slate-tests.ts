@@ -11,7 +11,7 @@ import {
   Inline,
   Mark,
   SchemaProperties,
-  Decoration
+  Decoration,
 } from "slate";
 
 const data = Data.create({ foo: "bar " });
@@ -31,19 +31,19 @@ const node: BlockJSON = {
             {
               data: { testData: "data" },
               type: "mark",
-              object: "mark"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              object: "mark",
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 const doc = Document.fromJSON({
   object: "document",
   data: {},
-  nodes: [node]
+  nodes: [node],
 });
 
 const editor = new Editor({ value });
@@ -55,8 +55,8 @@ const decorations = Decoration.createList([
   {
     anchor: Point.create({ key: "a", offset: 0 }),
     focus: Point.create({ key: "a", offset: 0 }),
-    mark
-  }
+    mark,
+  },
 ]);
 
 editor.registerQuery("testQuery");
@@ -95,8 +95,8 @@ editor
     data: {
       src: "http://placekitten.com/200/300",
       alt: "Kittens",
-      className: "img-responsive"
-    }
+      className: "img-responsive",
+    },
   })
   .insertBlockAtRange(range, "text")
   .insertFragment(doc)
@@ -318,14 +318,14 @@ editor
     offset: 0,
     text: "text",
     marks: [Mark.create({ type: "test_mark" })],
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "remove_text",
     path: "a",
     offset: 0,
     text: "text",
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "add_mark",
@@ -333,7 +333,7 @@ editor
     offset: 0,
     length: 1,
     mark: Mark.create({ type: "test_mark" }),
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "remove_mark",
@@ -341,7 +341,7 @@ editor
     offset: 0,
     length: 1,
     mark: Mark.create({ type: "test_mark" }),
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "set_mark",
@@ -350,39 +350,39 @@ editor
     length: 1,
     properties: { type: "test_mark" },
     newProperties: { type: "new_test_mark" },
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "insert_node",
     path: "a",
     node: Block.create({ type: "block" }),
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "merge_node",
     path: "a",
     position: 0,
     properties: { type: "node" },
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "move_node",
     path: "a",
     newPath: "a",
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "remove_node",
     path: "a",
     node: Block.create({ type: "block" }),
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "set_node",
     path: "a",
     properties: { type: "node" },
     newProperties: { type: "new_node" },
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "split_node",
@@ -390,19 +390,19 @@ editor
     position: 0,
     target: 1,
     properties: { type: "block" },
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "set_selection",
     properties: {},
     newProperties: {},
-    data: Data.create({})
+    data: Data.create({}),
   })
   .applyOperation({
     type: "set_value",
     properties: {},
     newProperties: {},
-    data: Data.create({})
+    data: Data.create({}),
   });
 
 KeyUtils.setGenerator(() => "Test");
@@ -421,9 +421,9 @@ const schema: SchemaProperties = {
           { type: "paragraph" },
           { type: "bulleted-list" },
           { type: "numbered-list" },
-          { type: "list-item" }
-        ]
-      }
+          { type: "list-item" },
+        ],
+      },
     ],
     last: { type: "paragraph" },
     normalize: (editor: Editor, { code, node }: any) => {
@@ -433,19 +433,19 @@ const schema: SchemaProperties = {
           return editor.insertNodeByKey(node.key, node.nodes.size, paragraph);
         }
       }
-    }
+    },
   },
   blocks: {
     image: {
-      isVoid: true
+      isVoid: true,
     },
     paragraph: {
       marks: [
         { type: "bold" },
         { type: "italic" },
         { type: "underline" },
-        { type: t => ["bold", "underline"].indexOf(t) !== -1 }
-      ]
-    }
-  }
+        { type: (t) => ["bold", "underline"].indexOf(t) !== -1 },
+      ],
+    },
+  },
 };

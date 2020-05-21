@@ -29,7 +29,7 @@ export function createPlugin(
       queries,
       commands,
       onKeyDown: options.withHandlers ? onKeyDown : undefined,
-      schema
+      schema,
     },
     ...(options.withHandlers
       ? [
@@ -49,22 +49,22 @@ export function createPlugin(
                 return undefined;
               }
               return next();
-            }
+            },
           }),
           AutoReplace({
             trigger: " ",
             before: /^(-)$/,
             command: (editor, _matches, _next) =>
-              editor.createListWithType(unorderedlist)
+              editor.createListWithType(unorderedlist),
           }),
           AutoReplace({
             trigger: " ",
             before: /^(\[\])$/,
             command: (editor, _matches, _next) =>
-              editor.createListWithType(checklist)
-          })
+              editor.createListWithType(checklist),
+          }),
         ]
-      : [])
+      : []),
   ];
   if (renderer) {
     const rendererPlugins = renderer(options);

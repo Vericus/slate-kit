@@ -9,12 +9,12 @@ export default function getData(el, opts) {
   if (tagName !== "ul") return {};
   if (
     Array.isArray(classNames) &&
-    classNames.some(className => /(checked|list-taskdone)/i.test(className))
+    classNames.some((className) => /(checked|list-taskdone)/i.test(className))
   ) {
     return {
       data: {
-        [checkField]: true
-      }
+        [checkField]: true,
+      },
     };
   }
   return {};

@@ -4,7 +4,7 @@ import createRenderNode, {
   HeadingThree,
   HeadingFour,
   Paragraph,
-  Blockquote
+  Blockquote,
 } from "./renderNode";
 
 export {
@@ -14,5 +14,5 @@ export {
   HeadingThree,
   HeadingFour,
   Paragraph,
-  Blockquote
+  Blockquote,
 };

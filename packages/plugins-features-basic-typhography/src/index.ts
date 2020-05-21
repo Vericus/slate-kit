@@ -16,11 +16,11 @@ export default function createPlugin(
   const schema = createSchema(options);
   const nodes = {
     ...blockTypes,
-    default: defaultBlock
+    default: defaultBlock,
   };
   let plugins: Plugin[] = [
     Register({ nodes, createRule, options }),
-    { commands, queries, schema }
+    { commands, queries, schema },
   ];
   if (renderer) {
     const rendererPlugins = renderer(options);

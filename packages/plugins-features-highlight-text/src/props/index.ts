@@ -3,16 +3,16 @@ import { TypeOptions } from "../options";
 
 const defaultStyle = {
   textDecoration: "inherit",
-  textDecorationColor: "inherit"
+  textDecorationColor: "inherit",
 };
 
 export default function createProps(opts: TypeOptions) {
   const { type, data: dataField, styles: styleFields, alpha } = opts;
-  return props => {
+  return (props) => {
     if (!props.mark || props.mark.type !== type) return props;
     const {
       attributes,
-      mark: { data }
+      mark: { data },
     } = props;
     let { style } = attributes || { style: {} };
     const color = tinycolor(data.get(dataField));
@@ -24,10 +24,10 @@ export default function createProps(opts: TypeOptions) {
       ...styleFields.reduce(
         (acc, styleField) => ({
           ...acc,
-          [styleField]: color.setAlpha(alpha).toRgbString()
+          [styleField]: color.setAlpha(alpha).toRgbString(),
         }),
         {}
-      )
+      ),
     };
     return {
       ...props,
@@ -36,8 +36,8 @@ export default function createProps(opts: TypeOptions) {
         style,
         [`data-slate-kit-${type.toLowerCase()}`]: color
           .setAlpha(alpha)
-          .toRgbString()
-      }
+          .toRgbString(),
+      },
     };
   };
 }

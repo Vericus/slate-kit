@@ -19,8 +19,8 @@ export default function createCommands(opt: TypeOptions) {
           const newMark = new Mark({
             type,
             data: Data.create({
-              [data]: color
-            })
+              [data]: color,
+            }),
           });
           if (selection.isCollapsed) {
             editor.removeCollapsedMark(type).addMark(newMark);
@@ -32,8 +32,8 @@ export default function createCommands(opt: TypeOptions) {
         const mark = new Mark({
           type,
           data: Data.create({
-            [data]: color
-          })
+            [data]: color,
+          }),
         });
         if (selection.isCollapsed) {
           editor.removeCollapsedMark(type).addMark(mark);
@@ -42,6 +42,6 @@ export default function createCommands(opt: TypeOptions) {
         }
       }
       editor.focus();
-    }
+    },
   };
 }

@@ -10,23 +10,23 @@ export default function createSchema(opts: TypeOptions) {
         ...acc,
         [block]: {
           data: {
-            [dataField]: align =>
-              !align || (align && alignments.includes(align))
+            [dataField]: (align) =>
+              !align || (align && alignments.includes(align)),
           },
           normalize: (editor: Editor, error: SlateError) => {
             if (error.code === "node_data_invalid") {
               editor.withoutNormalizing(() => {
                 if (!Text.isText(error.node)) {
                   editor.setNodeByKey(error.node.key, {
-                    data: error.node.data.delete(dataField)
+                    data: error.node.data.delete(dataField),
                   });
                 }
               });
             }
-          }
-        }
+          },
+        },
       }),
       {}
-    )
+    ),
   };
 }

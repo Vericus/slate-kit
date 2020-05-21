@@ -9,18 +9,18 @@ describe("bind hotKey", () => {
     const plugins = [
       {
         commands: {
-          testCommand: _editor => testCommand()
-        }
+          testCommand: (_editor) => testCommand(),
+        },
       },
       BindHotKey({
         commandName: "testCommand",
-        hotkeys: "mod+b"
-      })
+        hotkeys: "mod+b",
+      }),
     ];
     const editor = new Editor({ plugins });
     const event = createEvent("keydown", {
       key: "b",
-      ctrlKey: true
+      ctrlKey: true,
     });
     editor.run("onKeyDown", event);
     expect(testCommand).toHaveBeenCalled();
@@ -30,18 +30,18 @@ describe("bind hotKey", () => {
     const plugins = [
       {
         commands: {
-          testCommand: _editor => testCommand()
-        }
+          testCommand: (_editor) => testCommand(),
+        },
       },
       BindHotKey({
         commandName: "testCommand",
-        hotkeys: "mod+b"
-      })
+        hotkeys: "mod+b",
+      }),
     ];
     const editor = new Editor({ plugins });
     const event = createEvent("keydown", {
       key: "d",
-      ctrlKey: true
+      ctrlKey: true,
     });
     editor.run("onKeyDown", event);
     expect(testCommand).not.toHaveBeenCalled();

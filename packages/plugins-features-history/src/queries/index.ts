@@ -11,6 +11,6 @@ export default function createQueries() {
     isRedo: (editor: Editor, prevValue: Value, currValue: Value) =>
       isRedo(prevValue, currValue),
     isUndo: (editor: Editor, prevValue: Value, currValue: Value) =>
-      isUndo(prevValue, currValue)
+      isUndo(prevValue, currValue),
   };
 }

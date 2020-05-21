@@ -18,11 +18,11 @@ const h = createHyperscript({
     code: "code",
     image: {
       type: "image",
-      isVoid: true
+      isVoid: true,
     },
     ol: "ol-list",
     ul: "ul-list",
-    check: "check-list"
+    check: "check-list",
   },
   inlines: {
     hyperlink: "link",
@@ -30,8 +30,8 @@ const h = createHyperscript({
     comment: "comment",
     emoji: {
       type: "emoji",
-      isVoid: true
-    }
+      isVoid: true,
+    },
   },
   marks: {
     b: "bold",
@@ -39,8 +39,8 @@ const h = createHyperscript({
     u: "underline",
     s: "strikethrough",
     color: "textColor",
-    highlight: "textBackground"
-  }
+    highlight: "textBackground",
+  },
 });
 
 /**

@@ -3,7 +3,7 @@ import expect from "expect";
 import {
   fixtures,
   testWithHistory,
-  createEvent
+  createEvent,
 } from "../../../support/test-helpers";
 import TextFormatting from "../src/index";
 import Utils from "../../utils/src/index";

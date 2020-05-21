@@ -3,22 +3,22 @@ const path = require("path");
 module.exports = {
   settings: {
     react: {
-      version: "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
+      version: "detect", // Tells eslint-plugin-react to automatically detect the version of React to use
     },
     "import/resolver": {
       node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"]
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
       },
       "eslint-import-resolver-lerna": {
-        packages: path.resolve(__dirname, "packages")
-      }
-    }
+        packages: path.resolve(__dirname, "packages"),
+      },
+    },
   },
   root: true,
   extends: ["@vericus/vericus-base"],
   env: {
     es6: true,
-    browser: true
+    browser: true,
   },
   rules: {
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -31,7 +31,7 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn",
     "@typescript-eslint/no-unused-vars": [
       "warn",
-      { args: "after-used", argsIgnorePattern: "^_" }
+      { args: "after-used", argsIgnorePattern: "^_" },
     ],
     "no-unused-vars": ["warn", { args: "after-used", argsIgnorePattern: "^_" }],
     "import/no-extraneous-dependencies": [
@@ -40,32 +40,32 @@ module.exports = {
         devDependencies: [
           "**/test/**/*.js",
           "**/test/**/*.ts",
-          "**/test/**/*.tsx"
+          "**/test/**/*.tsx",
         ],
-        peerDependencies: true
-      }
+        peerDependencies: true,
+      },
     ],
     "import/prefer-default-export": 0,
     "react/prop-types": 0,
     "react/button-has-type": 0,
-    "no-console": "warn"
+    "no-console": "warn",
   },
   overrides: [
     {
       files: ["packages/**/test/**/*.js"],
       env: { jest: true },
-      parser: "babel-eslint"
+      parser: "babel-eslint",
     },
     {
       files: ["packages/**/test/**/*.ts", "packages/**/test/**/*.tsx"],
-      env: { jest: true }
+      env: { jest: true },
     },
     {
       files: ["stories/**/*.js"],
       parser: "babel-eslint",
       rules: {
-        "import/no-extraneous-dependencies": 0
-      }
-    }
-  ]
+        "import/no-extraneous-dependencies": 0,
+      },
+    },
+  ],
 };

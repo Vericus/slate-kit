@@ -19,7 +19,7 @@ export const createEvent = (eventName, options) => {
       ...options,
       key,
       keyCode,
-      which: keyCode
+      which: keyCode,
     });
   }
   return simulateEvent.generate(eventName, options);
@@ -71,12 +71,13 @@ export const fixtures = (...args) => {
         !file.startsWith(".") &&
         // Ignoring `index.js` files allows us to use the fixtures directly
         // from the top-level directory itself, instead of only children.
-        file !== "index.js" && file !== "index.jsx"
+        file !== "index.js" &&
+        file !== "index.jsx"
       ) {
         const name = basename(file, extname(file));
 
         // This needs to be a non-arrow function to use `this.skip()`.
-        it(name, function() {
+        it(name, function () {
           // Ensure that the key generator is reset. We have to do this here
           // because the `require` call will create the Slate objects.
           KeyUtils.resetGenerator();

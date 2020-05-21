@@ -23,11 +23,14 @@ export default function getData(el, opts) {
     if (marginLeft) marginLeft += extraIndentation;
   } else {
     marginLeft =
-      el.style && el.style.marginLeft && parseInt(el.style.marginLeft, 10);
+      el &&
+      el.style &&
+      el.style.marginLeft &&
+      parseInt(el.style.marginLeft, 10);
   }
   let indentLevel = 0;
   if (Array.isArray(classNames)) {
-    classNames.forEach(classname => {
+    classNames.forEach((classname) => {
       const result = classname.match(/(.*)(indentation|indent|level)(.*)(\d+)/);
       const indentation = result && result[4] && parseInt(result[4], 10);
       if (indentation && indentation > 1) {
@@ -52,7 +55,7 @@ export default function getData(el, opts) {
   if (!indentLevel) return {};
   return {
     data: {
-      [dataField]: indentLevel
-    }
+      [dataField]: indentLevel,
+    },
   };
 }

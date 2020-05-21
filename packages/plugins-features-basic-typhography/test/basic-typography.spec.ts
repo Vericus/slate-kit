@@ -42,11 +42,11 @@ describe("typography", () => {
       it("on-any-range", () => {
         /* eslint-disable array-callback-return */
         ["paragraph", "heading-one", "heading-two", "heading-three"].map(
-          type => {
+          (type) => {
             const testPlugins = [
               Renderer(),
               Typography({ defaultBlock: type }),
-              Utils()
+              Utils(),
             ];
             const editor = new Editor({ plugins: testPlugins });
             expect(editor.getDefaultBlock()).toEqual(type);
@@ -63,16 +63,16 @@ describe("typography", () => {
         const testPlugins = [Renderer(), Typography(), Utils()];
         const editor = new Editor({ plugins: testPlugins });
         ["paragraph", "heading-one", "heading-two", "heading-three"].forEach(
-          type => {
+          (type) => {
             const block = Block.create({
-              type
+              type,
             });
             expect(editor.isTypography(block)).toEqual(true);
           }
         );
-        ["ol-list", "ul-list"].forEach(type => {
+        ["ol-list", "ul-list"].forEach((type) => {
           const block = Block.create({
-            type
+            type,
           });
           expect(editor.isTypography(block)).toEqual(false);
         });

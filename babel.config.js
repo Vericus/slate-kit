@@ -10,14 +10,14 @@ module.exports = function babelConfig(api) {
         {
           modules: false,
           useBuiltIns: "usage",
-          corejs: 3
-        }
-      ]
+          corejs: 3,
+        },
+      ],
     ];
     plugins = [
       "@babel/plugin-transform-typescript",
       "@babel/plugin-syntax-dynamic-import",
-      "@babel/plugin-transform-runtime"
+      "@babel/plugin-transform-runtime",
     ];
   } else if (api.env("test")) {
     presets = [
@@ -28,9 +28,9 @@ module.exports = function babelConfig(api) {
         {
           modules: "commonjs",
           useBuiltIns: "usage",
-          corejs: 3
-        }
-      ]
+          corejs: 3,
+        },
+      ],
     ];
     plugins = [
       "@babel/plugin-transform-typescript",
@@ -42,27 +42,27 @@ module.exports = function babelConfig(api) {
       [
         "@babel/plugin-proposal-optional-chaining",
         {
-          loose: false
-        }
+          loose: false,
+        },
       ],
       [
         "@babel/plugin-proposal-pipeline-operator",
         {
-          proposal: "minimal"
-        }
+          proposal: "minimal",
+        },
       ],
       [
         "@babel/plugin-proposal-nullish-coalescing-operator",
         {
-          loose: false
-        }
+          loose: false,
+        },
       ],
       "@babel/plugin-proposal-do-expressions",
       [
         "@babel/plugin-proposal-decorators",
         {
-          legacy: true
-        }
+          legacy: true,
+        },
       ],
       "@babel/plugin-proposal-function-sent",
       "@babel/plugin-proposal-export-namespace-from",
@@ -73,29 +73,29 @@ module.exports = function babelConfig(api) {
       [
         "@babel/plugin-proposal-class-properties",
         {
-          loose: false
-        }
+          loose: false,
+        },
       ],
-      "@babel/plugin-proposal-json-strings"
+      "@babel/plugin-proposal-json-strings",
     ];
   } else if (api.env("build")) {
     presets = [
       ["@babel/preset-typescript", { isTSX: true, allExtensions: true }],
       "@babel/react",
-      "@babel/env"
+      "@babel/env",
     ];
     plugins = [
       "@babel/plugin-transform-typescript",
       "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-transform-runtime",
       "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-object-rest-spread"
+      "@babel/plugin-proposal-object-rest-spread",
     ];
   } else if (api.env("gh-pages")) {
     presets = [
       ["@babel/preset-typescript", { isTSX: true, allExtensions: true }],
       "@babel/env",
-      "@babel/react"
+      "@babel/react",
     ];
     plugins = [
       "@babel/plugin-transform-typescript",
@@ -103,10 +103,10 @@ module.exports = function babelConfig(api) {
       [
         "@babel/plugin-transform-classes",
         {
-          globals: ["Error", "Array"]
-        }
+          globals: ["Error", "Array"],
+        },
       ],
-      "@babel/plugin-transform-runtime"
+      "@babel/plugin-transform-runtime",
     ];
   } else {
     presets = [
@@ -114,22 +114,22 @@ module.exports = function babelConfig(api) {
       [
         "@babel/env",
         {
-          modules: false
-        }
+          modules: false,
+        },
       ],
-      "@babel/react"
+      "@babel/react",
     ];
     plugins = [
       "@babel/plugin-transform-typescript",
       "@babel/plugin-syntax-dynamic-import",
       "transform-dynamic-import",
       "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-object-rest-spread"
+      "@babel/plugin-proposal-object-rest-spread",
     ];
   }
   return {
     presets,
     plugins,
-    exclude: "node_modules/**"
+    exclude: "node_modules/**",
   };
 };

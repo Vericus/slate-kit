@@ -11,6 +11,6 @@ export default function createChanges(opts: TypeOption) {
     toggleCaption: toggleCaption(opts),
     deleteMedia: deleteMedia(opts),
     insertImage: insertImage(opts),
-    updateImageSource: updateImageSource(opts)
+    updateImageSource: updateImageSource(opts),
   };
 }

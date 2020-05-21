@@ -5,10 +5,13 @@ export interface Props {
   children: (...args: any[]) => JSX.Element;
 }
 
-const SlateKitNode: React.SFC<Props> = props => props.children(props);
+const SlateKitNode: React.SFC<Props> = (props) => props.children(props);
 
 const compose = (...funcs) =>
-  funcs.reduce((a, b) => (...args) => a(b(...args)), arg => arg);
+  funcs.reduce(
+    (a, b) => (...args) => a(b(...args)),
+    (arg) => arg
+  );
 
 export default function createRenderers(): Plugin {
   const nodes = {};
@@ -55,17 +58,14 @@ export default function createRenderers(): Plugin {
       ) => {
         if (nodeHOCs[nodeType] && nodeHOCsLabel[nodeType]) {
           if (!nodeHOCsLabel[nodeType][label]) {
-            nodeHOCs[nodeType] = compose(
-              nodeHOCs[nodeType],
-              renderer
-            );
+            nodeHOCs[nodeType] = compose(nodeHOCs[nodeType], renderer);
           }
         } else {
           if (nodeHOCsLabel[nodeType]) {
             nodeHOCsLabel[nodeType][label] = true;
           } else {
             nodeHOCsLabel[nodeType] = {
-              [label]: true
+              [label]: true,
             };
           }
           nodeHOCs[nodeType] = compose(renderer);
@@ -79,17 +79,14 @@ export default function createRenderers(): Plugin {
       ) => {
         if (markHOCs[markType]) {
           if (!markHOCsLabel[markType][label]) {
-            markHOCs[markType] = compose(
-              markHOCs[markType],
-              renderer
-            );
+            markHOCs[markType] = compose(markHOCs[markType], renderer);
           }
         } else {
           if (markHOCsLabel[markType]) {
             markHOCsLabel[markType][label] = true;
           } else {
             markHOCsLabel[markType] = {
-              [label]: true
+              [label]: true,
             };
           }
           markHOCs[markType] = compose(renderer);
@@ -106,7 +103,7 @@ export default function createRenderers(): Plugin {
         markHOCs[markType],
       getMarkType: (_editor: Editor, markName: string) =>
         markMappings[markName],
-      getMarkTypes: (_editor: Editor): string[] => Object.values(markMappings)
+      getMarkTypes: (_editor: Editor): string[] => Object.values(markMappings),
     },
     renderNode: (props, editor: Editor, next) => {
       const { node } = props;
@@ -155,6 +152,6 @@ export default function createRenderers(): Plugin {
         );
       }
       return next();
-    }
+    },
   };
 }

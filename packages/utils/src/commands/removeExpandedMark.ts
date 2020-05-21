@@ -5,6 +5,6 @@ export default function removeExpandedMark(editor: Editor, type: string): any {
   const { document, selection } = value;
   return document
     .getMarksAtRange(selection)
-    .filter(mark => !!(mark && mark.type === type))
-    .forEach(mark => mark && editor.removeMarkAtRange(selection, mark));
+    .filter((mark) => !!(mark && mark.type === type))
+    .forEach((mark) => mark && editor.removeMarkAtRange(selection, mark));
 }

@@ -10,7 +10,7 @@ export default function toggleCaption(opts: TypeOption) {
 
     if (media && Block.isBlock(media)) {
       const caption = media.findDescendant(
-        n => Block.isBlock(n) && n.type === captionType
+        (n) => Block.isBlock(n) && n.type === captionType
       );
       if (caption && Block.isBlock(caption)) {
         if (captionHideField) {
@@ -22,7 +22,7 @@ export default function toggleCaption(opts: TypeOption) {
             editor.moveToEndOfPreviousBlock().focus();
           }
           editor.setNodeByKey(captionKey, {
-            data: captionData.set(captionHideField, !hidden)
+            data: captionData.set(captionHideField, !hidden),
           });
           if (focus && hidden) {
             editor.moveToEndOfNode(caption).focus();
@@ -33,14 +33,11 @@ export default function toggleCaption(opts: TypeOption) {
       } else {
         const captionBlock = Block.create({
           type: captionType,
-          nodes: [Text.create("")]
+          nodes: [Text.create("")],
         });
         editor.insertNodeByKey(media.key, media.nodes.size, captionBlock);
         if (focus) {
-          editor
-            .moveToEndOfNode(media)
-            .moveForward(1)
-            .focus();
+          editor.moveToEndOfNode(media).moveForward(1).focus();
         }
       }
     }

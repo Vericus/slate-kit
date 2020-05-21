@@ -8,6 +8,6 @@ export default function createQueries() {
     getHighestSelectedBlocks,
     hasActiveMark,
     hasBlock,
-    hasMark
+    hasMark,
   };
 }

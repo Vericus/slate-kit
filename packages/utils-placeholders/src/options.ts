@@ -12,7 +12,7 @@ const defaultOption: TypeOptions = {
   type: "",
   when: (_editor: Editor, _node: Node) => false,
   placeholder: undefined,
-  render: undefined
+  render: undefined,
 };
 
 export default class Options extends Record(defaultOption) {
@@ -27,7 +27,7 @@ export default class Options extends Record(defaultOption) {
   public static create(option: Partial<TypeOptions>): TypeOptions {
     const options = {
       ...defaultOption,
-      ...option
+      ...option,
     };
     return new Options(options);
   }

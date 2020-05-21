@@ -5,6 +5,6 @@ import getData from "./getData";
 export default function createStyle(opts: TypeOptions) {
   const { dataField } = opts;
   return {
-    getData: (_editor: Editor, el: HTMLElement) => getData(el, dataField)
+    getData: (_editor: Editor, el: HTMLElement) => getData(el, dataField),
   };
 }

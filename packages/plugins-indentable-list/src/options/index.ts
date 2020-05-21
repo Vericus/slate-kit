@@ -17,13 +17,13 @@ const defaultOptions = {
   blockTypes: {
     orderedlist: "ol-list",
     unorderedlist: "ul-list",
-    checklist: "check-list"
+    checklist: "check-list",
   },
   renderer: undefined,
   startAtField: "startAt",
   checkField: "checked",
   withHandlers: true,
-  label: "indentable-list"
+  label: "indentable-list",
 };
 
 class Options extends Record(defaultOptions) {

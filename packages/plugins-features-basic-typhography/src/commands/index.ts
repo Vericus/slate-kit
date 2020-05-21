@@ -9,7 +9,7 @@ export default function createCommands(pluginOptions: TypeOptions) {
     if (typeof typeName === "string") {
       return {
         ...types,
-        [type]: typeName
+        [type]: typeName,
       };
     }
     return types;
@@ -19,12 +19,12 @@ export default function createCommands(pluginOptions: TypeOptions) {
     toggleTypography: (editor: Editor, type: string) => {
       if (slateBlockTypes.includes(type)) {
         const selectedBlocks = editor.getHighestSelectedBlocks(editor.value);
-        selectedBlocks.toArray().forEach(block => {
+        selectedBlocks.toArray().forEach((block) => {
           if (!Block.isBlock(block)) return;
           if (editor.isTypography(block)) {
             editor.setNodeByKey(block.key, type);
           } else {
-            block.getBlocks().forEach(nodeBlock => {
+            block.getBlocks().forEach((nodeBlock) => {
               if (Block.isBlock(nodeBlock) && editor.isTypography(nodeBlock)) {
                 editor.setNodeByKey(nodeBlock.key, type);
               }
@@ -43,6 +43,6 @@ export default function createCommands(pluginOptions: TypeOptions) {
       blockTypes &&
       defaultBlock &&
       blockTypes[defaultBlock] &&
-      editor.setNodeByKey(key, blockTypes[defaultBlock])
+      editor.setNodeByKey(key, blockTypes[defaultBlock]),
   };
 }

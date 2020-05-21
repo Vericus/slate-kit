@@ -4,13 +4,13 @@ export default function createProps(opts) {
   const { blockTypes, startAtField, checkField } = opts;
   const { orderedlist, unorderedlist, checklist } = blockTypes;
   const listTypes = [orderedlist, unorderedlist, checklist];
-  return nodeProps => {
+  return (nodeProps) => {
     const { editor, node, key } = nodeProps;
     if (!node || !key || !listTypes.includes(node.type)) {
       return nodeProps;
     }
     const {
-      value: { document }
+      value: { document },
     } = editor;
     const previousBlock = document.getPreviousBlock(key);
     const prevIndentation =
@@ -33,12 +33,12 @@ export default function createProps(opts) {
 
     const onMouseDown =
       nodeProps.node.type === checklist
-        ? e => {
+        ? (e) => {
             const { top } = e.target.getBoundingClientRect();
             let left;
             if (e.target.children && e.target.children[0]) {
               const {
-                left: leftBound
+                left: leftBound,
               } = e.target.children[0].getBoundingClientRect();
               left = leftBound;
             }
@@ -75,7 +75,7 @@ export default function createProps(opts) {
       checked: !!checked,
       checkList: nodeProps.node.type === checklist,
       readOnly:
-        nodeProps.node.type === checklist && nodeProps.editor.props.isReadOnly
+        nodeProps.node.type === checklist && nodeProps.editor.props.isReadOnly,
     });
     return {
       ...nodeProps,
@@ -83,8 +83,8 @@ export default function createProps(opts) {
       onMouseDown,
       attributes: {
         ...nodeProps.attributes,
-        style
-      }
+        style,
+      },
     };
   };
 }

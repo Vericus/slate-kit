@@ -30,7 +30,7 @@ export default function createQueries(opts: TypeOption) {
       mediaTypes &&
       mediaTypes.image &&
       mediaTypes.image.allowedExtensions &&
-      mediaTypes.image.allowedExtensions.includes(extension)
+      mediaTypes.image.allowedExtensions.includes(extension),
   };
 }
 
@@ -41,5 +41,5 @@ export {
   getClosestMedia,
   getClosestMediaContainer,
   hideCaption,
-  hasMedia
+  hasMedia,
 };

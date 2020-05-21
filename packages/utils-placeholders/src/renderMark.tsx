@@ -16,7 +16,7 @@ export default function createRenderMark(options: TypeOptions) {
         width: "0",
         maxWidth: "100%",
         whiteSpace: "nowrap",
-        opacity: 0.333
+        opacity: 0.333,
       };
 
       return (

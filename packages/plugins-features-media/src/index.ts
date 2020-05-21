@@ -26,7 +26,7 @@ export default function createPlugin(
       queries,
       commands,
       schema,
-      onKeyDown: options.withHandlers ? onKeyDown : undefined
+      onKeyDown: options.withHandlers ? onKeyDown : undefined,
     },
     ...(toolbarRenderer
       ? [
@@ -43,11 +43,11 @@ export default function createPlugin(
               if (!(start.isInNode(node) || end.isInNode(node))) return false;
               return true;
             },
-            render: toolbarRenderer
-          })
+            render: toolbarRenderer,
+          }),
         ]
       : []),
-    Register({ nodes: blockTypes, options })
+    Register({ nodes: blockTypes, options }),
   ];
 
   if (renderer) {

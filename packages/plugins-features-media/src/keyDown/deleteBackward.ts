@@ -4,22 +4,24 @@ export default function deleteBackward(
   editor,
   types,
   captionType,
+  mediaTypes,
   event,
   next
 ) {
   const { value } = editor;
-  const { document, selection, startBlock, previousBlock } = value;
+  const { selection, startBlock, previousBlock } = value;
   const { isExpanded, start } = selection;
+  const imageType = mediaTypes.image ? mediaTypes.image.type : undefined;
   if (
     !isExpanded &&
     previousBlock &&
-    previousBlock.type === captionType &&
+    (previousBlock.type === captionType || previousBlock.type == imageType) &&
     start.offset === 0 &&
     startBlock &&
     startBlock.type &&
     !types.includes(startBlock.type)
   ) {
-    const mediaBlock = editor.getClosestMedia(document, previousBlock);
+    const mediaBlock = editor.getClosestMedia(previousBlock);
     if (mediaBlock && Block.isBlock(mediaBlock)) {
       event.preventDefault();
       editor.moveToRangeOfNode(mediaBlock);

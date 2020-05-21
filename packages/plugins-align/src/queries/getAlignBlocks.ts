@@ -14,7 +14,7 @@ function getAlignBlocksInBlock(opts: TypeOptions, node: any): Block[] {
   return node.nodes.reduce(
     (alignBlocks: Block[], block: Block) => [
       ...alignBlocks,
-      ...getAlignBlocksInBlock(opts, block)
+      ...getAlignBlocksInBlock(opts, block),
     ],
     []
   );
@@ -26,7 +26,7 @@ function getAlignBlocks(opts: TypeOptions, editor: Editor) {
   return List(maybeAlignBlocks).reduce(
     (alignBlocks: Block[], block: any) => [
       ...alignBlocks,
-      ...getAlignBlocksInBlock(opts, block)
+      ...getAlignBlocksInBlock(opts, block),
     ],
     []
   );

@@ -49,7 +49,7 @@ export default function getHighestSelectedBlocks(editor: Editor): List<Block> {
           ) {
             return ancestor.nodes
               .slice(blockStartPath, blockEndPath + 1)
-              .filter(node => Block.isBlock(node)) as List<Block>;
+              .filter((node) => Block.isBlock(node)) as List<Block>;
           }
         }
       }

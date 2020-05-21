@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Props } from "../types";
 
-const CaptionPlaceholder: React.SFC<Props> = props => {
+const CaptionPlaceholder: React.SFC<Props> = (props) => {
   const { children } = props;
   const placeholderStyle: React.CSSProperties = {
     pointerEvents: "none",
@@ -9,7 +9,7 @@ const CaptionPlaceholder: React.SFC<Props> = props => {
     width: "100%",
     whiteSpace: "nowrap",
     flexDirection: "column-reverse",
-    opacity: 0.333
+    opacity: 0.333,
   };
   const innerStyle: React.CSSProperties = {
     position: "absolute",
@@ -18,7 +18,7 @@ const CaptionPlaceholder: React.SFC<Props> = props => {
     left: 0,
     textIndent: "initial",
     maxHeight: 180,
-    overflow: "hidden"
+    overflow: "hidden",
   };
   return (
     <span style={placeholderStyle} className="placeholder">

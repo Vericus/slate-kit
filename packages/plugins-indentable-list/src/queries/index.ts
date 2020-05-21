@@ -33,19 +33,19 @@ function isListNode(editor: Editor, opts: BlockTypes, node: Node) {
 
 function isOrderedList(editor: Editor) {
   return List(editor.getHighestSelectedBlocks()).every(
-    node => Block.isBlock(node) && editor.isOrderedNode(node)
+    (node) => Block.isBlock(node) && editor.isOrderedNode(node)
   );
 }
 
 function isUnorderedList(editor: Editor) {
   return List(editor.getHighestSelectedBlocks()).every(
-    node => Block.isBlock(node) && editor.isUnorderedNode(node)
+    (node) => Block.isBlock(node) && editor.isUnorderedNode(node)
   );
 }
 
 function isCheckList(editor: Editor, _opts: BlockTypes) {
   return List(editor.getHighestSelectedBlocks()).every(
-    node => Block.isBlock(node) && editor.isCheckNode(node)
+    (node) => Block.isBlock(node) && editor.isCheckNode(node)
   );
 }
 
@@ -64,6 +64,6 @@ export default function createQueries(opts: TypeOptions) {
     isUnorderedList: (editor: Editor) => isUnorderedList(editor),
     isCheckList: (editor: Editor) => isCheckList(editor, blockTypes),
     selectedOrderedList: (editor: Editor) =>
-      selectedOrderedList(editor, blockTypes)
+      selectedOrderedList(editor, blockTypes),
   };
 }

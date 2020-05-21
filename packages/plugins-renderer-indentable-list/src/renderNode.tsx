@@ -11,7 +11,7 @@ export interface Props {
   node: Node;
 }
 
-const OrderedList: React.SFC<Props> = props => {
+const OrderedList: React.SFC<Props> = (props) => {
   const { attributes, children, className } = props;
   return (
     <ol {...attributes} className={className}>
@@ -20,7 +20,7 @@ const OrderedList: React.SFC<Props> = props => {
   );
 };
 
-const UnOrderedList: React.SFC<Props> = props => {
+const UnOrderedList: React.SFC<Props> = (props) => {
   const { attributes, children, className } = props;
   return (
     <ul {...attributes} className={className}>
@@ -30,7 +30,7 @@ const UnOrderedList: React.SFC<Props> = props => {
 };
 
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-const CheckList: React.SFC<Props> = props => {
+const CheckList: React.SFC<Props> = (props) => {
   const { attributes, children, onMouseDown, className } = props;
   return (
     <ul {...attributes} className={className}>
@@ -48,7 +48,7 @@ export function createRenderNode(): Plugin {
   const nodesRenderer = {
     orderedlist: OrderedList,
     unorderedlist: UnOrderedList,
-    checklist: CheckList
+    checklist: CheckList,
   };
   return Register({ nodesRenderer });
 }

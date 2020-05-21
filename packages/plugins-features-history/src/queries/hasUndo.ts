@@ -8,7 +8,7 @@ export default function hasUndo(editor, value?: Value) {
     undos &&
     undos
       .filter(
-        undo =>
+        (undo) =>
           !(
             undo.size === 1 &&
             (undo.get(0).type === "set_selection" ||

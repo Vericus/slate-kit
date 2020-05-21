@@ -11,6 +11,6 @@ export default function createCommands(options: TypeOptions) {
     toggleUnderline: (editor: Editor) =>
       underline && editor.toggleMark(underline).focus(),
     toggleStrikethrough: (editor: Editor) =>
-      strikethrough && editor.toggleMark(strikethrough).focus()
+      strikethrough && editor.toggleMark(strikethrough).focus(),
   };
 }

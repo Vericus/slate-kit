@@ -8,7 +8,7 @@ function removeAlign(opts: TypeOptions) {
     editor.withoutNormalizing(() => {
       editor
         .getAlignBlocks(value)
-        .filter(n => align && n.data && n.data.get(dataField) === align)
+        .filter((n) => align && n.data && n.data.get(dataField) === align)
         .forEach((n: Block | Inline) =>
           editor.setNodeByKey(n.key, { data: n.data.delete(dataField) })
         );
@@ -33,7 +33,7 @@ function setAlign(opts: TypeOptions) {
 function createCommands(opts: TypeOptions) {
   return {
     removeAlign: removeAlign(opts),
-    setAlign: setAlign(opts)
+    setAlign: setAlign(opts),
   };
 }
 

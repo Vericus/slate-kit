@@ -23,7 +23,7 @@ export default function createRenderMark(options): Plugin {
               {children}
             </span>
           );
-        }
+        },
       };
     },
     {}

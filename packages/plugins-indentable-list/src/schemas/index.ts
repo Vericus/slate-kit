@@ -14,9 +14,9 @@ export default function createSchema(opts: TypeOptions) {
       blocks: {
         [orderedlist]: {
           data: {
-            [startAtField]: startAt =>
+            [startAtField]: (startAt) =>
               !startAt || typeof parseInt(startAt, 10) === "number",
-            [checkField]: checked => checked === undefined
+            [checkField]: (checked) => checked === undefined,
           },
           normalize: (editor: Editor, error: SlateError) => {
             const { code, node } = error;
@@ -37,12 +37,12 @@ export default function createSchema(opts: TypeOptions) {
                 editor.setNodeByKey(node.key, { data: blockData })
               );
             }
-          }
+          },
         },
         [unorderedlist]: {
           data: {
-            [startAtField]: startAt => startAt === undefined,
-            [checkField]: checked => checked === undefined
+            [startAtField]: (startAt) => startAt === undefined,
+            [checkField]: (checked) => checked === undefined,
           },
           normalize: (editor: Editor, error: SlateError) => {
             const { code, node } = error;
@@ -52,16 +52,16 @@ export default function createSchema(opts: TypeOptions) {
             ) {
               editor.withoutNormalizing(() =>
                 editor.setNodeByKey(node.key, {
-                  data: node.data.delete(checkField).delete(startAtField)
+                  data: node.data.delete(checkField).delete(startAtField),
                 })
               );
             }
-          }
+          },
         },
         [checklist]: {
           data: {
-            [startAtField]: startAt => startAt === undefined,
-            [checkField]: checked => typeof checked === "boolean"
+            [startAtField]: (startAt) => startAt === undefined,
+            [checkField]: (checked) => typeof checked === "boolean",
           },
           normalize: (editor: Editor, error: SlateError) => {
             const { code, node } = error;
@@ -80,9 +80,9 @@ export default function createSchema(opts: TypeOptions) {
                 editor.setNodeByKey(node.key, { data: blockData })
               );
             }
-          }
-        }
-      }
+          },
+        },
+      },
     };
   }
   return {};

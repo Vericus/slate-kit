@@ -10,9 +10,9 @@ const backgroundPlugins = [
     data: "backgroundColor",
     defaultColor: "black",
     styles: ["backgroundColor"],
-    name: "Background"
+    name: "Background",
   }),
-  Utils()
+  Utils(),
 ];
 
 const coloredPlugins = [
@@ -21,9 +21,9 @@ const coloredPlugins = [
     data: "color",
     defaultColor: "transparent",
     styles: ["textDecorationColor", "color"],
-    name: "Text"
+    name: "Text",
   }),
-  Utils()
+  Utils(),
 ];
 
 describe("highlight text", () => {

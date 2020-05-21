@@ -32,7 +32,7 @@ export default function createQueries(opts: TypeOptions) {
     if (typeof typeName === "string") {
       return {
         ...types,
-        [type]: typeName
+        [type]: typeName,
       };
     }
     return types;
@@ -44,6 +44,6 @@ export default function createQueries(opts: TypeOptions) {
     currentTypography: (editor: Editor) =>
       currentTypography(editor, validBlockTypes),
     getDefaultBlock: (editor: Editor) =>
-      editor.getNodeType && editor.getNodeType(defaultBlock)
+      editor.getNodeType && editor.getNodeType(defaultBlock),
   };
 }

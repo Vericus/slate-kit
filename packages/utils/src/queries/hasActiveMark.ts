@@ -6,6 +6,6 @@ export default function hasActiveMark(editor: Editor, type: string): boolean {
     value.selection &&
     value.selection.isFocused &&
     value.activeMarks &&
-    value.activeMarks.some(mark => !!(mark && mark.type === type))
+    value.activeMarks.some((mark) => !!(mark && mark.type === type))
   );
 }

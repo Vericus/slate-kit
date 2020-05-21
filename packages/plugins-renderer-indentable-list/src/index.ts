@@ -1,7 +1,7 @@
 import createRenderNode, {
   OrderedList,
   UnOrderedList,
-  CheckList
+  CheckList,
 } from "./renderNode";
 
 export { createRenderNode as default, OrderedList, UnOrderedList, CheckList };

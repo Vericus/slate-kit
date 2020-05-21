@@ -42,11 +42,11 @@ export const defaultImageOptions: ImageOption = {
   maxSize: 1024000,
   allowedExtensions: ["png", "tif", "gif", "bmp", "jpg", "jpeg"],
   type: "image",
-  onInsert: () => {}
+  onInsert: () => {},
 };
 
 export const defaultMediaTypesOption: MediaOption = {
-  image: defaultImageOptions
+  image: defaultImageOptions,
 };
 
 export const defaultOptions: TypeOption = {
@@ -58,7 +58,7 @@ export const defaultOptions: TypeOption = {
   blockTypes: {},
   withHandlers: true,
   toolbarRenderer: undefined,
-  label: "media"
+  label: "media",
 };
 
 export default class Options extends Record(defaultOptions) {
@@ -81,7 +81,7 @@ export default class Options extends Record(defaultOptions) {
   public static create(option: Partial<TypeOption>): TypeOption {
     let options = {
       ...defaultOptions,
-      ...option
+      ...option,
     };
     let mediaTypesOption = defaultOptions.mediaTypes;
     if (option.mediaTypes) {
@@ -95,12 +95,12 @@ export default class Options extends Record(defaultOptions) {
                 ...(mediaTypesOption[mediaType]
                   ? mediaTypesOption[mediaType]
                   : {}),
-                ...mediaTypeOption
-              }
+                ...mediaTypeOption,
+              },
             };
           },
           {}
-        )
+        ),
       };
     }
     options = {
@@ -111,15 +111,15 @@ export default class Options extends Record(defaultOptions) {
         ...Object.entries(mediaTypesOption).reduce(
           (mediaTypes, [mediaType, mediaOption]: [string, CommonOption]) => ({
             ...mediaTypes,
-            [mediaType]: mediaOption.type
+            [mediaType]: mediaOption.type,
           }),
           {}
         ),
         media: option.type ? option.type : defaultOptions.type,
         mediacaption: option.captionType
           ? option.captionType
-          : defaultOptions.captionType
-      }
+          : defaultOptions.captionType,
+      },
     };
     return new Options(options);
   }

@@ -4,7 +4,7 @@ import Indent from "../src/index";
 import {
   fixtures,
   testWithHistory,
-  createEvent
+  createEvent,
 } from "../../../support/test-helpers";
 import Typography from "../../plugins-features-basic-typhography/src/index";
 import Utils from "../../utils/src/index";

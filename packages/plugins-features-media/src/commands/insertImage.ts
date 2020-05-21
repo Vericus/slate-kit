@@ -7,7 +7,7 @@ export default function insertImage(opts: TypeOption) {
   const { image } = mediaTypes || { image: undefined };
   const { type: imageType, srcField } = image || {
     type: undefined,
-    srcField: undefined
+    srcField: undefined,
   };
   if (imageType && captionType && srcField) {
     return (editor: Editor, src) => {
@@ -17,15 +17,15 @@ export default function insertImage(opts: TypeOption) {
         nodes: List([
           Block.create({
             type: imageType,
-            data: src ? Data.create({ [srcField]: src }) : undefined
-          })
-        ])
+            data: src ? Data.create({ [srcField]: src }) : undefined,
+          }),
+        ]),
       });
       editor.insertBlock(media);
       if (defaultBlock) {
         const paragraph = Block.create({
           type: defaultBlock,
-          nodes: List([Text.create("")])
+          nodes: List([Text.create("")]),
         });
         editor.insertBlock(paragraph);
       }

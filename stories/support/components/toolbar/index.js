@@ -19,7 +19,7 @@ export class IconButton extends Component {
       [this.props.className || ""]: true,
       "btn-icon": true,
       "btn-icon--active": this.props.active,
-      "btn-icon--disabled": this.props.disabled
+      "btn-icon--disabled": this.props.disabled,
     });
     return (
       <div style={{ display: "inline-block" }}>
@@ -36,7 +36,7 @@ export class IconButton extends Component {
   }
 }
 
-const ContextPopover = props => {
+const ContextPopover = (props) => {
   return (
     <Popover
       body={props.body}
@@ -71,7 +71,7 @@ const textColors = [
   "#7f8c8d",
   "#303030",
   "#000000",
-  "#ffffff"
+  "#ffffff",
 ];
 const highlightColors = [
   "#ff003c",
@@ -89,7 +89,7 @@ const highlightColors = [
   "#fafafa",
   "#dfeaf0",
   "#b0c5c7",
-  "transparent"
+  "transparent",
 ];
 
 class ColorPicker extends Component {
@@ -98,13 +98,13 @@ class ColorPicker extends Component {
 
     this.state = {
       isOpen: false,
-      color: this.props.color
+      color: this.props.color,
     };
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      color: nextProps.color
+      color: nextProps.color,
     });
   }
 
@@ -116,18 +116,18 @@ class ColorPicker extends Component {
     );
   }
 
-  onOpen = event => {
+  onOpen = (event) => {
     event.preventDefault();
     event.stopPropagation();
     this.setState({
       isOpen: true,
-      color: this.props.color
+      color: this.props.color,
     });
   };
 
-  onExit = event => {
+  onExit = (event) => {
     this.setState({
-      isOpen: false
+      isOpen: false,
     });
   };
 
@@ -152,7 +152,7 @@ class ColorPicker extends Component {
         borderRadius: "3px",
         boxSizing: "border-box",
         overflow: "hidden",
-        boxShadow: "0 0 4px 0 rgba(0,0,0,0.09), 0 4px 9px 0 rgba(0,0,0,0.24)"
+        boxShadow: "0 0 4px 0 rgba(0,0,0,0.09), 0 4px 9px 0 rgba(0,0,0,0.24)",
       }}
     >
       <div
@@ -161,7 +161,7 @@ class ColorPicker extends Component {
           lineHeight: "45px",
           minHeight: "18px",
           margin: "9px 0px",
-          flexGrow: "2"
+          flexGrow: "2",
         }}
       >
         <CirclePicker
@@ -191,7 +191,7 @@ class ColorPicker extends Component {
             fill:
               this.props.color === "transparent" ? "black" : this.props.color,
             stroke:
-              this.props.color === "transparent" ? "black" : this.props.color
+              this.props.color === "transparent" ? "black" : this.props.color,
           }}
           size="18"
           disabled={this.props.isReadOnly}
@@ -212,72 +212,72 @@ export default class Toolbar extends Component {
       "heading-one": {
         icon: "Header",
         change: editor.toggleTypography ? editor.toggleTypography : () => {},
-        disabled: !editor.toggleTypography
+        disabled: !editor.toggleTypography,
       },
       "heading-two": {
         icon: "Header2",
         change: editor.toggleTypography ? editor.toggleTypography : () => {},
-        disabled: !editor.toggleTypography
+        disabled: !editor.toggleTypography,
       },
       "heading-three": {
         icon: "Header3",
         change: editor.toggleTypography ? editor.toggleTypography : () => {},
-        disabled: !editor.toggleTypography
+        disabled: !editor.toggleTypography,
       },
       "heading-four": {
         icon: "Header4",
         change: editor.toggleTypography ? editor.toggleTypography : () => {},
-        disabled: !editor.toggleTypography
+        disabled: !editor.toggleTypography,
       },
       paragraph: {
         icon: "Header5",
         change: editor.toggleTypography ? editor.toggleTypography : () => {},
-        disabled: !editor.toggleTypography
+        disabled: !editor.toggleTypography,
       },
       blockquote: {
         icon: "Blockquote",
         change: editor.toggleTypography ? editor.toggleTypography : () => {},
-        disabled: !editor.toggleTypography
-      }
+        disabled: !editor.toggleTypography,
+      },
     };
     this.lists = {
       "ol-list": {
         icon: "ListOrdered",
         change: editor.changeListType ? editor.changeListType : () => {},
         disabled: !editor.changeListType,
-        isActive: editor.isOrderedList ? editor.isOrderedList : () => false
+        isActive: editor.isOrderedList ? editor.isOrderedList : () => false,
       },
       "ul-list": {
         icon: "ListBullet",
         change: editor.changeListType ? editor.changeListType : () => {},
         disabled: !editor.changeListType,
-        isActive: editor.isUnorderedList ? editor.isUnorderedList : () => false
+        isActive: editor.isUnorderedList ? editor.isUnorderedList : () => false,
       },
       "check-list": {
         icon: "ListCheck",
         change: editor.changeListType ? editor.changeListType : () => {},
         disabled: !editor.changeListType,
-        isActive: editor.isCheckList ? editor.isCheckList : () => false
-      }
+        isActive: editor.isCheckList ? editor.isCheckList : () => false,
+      },
     };
     this.marks = {
       bold: {
         icon: "Bold",
         change: editor.toggleBold ? editor.toggleBold : () => {},
         disabled: !editor.toggleBold,
-        isActive: editor.isBold ? editor.isBold : () => false
+        isActive: editor.isBold ? editor.isBold : () => false,
       },
       italic: {
         icon: "Italic",
         change: editor.toggleItalic ? editor.toggleItalic : () => {},
         disabled: !editor.toggleItalic,
-        isActive: editor.isItalic ? editor.isItalic : () => false
+        isActive: editor.isItalic ? editor.isItalic : () => false,
       },
       underline: {
         icon: "Underline",
         change: editor.toggleUnderline ? editor.toggleUnderline : () => {},
         disabled: !editor.toggleUnderline,
-        isActive: editor.isUnderline ? editor.isUnderline : () => false
+        isActive: editor.isUnderline ? editor.isUnderline : () => false,
       },
       strikethrough: {
         icon: "Strike",
@@ -285,28 +285,28 @@ export default class Toolbar extends Component {
           ? editor.toggleStrikethrough
           : () => {},
         disabled: !editor.toggleStrikethrough,
-        isActive: editor.isStrikethrough ? editor.isStrikethrough : () => false
-      }
+        isActive: editor.isStrikethrough ? editor.isStrikethrough : () => false,
+      },
     };
     this.allignments = {
       left: {
         icon: "AlignLeft",
         change: editor.setAlign ? editor.setAlign : () => {},
         disabled: !editor.setAlign,
-        isActive: editor.isAligned ? editor.isAligned : () => false
+        isActive: editor.isAligned ? editor.isAligned : () => false,
       },
       center: {
         icon: "AlignCenter",
         change: editor.setAlign ? editor.setAlign : () => {},
         disabled: !editor.setAlign,
-        isActive: editor.isAligned ? editor.isAligned : () => false
+        isActive: editor.isAligned ? editor.isAligned : () => false,
       },
       right: {
         icon: "AlignRight",
         change: editor.setAlign ? editor.setAlign : () => {},
         disabled: !editor.setAlign,
-        isActive: editor.isAligned ? editor.isAligned : () => false
-      }
+        isActive: editor.isAligned ? editor.isAligned : () => false,
+      },
     };
   }
 
@@ -328,7 +328,9 @@ export default class Toolbar extends Component {
         <IconButton
           key={options.icon}
           icon={options.icon}
-          onMouseDown={e => this.handleClickTypography(e, options.change, type)}
+          onMouseDown={(e) =>
+            this.handleClickTypography(e, options.change, type)
+          }
           disabled={options.disabled || this.props.isReadOnly}
           active={this.currentTypography() === type}
           size="18"
@@ -349,7 +351,7 @@ export default class Toolbar extends Component {
         <IconButton
           key={options.icon}
           icon={options.icon}
-          onMouseDown={e => this.handleClickList(e, options.change, type)}
+          onMouseDown={(e) => this.handleClickList(e, options.change, type)}
           disabled={options.disabled || this.props.isReadOnly}
           active={options.isActive()}
           size="18"
@@ -358,14 +360,14 @@ export default class Toolbar extends Component {
     });
   };
 
-  handleClickIndent = event => {
+  handleClickIndent = (event) => {
     const { editor } = this.props;
     event.preventDefault();
     event.stopPropagation();
     editor.increaseIndent();
   };
 
-  handleClickOutdent = event => {
+  handleClickOutdent = (event) => {
     const { editor } = this.props;
     event.preventDefault();
     event.stopPropagation();
@@ -387,17 +389,17 @@ export default class Toolbar extends Component {
       <IconButton
         key="Indent"
         icon="Indent"
-        onMouseDown={e => this.handleClickIndent(e)}
+        onMouseDown={(e) => this.handleClickIndent(e)}
         disabled={this.props.isReadOnly || !this.props.editor.increaseIndent}
         size="18"
       />,
       <IconButton
         key="Outdent"
         icon="Outdent"
-        onMouseDown={e => this.handleClickOutdent(e)}
+        onMouseDown={(e) => this.handleClickOutdent(e)}
         disabled={this.props.isReadOnly || !this.props.editor.decreaseIndent}
         size="18"
-      />
+      />,
     ];
   };
 
@@ -414,7 +416,9 @@ export default class Toolbar extends Component {
         <IconButton
           key={options.icon}
           icon={options.icon}
-          onMouseDown={e => this.handleClickAlignment(e, options.change, type)}
+          onMouseDown={(e) =>
+            this.handleClickAlignment(e, options.change, type)
+          }
           disabled={
             options.disabled || this.props.isReadOnly || !editor.isAlignable()
           }
@@ -431,7 +435,7 @@ export default class Toolbar extends Component {
         <IconButton
           key={options.icon}
           icon={options.icon}
-          onMouseDown={e => this.handleClickMark(e, options.change)}
+          onMouseDown={(e) => this.handleClickMark(e, options.change)}
           disabled={options.disabled || this.props.isReadOnly}
           active={options.isActive()}
           size="18"
@@ -448,7 +452,7 @@ export default class Toolbar extends Component {
     handler();
   };
 
-  hasHistory = type => {
+  hasHistory = (type) => {
     const { editor } = this.props;
     const check = type === "undo" ? editor.hasUndo : editor.hasRedo;
     if (check) return check();
@@ -461,22 +465,22 @@ export default class Toolbar extends Component {
           <IconButton
             key="Undo"
             icon="Undo"
-            onMouseDown={e => this.handleHistory(e, "undo")}
+            onMouseDown={(e) => this.handleHistory(e, "undo")}
             disabled={!this.hasHistory("undo") || this.props.isReadOnly}
             size="18"
           />,
           <IconButton
             key="Redo"
             icon="Redo"
-            onMouseDown={e => this.handleHistory(e, "redo")}
+            onMouseDown={(e) => this.handleHistory(e, "redo")}
             disabled={!this.hasHistory("redo") || this.props.isReadOnly}
             size="18"
-          />
+          />,
         ]
       : null;
   };
 
-  onImageInsert = e => {
+  onImageInsert = (e) => {
     const { editor } = this.props;
     editor.insertImage();
   };
@@ -487,7 +491,7 @@ export default class Toolbar extends Component {
       <IconButton
         key="Image"
         icon="Image"
-        onMouseDown={e => {
+        onMouseDown={(e) => {
           e.preventDefault();
           this.onImageInsert();
         }}
@@ -509,7 +513,7 @@ export default class Toolbar extends Component {
         icon={icon}
         colors={colors}
         color={editor[`current${label}Color`]()}
-        onChange={color =>
+        onChange={(color) =>
           this.handleColorChange(editor[`change${label}Color`], color)
         }
         isReadOnly={this.props.isReadOnly}
@@ -527,15 +531,15 @@ export default class Toolbar extends Component {
   renderStateLogger = () => {
     const { editor } = this.props;
     return [
-      <button onMouseDown={e => console.log(editor.value)} key="state-logger">
+      <button onMouseDown={(e) => console.log(editor.value)} key="state-logger">
         Log State
       </button>,
       <button
-        onMouseDown={e => console.log(JSON.stringify(editor.value.toJSON()))}
+        onMouseDown={(e) => console.log(JSON.stringify(editor.value.toJSON()))}
         key="json-state-logger"
       >
         Log JSON State
-      </button>
+      </button>,
     ];
   };
 
@@ -549,7 +553,7 @@ export default class Toolbar extends Component {
           display: "flex",
           justifyContent: "center",
           zIndex: "99999",
-          background: "white"
+          background: "white",
         }}
       >
         {this.renderTyphography()}

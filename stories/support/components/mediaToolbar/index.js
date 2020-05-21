@@ -2,7 +2,7 @@ import React from "react";
 import { IconButton } from "../toolbar";
 
 class ToolbarButton extends React.Component {
-  onMouseDown = e => {
+  onMouseDown = (e) => {
     e.preventDefault();
     this.props.change();
   };
@@ -13,7 +13,7 @@ class ToolbarButton extends React.Component {
           height: "45px",
           color: this.props.active ? "blue" : "inherit",
           pointerEvents: "auto",
-          userSelect: "none"
+          userSelect: "none",
         }}
         onMouseDown={this.onMouseDown}
       >
@@ -23,7 +23,7 @@ class ToolbarButton extends React.Component {
   }
 }
 
-const Toolbar = props => {
+const Toolbar = (props) => {
   const { editor, node } = props;
   return (
     <div
@@ -35,7 +35,7 @@ const Toolbar = props => {
         justifyContent: "center",
         background: "rgba(255,255,255,0.8)",
         top: "0",
-        pointerEvents: "none"
+        pointerEvents: "none",
       }}
     >
       <ToolbarButton

@@ -4,7 +4,7 @@ const rejectedBlocks = ["p", "h1", "h2", "h3", "h4", "h5", "h6"];
 
 function deserializeFlatList(blocks, data, marks, block, childNodes, next) {
   const nodes = Array.from(childNodes);
-  return nodes.map(node => {
+  return nodes.map((node) => {
     const nodeElement = node as HTMLElement;
     const nodeChilds = Array.from(nodeElement.childNodes).reduce(
       (acc, childNode) => {
@@ -26,7 +26,7 @@ function deserializeFlatList(blocks, data, marks, block, childNodes, next) {
       type: block,
       data: Data.create(data),
       marks,
-      nodes: next(nodeChilds)
+      nodes: next(nodeChilds),
     };
   });
 }
@@ -36,7 +36,7 @@ function deserializeNested(blocks, editor, el, block, childNodes, next) {
   const initialIndentation = data && data.indentation ? data.indentation : 0;
   const nodes: Node[] = Array.from(childNodes);
   return nodes
-    .map(node => {
+    .map((node) => {
       const updatedNode = node;
       const updatedNodeElement = node as HTMLElement;
       if (!updatedNodeElement || !updatedNodeElement.tagName) return undefined;
@@ -62,7 +62,7 @@ function deserializeNested(blocks, editor, el, block, childNodes, next) {
         updatedNodeElement.className && updatedNodeElement.className.split(" ");
       const containsIndentation =
         classNames &&
-        classNames.some(className =>
+        classNames.some((className) =>
           /(.*)(indentation|indent|level)(.*)(\d+)/.test(className)
         );
       if (!containsIndentation && classNames) {
@@ -77,7 +77,7 @@ function deserializeNested(blocks, editor, el, block, childNodes, next) {
           updatedNodeElement.className.split(" ");
         if (
           Array.isArray(blockClassNames) &&
-          blockClassNames.some(className =>
+          blockClassNames.some((className) =>
             /(list-task|checklist)/i.test(className)
           )
         ) {
@@ -85,13 +85,13 @@ function deserializeNested(blocks, editor, el, block, childNodes, next) {
         }
       }
       const nodeChildNodes = Array.from(updatedNode.childNodes).filter(
-        childNode =>
+        (childNode) =>
           childNode.nodeName !== "#text" ||
           (childNode.nodeName === "#text" &&
             childNode.textContent &&
             childNode.textContent.trim() !== "")
       );
-      const isFlat = nodeChildNodes.every(childNode => {
+      const isFlat = nodeChildNodes.every((childNode) => {
         const childNodeElement = childNode as HTMLElement;
         return !!(
           childNodeElement.tagName &&
@@ -130,13 +130,13 @@ function deserializeFlat(blocks, editor, el, block, childNodes, next) {
 
 export default function createRule(options, editor) {
   const { blockTypes } = Array.isArray(options)
-    ? options.find(option => option.blockTypes)
+    ? options.find((option) => option.blockTypes)
     : options;
   if (!blockTypes) return [];
   const blocks = {
     ul: blockTypes.unorderedlist,
     ol: blockTypes.orderedlist,
-    check: blockTypes.checklist
+    check: blockTypes.checklist,
   };
   return [
     {
@@ -148,7 +148,7 @@ export default function createRule(options, editor) {
           const classNames = el.className && el.className.split(" ");
           if (
             Array.isArray(classNames) &&
-            classNames.some(className =>
+            classNames.some((className) =>
               /(list-task|checklist)/i.test(className)
             )
           ) {
@@ -157,13 +157,13 @@ export default function createRule(options, editor) {
         }
         const nodes = Array.from(el.childNodes);
         const childNodes = nodes.filter(
-          node =>
+          (node) =>
             node.nodeName !== "#text" ||
             (node.nodeName === "#text" &&
               node.textContent &&
               node.textContent.trim() !== "")
         );
-        const isFlat = childNodes.every(node => {
+        const isFlat = childNodes.every((node) => {
           const nodeElement = node as HTMLElement;
           return !!(
             nodeElement &&
@@ -174,7 +174,7 @@ export default function createRule(options, editor) {
         return isFlat
           ? deserializeFlat(blocks, editor, el, block, childNodes, next)
           : deserializeNested(blocks, editor, el, block, childNodes, next);
-      }
-    }
+      },
+    },
   ];
 }

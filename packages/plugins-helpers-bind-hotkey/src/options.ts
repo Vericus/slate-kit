@@ -9,7 +9,7 @@ export interface TypeOptions {
 const defaultOptions: TypeOptions = {
   hotkeys: undefined,
   commandName: undefined,
-  commandArgs: undefined
+  commandArgs: undefined,
 };
 
 class Options extends Record(defaultOptions) {

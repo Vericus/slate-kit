@@ -7,8 +7,8 @@
     "tsBuildInfoFile": "./.tsbuildinfo"
   },
   "references": [
-    {"path":"../plugins-helpers-bind-hotkey"},
-    {"path":"../utils"},
-    {"path":"../utils-register-helpers"}
+    { "path": "../plugins-helpers-bind-hotkey" },
+    { "path": "../utils" },
+    { "path": "../utils-register-helpers" }
   ]
 }

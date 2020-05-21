@@ -9,7 +9,7 @@ function nthOfType(array, n) {
 
 function includeIndentation(indentationLevel) {
   return css`
-    padding-left: ${p =>
+    padding-left: ${(p) =>
       `calc(${p.theme.spacing.unit * 3 * indentationLevel}px + ${
         p.theme.spacing.gutter
       }px)`};
@@ -22,7 +22,7 @@ function includeListStyle(indentationLevel) {
       counter-reset: ${`ol-${indentationLevel} var(--start-at, 1)`};
     }
     ${`ul.indented.indentation-${indentationLevel} > li`}, ${`ol.indented.indentation-${indentationLevel} > li`} {
-      padding-left: ${p =>
+      padding-left: ${(p) =>
         `calc(${p.theme.spacing.unit * 3 * indentationLevel}px + 1.5em)`};
     }
     ${`ol.indentation-${indentationLevel}`} > li:before {
@@ -71,7 +71,7 @@ export default css`
 
   ul > li > span,
   ol > li > span {
-    line-height: ${p => p.lineHeight || p.theme.typography.lineHeight};
+    line-height: ${(p) => p.lineHeight || p.theme.typography.lineHeight};
   }
 
   ul > li:before,
@@ -129,7 +129,7 @@ export default css`
 
   .checkList.checked {
     text-decoration: line-through;
-    color: ${p => p.theme.colors.shadows[36]}
+    color: ${(p) => p.theme.colors.shadows[36]}
   }
 
   .checkList.checked > li:before {

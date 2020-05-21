@@ -11,7 +11,7 @@ import {
   Range,
   Document,
   RenderNodeProps,
-  Decoration
+  Decoration,
 } from "slate";
 import * as React from "react";
 import * as Immutable from "immutable";
@@ -45,7 +45,7 @@ class MyEditor extends React.Component<EditorProps, MyEditorState> {
   constructor(props: EditorProps) {
     super(props);
     this.state = {
-      value
+      value,
     };
   }
 
@@ -69,14 +69,14 @@ const decorations = Decoration.createList([
   {
     anchor: Point.create({ key: "a", offset: 0 }),
     focus: Point.create({ key: "a", offset: 0 }),
-    mark
-  }
+    mark,
+  },
 ]);
 
 const doc = Document.fromJSON({
   object: "document",
   data: {},
-  nodes: []
+  nodes: [],
 });
 
 editor
@@ -106,8 +106,8 @@ editor
     data: {
       src: "http://placekitten.com/200/300",
       alt: "Kittens",
-      className: "img-responsive"
-    }
+      className: "img-responsive",
+    },
   })
   .insertBlockAtRange(range, "text")
   .insertFragment(doc)

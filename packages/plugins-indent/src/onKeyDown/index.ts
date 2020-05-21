@@ -8,9 +8,9 @@ export default function createOnKeyDown(opts: TypeOptions) {
   const {
     isDeleteBackward,
     isDeleteLineBackward,
-    isDeleteWordBackward
+    isDeleteWordBackward,
   } = hotkeys;
-  const isDeleteHotKey = e =>
+  const isDeleteHotKey = (e) =>
     isDeleteBackward(e) || isDeleteLineBackward(e) || isDeleteWordBackward(e);
 
   return (event, editor: Editor, next) => {
@@ -18,7 +18,7 @@ export default function createOnKeyDown(opts: TypeOptions) {
     const { startBlock, endBlock, selection } = value;
     const {
       isCollapsed,
-      start: { offset: startOffset }
+      start: { offset: startOffset },
     } = selection;
     const isIndent = isHotkey("tab", event);
     const isDelete = isDeleteHotKey(event);

@@ -31,7 +31,7 @@ const plugins = [
     data: "backgroundColor",
     defaultColor: "transparent",
     styles: ["backgroundColor"],
-    renderer: HighlightRenderer
+    renderer: HighlightRenderer,
   }),
   HighlightText({
     name: "Text",
@@ -39,9 +39,9 @@ const plugins = [
     data: "color",
     defaultColor: "black",
     styles: ["textDecorationColor", "color"],
-    renderer: HighlightRenderer
+    renderer: HighlightRenderer,
   }),
-  BasicTypography({ renderer: BasicTypographyRenderer })
+  BasicTypography({ renderer: BasicTypographyRenderer }),
 ].flat();
 
 storiesOf("plugins/features", module)

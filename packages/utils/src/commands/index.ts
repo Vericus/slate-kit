@@ -4,6 +4,6 @@ import removeExpandedMark from "./removeExpandedMark";
 export default function createCommands() {
   return {
     removeCollapsedMark,
-    removeExpandedMark
+    removeExpandedMark,
   };
 }

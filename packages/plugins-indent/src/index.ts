@@ -36,8 +36,8 @@ function createIndentPlugin(
           return true;
         }
         return next();
-      }
-    }
+      },
+    },
   ];
 }
 

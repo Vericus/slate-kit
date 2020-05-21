@@ -12,7 +12,7 @@ export interface Props {
 
 const defaultStyle = {
   textDecoration: "inherit",
-  textDecorationColor: "inherit"
+  textDecorationColor: "inherit",
 };
 
 const renderMark: React.SFC<Props> = ({ children, attributes, className }) => {
@@ -30,8 +30,8 @@ export function bold(props: Props) {
     ...props,
     attributes: {
       ...props.attributes,
-      style: { ...defaultStyle, fontWeight: "bold" }
-    }
+      style: { ...defaultStyle, fontWeight: "bold" },
+    },
   });
 }
 
@@ -40,8 +40,8 @@ export function italic(props: Props) {
     ...props,
     attributes: {
       ...props.attributes,
-      style: { ...defaultStyle, fontStyle: "italic" }
-    }
+      style: { ...defaultStyle, fontStyle: "italic" },
+    },
   });
 }
 
@@ -50,8 +50,8 @@ export function underline(props: Props) {
     ...props,
     attributes: {
       ...props.attributes,
-      style: { ...defaultStyle, textDecoration: "underline" }
-    }
+      style: { ...defaultStyle, textDecoration: "underline" },
+    },
   });
 }
 
@@ -60,8 +60,8 @@ export function strikethrough(props: Props) {
     ...props,
     attributes: {
       ...props.attributes,
-      style: { ...defaultStyle, textDecoration: "line-through" }
-    }
+      style: { ...defaultStyle, textDecoration: "line-through" },
+    },
   });
 }
 
@@ -70,7 +70,7 @@ export default function createRenderMark(): Plugin {
     bold,
     italic,
     underline,
-    strikethrough
+    strikethrough,
   };
   return Register({ marksRenderer });
 }

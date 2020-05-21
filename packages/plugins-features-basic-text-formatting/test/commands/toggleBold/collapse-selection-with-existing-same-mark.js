@@ -1,7 +1,7 @@
 /** @jsx h */
 import h from "@vericus/slate-kit-utils-hyperscript";
 
-export default function(editor) {
+export default function (editor) {
   editor.toggleBold();
 }
 

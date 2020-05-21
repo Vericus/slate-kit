@@ -16,7 +16,7 @@ declare module "slate-react" {
     Change,
     Plugin,
     Range,
-    Controller
+    Controller,
   } from "slate";
   import * as Immutable from "immutable";
   import * as React from "react";

@@ -41,11 +41,18 @@ export default function ReadOnly(): Plugin {
     return true;
   }
 
+  function onPaste(e, editor, next) {
+    if (!editor.props.isReadOnly) return next();
+    e.preventDefault();
+    e.stopPropagation();
+    return true;
+  }
+
   function renderEditor(props, editor, next) {
     const children = next();
-    const childrenWithReadOnly = React.Children.map(children, child =>
+    const childrenWithReadOnly = React.Children.map(children, (child) =>
       React.cloneElement(child, {
-        spellCheck: editor.props.isReadOnly ? false : editor.props.spellCheck
+        spellCheck: editor.props.isReadOnly ? false : editor.props.spellCheck,
       })
     );
     return <React.Fragment>{childrenWithReadOnly}</React.Fragment>;
@@ -57,6 +64,7 @@ export default function ReadOnly(): Plugin {
     onDrop,
     onKeyDown,
     onBeforeInput,
-    onCut
+    onCut,
+    onPaste,
   };
 }

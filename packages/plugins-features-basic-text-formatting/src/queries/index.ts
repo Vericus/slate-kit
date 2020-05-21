@@ -16,6 +16,6 @@ export default function createQueries(options: TypeOptions) {
       : returnFalse,
     isStrikethrough: strikethrough
       ? (editor: Editor) => editor.hasActiveMark(strikethrough)
-      : returnFalse
+      : returnFalse,
   };
 }

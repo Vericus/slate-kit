@@ -22,13 +22,13 @@ export default function createBasicTextFormatPlugin(
       marks,
       getData,
       createRule,
-      options
+      options,
     }),
     {
       commands,
-      queries
+      queries,
     },
-    ...(withHandlers ? createKeyBindings(options) : [])
+    ...(withHandlers ? createKeyBindings(options) : []),
   ];
   if (renderer) {
     const rendererPlugins = renderer(options);

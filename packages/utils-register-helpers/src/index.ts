@@ -12,14 +12,14 @@ export default function register(pluginOptions): Plugin {
     props,
     getData,
     createRule,
-    options = {}
+    options = {},
   } = pluginOptions;
   return {
     queries: {
       registerOptions: (_editor: Editor, label: string, newOption: any) => {
         editorOptions[label] = newOption;
       },
-      getOptions: (_editor: Editor, label: string) => editorOptions[label]
+      getOptions: (_editor: Editor, label: string) => editorOptions[label],
     },
     onConstruct: (editor: Editor, next) => {
       if (editor.registerPropsGetter && props) {
@@ -61,15 +61,16 @@ export default function register(pluginOptions): Plugin {
         editor.registerNodeHocRenderer &&
         nodesHOCRenderer
       ) {
-        Object.entries(nodesHOCRenderer).map(
-          ([nodeName, rendererCollection]: [string, Record<string, any>]) =>
-            Object.entries(rendererCollection).map(([label, renderer]) =>
-              editor.registerNodeHocRenderer(
-                editor.getNodeType(nodeName),
-                label,
-                renderer
-              )
+        Object.entries(
+          nodesHOCRenderer
+        ).map(([nodeName, rendererCollection]: [string, Record<string, any>]) =>
+          Object.entries(rendererCollection).map(([label, renderer]) =>
+            editor.registerNodeHocRenderer(
+              editor.getNodeType(nodeName),
+              label,
+              renderer
             )
+          )
         );
       }
       if (
@@ -77,18 +78,19 @@ export default function register(pluginOptions): Plugin {
         editor.registerMarkHocRenderer &&
         marksHOCRenderer
       ) {
-        Object.entries(marksHOCRenderer).map(
-          ([markName, rendererCollection]: [string, Record<string, any>]) =>
-            Object.entries(rendererCollection).map(([label, renderer]) =>
-              editor.registerMarkHocRenderer(
-                editor.getMarkType(markName),
-                label,
-                renderer
-              )
+        Object.entries(
+          marksHOCRenderer
+        ).map(([markName, rendererCollection]: [string, Record<string, any>]) =>
+          Object.entries(rendererCollection).map(([label, renderer]) =>
+            editor.registerMarkHocRenderer(
+              editor.getMarkType(markName),
+              label,
+              renderer
             )
+          )
         );
       }
       return next();
-    }
+    },
   };
 }

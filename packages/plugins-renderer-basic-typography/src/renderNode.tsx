@@ -10,7 +10,7 @@ export interface Props {
   node: Node;
 }
 
-export const HeadingOne: React.SFC<Props> = props => {
+export const HeadingOne: React.SFC<Props> = (props) => {
   const { attributes, children, className } = props;
   return (
     <h1 {...attributes} className={className}>
@@ -18,7 +18,7 @@ export const HeadingOne: React.SFC<Props> = props => {
     </h1>
   );
 };
-export const HeadingTwo: React.SFC<Props> = props => {
+export const HeadingTwo: React.SFC<Props> = (props) => {
   const { attributes, children, className } = props;
   return (
     <h2 {...attributes} className={className}>
@@ -26,7 +26,7 @@ export const HeadingTwo: React.SFC<Props> = props => {
     </h2>
   );
 };
-export const HeadingThree: React.SFC<Props> = props => {
+export const HeadingThree: React.SFC<Props> = (props) => {
   const { attributes, children, className } = props;
   return (
     <h3 {...attributes} className={className}>
@@ -34,7 +34,7 @@ export const HeadingThree: React.SFC<Props> = props => {
     </h3>
   );
 };
-export const HeadingFour: React.SFC<Props> = props => {
+export const HeadingFour: React.SFC<Props> = (props) => {
   const { attributes, children, className } = props;
   return (
     <h4 {...attributes} className={className}>
@@ -42,7 +42,7 @@ export const HeadingFour: React.SFC<Props> = props => {
     </h4>
   );
 };
-export const Paragraph: React.SFC<Props> = props => {
+export const Paragraph: React.SFC<Props> = (props) => {
   const { attributes, children, className } = props;
   return (
     <p {...attributes} className={className}>
@@ -50,7 +50,7 @@ export const Paragraph: React.SFC<Props> = props => {
     </p>
   );
 };
-export const Blockquote: React.SFC<Props> = props => {
+export const Blockquote: React.SFC<Props> = (props) => {
   const { attributes, children, className } = props;
   return (
     <blockquote {...attributes} className={className}>
@@ -73,7 +73,7 @@ export default function createRenderNode(): Plugin {
     "heading-two": HeadingTwo,
     "heading-three": HeadingThree,
     "heading-four": HeadingFour,
-    blockquote: Blockquote
+    blockquote: Blockquote,
   };
   return Register({ nodesRenderer });
 }

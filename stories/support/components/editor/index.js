@@ -6,7 +6,7 @@ import {
   setEventTransfer,
   findNode,
   findDOMNode,
-  Editor
+  Editor,
 } from "slate-react";
 import { Value } from "slate";
 import Toolbar from "../toolbar";
@@ -23,14 +23,14 @@ export default class SlateKitEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: Value.fromJSON(props.initialState)
+      value: Value.fromJSON(props.initialState),
     };
     this.editor = React.createRef();
   }
 
   onChange = ({ value }) => {
     this.setState({
-      value
+      value,
     });
   };
 

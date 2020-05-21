@@ -2,7 +2,7 @@ import { Block } from "slate";
 
 export default function deleteForward(editor, types, captionType, event, next) {
   const { value } = editor;
-  const { document, selection, startBlock, nextBlock } = value;
+  const { selection, startBlock, nextBlock } = value;
   const { isExpanded, start } = selection;
   if (
     nextBlock &&
@@ -13,7 +13,7 @@ export default function deleteForward(editor, types, captionType, event, next) {
     start.offset === startBlock.text.length &&
     !isExpanded
   ) {
-    const mediaBlock = editor.getClosestMedia(document, nextBlock);
+    const mediaBlock = editor.getClosestMedia(nextBlock);
     if (mediaBlock && Block.isBlock(mediaBlock)) {
       event.preventDefault();
       editor.moveToRangeOfNode(mediaBlock);

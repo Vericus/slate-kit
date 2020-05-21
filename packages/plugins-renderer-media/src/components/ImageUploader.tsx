@@ -26,23 +26,23 @@ export default class ImageUploader extends React.Component<
     super(props);
     this.fileRef = React.createRef();
     this.state = {
-      src: this.props.src
+      src: this.props.src,
     };
   }
 
   private onImageUploaded = (src: string) => {
     this.setState({
-      src
+      src,
     });
     this.props.onChange(src);
   };
 
-  private handleImageRead = _e => {
+  private handleImageRead = (_e) => {
     const src = this.fileReader.result as string;
     if (src && src !== "") {
       this.setState(
         {
-          src
+          src,
         },
         () => {
           this.props.onInsert(src).then(this.onImageUploaded);
@@ -51,13 +51,13 @@ export default class ImageUploader extends React.Component<
     }
   };
 
-  private onImageSelected = file => {
+  private onImageSelected = (file) => {
     this.fileReader = new FileReader();
     this.fileReader.onloadend = this.handleImageRead;
     this.fileReader.readAsDataURL(file);
   };
 
-  private onImageSelect = e => {
+  private onImageSelect = (e) => {
     e.preventDefault();
     e.stopPropagation();
     const fileInput = this.fileRef.current;
@@ -66,7 +66,7 @@ export default class ImageUploader extends React.Component<
     }
   };
 
-  private onImageChange = e => {
+  private onImageChange = (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (e.target && e.target.files) {

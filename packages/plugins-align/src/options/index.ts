@@ -16,11 +16,11 @@ export const defaultOption: TypeOptions = {
     "heading-two",
     "heading-three",
     "heading-four",
-    "blockquote"
+    "blockquote",
   ],
   alignments: ["left", "right", "center", "justify"],
   dataField: "textAlign",
-  label: "align"
+  label: "align",
 };
 
 class Options extends Record(defaultOption) {
@@ -40,16 +40,16 @@ class Options extends Record(defaultOption) {
       ...option,
       floatBlocks: [
         ...defaultOption.floatBlocks,
-        ...(option.floatBlocks ? option.floatBlocks : [])
+        ...(option.floatBlocks ? option.floatBlocks : []),
       ],
       alignments: [
         ...defaultOption.alignments,
-        ...(option.alignments ? option.alignments : [])
+        ...(option.alignments ? option.alignments : []),
       ],
       textBlocks: [
         ...defaultOption.textBlocks,
-        ...(option.textBlocks ? option.textBlocks : [])
-      ]
+        ...(option.textBlocks ? option.textBlocks : []),
+      ],
     };
     return new Options(options);
   }

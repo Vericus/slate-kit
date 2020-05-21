@@ -6,7 +6,7 @@ function resetBlockStartAt(opts: TypeOptions, editor: Editor, block: Block) {
   const { startAtField } = opts;
   if (block) {
     editor.setNodeByKey(block.key, {
-      data: block.data.delete(startAtField)
+      data: block.data.delete(startAtField),
     });
   }
 }
@@ -15,7 +15,7 @@ function resetBlockChecked(opts: TypeOptions, editor: Editor, block: Block) {
   const { checkField } = opts;
   if (block) {
     editor.setNodeByKey(block.key, {
-      data: block.data.delete(checkField)
+      data: block.data.delete(checkField),
     });
   }
 }
@@ -25,7 +25,7 @@ function resetStartAt(opts: TypeOptions, editor: Editor) {
   const selectedBlocks = editor.selectedOrderedList(value);
   editor.withoutNormalizing(() => {
     selectedBlocks.forEach(
-      block => Block.isBlock(block) && editor.resetBlockStartAt(block)
+      (block) => Block.isBlock(block) && editor.resetBlockStartAt(block)
     );
   });
 }
@@ -35,7 +35,7 @@ function resetChecked(opts: TypeOptions, editor: Editor) {
   const selectedBlocks = editor.selectedOrderedList(value);
   editor.withoutNormalizing(() => {
     selectedBlocks.forEach(
-      block => Block.isBlock(block) && editor.resetBlockChecked(block)
+      (block) => Block.isBlock(block) && editor.resetBlockChecked(block)
     );
   });
 }
@@ -54,7 +54,7 @@ function createChangeListType(opts: TypeOptions) {
       (type === unorderedlist && editor.isUnorderedList(value));
     if (shouldUnwrap) {
       editor.withoutNormalizing(() =>
-        selectedBlocks.forEach(block => {
+        selectedBlocks.forEach((block) => {
           if (block && Block.isBlock(block)) {
             editor.setToDefaultNodeByKey(block.key);
           }
@@ -62,7 +62,7 @@ function createChangeListType(opts: TypeOptions) {
       );
     } else {
       editor.withoutNormalizing(() => {
-        selectedBlocks.forEach(block => {
+        selectedBlocks.forEach((block) => {
           if (block && Block.isBlock(block)) {
             editor
               .setNodeByKey(block.key, type)
@@ -88,7 +88,7 @@ function createListWithType(
     if (startAt) {
       editor.setNodeByKey(startBlock.key, {
         type,
-        data: startBlock.data.set(startAtField, startAt)
+        data: startBlock.data.set(startAtField, startAt),
       });
     } else {
       editor.setNodeByKey(startBlock.key, type);
@@ -109,7 +109,7 @@ function unwrapList(opts: TypeOptions, editor: Editor, isDelete: boolean) {
 function toggleCheck(opts: TypeOptions, editor: Editor, block: Block) {
   const { checkField } = opts;
   return editor.setNodeByKey(block.key, {
-    data: block.data.set(checkField, !block.data.get(checkField))
+    data: block.data.set(checkField, !block.data.get(checkField)),
   });
 }
 
@@ -128,6 +128,6 @@ export default function createCommands(opts: TypeOptions) {
     toggleCheck: (editor: Editor, block: Block) =>
       toggleCheck(opts, editor, block),
     unwrapList: (editor: Editor, isDelete: boolean) =>
-      unwrapList(opts, editor, isDelete)
+      unwrapList(opts, editor, isDelete),
   };
 }

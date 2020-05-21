@@ -58,7 +58,7 @@ export default function AutoReplace(
       let startOffset = 0;
       let matchIndex = 0;
 
-      beforeMatches.slice(1, beforeMatches.length).forEach(current => {
+      beforeMatches.slice(1, beforeMatches.length).forEach((current) => {
         if (current === undefined) return;
 
         matchIndex = match.indexOf(current, matchIndex);
@@ -67,7 +67,7 @@ export default function AutoReplace(
         offsets.push({
           start: startOffset,
           end: startOffset + current.length,
-          total: current.length
+          total: current.length,
         });
 
         totalRemoved += current.length;
@@ -80,7 +80,7 @@ export default function AutoReplace(
       let startOffset = 0;
       let matchIndex = 0;
 
-      afterMatches.slice(1, afterMatches.length).forEach(current => {
+      afterMatches.slice(1, afterMatches.length).forEach((current) => {
         if (current === undefined) return;
 
         matchIndex = match.indexOf(current, matchIndex);
@@ -89,7 +89,7 @@ export default function AutoReplace(
         offsets.push({
           start: startOffset,
           end: startOffset + current.length,
-          total: 0
+          total: 0,
         });
 
         totalRemoved += current.length;
@@ -112,11 +112,8 @@ export default function AutoReplace(
     let startOffset = start.offset;
     let totalRemoved = 0;
     const offsets = getOffsets(matches, startOffset);
-    offsets.forEach(offset => {
-      editor
-        .moveAnchorTo(offset.start)
-        .moveFocusTo(offset.end)
-        .delete();
+    offsets.forEach((offset) => {
+      editor.moveAnchorTo(offset.start).moveFocusTo(offset.end).delete();
       totalRemoved += offset.total;
     });
 
@@ -139,6 +136,6 @@ export default function AutoReplace(
         return replace(editor, next);
       }
       return next();
-    }
+    },
   };
 }

@@ -6,7 +6,7 @@ function createOnKeyDown(opts: Options) {
   const { commandName, commandArgs } = opts;
   const hotkeyArrays = Array.isArray(hotkeys) ? hotkeys : [hotkeys];
   function checkHotKey(event): boolean {
-    return hotkeyArrays.some(hotkey => isHotkey(hotkey)(event));
+    return hotkeyArrays.some((hotkey) => isHotkey(hotkey)(event));
   }
   return (event, editor, next): boolean => {
     if (checkHotKey(event) && editor[commandName]) {

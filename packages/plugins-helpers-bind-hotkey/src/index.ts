@@ -6,7 +6,7 @@ function createHotKeyPlugin(pluginOptions: Partial<TypeOptions> = {}): Plugin {
   const options = new Options(pluginOptions);
   const onKeyDown = createOnKeyDown(options);
   return {
-    onKeyDown
+    onKeyDown,
   };
 }
 

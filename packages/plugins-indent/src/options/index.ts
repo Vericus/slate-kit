@@ -15,7 +15,7 @@ const defaultOptions = {
     "heading-one",
     "heading-two",
     "heading-three",
-    "heading-four"
+    "heading-four",
   ],
   indentable: [
     "paragraph",
@@ -25,12 +25,12 @@ const defaultOptions = {
     "heading-four",
     "ol-list",
     "ul-list",
-    "check-list"
+    "check-list",
   ],
   maxIndentation: 8,
   dataField: "indentation",
   withHandlers: true,
-  label: "indent"
+  label: "indent",
 };
 
 class Options extends Record(defaultOptions) {

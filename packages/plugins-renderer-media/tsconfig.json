@@ -7,8 +7,8 @@
     "tsBuildInfoFile": "./.tsbuildinfo"
   },
   "references": [
-    {"path":"../utils-hyperscript"},
-    {"path":"../utils-placeholders"},
-    {"path":"../utils-register-helpers"}
+    { "path": "../utils-hyperscript" },
+    { "path": "../utils-placeholders" },
+    { "path": "../utils-register-helpers" }
   ]
 }

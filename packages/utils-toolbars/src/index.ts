@@ -8,6 +8,6 @@ export default function toolbar(options): Plugin {
       if (editor.props.isReadOnly) return undefined;
       if (!when(editor, node)) return next();
       return render(props);
-    }
+    },
   };
 }

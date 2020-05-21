@@ -5,12 +5,12 @@ export default function createSchema(opts: TypeOptions) {
   const { blockTypes, defaultBlock } = opts;
   return {
     document: {
-      last: Object.values(blockTypes).map(type => ({ type })),
+      last: Object.values(blockTypes).map((type) => ({ type })),
       normalize: (editor: Editor, error: SlateError) => {
         const { code, node } = error;
         const paragraph = Block.create({
           type: defaultBlock,
-          nodes: [Text.create("")]
+          nodes: [Text.create("")],
         });
         switch (code) {
           case "last_child_type_invalid":
@@ -21,7 +21,7 @@ export default function createSchema(opts: TypeOptions) {
           default:
             break;
         }
-      }
+      },
     },
     blocks: {
       ...Object.values(blockTypes).reduce((acc, type) => {
@@ -43,12 +43,12 @@ export default function createSchema(opts: TypeOptions) {
                   default:
                     break;
                 }
-              }
-            }
+              },
+            },
           };
         }
         return acc;
-      }, {})
-    }
+      }, {}),
+    },
   };
 }

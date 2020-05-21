@@ -34,22 +34,22 @@ export default function PasteHelpers(): PasteHelperPlugin {
           cleanedHTML = await editor.cleanedWordHTML(html);
           return {
             origin: "word",
-            cleanedHTML
+            cleanedHTML,
           };
         }
         if (editor.isGoogleDocsHTML(html)) {
           cleanedHTML = await editor.cleanedDocsHTML(html);
           return {
             origin: "docs",
-            cleanedHTML
+            cleanedHTML,
           };
         }
         cleanedHTML = await editor.cleanedGenericHTML(html);
         return {
           origin: "generic",
-          cleanedHTML
+          cleanedHTML,
         };
-      }
-    }
+      },
+    },
   };
 }

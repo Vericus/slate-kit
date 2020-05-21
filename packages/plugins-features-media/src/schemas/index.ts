@@ -12,30 +12,30 @@ export default function createSchema(opts: TypeOption) {
               (allowedTypes, mediaType: CommonOption) => [
                 ...allowedTypes,
                 {
-                  type: mediaType.type
-                }
+                  type: mediaType.type,
+                },
               ],
               []
             ),
             min: 1,
-            max: 1
+            max: 1,
           },
           {
             match: [{ type: captionType }],
             min: 0,
-            max: 1
-          }
+            max: 1,
+          },
         ],
         last: {
-          type: nodeType => {
+          type: (nodeType) => {
             return [
               ...Object.values(mediaTypes).reduce(
                 (acc, mediaType) => [...acc, mediaType.type],
                 []
               ),
-              captionType
+              captionType,
             ].includes(nodeType);
-          }
+          },
         },
         normalize: (editor: Editor, error: SlateError) => {
           switch (error.code) {
@@ -52,7 +52,7 @@ export default function createSchema(opts: TypeOption) {
             default:
               break;
           }
-        }
+        },
       },
       [captionType]: {
         parent: { type },
@@ -75,7 +75,7 @@ export default function createSchema(opts: TypeOption) {
             default:
               break;
           }
-        }
+        },
       },
       ...Object.values(mediaTypes).reduce(
         (acc: object, mediaType: CommonOption) => ({
@@ -95,8 +95,8 @@ export default function createSchema(opts: TypeOption) {
                 ) {
                   return {
                     ...data,
-                    [mediaType[mediaField]]: value =>
-                      mediaType[`${dataField}Options`].includes(value)
+                    [mediaType[mediaField]]: (value) =>
+                      mediaType[`${dataField}Options`].includes(value),
                   };
                 }
               }
@@ -105,7 +105,7 @@ export default function createSchema(opts: TypeOption) {
             normalize: (editor: Editor, error: SlateError) => {
               const { key, node, code } = error;
               const defaultKey = key
-                ? `default${key.replace(/\w/, c => c.toUpperCase())}`
+                ? `default${key.replace(/\w/, (c) => c.toUpperCase())}`
                 : "";
               switch (code) {
                 case "parent_type_invalid":
@@ -118,18 +118,18 @@ export default function createSchema(opts: TypeOption) {
                     Block.isBlock(node)
                   ) {
                     editor.setNodeByKey(node.key, {
-                      data: node.data.set(key, mediaType[defaultKey])
+                      data: node.data.set(key, mediaType[defaultKey]),
                     });
                   }
                   break;
                 default:
                   break;
               }
-            }
-          }
+            },
+          },
         }),
         {}
-      )
-    }
+      ),
+    },
   };
 }

@@ -9,7 +9,7 @@ import {
   chalkError,
   chalkSuccess,
   chalkWarning,
-  chalkProcessing
+  chalkProcessing,
 } from "./chalkConfig";
 import Directory from "./directory";
 
@@ -39,13 +39,14 @@ const mainIndex = `${ghPagesFolder}/index.html`;
 const packageJson = require(path.resolve(__dirname, "../../package.json"));
 const commitMsg = "[skip ci] update github pages with version ";
 
-const isDirectory = source => fs.lstatSync(source).isDirectory();
-const getDirectories = source =>
+const isDirectory = (source) => fs.lstatSync(source).isDirectory();
+const getDirectories = (source) =>
   fs
     .readdirSync(source)
-    .map(name => path.join(source, name))
+    .map((name) => path.join(source, name))
     .filter(isDirectory);
-const getBasename = source => source.map(directory => path.basename(directory));
+const getBasename = (source) =>
+  source.map((directory) => path.basename(directory));
 
 async function checkLatestVersion() {
   await rmfr(ghPagesFolder);
@@ -65,7 +66,7 @@ async function checkLatestVersion() {
 
 async function createVersionFile(currentVersion) {
   return await fse.writeJson(`${storybookFolder}/version.json`, {
-    version: currentVersion
+    version: currentVersion,
   });
 }
 
@@ -121,7 +122,7 @@ deploy()
     console.log(chalkSuccess("Your github pages has been updated"));
     return 0;
   })
-  .catch(async err => {
+  .catch(async (err) => {
     await cleanup();
     if (err instanceof WarningError) {
       console.log(chalkWarning(err));

@@ -9,9 +9,11 @@ export default function createSchema(opts: TypeOptions) {
         ...acc,
         [block]: {
           data: {
-            [dataField]: indentation =>
+            [dataField]: (indentation) =>
               !indentation ||
-              (indentation && indentation <= maxIndentation && indentation >= 0)
+              (indentation &&
+                indentation <= maxIndentation &&
+                indentation >= 0),
           },
           normalize: (editor: Editor, error: SlateError) => {
             const { code, node } = error;
@@ -23,21 +25,21 @@ export default function createSchema(opts: TypeOptions) {
               if (typeof data !== "number" || data < 0) {
                 editor.withoutNormalizing(() =>
                   editor.setNodeByKey(node.key, {
-                    data: node.data.delete(dataField)
+                    data: node.data.delete(dataField),
                   })
                 );
               } else {
                 editor.withoutNormalizing(() =>
                   editor.setNodeByKey(node.key, {
-                    data: node.data.set(dataField, maxIndentation)
+                    data: node.data.set(dataField, maxIndentation),
                   })
                 );
               }
             }
-          }
-        }
+          },
+        },
       }),
       {}
-    )
+    ),
   };
 }

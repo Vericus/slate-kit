@@ -10,7 +10,7 @@ export default function isAligned(
   return (
     alignBlocks.length !== 0 &&
     alignBlocks.every(
-      block => block && editor.getAlignment(block) === alignment
+      (block) => block && editor.getAlignment(block) === alignment
     )
   );
 }

@@ -7,7 +7,7 @@ export default function changeWidth(opts: TypeOption) {
     const media = editor.getSelectedMediaBlock(editor.value);
     if (media && mediaTypes && Block.isBlock(media)) {
       return editor.withoutNormalizing(() => {
-        media.nodes.map(node => {
+        media.nodes.map((node) => {
           if (!Block.isBlock(node)) return undefined;
           const { type } = node;
           if (!mediaTypes[type]) return undefined;
@@ -16,7 +16,7 @@ export default function changeWidth(opts: TypeOption) {
             return undefined;
           }
           editor.setNodeByKey(node.key, {
-            data: node.data.set(widthField, width)
+            data: node.data.set(widthField, width),
           });
           return undefined;
         });

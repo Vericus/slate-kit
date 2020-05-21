@@ -1,7 +1,7 @@
 /** @jsx h */
 import h from "@vericus/slate-kit-utils-hyperscript";
 
-export default function(editor, name) {
+export default function (editor, name) {
   editor[`change${name}Color`]("red");
 }
 

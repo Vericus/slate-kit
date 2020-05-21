@@ -38,7 +38,7 @@ const plugins = [
     data: "backgroundColor",
     defaultColor: "transparent",
     styles: ["backgroundColor"],
-    renderer: HighlightRenderer
+    renderer: HighlightRenderer,
   }),
   HighlightText({
     name: "Text",
@@ -46,7 +46,7 @@ const plugins = [
     data: "color",
     defaultColor: "black",
     styles: ["textDecorationColor", "color"],
-    renderer: HighlightRenderer
+    renderer: HighlightRenderer,
   }),
   BasicTypography({ renderer: BasicTypographyRenderer }),
   ListPlugin({ renderer: ListRenderer }),
@@ -57,18 +57,18 @@ const plugins = [
     renderer: MediaRenderer,
     mediaTypes: {
       image: {
-        onInsert: src => {
-          return new Promise(resolve => {
+        onInsert: (src) => {
+          return new Promise((resolve) => {
             setTimeout(() => {
               resolve(src);
             }, 5000);
           });
-        }
-      }
+        },
+      },
     },
     // eslint-disable-next-line react/display-name
-    toolbarRenderer: props => <MediaToolbar {...props} />
-  })
+    toolbarRenderer: (props) => <MediaToolbar {...props} />,
+  }),
 ].flat();
 
 storiesOf("editor", module)

@@ -6,7 +6,5 @@
     "outDir": "lib",
     "tsBuildInfoFile": "./.tsbuildinfo"
   },
-  "references": [
-    {"path":"../utils-hyperscript"}
-  ]
+  "references": [{ "path": "../utils-hyperscript" }]
 }

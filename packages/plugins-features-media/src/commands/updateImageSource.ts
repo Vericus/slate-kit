@@ -9,7 +9,7 @@ export default function updateImageSource(opts: TypeOption) {
     return (editor: Editor, block: Block, src) => {
       if (block.type === type) {
         editor.setNodeByKey(block.key, {
-          data: block.data.set(srcField, src)
+          data: block.data.set(srcField, src),
         });
       }
     };

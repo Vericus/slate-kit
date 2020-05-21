@@ -23,9 +23,9 @@ function HTMLSerializer(): Plugin[] {
             data,
             marks,
             type: "paragraph",
-            nodes: next(el.childNodes)
+            nodes: next(el.childNodes),
           };
-        }
+        },
       },
       {
         deserialize(el: HTMLElement, next) {
@@ -65,10 +65,10 @@ function HTMLSerializer(): Plugin[] {
             data,
             marks,
             type: "paragraph",
-            nodes: next(el.childNodes)
+            nodes: next(el.childNodes),
           };
-        }
-      }
+        },
+      },
     ];
   }
 
@@ -96,22 +96,22 @@ function HTMLSerializer(): Plugin[] {
             const passData = getter(editor, element);
             const marks = [
               ...(memo.marks ? memo.marks : []),
-              ...(passData.marks ? passData.marks : [])
+              ...(passData.marks ? passData.marks : []),
             ];
             const data = {
               ...memo.data,
-              ...passData.data
+              ...passData.data,
             };
             return {
               data,
-              marks
+              marks,
             };
           }, {}),
         getHTMLSerializer: (_editor: Editor) => serializers,
         deserializeHTML: (_editor: Editor, html: string): Value =>
-          serializers.deserialize(html)
-      }
-    }
+          serializers.deserialize(html),
+      },
+    },
   ];
 }
 

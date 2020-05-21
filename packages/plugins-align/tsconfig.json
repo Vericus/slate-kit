@@ -7,7 +7,7 @@
     "tsBuildInfoFile": "./.tsbuildinfo"
   },
   "references": [
-    {"path":"../utils"},
-    {"path":"../utils-register-helpers"}
+    { "path": "../utils" },
+    { "path": "../utils-register-helpers" }
   ]
 }

@@ -7,6 +7,6 @@ export default function create(): Plugin {
   const commands = createCommands();
   return {
     queries,
-    commands
+    commands,
   };
 }

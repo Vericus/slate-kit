@@ -3,10 +3,10 @@ import listStyles from "./listStyles";
 
 function includeTypography(heading) {
   return css`
-    font-size: ${p => p.theme.typography[heading].fontSize};
-    font-weight: ${p => p.theme.typography[heading].fontWeight};
-    margin-top: ${p => p.theme.typography[heading].marginTop};
-    margin-bottom: ${p => p.theme.typography[heading].marginBottom};
+    font-size: ${(p) => p.theme.typography[heading].fontSize};
+    font-weight: ${(p) => p.theme.typography[heading].fontWeight};
+    margin-top: ${(p) => p.theme.typography[heading].marginTop};
+    margin-bottom: ${(p) => p.theme.typography[heading].marginBottom};
   `;
 }
 
@@ -115,10 +115,10 @@ const Styled = styled.div`
   }
   .editorContainer {
     padding-top: 100px;
-    font-family: ${p => p.fontFamily || p.theme.typography.fontFamily};
-    font-size: ${p => p.fontSize || p.theme.typography.fontSize};
-    line-height: ${p => p.lineHeight || p.theme.typography.lineHeight};
-    color: ${p => p.theme.colors.charcoal};
+    font-family: ${(p) => p.fontFamily || p.theme.typography.fontFamily};
+    font-size: ${(p) => p.fontSize || p.theme.typography.fontSize};
+    line-height: ${(p) => p.lineHeight || p.theme.typography.lineHeight};
+    color: ${(p) => p.theme.colors.charcoal};
 
     p,
     h1,
@@ -135,8 +135,8 @@ const Styled = styled.div`
     .cui-table {
       max-width: 800px;
       min-width: 360px;
-      padding-left: ${p => `${p.theme.spacing.gutter}px`};
-      padding-right: ${p => `${p.theme.spacing.gutter}px`};
+      padding-left: ${(p) => `${p.theme.spacing.gutter}px`};
+      padding-right: ${(p) => `${p.theme.spacing.gutter}px`};
       box-sizing: border-box;
       margin-left: auto;
       margin-right: auto;
@@ -216,14 +216,14 @@ const Styled = styled.div`
     }
 
     p {
-      font-size: ${p => p.theme.typography.paragraph.fontSize};
-      font-weight: ${p => p.theme.typography.paragraph.fontWeight};
+      font-size: ${(p) => p.theme.typography.paragraph.fontSize};
+      font-weight: ${(p) => p.theme.typography.paragraph.fontWeight};
       margin-top: 1em;
       margin-bottom: 1em;
     }
 
     strong {
-      font-weight: ${p => p.theme.typography.fontWeightBold};
+      font-weight: ${(p) => p.theme.typography.fontWeightBold};
     }
     ${listStyles};
   }

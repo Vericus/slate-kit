@@ -1,10 +1,10 @@
 /** @jsx h */
 import h from "@vericus/slate-kit-utils-hyperscript";
 
-export default function(editor, createEvent) {
+export default function (editor, createEvent) {
   const keyEvent = createEvent("keydown", {
     key: "tab",
-    shiftKey: true
+    shiftKey: true,
   });
   editor.run("onKeyDown", keyEvent);
 }

@@ -17,7 +17,7 @@ export default function hasCaption(opts: TypeOption) {
           mediaBlock = editor.value.document.getClosestBlock(mediaBlock.key);
         }
         return Block.isBlock(mediaBlock) && mediaBlock.type === type
-          ? mediaBlock.nodes.some(n =>
+          ? mediaBlock.nodes.some((n) =>
               n
                 ? Block.isBlock(n) &&
                   n.type === captionType &&

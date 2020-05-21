@@ -30,7 +30,14 @@ export default function createOnKeyDown(opts: TypeOption) {
       return extendBackward(editor, types, captionType, event, next);
     }
     if (Hotkeys.isDeleteBackward(event)) {
-      return deleteBackward(editor, types, captionType, event, next);
+      return deleteBackward(
+        editor,
+        types,
+        captionType,
+        mediaTypes,
+        event,
+        next
+      );
     }
     if (Hotkeys.isDeleteForward(event)) {
       return deleteForward(editor, types, captionType, event, next);
@@ -54,7 +61,7 @@ export default function createOnKeyDown(opts: TypeOption) {
                 parent.key,
                 index + 1,
                 Block.create({
-                  type: defaultBlock
+                  type: defaultBlock,
                 })
               )
               .moveToEndOfNode(mediaBlock)

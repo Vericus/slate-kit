@@ -1,6 +1,6 @@
 import React from "react";
 import { configure, addDecorator, addParameters } from "@storybook/react";
-import { themes } from '@storybook/theming';
+import { themes } from "@storybook/theming";
 import { withOptions } from "@storybook/addon-options";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "./theme";
@@ -22,7 +22,7 @@ body {
 // automatically import all files ending in *.stories.js
 const req = require.context("../stories", true, /.stories.js$/);
 function loadStories() {
-  req.keys().forEach(filename => req(filename));
+  req.keys().forEach((filename) => req(filename));
 }
 
 addParameters({
@@ -30,11 +30,11 @@ addParameters({
     name: "Slate-Kit",
     url: "https://github.com/Vericus/slate-kit",
     panelPosition: "right",
-    theme: themes.light
-  }
+    theme: themes.light,
+  },
 });
 
-addDecorator(story => (
+addDecorator((story) => (
   <React.Fragment>
     <ThemeProvider theme={theme}>
       <Styled>{story()}</Styled>

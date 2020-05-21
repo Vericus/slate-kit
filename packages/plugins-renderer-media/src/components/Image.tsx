@@ -24,7 +24,7 @@ export default class Image extends React.Component<Props, States> {
         : "",
       width: Block.isBlock(this.props.node)
         ? editor.getImageWidth(this.props.node)
-        : ""
+        : "",
     };
   }
 
@@ -36,13 +36,13 @@ export default class Image extends React.Component<Props, States> {
       return {
         ...state,
         width,
-        src
+        src,
       };
     }
     return null;
   }
 
-  private onImageSelected = src => {
+  private onImageSelected = (src) => {
     const { node, editor } = this.props;
     if (Block.isBlock(node)) {
       editor.updateImageSource(node, src).toggleCaption(node);
@@ -55,7 +55,7 @@ export default class Image extends React.Component<Props, States> {
       attributes,
       isSelected,
       extensions,
-      onInsert
+      onInsert,
     } = this.props;
     const { src, width } = this.state;
     if (!src || src === "") {

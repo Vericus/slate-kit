@@ -12,9 +12,9 @@ export default function createOnKeyDown(opts: TypeOptions) {
   const {
     isDeleteBackward,
     isDeleteLineBackward,
-    isDeleteWordBackward
+    isDeleteWordBackward,
   } = hotkeys;
-  const isDelete = e =>
+  const isDelete = (e) =>
     isDeleteBackward(e) || isDeleteLineBackward(e) || isDeleteWordBackward(e);
 
   return (e, editor: Editor, next) => {
@@ -22,7 +22,7 @@ export default function createOnKeyDown(opts: TypeOptions) {
     const { startBlock, endBlock, selection } = value;
     const {
       isCollapsed,
-      start: { offset: startOffset }
+      start: { offset: startOffset },
     } = selection;
     const isIndent = isTab(e) && !isShiftTab(e);
     const isSplitBlock =
@@ -52,26 +52,26 @@ export default function createOnKeyDown(opts: TypeOptions) {
       if (startBlock === endBlock && startOffset === text.length) {
         editor.insertBlock({
           type: startBlock.type,
-          data: data.delete(startAtField).delete(checkField)
+          data: data.delete(startAtField).delete(checkField),
         });
         return undefined;
       }
       if (startBlock === endBlock) {
         editor.setNodeByKey(key, {
-          data: data.delete(startAtField).delete(checkField)
+          data: data.delete(startAtField).delete(checkField),
         });
         if (startOffset !== 0) {
           editor.splitBlock(1);
           editor.setNodeByKey(key, {
-            data
+            data,
           });
         } else {
           editor.insertBlock({
             type: startBlock.type,
-            data: data.delete(checkField)
+            data: data.delete(checkField),
           });
           editor.setNodeByKey(key, {
-            data: data.delete(startAtField)
+            data: data.delete(startAtField),
           });
         }
         return undefined;

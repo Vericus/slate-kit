@@ -30,8 +30,8 @@ export default function getData(
           new Mark({
             type,
             data: Data.create({
-              [data]: color
-            })
+              [data]: color,
+            }),
           })
         );
       }

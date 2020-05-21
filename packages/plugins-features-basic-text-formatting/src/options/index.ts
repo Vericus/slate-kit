@@ -21,17 +21,17 @@ const defaultOption: TypeOptions = {
   keyBindings: [
     { hotkeys: "mod+b", commandName: "toggleBold" },
     { hotkeys: "mod+i", commandName: "toggleItalic" },
-    { hotkeys: "mod+u", commandName: "toggleUnderline" }
+    { hotkeys: "mod+u", commandName: "toggleUnderline" },
   ],
   marks: {
     bold: "bold",
     italic: "italic",
     underline: "underline",
-    strikethrough: "strikethrough"
+    strikethrough: "strikethrough",
   },
   renderer: undefined,
   withHandlers: true,
-  label: "basic-text-formatting"
+  label: "basic-text-formatting",
 };
 
 class Options extends Record(defaultOption) {
@@ -50,13 +50,13 @@ class Options extends Record(defaultOption) {
       ...defaultOption,
       marks: {
         ...defaultOption.marks,
-        ...(option.marks ? option.marks : {})
+        ...(option.marks ? option.marks : {}),
       },
       keyBindings: [
         ...defaultOption.keyBindings,
-        ...(option.keyBindings ? option.keyBindings : [])
+        ...(option.keyBindings ? option.keyBindings : []),
       ],
-      ...option
+      ...option,
     };
     return new Options(options);
   }

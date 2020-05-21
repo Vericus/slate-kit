@@ -1,6 +1,6 @@
 export default function createProps(opts) {
   const { floatBlocks, textBlocks } = opts;
-  return props => {
+  return (props) => {
     if (
       !props.node ||
       props.node.object !== "block" ||
@@ -16,21 +16,21 @@ export default function createProps(opts) {
     if (textBlocks.includes(props.node.type)) {
       style = {
         ...style,
-        textAlign: alignment
+        textAlign: alignment,
       };
     }
     if (floatBlocks.includes(props.node.type)) {
       style = {
         ...style,
-        float: alignment
+        float: alignment,
       };
     }
     return {
       ...props,
       attributes: {
         ...props.attributes,
-        style
-      }
+        style,
+      },
     };
   };
 }

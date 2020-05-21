@@ -20,6 +20,6 @@ export default function History(): Plugin {
   return {
     commands,
     queries,
-    onKeyDown
+    onKeyDown,
   };
 }

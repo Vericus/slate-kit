@@ -22,7 +22,7 @@ const plugins = [
   Util(),
   HistoryPlugin(),
   BasicTextFormat({ renderer: BasicTextFormatRenderer }),
-  BasicTypography({ renderer: BasicTypographyRenderer })
+  BasicTypography({ renderer: BasicTypographyRenderer }),
 ].flat();
 
 storiesOf("plugins/features", module)

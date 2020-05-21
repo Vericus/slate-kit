@@ -8,7 +8,7 @@ export default function createUtils(opts: TypeOptions) {
       const { value } = editor;
       if (value.selection && value.selection.isFocused && value.activeMarks) {
         const activeColorMarks = value.activeMarks
-          .filter(mark => !!(mark && mark.type === type))
+          .filter((mark) => !!(mark && mark.type === type))
           .reduce((colors: string[], mark: Mark) => {
             if (mark && mark.data.get(data)) {
               return [...colors, mark.data.get(data)];
@@ -21,6 +21,6 @@ export default function createUtils(opts: TypeOptions) {
         }
       }
       return defaultColor;
-    }
+    },
   };
 }
