@@ -1,5 +1,5 @@
 {
-  "version": "0.1.28",
+  "version": "0.2.0",
   "name": "@vericus/slate-kit-renderer",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -52,8 +52,8 @@
   ],
   "devDependencies": {
     "@types/react": "^16.7.3",
-    "@vericus/slate-kit-typescript-typings": "^1.1.15",
-    "@vericus/slate-kit-utils-hyperscript": "^0.2.17",
+    "@vericus/slate-kit-typescript-typings": "^1.2.0",
+    "@vericus/slate-kit-utils-hyperscript": "^0.3.0",
     "slate": ">=0.44.0 <0.46.0"
   }
 }

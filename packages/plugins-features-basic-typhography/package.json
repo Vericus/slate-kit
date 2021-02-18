@@ -1,5 +1,5 @@
 {
-  "version": "0.2.29",
+  "version": "0.3.0",
   "name": "@vericus/slate-kit-basic-typhography",
   "description": "plugin that provides basic typography functionality to slate",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -33,7 +33,7 @@
     "watch": "npx npm-run-all -l -r -n -p *:watch"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.15",
+    "@vericus/slate-kit-utils-register-helpers": "^0.2.0",
     "debug": "^3.1.0",
     "immutable": ">=3.8.2",
     "is-plain-obj": "^1.1.0",
@@ -42,8 +42,8 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.15",
-    "@vericus/slate-kit-utils-hyperscript": "^0.2.17",
+    "@vericus/slate-kit-typescript-typings": "^1.2.0",
+    "@vericus/slate-kit-utils-hyperscript": "^0.3.0",
     "expect": "^23.1.0",
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0",
