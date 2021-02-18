@@ -1,5 +1,5 @@
 {
-  "version": "0.1.32",
+  "version": "0.1.33",
   "name": "@vericus/slate-kit-media",
   "description": "TODO: fill in this description later",
   "homepage": "https://github.com/Vericus/slate-kit/",
@@ -33,8 +33,8 @@
     "watch": "npx npm-run-all -l -r -n -p *:watch"
   },
   "dependencies": {
-    "@vericus/slate-kit-utils-register-helpers": "^0.1.14",
-    "@vericus/slate-kit-utils-toolbars": "^0.1.10",
+    "@vericus/slate-kit-utils-register-helpers": "^0.1.15",
+    "@vericus/slate-kit-utils-toolbars": "^0.1.11",
     "immutable": ">=3.8.2",
     "is-hotkey": "^0.1.3",
     "slate": ">=0.44.0 <0.46.0",
@@ -55,7 +55,7 @@
     "slate-kit"
   ],
   "devDependencies": {
-    "@vericus/slate-kit-typescript-typings": "^1.1.14",
-    "@vericus/slate-kit-utils-hyperscript": "^0.2.16"
+    "@vericus/slate-kit-typescript-typings": "^1.1.15",
+    "@vericus/slate-kit-utils-hyperscript": "^0.2.17"
   }
 }
