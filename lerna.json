@@ -7,7 +7,8 @@
   "useWorkspaces": true,
   "command": {
     "publish": {
-      "allowBranch": "master"
+      "allowBranch": "master",
+      "registry": "https://npm.pkg.github.com"
     }
   },
   "changelog": {
